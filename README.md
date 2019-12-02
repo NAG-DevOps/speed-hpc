@@ -15,6 +15,6 @@ Concordia University, Montreal
 
 ### Technical ###
 
-* [UGE][https://en.wikipedia.org/wiki/Univa_Grid_Engine]
+* [UGE](https://en.wikipedia.org/wiki/Univa_Grid_Engine)
 * NVIDIA Tesla P6
 * [AMD Tonga FirePro S7100X](https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#FirePro_Server_Series_(S000x/Sxx_000))
