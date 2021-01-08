@@ -1,12 +1,12 @@
 #!/encs/bin/tcsh
 
 #####################################################################################################################
-## Gurobi brings it's own version of Python but that one does not contain any 3rd-party Python packages except Gurobi. 
+## Gurobi brings its own version of Python but that one does not contain any 3rd-party Python packages except Gurobi. 
 ## In order to use Gurobi together with popular Python packages like multiprocessing and others, we need to create a
-## virtual Python environment in which we can install gurobipy and other pakages.
+## virtual Python environment, in which we can install gurobipy and other pakages.
 ##
-## You can create the new virtual Python environment inside your home directory before scheduling your job
-## Or create it inside $TMPDIR on fly as a part of your job
+## You can create the new virtual Python environment inside your home directory before scheduling your job,
+## or create it inside $TMPDIR on fly as a part of your job
 #####################################################################################################################
 
 #$ -N MY_JOB
