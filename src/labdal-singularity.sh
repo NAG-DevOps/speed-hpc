@@ -1,4 +1,4 @@
-#!/encs/bin/tcsh
+#!/encs/bin/bash
 
 # Serguei Mokhov
 # UGE-based job invocation script
@@ -13,7 +13,6 @@
 #$ -cwd
 
 # How many GPUs (currently limit is set 2 max for Speed 5 and 17)
-#$-l g16=1
 #$-l gpu=2
 
 # High value of memory requeted
@@ -22,7 +21,7 @@
 
 # Number of cores requested (approx).
 # Be conservative
-#$ -pe smp 16
+#$ -pe smp 4
 
 # Email notifications
 #$ -m bea
@@ -39,16 +38,14 @@ echo "$0 : about to run gcs-labdalabs-singulairty on Speed..."
 date
 
 # time will simply measure and print runtime
-# SINGULARITYENV_CUDA_VISIBLE_DEVICES -- how many GPUs to use in the contaienr,
-#   On Speed 5 and 17 it should always be 2 for now as a policy.
 # sigularity run -- running the image
 # then whatever script you need to run inside the container
 
+SINGULARITY=/encs/pkg/singularity-3.7.0/root/bin/singularity
+
 time \
-	SINGULARITYENV_CUDA_VISIBLE_DEVICES=2 \
-	sigularity run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
-	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print("I love Lambda Stack!")' && \
-	/usr/bin/python3 -c 'from tensorflow.python.client import device_lib; print(device_lib.list_local_devices())'
+	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
+	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print(\"I love Lambda Stack!\")'
 
 echo "$0 : Done!"
 date
