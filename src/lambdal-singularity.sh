@@ -37,6 +37,14 @@
 echo "$0 : about to run gcs-labdalabs-singulairty on Speed..."
 date
 
+# bind mount the current directory, the user's speed-scratch
+#           directory, nettemp
+# Note: $HOME, /tmp, /proc, /sys, /dev are bound by default
+#
+SINGULARITY_BIND=$PWD,/speed-scratch/$USER,/nettemp
+
+echo "Singularity will bind mount: $SINGULARITY_BIND for user: $USER"
+
 # time will simply measure and print runtime
 # sigularity run -- running the image
 # then whatever script you need to run inside the container
