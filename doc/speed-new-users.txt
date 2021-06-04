@@ -158,3 +158,4 @@ position in the queue is based upon past usage. The scheduler does attempt
 to fill gaps, though, so sometimes a single-core job of lower priority
 will schedule before a multi-core job of higher priority, for example.
 
+Contact rt-ex-hpc@encs.concordia.ca with your questions and for more information.
