@@ -39,3 +39,5 @@ the compute node (100-percent certainty). The workaround is to either
 manually effect GPU parallelisation (TensorFlow has an example on how to
 do this), or to run on a single GPU.
 
+***Important*** 
+Users without permission to use the GPU nodes can submit jobs to the g.q queue but those jobs will hang and never run.
