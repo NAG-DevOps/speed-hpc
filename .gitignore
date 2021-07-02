@@ -1,0 +1,6 @@
+# LaTeX
+
+*.aux
+*.log
+*.out
+*.synctex*
