@@ -54,7 +54,9 @@
 This document primarily presents a quick start
 guide to the usage of the Gina Cody School of
 Engineering and Computer Science compute server farm
-called ``Speed'' -- the GCS ENCS Speed cluster.
+called ``Speed'' -- the GCS ENCS Speed cluster,
+managed by HPC/NAG of GCS ENCS, Concordia University,
+Montreal, Canada.
 \end{abstract}
 
 % ------------------------------------------------------------------------------
@@ -97,9 +99,9 @@ list upon gaining access.
 
 \begin{itemize}
 \item
-Twenty 4, 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Twenty four (24), 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
 \item
-Twelve NVIDIA Tesla P6 GPUs, with 16 GB of memory (compatible with the CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+Twelve (12) NVIDIA Tesla P6 GPUs, with 16 GB of memory (compatible with the CUDA, OpenGL, OpenCL, and Vulkan APIs). 
 \item
 One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
@@ -109,7 +111,7 @@ One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, O
 
 \begin{itemize}
 \item
-Jobs that are too demanding of a desktop, but that are not worth the hassles  associated with the provincial and national clusters. 
+Jobs that are too demanding of a desktop, but that are not worth the hassles associated with the provincial and national clusters. 
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
@@ -117,7 +119,9 @@ Anything that can fit into a 500-GB memory space, and a scratch space of  approx
 \item
 CPU-based jobs. 
 \item
-Non-CUDA GPU jobs. 
+CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}).
+\item
+Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -367,15 +371,22 @@ more than two GPUs can be requested for any one job.
 \subsection{Important Limitations}
 \label{sect:limitations}
 
+\begin{itemize}
+\item
 As a new user, you are limited to 32 cores (a restriction that is removed for responsible users).
 
+\item
 Jobs are assigned a maximum runtime of one week, unless otherwise specified. 
 
+\item
 Home directories (data directories) are served over NFS. NFS is great for acute  activity, but crappy for chronic activity. Any data that a job will read more than once should be copied at the start to the scratch disk of a compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), any intermediary job data should be produced in \api{\$TMPDIR}, and once a job is near to finishing, those data should be copied to your NFS-mounted home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps, \api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected locally whenever possible, saving network activity for the start and end of jobs. 
 
+\item
 Your current resource allocation is based upon past usage, which is an amalgamation of approximately one week's worth of past wallclock (i.e., time spent on the node(s)) and cpu activity (on the node(s)).
 
+\item
 Jobs should NEVER be run outside of the province of the scheduler. Repeat offenders risk loss of cluster access. 
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Tips/Tricks}
@@ -412,6 +423,35 @@ Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of  vo
 \item
 Five AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Sister Facilities}
+
+Below is a list of resources and facilities similar to Speed at various capacities.
+Depending on your research group and needs, they might be available to you. They
+are not managed by HPC/NAG of AITS, so contact their respective representatives.
+
+\begin{itemize}
+\item
+\texttt{computation.encs} CPU only 3-machine cluster running longer jobs
+without a scheduler
+\item
+\texttt{apini.encs} cluster for teaching and MPI programming (see the corresponding
+course)
+\item
+Compute Canada / Calcul Quebec
+\item
+Computer Science and Software Engineering (CSSE) Virya GPU Cluster
+(2 nodes totalling 16 V100 NVIDIA GPUs), contact \texttt{gpu-help AT encs}
+to request access if you are CSSE member
+\item
+Dr. Maria Amer's VidPro group's nodes in Speed with additional V100 and P6 GPUs
+\item
+Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
+\item
+Dr. Ivan Contreras' servers
+\end{itemize}
+
 
 % ------------------------------------------------------------------------------
 % Refs:
