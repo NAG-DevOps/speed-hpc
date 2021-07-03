@@ -1,5 +1,8 @@
 \documentclass{easychair}
 
+% https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
+\usepackage{listings}
+
 \input{commands}
 
 %% Document
@@ -147,17 +150,14 @@ You may consider adding the source request to your shell-startup environment (i.
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
-Let's look at a basic job script, \file{tcsh.sh} (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}):
+Let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
+(you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
 
-\begin{verbatim}
-#!/encs/bin/tcsh 
-#$ -N qsub-test 
-#$ -cwd 
-#$ -l h_vmem=1G 
-sleep 30 
-module load gurobi/8.1.0 
-module list 
-\end{verbatim}
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{../src/tcsh.sh}
+    \caption{Source code for \file{tcsh.sh}}
+	\label{fig:tcsh.sh}
+\end{figure}
 
 This script sleeps on a node for 30 seconds, uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment, and then prints the list of loaded modules into a file.  Concentrating on the first four lines, the first line is the shell declaration; the next three lines are submission options passed to the scheduler. The first, \texttt{-N}, attaches a name to the job (otherwise it is called what the job script is called), the second, \texttt{-cwd}, tells  the scheduler to execute the job from the current working directory, and not to use the default of your home directory (potentially important for output-file placement), and the third, \texttt{-l h\_vmem}, requests and assigns a memory space to the job (this is an upper  bound, and jobs that attempt to use more will be terminated). Note that this third option 
 is \emph{not} optional (if you do not specify a memory space, submission of the job will fail).  Also notice the syntax that denotes a scheduler option, the, \verb+#$+. 
@@ -279,21 +279,14 @@ The scheduler presents a number of environment variables that can be used in you
 \end{itemize}
 
 \noindent
-Here is a sample script, using all three: 
+In \xf{fig:tmpdir.sh} is a sample script, using all three.
 
-\begin{verbatim}
-#!/encs/bin/tcsh 
-#$ -N envs 
-#$ -cwd 
-#$ -pe smp 8 
-#$ -l h_vmem=32G 
-cd $TMPDIR 
-mkdir input 
-rsync -av $SGE_O_WORKDIR/references/ input/ 
-mkdir results
-STAR --inFiles $TMPDIR/input --parallel $NSLOTS --outFiles $TMPDIR/results 
-rsync -av $TMPDIR/results/ $SGE_O_WORKDIR/processed/ 
-\end{verbatim}
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{../src/tmpdir.sh}
+    \caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}
+
 
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
@@ -314,20 +307,13 @@ Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
 % ------------------------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
 
-\begin{verbatim}
-#!/encs/bin/tcsh 
-#$ -N flu10000 
-#$ -cwd 
-#$ -m bea 
-#$ -pe smp 32 
-#$ -l h_vmem=160G 
-module load ansys/19.0/default
-cd $TMPDIR 
-fluent 3ddp -g -i $SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp > call.txt 
-rsync -av $TMPDIR/ $SGE_O_WORKDIR/fluentparallel/ 
-\end{verbatim}
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{../src/fluent.sh}
+    \caption{Source code for \file{fluent.sh}}
+	\label{fig:fluent.sh}
+\end{figure}
 
-This job script runs Fluent in parallel over 32 cores. Of note, I have requested e-mail notifications (\texttt{-m}), am defining the parallel environment for, \tool{fluent}, with, \texttt{-sgepe  smp} (very important), and am setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file (in-job, because the last line of the script copies everything from \api{\$TMPDIR} to a directory in my NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g., \file{flu10000.o249}), and/or by examining the ``moment'' file in \file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running the job. Caveat: take care with journal-file file paths.  
+The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. Of note, I have requested e-mail notifications (\texttt{-m}), am defining the parallel environment for, \tool{fluent}, with, \texttt{-sgepe  smp} (very important), and am setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file (in-job, because the last line of the script copies everything from \api{\$TMPDIR} to a directory in my NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g., \file{flu10000.o249}), and/or by examining the ``moment'' file in \file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running the job. Caveat: take care with journal-file file paths.  
 
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
