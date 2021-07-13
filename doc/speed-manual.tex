@@ -90,7 +90,9 @@ All registered users are subscribed to the \texttt{hpc-ml} mailing
 list upon gaining access.
 
 \item
-\href{https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis}{Introductory slides of Speed presented to departments.}
+\href
+	{https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis}
+	{Introductory slides of Speed presented to departments}~\cite{speed-intro-preso}.
 
 \end{itemize}
 
@@ -125,6 +127,24 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
+\subsection{Speed's Intent}
+
+\begin{itemize}
+	\item 
+To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets
+	\item 
+Prepare them for big clusters:
+\begin{itemize}
+	\item 
+Calcul Quebec
+	\item 
+Compute Canada
+	\item 
+Cloud platforms
+\end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
 \subsection{Available Software}
 
 We have a great number of open-source software available and installed
@@ -133,6 +153,43 @@ OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
 There are also a number of commercial packages, a subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Ansys, Fluent~\cite{fluent}, etc. To see the
 packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
+
+In particular, there are over 2200 programs available in
+\texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
+
+\begin{itemize}
+	\item 
+Popular concrete examples:
+\begin{itemize}
+	\item 
+MATLAB (R2016b, R2018a, R2018b)
+	\item 
+Fluent (19.2)
+	\item 
+Singularity (Docker-like container), can run other OS's apps, like Ubuntu's.
+\end{itemize}
+	\item 
+We do our best to accommodate custom software requests
+	\item 
+A number of specific environments available, too
+	\item 
+Popular examples mentioned (loaded with, \tool{module}):
+\begin{itemize}
+	\item 
+Python (2.3.0 - 3.5.1)
+	\item 
+Gurobi (7.0.1, 7.5.0, 8.0.0, 8.1.0)
+	\item 
+Ansys (16, 17, 18, 19)
+	\item 
+OpenFOAM (2.3.1, 3.0.1, 5.0, 6.0)
+	\item 
+Cplex 12.6.x to 12.8.x
+	\item 
+OpenMPI 1.6.x, 1.8.x, 3.1.3
+\end{itemize}
+\end{itemize}
+
 
 % ------------------------------------------------------------------------------
 \section{Job Management}
@@ -407,6 +464,38 @@ The load displayed in \tool{qstat} by default is \api{np\_load}, which is load/\
 Try to request resources that closely match what your job will use: requesting many more cores or much more memory than will be needed makes a job more difficult to schedule when resources are scarce.
 \item
 e-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Use Cases}
+
+\begin{itemize}
+	\item 
+HPC Committee's initial batch about 6 students:
+\begin{itemize}
+	\item 
+10000 iterations job in Fluent finished in $<26$ hours vs. 46 hours in Calcul Quebec
+\end{itemize}
+	\item 
+NAG's MAC spoofer analyzer~\cite{mac-spoofer-analyzer-intro-c3s2e2014,mac-spoofer-analyzer-detail-fps2014},
+such as \url{https://github.com/smokhov/atsm/tree/master/examples/flucid}
+\begin{itemize}
+	\item 
+compilation of forensic computing reasoning cases about false or true positives of hardware address spoofing in the labs
+\end{itemize}
+S4 LAB/GIPSY R\&D Group's:
+\begin{itemize}
+	\item 
+MARFCAT and MARFPCAT (OSS signal processing and machine learning tools for 
+vulnerable and weak code analysis and network packet capture
+analysis)~\cite{marfcat-nlp-ai2014,marfcat-sate2010-nist,fingerprinting-mal-traffic}
+	\item 
+Web service data conversion and analysis
+	\item 
+{\flucid} encoders (translation of large log data into {\flucid}~\cite{mokhov-phd-thesis-2013} for forensic analysis)
+	\item 
+Genomic alignment exercises
+\end{itemize}
 \end{itemize}
 
 % ------------------------------------------------------------------------------
