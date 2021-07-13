@@ -115,7 +115,7 @@ Jobs that are too demanding of a desktop, but that are not worth the hassles ass
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space, and a scratch space of  approximately 1 TB. 
+Anything that can fit into a 500-GB memory space, and a scratch space of approximately 1 TB. 
 \item
 CPU-based jobs. 
 \item
@@ -142,7 +142,7 @@ packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
 \subsection{Getting Started}
 
 To use the cluster you will need to be added to the LDAP group that governs access to \texttt{speed-submit.encs.concordia.ca}. Please submit your request to, 
-\texttt{rt-ex-hpc AT encs.concordia.ca}, detailing who you are, your username (e.g., what you  would use to access \texttt{login.encs.concordia.ca}, for example), and the lab that you are  associated with. That same username will then be given a scheduler account. Once that you can SSH to \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}), you will  
+\texttt{rt-ex-hpc AT encs.concordia.ca}, detailing who you are, your username (e.g., what you would use to access \texttt{login.encs.concordia.ca}, for example), and the lab that you are associated with. That same username will then be given a scheduler account. Once that you can SSH to \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}), you will
 need to source the scheduler file:
 
 \begin{verbatim}
@@ -163,10 +163,10 @@ Let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-This script sleeps on a node for 30 seconds, uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment, and then prints the list of loaded modules into a file.  Concentrating on the first four lines, the first line is the shell declaration; the next three lines are submission options passed to the scheduler. The first, \texttt{-N}, attaches a name to the job (otherwise it is called what the job script is called), the second, \texttt{-cwd}, tells  the scheduler to execute the job from the current working directory, and not to use the default of your home directory (potentially important for output-file placement), and the third, \texttt{-l h\_vmem}, requests and assigns a memory space to the job (this is an upper  bound, and jobs that attempt to use more will be terminated). Note that this third option 
-is \emph{not} optional (if you do not specify a memory space, submission of the job will fail).  Also notice the syntax that denotes a scheduler option, the, \verb+#$+. 
+This script sleeps on a node for 30 seconds, uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment, and then prints the list of loaded modules into a file. Concentrating on the first four lines, the first line is the shell declaration; the next three lines are submission options passed to the scheduler. The first, \texttt{-N}, attaches a name to the job (otherwise it is called what the job script is called), the second, \texttt{-cwd}, tells the scheduler to execute the job from the current working directory, and not to use the default of your home directory (potentially important for output-file placement), and the third, \texttt{-l h\_vmem}, requests and assigns a memory space to the job (this is an upper bound, and jobs that attempt to use more will be terminated). Note that this third option 
+is \emph{not} optional (if you do not specify a memory space, submission of the job will fail). Also notice the syntax that denotes a scheduler option, the, \verb+#$+. 
 
-The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job X ("qsub-test") has been submitted"}. The  command, \tool{qstat}, can be used to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will  see something like this: 
+The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see something like this: 
 
 \small
 \begin{verbatim}
@@ -193,8 +193,8 @@ etc.
 \normalsize
 
 Remember that you only have 30 seconds before the job is essentially over, so if you do not see a similar output, either adjust the sleep time in the script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} output listed above shows you that your job is 
-running on node \texttt{speed-05}, that it has a job number of 144, that it was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the default).  
-Once the job finishes, there will be a new file in the directory that the job was started  from, with the syntax of, \texttt{"job name".o"job number"}, so in this example the file is, qsub \file{test.o144}. This file represents the standard output (and error, if there is any) of the job in question. If you look at the contents of your newly created file, you will see that it  contains the output of the, \texttt{module list} command. 
+running on node \texttt{speed-05}, that it has a job number of 144, that it was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the default). 
+Once the job finishes, there will be a new file in the directory that the job was started from, with the syntax of, \texttt{"job name".o"job number"}, so in this example the file is, qsub \file{test.o144}. This file represents the standard output (and error, if there is any) of the job in question. If you look at the contents of your newly created file, you will see that it contains the output of the, \texttt{module list} command. 
 
 Congratulations on your first job! 
 
@@ -208,7 +208,7 @@ Here are useful job-management commands:
 \texttt{qstat -f -u "*"}: display cluster status for all users. 
 
 \item
-\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or  waiting in the queue). 
+\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
 
 \item
 \texttt{qdel [job-ID]}: delete job [job-ID]. 
@@ -220,18 +220,18 @@ Here are useful job-management commands:
 \texttt{qrls [job-ID]}: release held job [job-ID]. 
 
 \item
-\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more  useful stats. 
+\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
 \end{itemize}
 
 
 % ------------------------------------------------------------------------------
 \subsection{Advanced \tool{qsub} Options}
 
-In addition to the basic \tool{qsub} options presented earlier, there are a few additional options that are generally useful:  
+In addition to the basic \tool{qsub} options presented earlier, there are a few additional options that are generally useful:
 
 \begin{itemize}
 \item
-\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins; (e)nds; (a)borts.  Mail is sent to the default address of, \texttt{"username@encs.concordia.ca"}, unless a  different address is supplied (see, \texttt{-M}). The report sent when a job ends includes job 
+\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins; (e)nds; (a)borts. Mail is sent to the default address of, \texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, \texttt{-M}). The report sent when a job ends includes job 
 runtime, as well as the maximum memory value hit (\api{maxvmem}). 
 
 \item
@@ -244,8 +244,8 @@ runtime, as well as the maximum memory value hit (\api{maxvmem}).
 \texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note that if you give a single number, that represents \emph{seconds}, not hours. 
 
 \item
-\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the  queue. 
-The many \tool{qsub} options available are read with, \texttt{man qsub}. Also note that \tool{qsub} options can be specified during the job-submission command, and these \emph{override}  existing script options (if present). The syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but  unlike in the script, the options are specified without the leading \verb+#$+ (e.g., \texttt{qsub -N  qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
+\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
+The many \tool{qsub} options available are read with, \texttt{man qsub}. Also note that \tool{qsub} options can be specified during the job-submission command, and these \emph{override} existing script options (if present). The syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but unlike in the script, the options are specified without the leading \verb+#$+ (e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -257,13 +257,13 @@ For jobs that can take advantage of multiple machine cores, up to 32 cores (per 
 #$ -pe smp [#cores] 
 \end{verbatim}
 
-\textbf{Do not request more cores than you think will be useful}, as larger-core jobs are more difficult to schedule. On the flip side, though, if you are going to be running a program that scales out to the maximum single-machine core count available, please (please) request 32 cores, to avoid node oversubscription (i.e., to avoid overloading the CPUs).  
-Core count associated with a job appears under, ``states'', in the, \texttt{qstat -f -u "*"}, output.  
+\textbf{Do not request more cores than you think will be useful}, as larger-core jobs are more difficult to schedule. On the flip side, though, if you are going to be running a program that scales out to the maximum single-machine core count available, please (please) request 32 cores, to avoid node oversubscription (i.e., to avoid overloading the CPUs).
+Core count associated with a job appears under, ``states'', in the, \texttt{qstat -f -u "*"}, output.
 
 % ------------------------------------------------------------------------------
 \subsection{Interactive Jobs}
 
-Job sessions can be interactive, instead of batch (script) based. Such sessions can be  useful for testing and optimising code and resource requirements prior to batch submission. To request an interactive job session, use, \texttt{qlogin [options]}, similarly to a 
+Job sessions can be interactive, instead of batch (script) based. Such sessions can be useful for testing and optimising code and resource requirements prior to batch submission. To request an interactive job session, use, \texttt{qlogin [options]}, similarly to a 
 \tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}). Note that the options that are available for \tool{qsub} are not necessarily available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
 
 % ------------------------------------------------------------------------------
@@ -273,13 +273,13 @@ The scheduler presents a number of environment variables that can be used in you
 
 \begin{itemize}
 \item
-\api{\$TMPDIR}=the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job, so if data in the temporary space are important, they absolutely need to be accessed before the job terminates.  
+\api{\$TMPDIR}=the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job, so if data in the temporary space are important, they absolutely need to be accessed before the job terminates.
 
 \item
-\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely a NFS-mounted  path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, the path defaults to your home  directory.  
+\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely a NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, the path defaults to your home directory.
 
 \item
-\api{\$NSLOTS}=the number of cores requested for the job. This variable can be used in  place of hardcoded thread-request declarations. 
+\api{\$NSLOTS}=the number of cores requested for the job. This variable can be used in place of hardcoded thread-request declarations. 
 \end{itemize}
 
 \noindent
@@ -317,12 +317,12 @@ Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
 	\label{fig:fluent.sh}
 \end{figure}
 
-The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. Of note, I have requested e-mail notifications (\texttt{-m}), am defining the parallel environment for, \tool{fluent}, with, \texttt{-sgepe  smp} (very important), and am setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file (in-job, because the last line of the script copies everything from \api{\$TMPDIR} to a directory in my NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g., \file{flu10000.o249}), and/or by examining the ``moment'' file in \file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running the job. Caveat: take care with journal-file file paths.  
+The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. Of note, I have requested e-mail notifications (\texttt{-m}), am defining the parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (very important), and am setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file (in-job, because the last line of the script copies everything from \api{\$TMPDIR} to a directory in my NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g., \file{flu10000.o249}), and/or by examining the ``moment'' file in \file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running the job. Caveat: take care with journal-file file paths.
 
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
 
-Jobs that call \tool{java} have a memory overhead, which needs to be taken into account when assigning a value to \api{h\_vmem}. Even the most basic \tool{java} call, \texttt{java -Xmx1G - version}, will need to have, \texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. Note that this memory overhead grows proportionally with the value of \texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G, \api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G. 
+Jobs that call \tool{java} have a memory overhead, which needs to be taken into account when assigning a value to \api{h\_vmem}. Even the most basic \tool{java} call, \texttt{java -Xmx1G -version}, will need to have, \texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. Note that this memory overhead grows proportionally with the value of \texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G, \api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G. 
 
 % ------------------------------------------------------------------------------
 \subsection{Scheduling On The GPU Nodes}
@@ -379,7 +379,7 @@ As a new user, you are limited to 32 cores (a restriction that is removed for re
 Jobs are assigned a maximum runtime of one week, unless otherwise specified. 
 
 \item
-Home directories (data directories) are served over NFS. NFS is great for acute  activity, but crappy for chronic activity. Any data that a job will read more than once should be copied at the start to the scratch disk of a compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), any intermediary job data should be produced in \api{\$TMPDIR}, and once a job is near to finishing, those data should be copied to your NFS-mounted home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps, \api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected locally whenever possible, saving network activity for the start and end of jobs. 
+Home directories (data directories) are served over NFS. NFS is great for acute activity, but crappy for chronic activity. Any data that a job will read more than once should be copied at the start to the scratch disk of a compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), any intermediary job data should be produced in \api{\$TMPDIR}, and once a job is near to finishing, those data should be copied to your NFS-mounted home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps, \api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected locally whenever possible, saving network activity for the start and end of jobs. 
 
 \item
 Your current resource allocation is based upon past usage, which is an amalgamation of approximately one week's worth of past wallclock (i.e., time spent on the node(s)) and cpu activity (on the node(s)).
@@ -402,9 +402,9 @@ cluster, \tool{tar} everything up first.
 \item
 If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}), you will need to source a different scheduler file, and will need to change the shell declaration in your script(s).
 \item
-The load displayed in \tool{qstat} by default is \api{np\_load}, which is load/\#cores. That means that a load of, ``1'', which represents a fully active core, is displayed as $0.03$ on the  node in question, as there are 32 cores on a node. To display load ``as is'' (such that a node with a fully active core displays a load of approximately $1.00$), add the following to your \file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
+The load displayed in \tool{qstat} by default is \api{np\_load}, which is load/\#cores. That means that a load of, ``1'', which represents a fully active core, is displayed as $0.03$ on the node in question, as there are 32 cores on a node. To display load ``as is'' (such that a node with a fully active core displays a load of approximately $1.00$), add the following to your \file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
 \item
-Try to request resources that closely match what your job will use: requesting many  more cores or much more memory than will be needed makes a job more difficult to schedule when resources are scarce.  
+Try to request resources that closely match what your job will use: requesting many more cores or much more memory than will be needed makes a job more difficult to schedule when resources are scarce.
 \item
 e-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
 \end{itemize}
@@ -419,7 +419,7 @@ Phase 1 of Speed was of the following configuration:
 
 \begin{itemize}
 \item
-Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of  volatile-scratch disk space. 
+Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
 \item
 Five AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
