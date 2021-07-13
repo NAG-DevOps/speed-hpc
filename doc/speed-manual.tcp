@@ -3,7 +3,7 @@ Type=TeXnicCenterProjectInformation
 Version=4
 
 [ProjectInfo]
-MainFile=speed-manual.tcp
+MainFile=speed-manual.tex
 UseBibTeX=1
 UseMakeIndex=1
 ActiveProfile=LaTeX ⇨ PDF
