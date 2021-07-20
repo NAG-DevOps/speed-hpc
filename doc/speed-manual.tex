@@ -36,14 +36,20 @@
     \affiliation{Concordia University}\\
     \affiliation{Montreal, Quebec, Canada}\\
     \affiliation{\url{serguei@encs.concordia.ca}}\\
+\and
+    Gillian Roper\\
+    \affiliation{Concordia University}\\
+    \affiliation{Montreal, Quebec, Canada}\\
+    \affiliation{\url{groper@encs.concordia.ca}}\\
 }
 
 % \authorrunning{} has to be set for the shorter version of the authors' names;
 % otherwise a warning will be rendered in the running heads.
 %
-\authorrunning{Bunnell, Mokhov}
+\authorrunning{Bunnell, Mokhov, Roper}
 \indexedauthor{Bunnell, Scott}
 \indexedauthor{Mokhov, Serguei}
+\indexedauthor{Roper, Gillian}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
@@ -220,10 +226,26 @@ Let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-This script sleeps on a node for 30 seconds, uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment, and then prints the list of loaded modules into a file. Concentrating on the first four lines, the first line is the shell declaration; the next three lines are submission options passed to the scheduler. The first, \texttt{-N}, attaches a name to the job (otherwise it is called what the job script is called), the second, \texttt{-cwd}, tells the scheduler to execute the job from the current working directory, and not to use the default of your home directory (potentially important for output-file placement), and the third, \texttt{-l h\_vmem}, requests and assigns a memory space to the job (this is an upper bound, and jobs that attempt to use more will be terminated). Note that this third option 
-is \emph{not} optional (if you do not specify a memory space, submission of the job will fail). Also notice the syntax that denotes a scheduler option, the, \verb+#$+. 
+This script sleeps on a node for 30 seconds, uses the \tool{module} command 
+to load the \texttt{gurobi/8.1.0} environment, and then prints the list of 
+loaded modules into a file. Concentrating on the first four lines, the first 
+line is the shell declaration; the next three lines are submission options 
+passed to the scheduler. The first, \texttt{-N}, attaches a name to the job
+(otherwise it is called what the job script is called), the second, \texttt{-cwd},
+tells the scheduler to execute the job from the current working 
+directory, and not to use the default of your home directory (potentially 
+important for output-file placement), and the third, \texttt{-l h\_vmem}, 
+requests and assigns a memory space to the job (this is an upper bound, and 
+jobs that attempt to use more will be terminated). Note that this third 
+option is \emph{not} optional (if you do not specify a memory space, 
+submission of the job will fail). Also notice the syntax that denotes a 
+scheduler option, the, \texttt{\#\$}.
 
-The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see something like this: 
+The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
+To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
+X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
+to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
+something like this: 
 
 \small
 \begin{verbatim}
@@ -384,7 +406,72 @@ Jobs that call \tool{java} have a memory overhead, which needs to be taken into 
 % ------------------------------------------------------------------------------
 \subsection{Scheduling On The GPU Nodes}
 
-There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one in \texttt{speed-19}. Their availability is seen with, \texttt{qstat -F g} (note the capital): 
+The cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
+cards: each card has 2048 cores and 16GB of RAM. Though note that the P6
+is mainly a single-precision card, so unless you need the GPU double
+precision, double-precision calculations will be faster on a CPU node.
+
+Job scripts for the GPU queue differ in that they do not need these
+statements:
+
+\begin{verbatim}
+#$ -pe smp <threadcount>
+#$ -l h_vmem=<memory>G
+\end{verbatim}
+
+But do need this statement, which attaches either a single GPU, or, two
+GPUs, to the job:
+
+\begin{verbatim}
+#$ -l gpu=[1|2]
+\end{verbatim}
+
+Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
+dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
+total of \emph{four} GPUs can be actively attached to any one user at any given
+time.
+
+Once that your job script is ready, you can submit it to the GPU queue
+with:
+
+\begin{verbatim}
+qsub -q g.q ./<myscript>.sh
+\end{verbatim}
+
+And you can query \tool{nvidia-smi} on the node that is running your job with:
+
+\begin{verbatim}
+ssh <username>@speed[-05|-17] nvidia-smi
+\end{verbatim}
+
+Status of the GPU queue can be queried with:
+
+\begin{verbatim}
+qstat -f -u "*" -q g.q
+\end{verbatim}
+
+\textbf{Very important note} regarding TensorFlow and PyTorch: if you are planning
+to run TensorFlow and/or PyTorch multi-GPU jobs, do not use the
+\api{tf.distribute} and/or \api{torch.nn.DataParallel} functions, as they will crash
+the compute node (100\% certainty). This appears to be the current hardware's architecture's defect.
+%
+The workaround is to either
+% TODO: Need to link to that example
+manually effect GPU parallelisation (TensorFlow has an example on how to
+do this), or to run on a single GPU.
+
+\vspace{10pt}
+\noindent
+\textbf{Important}
+\vspace{10pt}
+
+Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
+queue but those jobs will hang and never run.
+
+% TODO: re-integrate this text to blend in and update the output
+There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
+in \texttt{speed-19}. Their availability is seen with, \texttt{qstat -F g}
+(note the capital): 
 
 \small
 \begin{verbatim}
@@ -402,7 +489,12 @@ etc.
 \end{verbatim}
 \normalsize
 
-This status demonstrates that all five are available (i.e., have not been requested as resources). To specifically request a GPU node, add, \texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or \tool{qlogin} (statement) request. For example, \texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You will see that this job has been assigned to one of the GPU nodes:
+This status demonstrates that all five are available (i.e., have not been 
+requested as resources). To specifically request a GPU node, add,
+\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
+\tool{qlogin} (statement) request. For example,
+\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You 
+will see that this job has been assigned to one of the GPU nodes:
 
 \small
 \begin{verbatim}
@@ -436,10 +528,21 @@ As a new user, you are limited to 32 cores (a restriction that is removed for re
 Jobs are assigned a maximum runtime of one week, unless otherwise specified. 
 
 \item
-Home directories (data directories) are served over NFS. NFS is great for acute activity, but crappy for chronic activity. Any data that a job will read more than once should be copied at the start to the scratch disk of a compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), any intermediary job data should be produced in \api{\$TMPDIR}, and once a job is near to finishing, those data should be copied to your NFS-mounted home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps, \api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected locally whenever possible, saving network activity for the start and end of jobs. 
+Home directories (data directories) are served over NFS. NFS is great for 
+acute activity, but crappy for chronic activity. Any data that a job will 
+read more than once should be copied at the start to the scratch disk of a 
+compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), 
+any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
+job is near to finishing, those data should be copied to your NFS-mounted 
+home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps,
+\api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected 
+locally whenever possible, saving network activity for the start and end of 
+jobs. 
 
 \item
-Your current resource allocation is based upon past usage, which is an amalgamation of approximately one week's worth of past wallclock (i.e., time spent on the node(s)) and cpu activity (on the node(s)).
+Your current resource allocation is based upon past usage, which is an 
+amalgamation of approximately one week's worth of past wallclock (i.e., time 
+spent on the node(s)) and CPU activity (on the node(s)).
 
 \item
 Jobs should NEVER be run outside of the province of the scheduler. Repeat offenders risk loss of cluster access. 
