@@ -201,21 +201,80 @@ OpenMPI 1.6.x, 1.8.x, 3.1.3
 \section{Job Management}
 \label{sect:job-management}
 
+In these instructions, anything bracketed like so, \verb+<>+, indicates a
+label/value to be replaced (the entire bracketed term needs replacement).
+
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
 
-To use the cluster you will need to be added to the LDAP group that governs access to \texttt{speed-submit.encs.concordia.ca}. Please submit your request to, 
-\texttt{rt-ex-hpc AT encs.concordia.ca}, detailing who you are, your username (e.g., what you would use to access \texttt{login.encs.concordia.ca}, for example), and the lab that you are associated with. That same username will then be given a scheduler account. Once that you can SSH to \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}), you will
+To use the cluster you will need to be added to the LDAP group that governs 
+access to \texttt{speed-submit.encs.concordia.ca}. Please submit your request 
+to, \texttt{rt-ex-hpc AT encs.concordia.ca}, detailing who you are, your username 
+(e.g., what you would use to access \texttt{login.encs.concordia.ca}, for 
+example), and the lab that you are associated with. That same username will 
+then be given a scheduler account. Once that you can SSH to \texttt{speed}
+(an alias for \texttt{speed-submit.encs.concordia.ca}), you will
 need to source the scheduler file:
 
 \begin{verbatim}
 source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
 \end{verbatim}
 
-You may consider adding the source request to your shell-startup environment (i.e., to your \file{.tcshrc} file). If sourcing has been successful, you have access to the scheduler commands. For example, if, \texttt{qstat -f -u "*"}, returns something non-error related, you are in business. 
+You may consider adding the source request to your shell-startup environment
+(i.e., to your \file{.tcshrc} file). If sourcing has been successful, you have 
+access to the scheduler commands. For example, if, \texttt{qstat -f -u "*"}, 
+returns something non-error related, you are in business. 
+
+As a new user, \textbf{iff} you don't have yet \file{.tcshrc},
+please execute the following the first time that you log
+in, in your home directory, \emph{exactly} as it is written (it is all one
+line):
+
+\begin{verbatim}
+cp /home/n/nul-uge/.tcshrc . && cp /home/n/nul-uge/template.sh .
+  && mkdir /speed-scratch/$USER
+\end{verbatim}
+
+If you do have \file{.tcshrc} already, you may need to edit it instead
+using, e.g., \tool{vim}.
+
+That command prepares your environment (again, be careful overwriting an existing
+\file{.tcshrc}), provides you with a job template, and sets up your
+cluster-specific storage. Note that you need to either log out and back
+in, or execute a new shell, for the environment changes to be applied
+(important). And if you use \tool{bash}, or another shell, please contact 
+\texttt{rt-ex-hpc AT encs.concordia.ca}.
+
+If you are connecting from home, and have a Mac or Linux system, in a
+terminal, this will connect you (on a single line):
+
+\begin{verbatim}
+ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
+  <ENCSusername>@speed.encs.concordia.ca
+\end{verbatim}
+
+Windows users can connect via PuTTY (or MobaXterm). All users are expected
+to have a basic understanding of Linux and its commonly used commands.
 
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
+
+Preparing your job for submission is fairly straightforward. Job scripts
+are broken into four main sections: make a copy of \file{template.sh}
+or any existing job script example on our GitHub, and base
+your job on that. The first section is the shell call, and that can be
+left alone, unless you want to use a different shell. The next section
+contains the options provided to the cluster scheduler, and \file{template.sh}
+provides the essentials:
+
+\begin{verbatim}
+#$ -N <jobname>
+#$ -cwd
+#$ -m bea
+#$ -pe smp <corecount>
+#$ -l h_vmem=<memory>G
+\end{verbatim}
+
 
 Let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
@@ -271,14 +330,26 @@ etc.
 \end{verbatim}
 \normalsize
 
-Remember that you only have 30 seconds before the job is essentially over, so if you do not see a similar output, either adjust the sleep time in the script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} output listed above shows you that your job is 
-running on node \texttt{speed-05}, that it has a job number of 144, that it was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the default). 
-Once the job finishes, there will be a new file in the directory that the job was started from, with the syntax of, \texttt{"job name".o"job number"}, so in this example the file is, qsub \file{test.o144}. This file represents the standard output (and error, if there is any) of the job in question. If you look at the contents of your newly created file, you will see that it contains the output of the, \texttt{module list} command. 
+Remember that you only have 30 seconds before the job is essentially over, so 
+if you do not see a similar output, either adjust the sleep time in the 
+script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} 
+output listed above shows you that your job is 
+running on node \texttt{speed-05}, that it has a job number of 144, that it 
+was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the 
+default). 
+
+Once the job finishes, there will be a new file in the directory that the job 
+was started from, with the syntax of, \texttt{"job name".o"job number"}, so 
+in this example the file is, qsub \file{test.o144}. This file represents the 
+standard output (and error, if there is any) of the job in question. If you 
+look at the contents of your newly created file, you will see that it 
+contains the output of the, \texttt{module list} command. 
 
 Congratulations on your first job! 
 
 % ------------------------------------------------------------------------------
-\subsection{Job Management}
+\subsection{Job Management Commands}
+\label{sect:job-management-commands}
 
 Here are useful job-management commands: 
 
@@ -305,6 +376,7 @@ Here are useful job-management commands:
 
 % ------------------------------------------------------------------------------
 \subsection{Advanced \tool{qsub} Options}
+\label{sect:qsub-options}
 
 In addition to the basic \tool{qsub} options presented earlier, there are a few additional options that are generally useful:
 

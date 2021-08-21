@@ -1,6 +1,7 @@
-In these instructions, anything bracketed like so, <>, indicates a
-label/value to be replaced (the entire bracketed term needs replacement).
+//In these instructions, anything bracketed like so, <>, indicates a
+//label/value to be replaced (the entire bracketed term needs replacement).
 
+/*
 If you are connecting from home, and have a Mac or Linux system, in a
 terminal, this will connect you:
 
@@ -9,6 +10,7 @@ ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed
 
 Windows users can connect via PuTTY (or MobaXterm). All users are expected
 to have a basic understanding of Linux and its commonly used commands.
+*/
 
 As a new user, please execute the following the first time that you log
 in, in your home directory, *exactly* as it is written (it is all one
@@ -23,6 +25,7 @@ cluster-specific storage. Note that you need to either log out and back
 in, or execute a new shell, for the environment changes to be applied
 (important). And if you use bash, or another shell, please contact 
 rt-ex-hpc@encs.concordia.ca.
+*/
 
 Preparing your job for submission is fairly straightforward. Job scripts
 are broken into four main sections: make a copy of template.sh, and base
@@ -36,6 +39,7 @@ provides the essentials:
 #$ -m bea
 #$ -pe smp <corecount>
 #$ -l h_vmem=<memory>G
+*/
 
 Replace, <jobname>, with the name that you want your cluster job to have;
 '-cwd', makes the current working directory the "job working directory",
