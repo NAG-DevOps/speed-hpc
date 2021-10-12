@@ -7,7 +7,7 @@
 #$ -N comsole_job  # job name
 #$ -cwd            # Run from directory that script is in, e.g., your speed-scratch directory
 #$ -m bea          # Email notifications at job's start and end, or on abort
-#$ -pe smp 32      # Request 32 slots from parellel environment 'smp'
+#$ -pe smp 8       # Request 8 slots from parellel environment 'smp'
 #$ -l h_vmem=500G  # set resource value h_vmem (hard virtual memory size) to 500G
                 
 ##
