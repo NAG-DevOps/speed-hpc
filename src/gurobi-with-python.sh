@@ -12,8 +12,8 @@
 #$ -N MY_JOB
 #$ -cwd
 #$ -m bea
-#$ -pe smp 32
-#$ -l h_vmem=500G
+#$ -pe smp 8
+#$ -l h_vmem=150G
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
