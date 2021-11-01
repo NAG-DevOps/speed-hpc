@@ -275,8 +275,99 @@ provides the essentials:
 #$ -l h_vmem=<memory>G
 \end{verbatim}
 
+Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
+\option{-cwd}, makes the current working directory the ``job working directory'',
+and your standard output file will appear here; \option{-m bea}, provides e-mail
+notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
+(multithreaded) parallelism (i.e., cores) you attach to your job (up to
+32), and this line needs to be deleted or commented out if not relevant;
+replace, \verb+<memory>+, with the value (in GB), that you want your job's memory
+space to be (up to 500), and all jobs MUST have a memory-space assignment.
+If you are unsure about memory footprints, err on assigning a generous
+memory space to your job so that it does not get prematurely terminated
+(the value given to \api{h\_vmem} is a hard memory ceiling). You can refine
+\api{h\_vmem} values for future jobs by monitoring the size of a job's active
+memory space on \texttt{speed-submit} with:
 
-Let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
+\begin{verbatim}
+qstat -j <jobID> | grep maxvmem
+\end{verbatim}
+
+Memory-footprint values are also provided for completed jobs in the final
+e-mail notification (as, ``Max vmem''), and via the accounting function on
+\texttt{speed-submit} with:
+
+\begin{verbatim}
+qacct -j <jobID> | grep maxvmem
+\end{verbatim}
+
+Jobs that request a low-memory footprint are more likely to load on a busy
+cluster.
+
+The third job-script section is for module loads. On \texttt{speed-submit}, to list
+what is available:
+
+\begin{verbatim}
+module avail
+\end{verbatim}
+
+To list for a particular program (\tool{matlab}, for example):
+
+\begin{verbatim}
+module -t avail matlab
+\end{verbatim}
+
+Which, of course, can be shortened to match all that start with a
+particular letter:
+
+\begin{verbatim}
+module -t avail o
+\end{verbatim}
+
+To load a module (here, again, using \tool{matlab}):
+
+\begin{verbatim}
+module load matlab/R2020a/default
+\end{verbatim}
+
+Use, \option{unload}, in place of, \option{load}, to remove a module from active use.
+
+Finally, to list loaded modules:
+
+\begin{verbatim}
+module list
+\end{verbatim}
+
+Typically only the \texttt{module load} command will be used in your script.
+
+Lastly, what you want to execute in your job goes into the fourth section
+of the script. A common execution framework comprises the program call,
+and options to the program specifying location of input and output files,
+as well as a declaration of degree of parallelism (note the
+cluster-specific environment variable, \api{NSLOTS}, which resolves to the value
+provided to the scheduler option, \option{-pe smp}), though, obviously, every
+program has its own unique execution framework.
+
+Please note that jobs that expect to touch data-input and -output files
+more than once should make use of \api{TMPDIR}, a scheduler-provided working
+space (this is quite generous, close to 1~TB in size). \api{TMPDIR} is created
+when a job starts, and exists on the local disk of the compute node
+executing your job, so I/O operations are much faster than what would be
+expected to/from the shared storage (which is provided over NFS). An
+example job script using \api{TMPDIR} is found at
+% TODO: update / sync with repo version, git pull repo in /home/n/nul-uge/
+%       so they all refer to the same scripts.
+\texttt{/home/n/nul-uge/templateTMPDIR.sh}: the job is instructed to change to
+\api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
+\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
+current working directory), to make the new directory \texttt{results}, to
+execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
+output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
+to an existing directory, \texttt{processed}, that is located in the current
+working directory. TMPDIR only exists for the duration of the job, though,
+so it is very important to copy relevant results from it at job's end.
+
+Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
 
 \begin{figure}[htpb]
@@ -294,7 +385,7 @@ passed to the scheduler. The first, \texttt{-N}, attaches a name to the job
 tells the scheduler to execute the job from the current working 
 directory, and not to use the default of your home directory (potentially 
 important for output-file placement), and the third, \texttt{-l h\_vmem}, 
-requests and assigns a memory space to the job (this is an upper bound, and 
+requests and assigns a 1GB of memory space to the job (this is an upper bound, and 
 jobs that attempt to use more will be terminated). Note that this third 
 option is \emph{not} optional (if you do not specify a memory space, 
 submission of the job will fail). Also notice the syntax that denotes a 
@@ -344,16 +435,24 @@ in this example the file is, qsub \file{test.o144}. This file represents the
 standard output (and error, if there is any) of the job in question. If you 
 look at the contents of your newly created file, you will see that it 
 contains the output of the, \texttt{module list} command. 
+Important information is often written to this file.
 
 Congratulations on your first job! 
 
 % ------------------------------------------------------------------------------
-\subsection{Job Management Commands}
+\subsection{Common Job Management Commands Summary}
 \label{sect:job-management-commands}
 
 Here are useful job-management commands: 
 
 \begin{itemize}
+\item
+\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+on \texttt{speed-submit} you can submit it using this
+
+\item
+\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+
 \item
 \texttt{qstat -f -u "*"}: display cluster status for all users. 
 
@@ -402,25 +501,39 @@ The many \tool{qsub} options available are read with, \texttt{man qsub}. Also no
 % ------------------------------------------------------------------------------
 \subsection{Requesting Multiple Cores (i.e., Multithreading Jobs)}
 
-For jobs that can take advantage of multiple machine cores, up to 32 cores (per job) can be requested in your script with: 
+For jobs that can take advantage of multiple machine cores, up to 32 cores (
+per job) can be requested in your script with: 
 
 \begin{verbatim}
 #$ -pe smp [#cores] 
 \end{verbatim}
 
-\textbf{Do not request more cores than you think will be useful}, as larger-core jobs are more difficult to schedule. On the flip side, though, if you are going to be running a program that scales out to the maximum single-machine core count available, please (please) request 32 cores, to avoid node oversubscription (i.e., to avoid overloading the CPUs).
-Core count associated with a job appears under, ``states'', in the, \texttt{qstat -f -u "*"}, output.
+\textbf{Do not request more cores than you think will be useful}, as larger-core
+jobs are more difficult to schedule. On the flip side, though, if you 
+are going to be running a program that scales out to the maximum single-machine
+core count available, please (please) request 32 cores, to avoid node 
+oversubscription (i.e., to avoid overloading the CPUs).
+
+Core count associated with a job appears under, ``states'', in the,
+\texttt{qstat -f -u "*"}, output.
 
 % ------------------------------------------------------------------------------
 \subsection{Interactive Jobs}
 
-Job sessions can be interactive, instead of batch (script) based. Such sessions can be useful for testing and optimising code and resource requirements prior to batch submission. To request an interactive job session, use, \texttt{qlogin [options]}, similarly to a 
-\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}). Note that the options that are available for \tool{qsub} are not necessarily available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
+Job sessions can be interactive, instead of batch (script) based. Such 
+sessions can be useful for testing and optimising code and resource 
+requirements prior to batch submission. To request an interactive job 
+session, use, \texttt{qlogin [options]}, similarly to a 
+\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}).
+Note that the options that are available for \tool{qsub} are not necessarily
+available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
 
 % ------------------------------------------------------------------------------
 \subsection{Scheduler Environment Variables}
 
-The scheduler presents a number of environment variables that can be used in your jobs. Three of the more useful are \api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
+The scheduler presents a number of environment variables that can be used in 
+your jobs. Three of the more useful are \api{TMPDIR}, \api{SGE\_O\_WORKDIR}, 
+and \api{NSLOTS}:
 
 \begin{itemize}
 \item
@@ -446,17 +559,24 @@ In \xf{fig:tmpdir.sh} is a sample script, using all three.
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
 
-Some programs effect their parallel processing via MPI (which is a communication protocol). An example of such software is Fluent. MPI needs to have `passwordless login' set up, which means SSH keys. In your NFS-mounted home directory:
+Some programs effect their parallel processing via MPI (which is a 
+communication protocol). An example of such software is Fluent. MPI needs to 
+have `passwordless login' set up, which means SSH keys. In your NFS-mounted 
+home directory:
 
+% TODO: fix RSA keys to be one of the EC ones as RSA is deprecated
 \begin{itemize}
 \item
 \texttt{cd .ssh}
 \item
 \texttt{ssh-keygen -t rsa} (default location; blank passphrase) 
 \item
-\texttt{cat id\_rsa.pub >> authorized\_keys} (if the \file{authorized\_keys} file already exists) \emph{OR} \texttt{cat id\_rsa.pub > authorized\_keys} (if does not) 
+\texttt{cat id\_rsa.pub >> authorized\_keys} (if the \file{authorized\_keys}
+file already exists) \emph{OR} \texttt{cat id\_rsa.pub > authorized\_keys} (if does not) 
 \item
-Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home to 700 (note that you likely will not have to do anything here, as most people will have those permissions by default). 
+Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
+to 700 (note that you likely will not have to do anything here, as most people
+will have those permissions by default). 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -473,7 +593,15 @@ The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. Of n
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
 
-Jobs that call \tool{java} have a memory overhead, which needs to be taken into account when assigning a value to \api{h\_vmem}. Even the most basic \tool{java} call, \texttt{java -Xmx1G -version}, will need to have, \texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. Note that this memory overhead grows proportionally with the value of \texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G, \api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G. 
+Jobs that call \tool{java} have a memory overhead, which needs to be taken 
+into account when assigning a value to \api{h\_vmem}. Even the most basic 
+\tool{java} call, \texttt{java -Xmx1G -version}, will need to have,
+\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
+Note that this memory overhead grows proportionally with the value of
+\texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G,
+\api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
+
+% TODO: add a MARF Java job
 
 % ------------------------------------------------------------------------------
 \subsection{Scheduling On The GPU Nodes}
@@ -588,20 +716,31 @@ more than two GPUs can be requested for any one job.
 \section{Conclusion}
 \label{sect:conclusion}
 
+The cluster is, ``first come, first served'', until it fills, and then job
+position in the queue is based upon past usage. The scheduler does attempt
+to fill gaps, though, so sometimes a single-core job of lower priority
+will schedule before a multi-core job of higher priority, for example.
+
 % ------------------------------------------------------------------------------
 \subsection{Important Limitations}
 \label{sect:limitations}
 
 \begin{itemize}
 \item
-As a new user, you are limited to 32 cores (a restriction that is removed for responsible users).
+New users are restricted to a total of 32 cores: write to \url{rt-ex-hpc@encs.concordia.ca}
+if you need more temporarily (256 is the maximum possible, or, 8 jobs of 32 cores each).
 
 \item
-Jobs are assigned a maximum runtime of one week, unless otherwise specified. 
+Job sessions are a maximum of one week in length (only 24 hours, though,
+for interactive jobs).
 
 \item
-Home directories (data directories) are served over NFS. NFS is great for 
-acute activity, but crappy for chronic activity. Any data that a job will 
+Scripts can live in your NFS-provided home, but any substantial data need
+to be in your cluster-specific directory
+(located at \verb+/speed-scratch/<ENCSusername>/+).
+
+NFS is great for acute activity, but is not ideal for chronic activity.
+Any data that a job will 
 read more than once should be copied at the start to the scratch disk of a 
 compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), 
 any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
@@ -617,7 +756,9 @@ amalgamation of approximately one week's worth of past wallclock (i.e., time
 spent on the node(s)) and CPU activity (on the node(s)).
 
 \item
-Jobs should NEVER be run outside of the province of the scheduler. Repeat offenders risk loss of cluster access. 
+Jobs should NEVER be run outside of the province of the scheduler. Repeat 
+offenders risk loss of cluster access. 
+
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -625,20 +766,31 @@ Jobs should NEVER be run outside of the province of the scheduler. Repeat offend
 
 \begin{itemize}
 \item
-files/scripts must have Linux line breaks in them (not Windows ones).
+Files/scripts must have Linux line breaks in them (not Windows ones).
 \item
-use \tool{rsync}, not \tool{scp}, when moving data around. 
+Use \tool{rsync}, not \tool{scp}, when moving data around. 
 \item
-if you are going to move many many files between NFS-mounted storage and the 
+If you are going to move many many files between NFS-mounted storage and the 
 cluster, \tool{tar} everything up first. 
 \item
-If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}), you will need to source a different scheduler file, and will need to change the shell declaration in your script(s).
+If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}),
+you will need to source a different scheduler file, and will need to 
+change the shell declaration in your script(s).
 \item
-The load displayed in \tool{qstat} by default is \api{np\_load}, which is load/\#cores. That means that a load of, ``1'', which represents a fully active core, is displayed as $0.03$ on the node in question, as there are 32 cores on a node. To display load ``as is'' (such that a node with a fully active core displays a load of approximately $1.00$), add the following to your \file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
+The load displayed in \tool{qstat} by default is \api{np\_load}, which is
+load/\#cores. That means that a load of, ``1'', which represents a fully active 
+core, is displayed as $0.03$ on the node in question, as there are 32 cores 
+on a node. To display load ``as is'' (such that a node with a fully active 
+core displays a load of approximately $1.00$), add the following to your
+\file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
+
 \item
-Try to request resources that closely match what your job will use: requesting many more cores or much more memory than will be needed makes a job more difficult to schedule when resources are scarce.
+Try to request resources that closely match what your job will use: 
+requesting many more cores or much more memory than will be needed makes a 
+job more difficult to schedule when resources are scarce.
+
 \item
-e-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
+E-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -703,17 +855,17 @@ without a scheduler
 \texttt{apini.encs} cluster for teaching and MPI programming (see the corresponding
 course)
 \item
-Compute Canada / Calcul Quebec
-\item
 Computer Science and Software Engineering (CSSE) Virya GPU Cluster
 (2 nodes totalling 16 V100 NVIDIA GPUs), contact \texttt{gpu-help AT encs}
-to request access if you are CSSE member
+to request access if you are a CSSE member
 \item
 Dr. Maria Amer's VidPro group's nodes in Speed with additional V100 and P6 GPUs
 \item
 Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
 \item
 Dr. Ivan Contreras' servers
+\item
+Compute Canada / Calcul Quebec
 \end{itemize}
 
 

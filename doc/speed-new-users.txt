@@ -41,6 +41,7 @@ provides the essentials:
 #$ -l h_vmem=<memory>G
 */
 
+/*
 Replace, <jobname>, with the name that you want your cluster job to have;
 '-cwd', makes the current working directory the "job working directory",
 and your standard output file will appear here; '-m bea', provides e-mail
@@ -116,7 +117,9 @@ output to "$TMPDIR/results/“), and finally to copy the total end results
 to an existing directory, "processed", that is located in the current
 working directory. TMPDIR only exists for the duration of the job, though,
 so it is very important to copy relevant results from it at job's end.
+*/
 
+/*
 Once that your job script is ready, on speed-submit you can submit it
 with:
 
@@ -133,12 +136,15 @@ qstat -f -u "*"
 If you need to delete a job, the syntax is:
 
 qdel <jobID>
+*/
 
+/*
 All jobs generate a standard output file, in the directory that the job
 was submitted from, in the name format of, "<jobname>.o<jobID>". Important
 information is often written to this file.
+*/
 
-
+/*
 Interactive jobs can be scheduled, instead of batch (script) ones. 
 Contact rt-ex-hpc@encs.concordia.ca for more information.
 
@@ -146,7 +152,9 @@ MPI-based jobs need SSH keys set up.
 
 There is a queue set aside specifically for GPU-based jobs.
 Contact rt-ex-hpc@encs.concordia.ca for more information.
+*/
 
+/*
 Job sessions are a maximum of one week in length (only 24 hours, though,
 for interactive jobs).
 
@@ -156,10 +164,15 @@ to be in your cluster-specific directory (located at
 
 New users are restricted to a total of 32 cores: write to rt-ex-hpc@encs.concordia.ca
  if you need more (256 is the maximum possible, or, 8 jobs of 32 cores each).
+*/
 
+/*
 The cluster is, "first come, first served", until it fills, and then job
 position in the queue is based upon past usage. The scheduler does attempt
 to fill gaps, though, so sometimes a single-core job of lower priority
 will schedule before a multi-core job of higher priority, for example.
+*/
 
+/*
 Contact rt-ex-hpc@encs.concordia.ca with your questions and for more information.
+*/
