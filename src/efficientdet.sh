@@ -6,7 +6,7 @@
 
 ##
 ## Prerequisite: 
-##  Efficientdet Virtual Environment (see efficientdet_virtual_env_speed.txt)
+##  Efficientdet Virtual Environment (see commit comments)
 ##
 
 ##
