@@ -13,7 +13,7 @@
 #$ -cwd
 
 # How many GPUs (currently limit is set 2 max for Speed 5 and 17)
-#$-l gpu=2
+#$ -l gpu=2
 
 # High value of memory requeted
 #$ -l h_vmem=20G
