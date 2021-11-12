@@ -4,6 +4,8 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 Concordia University, Montreal
 
+[![DOI](https://zenodo.org/badge/166873072.svg)](https://zenodo.org/badge/latestdoi/166873072)
+
 * [GCS Speed HPC Facility](https://www.concordia.ca/ginacody/aits/speed.html)
 * [Overview Slides](https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis)
 * [AITS Service Desk](https://www.concordia.ca/ginacody/aits.html)
