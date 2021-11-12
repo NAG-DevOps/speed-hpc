@@ -3,6 +3,10 @@
 % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
 \usepackage{listings}
 
+% For inline citations
+\usepackage{bibentry}
+\nobibliography*
+
 \input{commands}
 
 %% Document
@@ -832,7 +836,7 @@ E-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
 
 \begin{itemize}
 	\item 
-HPC Committee's initial batch about 6 students:
+HPC Committee's initial batch about 6 students (end of 2019):
 \begin{itemize}
 	\item 
 10000 iterations job in Fluent finished in $<26$ hours vs. 46 hours in Calcul Quebec
@@ -844,6 +848,7 @@ such as \url{https://github.com/smokhov/atsm/tree/master/examples/flucid}
 	\item 
 compilation of forensic computing reasoning cases about false or true positives of hardware address spoofing in the labs
 \end{itemize}
+	\item 
 S4 LAB/GIPSY R\&D Group's:
 \begin{itemize}
 	\item 
@@ -857,6 +862,8 @@ Web service data conversion and analysis
 	\item 
 Genomic alignment exercises
 \end{itemize}
+\item
+\bibentry{niksirat2020}
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -908,6 +915,7 @@ Compute Canada / Calcul Quebec
 %
 \nocite{aosa-book-vol1}
 \label{sect:bib}
+%\bibliographystyle{IEEEtran}
 \bibliographystyle{plain}
 %\bibliographystyle{alpha}
 %\bibliographystyle{unsrt}
