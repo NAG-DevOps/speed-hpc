@@ -26,6 +26,9 @@
 %
 \titlerunning{Speed: The GCS ENCS Cluster}
 
+% Previously VI
+\date{Version 6.5}
+
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
 % allows.
@@ -86,7 +89,7 @@ Some resources:
 \begin{itemize}
 \item
 Our public GitHub page where the manual and sample job scripts
-are maintained, pull-requests (PRs) (subject to review) are welcome:\\
+are maintained (pull-requests (PRs), subject to review, are welcome):\\
 \url{https://github.com/NAG-DevOps/speed-hpc}\\
 \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
 
@@ -179,9 +182,11 @@ Fluent (19.2)
 Singularity (Docker-like container), can run other OS's apps, like Ubuntu's.
 \end{itemize}
 	\item 
-We do our best to accommodate custom software requests
+We do our best to accommodate custom software requests.
+Python environments can be used to have user-custom installs
+in the scratch directory.
 	\item 
-A number of specific environments available, too
+A number of specific environments available, too.
 	\item 
 Popular examples mentioned (loaded with, \tool{module}):
 \begin{itemize}
@@ -595,15 +600,14 @@ communication protocol). An example of such software is Fluent. MPI needs to
 have `passwordless login' set up, which means SSH keys. In your NFS-mounted 
 home directory:
 
-% TODO: fix RSA keys to be one of the EC ones as RSA is deprecated
 \begin{itemize}
 \item
 \texttt{cd .ssh}
 \item
-\texttt{ssh-keygen -t rsa} (default location; blank passphrase) 
+\texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
 \item
-\texttt{cat id\_rsa.pub >> authorized\_keys} (if the \file{authorized\_keys}
-file already exists) \emph{OR} \texttt{cat id\_rsa.pub > authorized\_keys} (if does not) 
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized\_keys}
+file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
 \item
 Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
 to 700 (note that you likely will not have to do anything here, as most people
@@ -897,10 +901,11 @@ without a scheduler
 course)
 \item
 Computer Science and Software Engineering (CSSE) Virya GPU Cluster
-(2 nodes totalling 16 V100 NVIDIA GPUs), contact \texttt{gpu-help AT encs}
+(2 nodes totalling 16 V100 NVIDIA GPUs), contact Alexander Aric at \texttt{gpu-help AT encs}
 to request access if you are a CSSE member
 \item
 Dr. Maria Amer's VidPro group's nodes in Speed with additional V100 and P6 GPUs
+(use \texttt{a.q} for those nodes).
 \item
 Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
 \item
