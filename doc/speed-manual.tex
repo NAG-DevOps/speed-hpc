@@ -7,6 +7,11 @@
 \usepackage{bibentry}
 \nobibliography*
 
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{../src/}{src/}}% append
+\makeatother
+
 \input{commands}
 
 %% Document
@@ -380,7 +385,7 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{../src/tcsh.sh}
+    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
     \caption{Source code for \file{tcsh.sh}}
 	\label{fig:tcsh.sh}
 \end{figure}
@@ -586,7 +591,7 @@ and \api{NSLOTS}:
 In \xf{fig:tmpdir.sh} is a sample script, using all three.
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{../src/tmpdir.sh}
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{tmpdir.sh}
     \caption{Source code for \file{tmpdir.sh}}
 	\label{fig:tmpdir.sh}
 \end{figure}
@@ -618,7 +623,7 @@ will have those permissions by default).
 \subsection{Example Job Script: Fluent}
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{../src/fluent.sh}
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
     \caption{Source code for \file{fluent.sh}}
 	\label{fig:fluent.sh}
 \end{figure}
