@@ -3,7 +3,7 @@
 #$ -N flu10000
 #$ -cwd
 #$ -m bea
-#$ -pe smp 32
+#$ -pe smp 8
 #$ -l h_vmem=160G
 
 module load ansys/19.0/default

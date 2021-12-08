@@ -1,0 +1,563 @@
+% My own commands, commands adapted from Joey and Peter
+
+% Cross-reference commands.
+% Per Dr. Grogono and my own self.
+\newcommand{\xf}[1]{Figure~\ref{#1}}
+\newcommand{\xp}[1]{page~\pageref{#1}}
+\newcommand{\xs}[1]{Section~\ref{#1}}
+\newcommand{\xa}[1]{Appendix~\ref{#1}}
+\newcommand{\xc}[1]{Chapter~\ref{#1}}
+\newcommand{\xt}[1]{Table~\ref{#1}}
+\newcommand{\xl}[1]{Listing~\ref{#1}}
+
+%
+% Abbrs
+%
+
+\newcommand{\rpc}{{RPC\index{RPC}}}
+\newcommand{\rmi}{{RMI\index{RMI}}}
+\newcommand{\clp}{{CLP\index{CLP}}}
+\newcommand{\tlp}{{TLP\index{TLP}}}
+\newcommand{\slp}{{SLP\index{SLP}}}
+\newcommand{\complus}{{DCOM+\index{DCOM+}}}
+\newcommand{\corba}{{CORBA\index{CORBA}}}
+\newcommand{\jini}{{Jini\index{Jini}}}
+\newcommand{\jms}{{JMS\index{JMS}}}
+\newcommand{\dotnet}{{.NET Remoting\index{.NET Remoting}}}
+\newcommand{\gnu}{{GNU\index{GNU}}}
+\newcommand{\tcpip}{{TCP/IP\index{TCP/IP}}}
+\newcommand{\AST}{{AST\index{AST}}}
+
+
+%
+% The GIPSY
+%
+
+\newcommand{\gipc}{{GIPC\index{GIPC}\index{Frameworks!GIPC}}}
+\newcommand{\gicf}{{GICF\index{GICF}\index{Frameworks!GICF}}}
+\newcommand{\iplcf}{{IPLCF\index{IPLCF}\index{Frameworks!IPLCF}}}
+\newcommand{\gee}{{GEE\index{GEE}\index{Frameworks!GEE}}}
+\newcommand{\geer}{{GEER\index{GEER}}}
+\newcommand{\gipsy}{{GIPSY\index{GIPSY}}}
+\newcommand{\agipsy}{{AGIPSY\index{AGIPSY}}}
+\newcommand{\ripe}{{RIPE\index{RIPE}\index{Frameworks!RIPE}}}
+\newcommand{\dpr}{{DPR\index{DPR}}}
+\newcommand{\dms}{{DMS\index{DMS}}}
+\newcommand{\dmf}{{DMF\index{DMF}\index{Frameworks!DMF}}}
+\newcommand{\dfg}{{DFG\index{DFG}}}
+
+
+%
+% The Lucids Family
+%
+
+\newcommand{\glu}{{GLU\index{GLU}}}
+\newcommand{\glusharp}{{GLU\#\index{GLU\#}}}
+\newcommand{\gipl}{{GIPL\index{GIPL}}}
+\newcommand{\sipl}{{SIPL\index{SIPL}}}
+\newcommand{\ipl}{{IPL\index{IPL}}}
+\newcommand{\lucid}{{Lucid\index{Lucid}}}
+\newcommand{\ilucid}{{Indexical Lucid\index{Indexical Lucid}}}
+\newcommand{\jlucid}{{JLucid\index{JLucid}}}
+\newcommand{\olucid}{{Objective Lucid\index{Tensor Lucid}}}
+\newcommand{\tlucid}{{Tensor Lucid\index{Tensor Lucid}}}
+\newcommand{\plucid}{{Partial Lucid\index{Partial Lucid}}}
+\newcommand{\flucid}{{Forensic Lucid\index{Forensic Lucid}}}
+\newcommand{\onyx}{{Onyx\index{Onyx}}}
+\newcommand{\lucx}{{Lucx\index{Lucx}}}
+\newcommand{\ooip}{{OOIP\index{OOIP}}}
+\newcommand{\ioop}{{IOOP\index{IOOP}}}
+\newcommand{\jooip}{{JOOIP\index{JOOIP}}}
+
+%
+% The Other Intensionals
+%
+
+\newcommand{\marfl}{{MARFL\index{MARFL}}}
+
+
+%
+% The Imperatives
+%
+
+\newcommand{\C}{{C\index{C}}}
+\newcommand{\cpp}{{C++\index{C++}}}
+\newcommand{\perl}{{Perl\index{Perl}}}
+\newcommand{\java}{{Java\index{Java}}}
+\newcommand{\python}{{Python\index{Python}}}
+\newcommand{\fortran}{{Fortran\index{Fortran}}}
+\newcommand{\aspectj}{{AspectJ\index{AspectJ}}}
+\newcommand{\php}{{PHP\index{PHP}}}
+
+
+%
+% The Functionals
+%
+
+\newcommand{\lisp}{{LISP\index{LISP}}}
+\newcommand{\scheme}{{Scheme\index{Scheme}}}
+\newcommand{\haskell}{{Haskell\index{Haskell}}}
+\newcommand{\mllessequal}{{ML$_{\le}$\index{ML$_{\le}$}}}
+\newcommand{\fcpp}{{FC++\index{FC++}}}
+
+
+%
+% Lucid Operators: The Original and The New
+%
+
+\newcommand{\olucidop}[1]{{\bf \texttt{\textmd{\textsc{#1}}}}}
+\newcommand{\lucidop}[1]{{\bf \texttt{#1}}}
+
+
+%
+% Forensic terms
+%
+
+% Forward transition
+\newcommand{\trans}{$\psi$}
+\newcommand{\transeq}[2]{$\psi(#1) = #2$}
+% Inverse transition function
+\newcommand{\invtrans}{$\Psi^{-1}$}
+\newcommand{\invtranseq}[2]{$\Psi^{-1}(#1) = #2$}
+
+
+%
+% Util
+%
+
+\newcommand{\tab}[1]{\hspace{#1pt}}
+
+\newcommand{\shrule}[0]{\vspace{3pt}\hrule\vspace{6pt}}
+\newcommand{\ehrule}[0]{\vspace{6pt}\hrule\vspace{3pt}}
+
+\newcommand{\nonterminal}[1]{$\mathtt{<\!\!#1\!\!>}$}
+
+\newcommand{\source}[1]
+{
+	{\shrule}
+	\scriptsize
+	#1
+	\normalsize
+	\hrule
+}
+
+\newcommand{\sourcefloat}[3]
+{
+	\begin{figure}[!hp]
+	\begin{centering}
+	\begin{minipage}{0.5\textwidth}
+	\source{#1}
+	\end{minipage}
+	\caption{\small{#3}}
+	\label{#2}
+	\end{centering}
+	\end{figure}
+}
+
+\newcommand{\todo}[0]
+{
+	\begin{center}{\Large [TODO]}\index{TODO}\end{center}
+}
+
+\newcommand{\file}[1]{\url{#1}\index{Files!#1}}
+\newcommand{\tool}[1]{\texttt{#1}\index{Tools!#1}}
+\newcommand{\option}[1]{\texttt{#1}\index{Options!#1}}
+\newcommand{\api}[1]{\texttt{#1}\index{API!#1}}
+\newcommand{\apipackage}[1]{\url{#1}\index{API!Packages!#1}\index{Packages!#1}}
+\newcommand{\datatype}[1]{\texttt{#1}\index{Type!#1}}
+\newcommand{\codesegment}[1]{\texttt{\##1}\index{Segments!\##1}}
+
+
+%
+% Tools
+%
+
+\newcommand{\javacc}[0]{JavaCC\index{Tools!JavaCC}}
+\newcommand{\junit}[0]{JUnit\index{Tools!JUnit}}
+
+
+%
+% Frameworks, APIs, Libraries
+%
+
+\newcommand{\marf}[0]{MARF\index{MARF}\index{Frameworks!MARF}\index{Libraries!MARF}}
+\newcommand{\dmarf}[0]{DMARF\index{MARF!Distributed}\index{Frameworks!Distributed MARF}\index{Libraries!Distributed MARF}}
+\newcommand{\admarf}
+	[0]
+	{ADMARF%
+	\index{ADMARF}%
+	\index{MARF!Autonomic}%
+	\index{DMARF!Autonomic}%
+	\index{Frameworks!Autonomic Distributed MARF}%
+	\index{Libraries!Autonomic Distributed MARF}%
+	}
+\newcommand{\jdsf}[0]{JDSF\index{Frameworks!JDSF}\index{Libraries!JDSF}}
+\newcommand{\sqlrand}[0]{SQLrand\index{SQLrand}}
+\newcommand{\hsqldb}[0]{HSQLDB\index{HSQLDB}\index{Tools!HSQLDB}\index{Databases!HSQLDB}}
+\newcommand{\cryptolysis}[0]{Cryptolysis\index{Frameworks!Cryptolysis}}
+\newcommand{\assl}{ASSL\index{ASSL}\index{Autonomic Systems Specification Language}}
+
+
+%
+% Def
+%
+
+\newcommand{\statement}[2]
+{
+	\vspace{7pt}
+	\shrule
+	{\bf #1}
+
+	#2
+	\ehrule
+	\vspace{7pt}
+}
+
+% \newcommand{\proposition}[2]
+\newcommand{\sproposition}[2]
+{
+	\statement{Proposition #1}{#2}
+}
+
+% \newcommand{\definition}[2]
+\newcommand{\sdefinition}[2]
+{
+	\statement{Definition #1}{#2}
+}
+
+% \newcommand{\axiom}[2]
+\newcommand{\saxiom}[2]
+{
+	\statement{Axiom #1}{#2}
+}
+
+% \newcommand{\theorem}[2]
+\newcommand{\stheorem}[2]
+{
+	\statement{Theorem #1}{#2}
+}
+
+%
+% OS
+%
+
+\newcommand{\unix}{\index{Unix@{\sc{Unix}}}{\sc{Unix}}}
+\newcommand{\macos}[1]{\index{Mac OS #1@{\sc{Mac OS #1}}}{\sc{Mac OS #1}}}
+\newcommand{\linux}{\index{Linux@{\sc{Linux}}}{\sc{Linux}}}
+\newcommand{\rhl}[1]{\index{Red Hat Linux #1@{\sc{Red Hat Linux #1}}}{\sc{Red Hat Linux #1}}}
+\newcommand{\fcore}[1]{\index{Fedora Core #1@{\sc{Fedora Core #1}}}{\sc{Fedora Core #1}}}
+\newcommand{\ubuntu}[1]{\index{Ubuntu #1@{\sc{Ubuntu #1}}}{\sc{Ubuntu #1}}}
+\newcommand{\debian}[1]{\index{Debian #1@{\sc{Debian #1}}}{\sc{Debian #1}}}
+\newcommand{\solaris}[1]{\index{Solaris #1@{\sc{Solaris #1}}}{\sc{Solaris #1}}}
+\newcommand{\win}[1]{\index{Windows #1@{\sc{Windows #1}}}{\sc{Windows #1}}}
+
+
+% Joey:
+
+\newtheorem{defn}{Definition}
+\newtheorem{axioms}{Axiom}
+% \newtheorem{lemma}{Lemma}
+\newtheorem{lemmas}{Lemma}
+% \newcommand{\web}{{WWW}}
+\newcommand{\wwweb}{{WWW}}
+\newcommand{\bic}{{\index{BIC}BIC}}
+\newcommand{\mni}{{\index{MNI}MNI}}
+\newcommand{\nfs}{{\index{NFS}NFS}}
+\newcommand{\crim}{{\index{CRIM}CRIM}}
+\newcommand{\animal}{\index{Animal@{\sc{Animal}}}{\sc{Animal}}}
+\newcommand{\paranimal}{\index{Paranimal@{\sc{ParAnimal}}}{\sc{ParAnimal}}}
+\newcommand{\minc}{{\sc{MINC}}}
+\newcommand{\netcdf}{{\sc{NetCDF}}}
+\newcommand{\sgi}{{\index{SGI}}SGI}
+\newcommand{\vv}{{\tt{*var}}}
+\newcommand{\vd}{{\tt{?var}}}
+\newcommand{\tv}{{\tt{*term}}}
+\newcommand{\td}{{\tt{?term}}}
+\newcommand{\fv}{{\tt{*fn}}}
+\newcommand{\fd}{{\tt{?fn}}}
+\newcommand{\home}{{\tt{home}}}
+\newcommand{\light}{{\tt{light}}}
+\newcommand{\heavy}{{\tt{heavy}}}
+\newcommand{\lucidA}[1]{${\mathit{Lucid}}(#1)$}
+\newcommand{\lucidL}[1]{{$\mathit{Lucid}$}($L$) }
+\newcommand{\tristan}{\index{Tristan}Tristan}
+\newcommand{\commercial}[1]{#1}
+\newcommand{\al}{\mbox{$\alpha$}}
+\newcommand{\be}{\mbox{$\beta$}}
+\newcommand{\ga}{\mbox{$\gamma$}}
+\newcommand{\vx}[1]{\mbox{$\overrightarrow{#1}$}}
+\newcommand{\lvx}[1]{\mbox{$\mid\!\!\overrightarrow{#1}\!\!\mid$}}
+\newcommand{\svx}[1]{{\small \mbox{$\overrightarrow{#1}$}}}
+\newcommand{\curl}[1]{\nabla\times\;\mathbf{#1}}
+\newcommand{\components}[3]{{_{#3}}{#2}_{#1}}
+\newcommand{\componentsp}[3]{{_{#3}}{#2}'_{#1}}
+\newcommand{\mypageheader}[1]{\vspace*{22mm}{\Huge \bf #1}\vspace*{5mm}}
+\newcommand{\myfig}[1]{\center{\makebox[\textwidth]{\hbox{\vbox{\epsfbox{#1}}}}}}
+%\newcommand{\myfig}[1]{\makebox[\textwidth]{\hbox{\vbox{60mm}}}}
+\newcommand{\ctxt}{{\mathcal L},{\mathcal D},{\mathcal P},{\mathcal W}}
+\newcommand{\noWctxt}{{\mathcal L},{\mathcal D},{\mathcal P}}
+\newcommand{\myvdash}{\:\vdash\:}
+\newcommand{\mysemi}{\::\:}
+\newcommand{\Spc}          {{\mathcal{S}}}
+\newcommand{\corner}[1]    {\ulcorner #1\urcorner}
+\newcommand{\db}[1]        {\{#1\}}
+\newcommand{\mtt}[1]       {{\mathtt{#1}}}
+\newcommand{\mrm}[1]       {{\mathrm{#1}}}
+\newcommand{\mem}[1]       {{\mathit{#1}}}
+
+\newcommand{\mathfbyd}     {{\mathtt{fby.d}}}
+\newcommand{\mathfirstd}   {{\mathtt{first.d}}}
+\newcommand{\mathnextd}    {{\mathtt{next.d}}}
+\newcommand{\mathprevd}    {{\mathtt{prev.d}}}
+\newcommand{\mathwvrd}     {{\mathtt{wvr.d}}}
+\newcommand{\mathasad}     {{\mathtt{asa.d}}}
+\newcommand{\mathupond}    {{\mathtt{upon.d}}}
+\newcommand{\mathfby}      {{\mathtt{fby}}}
+\newcommand{\mathbefore}   {{\mathtt{before}}}
+\newcommand{\mathfirst}    {{\mathtt{first}}}
+\newcommand{\mathnext}     {{\mathtt{next}}}
+\newcommand{\mathprev}     {{\mathtt{prev}}}
+\newcommand{\mathwvr}      {{\mathtt{wvr}}}
+\newcommand{\mathasa}      {{\mathtt{asa}}}
+\newcommand{\mathupon}     {{\mathtt{upon}}}
+\newcommand{\mathif}       {{\mathtt{if}}}
+\newcommand{\maththen}     {{\mathtt{then}}}
+\newcommand{\mathelse}     {{\mathtt{else}}}
+\newcommand{\mathfi}       {{\mathtt{fi}}}
+\newcommand{\mathatd}      {{\mathtt{@.d}}}
+\newcommand{\mathat}       {{\mathtt{@.}}}
+\newcommand{\mathtagd}     {{\mathtt{\#.d}}}
+\newcommand{\mathtag}      {{\mathtt{\#.}}}
+\newcommand{\mathwhere}    {{\mathtt{where}}}
+\newcommand{\mathdimension}{{\mathtt{dimension}}}
+\newcommand{\mathhome}	   {{\mathtt{home}}}
+\newcommand{\mathheavy}	   {{\mathtt{heavy}}}
+\newcommand{\mathlight}	   {{\mathtt{light}}}
+\newcommand{\mathiseod}    {{\mathtt{iseod}}}
+\newcommand{\mathiserror}  {{\mathtt{iserror}}}
+\newcommand{\mathend}      {{\mathtt{end}}}
+\newcommand{\matheod}      {{\mathtt{eod}}}
+\newcommand{\matherror}    {{\mathtt{error}}}
+\newcommand{\mathtrue}     {{\mathtt{true}}}
+\newcommand{\mathfalse}    {{\mathtt{false}}}
+\newcommand{\Ek}           {${\mathbf{E_{k}}}$}
+\newcommand{\Eop}           {${\mathbf{E_{op}}}$}
+\newcommand{\Eid}           {${\mathbf{E_{id}}}$}
+\newcommand{\Efid}          {${\mathbf{E_{fid}}}$}
+\newcommand{\Econdt}        {${\mathbf{E_{c_{T}}}}$}
+\newcommand{\Econdf}        {${\mathbf{E_{c_{F}}}}$}
+\newcommand{\Ewhere}        {${\mathbf{E_{w}}}$}
+\newcommand{\Eat}           {${\mathbf{E_{at}}}$}
+\newcommand{\Etag}          {${\mathbf{E_{tag}}}$}
+\newcommand{\Qid}           {${\mathbf{Q_{id}}}$}
+\newcommand{\Qfid}          {${\mathbf{Q_{fid}}}$}
+\newcommand{\QQ}            {${\mathbf{QQ}}$}
+\newcommand{\const}        {{\mathit{k}}}
+\newcommand{\varid}        {{\mathit{id}}}
+\newcommand{\dimid}        {{\mathit{did}}}
+\newcommand{\letter}       {{\mathit{letter}}}
+\newcommand{\digit}        {{\mathit{digit}}}
+\newcommand{\character}    {{\mathit{char}}}
+\newcommand{\mystring}     {{\mathit{string}}}
+\newcommand{\boolean}      {{\mathit{boolean}}}
+\newcommand{\real}         {{\mathit{real}}}
+\newcommand{\ASCIIchar}    {{\mathit{ASCIIchar}}}
+\newcommand{\alphanum}     {{\mathit{alphanum}}}
+\newcommand{\integer}      {{\mathit{integer}}}
+\newcommand{\E}            {{\mathit{E}}}
+%\renewcommand{\E}            {{\mathit{E}}}
+\newcommand{\userfct}      {{\mathit{userfct}}}
+\newcommand{\llop}         {{\textit{intensional-op}}}
+\newcommand{\luop}         {{\textit{i-unary-op}}}
+\newcommand{\lbop}         {{\textit{i-binary-op}}}
+\newcommand{\op}           {{\textit{data-op}}}
+\newcommand{\uop}          {{\textit{unary-op}}}
+\newcommand{\bop}          {{\textit{binary-op}}}
+\newcommand{\ifexpr}       {{\mathit{ifexpr}}}
+\newcommand{\deflist}      {{\mathit{deflist}}}
+\newcommand{\dimdef}       {{\mathit{dimdef}}}
+\newcommand{\fctid  }      {{\mathit{fid}}}
+\newcommand{\tensorid}[2]  {{\mathit{tid_{#1}#2}}}
+\newcommand{\usc}          {\mathit{\raisebox{0mm}{\_}}}
+\newcommand{\dimlist}      {{\mathit{dimlist}}}
+\newcommand{\Elist}        {{\mathit{Elist}}}
+\newcommand{\simpleuop}    {{\mathit{mathuop}}}
+\newcommand{\complexuop}   {{\mathit{intuop}}}
+\newcommand{\defmy}        {{\mathit{Q}}}
+\newcommand{\paramlist}    {{\mathit{parlist}}}
+\newcommand{\id}           {{\mathit{identifier}}}
+\newcommand{\Luciduop}     {{\mathit{Luciduop}}}
+\newcommand{\Lucidbop}     {{\mathit{Lucidbop}}}
+\newcommand{\simplebop}    {{\mathit{mathbop}}}
+\newcommand{\complexbop}   {{\mathit{intbop}}}
+\newcommand{\arithbop}     {{\textit{arith-op}}}
+\newcommand{\relbop}       {{\textit{rel-op}}}
+\newcommand{\logbop}       {{\textit{log-op}}}
+\newcommand{\bitbop}       {{\textit{bit-op}}}
+\newcommand{\seqbop}       {{\textit{seq-op}}}
+\newcommand{\B}{\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!\!}
+\newcommand{\Bs}{\!\!\!}
+\newcommand{\Bt}{\!}
+\newcommand{\Dim}{{\mathcal{D}}}
+\newcommand{\Point}{{\mathcal{P}}}
+\newcommand{\PointP}{{\mathcal{P}}\!\dagger\!}
+\newcommand{\Tag}{{\mathcal{T}}}
+\newcommand{\Lang}{{\mathcal{L}}}
+\newcommand{\Def}{{\mathcal{D}}}
+\newcommand{\Ware}{{\mathcal{W}}}
+\newcommand{\WareD}[2]{{\mathcal{W}}?\!\left\{[#1]#2\right\}}
+\newcommand{\WareP}[3]{{\mathcal{W}}\!\dagger\!\left\{[#1]#2:#3\right\}}
+\newcommand{\Id}{{\mathcal{I}}}
+\newcommand{\Val}{{\mathcal{V}}}
+\newcommand{\Stream}{{\mathcal{I}}}
+\newcommand{\Expr}{{\mathcal{E}}}
+\newcommand{\allExpr}{\Expr^\infty}
+\newcommand{\allDim}{\Delta^\infty}
+\newcommand{\allPoint}{\Pi^\infty}
+\newcommand{\allStream}{\Stream^\infty}
+\newcommand{\allVal}{\Val^\infty}
+\newcommand{\allTag}{\Tag^\infty}
+\newcommand{\extdef}{\stackrel{ext}{\equiv}}
+\newcommand{\Sb}{\mathbf{Sb}}
+\newcommand{\Sw}{\mathbf{Sw}}
+
+%\newenvironment{program}
+%		{\begin{quote}}
+%		{\end{quote}}
+\newtheorem{mydef}
+		{{\bf Definition:}}
+		{}
+\newcommand{\paracite}[2]
+		{\vspace{0.5cm}
+		{\it{#1
+
+		}}
+		{\begin{flushright}---#2\end{flushright}}
+}
+\newcommand{\cutecite}[2]
+		{\vspace{0.5cm}
+		{\begin{flushright}
+		{\it{#1}}\\
+		---#2
+		\end{flushright}}
+}
+\newcommand{\sembox}[3]
+		{\TR{   \begin{small}
+			\begin{tabular}{|p{4mm}|c|}\hline
+			$\!\!$#1 & {\tt{#2}}\\\cline{2-2}
+		   	   & [#3]\\\hline
+			\end{tabular}
+			\end{small}
+
+		}}
+%\floatstyle{boxed}
+%\restylefloat{table}
+%\restylefloat{figure}
+%\floatname{boxtable}{Table}
+%\newfloat{boxtable}{h}{lot}[chapter]
+
+
+%\newcounter{definition}
+%\setcounter{definition}{0}
+%\newenvironment{definition}
+%{
+%\parindent0mm
+%\parskip3mm
+%\addtocounter{definition}{1}
+%{\bf Definition \arabic{definition}}:
+%}
+
+%\newcounter{theorem}
+%\setcounter{theorem}{0}
+%\newenvironment{theorem}
+%{
+%\parindent0mm
+%\parskip3mm
+%\addtocounter{theorem}{1}
+%{\bf Theorem \arabic{theorem}}:
+%}
+
+%\newtheorem{proposition}{Proposition}
+
+\def\mymid{\vrule depth 4pt height 10pt width 0.2mm}
+\def\myspace{\hspace*{3mm}}
+\def\mymidspace{\mymid\myspace}
+\def\myvert{\raise 2.27pt \hbox{\vrule depth 0pt height 8pt width 0.2mm}}
+\def\myarrow{\hspace*{0.43mm}%
+             \raise 2.29pt\hbox{\vrule depth 0pt height 8pt width 0.16mm}%
+             \hspace*{-0.32mm}%
+             $\longrightarrow$
+             \ %
+             }
+\def\mmyarrow{$\rightarrow$\ }
+
+%\psset{unit=.75cm}
+
+\newcommand{\johndef}{\mathcal{D}}
+\newcommand{\johnjvmdef}{\mathcal{D}_{jvm}}
+\newcommand{\johntdef}{\mathcal{T}}
+\newcommand{\myid}{\textit{id}}
+\newcommand{\mytid}{\textit{tid}}
+\newcommand{\mydagger}{\!\dagger\!}
+\newcommand{\context}[2]{\mathcal{D},\mathcal{P} \vdash #1 : #2}
+\newcommand{\jvmcontext}[2]{\mathcal{D}_{jvm} \vdash #1 : #2}
+\newcommand{\pcontext}[2]{\mathcal{D},\mathcal{P},\mathcal{N} \vdash #1 : #2}
+\newcommand{\contextW}[2]{\mathcal{D},\mathcal{P},\mathcal{W} \vdash #1 : #2}
+\newcommand{\contextWp}[2]{\mathcal{D},\mathcal{P},\mathcal{W}' \vdash #1 : #2}
+\newcommand{\qcontext}[2]{\mathcal{D},\mathcal{P} \vdash #1 \::\: #2}
+\newcommand{\qjvmcontext}[2]{\mathcal{D}_{jvm} \vdash #1 \::\: #2}
+\newcommand{\pqcontext}[2]{\mathcal{D},\mathcal{P},\mathcal{N} \vdash #1 \::\: #2}
+\newcommand{\qcontextW}[2]{\mathcal{D},\mathcal{P,\mathcal{W}} \vdash #1 \::\: #2}
+\newcommand{\myifthenelse}{\mathtt{if}\;E\;\mathtt{then}\;E'\;\mathtt{else}\;E''}
+
+\def\Lfirst{\index{first@{\texttt{first}}}\texttt{first}\;}
+\def\Lnext{\index{next@{\texttt{next}}}\texttt{next}\;}
+\def\Lfby{\index{fby@{\texttt{fby}}}\;\texttt{fby}\;}
+\def\Lat{\index{a@{\texttt{\char64}}}\;\texttt{\char64}\;}
+\def\LSat{\index{a@{\texttt{\char64}}}\texttt{\char64}}
+\def\Lhash{\index{a@{\texttt{\char35}}}\texttt{\char35}}
+\def\Lwvr{\index{wvr@{\texttt{wvr}}}\;\texttt{wvr}\;}
+\def\Lupon{\index{upon@{\texttt{upon}}}\;\texttt{upon}\;}
+\def\LSupon{\index{upon@{\texttt{upon}}}\;\texttt{upon}}
+\def\Lasa{\index{asa@{\texttt{asa}}}\;\texttt{asa}\;}
+\def\Leod{\index{eod@{\texttt{eod}}}\texttt{eod}}
+\def\Liseod{\index{iseod@{\texttt{iseod}}}\texttt{iseod}}
+\def\Lif{\index{ifthenelse@{\texttt{if then else}}}\texttt{if}\;}
+\def\Lthen{\;\texttt{then}\;}
+\def\Lelse{\;\texttt{else}\;}
+\def\Lsif{\index{ifthenelse@{\texttt{if then else}}}\texttt{\scriptsize if}\;}
+\def\Lsthen{\;\texttt{\scriptsize then}\;}
+\def\Lselse{\;\texttt{\scriptsize else}\;}
+
+\def\mufirst{\index{first@{\texttt{first}}}\mathrm{\underline{\mathtt{first}}}\;}
+\def\munext{\index{next@{\texttt{next}}}\mathrm{\underline{\mathtt{next}}}\;}
+\def\mufby{\index{fby@{\texttt{fby}}}\;\mathrm{\underline{\mathtt{fby}}}\;}
+\def\muwvr{\index{wvr@{\texttt{wvr}}}\;\mathrm{\underline{\mathtt{wvr}}}\;}
+\def\muupon{\index{upon@{\texttt{upon}}}\;\mathrm{\underline{\mathtt{upon}}}\;}
+\def\muasa{\index{asa@{\texttt{asa}}}\;\mathrm{\underline{\mathtt{asa}}}\;}
+
+\def\mfirst{\index{first@{\texttt{first}}}\mathrm{{\mathtt{first}}}\;}
+\def\mprev{\index{prev@{\texttt{prev}}}\mathrm{{\mathtt{prev}}}\;}
+\def\mnext{\index{next@{\texttt{next}}}\mathrm{{\mathtt{next}}}\;}
+\def\mfby{\index{fby@{\texttt{fby}}}\;\mathrm{{\mathtt{fby}}}\;}
+\def\mwvr{\index{wvr@{\texttt{wvr}}}\;\mathrm{{\mathtt{wvr}}}\;}
+\def\mupon{\index{upon@{\texttt{upon}}}\;\mathrm{{\mathtt{upon}}}\;}
+\def\masa{\index{asa@{\texttt{asa}}}\;\mathrm{{\mathtt{asa}}}\;}
+
+\def\Tfirst{\index{first@{\texttt{first}}}\texttt{first}}
+\def\Tnext{\index{next@{\texttt{next}}}\texttt{next}}
+\def\Tfby{\index{fby@{\texttt{fby}}}\texttt{fby}}
+\def\Twvr{\index{wvr@{\texttt{wvr}}}\texttt{wvr}}
+\def\Tupon{\index{upon@{\texttt{upon}}}\texttt{upon}}
+\def\Tasa{\index{asa@{\texttt{asa}}}\texttt{asa}}
+
+\newcommand{\eqdef}{\stackrel{{\mathrm{def}}}{=}}
+\newcommand{\mylinebefore}{\noindent\rule{.1mm}{3mm}\rule[3mm]{.995\textwidth}{.1mm}\rule{.1mm}{3mm}\vspace*{-5mm}}
+\newcommand{\mylineafter}{\vspace*{-5mm}\noindent\rule{.1mm}{3mm}\rule{.995\textwidth}{.1mm}\rule{.1mm}{3mm}}
+\newcommand{\myprop}[1]{
+\mylinebefore
+\begin{proposition}
+#1
+\end{proposition}
+\mylineafter
+}

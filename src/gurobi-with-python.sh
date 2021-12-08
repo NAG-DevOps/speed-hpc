@@ -12,8 +12,8 @@
 #$ -N MY_JOB
 #$ -cwd
 #$ -m bea
-#$ -pe smp 32
-#$ -l h_vmem=500G
+#$ -pe smp 8
+#$ -l h_vmem=150G
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
@@ -31,7 +31,7 @@ python3.7 setup.py build --build-base /tmp/${USER} install
 cd $SGE_O_WORKDIR
 
 ## Now, instead of using 'gurobi.sh MY_PYTHON_SCRIPT.py', you can use
-pytohn MY_PYTHON_SCRIPT.py
+python MY_PYTHON_SCRIPT.py
 ## inside MY_PYTHON_SCRIPT.py, you can use
 ## from gurobipy import *
 ## import multiprocessing as mp
