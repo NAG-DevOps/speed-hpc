@@ -25,6 +25,7 @@ Concordia University, Montreal
 
 ### Technical ###
 
+* [UGE](https://en.wikipedia.org/wiki/Univa_Grid_Engine)
 * [Altair Grid Engine (AGE)](https://www.altair.com/grid-engine/)
 * [Altair product documentation](https://community.altair.com/community?id=altair_product_documentation)
 * [NVIDIA Tesla P6](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/solutions/resources/documents1/Tesla-P6-Product-Brief.pdf)
