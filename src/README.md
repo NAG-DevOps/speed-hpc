@@ -1,6 +1,42 @@
 # Environments 
 Speed: Gina Cody School HPC Facility: Virtual Environment Creation documentation
 
+The following documentation is specific to **speed**.
+
+## Anaconda ##
+
+### Create an Environment ###
+To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
+
+For example:
+`conda create --prefix /speed-scratch/<encs_username>/myconda`
+
+Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
+
+### List Environments ###
+To view your conda environments, type 
+`conda info --envs`
+
+```
+# conda environments:
+#
+base                  *  /encs/pkg/anaconda3-2019.07/root
+                         /speed-scratch/<encs_username>/myconda
+```                 
+
+### Activate an Environment ###
+Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
+
+`conda activate /speed-scratch/<encs_username>/myconda`
+
+After activating your environment, add pip to your environment by using 
+
+`conda install pip`
+
+This will install pip and pip's dependencies, including python.
+
+**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
+
 ## efficientdet ##
 
 The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
