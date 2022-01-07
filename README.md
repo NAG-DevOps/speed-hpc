@@ -26,6 +26,7 @@ Concordia University, Montreal
 ### Technical ###
 
 * [Altair Grid Engine (AGE)](https://www.altair.com/grid-engine/) (formely [Univa Grid Engine (UGE)](https://en.wikipedia.org/wiki/Univa_Grid_Engine))
+* [UGE User Guide for version 8.6.3 (current version running on speed)](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/UsersGuideGE.pdf)
 * [Altair product documentation](https://community.altair.com/community?id=altair_product_documentation)
 * [NVIDIA Tesla P6](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/solutions/resources/documents1/Tesla-P6-Product-Brief.pdf)
 * [AMD Tonga FirePro S7100X](https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#FirePro_Server_Series_(S000x/Sxx_000))
