@@ -847,6 +847,7 @@ offenders risk loss of cluster access.
 
 % ------------------------------------------------------------------------------
 \subsection{Tips/Tricks}
+\label{sect:tips}
 
 \begin{itemize}
 \item
@@ -879,6 +880,7 @@ E-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
 
 % ------------------------------------------------------------------------------
 \subsection{Use Cases}
+\label{sect:cases}
 
 \begin{itemize}
 	\item 
@@ -936,6 +938,59 @@ Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of vol
 \item
 Five AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\section{Frequently Asked Questions}
+\label{sect:faqs}
+
+\subsection{"Disk quota exceeded" Error}
+\subsubsection{Probably Cause}
+The \texttt{"Disk quota exceeded"} Error occurs when your application has run out of disk space to write to. On Speed this error can be returned when:
+\begin{enumerate}
+	\item
+The \texttt{/tmp} directory on the speed node your application is running on is full and cannot be written to.
+	\item
+Your NFS-provided home is full and cannot be written to.
+\end{enumberate}
+
+\subsubsection{Possible Solutions}
+
+\begin{enumerate}
+	\item
+Use the \textbf{-cwd} job script option to make the directory that the job script is submitted from the \texttt{job working directory}, e.g., the directory to store all output files in.
+	\item
+As previously mentioned in this manual, it is recommended to use local disk space for IO intensive operations, however, as the \texttt{/tmp} on the speed machines is \texttt{1GB} in size it may be necessary for scripts to store temporary data elsewhere. Review the documentation for the module(s) you are calling within your script to determine how to set working directories for that application. The basic steps for this solution are:
+\begin{itemize}
+	\item
+Review the documentation for the module(s) you are calling within your script to determine how to set working directories for that application.
+	\item
+Create a directory in speed-scratch for your temporary files. For example, to create a subdirector called \texttt{/tmp} for user \textbf{a_user}, in that user's speed-scratch directory execute:
+	\textbf{mkdir -m 750 /speed-scratch/a_user/tmp}
+	\item
+If necessary, create a subdirectory for recovery files as well:
+	\textbf{mkdir -m 750 /speed-scratch/a_user/recovery}
+	\item
+Use the documentation to update your script(s) and command calls to use the working directories created in the previous steps.	
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Example of setting working directories for \tool{COMSOL}}
+
+\begin{itemize}
+	\item 
+Create directories for recovery, temporary, and configuration files. For example, to create these directories for \textbf{a_user}:
+	\begin{verbatum}
+	mkdir -m 750 -p /speed-scratch/a_user/comsol/{recovery,tmp,config}
+	\end{verbatum}
+	\item
+Add the following command switches to the COMSOL command to use the directories created for \textbf{a_user} above:
+	\begin{verbatim} 
+	-recoverydir /speed-scratch/a_user/comsol/recovery 
+	-tmpdir /speed-scratch/a_user/comsol/tmp
+	-configuration/speed-scratch/a_user/comsol/config
+	\end{verbatum}
+\end{itemize} 
+
 
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
