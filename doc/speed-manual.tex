@@ -80,12 +80,13 @@ Montreal, Canada.
 % ------------------------------------------------------------------------------
 \section{Introduction}
 
-We include basic information and tips and tricks in this document,
-as well as examples and references, including to the projects or
-papers the use(d) Speed. Feel free to contribute either sample jobs
-or references. Details are sent to the \texttt{hpc-ml} mailing list.
+This document contains basic information required to use ``Speed'' as well as 
+tips and tricks, examples, and references to projects and papers that have used Speed. 
+User contributions of sample jobs and/ or references are welcome. 
+Details are sent to the \texttt{hpc-ml} mailing list.
 
-Some resources:
+
+\textbf{Resources:}
 
 \begin{itemize}
 \item
@@ -95,9 +96,9 @@ are maintained (pull-requests (PRs), subject to review, are welcome):\\
 \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
 
 \item
-Our official Concordia page for GCS:\\
+Our official Concordia page for the ``Speed'' cluster:\\
 \url{https://www.concordia.ca/ginacody/aits/speed.html}\\
-that includes access request instructions.
+which includes access request instructions.
 
 \item
 All registered users are subscribed to the \texttt{hpc-ml} mailing
@@ -111,11 +112,11 @@ list upon gaining access.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{What It Comprises}
+\subsection{What Speed Comprises}
 
 \begin{itemize}
 \item
-Twenty four (24), 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Twenty four (24) 32-core compute nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
 \item
 Twelve (12) NVIDIA Tesla P6 GPUs, with 16 GB of memory (compatible with the CUDA, OpenGL, OpenCL, and Vulkan APIs). 
 \item
@@ -123,15 +124,15 @@ One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, O
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{What It Is Ideal For}
+\subsection{What Speed Is Ideal For}
 
 \begin{itemize}
 \item
-Jobs that are too demanding of a desktop, but that are not worth the hassles associated with the provincial and national clusters. 
+Jobs that are too demanding for a desktop, but that are not worth the hassles associated with the provincial and national clusters. 
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space, and a scratch space of approximately 1 TB. 
+Anything that can fit into a 500-GB memory space and a scratch space of approximately 1 TB. 
 \item
 CPU-based jobs. 
 \item
@@ -145,7 +146,7 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 
 \begin{itemize}
 	\item 
-To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets
+To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
 	\item 
 Prepare them for big clusters:
 \begin{itemize}
@@ -164,11 +165,13 @@ Cloud platforms
 We have a great number of open-source software available and installed
 on Speed -- various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
 OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
-There are also a number of commercial packages, a subject to licensing
+There are also a number of commercial packages, subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaqus~\cite{abaqus}, 
 Ansys, Fluent~\cite{fluent}, etc. 
 
+
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
+
 
 In particular, there are over 2200 programs available in
 \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
@@ -189,7 +192,7 @@ We do our best to accommodate custom software requests.
 Python environments can be used to have user-custom installs
 in the scratch directory.
 	\item 
-A number of specific environments available, too.
+A number of specific environments are available, too.
 	\item 
 Popular examples mentioned (loaded with, \tool{module}):
 \begin{itemize}
