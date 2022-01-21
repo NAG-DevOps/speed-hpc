@@ -8,3 +8,5 @@
 *.blg
 *.toc
 *.tps
+doc/speed-manual.fdb_latexmk
+doc/speed-manual.fls
