@@ -76,7 +76,7 @@ or
   
 ### Special Notes for sending CUDA jobs to the GPU Queue(`g.q`) ###
 
-It is not possible to create a `qlogin` session on to a node in the **GPU Queue** (`g.q`). As direct logins to these nodes is not available, jobs must be submitted to the **GPU Queue** in order to compile and link.
+It is not possible to create an interactive `qlogin` session to **GPU Queue** (`g.q`) nodes. As direct login to these nodes is not available, batch jobs must be submitted to the **GPU Queue** with `qsub` in order to compile and link.
 
 We have several versions of CUDA installed in:
 ```
