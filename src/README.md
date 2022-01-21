@@ -1,4 +1,4 @@
-# Environments 
+# Environments #
 Speed: Gina Cody School HPC Facility: Virtual Environment Creation documentation
 
 The following documentation is specific to **speed**.
@@ -62,3 +62,27 @@ pip install tensorflow-model-optimization>=0.5
 pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
+## CUDA ##
+
+When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the cuda-11.5 libraries, specify the following in your Makefile.
+```
+-L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
+```
+In your job script, specify the version of `gcc` to use prior to calling cuda. For example: 
+   `module load gcc/8.4`
+or
+   `module load gcc/9.3`
+ 
+  
+### Special Notes for sending CUDA jobs to the GPU Queue(`g.q`) ###
+
+It is not possible to create a `qlogin` session on to a node in the **GPU Queue** (`g.q`). As direct logins to these nodes is not available, jobs must be submitted to the **GPU Queue** in order to compile and link.
+
+We have several versions of CUDA installed in:
+```
+/encs/pkg/cuda-11.5/root/
+/encs/pkg/cuda-10.2/root/
+/encs/pkg/cuda-9.2/root
+```
+
+For CUDA to compile properly for the GPU queue, edit your Makefile replacing `/usr/local/cuda` with one of the above.
