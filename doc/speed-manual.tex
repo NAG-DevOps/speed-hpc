@@ -797,6 +797,104 @@ And that there are no more GPUs available on that node (\texttt{hc:gpu=0}). Note
 more than two GPUs can be requested for any one job. 
 
 % ------------------------------------------------------------------------------
+\section{Creating Virtual Environments}
+\label{sect:environments}
+
+The following documentation is specific to the \textbf{Speed} HPC Facility at the Gina Cody School
+of Engineering and Computer Science.
+
+% ------------------------------------------------------------------------------
+\subsection{Anaconda}
+To create an anaconda environment in your speed-scratch directory, use the \texttt{--prefix} option when executing \texttt{conda create}. For example, to create an anaconda environment for \texttt{a_user}, execute the following at the command line:
+
+\begin{verbatim}
+conda create --prefix /speed-scratch/a_user/myconda
+\end{verbatim}
+
+\textbf{Note:} Without the \texttt{--prefix} option, the \texttt{conda create} command creates the environment in texttt{a_user}'s home directory by default.
+
+\subsubsection{List Environments}
+To view your conda environments, type: \texttt{conda info --envs}
+
+\begin{verbatim}
+# conda environments:
+#
+base                  *  /encs/pkg/anaconda3-2019.07/root
+                         /speed-scratch/a_user/myconda
+\end{verbatim}      
+
+\subsubsection{Activate an Environment}
+Activate the environment \texttt{/speed-scratch/a_user/myconda} as follows
+\begin{verbatim}
+conda activate /speed-scratch/a_user/myconda
+\end{verbatim}
+After activating your environment, add \tool{pip} to your environment by using 
+\begin{verbatim}
+conda install pip
+\end{verbatim}
+This will install \tool{pip} and \tool{pip}'s dependencies, including python, into the environment.
+
+\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are used to install modules from the python distribution while \texttt{conda install} installs modules from anaconda's repository.
+
+% ------------------------------------------------------------------------------
+\subsection{CUDA}
+
+When calling \tool{CUDA} within job scripts, it is important to create a link to the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. For example, to use the \texttt{cuda-11.5} libraries, specify the following in your Makefile.
+\begin{verbatim}
+-L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
+\end{verbatim}
+
+In your job script, specify the version of \texttt{gcc} to use prior to calling cuda. For example: 
+   \texttt{module load gcc/8.4}
+or
+   \texttt{module load gcc/9.3}
+
+% ------------------------------------------------------------------------------
+\subsubsection{Special Notes for sending CUDA jobs to the GPU Queue}
+
+It is not possible to create a \texttt{qlogin} session on to a node in the \textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not available, jobs must be submitted to the \textbf{GPU Queue} in order to compile and link.
+
+We have several versions of CUDA installed in:
+\begin{verbatim}
+/encs/pkg/cuda-11.5/root/
+/encs/pkg/cuda-10.2/root/
+/encs/pkg/cuda-9.2/root
+\end{verbatim}
+
+For CUDA to compile properly for the GPU queue, edit your Makefile replacing \texttt{/usr/local/cuda} with one of the above.
+
+% ------------------------------------------------------------------------------
+\subsection{efficientdet}
+
+The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
+
+\begin{itemize}
+    \item 
+    Enter your ENCS user account's speed-scratch directory \texttt{cd /speed-scratch/<encs_username>}
+    \item
+    load python \texttt{module load python/3.8.3}
+    create virtual environment \texttt{python3 -m venv <env_name>}
+    activate virtual environment \texttt{source <env_name>/bin/activate.csh}
+    install DL packages for Efficientdet
+\end{itemize}
+\begin{verbatim}
+pip install tensorflow==2.7.0
+pip install lxml>=4.6.1
+pip install absl-py>=0.10.0
+pip install matplotlib>=3.0.3
+pip install numpy>=1.19.4
+pip install Pillow>=6.0.0
+pip install PyYAML>=5.1
+pip install six>=1.15.0
+pip install tensorflow-addons>=0.12
+pip install tensorflow-hub>=0.11
+pip install neural-structured-learning>=1.3.1
+pip install tensorflow-model-optimization>=0.5
+pip install Cython>=0.29.13
+pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
+\end{verbatim}
+
+% ------------------------------------------------------------------------------
 \section{Conclusion}
 \label{sect:conclusion}
 
