@@ -220,46 +220,24 @@ In these instructions, anything bracketed like so, \verb+<>+, indicates a
 label/value to be replaced (the entire bracketed term needs replacement).
 
 % ------------------------------------------------------------------------------
+\subsection*{Requesting Access}
+The first step to using the ``Speed'' cluster is to request access. 
+
+Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
+including your ENCS account's username.
+
+If you are a student, please include the name of your Supervisor or instructor
+as well as a statement from that person which indicates that you may have
+access to ``Speed''.
+
+% ------------------------------------------------------------------------------
 \subsection{Getting Started}
 
-To use the cluster you will need to be added to the LDAP group that governs
-access to \texttt{speed-submit.encs.concordia.ca}. Please submit your request 
-to, \texttt{rt-ex-hpc AT encs.concordia.ca}, detailing who you are, your username 
-(e.g., what you would use to access \texttt{login.encs.concordia.ca}, for 
-example), and the lab that you are associated with. That same username will 
-then be given a scheduler account. Once that you can SSH to \texttt{speed}
-(an alias for \texttt{speed-submit.encs.concordia.ca}), you will
-need to source the scheduler file:
+Once your ENCS account has been granted access to ``Speed'',
+use your ENCS account credentials to create an SSH connection to 
+\texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 
-\begin{verbatim}
-source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
-\end{verbatim}
-
-You may consider adding the source request to your shell-startup environment
-(i.e., to your \file{.tcshrc} file). If sourcing has been successful, you have 
-access to the scheduler commands. For example, if, \texttt{qstat -f -u "*"}, 
-returns something non-error related, you are in business. 
-
-As a new user, \textbf{iff} you don't have yet \file{.tcshrc},
-please execute the following the first time that you log
-in, in your home directory, \emph{exactly} as it is written (it is all one
-line):
-
-\begin{verbatim}
-cp /home/n/nul-uge/.tcshrc . && cp /home/n/nul-uge/template.sh .
-  && mkdir /speed-scratch/$USER
-\end{verbatim}
-
-If you do have \file{.tcshrc} already, you may need to edit it instead
-using, e.g., \tool{vim}.
-
-That command prepares your environment (again, be careful overwriting an existing
-\file{.tcshrc}), provides you with a job template, and sets up your
-cluster-specific storage. Note that you need to either log out and back
-in, or execute a new shell, for the environment changes to be applied
-(important). And if you use \tool{bash}, or another shell, please contact 
-\texttt{rt-ex-hpc AT encs.concordia.ca}.
-
+\subsubsection{SSH Connections}
 If you are connecting from home, and have a Mac or Linux system, in a
 terminal, this will connect you (on a single line):
 
@@ -268,19 +246,84 @@ ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
   <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
 
-Windows users can connect via PuTTY (or MobaXterm). All users are expected
-to have a basic understanding of Linux and its commonly used commands.
+Windows users can create SSH connections via PuTTY (or MobaXterm). 
+
+All users are expected to have a basic understanding of Linux and its 
+commonly used commands.
+
+\subsubsection{Environment Set Up}
+\label{envsetup}
+After creating an SSH session to ``Speed'', you will need to source the scheduler file:
+
+\begin{verbatim}
+source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
+\end{verbatim}
+
+If sourcing the settings file has been successful, you will now have access to 
+the scheduler commands. 
+For example, if, \texttt{qstat -f -u "*"}, returns something non-error related, 
+you are in business. 
+
+The next step is to copy a job template to your home directory and to set up your
+cluster-specific storage. Execute the following command from within your
+home directory. (To move to your home directory, type \texttt{cd} at the Linux
+prompt and press \texttt{Enter}.) 
+
+\begin{verbatim}
+cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
+\end{verbatim}
+
+\textbf{Tip:} Add the source command to your shell-startup environment. 
+
+For \textbf{new ENCS Users}, and/ or those who don't have an \file{.tcshrc} 
+file, move a copy of the \file{.tcshrc} in \texttt{nul-uge}'s. home directory 
+to your home directory with:
+
+\begin{verbatim}
+cp /home/n/nul-uge/.tcshrc . 
+\end{verbatim}
+
+Users who already have an \file{.tcshrc} file, use a text editor, such as
+ \tool{vim} or \tool{emacs}, to add the source request to your existing
+shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
+
+Note that you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} file to be applied 
+(important). 
+
+If you use \tool{bash}, or another shell, please contact 
+\texttt{rt-ex-hpc AT encs.concordia.ca}.
 
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
-Preparing your job for submission is fairly straightforward. Job scripts
-are broken into four main sections: make a copy of \file{template.sh}
-or any existing job script example on our GitHub, and base
-your job on that. The first section is the shell call, and that can be
-left alone, unless you want to use a different shell. The next section
-contains the options provided to the cluster scheduler, and \file{template.sh}
-provides the essentials:
+Preparing your job for submission is fairly straightforward. Editing a copy
+of the\file{template.sh} you moved into your home directory during section
+\refname{envsetup} is a good place to start. You can also use a job script
+example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ''src'' 
+directory and base your job on it.
+
+Job scripts are broken into four main sections: 
+\subsubsection{The shell call}
+
+The first section is the shell call, and that can be left as is, unless 
+you want to use a different shell. It is recommened to call the version 
+of the shell in \texttt{/encs/bin}. 
+
+For example, to use \texttt{tcsh} use the following shell call:
+
+\begin{verbatim}
+#!/encs/bin/tcsh
+\end{verbatim}
+
+For \texttt{bash} use the following shell call:
+\begin{verbatim}
+#!/encs/bin/bash
+\end{verbatim}
+
+\subsubsection{Job Scheduler Options}
+The next section contains the options provided to the cluster scheduler 
+and \file{template.sh} provides the essentials:
 
 \begin{verbatim}
 #$ -N <jobname>
@@ -298,6 +341,7 @@ notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
 32), and this line needs to be deleted or commented out if not relevant;
 replace, \verb+<memory>+, with the value (in GB), that you want your job's memory
 space to be (up to 500), and all jobs MUST have a memory-space assignment.
+
 If you are unsure about memory footprints, err on assigning a generous
 memory space to your job so that it does not get prematurely terminated
 (the value given to \api{h\_vmem} is a hard memory ceiling). You can refine
@@ -319,8 +363,9 @@ qacct -j <jobID> | grep maxvmem
 Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.
 
+\subsubsection*{Module Loads}
 The third job-script section is for module loads. On \texttt{speed-submit}, to list
-what is available:
+available modules, execute the following at the command line:
 
 \begin{verbatim}
 module avail
@@ -355,6 +400,7 @@ module list
 
 Typically only the \texttt{module load} command will be used in your script.
 
+\subsubsection*{Program Calls}
 Lastly, what you want to execute in your job goes into the fourth section
 of the script. A common execution framework comprises the program call,
 and options to the program specifying location of input and output files,
@@ -363,9 +409,9 @@ cluster-specific environment variable, \api{NSLOTS}, which resolves to the value
 provided to the scheduler option, \option{-pe smp}), though, obviously, every
 program has its own unique execution framework.
 
-Please note that jobs that expect to touch data-input and -output files
+Please note that jobs that expect to touch data-input and data-output files
 more than once should make use of \api{TMPDIR}, a scheduler-provided working
-space (this is quite generous, close to 1~TB in size). \api{TMPDIR} is created
+space (this is quite generous, close to ~1TB in size). \api{TMPDIR} is created
 when a job starts, and exists on the local disk of the compute node
 executing your job, so I/O operations are much faster than what would be
 expected to/from the shared storage (which is provided over NFS). An
@@ -391,12 +437,14 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-This script sleeps on a node for 30 seconds, uses the \tool{module} command 
-to load the \texttt{gurobi/8.1.0} environment, and then prints the list of 
-loaded modules into a file. Concentrating on the first four lines, the first 
-line is the shell declaration; the next three lines are submission options 
-passed to the scheduler. The first, \texttt{-N}, attaches a name to the job
-(otherwise it is called what the job script is called), the second, \texttt{-cwd},
+This script sleeps on a node for 30 seconds, uses the 
+\tool{module} command to load the \texttt{gurobi/8.1.0} 
+environment, and then prints the list of loaded modules 
+into a file. Concentrating on the first 
+four lines, the first line is the shell declaration; the next three 
+lines are submission options passed to the scheduler. 
+The first, \texttt{-N}, attaches a name to the job (otherwise it is 
+called what the job script is called), the second, \texttt{-cwd},
 tells the scheduler to execute the job from the current working 
 directory, and not to use the default of your home directory (potentially 
 important for output-file placement), and the third, \texttt{-l h\_vmem}, 
@@ -731,10 +779,11 @@ Status of the GPU queue can be queried with:
 qstat -f -u "*" -q g.q
 \end{verbatim}
 
-\textbf{Very important note} regarding TensorFlow and PyTorch: if you are planning
-to run TensorFlow and/or PyTorch multi-GPU jobs, do not use the
-\api{tf.distribute} and/or \api{torch.nn.DataParallel} functions, as they will crash
-the compute node (100\% certainty). This appears to be the current hardware's architecture's defect.
+\textbf{Very important note} regarding TensorFlow and PyTorch: 
+if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
+do not use the \api{tf.distribute} and/or \api{torch.nn.DataParallel} 
+functions, as they will crash the compute node (100\% certainty). 
+This appears to be the current hardware's architecture's defect.
 %
 The workaround is to either
 % TODO: Need to link to that example
@@ -1125,7 +1174,7 @@ The basic steps for this solution are:
 	-recoverydir /speed-scratch/a_user/comsol/recovery 
 	-tmpdir /speed-scratch/a_user/comsol/tmp
 	-configuration/speed-scratch/a_user/comsol/config
-	\end{verbatum}
+	\end{verbatim}
 \end{itemize} 
 
 % ------------------------------------------------------------------------------
