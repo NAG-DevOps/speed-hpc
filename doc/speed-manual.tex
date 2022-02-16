@@ -298,9 +298,9 @@ If you use \tool{bash}, or another shell, please contact
 \subsection{Job Submission Basics}
 
 Preparing your job for submission is fairly straightforward. Editing a copy
-of the\file{template.sh} you moved into your home directory during section
-\refname{envsetup} is a good place to start. You can also use a job script
-example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ''src'' 
+of the \file{template.sh} you moved into your home directory during section
+\xs{envsetup} is a good place to start. You can also use a job script
+example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
 directory and base your job on it.
 
 Job scripts are broken into four main sections: 
@@ -411,7 +411,7 @@ program has its own unique execution framework.
 
 Please note that jobs that expect to touch data-input and data-output files
 more than once should make use of \api{TMPDIR}, a scheduler-provided working
-space (this is quite generous, close to ~1TB in size). \api{TMPDIR} is created
+space (this is quite generous, close to 1~TB in size). \api{TMPDIR} is created
 when a job starts, and exists on the local disk of the compute node
 executing your job, so I/O operations are much faster than what would be
 expected to/from the shared storage (which is provided over NFS). An
