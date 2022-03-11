@@ -210,17 +210,8 @@ Cplex 12.6.x to 12.8.x
 OpenMPI 1.6.x, 1.8.x, 3.1.3
 \end{itemize}
 \end{itemize}
-
-
 % ------------------------------------------------------------------------------
-\section{Job Management}
-\label{sect:job-management}
-
-In these instructions, anything bracketed like so, \verb+<>+, indicates a
-label/value to be replaced (the entire bracketed term needs replacement).
-
-% ------------------------------------------------------------------------------
-\subsection*{Requesting Access}
+\subsection{Requesting Access}
 The first step to using the ``Speed'' cluster is to request access. 
 
 Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
@@ -229,6 +220,13 @@ including your ENCS account's username.
 If you are a student, please include the name of your Supervisor or instructor
 as well as a statement from that person which indicates that you may have
 access to ``Speed''.
+
+% ------------------------------------------------------------------------------
+\section{Job Management}
+\label{sect:job-management}
+
+In these instructions, anything bracketed like so, \verb+<>+, indicates a
+label/value to be replaced (the entire bracketed term needs replacement).
 
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
@@ -304,26 +302,27 @@ example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'
 directory and base your job on it.
 
 Job scripts are broken into four main sections: 
-\subsubsection{The shell call}
+\begin{itemize}
+	\item Directives
+	\item Module Loads
+	\item User Scripting
+\end{itemize}
 
-The first section is the shell call, and that can be left as is, unless 
-you want to use a different shell. It is recommened to call the version 
-of the shell in \texttt{/encs/bin}. 
+\subsubsection{Directives}
+Directives are comments included at the beginning of a job script that set the shell 
+and the options for the job scheduler. 
 
-For example, to use \texttt{tcsh} use the following shell call:
+The shebang directive is always the first line of a script. In your job script, 
+this directive sets which shell your script's commands will run in. On ``Speed'', 
+we recommend that your script use a shell from the \texttt{/encs/bin} directory. \par
 
-\begin{verbatim}
-#!/encs/bin/tcsh
-\end{verbatim}
+To use the \texttt{tcsh} shell, start your script with: \verb| #!/encs/bin/tcsh| \par
 
-For \texttt{bash} use the following shell call:
-\begin{verbatim}
-#!/encs/bin/bash
-\end{verbatim}
+For \texttt{bash}, start with: \verb| #!/encs/bin/bash| \par
 
-\subsubsection{Job Scheduler Options}
-The next section contains the options provided to the cluster scheduler 
-and \file{template.sh} provides the essentials:
+Directives that start with \verb|"$#"|, set the options for the cluster's 
+``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
+provides the essentials:
 
 \begin{verbatim}
 #$ -N <jobname>
@@ -338,9 +337,10 @@ Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
 and your standard output file will appear here; \option{-m bea}, provides e-mail
 notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
 (multithreaded) parallelism (i.e., cores) you attach to your job (up to
-32), and this line needs to be deleted or commented out if not relevant;
-replace, \verb+<memory>+, with the value (in GB), that you want your job's memory
-space to be (up to 500), and all jobs MUST have a memory-space assignment.
+32), be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
+is not relevant; replace, \verb+<memory>+, with the value (in GB), that you want 
+your job's memory space to be (up to 500), and all jobs MUST have a memory-space 
+assignment.\par
 
 If you are unsure about memory footprints, err on assigning a generous
 memory space to your job so that it does not get prematurely terminated
@@ -363,9 +363,13 @@ qacct -j <jobID> | grep maxvmem
 Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.
 
-\subsubsection*{Module Loads}
-The third job-script section is for module loads. On \texttt{speed-submit}, to list
-available modules, execute the following at the command line:
+\subsubsection{Module Loads}
+As your job will run on a compute or GPU ``Speed'' node, and not the submit node,
+any software that is needed must be loaded by the job script. Software is loaded
+within the script just as it would be from the command line.\par
+
+To see a list of which modules are available, execute the following from the 
+command line on \texttt{speed-submit}.
 
 \begin{verbatim}
 module avail
@@ -381,10 +385,10 @@ Which, of course, can be shortened to match all that start with a
 particular letter:
 
 \begin{verbatim}
-module -t avail o
+module -t avail m
 \end{verbatim}
 
-To load a module (here, again, using \tool{matlab}):
+Insert the following in your script to load the \tool{matlab/R2020a}) module:
 
 \begin{verbatim}
 module load matlab/R2020a/default
@@ -392,32 +396,43 @@ module load matlab/R2020a/default
 
 Use, \option{unload}, in place of, \option{load}, to remove a module from active use.
 
-Finally, to list loaded modules:
+To list loaded modules:
 
 \begin{verbatim}
 module list
 \end{verbatim}
 
-Typically only the \texttt{module load} command will be used in your script.
+To purge all software in your working environment:
 
-\subsubsection*{Program Calls}
-Lastly, what you want to execute in your job goes into the fourth section
-of the script. A common execution framework comprises the program call,
-and options to the program specifying location of input and output files,
-as well as a declaration of degree of parallelism (note the
-cluster-specific environment variable, \api{NSLOTS}, which resolves to the value
-provided to the scheduler option, \option{-pe smp}), though, obviously, every
-program has its own unique execution framework.
+\begin{verbatim}
+module purge
+\end{verbatim}
 
-Please note that jobs that expect to touch data-input and data-output files
-more than once should make use of \api{TMPDIR}, a scheduler-provided working
-space (this is quite generous, close to 1~TB in size). \api{TMPDIR} is created
-when a job starts, and exists on the local disk of the compute node
-executing your job, so I/O operations are much faster than what would be
-expected to/from the shared storage (which is provided over NFS). An
-example job script using \api{TMPDIR} is found at
-\texttt{/home/n/nul-uge/templateTMPDIR.sh}: the job is instructed to change to
-\api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
+Typically, only the \texttt{module load} command will be used in your script.
+
+\subsubsection{User Scripting}
+The last part the job script is the scripting that will be executed by the job. 
+This part of the job script includes all commands required to set up and 
+execute the task your script has been written to do. Any linux command can be used 
+at this step. This section can be a simple call to an executable or a complex 
+loop which iterates through a series of commands.\par
+
+Every software program has a unique execution framework. It is the responsibility 
+of the script's author (e.g. you) to know what is required for the software used 
+in your script by reviewing the software's documenation. Regardless of which software
+your script calls, your script should be written so that the software knows the 
+location of the input and output files as well as the degree of parallelism. 
+Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
+to the value provided to the scheduler in the \option{-pe smp} option.\par 
+
+Jobs which touch data-input and data-output files more than once, should make use 
+of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
+ \api{TMPDIR} is created when a job starts, and exists on the local disk of the
+  compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
+than those to and from shared storage (which is provided over NFS). \par
+
+An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
+the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
 \texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
 current working directory), to make the new directory \texttt{results}, to
 execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
@@ -425,6 +440,9 @@ output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
 to an existing directory, \texttt{processed}, that is located in the current
 working directory. TMPDIR only exists for the duration of the job, though,
 so it is very important to copy relevant results from it at job's end.
+
+% ------------------------------------------------------------------------------
+\subsection{Sample Job Script}
 
 Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
