@@ -33,7 +33,7 @@
 
 % Previously VI
 %\date{Version 6.5}
-\date{\textbf{Version 6.6-dev-02}}
+\date{\textbf{Version 6.6-dev-03}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -282,12 +282,12 @@ cp /home/n/nul-uge/.tcshrc .
 \end{verbatim}
 
 Users who already have an \file{.tcshrc} file, use a text editor, such as
- \tool{vim} or \tool{emacs}, to add the source request to your existing
+\tool{vim} or \tool{emacs}, to add the source request to your existing
 shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
 
 Note that you will need to either log out and back in, or execute a new shell, 
 for the environment changes in the updated \file{.tcshrc} file to be applied 
-(important). 
+(\textbf{important}).
 
 If you use \tool{bash}, or another shell, please contact 
 \texttt{rt-ex-hpc AT encs.concordia.ca}.
@@ -296,7 +296,7 @@ If you use \tool{bash}, or another shell, please contact
 \subsection{Job Submission Basics}
 
 Preparing your job for submission is fairly straightforward. Editing a copy
-of the \file{template.sh} you moved into your home directory during section
+of the \file{template.sh} you moved into your home directory during
 \xs{envsetup} is a good place to start. You can also use a job script
 example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
 directory and base your job on it.
@@ -308,17 +308,19 @@ Job scripts are broken into four main sections:
 	\item User Scripting
 \end{itemize}
 
+% ------------------------------------------------------------------------------
 \subsubsection{Directives}
+
 Directives are comments included at the beginning of a job script that set the shell 
 and the options for the job scheduler. 
 
 The shebang directive is always the first line of a script. In your job script, 
 this directive sets which shell your script's commands will run in. On ``Speed'', 
-we recommend that your script use a shell from the \texttt{/encs/bin} directory. \par
+we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
 
-To use the \texttt{tcsh} shell, start your script with: \verb| #!/encs/bin/tcsh| \par
+To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
 
-For \texttt{bash}, start with: \verb| #!/encs/bin/bash| \par
+For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
 
 Directives that start with \verb|"$#"|, set the options for the cluster's 
 ``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
@@ -336,11 +338,11 @@ Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
 \option{-cwd}, makes the current working directory the ``job working directory'',
 and your standard output file will appear here; \option{-m bea}, provides e-mail
 notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
-(multithreaded) parallelism (i.e., cores) you attach to your job (up to
-32), be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
+(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32),
+be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
 is not relevant; replace, \verb+<memory>+, with the value (in GB), that you want 
 your job's memory space to be (up to 500), and all jobs MUST have a memory-space 
-assignment.\par
+assignment.
 
 If you are unsure about memory footprints, err on assigning a generous
 memory space to your job so that it does not get prematurely terminated
@@ -353,20 +355,17 @@ qstat -j <jobID> | grep maxvmem
 \end{verbatim}
 
 Memory-footprint values are also provided for completed jobs in the final
-e-mail notification (as, ``Max vmem''), and via the accounting function on
-\texttt{speed-submit} with:
+e-mail notification (as, ``Max vmem'').
 
-\begin{verbatim}
-qacct -j <jobID> | grep maxvmem
-\end{verbatim}
+\emph{Jobs that request a low-memory footprint are more likely to load on a busy
+cluster.}
 
-Jobs that request a low-memory footprint are more likely to load on a busy
-cluster.
-
+% ------------------------------------------------------------------------------
 \subsubsection{Module Loads}
+
 As your job will run on a compute or GPU ``Speed'' node, and not the submit node,
 any software that is needed must be loaded by the job script. Software is loaded
-within the script just as it would be from the command line.\par
+within the script just as it would be from the command line.
 
 To see a list of which modules are available, execute the following from the 
 command line on \texttt{speed-submit}.
@@ -410,26 +409,28 @@ module purge
 
 Typically, only the \texttt{module load} command will be used in your script.
 
+% ------------------------------------------------------------------------------
 \subsubsection{User Scripting}
+
 The last part the job script is the scripting that will be executed by the job. 
 This part of the job script includes all commands required to set up and 
-execute the task your script has been written to do. Any linux command can be used 
+execute the task your script has been written to do. Any Linux command can be used 
 at this step. This section can be a simple call to an executable or a complex 
-loop which iterates through a series of commands.\par
+loop which iterates through a series of commands.
 
 Every software program has a unique execution framework. It is the responsibility 
-of the script's author (e.g. you) to know what is required for the software used 
-in your script by reviewing the software's documenation. Regardless of which software
+of the script's author (e.g., you) to know what is required for the software used 
+in your script by reviewing the software's documentation. Regardless of which software
 your script calls, your script should be written so that the software knows the 
 location of the input and output files as well as the degree of parallelism. 
 Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
-to the value provided to the scheduler in the \option{-pe smp} option.\par 
+to the value provided to the scheduler in the \option{-pe smp} option. 
 
 Jobs which touch data-input and data-output files more than once, should make use 
 of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
- \api{TMPDIR} is created when a job starts, and exists on the local disk of the
-  compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
-than those to and from shared storage (which is provided over NFS). \par
+\api{TMPDIR} is created when a job starts, and exists on the local disk of the
+compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
+than those to and from shared storage (which is provided over NFS). 
 
 An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
 the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
@@ -583,32 +584,47 @@ on \texttt{speed-submit} you can submit it using this
 \subsection{Advanced \tool{qsub} Options}
 \label{sect:qsub-options}
 
-In addition to the basic \tool{qsub} options presented earlier, there are a few additional options that are generally useful:
+In addition to the basic \tool{qsub} options presented earlier, there are a 
+few additional options that are generally useful:
 
 \begin{itemize}
 \item
-\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins; (e)nds; (a)borts. Mail is sent to the default address of, \texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, \texttt{-M}). The report sent when a job ends includes job 
+\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
+(e)nds; (a)borts. Mail is sent to the default address of,
+\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
+\texttt{-M}). The report sent when a job ends includes job 
 runtime, as well as the maximum memory value hit (\api{maxvmem}). 
 
 \item
-\texttt{-M email@domain.com}: requests that the scheduler use this e-mail notification address, rather than the default (see, \texttt{-m}). 
+\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
+notification address, rather than the default (see, \texttt{-m}). 
 
 \item
 \texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
 
 \item
-\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note that if you give a single number, that represents \emph{seconds}, not hours. 
+\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
+that if you give a single number, that represents \emph{seconds}, not hours. 
 
 \item
 \texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
-The many \tool{qsub} options available are read with, \texttt{man qsub}. Also note that \tool{qsub} options can be specified during the job-submission command, and these \emph{override} existing script options (if present). The syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but unlike in the script, the options are specified without the leading \verb+#$+ (e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
+The many \tool{qsub} options available are read with, \texttt{man qsub}. Also 
+note that \tool{qsub} options can be specified during the job-submission 
+command, and these \emph{override} existing script options (if present). The 
+syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but unlike in the script, 
+the options are specified without the leading \verb+#$+
+(e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
+
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Array Jobs}
-Array jobs are those that start a batch job or a parallel job multiple times. Each iteration of the job array is called a task and receives a unique job ID.
 
-To submit an array job, use the \texttt{\-t} option of the \texttt{qsub} command as follows:
+Array jobs are those that start a batch job or a parallel job multiple times. 
+Each iteration of the job array is called a task and receives a unique job ID.
+
+To submit an array job, use the \texttt{\-t} option of the \texttt{qsub} 
+command as follows:
 
 \begin{verbatim}
 qsub -t n[-m[:s]] <batch_script>
@@ -636,14 +652,19 @@ qsub -t n[-m[:s]] <batch_script>
 \end{itemize}
 
 \textbf{Output files for Array Jobs:}
-The default and output and error-files are \option{job\_name.[o|e]job\_id} and \option{job\_name.[o|e]job\_id.task\_id}.
 
-This means that Speed creates an output and an error-file for each task generated by the array-job as well as one
-for the super-ordinate array-job. To alter this behavior use the \option{-o} and \option{-e} option of \tool{qsub}. 
+The default and output and error-files are \option{job\_name.[o|e]job\_id} and\\
+\option{job\_name.[o|e]job\_id.task\_id}.
+%
+This means that Speed creates an output and an error-file for each task 
+generated by the array-job as well as one for the super-ordinate array-job. 
+To alter this behavior use the \option{-o} and \option{-e} option of
+\tool{qsub}. 
 
-For more details about Array Job options, please review the manual pages for \option{qsub} by executing 
-the following at the command line on speed-submit \tool{man qsub}.
-
+For more details about Array Job options, please review the manual pages for 
+\option{qsub} by executing the following at the command line on speed-submit 
+\tool{man qsub}.
+ 
 % ------------------------------------------------------------------------------
 \subsection{Requesting Multiple Cores (i.e., Multithreading Jobs)}
 
@@ -683,13 +704,19 @@ and \api{NSLOTS}:
 
 \begin{itemize}
 \item
-\api{\$TMPDIR}=the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job, so if data in the temporary space are important, they absolutely need to be accessed before the job terminates.
+\api{\$TMPDIR}=the path to the job's temporary space on the node. It
+\emph{only} exists for the duration of the job, so if data in the temporary space 
+are important, they absolutely need to be accessed before the job terminates.
 
 \item
-\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely a NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, the path defaults to your home directory.
+\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
+NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+the path defaults to your home directory.
 
 \item
-\api{\$NSLOTS}=the number of cores requested for the job. This variable can be used in place of hardcoded thread-request declarations. 
+\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
+be used in place of hardcoded thread-request declarations. 
+
 \end{itemize}
 
 \noindent
@@ -733,7 +760,16 @@ will have those permissions by default).
 	\label{fig:fluent.sh}
 \end{figure}
 
-The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. Of note, I have requested e-mail notifications (\texttt{-m}), am defining the parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (very important), and am setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file (in-job, because the last line of the script copies everything from \api{\$TMPDIR} to a directory in my NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g., \file{flu10000.o249}), and/or by examining the ``moment'' file in \file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running the job. Caveat: take care with journal-file file paths.
+The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. 
+Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
+parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
+important}), and are setting \api{\$TMPDIR} as the in-job location for the
+``moment'' \file{rfile.out} file (in-job, because the last line of the script 
+copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
+Job progress can be monitored by examining the standard-out file (e.g.,
+\file{flu10000.o249}), and/or by examining the ``moment'' file in
+\file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running 
+the job. \textbf{Caveat:} take care with journal-file file paths.
 
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
@@ -751,7 +787,7 @@ Note that this memory overhead grows proportionally with the value of
 % ------------------------------------------------------------------------------
 \subsection{Scheduling On The GPU Nodes}
 
-The cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
+The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
 cards: each card has 2048 cores and 16GB of RAM. Though note that the P6
 is mainly a single-precision card, so unless you need the GPU double
 precision, double-precision calculations will be faster on a CPU node.
@@ -797,7 +833,8 @@ qstat -f -u "*" -q g.q
 
 \textbf{Very important note} regarding TensorFlow and PyTorch: 
 if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
-do not use the \api{tf.distribute} and/or \api{torch.nn.DataParallel} 
+do not use the \api{tf.distribute} and/or\\
+\api{torch.nn.DataParallel} 
 functions, as they will crash the compute node (100\% certainty). 
 This appears to be the current hardware's architecture's defect.
 %
@@ -869,13 +906,14 @@ that no more than two GPUs can be requested for any one job.
 \label{sect:environments}
 
 The following documentation is specific to the \textbf{Speed} HPC Facility at the
- Gina Cody School of Engineering and Computer Science.
+Gina Cody School of Engineering and Computer Science.
 
 % ------------------------------------------------------------------------------
 \subsection{Anaconda}
+
 To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
-option when executing  \texttt{conda create}. For example, to create an anaconda environment for 
- \texttt{ai\_user}, execute the following at the command line:
+option when executing \texttt{conda create}. For example, to create an anaconda environment for 
+\texttt{ai\_user}, execute the following at the command line:
 
 \begin{verbatim}
 conda create --prefix /speed-scratch/a_user/myconda
@@ -887,7 +925,9 @@ conda create --prefix /speed-scratch/a_user/myconda
 environment in texttt{a\_user}'s home directory by default.
 \vspace{10pt}
 
+% ------------------------------------------------------------------------------
 \subsubsection{List Environments}
+
 To view your conda environments, type: \texttt{conda info --envs}
 
 \begin{verbatim}
@@ -897,7 +937,9 @@ base                  *  /encs/pkg/anaconda3-2019.07/root
                          /speed-scratch/a_user/myconda
 \end{verbatim}      
 
+% ------------------------------------------------------------------------------
 \subsubsection{Activate an Environment}
+
 Activate the environment \texttt{\/speed\-scratch\/a\_user\/myconda} as follows
 \begin{verbatim}
 conda activate /speed-scratch/a_user/myconda
@@ -920,9 +962,10 @@ into the environment.
 \subsection{CUDA}
 
 When calling \tool{CUDA} within job scripts, it is important to create a link to
- the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
+the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
 For example, to use the \texttt{cuda-11.5} libraries, specify the following in 
 your Makefile.
+
 \begin{verbatim}
 -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
 \end{verbatim}
@@ -954,8 +997,8 @@ replacing \option{\/usr\/local\/cuda} with one of the above.
 % ------------------------------------------------------------------------------
 \subsection{efficientdet}
 
-The following steps describing how to create an efficientdet environment on \emph{Speed}
-, were submitted by a member of Dr. Amer's Research Group.
+The following steps describing how to create an efficientdet environment on
+\emph{Speed}, were submitted by a member of Dr. Amer's research group.
 
 \begin{itemize}
     \item 
