@@ -72,9 +72,9 @@ The pre-requisites to prepare the environment are located in `environment.yml`. 
 
 Using a test dataset (Market1501) and 2 epochs as an example, we ran the script and the results were the following:
 
-Workstation: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz --- 4hrs
-Speed 1 GPU: 1hr 30min
-Speed CPU - 32 cores: 1hr 4min
+Workstation: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz --- 4hrs  
+Speed 1 GPU: 1hr 30min  
+Speed CPU - 32 cores: 1hr 4min  
 
 TEST DATASET: Market1501
 
