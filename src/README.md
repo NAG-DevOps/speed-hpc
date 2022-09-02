@@ -63,7 +63,7 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 ## Openiss-yolov3 
-This is a case study example on image classification, for more details please visit [Openiss-yolov3](https://github.com/tariqghd/speed-hpc).
+This is a case study example on image classification, for more details please visit [Openiss-yolov3](https://github.com/tariqghd/openiss-yolov3).
 
 ### Speed Login Configuration 
 1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
