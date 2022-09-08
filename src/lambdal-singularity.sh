@@ -47,7 +47,7 @@ SINGULARITY=/encs/pkg/singularity-3.7.0/root/bin/singularity
 #           directory, nettemp
 # Note: $HOME, /tmp, /proc, /sys, /dev are bound by default
 #
-SINGULARITY_BIND=$PWD:/speed-pwd,/speed-scratch/$USER:/my-speed-scratch,/nettemp
+SINGULARITY_BIND=$PWD:/speed-pwd,/speed-scratch/$USER,/nettemp
 
 echo "Singularity will bind mount: $SINGULARITY_BIND for user: $USER"
 
@@ -57,7 +57,8 @@ time \
 	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print(\"I love Lambda Stack!\")'
 
 time \ 
-	$SINGULARITY exec touch /my-speed-scratch/test1
+	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
+	touch /speed-scratch/$USER/test1
 
 echo "$0 : Done!"
 date
