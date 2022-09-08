@@ -56,9 +56,9 @@ time \
 	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
 	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print(\"I love Lambda Stack!\")'
 
-time \ 
-	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
-	touch /speed-scratch/$USER/test1
+
+echo "create a file..."
+time touch /speed-scratch/$USER/test1
 
 echo "$0 : Done!"
 date
