@@ -247,20 +247,37 @@ ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
 Windows users can create SSH connections via PuTTY (or MobaXterm). 
 
 All users are expected to have a basic understanding of Linux and its 
-commonly used commands.
+commonly used commands. 
 
 \subsubsection{Environment Set Up}
 \label{envsetup}
-After creating an SSH session to ``Speed'', you will need to source the scheduler file:
+After creating an SSH connection to ``Speed'', you will need to source 
+the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
+Sourcing the settings file will set the environment variables required to 
+execute scheduler commands.
 
+Based on the UNIX shell type, choose one of the following commands to source
+the settings file. 
+
+csh/tcsh:
 \begin{verbatim}
 source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
 \end{verbatim}
 
-If sourcing the settings file has been successful, you will now have access to 
-the scheduler commands. 
-For example, if, \texttt{qstat -f -u "*"}, returns something non-error related, 
-you are in business. 
+Bourne shell/bash:
+\begin{verbatim}
+. /local/pkg/uge-8.6.3/root/default/common/settings.sh 
+\end{verbatim}
+
+In order to set up the default ENCS bash shell, executing the following command 
+is also required:
+\begin{verbatim}
+printenv ORGANIZATION |grep -qw ENCS || . /encs/Share/bash/profile 
+\end{verbatim}
+
+To verify that you have access to the scheduler commands execute 
+\texttt{qstat -f -u "*"}. If an error is returned, attempt sourcing 
+the settings file again.
 
 The next step is to copy a job template to your home directory and to set up your
 cluster-specific storage. Execute the following command from within your
@@ -271,26 +288,49 @@ prompt and press \texttt{Enter}.)
 cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
 \end{verbatim}
 
-\textbf{Tip:} Add the source command to your shell-startup environment. 
+\textbf{Tip:} Add the source command to your shell-startup script. 
 
-For \textbf{new ENCS Users}, and/ or those who don't have an \file{.tcshrc} 
-file, move a copy of the \file{.tcshrc} in \texttt{nul-uge}'s. home directory 
-to your home directory with:
+For \textbf{new ENCS Users}, and/ or those who don't have a shell-startup script, 
+based on your shell type use one of the following commands to copy a start up script 
+from \texttt{nul-uge}'s. home directory to your home directory. (To move to your home
+ directory, type \texttt{cd} at the Linux prompt and press \texttt{Enter}.) 
 
+csh/tcsh:
 \begin{verbatim}
 cp /home/n/nul-uge/.tcshrc . 
 \end{verbatim}
 
-Users who already have an \file{.tcshrc} file, use a text editor, such as
+Bourne shell/bash:
+\begin{verbatim}
+cp /home/n/nul-uge/.bashrc . 
+\end{verbatim}
+
+Users who already have a shell-startup script, use a text editor, such as
 \tool{vim} or \tool{emacs}, to add the source request to your existing
 shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
 
-Note that you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} file to be applied 
-(\textbf{important}).
+csh/tcsh:
+Sample \file{.tcshrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if ($HOSTNAME  == speed-submit.encs.concordia.ca) then
+   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
+endif
+\end{verbatim}
 
-If you use \tool{bash}, or another shell, please contact 
-\texttt{rt-ex-hpc AT encs.concordia.ca}.
+Bourne shell/bash:
+Sample \file{.bashrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
+    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
+    printenv ORGANIZATION |grep -qw ENCS || .  /encs/Share/bash/profile
+fi
+\end{verbatim}
+
+Note that you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
+(\textbf{important}).
 
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
