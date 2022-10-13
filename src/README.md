@@ -5,6 +5,13 @@ The following documentation is specific to **speed**.
 
 ## Anaconda ##
 
+### Initialize Shell ###
+To initialize your shell, run
+`conda init <SHELL_NAME>`
+
+The default shell for ENCS accounts is tcsh. Therefore, to initialize your default shell run
+`conda init tcsh`
+
 ### Create an Environment ###
 To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
 
