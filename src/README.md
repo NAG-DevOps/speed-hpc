@@ -87,6 +87,7 @@ TEST DATASET: Market1501
 ### Prepare ###
 
 Once logged into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/` and clone/download this git repository: https://github.com/carlos-encs/openiss-reid-tfk.
+Prepare the dataset as described in https://github.com/carlos-encs/openiss-reid-tfk
 
 ```
 **IMPORTANT**  
