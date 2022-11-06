@@ -791,10 +791,10 @@ home directory:
 \item
 \texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
 \item
-\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized_keys}
-file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized_keys} (if does not) 
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized\_keys}
+file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
 \item
-Set file permissions of \file{authorized_keys} to 600; of your NFS-mounted home
+Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
 to 700 (note that you likely will not have to do anything here, as most people
 will have those permissions by default). 
 \end{itemize}
@@ -815,8 +815,8 @@ important}), and are setting \api{\$TMPDIR} as the in-job location for the
 ``moment'' \file{rfile.out} file (in-job, because the last line of the script 
 copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
 Job progress can be monitored by examining the standard-out file (e.g.,
-\file{flu10000.o249}), and/or by examining the ``moment'' file in
-\verb{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running 
+\file{flu10000.o249}), and/or by examining the ``moment'' file in 
+\texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
 the job. \textbf{Caveat:} take care with journal-file file paths.
 
 % ------------------------------------------------------------------------------
