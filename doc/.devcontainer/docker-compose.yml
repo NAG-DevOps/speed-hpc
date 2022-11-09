@@ -5,7 +5,7 @@ services:
     build: .
     image: latexdevcontainer
     volumes:
-      - ../:/workspace
+      - ../../:/workspace
       # Docker socket to access Docker server
       - /var/run/docker.sock:/var/run/docker.sock
       # SSH directory
