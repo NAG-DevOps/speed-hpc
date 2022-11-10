@@ -7,7 +7,7 @@ Concordia University, Montreal
 [![DOI](https://zenodo.org/badge/166873072.svg)](https://zenodo.org/badge/latestdoi/166873072)
 
 * [GCS Speed HPC Facility](https://www.concordia.ca/ginacody/aits/speed.html)
-* [Overview Slides](https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis)
+* [Overview Slides](https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44/edit?usp=sharing)
 * [AITS Service Desk](https://www.concordia.ca/ginacody/aits.html)
 
 ## Examples ##
