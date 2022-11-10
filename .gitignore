@@ -8,5 +8,14 @@
 *.blg
 *.toc
 *.tps
+*.4ct
+*.4tc
+*.idv
+*.lg
+*.tmp
+*.xref
+*.out
+*.dvi
+.DS_Store
 doc/speed-manual.fdb_latexmk
 doc/speed-manual.fls
