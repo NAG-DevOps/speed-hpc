@@ -5,6 +5,15 @@ The following documentation is specific to **speed**.
 
 ## Anaconda ##
 
+### Load the Anaconda module ###
+To view the Anaconda modules available, run
+`module avail anaconda`
+
+Load the desired version of anaconda using the module load command.
+
+For example:
+`module load anaconda3`
+
 ### Initialize Shell ###
 To initialize your shell, run
 `conda init <SHELL_NAME>`
