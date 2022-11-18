@@ -65,16 +65,15 @@ pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAP
 
 ## Openiss-reid-tfk ##
 
-The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/carlos-encs/openiss-reid-tfk) on *SPEED*
+The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
 ### Environment ###
 
-The pre-requisites to prepare the environment are located in `environment.yml`. (https://github.com/carlos-encs/openiss-reid-tfk)
+The pre-requisites to prepare the environment are located in `environment.yml`. (https://github.com/NAG-DevOps/openiss-reid-tfk)
 
-Using a test dataset (Market1501) and 2 epochs as an example, we ran the script and the results were the following:
+Using a test dataset (Market1501) and 120 epochs as an example, we ran the script and the results were the following:
 
-Workstation: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz --- 4hrs  
-Speed 1 GPU: 1hr 30min  
-Speed CPU - 32 cores: 1hr 4min  
+Speed 1 GPU: 5hrs 25min 
+Speed CPU - 32 cores: 2 days 22 hours
 
 TEST DATASET: Market1501
 
@@ -86,9 +85,9 @@ TEST DATASET: Market1501
 
 ### Prepare ###
 
-Once logged into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/` and clone/download this git repository: https://github.com/carlos-encs/openiss-reid-tfk.
+Once logged into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/` and clone/download this git repository: https://github.com/NAG-DevOps/openiss-reid-tfk.
 
-Prepare the dataset as described in https://github.com/carlos-encs/openiss-reid-tfk
+Prepare the dataset as described in https://github.com/NAG-DevOps/openiss-reid-tfk
 
 ```
 **IMPORTANT**  
