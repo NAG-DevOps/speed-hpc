@@ -126,6 +126,13 @@ copy-to-nag: submission
 	cp -f FIG/*.{pdf,png} /groups/n/nag/papers/encs-networking/FIG/
 	chmod -R g+rwX /groups/n/nag/papers/encs-networking 2>/dev/null || cat /dev/null
 
+# Building static HTML requires `make4ht`
+# Works with existing environment
+html:
+		make4ht $(DELIVERABLE) -a debug mathjax -c speed-manual.cfg -d web && \
+		mv ./web/$(DELIVERABLE).html ./web/index.html && \
+		rm $(DELIVERABLE).html $(DELIVERABLE).css
+
 #
 # Clean up
 #
@@ -135,6 +142,6 @@ clean:
           *.lot *.lof *.idx *.bbl *.blg *.ilg *.ind
 
 maintainer-clean: clean
-	rm -f *.pdf
+	rm -f *.pdf *.html *.css
 
 # EOF
