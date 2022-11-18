@@ -7,7 +7,7 @@
 #$ -m bea
 
 # Specify the output file name
-#$ -o reid-tfk.qlog2
+#$ -o reid-tfk.log
 
 # Set output directory to current
 #$ -cwd
@@ -17,7 +17,7 @@
 # #$ -l h_vmem=32G
 
 # Request GPU
-#$ -l gpu=2
+#$ -l gpu=1
 
 # Execute the script
 module load anaconda/default
