@@ -12,11 +12,11 @@
 # Set output directory to current
 #$ -cwd
 
-# Request CPU
+# Request CPU - comment this section if the job WON'T use CPU
 # #$ -pe smp 32
 # #$ -l h_vmem=32G
 
-# Request GPU
+# Request GPU - comment this section if the job WON'T use GPU
 #$ -l gpu=1
 
 # Execute the script
