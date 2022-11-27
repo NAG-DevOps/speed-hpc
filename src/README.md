@@ -11,6 +11,7 @@ These are examples either trivial or some are more elaborate. Some are described
   - `tcsh.sh` -- default `tcsh` job script example
   - `tmpdir.sh` -- example use of TMPDIR on a local node
   - `bash.sh` -- example use with `bash` shell as opposed to `tcsh`
+  - `manua.sh` -- example job to compile our very manual here to PDF and HTML using LaTeX
 - Common packages:
   - `fluent.sh` -- Fluent job
   - `comsol.sh` -- Comsol job
