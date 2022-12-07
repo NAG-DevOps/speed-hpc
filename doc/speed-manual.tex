@@ -148,8 +148,19 @@ One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, O
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
-
 \begin{itemize}
+\item
+To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
+\item
+Prepare them for big clusters:
+	\begin{itemize}
+	\item 
+	Calcul Quebec
+	\item 
+	Compute Canada
+	\item 
+	Cloud platforms
+	\end{itemize}
 \item
 Jobs that are too demanding for a desktop. 
 \item
@@ -163,23 +174,14 @@ CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}).
 \item
 Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
-
 % ------------------------------------------------------------------------------
-\subsection{Speed's Intent}
-
+\subsection{What Speed Is Not}
 \begin{itemize}
-	\item 
-To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
-	\item 
-Prepare them for big clusters:
-\begin{itemize}
-	\item 
-Calcul Quebec
-	\item 
-Compute Canada
-	\item 
-Cloud platforms
-\end{itemize}
+\item Speed is not a web host and does not host websites.
+\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Does not run Kubernetes or other container orchestration software.
+\item Does not run Docker. (Note: Speed does run Singularity and Docker containers can be converted to Singularity with a single command.)
+\item Speed is not for jobs executed outside of the scheduler. (Jobs run outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -234,15 +236,13 @@ OpenMPI 1.6.x, 1.8.x, 3.1.3
 
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
-
-The first step to using the ``Speed'' cluster is to request access. 
-
-Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
-including your ENCS account's username.
-
-If you are a student, please include the name of your Supervisor or instructor
-as well as a statement from that person which indicates that you may have
-access to ``Speed''.
+Email your request for ``Speed'' cluster access to: \href{mailto:rt-ex-hpc@encs.concordia.ca}{\texttt{rt-ex-hpc AT encs.concordia.ca}}.\\
+\\Students must include the following:
+\begin{itemize} 
+	\item ENCS username.
+	\item Name of Supervisor or instructor.
+	\item Written request from the Supervisor or instructor for the ENCS username to be granted access to ``Speed''
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \section{Job Management}
@@ -524,26 +524,22 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
     \caption{Source code for \file{tcsh.sh}}
 	\label{fig:tcsh.sh}
 \end{figure}
-
-This script sleeps on a node for 30 seconds, uses the 
-\tool{module} command to load the \texttt{gurobi/8.1.0} 
-environment, and then prints the list of loaded modules 
-into a file. Concentrating on the first 
-four lines, the first line is the shell declaration; the next three 
-lines are submission options passed to the scheduler. 
-The first, \texttt{-N}, attaches a name to the job (otherwise it is 
-called what the job script is called), the second, \texttt{-cwd},
-tells the scheduler to execute the job from the current working 
-directory, and not to use the default of your home directory (potentially 
-important for output-file placement), and the third, \texttt{-l h\_vmem}, 
-requests and assigns a 1GB of memory space to the job (this is an upper bound, and 
-jobs that attempt to use more will be terminated). Note that this third 
-option is \emph{not} optional (if you do not specify a memory space, 
-submission of the job will fail). Also notice the syntax that denotes a 
-scheduler option, the, \texttt{\#\$}.
+The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.\\
+The lines that begin with \texttt{\#\$} are directives for the scheduler.
+	\begin{itemize}
+	\item  \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+	\end{itemize}
+The script then:
+\begin{itemize}
+	\item Sleeps on a node for 30 seconds
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
+	\item Prints the list of loaded modules into a file. 
+\end{itemize}
 
 The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
-To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
+From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
 X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
 to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
 something like this: 
