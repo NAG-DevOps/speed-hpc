@@ -33,7 +33,7 @@
 
 % Previously VI
 %\date{Version 6.5}
-\date{\textbf{Version 6.6-dev-05}}
+\date{\textbf{Version 6.6-dev-06}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -131,7 +131,7 @@ Carlos Alarcón Meza, Administrator, System, High Performance Computing and Netw
 Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
 \end{itemize}
 
-We receive support from the rest of AITS seams, such
+We receive support from the rest of AITS teams, such
 as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
@@ -148,8 +148,19 @@ One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, O
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
+\label{sect:speed-is-for}
 
 \begin{itemize}
+\item
+To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets.
+\item
+Prepare them for big clusters:
+	\begin{itemize}
+	\item 
+	Calcul Quebec and Compute Canada
+	\item 
+	Cloud platforms
+	\end{itemize}
 \item
 Jobs that are too demanding for a desktop. 
 \item
@@ -165,21 +176,15 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Speed's Intent}
+\subsection{What Speed Is Not}
+\label{sect:speed-is-not}
 
 \begin{itemize}
-	\item 
-To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
-	\item 
-Prepare them for big clusters:
-\begin{itemize}
-	\item 
-Calcul Quebec
-	\item 
-Compute Canada
-	\item 
-Cloud platforms
-\end{itemize}
+\item Speed is not a web host and does not host websites.
+\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Does not run Kubernetes or other container orchestration software.
+\item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
+\item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -235,14 +240,18 @@ OpenMPI 1.6.x, 1.8.x, 3.1.3
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
 
-The first step to using the ``Speed'' cluster is to request access. 
+After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
+``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
+cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
+%
+Faculty and staff may request the access directly.
+Students must include the following in their message:
 
-Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
-including your ENCS account's username.
-
-If you are a student, please include the name of your Supervisor or instructor
-as well as a statement from that person which indicates that you may have
-access to ``Speed''.
+\begin{itemize} 
+	\item GCS ENCS username
+	\item Name and email (CC) of the supervisor or instructor
+	\item Written request from the supervisor or instructor for the ENCS username to be granted access to ``Speed''
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \section{Job Management}
@@ -254,8 +263,10 @@ label/value to be replaced (the entire bracketed term needs replacement).
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
 
-Once your ENCS account has been granted access to ``Speed'',
-use your ENCS account credentials to create an SSH connection to 
+Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
+and ``What Speed is Not'' (\xs{sect:speed-is-not}).
+Once your GCS ENCS account has been granted access to ``Speed'',
+use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 
 % ------------------------------------------------------------------------------
@@ -520,31 +531,31 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
-    \caption{Source code for \file{tcsh.sh}}
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
+	\caption{Source code for \file{tcsh.sh}}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-This script sleeps on a node for 30 seconds, uses the 
-\tool{module} command to load the \texttt{gurobi/8.1.0} 
-environment, and then prints the list of loaded modules 
-into a file. Concentrating on the first 
-four lines, the first line is the shell declaration; the next three 
-lines are submission options passed to the scheduler. 
-The first, \texttt{-N}, attaches a name to the job (otherwise it is 
-called what the job script is called), the second, \texttt{-cwd},
-tells the scheduler to execute the job from the current working 
-directory, and not to use the default of your home directory (potentially 
-important for output-file placement), and the third, \texttt{-l h\_vmem}, 
-requests and assigns a 1GB of memory space to the job (this is an upper bound, and 
-jobs that attempt to use more will be terminated). Note that this third 
-option is \emph{not} optional (if you do not specify a memory space, 
-submission of the job will fail). Also notice the syntax that denotes a 
-scheduler option, the, \texttt{\#\$}.
+The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
+The lines that begin with \texttt{\#\$} are directives for the scheduler.
+
+\begin{itemize}
+	\item \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+\end{itemize}
+
+The script then:
+
+\begin{itemize}
+	\item Sleeps on a node for 30 seconds
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
+	\item Prints the list of loaded modules into a file
+\end{itemize}
 
 The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
-To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
-X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
+From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}. You will see,
+\texttt{"Your job X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
 to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
 something like this: 
 
@@ -813,10 +824,10 @@ home directory:
 \item
 \texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
 \item
-\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized\_keys}
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}}
 file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
 \item
-Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
+Set file permissions of \texttt{authorized\_keys} to 600; of your NFS-mounted home
 to 700 (note that you likely will not have to do anything here, as most people
 will have those permissions by default). 
 \end{itemize}
@@ -1366,7 +1377,6 @@ Compute Canada / Calcul Quebec
 % ------------------------------------------------------------------------------
 % Refs:
 %
-
 \nocite{aosa-book-vol1}
 \label{sect:bib}
 %\bibliographystyle{IEEEtran}
