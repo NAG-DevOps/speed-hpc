@@ -138,7 +138,6 @@ TEST DATASET: Market1501
 
 **IMPORTANT**  
 Modify the script `openiss-2-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; h_vmem= and gpu= CAN'T be enabled at the same time, more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
-```
 
 ## CUDA ##
 
