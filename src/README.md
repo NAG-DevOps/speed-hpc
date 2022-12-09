@@ -133,7 +133,9 @@ TEST DATASET: Market1501
 - On environment.yml comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
 - On openiss-2-speed.sh comment or uncomment the secction accordingly (for CPU or GPU)
 - Submit the job:
+
    On CPUs nodes: `qsub ./openiss-2-speed.sh`
+
    On GPUs nodes: `qsub -q g.q ./openiss-2-speed.sh`
 
 **IMPORTANT**  
