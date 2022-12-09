@@ -123,25 +123,22 @@ TEST DATASET: Market1501
 
 ---- Gallery images: 15913
 
-### Prepare ###
+### Configuration and execution ###
 
-Once logged into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/` and clone/download this git repository: https://github.com/NAG-DevOps/openiss-reid-tfk.
+- Log into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/`
+- Clone the repo from https://github.com/NAG-DevOps/openiss-reid-tfk
+- Download the dataset:  go to datasets/ and run get_dataset_market1501.sh
+- In reid.py set the epochs (g_epochs=120 by default)
+- Download openiss-2-speed.sh from this repository
+- On environment.yml comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
+- On openiss-2-speed.sh comment or uncomment the secction accordingly (for CPU or GPU)
+- Submit the job:
+   On CPUs nodes: `qsub ./openiss-2-speed.sh`
+   On GPUs nodes: `qsub -q g.q ./openiss-2-speed.sh`
 
-Prepare the dataset as described in https://github.com/NAG-DevOps/openiss-reid-tfk
-
-```
 **IMPORTANT**  
 Modify the script `openiss-2-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; h_vmem= and gpu= CAN'T be enabled at the same time, more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
 ```
-
-### Run ###
-
-The script `openiss-2-speed.sh` will prepare the environment and run `reid.py`
-
-To submit the job to speed:
-
-On CPUs nodes: `qsub ./openiss-2-speed.sh`  
-On GPUs nodes: `qsub -q g.q ./openiss-2-speed.sh`
 
 ## CUDA ##
 
