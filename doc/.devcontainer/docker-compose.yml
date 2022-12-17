@@ -2,8 +2,10 @@ version: "3.2"
 
 services:
   vscode:
-    build: .
     image: latexdevcontainer
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
     volumes:
       - ../../:/workspace
       # Docker socket to access Docker server
@@ -24,4 +26,3 @@ services:
     # that prevents initial handshake between the IDE 
     # to the newly created container
     entrypoint: ["zsh", "-c", "while sleep 1000; do :; done"]
- 
