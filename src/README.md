@@ -149,6 +149,35 @@ To run the script you will use `qsub`, you can run the task on CPU or gpu comput
 qsub -q g.q ./yolo_subGPU.sh
 ```
 
+
+```
+qlogin 
+cd /speed-scratch/$USER/SpeedYolo
+conda activate /speed-scratch/$USER/YOLOInteractive
+```
+4. Before you run the script you need to add permission access to the project files, then start run the script `./yolo_submit.sh`    
+```
+chmod +rwx *
+./yolo_submit.sh
+```
+5. A pop up window will show a classifed live video. 
+
+Please note that since we have limited number of node with GPU support `qlogin` is not allowed to direct you to login to these server you will be directed to the availabel computation nodes in the cluster with CPU support only. 
+
+
+For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+
+## performance comparison 
+Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of teasla P6. The project use  keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 (gpu32), for P6 (gpu) you can find that in scripts shell.    
+
+|   1GPU-P6     |    1GPU-V100  |    2GPU-V100  |    32CPU       |
+| --------------|-------------- |-------------- |----------------|
+|    22.45      |   17.15       |   23.33       |     60.42      |
+|    22.15      |   17.54       |   23.08       |     60.18      |
+|    22.18      |   17.18       |   23.13       |     60.47      |
+
+
+
 ## CUDA ##
 
 When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the cuda-11.5 libraries, specify the following in your Makefile.
