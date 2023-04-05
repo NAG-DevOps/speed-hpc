@@ -33,7 +33,7 @@
 
 % Previously VI
 %\date{Version 6.5}
-\date{\textbf{Version 6.6-dev-03}}
+\date{\textbf{Version 6.6-dev-06}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -82,11 +82,11 @@ Montreal, Canada.
 
 This document contains basic information required to use ``Speed'' as well as 
 tips and tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/ or references are welcome. 
+User contributions of sample jobs and/or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
 
-
-\textbf{Resources:}
+% ------------------------------------------------------------------------------
+\subsection{Resources}
 
 \begin{itemize}
 \item
@@ -96,20 +96,43 @@ are maintained (pull-requests (PRs), subject to review, are welcome):\\
 \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
 
 \item
+PDF version of this manual:\\
+\url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}\\
+HTML version of this manual:\\
+\url{https://nag-devops.github.io/speed-hpc/}
+
+\item
 Our official Concordia page for the ``Speed'' cluster:\\
 \url{https://www.concordia.ca/ginacody/aits/speed.html}\\
 which includes access request instructions.
 
 \item
-All registered users are subscribed to the \texttt{hpc-ml} mailing
-list upon gaining access.
+All Speed users are subscribed to the \texttt{hpc-ml} mailing
+list.
 
 \item
 \href
-	{https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis}
-	{Introductory slides of Speed presented to departments}~\cite{speed-intro-preso}.
+	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
+	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
 
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Team}
+
+\begin{itemize}
+	\item 
+Serguei Mokhov, Manager, Networks, Security and HPC
+	\item 
+Gillian Roper, Senior Administrator, System, Information Technology
+	\item 
+Carlos Alarcón Meza, Administrator, System, High Performance Computing and Networking, Information Technology
+	\item 
+Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
+\end{itemize}
+
+We receive support from the rest of AITS teams, such
+as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Comprises}
@@ -125,10 +148,21 @@ One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, O
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
+\label{sect:speed-is-for}
 
 \begin{itemize}
 \item
-Jobs that are too demanding for a desktop, but that are not worth the hassles associated with the provincial and national clusters. 
+To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets.
+\item
+Prepare them for big clusters:
+	\begin{itemize}
+	\item 
+	Calcul Quebec and Compute Canada
+	\item 
+	Cloud platforms
+	\end{itemize}
+\item
+Jobs that are too demanding for a desktop. 
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
@@ -142,36 +176,28 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Speed's Intent}
+\subsection{What Speed Is Not}
+\label{sect:speed-is-not}
 
 \begin{itemize}
-	\item 
-To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
-	\item 
-Prepare them for big clusters:
-\begin{itemize}
-	\item 
-Calcul Quebec
-	\item 
-Compute Canada
-	\item 
-Cloud platforms
-\end{itemize}
+\item Speed is not a web host and does not host websites.
+\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Does not run Kubernetes or other container orchestration software.
+\item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
+\item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Available Software}
 
 We have a great number of open-source software available and installed
-on Speed -- various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
+on Speed~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
 OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
 There are also a number of commercial packages, subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaqus~\cite{abaqus}, 
 Ansys, Fluent~\cite{fluent}, etc. 
 
-
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
-
 
 In particular, there are over 2200 programs available in
 \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
@@ -185,7 +211,7 @@ MATLAB (R2016b, R2018a, R2018b)
 	\item 
 Fluent (19.2)
 	\item 
-Singularity (Docker-like container), can run other OS's apps, like Ubuntu's.
+Singularity (Docker-like container), can run other OS's apps, like Ubuntu's, converted Docker containers.
 \end{itemize}
 	\item 
 We do our best to accommodate custom software requests.
@@ -210,16 +236,22 @@ Cplex 12.6.x to 12.8.x
 OpenMPI 1.6.x, 1.8.x, 3.1.3
 \end{itemize}
 \end{itemize}
+
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
-The first step to using the ``Speed'' cluster is to request access. 
 
-Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
-including your ENCS account's username.
+After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
+``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
+cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
+%
+Faculty and staff may request the access directly.
+Students must include the following in their message:
 
-If you are a student, please include the name of your Supervisor or instructor
-as well as a statement from that person which indicates that you may have
-access to ``Speed''.
+\begin{itemize} 
+	\item GCS ENCS username
+	\item Name and email (CC) of the supervisor or instructor
+	\item Written request from the supervisor or instructor for the ENCS username to be granted access to ``Speed''
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \section{Job Management}
@@ -231,11 +263,15 @@ label/value to be replaced (the entire bracketed term needs replacement).
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
 
-Once your ENCS account has been granted access to ``Speed'',
-use your ENCS account credentials to create an SSH connection to 
+Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
+and ``What Speed is Not'' (\xs{sect:speed-is-not}).
+Once your GCS ENCS account has been granted access to ``Speed'',
+use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 
+% ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
+
 If you are connecting from home, and have a Mac or Linux system, in a
 terminal, this will connect you (on a single line):
 
@@ -247,20 +283,39 @@ ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
 Windows users can create SSH connections via PuTTY (or MobaXterm). 
 
 All users are expected to have a basic understanding of Linux and its 
-commonly used commands.
+commonly used commands. 
 
+% ------------------------------------------------------------------------------
 \subsubsection{Environment Set Up}
-\label{envsetup}
-After creating an SSH session to ``Speed'', you will need to source the scheduler file:
+\label{sect:envsetup}
 
+After creating an SSH connection to ``Speed'', you will need to source 
+the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
+Sourcing the settings file will set the environment variables required to 
+execute scheduler commands.
+
+Based on the UNIX shell type, choose one of the following commands to source
+the settings file. 
+
+csh/\tool{tcsh}:
 \begin{verbatim}
 source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
 \end{verbatim}
 
-If sourcing the settings file has been successful, you will now have access to 
-the scheduler commands. 
-For example, if, \texttt{qstat -f -u "*"}, returns something non-error related, 
-you are in business. 
+Bourne shell/\tool{bash}:
+\begin{verbatim}
+. /local/pkg/uge-8.6.3/root/default/common/settings.sh 
+\end{verbatim}
+
+In order to set up the default ENCS bash shell, executing the following command 
+is also required:
+\begin{verbatim}
+printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile 
+\end{verbatim}
+
+To verify that you have access to the scheduler commands execute 
+\texttt{qstat -f -u "*"}. If an error is returned, attempt sourcing 
+the settings file again.
 
 The next step is to copy a job template to your home directory and to set up your
 cluster-specific storage. Execute the following command from within your
@@ -271,33 +326,60 @@ prompt and press \texttt{Enter}.)
 cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
 \end{verbatim}
 
-\textbf{Tip:} Add the source command to your shell-startup environment. 
+\textbf{Tip:} Add the source command to your shell-startup script. 
 
-For \textbf{new ENCS Users}, and/ or those who don't have an \file{.tcshrc} 
-file, move a copy of the \file{.tcshrc} in \texttt{nul-uge}'s. home directory 
-to your home directory with:
+\textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
+If you would like to use \tool{bash}, please contact 
+\texttt{rt-ex-hpc AT encs.concordia.ca}.
 
+For \textbf{new ENCS Users}, and/or those who don't have a shell-startup script, 
+based on your shell type use one of the following commands to copy a start up script 
+from \texttt{nul-uge}'s. home directory to your home directory. (To move to your home
+directory, type \tool{cd} at the Linux prompt and press \texttt{Enter}.)
+
+csh/\tool{tcsh}:
 \begin{verbatim}
 cp /home/n/nul-uge/.tcshrc . 
 \end{verbatim}
 
-Users who already have an \file{.tcshrc} file, use a text editor, such as
+Bourne shell/\tool{bash}:
+\begin{verbatim}
+cp /home/n/nul-uge/.bashrc . 
+\end{verbatim}
+
+Users who already have a shell-startup script, use a text editor, such as
 \tool{vim} or \tool{emacs}, to add the source request to your existing
 shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
 
-Note that you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} file to be applied 
-(\textbf{important}).
+csh/\tool{tcsh}:
+Sample \file{.tcshrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if ($HOSTNAME == speed-submit.encs.concordia.ca) then
+   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
+endif
+\end{verbatim}
 
-If you use \tool{bash}, or another shell, please contact 
-\texttt{rt-ex-hpc AT encs.concordia.ca}.
+Bourne shell/\tool{bash}:
+Sample \file{.bashrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
+    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
+    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
+fi
+\end{verbatim}
+
+Note that you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
+(\textbf{important}).
 
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
 Preparing your job for submission is fairly straightforward. Editing a copy
 of the \file{template.sh} you moved into your home directory during
-\xs{envsetup} is a good place to start. You can also use a job script
+\xs{sect:envsetup} is a good place to start. You can also use a job script
 example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
 directory and base your job on it.
 
@@ -322,7 +404,7 @@ To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
 
 For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
 
-Directives that start with \verb|"$#"|, set the options for the cluster's 
+Directives that start with \verb|"#$"|, set the options for the cluster's 
 ``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
 provides the essentials:
 
@@ -449,31 +531,31 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 (you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
-    \caption{Source code for \file{tcsh.sh}}
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
+	\caption{Source code for \file{tcsh.sh}}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-This script sleeps on a node for 30 seconds, uses the 
-\tool{module} command to load the \texttt{gurobi/8.1.0} 
-environment, and then prints the list of loaded modules 
-into a file. Concentrating on the first 
-four lines, the first line is the shell declaration; the next three 
-lines are submission options passed to the scheduler. 
-The first, \texttt{-N}, attaches a name to the job (otherwise it is 
-called what the job script is called), the second, \texttt{-cwd},
-tells the scheduler to execute the job from the current working 
-directory, and not to use the default of your home directory (potentially 
-important for output-file placement), and the third, \texttt{-l h\_vmem}, 
-requests and assigns a 1GB of memory space to the job (this is an upper bound, and 
-jobs that attempt to use more will be terminated). Note that this third 
-option is \emph{not} optional (if you do not specify a memory space, 
-submission of the job will fail). Also notice the syntax that denotes a 
-scheduler option, the, \texttt{\#\$}.
+The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
+The lines that begin with \texttt{\#\$} are directives for the scheduler.
+
+\begin{itemize}
+	\item \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+\end{itemize}
+
+The script then:
+
+\begin{itemize}
+	\item Sleeps on a node for 30 seconds
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
+	\item Prints the list of loaded modules into a file
+\end{itemize}
 
 The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
-To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
-X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
+From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}. You will see,
+\texttt{"Your job X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
 to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
 something like this: 
 
@@ -611,7 +693,7 @@ that if you give a single number, that represents \emph{seconds}, not hours.
 The many \tool{qsub} options available are read with, \texttt{man qsub}. Also 
 note that \tool{qsub} options can be specified during the job-submission 
 command, and these \emph{override} existing script options (if present). The 
-syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but unlike in the script, 
+syntax is, \texttt{qsub [options] PATHTOSCRIPT}, but unlike in the script, 
 the options are specified without the leading \verb+#$+
 (e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
 
@@ -728,7 +810,6 @@ In \xf{fig:tmpdir.sh} is a sample script, using all three.
 	\label{fig:tmpdir.sh}
 \end{figure}
 
-
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
 
@@ -743,13 +824,71 @@ home directory:
 \item
 \texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
 \item
-\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized\_keys}
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}}
 file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
 \item
-Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
+Set file permissions of \texttt{authorized\_keys} to 600; of your NFS-mounted home
 to 700 (note that you likely will not have to do anything here, as most people
 will have those permissions by default). 
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Creating Virtual Environments}
+\label{sect:environments}
+
+The following documentation is specific to the \textbf{Speed} HPC Facility at the
+Gina Cody School of Engineering and Computer Science.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Anaconda}
+
+To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
+option when executing \texttt{conda create}. For example, to create an anaconda environment for 
+\texttt{ai\_user}, execute the following at the command line:
+
+\begin{verbatim}
+conda create --prefix /speed-scratch/a_user/myconda
+\end{verbatim}
+
+\vspace{10pt}
+\noindent
+\textbf{Note:} Without the \texttt{\-\-prefix} option, the \texttt{conda create} command creates the 
+environment in texttt{a\_user}'s home directory by default.
+\vspace{10pt}
+
+% ------------------------------------------------------------------------------
+\paragraph{List Environments.}
+
+To view your conda environments, type: \texttt{conda info --envs}
+
+\begin{verbatim}
+# conda environments:
+#
+base                  *  /encs/pkg/anaconda3-2019.07/root
+                         /speed-scratch/a_user/myconda
+\end{verbatim}      
+
+% ------------------------------------------------------------------------------
+\paragraph{Activate an Environment.}
+
+Activate the environment \texttt{\/speed\-scratch\/a\_user\/myconda} as follows
+\begin{verbatim}
+conda activate /speed-scratch/a_user/myconda
+\end{verbatim}
+After activating your environment, add \tool{pip} to your environment by using 
+\begin{verbatim}
+conda install pip
+\end{verbatim}
+This will install \tool{pip} and \tool{pip}'s dependencies, including python, 
+into the environment.
+
+\vspace{10pt}
+\noindent
+\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are used to install modules
+ from the python distribution while \texttt{conda install} installs modules from 
+ anaconda's repository.
+\vspace{10pt}
+
 
 % ------------------------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
@@ -767,9 +906,42 @@ important}), and are setting \api{\$TMPDIR} as the in-job location for the
 ``moment'' \file{rfile.out} file (in-job, because the last line of the script 
 copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
 Job progress can be monitored by examining the standard-out file (e.g.,
-\file{flu10000.o249}), and/or by examining the ``moment'' file in
-\file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running 
+\file{flu10000.o249}), and/or by examining the ``moment'' file in 
+\texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
 the job. \textbf{Caveat:} take care with journal-file file paths.
+
+% ------------------------------------------------------------------------------
+\subsection{Example Job: efficientdet}
+
+The following steps describing how to create an efficientdet environment on
+\emph{Speed}, were submitted by a member of Dr. Amer's research group.
+
+\begin{itemize}
+    \item 
+    Enter your ENCS user account's speed-scratch directory 
+    \verb!cd /speed-scratch/<encs_username>!
+    \item
+    load python \verb!module load python/3.8.3!
+    create virtual environment \verb!python3 -m venv <env_name>!
+    activate virtual environment \verb!source <env_name>/bin/activate.csh!
+    install DL packages for Efficientdet
+\end{itemize}
+\begin{verbatim}
+pip install tensorflow==2.7.0
+pip install lxml>=4.6.1
+pip install absl-py>=0.10.0
+pip install matplotlib>=3.0.3
+pip install numpy>=1.19.4
+pip install Pillow>=6.0.0
+pip install PyYAML>=5.1
+pip install six>=1.15.0
+pip install tensorflow-addons>=0.12
+pip install tensorflow-hub>=0.11
+pip install neural-structured-learning>=1.3.1
+pip install tensorflow-model-optimization>=0.5
+pip install Cython>=0.29.13
+pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
+\end{verbatim}
 
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
@@ -902,64 +1074,7 @@ And that there are no more GPUs available on that node (\texttt{hc:gpu=0}). Note
 that no more than two GPUs can be requested for any one job. 
 
 % ------------------------------------------------------------------------------
-\section{Creating Virtual Environments}
-\label{sect:environments}
-
-The following documentation is specific to the \textbf{Speed} HPC Facility at the
-Gina Cody School of Engineering and Computer Science.
-
-% ------------------------------------------------------------------------------
-\subsection{Anaconda}
-
-To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
-option when executing \texttt{conda create}. For example, to create an anaconda environment for 
-\texttt{ai\_user}, execute the following at the command line:
-
-\begin{verbatim}
-conda create --prefix /speed-scratch/a_user/myconda
-\end{verbatim}
-
-\vspace{10pt}
-\noindent
-\textbf{Note:} Without the \texttt{\-\-prefix} option, the \texttt{conda create} command creates the 
-environment in texttt{a\_user}'s home directory by default.
-\vspace{10pt}
-
-% ------------------------------------------------------------------------------
-\subsubsection{List Environments}
-
-To view your conda environments, type: \texttt{conda info --envs}
-
-\begin{verbatim}
-# conda environments:
-#
-base                  *  /encs/pkg/anaconda3-2019.07/root
-                         /speed-scratch/a_user/myconda
-\end{verbatim}      
-
-% ------------------------------------------------------------------------------
-\subsubsection{Activate an Environment}
-
-Activate the environment \texttt{\/speed\-scratch\/a\_user\/myconda} as follows
-\begin{verbatim}
-conda activate /speed-scratch/a_user/myconda
-\end{verbatim}
-After activating your environment, add \tool{pip} to your environment by using 
-\begin{verbatim}
-conda install pip
-\end{verbatim}
-This will install \tool{pip} and \tool{pip}'s dependencies, including python, 
-into the environment.
-
-\vspace{10pt}
-\noindent
-\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are used to install modules
- from the python distribution while \texttt{conda install} installs modules from 
- anaconda's repository.
-\vspace{10pt}
-
-% ------------------------------------------------------------------------------
-\subsection{CUDA}
+\subsubsection{CUDA}
 
 When calling \tool{CUDA} within job scripts, it is important to create a link to
 the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
@@ -994,38 +1109,6 @@ We have several versions of CUDA installed in:
 For CUDA to compile properly for the GPU queue, edit your Makefile 
 replacing \option{\/usr\/local\/cuda} with one of the above.
 
-% ------------------------------------------------------------------------------
-\subsection{efficientdet}
-
-The following steps describing how to create an efficientdet environment on
-\emph{Speed}, were submitted by a member of Dr. Amer's research group.
-
-\begin{itemize}
-    \item 
-    Enter your ENCS user account's speed-scratch directory 
-    \verb!cd /speed-scratch/<encs_username>!
-    \item
-    load python \verb!module load python/3.8.3!
-    create virtual environment \verb!python3 -m venv <env_name>!
-    activate virtual environment \verb!source <env_name>/bin/activate.csh!
-    install DL packages for Efficientdet
-\end{itemize}
-\begin{verbatim}
-pip install tensorflow==2.7.0
-pip install lxml>=4.6.1
-pip install absl-py>=0.10.0
-pip install matplotlib>=3.0.3
-pip install numpy>=1.19.4
-pip install Pillow>=6.0.0
-pip install PyYAML>=5.1
-pip install six>=1.15.0
-pip install tensorflow-addons>=0.12
-pip install tensorflow-hub>=0.11
-pip install neural-structured-learning>=1.3.1
-pip install tensorflow-model-optimization>=0.5
-pip install Cython>=0.29.13
-pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
-\end{verbatim}
 
 % ------------------------------------------------------------------------------
 \section{Conclusion}
@@ -1151,32 +1234,55 @@ Genomic alignment exercises
 % ------------------------------------------------------------------------------
 \section{History}
 
+% ------------------------------------------------------------------------------
 \subsection{Acknowledgments}
 \label{sect:scott-acks}
 
+\begin{itemize}
+	\item 
 The first 6 versions of this manual and early job script samples,
 Singularity testing and user support were produced/done by Dr.~Scott Bunnell
 during his time at Concordia as a part of the NAG/HPC group. We thank
 him for his contributions.
+	\item 
+The HTML version with devcontainer support was contributed by Anh H Nguyen.
+\end{itemize}
 
+% ------------------------------------------------------------------------------
+\subsection{Phase 3}
+
+Phase 3 had 4 vidpro nodes added from Dr.~Amer totalling 6x P6 and 6x V100
+GPUs added.
+
+% ------------------------------------------------------------------------------
+\subsection{Phase 2}
+
+Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes.
+The P6s replaced 4x of FirePro S7150.
+
+% ------------------------------------------------------------------------------
 \subsection{Phase 1}
 
 Phase 1 of Speed was of the following configuration:
 
 \begin{itemize}
 \item
-Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Sixteen, 32-core nodes, each with 512~GB of memory and approximately 1~TB of volatile-scratch disk space. 
 \item
-Five AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
+Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \section{Frequently Asked Questions}
 \label{sect:faqs}
 
-\subsection{"Disk quota exceeded" Error}
+% ------------------------------------------------------------------------------
+\subsection{``Disk quota exceeded'' Error}
+
+% ------------------------------------------------------------------------------
 \subsubsection{Probably Cause}
-The \texttt{"Disk quota exceeded"} Error occurs when your application has run out of disk space to write to. On Speed this error can be returned when:
+
+The \texttt{``Disk quota exceeded''} Error occurs when your application has run out of disk space to write to. On Speed this error can be returned when:
 \begin{enumerate}
 	\item
 The \texttt{/tmp} directory on the speed node your application is running on is full and cannot be written to.
@@ -1184,6 +1290,7 @@ The \texttt{/tmp} directory on the speed node your application is running on is 
 Your NFS-provided home is full and cannot be written to.
 \end{enumerate}
 
+% ------------------------------------------------------------------------------
 \subsubsection{Possible Solutions}
 
 \begin{enumerate}
@@ -1217,6 +1324,7 @@ The basic steps for this solution are:
 	\end{itemize}
 \end{enumerate}
 
+% ------------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{COMSOL}}
 
 \begin{itemize}
@@ -1269,7 +1377,6 @@ Compute Canada / Calcul Quebec
 % ------------------------------------------------------------------------------
 % Refs:
 %
-
 \nocite{aosa-book-vol1}
 \label{sect:bib}
 %\bibliographystyle{IEEEtran}
