@@ -15,7 +15,7 @@
 # How many GPUs (currently limit is set 2 max for Speed 5 and 17)
 #$ -l gpu=2
 
-# High value of memory requeted
+# High value of memory requested
 #$ -l h_vmem=20G
 #$ -ac hv=8
 
@@ -34,7 +34,7 @@
 # Run on GPU nodes like, `qsub -q g.q ...'
 #
 
-echo "$0 : about to run gcs-labdalabs-singulairty on Speed..."
+echo "$0 : about to run gcs-lambdalabs-singularity on Speed..."
 date
 
 # time will simply measure and print runtime
