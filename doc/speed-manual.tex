@@ -1277,7 +1277,7 @@ Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, 
 \label{sect:faqs}
 
 % ------------------------------------------------------------------------------
-\subsection{``Disk quota exceeded'' Error}
+\subsection{How to resolve``Disk quota exceeded'' errors?}
 
 % ------------------------------------------------------------------------------
 \subsubsection{Probably Cause}
@@ -1295,32 +1295,33 @@ Your NFS-provided home is full and cannot be written to.
 
 \begin{enumerate}
 	\item
-Use the \textbf{-cwd} job script option to make the directory that the job script
- is submitted from the \texttt{job working directory}, e.g., the directory to 
- store all output files in.
+Use the \textbf{-cwd} job script option to set the directory that the job script
+ is submitted from the \texttt{job working directory}. The \texttt{job working directory} is the directory that the job will write output files in.
 	\item
-As previously mentioned in this manual, it is recommended to use local disk space 
-for IO intensive operations, however, as the \texttt{/tmp} on the speed machines 
-is \texttt{1GB} in size it may be necessary for scripts to store temporary data 
+The use local disk space is generally recommended for IO intensive operations. However, as the size of \texttt{/tmp} on speed nodes 
+is \texttt{1GB} it can be necessary for scripts to store temporary data 
 elsewhere. 
-Review the documentation for the module(s) you are calling within your script to 
+Review the documentation for each module called within your script to 
 determine how to set working directories for that application. 
 The basic steps for this solution are:
 \begin{itemize}
 	\item
-	Review the documentation for the module(s) you are calling within your script to 
-	determine how to set working directories for that application.
+	Review the documentation on how to set working directories for 
+	each module called by the job script.
 	\item
-	Create a directory in speed-scratch for your temporary files. 
-	For example, to create a subdirector called \option{\/tmp} for user 
-	\textbf{a\_user}, in that user's speed-scratch directory execute:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/tmp}
+	Create a working directory in speed-scratch for output files. 
+	For example, this command creates subdirectory called \textbf{output}
+	 in \textbf{a\_user}'s speed-scratch directory:
+	 \begin{verbatim}
+		mkdir -m 750 /speed-scratch/a_user/output
+	 \end{verbatim}
 	\item
-	If necessary, create a subdirectory for recovery files as well:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/recovery}
+	To create a subdirectory for recovery files:
+	\begin{verbatim}
+		mkdir -m 750 /speed-scratch/a_user/recovery
+	\end{verbatim}
 	\item
-	Use the documentation to update your script(s) and command calls to use 
-	the working directories created in the previous steps.	
+	Update the job script to write output to the subdirectories you created in your speed\-scratch directory. For example, 	\textbf{\/speed\-scratch\/a\_user\/output}.
 	\end{itemize}
 \end{enumerate}
 
