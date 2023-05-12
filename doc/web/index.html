@@ -24,7 +24,7 @@
 <br />                       <span class='cmr-9'>Concordia University</span>
 <br />                     <span class='cmr-9'>Montreal, Quebec, Canada</span>
 <br />                 <a class='url' href='rt-ex-hpc~AT~encs.concordia.ca'><span class='cmtt-9'>rt-ex-hpc~AT~encs.concordia.ca</span></a><br /></div><br />
-<div class='date'><span class='cmbx-10'>Version 6.6-dev-06</span></div>
+<div class='date'><span class='cmbx-10'>Version 6.6-dev-07</span></div>
    <div class='thanks'><br /><a id='tk-1'></a><span class='thank-mark'><span class='tcrm-1000'>∗</span></span>The group acknowledges the initial manual version VI produced by Dr. Scott Bunnell while with
 us.</div></div>
    <section class='abstract' role='doc-abstract'> 
@@ -32,9 +32,9 @@ us.</div></div>
 <span class='cmbx-9'>Abstract</span>
 </h3>
      <!-- l. 68 --><p class='noindent'><span class='cmr-9'>This document primarily presents a quick start guide to the usage of the Gina Cody
-     </span><span class='cmr-9'>School of Engineering and Computer Science compute server farm called “Speed” – the
-     </span><span class='cmr-9'>GCS ENCS Speed cluster, managed by HPC/NAG of GCS ENCS, Concordia University,
-     </span><span class='cmr-9'>Montreal, Canada.</span>
+     School of Engineering and Computer Science compute server farm called “Speed” – the
+     GCS ENCS Speed cluster, managed by HPC/NAG of GCS ENCS, Concordia University,
+     Montreal, Canada.</span>
 </p>
 </section>
    <h3 class='likesectionHead' id='contents'><a id='x1-1000'></a>Contents</h3>
@@ -84,7 +84,7 @@ us.</div></div>
 <br />     <span class='subsectionToc'>A.3 <a href='#phase-1' id='QQ2-1-49'>Phase 2</a></span>
 <br />     <span class='subsectionToc'>A.4 <a href='#phase-2' id='QQ2-1-50'>Phase 1</a></span>
 <br />    <span class='sectionToc'>B <a href='#frequently-asked-questions' id='QQ2-1-51'>Frequently Asked Questions</a></span>
-<br />     <span class='subsectionToc'>B.1 <a href='#disk-quota-exceeded-error' id='QQ2-1-52'>“Disk quota exceeded” Error</a></span>
+<br />     <span class='subsectionToc'>B.1 <a href='#how-to-resolvedisk-quota-exceeded-errors' id='QQ2-1-52'>How to resolve“Disk quota exceeded” errors?</a></span>
 <br />      <span class='subsubsectionToc'>B.1.1 <a href='#probably-cause' id='QQ2-1-53'>Probably Cause</a></span>
 <br />      <span class='subsubsectionToc'>B.1.2 <a href='#possible-solutions' id='QQ2-1-54'>Possible Solutions</a></span>
 <br />      <span class='subsubsectionToc'>B.1.3 <a href='#example-of-setting-working-directories-for-comsol' id='QQ2-1-55'>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></a></span>
@@ -552,12 +552,12 @@ from <span class='cmtt-10'>/home/n/nul-uge</span>).
                                                                                
 <!-- l. 534 --><pre class='lstinputlisting' id='listing-1'><span class='label'><a id='x1-18002r1'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='cmitt-10'>!/</span></span><span style='color:#000000'><span class='cmitt-10'>encs</span></span><span style='color:#000000'><span class='cmitt-10'>/</span></span><span style='color:#000000'><span class='cmitt-10'>bin</span></span><span style='color:#000000'><span class='cmitt-10'>/</span></span><span style='color:#000000'><span class='cmitt-10'>tcsh</span></span> 
 <span class='label'><a id='x1-18003r2'></a></span> 
-<span class='label'><a id='x1-18004r3'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='tcit-1000'>$</span></span><span style='color:#000000'> <span class='cmitt-10'>-N </span><span class='cmitt-10'>qsub-test</span> 
+<span class='label'><a id='x1-18004r3'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='tcit-1000'>$</span></span><span style='color:#000000'> <span class='cmitt-10'>-N qsub-test</span> 
 </span><span class='label'><a id='x1-18005r4'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='tcit-1000'>$</span></span><span style='color:#000000'> <span class='cmitt-10'>-cwd</span> 
-</span><span class='label'><a id='x1-18006r5'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='tcit-1000'>$</span></span><span style='color:#000000'> <span class='cmitt-10'>-l </span><span class='cmitt-10'>h_vmem=1G</span> 
+</span><span class='label'><a id='x1-18006r5'></a></span><span style='color:#000000'><span class='cmitt-10'>#</span></span><span style='color:#000000'><span class='tcit-1000'>$</span></span><span style='color:#000000'> <span class='cmitt-10'>-l h_vmem=1G</span> 
 </span><span class='label'><a id='x1-18007r6'></a></span> 
 <span class='label'><a id='x1-18008r7'></a></span><span style='color:#000000'><span class='cmtt-10'>sleep</span></span><span style='color:#000000'> <span class='cmtt-10'>30</span> 
-</span><span class='label'><a id='x1-18009r8'></a></span><span style='color:#000000'><span class='cmtt-10'>module</span></span><span style='color:#000000'> <span class='cmtt-10'>load </span><span class='cmtt-10'>gurobi/8.1.0</span> 
+</span><span class='label'><a id='x1-18009r8'></a></span><span style='color:#000000'><span class='cmtt-10'>module</span></span><span style='color:#000000'> <span class='cmtt-10'>load gurobi/8.1.0</span> 
 </span><span class='label'><a id='x1-18010r9'></a></span><span style='color:#000000'><span class='cmtt-10'>module</span></span><span style='color:#000000'> <span class='cmtt-10'>list</span></span>
 </pre>
 <figcaption class='caption'><span class='id'>Figure 1: </span><span class='content'>Source code for <a class='url' href='tcsh.sh'><span class='cmtt-10'>tcsh.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-180111  -->
@@ -574,7 +574,7 @@ that begin with <span class='cmtt-10'>#</span><span class='tctt-1000'>$ </span>a
      <li class='itemize'><span class='cmtt-10'>-cwd </span>tells the scheduler to execute the job from the current working directory
      </li>
      <li class='itemize'><span class='cmtt-10'>-l h_vmem=1GB </span>requests and assigns 1GB of memory to the job. CPU jobs <span class='cmti-10'>require </span>the <span class='cmtt-10'>-l
-     </span><span class='cmtt-10'>h_vmem </span>option to be set.</li></ul>
+     h_vmem </span>option to be set.</li></ul>
 <!-- l. 548 --><p class='indent'>   The script then:
 </p>
      <ul class='itemize1'>
@@ -585,8 +585,8 @@ that begin with <span class='cmtt-10'>#</span><span class='tctt-1000'>$ </span>a
      <li class='itemize'>Prints the list of loaded modules into a file</li></ul>
 <!-- l. 556 --><p class='indent'>   The scheduler command, <span class='cmtt-10'>qsub</span>, is used to submit (non-interactive) jobs. From an ssh session on
 speed-submit, submit this job with <span class='cmtt-10'>qsub ./tcsh.sh</span>. You will see, <span class='cmtt-10'>"Your job X ("qsub-test") has
-</span><span class='cmtt-10'>been submitted"</span>. The command, <span class='cmtt-10'>qstat</span>, can be used to look at the status of the cluster: <span class='cmtt-10'>qstat -f
-</span><span class='cmtt-10'>-u "*"</span>. You will see something like this:
+been submitted"</span>. The command, <span class='cmtt-10'>qstat</span>, can be used to look at the status of the cluster: <span class='cmtt-10'>qstat -f
+-u "*"</span>. You will see something like this:
                                                                                
 
                                                                                
@@ -706,7 +706,7 @@ generally useful:
      options can be specified during the job-submission command, and these <span class='cmti-10'>override </span>existing
      script options (if present). The syntax is, <span class='cmtt-10'>qsub [options] PATHTOSCRIPT</span>, but unlike in
      the script, the options are specified without the leading <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>#$</span></span></span> (e.g., <span class='cmtt-10'>qsub -N qsub-test
-     </span><span class='cmtt-10'>-cwd -l h_vmem=1G ./tcsh.sh</span>).
+     -cwd -l h_vmem=1G ./tcsh.sh</span>).
 </li></ul>
                                                                                
 
@@ -773,7 +773,7 @@ output.
 <!-- l. 772 --><p class='noindent'>Job sessions can be interactive, instead of batch (script) based. Such sessions can be useful for testing
 and optimising code and resource requirements prior to batch submission. To request an interactive
 job session, use, <span class='cmtt-10'>qlogin [options]</span>, similarly to a <span class='cmtt-10'>qsub </span>command-line job (e.g., <span class='cmtt-10'>qlogin -N
-</span><span class='cmtt-10'>qlogin-test -l h_vmem=1G</span>). Note that the options that are available for <span class='cmtt-10'>qsub </span>are not necessarily
+qlogin-test -l h_vmem=1G</span>). Note that the options that are available for <span class='cmtt-10'>qsub </span>are not necessarily
 available for <span class='cmtt-10'>qlogin</span>, notably, <span class='cmtt-10'>-cwd</span>, and, <span class='cmtt-10'>-v</span>.
 </p><!-- l. 781 --><p class='noindent'>
 </p>
@@ -805,16 +805,16 @@ more useful are <span class='cmtt-10'>TMPDIR</span>, <span class='cmtt-10'>SGE_O
                                                                                
 <!-- l. 808 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-24002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
 <span class='label'><a id='x1-24003r2'></a></span> 
-<span class='label'><a id='x1-24004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-N </span><span class='cmitt-10x-x-80'>envs</span> 
+<span class='label'><a id='x1-24004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-N envs</span> 
 </span><span class='label'><a id='x1-24005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-cwd</span> 
-</span><span class='label'><a id='x1-24006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-pe </span><span class='cmitt-10x-x-80'>smp </span><span class='cmitt-10x-x-80'>8</span> 
-</span><span class='label'><a id='x1-24007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-l </span><span class='cmitt-10x-x-80'>h_vmem=32G</span> 
+</span><span class='label'><a id='x1-24006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-pe smp 8</span> 
+</span><span class='label'><a id='x1-24007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-l h_vmem=32G</span> 
 </span><span class='label'><a id='x1-24008r7'></a></span> 
 <span class='label'><a id='x1-24009r8'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
 </span><span class='label'><a id='x1-24010r9'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>input</span> 
-</span><span class='label'><a id='x1-24011r10'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/references/ </span><span class='cmtt-8'>input/</span> 
+</span><span class='label'><a id='x1-24011r10'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/references/ input/</span> 
 </span><span class='label'><a id='x1-24012r11'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>results</span> 
-</span><span class='label'><a id='x1-24013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>STAR</span></span><span style='color:#000000'> <span class='cmtt-8'>--inFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/input </span><span class='cmtt-8'>--parallel </span><span class='tctt-0800'>$</span><span class='cmtt-8'>NSLOTS </span><span class='cmtt-8'>--outFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results</span> 
+</span><span class='label'><a id='x1-24013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>STAR</span></span><span style='color:#000000'> <span class='cmtt-8'>--inFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/input --parallel </span><span class='tctt-0800'>$</span><span class='cmtt-8'>NSLOTS --outFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results</span> 
 </span><span class='label'><a id='x1-24014r13'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/processed/</span></span>
 </pre>
 <figcaption class='caption'><span class='id'>Figure 2: </span><span class='content'>Source code for <a class='url' href='tmpdir.sh'><span class='cmtt-10'>tmpdir.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-240152  -->
@@ -908,16 +908,16 @@ conda install pip
                                                                                
 <!-- l. 897 --><pre class='lstinputlisting' id='listing-3'><span class='label'><a id='x1-30002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
 <span class='label'><a id='x1-30003r2'></a></span> 
-<span class='label'><a id='x1-30004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-N </span><span class='cmitt-10x-x-80'>flu10000</span> 
+<span class='label'><a id='x1-30004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-N flu10000</span> 
 </span><span class='label'><a id='x1-30005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-cwd</span> 
-</span><span class='label'><a id='x1-30006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-m </span><span class='cmitt-10x-x-80'>bea</span> 
-</span><span class='label'><a id='x1-30007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-pe </span><span class='cmitt-10x-x-80'>smp </span><span class='cmitt-10x-x-80'>8</span> 
-</span><span class='label'><a id='x1-30008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-l </span><span class='cmitt-10x-x-80'>h_vmem=160G</span> 
+</span><span class='label'><a id='x1-30006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-m bea</span> 
+</span><span class='label'><a id='x1-30007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-pe smp 8</span> 
+</span><span class='label'><a id='x1-30008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='tcit-0800'>$</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>-l h_vmem=160G</span> 
 </span><span class='label'><a id='x1-30009r8'></a></span> 
-<span class='label'><a id='x1-30010r9'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>load </span><span class='cmtt-8'>ansys/19.0/default</span> 
+<span class='label'><a id='x1-30010r9'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>load ansys/19.0/default</span> 
 </span><span class='label'><a id='x1-30011r10'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
 </span><span class='label'><a id='x1-30012r11'></a></span> 
-<span class='label'><a id='x1-30013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>fluent</span></span><span style='color:#000000'> <span class='cmtt-8'>3ddp </span><span class='cmtt-8'>-g </span><span class='cmtt-8'>-i </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/fluentdata/info.jou </span><span class='cmtt-8'>-sgepe </span><span class='cmtt-8'>smp </span><span class='cmtt-8'>&gt; </span><span class='cmtt-8'>call.txt</span> 
+<span class='label'><a id='x1-30013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>fluent</span></span><span style='color:#000000'> <span class='cmtt-8'>3ddp -g -i </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp &gt; call.txt</span> 
 </span><span class='label'><a id='x1-30014r13'></a></span> 
 <span class='label'><a id='x1-30015r14'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SGE_O_WORKDIR/fluentparallel/</span></span>
 </pre>
@@ -928,7 +928,7 @@ conda install pip
    </figure>
 <!-- l. 902 --><p class='indent'>   The job script in Figure <a href='#-source-code-for-fluentsh'>3<!-- tex4ht:ref: fig:fluent.sh  --></a> runs Fluent in parallel over 32 cores. Of note, we have requested e-mail
 notifications (<span class='cmtt-10'>-m</span>), are defining the parallel environment for, <span class='cmtt-10'>fluent</span>, with, <span class='cmtt-10'>-sgepe smp </span>(<span class='cmbx-10'>very
-</span><span class='cmbx-10'>important</span>), and are setting <span class='tctt-1000'>$</span><span class='cmtt-10'>TMPDIR </span>as the in-job location for the “moment” <a class='url' href='rfile.out'><span class='cmtt-10'>rfile.out</span></a> file (in-job,
+important</span>), and are setting <span class='tctt-1000'>$</span><span class='cmtt-10'>TMPDIR </span>as the in-job location for the “moment” <a class='url' href='rfile.out'><span class='cmtt-10'>rfile.out</span></a> file (in-job,
 because the last line of the script copies everything from <span class='tctt-1000'>$</span><span class='cmtt-10'>TMPDIR </span>to a directory in the user’s
 NFS-mounted home). Job progress can be monitored by examining the standard-out file (e.g.,
 <a class='url' href='flu10000.o249'><span class='cmtt-10'>flu10000.o249</span></a>), and/or by examining the “moment” file in <span class='cmtt-10'>/disk/nobackup/&lt;yourjob&gt; </span>(hint: it
@@ -971,7 +971,7 @@ pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=Python
    <h4 class='subsectionHead' id='java-jobs'><span class='titlemark'>2.14   </span> <a id='x1-320002.14'></a>Java Jobs</h4>
 <!-- l. 949 --><p class='noindent'>Jobs that call <span class='cmtt-10'>java </span>have a memory overhead, which needs to be taken into account when assigning a
 value to <span class='cmtt-10'>h_vmem</span>. Even the most basic <span class='cmtt-10'>java </span>call, <span class='cmtt-10'>java -Xmx1G -version</span>, will need to have, <span class='cmtt-10'>-l
-</span><span class='cmtt-10'>h_vmem=5G</span>, with the 4-GB difference representing the memory overhead. Note that this memory
+h_vmem=5G</span>, with the 4-GB difference representing the memory overhead. Note that this memory
 overhead grows proportionally with the value of <span class='cmtt-10'>-Xmx</span>. To give you an idea, when <span class='cmtt-10'>-Xmx </span>has a
 value of 100G, <span class='cmtt-10'>h_vmem </span>has to be at least 106G; for 200G, at least 211G; for 300G, at least
 314G.
@@ -1103,7 +1103,7 @@ the following in your Makefile.
 </pre>
 <!-- l. 1086 --><p class='nopar'>
 </p><!-- l. 1088 --><p class='indent'>   In your job script, specify the version of <span class='cmtt-10'>gcc </span>to use prior to calling cuda. For example: <span class='cmtt-10'>module
-</span><span class='cmtt-10'>load gcc/8.4 </span>or <span class='cmtt-10'>module load gcc/9.3</span>
+load gcc/8.4 </span>or <span class='cmtt-10'>module load gcc/9.3</span>
 </p><!-- l. 1095 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='special-notes-for-sending-cuda-jobs-to-the-gpu-queue'><span class='titlemark'>2.15.2   </span> <a id='x1-350002.15.2'></a>Special Notes for sending CUDA jobs to the GPU Queue</h5>
@@ -1265,7 +1265,7 @@ S7150.
    <h3 class='sectionHead' id='frequently-asked-questions'><span class='titlemark'>B   </span> <a id='x1-45000B'></a>Frequently Asked Questions</h3>
 <!-- l. 1280 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='disk-quota-exceeded-error'><span class='titlemark'>B.1   </span> <a id='x1-46000B.1'></a>“Disk quota exceeded” Error</h4>
+   <h4 class='subsectionHead' id='how-to-resolvedisk-quota-exceeded-errors'><span class='titlemark'>B.1   </span> <a id='x1-46000B.1'></a>How to resolve“Disk quota exceeded” errors?</h4>
 <!-- l. 1283 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='probably-cause'><span class='titlemark'>B.1.1   </span> <a id='x1-47000B.1.1'></a>Probably Cause</h5>
@@ -1284,66 +1284,80 @@ to. On Speed this error can be returned when:
    <h5 class='subsubsectionHead' id='possible-solutions'><span class='titlemark'>B.1.2   </span> <a id='x1-48000B.1.2'></a>Possible Solutions</h5>
 <!-- l. 1296 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-48002x1'>Use the <span class='cmbx-10'>-cwd </span>job script option to make the directory that the job script is submitted
-     from the <span class='cmtt-10'>job working directory</span>, e.g., the directory to store all output files in.
+<li class='enumerate' id='x1-48002x1'>Use the <span class='cmbx-10'>-cwd </span>job script option to set the directory that the job script is submitted from
+     the <span class='cmtt-10'>job working directory</span>. The <span class='cmtt-10'>job working directory </span>is the directory that the job
+     will write output files in.
      </li>
 <li class='enumerate' id='x1-48004x2'>
-     <!-- l. 1302 --><p class='noindent'>As previously mentioned in this manual, it is recommended to use local disk space
-     for IO intensive operations, however, as the <span class='cmtt-10'>/tmp </span>on the speed machines is <span class='cmtt-10'>1GB </span>in
-     size it may be necessary for scripts to store temporary data elsewhere. Review the
-     documentation for the module(s) you are calling within your script to determine how to
-     set working directories for that application. The basic steps for this solution are:
+     <!-- l. 1301 --><p class='noindent'>The use local disk space is generally recommended for IO intensive operations. However, as the
+     size of <span class='cmtt-10'>/tmp </span>on speed nodes is <span class='cmtt-10'>1GB </span>it can be necessary for scripts to store temporary data
+     elsewhere. Review the documentation for each module called within your script to determine
+     how to set working directories for that application. The basic steps for this solution are:
      </p>
          <ul class='itemize1'>
-         <li class='itemize'>Review the documentation for the module(s) you are calling within your script to
-         determine how to set working directories for that application.
+         <li class='itemize'>Review the documentation on how to set working directories for each module called
+         by the job script.
          </li>
-         <li class='itemize'>Create a directory in speed-scratch for your temporary files. For example, to create a
-         subdirector called <span class='cmtt-10'>tmp </span>for user <span class='cmbx-10'>a_user</span>, in that user’s speed-scratch directory execute:
-         <span class='cmbx-10'>mkdir m 750 speedscratcha_usertmp</span>
-         </li>
-         <li class='itemize'>If  necessary,  create  a  subdirectory  for  recovery  files  as  well:  <span class='cmbx-10'>mkdir  m  750
-         </span><span class='cmbx-10'>speedscratcha_userrecovery</span>
-         </li>
-         <li class='itemize'>Use  the  documentation  to  update  your  script(s)  and  command  calls  to  use  the
-         working directories created in the previous steps.</li></ul>
-     </li></ol>
+         <li class='itemize'>
+         <!-- l. 1312 --><p class='noindent'>Create a working directory in speed-scratch for output files. For example, this command
+         creates subdirectory called <span class='cmbx-10'>output </span>in <span class='cmbx-10'>a_user</span>’s speed-scratch directory:
                                                                                
 
                                                                                
-<!-- l. 1328 --><p class='noindent'>
+</p>
+         <pre class='verbatim' id='verbatim-35'>
+         mkdir -m 750 /speed-scratch/a_user/output
+          
+</pre>
+         <!-- l. 1317 --><p class='nopar'>
+         </p></li>
+         <li class='itemize'>
+         <!-- l. 1319 --><p class='noindent'>To create a subdirectory for recovery files:
+                                                                               
+
+                                                                               
+</p>
+         <pre class='verbatim' id='verbatim-36'>
+         mkdir -m 750 /speed-scratch/a_user/recovery
+</pre>
+         <!-- l. 1322 --><p class='nopar'>
+         </p></li>
+         <li class='itemize'>Update the job script to write output to the subdirectories you created in your
+         <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>speed-scratch</span></span></span> directory, e.g., <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>/speed-scratch/a_user/output</span></span></span>.</li></ul>
+     </li></ol>
+<!-- l. 1329 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='example-of-setting-working-directories-for-comsol'><span class='titlemark'>B.1.3   </span> <a id='x1-49000B.1.3'></a>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></h5>
      <ul class='itemize1'>
      <li class='itemize'>
-     <!-- l. 1332 --><p class='noindent'>Create directories for recovery, temporary, and configuration files. For example, to create these
+     <!-- l. 1333 --><p class='noindent'>Create directories for recovery, temporary, and configuration files. For example, to create these
      directories for <span class='cmbx-10'>a_user</span>:
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-35'>
+     <pre class='verbatim' id='verbatim-37'>
      mkdir -m 750 -p /speed-scratch/a_user/comsol/{recovery,tmp,config}
 </pre>
-     <!-- l. 1336 --><p class='nopar'>
+     <!-- l. 1337 --><p class='nopar'>
      </p></li>
      <li class='itemize'>
-     <!-- l. 1338 --><p class='noindent'>Add the following command switches to the COMSOL command to use the directories created
+     <!-- l. 1339 --><p class='noindent'>Add the following command switches to the COMSOL command to use the directories created
      for <span class='cmbx-10'>a_user </span>above:
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-36'>
+     <pre class='verbatim' id='verbatim-38'>
      -recoverydir /speed-scratch/a_user/comsol/recovery
      -tmpdir /speed-scratch/a_user/comsol/tmp
      -configuration/speed-scratch/a_user/comsol/config
 </pre>
-     <!-- l. 1344 --><p class='nopar'></p></li></ul>
-<!-- l. 1348 --><p class='noindent'>
+     <!-- l. 1345 --><p class='nopar'></p></li></ul>
+<!-- l. 1349 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-50000C'></a>Sister Facilities</h3>
-<!-- l. 1350 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
+<!-- l. 1351 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
 research group and needs, they might be available to you. They are not managed by HPC/NAG of
 AITS, so contact their respective representatives.
 </p>
@@ -1384,12 +1398,12 @@ AITS, so contact their respective representatives.
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[3]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xfingerprinting-mal-traffic'></a><span class='cmr-9'>Amine  Boukhtouta,  Nour-Eddine  Lakhdari,  Serguei A.  Mokhov,  and  Mourad  Debbabi.
-    </span><span class='cmr-9'>Towards fingerprinting malicious traffic.  In </span><span class='cmti-9'>Proceedings of ANT’13</span><span class='cmr-9'>, volume 19, pages 548–555.
-    </span><span class='cmr-9'>Elsevier, June 2013.</span>
+    Towards fingerprinting malicious traffic.  In </span><span class='cmti-9'>Proceedings of ANT’13</span><span class='cmr-9'>, volume 19, pages 548–555.
+    Elsevier, June 2013.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[4]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xaosa-book-vol1'></a><span class='cmr-9'>Amy  Brown  and  Greg  Wilson,  editors.    </span><span class='cmti-9'>The  Architecture  of  Open  Source  Applications:
-    </span><span class='cmti-9'>Elegance, Evolution, and a Few Fearless Hacks</span><span class='cmr-9'>, volume I.  aosabook.org, March 2012.  Online at</span>
+    Elegance, Evolution, and a Few Fearless Hacks</span><span class='cmr-9'>, volume I.  aosabook.org, March 2012.  Online at</span>
     <a class='url' href='http://aosabook.org'><span class='cmtt-9'>http://aosabook.org</span></a><span class='cmr-9'>.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
@@ -1397,44 +1411,44 @@ AITS, so contact their respective representatives.
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[6]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmarfcat-sate2010-nist'></a><span class='cmr-9'>Serguei A.  Mokhov.     The  use  of  machine  learning  with  signal-  and  NLP  processing
-    </span><span class='cmr-9'>of  source  code  to  fingerprint,  detect,  and  classify  vulnerabilities  and  weaknesses  with
-    </span><span class='cmr-9'>MARFCAT.       Technical   Report   NIST   SP   500-283,   NIST,   October   2011.       Report:</span>
+    of  source  code  to  fingerprint,  detect,  and  classify  vulnerabilities  and  weaknesses  with
+    MARFCAT.       Technical   Report   NIST   SP   500-283,   NIST,   October   2011.       Report:</span>
     <a class='url' href='http://www.nist.gov/manuscript-publication-search.cfm?pub_id=909407'><span class='cmtt-9'>http://www.nist.gov/manuscript-publication-search.cfm?pub_id=909407</span></a><span class='cmr-9'>, online e-print at</span>
     <a class='url' href='http://arxiv.org/abs/1010.2511'><span class='cmtt-9'>http://arxiv.org/abs/1010.2511</span></a><span class='cmr-9'>.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[7]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmokhov-phd-thesis-2013'></a><span class='cmr-9'>Serguei A. Mokhov. </span><span class='cmti-9'>Intensional Cyberforensics</span><span class='cmr-9'>. PhD thesis, Department of Computer Science
-    </span><span class='cmr-9'>and Software Engineering, Concordia University, Montreal, Canada, September 2013.  Online at</span>
+    and Software Engineering, Concordia University, Montreal, Canada, September 2013.  Online at</span>
     <a class='url' href='http://arxiv.org/abs/1312.0466'><span class='cmtt-9'>http://arxiv.org/abs/1312.0466</span></a><span class='cmr-9'>.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[8]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmac-spoofer-analyzer-detail-fps2014'></a><span class='cmr-9'>Serguei A. Mokhov, Michael J. Assels, Joey Paquet, and Mourad Debbabi. Automating MAC
-    </span><span class='cmr-9'>spoofer evidence gathering and encoding for investigations.  In Frederic Cuppens et al., editors,
+    spoofer evidence gathering and encoding for investigations.  In Frederic Cuppens et al., editors,
     </span><span class='cmti-9'>Proceedings of The 7th International Symposium on Foundations &amp; Practice of Security (FPS’14)</span><span class='cmr-9'>,
-    </span><span class='cmr-9'>LNCS 8930, pages 168–183. Springer, November 2014. Full paper.</span>
+    LNCS 8930, pages 168–183. Springer, November 2014. Full paper.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
   <span class='cmr-9'>[9]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmac-spoofer-analyzer-intro-c3s2e2014'></a><span class='cmr-9'>Serguei A. Mokhov, Michael J. Assels, Joey Paquet, and Mourad Debbabi. Toward automated
-    </span><span class='cmr-9'>MAC spoofer investigations.  In </span><span class='cmti-9'>Proceedings of C3S2E’14</span><span class='cmr-9'>, pages 179–184. ACM, August 2014.
-    </span><span class='cmr-9'>Short paper.</span>
+    MAC spoofer investigations.  In </span><span class='cmti-9'>Proceedings of C3S2E’14</span><span class='cmr-9'>, pages 179–184. ACM, August 2014.
+    Short paper.</span>
                                                                                
 
                                                                                
     </p>
     <p class='bibitem'><span class='biblabel'>
  <span class='cmr-9'>[10]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xspeed-intro-preso'></a><span class='cmr-9'>Serguei A.      Mokhov      and      Scott      Bunnell.                 Speed      server      farm:
-    </span><span class='cmr-9'>Gina      Cody      School      of      ENCS      HPC      facility.               [online],      2018–2019.</span>
+    Gina      Cody      School      of      ENCS      HPC      facility.               [online],      2018–2019.</span>
     <a class='url' href='https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis'><span class='cmtt-9'>https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis</span></a><span class='cmr-9'>.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
  <span class='cmr-9'>[11]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmarfcat-nlp-ai2014'></a><span class='cmr-9'>Serguei A. Mokhov, Joey Paquet, and Mourad Debbabi. The use of NLP techniques in static
-    </span><span class='cmr-9'>code analysis to detect weaknesses and vulnerabilities.  In Maria Sokolova and Peter van Beek,
-    </span><span class='cmr-9'>editors, </span><span class='cmti-9'>Proceedings of Canadian Conference on AI’14</span><span class='cmr-9'>, volume 8436 of </span><span class='cmti-9'>LNAI</span><span class='cmr-9'>, pages 326–332.
-    </span><span class='cmr-9'>Springer, May 2014. Short paper.</span>
+    code analysis to detect weaknesses and vulnerabilities.  In Maria Sokolova and Peter van Beek,
+    editors, </span><span class='cmti-9'>Proceedings of Canadian Conference on AI’14</span><span class='cmr-9'>, volume 8436 of </span><span class='cmti-9'>LNAI</span><span class='cmr-9'>, pages 326–332.
+    Springer, May 2014. Short paper.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
  <span class='cmr-9'>[12]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xniksirat2020'></a><span class='cmr-9'>Parna Niksirat, Adriana Daca, and Krzysztof Skonieczny.  The effects of reduced-gravity on
-    </span><span class='cmr-9'>planetary rover mobility. </span><span class='cmti-9'>International Journal of Robotics Research</span><span class='cmr-9'>, 39(7):797–811, 2020.</span>
+    planetary rover mobility. </span><span class='cmti-9'>International Journal of Robotics Research</span><span class='cmr-9'>, 39(7):797–811, 2020.</span>
     </p>
     <p class='bibitem'><span class='biblabel'>
  <span class='cmr-9'>[13]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xaosa-book-vol1-bash'></a><span class='cmr-9'>Chet    Ramey.          The    Bourne-Again    Shell.          In    Brown    and    Wilson    </span><span class='cite'><span class='cmr-9'>[</span><a href='#Xaosa-book-vol1'><span class='cmr-9'>4</span></a><span class='cmr-9'>]</span></span><span class='cmr-9'>.</span>
@@ -1446,13 +1460,10 @@ AITS, so contact their respective representatives.
     </p>
     <p class='bibitem'><span class='biblabel'>
  <span class='cmr-9'>[15]</span><span class='bibsp'><span class='cmr-9'>   </span></span></span><a id='Xmarf'></a><span class='cmr-9'>The   MARF   Research   and   Development   Group.      The   Modular   Audio   Recognition
-    </span><span class='cmr-9'>Framework   and   its   Applications.        [online],   2002–2014.        </span><a class='url' href='http://marf.sf.net'><span class='cmtt-9'>http://marf.sf.net</span></a>  <span class='cmr-9'>and</span>
+    Framework   and   its   Applications.        [online],   2002–2014.        </span><a class='url' href='http://marf.sf.net'><span class='cmtt-9'>http://marf.sf.net</span></a>  <span class='cmr-9'>and</span>
     <a class='url' href='http://arxiv.org/abs/0905.1235'><span class='cmtt-9'>http://arxiv.org/abs/0905.1235</span></a><span class='cmr-9'>, last viewed May 2015.</span>
 </p>
     </div>
-                                                                               
-
-                                                                               
     
 </body> 
 </html>
