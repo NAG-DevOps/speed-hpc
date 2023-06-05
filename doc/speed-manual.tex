@@ -272,15 +272,22 @@ use your GCS ENCS account credentials to create an SSH connection to
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
 
-If you are connecting from home, and have a Mac or Linux system, in a
-terminal, this will connect you (on a single line):
+Requirements to create connections to Speed:
+\begin{enumerate}
+	\item
+An active \textbf{ENCS user account} which has permission to connect to Speed.
+	\item
+If you are off campus, an active connection to Concordia's VPN. Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
+	\item
+Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
+\end{enumerate}
+
+Open up a terminal window and type in the following SSH command being sure to replace
+\verb!<ENCSusername>! with your ENCS account's username.
 
 \begin{verbatim}
-ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
-  <ENCSusername>@speed.encs.concordia.ca
+ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
-
-Windows users can create SSH connections via PuTTY (or MobaXterm). 
 
 All users are expected to have a basic understanding of Linux and its 
 commonly used commands. 
@@ -1275,6 +1282,38 @@ Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, 
 % ------------------------------------------------------------------------------
 \section{Frequently Asked Questions}
 \label{sect:faqs}
+
+% ------------------------------------------------------------------------------
+\subsection{How to use the ``bash shell'' on Speed?}
+
+This section describes how to use the ``bash shell'' on Speed. Review \autoref{sect:envsetup} to ensure that your bash enviroment is set up.
+% ------------------------------------------------------------------------------
+
+\subsubsection{How do I set bash as my login shell?}
+In order to set your login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
+To make this change, create a ticket with the Service Desk (or email help at concordia.ca) to request that bash become your default login shell for your ENCS user account on all GCS servers.
+
+\subsubsection{How do I move into a bash shell on Speed?}
+To move to the bash shell, type \textbf{bash} at the command prompt.
+For example:
+\begin{verbatim}
+	[speed-27] [/home/a/a_user] > bash
+	bash-4.4$ echo $0
+	bash
+\end{verbatim}	
+
+Note how the command prompt changed from \verb![speed-27] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
+
+\subsubsection{How do I run scripts written in bash on Speed?}
+To execute bash scripts on Speed:
+\begin{enumerate}
+	\item 
+Ensure that the shebang of your bash job script is \verb!#!/encs/bin/bash!
+	\item 
+Use the qsub command to submit your job script to the scheduler.
+\end{enumerate}
+
+The Speed GitHub contains a sample \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh}{bash job script}.  
 
 % ------------------------------------------------------------------------------
 \subsection{How to resolve``Disk quota exceeded'' errors?}
