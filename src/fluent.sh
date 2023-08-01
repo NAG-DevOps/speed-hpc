@@ -1,10 +1,14 @@
 #!/encs/bin/tcsh
 
-#$ -N flu10000
-#$ -cwd
-#$ -m bea
-#$ -pe smp 8
-#$ -l h_vmem=160G
+#SBATCH --job-name=flu10000    ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./             ## Use currect directory as working directory
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      ## Request 8 cpus
+#SBATCH --mem=160G             ## Assign 160G memory per node 
+
 
 module load ansys/19.0/default
 cd $TMPDIR
