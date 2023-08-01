@@ -4,12 +4,13 @@
 ## Job Scheduler options 
 ##
 
-#$ -N speed-manual # job name
-#$ -cwd            # Run from directory that script is in, e.g., your speed-scratch directory
-#$ -m bea          # Email notifications at job's start and end, or on abort
-#$ -pe smp 2       # Request 2 slots from parellel environment 'smp'
-#$ -l h_vmem=1G    # set resource value h_vmem (hard virtual memory size) to 1G
-                
+#SBATCH --job-name=speed-manual ## Give the job a name
+#SBATCH --mail-type=ALL         ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./              ## Use currect directory as working directory
+#SBATCH --cpus-per-task=2       ## Request 2 cpus
+#SBATCH --mem=1G                ## Assign memory per node 
+
 ##
 ## Job to run
 ##
