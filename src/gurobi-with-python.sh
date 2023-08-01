@@ -9,11 +9,15 @@
 ## or create it inside $TMPDIR on fly as a part of your job
 #####################################################################################################################
 
-#$ -N MY_JOB
-#$ -cwd
-#$ -m bea
-#$ -pe smp 8
-#$ -l h_vmem=150G
+## SLURM options
+
+#SBATCH --job-name=gurobi-with-python ## Give the job a name
+#SBATCH --mail-type=ALL               ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./                    ## Use currect directory as working directory (default)
+#SBATCH --cpus-per-task=8             ## Request 8 cpus
+#SBATCH --mem=150G                    ## Assign memory per node 
+
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default

@@ -9,30 +9,18 @@
 ## Job scheduler options
 ##
 
-# Run from the current directory where this script is
-#$ -cwd
-
-# How many GPUs (currently limit is set 2 max for Speed 5 and 17)
-#$ -l gpu=2
-
-# High value of memory requested
-#$ -l h_vmem=20G
-#$ -ac hv=8
-
-# Number of cores requested (approx).
-# Be conservative
-#$ -pe smp 4
-
-# Email notifications
-#$ -m bea
+#SBATCH --job-name=envs        ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./             ## Use currect directory as working directory (default)
+#SBATCH --partition=pg-gpu     ## Use the GPU partition (specify here or at command line wirh -p option)
+#SBATCH --gpus=2               ## How many GPUs (currently limit is set 2 max for Speed 5 and 17)
+#SBATCH --mem=20G              ## Assign memory
+#SBATCH --export=ALL,hv=8      ## Export all environment variables and set a value for the hv variable
 
 ##
 ## Job to run
 ##
-
-# 
-# Run on GPU nodes like, `qsub -q g.q ...'
-#
 
 echo "$0 : about to run gcs-lambdalabs-singularity on Speed..."
 date
