@@ -22,6 +22,27 @@ These are examples either trivial or some are more elaborate. Some are described
   - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
   - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
 
+## PIP
+
+By default, pip installs packages to a system-wide default location.
+There are two options to set your speed-scracth directory as the
+installation location.
+### Configure personal temp directory
+Create a *tmp* sub directory in your speed-scratch space
+`mkdir /speed-scratch/$USER/tmp`
+
+Before invoking pip run
+`setenv TMPDIR /speed-scratch/$USER/tmp`
+ 
+### Pass target directory to pip install
+Create a *target* sub directory in your speed-scratch space
+`mkdir /speed-scratch/$USER/myproject`
+To pass the target directory (aka installation directory) to pip,
+use the -t option
+`pip install -t /speed-scratch/$USER/myproject`
+
+Read about the other available pip install options with
+`pip install -help`
 ## Environments
 
 Virtual Environment Creation documentation. The following documentation is specific to **Speed**.
