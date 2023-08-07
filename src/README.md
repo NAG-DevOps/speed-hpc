@@ -28,6 +28,7 @@ Disadvantages of creating environments and compiling code on speed-submit:
 the grid engine's scheduler. It is not intended to compile or run code. 
 - Importantly, speed-submit does not have the drivers for the GPUs in the g.q or a.q queue. 
 This means that code compiled on speed-submit will not be compiled against GPU drivers. 
+- Processes run outside of the scheduler on any Speed node will be killed an you will lose your work.
 
 ## Correct Procedure
 ### Overview of preparing environments, compiling code and testing:
