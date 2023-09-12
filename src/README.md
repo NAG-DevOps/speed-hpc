@@ -21,7 +21,40 @@ These are examples either trivial or some are more elaborate. Some are described
   - `efficientdet.sh` -- `efficientdet` with Conda environment described below
   - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
   - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+# Creating Environments and Compiling Code on Speed
 
+## Correct Procedure
+### Overview of preparing environments, compiling code and testing:
+- Create a qlogin session to the queue you wish to run your jobs 
+(e.g. qlogin -q g.q -l gpu=1 for GPU jobs )  
+- Within the qlogin session, create and activate an Anaconda environment in 
+your /speed-scratch/ directory using the instructions found in Section 2.11.1 of the manual: 
+https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
+- Compile your code within the environment.
+- Test your code with a limited data set.
+- Once you are satisfied with your test results, exit your qlogin session.
+
+### Once your environment and code have been tested
+- Create a job script. (see https://nag-devops.github.io/speed-hpc/#job-submission-basics)
+- Remember to Activate your Anaconda environment in the user scripting section
+- Use the qsub command to submit your job script to the correct queue
+## Do not use the submit node to create environments or compile code
+- Speed-submit is a virtual machine intended to submit user jobs to 
+the grid engine's scheduler. It is not intended to compile or run code. 
+- Importantly, speed-submit does not have GPU drivers. This means that code compiled on speed-submit will not be compiled against GPU drivers. 
+- Processes run outside of the scheduler on speed-submit will be killed and you will lose your work.
+
+## PIP
+By default, pip installs packages to a system-wide default location.
+
+Creating environments via pip shound NOT be done outside of an Anaconda environment.
+
+Why you should create an Anaconda environment and not use pip directly from the 
+command line:
+- Using pip directly from the command line affects the system wide environment. If all users
+use pip in this way, the packages and versions installed via pip may change while your jobs run.
+- Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
+- It is possible to create multiple conda environments for your different projects.
 ## Environments
 
 Virtual Environment Creation documentation. The following documentation is specific to **Speed**.

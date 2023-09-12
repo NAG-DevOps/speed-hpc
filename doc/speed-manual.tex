@@ -33,7 +33,7 @@
 
 % Previously VI
 %\date{Version 6.5}
-\date{\textbf{Version 6.6-dev-06}}
+\date{\textbf{Version 6.6-dev-07}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -272,15 +272,22 @@ use your GCS ENCS account credentials to create an SSH connection to
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
 
-If you are connecting from home, and have a Mac or Linux system, in a
-terminal, this will connect you (on a single line):
+Requirements to create connections to Speed:
+\begin{enumerate}
+	\item
+An active \textbf{ENCS user account} which has permission to connect to Speed.
+	\item
+If you are off campus, an active connection to Concordia's VPN. Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
+	\item
+Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
+\end{enumerate}
+
+Open up a terminal window and type in the following SSH command being sure to replace
+\verb!<ENCSusername>! with your ENCS account's username.
 
 \begin{verbatim}
-ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
-  <ENCSusername>@speed.encs.concordia.ca
+ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
-
-Windows users can create SSH connections via PuTTY (or MobaXterm). 
 
 All users are expected to have a basic understanding of Linux and its 
 commonly used commands. 
@@ -1277,7 +1284,39 @@ Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, 
 \label{sect:faqs}
 
 % ------------------------------------------------------------------------------
-\subsection{``Disk quota exceeded'' Error}
+\subsection{How to use the ``bash shell'' on Speed?}
+
+This section describes how to use the ``bash shell'' on Speed. Review \autoref{sect:envsetup} to ensure that your bash enviroment is set up.
+% ------------------------------------------------------------------------------
+
+\subsubsection{How do I set bash as my login shell?}
+In order to set your login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
+To make this change, create a ticket with the Service Desk (or email help at concordia.ca) to request that bash become your default login shell for your ENCS user account on all GCS servers.
+
+\subsubsection{How do I move into a bash shell on Speed?}
+To move to the bash shell, type \textbf{bash} at the command prompt.
+For example:
+\begin{verbatim}
+	[speed-27] [/home/a/a_user] > bash
+	bash-4.4$ echo $0
+	bash
+\end{verbatim}	
+
+Note how the command prompt changed from \verb![speed-27] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
+
+\subsubsection{How do I run scripts written in bash on Speed?}
+To execute bash scripts on Speed:
+\begin{enumerate}
+	\item 
+Ensure that the shebang of your bash job script is \verb!#!/encs/bin/bash!
+	\item 
+Use the qsub command to submit your job script to the scheduler.
+\end{enumerate}
+
+The Speed GitHub contains a sample \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh}{bash job script}.  
+
+% ------------------------------------------------------------------------------
+\subsection{How to resolve``Disk quota exceeded'' errors?}
 
 % ------------------------------------------------------------------------------
 \subsubsection{Probably Cause}
@@ -1295,32 +1334,33 @@ Your NFS-provided home is full and cannot be written to.
 
 \begin{enumerate}
 	\item
-Use the \textbf{-cwd} job script option to make the directory that the job script
- is submitted from the \texttt{job working directory}, e.g., the directory to 
- store all output files in.
+Use the \textbf{-cwd} job script option to set the directory that the job script
+ is submitted from the \texttt{job working directory}. The \texttt{job working directory} is the directory that the job will write output files in.
 	\item
-As previously mentioned in this manual, it is recommended to use local disk space 
-for IO intensive operations, however, as the \texttt{/tmp} on the speed machines 
-is \texttt{1GB} in size it may be necessary for scripts to store temporary data 
+The use local disk space is generally recommended for IO intensive operations. However, as the size of \texttt{/tmp} on speed nodes 
+is \texttt{1GB} it can be necessary for scripts to store temporary data 
 elsewhere. 
-Review the documentation for the module(s) you are calling within your script to 
+Review the documentation for each module called within your script to 
 determine how to set working directories for that application. 
 The basic steps for this solution are:
 \begin{itemize}
 	\item
-	Review the documentation for the module(s) you are calling within your script to 
-	determine how to set working directories for that application.
+	Review the documentation on how to set working directories for 
+	each module called by the job script.
 	\item
-	Create a directory in speed-scratch for your temporary files. 
-	For example, to create a subdirector called \option{\/tmp} for user 
-	\textbf{a\_user}, in that user's speed-scratch directory execute:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/tmp}
+	Create a working directory in speed-scratch for output files. 
+	For example, this command creates subdirectory called \textbf{output}
+	 in \textbf{a\_user}'s speed-scratch directory:
+	 \begin{verbatim}
+		mkdir -m 750 /speed-scratch/a_user/output
+	 \end{verbatim}
 	\item
-	If necessary, create a subdirectory for recovery files as well:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/recovery}
+	To create a subdirectory for recovery files:
+	\begin{verbatim}
+		mkdir -m 750 /speed-scratch/a_user/recovery
+	\end{verbatim}
 	\item
-	Use the documentation to update your script(s) and command calls to use 
-	the working directories created in the previous steps.	
+	Update the job script to write output to the subdirectories you created in your \verb!speed-scratch! directory, e.g., \verb!/speed-scratch/a_user/output!.
 	\end{itemize}
 \end{enumerate}
 
