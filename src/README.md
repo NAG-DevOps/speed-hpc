@@ -81,7 +81,9 @@ The default shell for ENCS accounts is tcsh. Therefore, to initialize your defau
 To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
 
 For example:
-`conda create --prefix /speed-scratch/<encs_username>/myconda`
+`conda create --prefix /speed-scratch/$USER/myconda`
+
+Where `$USER` is an environment variable containing your encs_username
 
 Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
 
@@ -99,7 +101,7 @@ base                  *  /encs/pkg/anaconda3-2019.07/root
 #### Activate an Environment
 Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
 
-`conda activate /speed-scratch/<encs_username>/myconda`
+`conda activate /speed-scratch/$USER/myconda`
 
 After activating your environment, add pip to your environment by using 
 
@@ -113,10 +115,10 @@ This will install pip and pip's dependencies, including python.
 
 The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
 
-* Enter your ENCS user account's speed-scratch directory `cd /speed-scratch/<encs_username>`
+* Enter your ENCS user account's speed-scratch directory `cd /speed-scratch/$USER`
 * load python `module load python/3.8.3`
-* create virtual environment `python3 -m venv <env_name>`
-* activate virtual environment `source <env_name>/bin/activate.csh`
+* create virtual environment `python3 -m venv my_env_name`
+* activate virtual environment `source my_env_name/bin/activate.csh`
 * install DL packages for Efficientdet
 ```python
 pip install tensorflow==2.7.0
@@ -158,3 +160,19 @@ We have several versions of CUDA installed in:
 ```
 
 For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `/usr/local/cuda` with one of the above.
+
+
+## Python Modules
+
+By default when adding a python module /tmp is used for the temporary repository of files downloaded. /tmp on speed_submit is too small for pytorch.
+
+To add a python module:
+
+- First create you own tmp directory in /speed-scratch
+  - `mkdir /speed-scratch/$USER/tmp`
+- Use the tmp direcrtory you created
+  - `setenv TMPDIR /speed-scratch/$USER/tmp`
+- Attempt the installation of pytorch
+
+Where `$USER` is an environment variable containing your encs_username
+
