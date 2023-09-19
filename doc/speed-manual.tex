@@ -1319,7 +1319,7 @@ The Speed GitHub contains a sample \href{https://github.com/NAG-DevOps/speed-hpc
 \subsection{How to resolve``Disk quota exceeded'' errors?}
 
 % ------------------------------------------------------------------------------
-\subsubsection{Probably Cause}
+\subsubsection{Probable Cause}
 
 The \texttt{``Disk quota exceeded''} Error occurs when your application has run out of disk space to write to. On Speed this error can be returned when:
 \begin{enumerate}
@@ -1349,41 +1349,63 @@ The basic steps for this solution are:
 	each module called by the job script.
 	\item
 	Create a working directory in speed-scratch for output files. 
-	For example, this command creates subdirectory called \textbf{output}
-	 in \textbf{a\_user}'s speed-scratch directory:
+	For example, this command will create a subdirectory called \textbf{output}
+	 in your \verb!speed-scratch! directory:
 	 \begin{verbatim}
-		mkdir -m 750 /speed-scratch/a_user/output
+		mkdir -m 750 /speed-scratch/$USER/output
 	 \end{verbatim}
 	\item
 	To create a subdirectory for recovery files:
 	\begin{verbatim}
-		mkdir -m 750 /speed-scratch/a_user/recovery
+		mkdir -m 750 /speed-scratch/$USER/recovery
 	\end{verbatim}
 	\item
-	Update the job script to write output to the subdirectories you created in your \verb!speed-scratch! directory, e.g., \verb!/speed-scratch/a_user/output!.
+	Update the job script to write output to the subdirectories you created in your \verb!speed-scratch! directory, e.g., \verb!/speed-scratch/$USER/output!.
 	\end{itemize}
 \end{enumerate}
-
+In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 % ------------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{COMSOL}}
 
 \begin{itemize}
 	\item 
 	Create directories for recovery, temporary, and configuration files. 
-	For example, to create these directories for \textbf{a\_user}:
+	For example, to create these directories for your encs user account:
 	\begin{verbatim}
-	mkdir -m 750 -p /speed-scratch/a_user/comsol/{recovery,tmp,config}
+	mkdir -m 750 -p /speed-scratch/$USER/comsol/{recovery,tmp,config}
 	\end{verbatim}
 	\item
 	Add the following command switches to the COMSOL command to use the 
-	directories created for \textbf{a\_user} above:
+	directories created above:
 	\begin{verbatim} 
-	-recoverydir /speed-scratch/a_user/comsol/recovery 
-	-tmpdir /speed-scratch/a_user/comsol/tmp
-	-configuration/speed-scratch/a_user/comsol/config
+	-recoverydir /speed-scratch/$USER/comsol/recovery 
+	-tmpdir /speed-scratch/$USER/comsol/tmp
+	-configuration/speed-scratch/$USER/comsol/config
 	\end{verbatim}
 \end{itemize} 
+In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+% ------------------------------------------------------------------------------
+\subsubsection{Example of setting working directories for \tool{Python Modules}}
 
+By default when adding a python module the \texttt{/tmp} directory is set as the temporary repository for files downloads. 
+The size of the \texttt{/tmp} directory on \verb!speed-submit! is too small for pytorch.
+To add a python module
+\begin{itemize}
+    \item 	
+	Create your own tmp directory in your \verb!speed-scratch! direcrtory
+	\begin{verbatim} 
+        mkdir /speed-scratch/$USER/tmp
+	\end{verbatim}
+	\item
+    Use the tmp direcrtory you created
+	\begin{verbatim} 
+        setenv TMPDIR /speed-scratch/$USER/tmp
+	\end{verbatim}
+    \item
+	Attempt the installation of pytorch
+\end{itemize}
+
+In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
 
@@ -1405,6 +1427,8 @@ to request access if you are a CSSE member
 \item
 Dr. Maria Amer's VidPro group's nodes in Speed with additional V100 and P6 GPUs
 (use \texttt{a.q} for those nodes).
+\item
+Dr. Amin Hammad's \texttt{construction.encs} Lambda Labs station
 \item
 Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
 \item
