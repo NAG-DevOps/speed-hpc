@@ -1417,6 +1417,45 @@ To add a python module
 \end{itemize}
 
 In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
+% ------------------------------------------------------------------------------
+\subsection{How do I check my job's status?}
+
+When a job with a job id of 1234 is running, the status of that job can be tracked using \verb!`qstat -j 1234`!.
+Likewise, if the job is pending, the \verb!`qstat -j 1234`! command will report as to why the job is not scheduled or running.
+Once the job has finished, or has been killed, the \textbf{qacct} command must be used to query the job's status, e.g., \verb!`qaact -j [jobid]`!. 
+
+\subsection{Why is my job pending when nodes are empty?}
+\subsubsection{Disabled nodes}
+It is possible that a (or a number of) the Speed nodes are disabled. Nodes are disabled if they require maintenance. 
+To verify if Speed nodes are disabled, request the current list of disabled nodes from qstat.
+
+\begin{verbatim}
+qstat -f -qs d
+queuename                      qtype resv/used/tot. load_avg arch          states
+---------------------------------------------------------------------------------
+g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.27     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-10.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-16.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-19.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-24.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
+---------------------------------------------------------------------------------
+s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
+\end{verbatim}
+
+Note how the all of the Speed nodes in the above list have a state of \textbf{d}, or disabled.
+
+Your job will run once the maintenance has been completed and the disabled nodes have been enabled.
+\subsubsection{Error in job submit request.}
+It is possible that your job is pending, because the job requested resources that are not available within Speed.
+To verify why pending job with job id 1234 is not running, execute \verb!`qstat -j 1234`! 
+and review the messages in the \textbf{scheduling info:} section.
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
 
