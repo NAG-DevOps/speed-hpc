@@ -7,6 +7,7 @@
 \usepackage{bibentry}
 \nobibliography*
 
+% Folders with images
 \makeatletter
 \providecommand*{\input@path}{}
 \g@addto@macro\input@path{{../src/}{src/}}% append
@@ -122,7 +123,7 @@ list.
 
 \begin{itemize}
 	\item 
-Serguei Mokhov, Manager, Networks, Security and HPC
+Serguei Mokhov, PhD, Manager, Networks, Security and HPC
 	\item 
 Gillian Roper, Senior Administrator, System, Information Technology
 	\item 
@@ -139,11 +140,16 @@ as NAG, SAG, FIS, and DOG.
 
 \begin{itemize}
 \item
-Twenty four (24) 32-core compute nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
+approximately 1~TB of volatile-scratch disk space. 
 \item
-Twelve (12) NVIDIA Tesla P6 GPUs, with 16 GB of memory (compatible with the CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
+CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+
 \item
-One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
+One AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the
+Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
+
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -157,7 +163,7 @@ To design and develop, test and run parallel, batch, and other algorithms, scrip
 Prepare them for big clusters:
 	\begin{itemize}
 	\item 
-	Calcul Quebec and Compute Canada
+	Digital Alliance (Calcul Quebec and Compute Canada)
 	\item 
 	Cloud platforms
 	\end{itemize}
@@ -166,7 +172,7 @@ Jobs that are too demanding for a desktop.
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space and a scratch space of approximately 1 TB. 
+Anything that can fit into a 500-GB memory space and a scratch space of approximately 1~TB. 
 \item
 CPU-based jobs. 
 \item
@@ -277,7 +283,8 @@ Requirements to create connections to Speed:
 	\item
 An active \textbf{ENCS user account} which has permission to connect to Speed.
 	\item
-If you are off campus, an active connection to Concordia's VPN. Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
+If you are off campus, an active connection to Concordia's VPN.
+Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
 	\item
 Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
 \end{enumerate}
@@ -1116,7 +1123,6 @@ We have several versions of CUDA installed in:
 For CUDA to compile properly for the GPU queue, edit your Makefile 
 replacing \option{\/usr\/local\/cuda} with one of the above.
 
-
 % ------------------------------------------------------------------------------
 \section{Conclusion}
 \label{sect:conclusion}
@@ -1284,27 +1290,41 @@ Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, 
 \label{sect:faqs}
 
 % ------------------------------------------------------------------------------
-\subsection{Where do I learn about linux? }
-% ------------------------------------------------------------------------------
+\subsection{Where do I learn about Linux?}
+
 All Speed users are expected to have a basic understanding of Linux and its commonly used commands.
+
+% ------------------------------------------------------------------------------
 \subsubsection*{Software Carpentry}
+
 Software Carpentry provides free resources to learn software, including a workshop on the Unix shell.
 \url{https://software-carpentry.org/lessons/} 
 
+% ------------------------------------------------------------------------------
 \subsubsection*{Udemy}
-There are a number of Udemy courses, including free ones, that will assist you in learning linux. Active Concordia faculty, staff and students have access to Udemy courses such as \textbf{Linux Mastery: Master the Linux Command Line in 11.5 Hours} is a good starting point for beginners. Visit \url{https://www.concordia.ca/it/services/udemy.html} to learn how Concordians may access Udemy.
+
+There are a number of Udemy courses, including free ones, that will assist 
+you in learning Linux. Active Concordia faculty, staff and students have 
+access to Udemy courses such as \textbf{Linux Mastery: Master the Linux 
+Command Line in 11.5 Hours} is a good starting point for beginners. Visit
+\url{https://www.concordia.ca/it/services/udemy.html} to learn how Concordians 
+may access Udemy.
 
 % ------------------------------------------------------------------------------
 \subsection{How to use the ``bash shell'' on Speed?}
 
-This section describes how to use the ``bash shell'' on Speed. Review \autoref{sect:envsetup} to ensure that your bash enviroment is set up.
-% ------------------------------------------------------------------------------
+This section describes how to use the ``bash shell'' on Speed. Review
+\xs{sect:envsetup} to ensure that your bash environment is set up.
 
+% ------------------------------------------------------------------------------
 \subsubsection{How do I set bash as my login shell?}
+
 In order to set your login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
 To make this change, create a ticket with the Service Desk (or email help at concordia.ca) to request that bash become your default login shell for your ENCS user account on all GCS servers.
 
+% ------------------------------------------------------------------------------
 \subsubsection{How do I move into a bash shell on Speed?}
+
 To move to the bash shell, type \textbf{bash} at the command prompt.
 For example:
 \begin{verbatim}
@@ -1315,7 +1335,9 @@ For example:
 
 Note how the command prompt changed from \verb![speed-27] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
 
+% ------------------------------------------------------------------------------
 \subsubsection{How do I run scripts written in bash on Speed?}
+
 To execute bash scripts on Speed:
 \begin{enumerate}
 	\item 
@@ -1375,6 +1397,7 @@ The basic steps for this solution are:
 	\end{itemize}
 \end{enumerate}
 In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
 % ------------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{COMSOL}}
 
@@ -1395,6 +1418,7 @@ In the above example, \verb!$USER! is an environment variable containing your EN
 	\end{verbatim}
 \end{itemize} 
 In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
 % ------------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{Python Modules}}
 
@@ -1456,6 +1480,7 @@ Your job will run once the maintenance has been completed and the disabled nodes
 It is possible that your job is pending, because the job requested resources that are not available within Speed.
 To verify why pending job with job id 1234 is not running, execute \verb!`qstat -j 1234`! 
 and review the messages in the \textbf{scheduling info:} section.
+
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
 
@@ -1484,9 +1509,8 @@ Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
 \item
 Dr. Ivan Contreras' servers
 \item
-Compute Canada / Calcul Quebec
+Digital Alliance (Compute Canada / Calcul Quebec)
 \end{itemize}
-
 
 % ------------------------------------------------------------------------------
 % Refs:
