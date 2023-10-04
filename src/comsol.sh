@@ -4,7 +4,7 @@
 ## SLURM options 
 ##
 
-#SBATCH --job-name=comsole_job ## Give the job a name
+#SBATCH --job-name=comsol_job  ## Give the job a name
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
 #SBATCH --nodes=1
@@ -35,7 +35,7 @@ srun comsol batch -inputfile <path/inputfile> \
              -outputfile <path/outputfile name> \
              -batchlog <path/logfile name>
                          
-wait
 echo "$0 : Done!"
 date
-#EOF
+
+# EOF

@@ -1,6 +1,6 @@
 #!/encs/bin/tcsh
 
-#SBATCH --job-name=sbatch-test
+#SBATCH --job-name=tcsh-test
 #SBATCH --mem=1G
 
 sleep 30

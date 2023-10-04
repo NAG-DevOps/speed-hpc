@@ -32,6 +32,6 @@
 # setenv RT 123
 
 echo "$0 : about to run mac-spoofer-flucid-processor on Speed"
-mac-spoofer-flucid-processor $RT
+srun mac-spoofer-flucid-processor $RT
 
 # EOF

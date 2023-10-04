@@ -1,6 +1,6 @@
 #!/encs/bin/tcsh
 
-#SBATCH --job-name=envs        ## Give the job a name
+#SBATCH --job-name=tmpdir      ## Give the job a name
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory

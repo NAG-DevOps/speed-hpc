@@ -40,5 +40,3 @@ srun python MY_PYTHON_SCRIPT.py
 ## from gurobipy import *
 ## import multiprocessing as mp
 
-## wait for all processes to complete
-wait 

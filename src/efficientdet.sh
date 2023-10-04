@@ -17,14 +17,14 @@
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
 
-# Request GPU in Dr. Amer's partition pa-gpu
-#SBATCH --partition=pa-gpu
+# Request GPU in Dr. Amer's partition pa
+#SBATCH --partition=pa
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=8      
 #SBATCH --ntasks=1
 #SBATCH --gpus-per-node=2
 
-#SBATCH --mem=128G             ## Assign 500G memory per node 
+#SBATCH --mem=128G             ## Assign memory per node 
 
 cd /speed-scratch/$USER
 

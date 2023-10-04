@@ -22,7 +22,7 @@ date
 # Pull speed-hpc sources latest commit only to avoid
 # downloading all the history. For fun time the longer
 # running commands.
-time git clone --depth 1 --branch master https://github.com/NAG-DevOps/speed-hpc.git
+time srun git clone --depth 1 --branch master https://github.com/NAG-DevOps/speed-hpc.git
 
 # We need to be in the doc directory
 cd speed-hpc/doc

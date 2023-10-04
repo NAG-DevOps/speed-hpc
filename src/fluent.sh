@@ -16,4 +16,3 @@ cd $TMPDIR
 srun fluent 3ddp -g -i $SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp > call.txt
 
 srun rsync -av $TMPDIR/ $SGE_O_WORKDIR/fluentparallel/
-wait

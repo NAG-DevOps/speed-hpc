@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 
-#SBATCH --job-name=matlab-job-test ## Give the job a name
-#SBATCH --mail-type=ALL            ## Receive all email type notifications
+#SBATCH --job-name=matlab-job  ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory (default)
 #SBATCH --partition=pg-gpu     ## Use the GPU partition (specify here or at command line wirh -p option)
@@ -19,4 +19,4 @@ module list
 # -nojvm : Tells Matlab to run without the Java Virtual Machine to reduce overhead
 # test.m : Matlab commands file
 
-matlab -nodisplay -nodesktop -nojvm < test.m
+srun matlab -nodisplay -nodesktop -nojvm < test.m
