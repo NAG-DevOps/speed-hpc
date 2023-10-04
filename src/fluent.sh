@@ -13,6 +13,7 @@
 module load ansys/19.0/default
 cd $TMPDIR
 
-fluent 3ddp -g -i $SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp > call.txt
+srun fluent 3ddp -g -i $SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp > call.txt
 
-rsync -av $TMPDIR/ $SGE_O_WORKDIR/fluentparallel/
+srun rsync -av $TMPDIR/ $SGE_O_WORKDIR/fluentparallel/
+wait
