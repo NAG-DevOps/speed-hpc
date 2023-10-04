@@ -14,12 +14,10 @@
 #SBATCH --job-name=gurobi-with-python ## Give the job a name
 #SBATCH --mail-type=ALL               ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
-#SBATCH --chdir=./                    ## Use currect directory as working directory (default)
+#SBATCH --chdir=./                    ## Use currect directory as working directory (default) 
+                                      ## stored as $SLURM_SUBMIT_DIR
 #SBATCH --cpus-per-task=8             ## Request 8 cpus
 #SBATCH --mem=150G                    ## Assign memory per node 
-
-## Initialize WORKDIR variable to current directory
-set WORKDIR=$PWD
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
@@ -34,7 +32,7 @@ cd $GUROBI_HOME
 srun python3.7 setup.py build --build-base /tmp/${USER} install
 
 ## return to working directory
-cd $WORKDIR
+cd $SLURM_SUBMIT_DIR
 
 ## Now, instead of using 'gurobi.sh MY_PYTHON_SCRIPT.py', you can use
 srun python MY_PYTHON_SCRIPT.py
