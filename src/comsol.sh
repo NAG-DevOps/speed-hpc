@@ -31,11 +31,11 @@ setenv LMCOMSOL_LICENSE_FILE  <port@licence file location>
 
 # Execute the comsole batch command
 # Note: review comsol batch -help for options available
-comsol batch -inputfile <path/inputfile> \
+srun comsol batch -inputfile <path/inputfile> \
              -outputfile <path/outputfile name> \
              -batchlog <path/logfile name>
                          
+wait
 echo "$0 : Done!"
 date
-
 #EOF
