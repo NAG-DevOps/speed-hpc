@@ -29,10 +29,10 @@ cd speed-hpc/doc
 pwd
 
 # Generate PDF manual
-time make
+time srun make
 
 # Generate the HTML manual
-time make html
+time srun make html
 
 # Report generated files
 ls -al *.pdf web/*
