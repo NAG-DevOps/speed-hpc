@@ -13,6 +13,7 @@
 mkdir -p /speed-scratch/$USER/tmp
 setenv TMPDIR /speed-scratch/$USER/tmp
 
-date
-env
-date
+srun date
+srun env
+srun date
+wait
