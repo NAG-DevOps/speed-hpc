@@ -1,7 +1,7 @@
 #!/encs/bin/bash
 
 # Serguei Mokhov
-# UGE-based job invocation script
+# Slurm invocation script
 
 # Singulairy container for Lambda Labs Software Stack
 
@@ -41,11 +41,11 @@ echo "Singularity will bind mount: $SINGULARITY_BIND for user: $USER"
 
 
 time \
-	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
+	srun $SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
 	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print(\"I love Lambda Stack!\")'
 
 time \ 
-	$SINGULARITY exec touch /my-speed-scratch/test1
+	srun $SINGULARITY exec touch /my-speed-scratch/test1
 
 echo "$0 : Done!"
 date
