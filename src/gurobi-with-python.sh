@@ -18,24 +18,29 @@
 #SBATCH --cpus-per-task=8             ## Request 8 cpus
 #SBATCH --mem=150G                    ## Assign memory per node 
 
+## Initialize WORKDIR variable to current directory
+set WORKDIR=$PWD
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
 module load python/3.7.7/default
 
 ## Create a virtual Python environment (env) in $TMPDIR
-python3.7 -m venv $TMPDIR/env
+srun python3.7 -m venv $TMPDIR/env
 ## Activate the new environment
-source $TMPDIR/env/bin/activate.csh
+srun source $TMPDIR/env/bin/activate.csh
 ## Install gurobipy module
 cd $GUROBI_HOME
-python3.7 setup.py build --build-base /tmp/${USER} install
+srun python3.7 setup.py build --build-base /tmp/${USER} install
 
-## return to workDir
-cd $SGE_O_WORKDIR
+## return to working directory
+cd $WORKDIR
 
 ## Now, instead of using 'gurobi.sh MY_PYTHON_SCRIPT.py', you can use
-python MY_PYTHON_SCRIPT.py
+srun python MY_PYTHON_SCRIPT.py
 ## inside MY_PYTHON_SCRIPT.py, you can use
 ## from gurobipy import *
 ## import multiprocessing as mp
+
+## wait for all processes to complete
+wait 
