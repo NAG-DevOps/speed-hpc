@@ -34,7 +34,7 @@ source envs/tf/bin/activate.csh
 
 cd code/automl/efficientdet
 
-python3 main.py --mode=train_and_eval \
+srun python3 main.py --mode=train_and_eval \
     --train_file_pattern=tfrecord/'pascal-*-of-00100.tfrecord' \
     --val_file_pattern=tfrecord/'val-*-of-00032.tfrecord' \
     --model_name='efficientdet-d0' \
