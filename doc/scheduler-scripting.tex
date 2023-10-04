@@ -1,0 +1,318 @@
+﻿% ------------------------------------------------------------------------------
+\subsubsection{User Scripting}
+
+The last part the job script is the scripting that will be executed by the job. 
+This part of the job script includes all commands required to set up and 
+execute the task your script has been written to do. Any Linux command can be used 
+at this step. This section can be a simple call to an executable or a complex 
+loop which iterates through a series of commands.
+
+Every software program has a unique execution framework. It is the responsibility 
+of the script's author (e.g., you) to know what is required for the software used 
+in your script by reviewing the software's documentation. Regardless of which software
+your script calls, your script should be written so that the software knows the 
+location of the input and output files as well as the degree of parallelism. 
+Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
+to the value provided to the scheduler in the \option{-pe smp} option. 
+
+Jobs which touch data-input and data-output files more than once, should make use 
+of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
+\api{TMPDIR} is created when a job starts, and exists on the local disk of the
+compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
+than those to and from shared storage (which is provided over NFS). 
+
+An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
+the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
+\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
+current working directory), to make the new directory \texttt{results}, to
+execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
+output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
+to an existing directory, \texttt{processed}, that is located in the current
+working directory. TMPDIR only exists for the duration of the job, though,
+so it is very important to copy relevant results from it at job's end.
+
+% ------------------------------------------------------------------------------
+\subsection{Sample Job Script}
+
+Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
+(you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
+
+\begin{figure}[htpb]
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
+	\caption{Source code for \file{tcsh.sh}}
+	\label{fig:tcsh.sh}
+\end{figure}
+
+The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
+The lines that begin with \texttt{\#\$} are directives for the scheduler.
+
+\begin{itemize}
+	\item \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+\end{itemize}
+
+The script then:
+
+\begin{itemize}
+	\item Sleeps on a node for 30 seconds
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
+	\item Prints the list of loaded modules into a file
+\end{itemize}
+
+The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
+From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}. You will see,
+\texttt{"Your job X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
+to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
+something like this: 
+
+\small
+\begin{verbatim}
+queuename                      qtype resv/used/tot. load_avg arch          states
+---------------------------------------------------------------------------------
+a.q@speed-01.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+a.q@speed-03.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+a.q@speed-25.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+a.q@speed-27.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64
+     144   100.00000 qsub-test nul-uge     r     12/03/2018 16:39:30    1 
+     62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
+---------------------------------------------------------------------------------
+g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
+---------------------------------------------------------------------------------
+s.q@speed-08.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+s.q@speed-09.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+---------------------------------------------------------------------------------
+s.q@speed-10.encs.concordia.ca BIP   0/32/32        32.72    lx-amd64
+     62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
+---------------------------------------------------------------------------------
+s.q@speed-11.encs.concordia.ca BIP   0/32/32        32.08    lx-amd64
+     62679 0.14212 CWLR_DF    a_bcdef      r     11/10/2021 17:25:19    32
+---------------------------------------------------------------------------------
+s.q@speed-12.encs.concordia.ca BIP   0/32/32        32.10    lx-amd64
+     62749 0.09000 CLOUDY     z_abc        r     11/11/2021 21:58:12    32
+---------------------------------------------------------------------------------
+s.q@speed-15.encs.concordia.ca BIP   0/4/32         0.03     lx-amd64
+     62753 82.47478 matlabLDPa b_bpxez      r     11/12/2021 08:49:52     4
+---------------------------------------------------------------------------------
+s.q@speed-16.encs.concordia.ca BIP   0/32/32        32.31    lx-amd64
+     62751 0.09000 CLOUDY     z_abc        r     11/12/2021 06:03:54    32
+---------------------------------------------------------------------------------
+s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.22    lx-amd64
+---------------------------------------------------------------------------------
+...
+---------------------------------------------------------------------------------
+s.q@speed-35.encs.concordia.ca BIP   0/32/32        2.78     lx-amd64
+     62754 7.22952 qlogin-tes a_tiyuu      r     11/12/2021 10:31:06    32
+---------------------------------------------------------------------------------
+s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64
+etc.
+\end{verbatim}
+\normalsize
+
+Remember that you only have 30 seconds before the job is essentially over, so 
+if you do not see a similar output, either adjust the sleep time in the 
+script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} 
+output listed above shows you that your job is 
+running on node \texttt{speed-05}, that it has a job number of 144, that it 
+was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the 
+default). 
+
+Once the job finishes, there will be a new file in the directory that the job 
+was started from, with the syntax of, \texttt{"job name".o"job number"}, so 
+in this example the file is, qsub \file{test.o144}. This file represents the 
+standard output (and error, if there is any) of the job in question. If you 
+look at the contents of your newly created file, you will see that it 
+contains the output of the, \texttt{module list} command. 
+Important information is often written to this file.
+
+Congratulations on your first job! 
+
+% ------------------------------------------------------------------------------
+\subsection{Common Job Management Commands Summary}
+\label{sect:job-management-commands}
+
+Here are useful job-management commands: 
+
+\begin{itemize}
+\item
+\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+on \texttt{speed-submit} you can submit it using this
+
+\item
+\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+
+\item
+\texttt{qstat -f -u "*"}: display cluster status for all users. 
+
+\item
+\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+
+\item
+\texttt{qdel [job-ID]}: delete job [job-ID]. 
+
+\item
+\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
+
+\item
+\texttt{qrls [job-ID]}: release held job [job-ID]. 
+
+\item
+\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
+\end{itemize}
+
+
+% ------------------------------------------------------------------------------
+\subsection{Advanced \tool{qsub} Options}
+\label{sect:qsub-options}
+
+In addition to the basic \tool{qsub} options presented earlier, there are a 
+few additional options that are generally useful:
+
+\begin{itemize}
+\item
+\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
+(e)nds; (a)borts. Mail is sent to the default address of,
+\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
+\texttt{-M}). The report sent when a job ends includes job 
+runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+
+\item
+\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
+notification address, rather than the default (see, \texttt{-m}). 
+
+\item
+\texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
+
+\item
+\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
+that if you give a single number, that represents \emph{seconds}, not hours. 
+
+\item
+\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
+The many \tool{qsub} options available are read with, \texttt{man qsub}. Also 
+note that \tool{qsub} options can be specified during the job-submission 
+command, and these \emph{override} existing script options (if present). The 
+syntax is, \texttt{qsub [options] PATHTOSCRIPT}, but unlike in the script, 
+the options are specified without the leading \verb+#$+
+(e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
+
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Array Jobs}
+
+Array jobs are those that start a batch job or a parallel job multiple times. 
+Each iteration of the job array is called a task and receives a unique job ID.
+
+To submit an array job, use the \texttt{\-t} option of the \texttt{qsub} 
+command as follows:
+
+\begin{verbatim}
+qsub -t n[-m[:s]] <batch_script>
+\end{verbatim}
+
+\textbf{-t Option Syntax:}
+\begin{itemize}
+\item
+\texttt{n}: indicates the start-id.
+\item
+\texttt{m}: indicates the max-id.
+\item
+\texttt{s}: indicates the step size.
+\end{itemize}
+
+\textbf{Examples:}
+\begin{itemize}
+\item
+\texttt{qsub -t 10 array.sh}: submits a job with 1 task where the task-id is 10. 
+\item
+\texttt{qsub -t 1-10 array.sh}: submits a job with 10 tasks numbered consecutively from 1 to 10.
+\item
+\texttt{qsub -t 3-15:3 array.sh}: submits a jobs with 5 tasks numbered consecutively with step size 3
+(task-ids 3,6,9,12,15).
+\end{itemize}
+
+\textbf{Output files for Array Jobs:}
+
+The default and output and error-files are \option{job\_name.[o|e]job\_id} and\\
+\option{job\_name.[o|e]job\_id.task\_id}.
+%
+This means that Speed creates an output and an error-file for each task 
+generated by the array-job as well as one for the super-ordinate array-job. 
+To alter this behavior use the \option{-o} and \option{-e} option of
+\tool{qsub}. 
+
+For more details about Array Job options, please review the manual pages for 
+\option{qsub} by executing the following at the command line on speed-submit 
+\tool{man qsub}.
+ 
+% ------------------------------------------------------------------------------
+\subsection{Requesting Multiple Cores (i.e., Multithreading Jobs)}
+
+For jobs that can take advantage of multiple machine cores, up to 32 cores
+(per job) can be requested in your script with: 
+
+\begin{verbatim}
+#$ -pe smp [#cores] 
+\end{verbatim}
+
+\textbf{Do not request more cores than you think will be useful}, as larger-core
+jobs are more difficult to schedule. On the flip side, though, if you 
+are going to be running a program that scales out to the maximum single-machine
+core count available, please (please) request 32 cores, to avoid node 
+oversubscription (i.e., to avoid overloading the CPUs).
+
+Core count associated with a job appears under, ``states'', in the,
+\texttt{qstat -f -u "*"}, output.
+
+% ------------------------------------------------------------------------------
+\subsection{Interactive Jobs}
+
+Job sessions can be interactive, instead of batch (script) based. Such 
+sessions can be useful for testing and optimising code and resource 
+requirements prior to batch submission. To request an interactive job 
+session, use, \texttt{qlogin [options]}, similarly to a 
+\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}).
+Note that the options that are available for \tool{qsub} are not necessarily
+available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
+
+% ------------------------------------------------------------------------------
+\subsection{Scheduler Environment Variables}
+
+The scheduler presents a number of environment variables that can be used in 
+your jobs. Three of the more useful are \api{TMPDIR}, \api{SGE\_O\_WORKDIR}, 
+and \api{NSLOTS}:
+
+\begin{itemize}
+\item
+\api{\$TMPDIR}=the path to the job's temporary space on the node. It
+\emph{only} exists for the duration of the job, so if data in the temporary space 
+are important, they absolutely need to be accessed before the job terminates.
+
+\item
+\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
+NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+the path defaults to your home directory.
+
+\item
+\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
+be used in place of hardcoded thread-request declarations. 
+
+\end{itemize}
+
+\noindent
+In \xf{fig:tmpdir.sh} is a sample script, using all three.
+
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{tmpdir.sh}
+    \caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}
