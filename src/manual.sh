@@ -32,6 +32,8 @@ pwd
 time srun make
 
 # Generate the HTML manual
+# 2023 TeXLive HTML generation gives obscure error
+setenv PATH "/encs/pkg/texlive-20220405/root/bin/x86_64-linux:$PATH"
 time srun make html
 
 # Report generated files
