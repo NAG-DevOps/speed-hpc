@@ -137,7 +137,46 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
-## CUDA
+## Openiss-reid-tfk ##
+
+The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
+### Environment ###
+
+The pre-requisites to prepare the environment are located in `environment.yml`. (https://github.com/NAG-DevOps/openiss-reid-tfk)
+
+Using a test dataset (Market1501) and 120 epochs as an example, we ran the script and the results were the following:
+
+Speed 1 GPU: 5hrs 25min
+
+Speed CPU - 32 cores: 2 days 22 hours
+
+TEST DATASET: Market1501
+
+---- Train images: 12936
+
+---- Query images: 3368
+
+---- Gallery images: 15913
+
+### Configuration and execution ###
+
+- Log into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/`
+- Clone the repo from https://github.com/NAG-DevOps/openiss-reid-tfk
+- Download the dataset:  go to datasets/ and run get_dataset_market1501.sh
+- In reid.py set the epochs (g_epochs=120 by default)
+- Download openiss-2-speed.sh from this repository
+- On environment.yml comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
+- On openiss-2-speed.sh comment or uncomment the secction accordingly (for CPU or GPU)
+- Submit the job:
+
+   On CPUs nodes: `qsub ./openiss-2-speed.sh`
+
+   On GPUs nodes: `qsub -q g.q ./openiss-2-speed.sh`
+
+**IMPORTANT**  
+Modify the script `openiss-2-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; h_vmem= and gpu= CAN'T be enabled at the same time, more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
+
+## CUDA ##
 
 When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the cuda-11.5 libraries, specify the following in your Makefile.
 ```
