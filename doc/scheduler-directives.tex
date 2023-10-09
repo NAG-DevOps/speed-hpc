@@ -1,0 +1,51 @@
+﻿% ------------------------------------------------------------------------------
+\subsubsection{Directives}
+
+Directives are comments included at the beginning of a job script that set the shell 
+and the options for the job scheduler. 
+
+The shebang directive is always the first line of a script. In your job script, 
+this directive sets which shell your script's commands will run in. On ``Speed'', 
+we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
+
+To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
+
+For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
+
+Directives that start with \verb|"#$"|, set the options for the cluster's 
+``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
+provides the essentials:
+
+\begin{verbatim}
+#$ -N <jobname>
+#$ -cwd
+#$ -m bea
+#$ -pe smp <corecount>
+#$ -l h_vmem=<memory>G
+\end{verbatim}
+
+Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
+\option{-cwd}, makes the current working directory the ``job working directory'',
+and your standard output file will appear here; \option{-m bea}, provides e-mail
+notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
+(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32),
+be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
+is not relevant; replace, \verb+<memory>+, with the value (in GB), that you want 
+your job's memory space to be (up to 500), and all jobs MUST have a memory-space 
+assignment.
+
+If you are unsure about memory footprints, err on assigning a generous
+memory space to your job so that it does not get prematurely terminated
+(the value given to \api{h\_vmem} is a hard memory ceiling). You can refine
+\api{h\_vmem} values for future jobs by monitoring the size of a job's active
+memory space on \texttt{speed-submit} with:
+
+\begin{verbatim}
+qstat -j <jobID> | grep maxvmem
+\end{verbatim}
+
+Memory-footprint values are also provided for completed jobs in the final
+e-mail notification (as, ``Max vmem'').
+
+\emph{Jobs that request a low-memory footprint are more likely to load on a busy
+cluster.}

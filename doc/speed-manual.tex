@@ -7,6 +7,7 @@
 \usepackage{bibentry}
 \nobibliography*
 
+% Folders with images
 \makeatletter
 \providecommand*{\input@path}{}
 \g@addto@macro\input@path{{../src/}{src/}}% append
@@ -33,7 +34,7 @@
 
 % Previously VI
 %\date{Version 6.5}
-\date{\textbf{Version 6.6-dev-03}}
+\date{\textbf{Version 6.6-dev-07}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -82,11 +83,11 @@ Montreal, Canada.
 
 This document contains basic information required to use ``Speed'' as well as 
 tips and tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/ or references are welcome. 
+User contributions of sample jobs and/or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
 
-
-\textbf{Resources:}
+% ------------------------------------------------------------------------------
+\subsection{Resources}
 
 \begin{itemize}
 \item
@@ -96,43 +97,82 @@ are maintained (pull-requests (PRs), subject to review, are welcome):\\
 \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
 
 \item
+PDF version of this manual:\\
+\url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}\\
+HTML version of this manual:\\
+\url{https://nag-devops.github.io/speed-hpc/}
+
+\item
 Our official Concordia page for the ``Speed'' cluster:\\
 \url{https://www.concordia.ca/ginacody/aits/speed.html}\\
 which includes access request instructions.
 
 \item
-All registered users are subscribed to the \texttt{hpc-ml} mailing
-list upon gaining access.
+All Speed users are subscribed to the \texttt{hpc-ml} mailing
+list.
 
 \item
 \href
-	{https://docs.google.com/presentation/d/1bWbGQvYsuJ4U2WsfLYp8S3yb4i7OdU7QDn3l_Q9mYis}
-	{Introductory slides of Speed presented to departments}~\cite{speed-intro-preso}.
+	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
+	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
 
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Team}
+
+\begin{itemize}
+	\item 
+Serguei Mokhov, PhD, Manager, Networks, Security and HPC
+	\item 
+Gillian Roper, Senior Administrator, System, Information Technology
+	\item 
+Carlos Alarcón Meza, Administrator, System, High Performance Computing and Networking, Information Technology
+	\item 
+Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
+\end{itemize}
+
+We receive support from the rest of AITS teams, such
+as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Comprises}
 
 \begin{itemize}
 \item
-Twenty four (24) 32-core compute nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
+approximately 1~TB of volatile-scratch disk space. 
 \item
-Twelve (12) NVIDIA Tesla P6 GPUs, with 16 GB of memory (compatible with the CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
+CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+
 \item
-One AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
+One AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the
+Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
+
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
+\label{sect:speed-is-for}
 
 \begin{itemize}
 \item
-Jobs that are too demanding for a desktop, but that are not worth the hassles associated with the provincial and national clusters. 
+To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets.
+\item
+Prepare them for big clusters:
+	\begin{itemize}
+	\item 
+	Digital Alliance (Calcul Quebec and Compute Canada)
+	\item 
+	Cloud platforms
+	\end{itemize}
+\item
+Jobs that are too demanding for a desktop. 
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space and a scratch space of approximately 1 TB. 
+Anything that can fit into a 500-GB memory space and a scratch space of approximately 1~TB. 
 \item
 CPU-based jobs. 
 \item
@@ -142,36 +182,28 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Speed's Intent}
+\subsection{What Speed Is Not}
+\label{sect:speed-is-not}
 
 \begin{itemize}
-	\item 
-To Design and Develop, test and run parallel, batch, etc. algorithms, scripts with partial data sets.
-	\item 
-Prepare them for big clusters:
-\begin{itemize}
-	\item 
-Calcul Quebec
-	\item 
-Compute Canada
-	\item 
-Cloud platforms
-\end{itemize}
+\item Speed is not a web host and does not host websites.
+\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Does not run Kubernetes or other container orchestration software.
+\item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
+\item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Available Software}
 
 We have a great number of open-source software available and installed
-on Speed -- various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
+on Speed~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
 OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
 There are also a number of commercial packages, subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaqus~\cite{abaqus}, 
 Ansys, Fluent~\cite{fluent}, etc. 
 
-
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
-
 
 In particular, there are over 2200 programs available in
 \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
@@ -185,7 +217,7 @@ MATLAB (R2016b, R2018a, R2018b)
 	\item 
 Fluent (19.2)
 	\item 
-Singularity (Docker-like container), can run other OS's apps, like Ubuntu's.
+Singularity (Docker-like container), can run other OS's apps, like Ubuntu's, converted Docker containers.
 \end{itemize}
 	\item 
 We do our best to accommodate custom software requests.
@@ -210,16 +242,22 @@ Cplex 12.6.x to 12.8.x
 OpenMPI 1.6.x, 1.8.x, 3.1.3
 \end{itemize}
 \end{itemize}
+
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
-The first step to using the ``Speed'' cluster is to request access. 
 
-Please email your access request to, \texttt{rt-ex-hpc AT encs.concordia.ca}, 
-including your ENCS account's username.
+After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
+``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
+cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
+%
+Faculty and staff may request the access directly.
+Students must include the following in their message:
 
-If you are a student, please include the name of your Supervisor or instructor
-as well as a statement from that person which indicates that you may have
-access to ``Speed''.
+\begin{itemize} 
+	\item GCS ENCS username
+	\item Name and email (CC) of the supervisor or instructor
+	\item Written request from the supervisor or instructor for the ENCS username to be granted access to ``Speed''
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \section{Job Management}
@@ -231,73 +269,46 @@ label/value to be replaced (the entire bracketed term needs replacement).
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
 
-Once your ENCS account has been granted access to ``Speed'',
-use your ENCS account credentials to create an SSH connection to 
+Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
+and ``What Speed is Not'' (\xs{sect:speed-is-not}).
+Once your GCS ENCS account has been granted access to ``Speed'',
+use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 
+% ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
-If you are connecting from home, and have a Mac or Linux system, in a
-terminal, this will connect you (on a single line):
+
+Requirements to create connections to Speed:
+\begin{enumerate}
+	\item
+An active \textbf{ENCS user account} which has permission to connect to Speed.
+	\item
+If you are off campus, an active connection to Concordia's VPN.
+Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
+	\item
+Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
+\end{enumerate}
+
+Open up a terminal window and type in the following SSH command being sure to replace
+\verb!<ENCSusername>! with your ENCS account's username.
 
 \begin{verbatim}
-ssh -o ProxyCommand="ssh <ENCSusername>@login.encs.concordia.ca nc speed 22"
-  <ENCSusername>@speed.encs.concordia.ca
+ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
-
-Windows users can create SSH connections via PuTTY (or MobaXterm). 
 
 All users are expected to have a basic understanding of Linux and its 
-commonly used commands.
+commonly used commands. 
 
-\subsubsection{Environment Set Up}
-\label{envsetup}
-After creating an SSH session to ``Speed'', you will need to source the scheduler file:
-
-\begin{verbatim}
-source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
-\end{verbatim}
-
-If sourcing the settings file has been successful, you will now have access to 
-the scheduler commands. 
-For example, if, \texttt{qstat -f -u "*"}, returns something non-error related, 
-you are in business. 
-
-The next step is to copy a job template to your home directory and to set up your
-cluster-specific storage. Execute the following command from within your
-home directory. (To move to your home directory, type \texttt{cd} at the Linux
-prompt and press \texttt{Enter}.) 
-
-\begin{verbatim}
-cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
-\end{verbatim}
-
-\textbf{Tip:} Add the source command to your shell-startup environment. 
-
-For \textbf{new ENCS Users}, and/ or those who don't have an \file{.tcshrc} 
-file, move a copy of the \file{.tcshrc} in \texttt{nul-uge}'s. home directory 
-to your home directory with:
-
-\begin{verbatim}
-cp /home/n/nul-uge/.tcshrc . 
-\end{verbatim}
-
-Users who already have an \file{.tcshrc} file, use a text editor, such as
-\tool{vim} or \tool{emacs}, to add the source request to your existing
-shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
-
-Note that you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} file to be applied 
-(\textbf{important}).
-
-If you use \tool{bash}, or another shell, please contact 
-\texttt{rt-ex-hpc AT encs.concordia.ca}.
+% ------------------------------------------------------------------------------
+% TMP scheduler-specific section
+\input{scheduler-env}
 
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
 Preparing your job for submission is fairly straightforward. Editing a copy
 of the \file{template.sh} you moved into your home directory during
-\xs{envsetup} is a good place to start. You can also use a job script
+\xs{sect:envsetup} is a good place to start. You can also use a job script
 example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
 directory and base your job on it.
 
@@ -309,56 +320,8 @@ Job scripts are broken into four main sections:
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsubsection{Directives}
-
-Directives are comments included at the beginning of a job script that set the shell 
-and the options for the job scheduler. 
-
-The shebang directive is always the first line of a script. In your job script, 
-this directive sets which shell your script's commands will run in. On ``Speed'', 
-we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
-
-To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
-
-For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
-
-Directives that start with \verb|"$#"|, set the options for the cluster's 
-``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
-provides the essentials:
-
-\begin{verbatim}
-#$ -N <jobname>
-#$ -cwd
-#$ -m bea
-#$ -pe smp <corecount>
-#$ -l h_vmem=<memory>G
-\end{verbatim}
-
-Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
-\option{-cwd}, makes the current working directory the ``job working directory'',
-and your standard output file will appear here; \option{-m bea}, provides e-mail
-notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
-(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32),
-be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
-is not relevant; replace, \verb+<memory>+, with the value (in GB), that you want 
-your job's memory space to be (up to 500), and all jobs MUST have a memory-space 
-assignment.
-
-If you are unsure about memory footprints, err on assigning a generous
-memory space to your job so that it does not get prematurely terminated
-(the value given to \api{h\_vmem} is a hard memory ceiling). You can refine
-\api{h\_vmem} values for future jobs by monitoring the size of a job's active
-memory space on \texttt{speed-submit} with:
-
-\begin{verbatim}
-qstat -j <jobID> | grep maxvmem
-\end{verbatim}
-
-Memory-footprint values are also provided for completed jobs in the final
-e-mail notification (as, ``Max vmem'').
-
-\emph{Jobs that request a low-memory footprint are more likely to load on a busy
-cluster.}
+% TMP scheduler-specific section
+\input{scheduler-directives}
 
 % ------------------------------------------------------------------------------
 \subsubsection{Module Loads}
@@ -410,324 +373,8 @@ module purge
 Typically, only the \texttt{module load} command will be used in your script.
 
 % ------------------------------------------------------------------------------
-\subsubsection{User Scripting}
-
-The last part the job script is the scripting that will be executed by the job. 
-This part of the job script includes all commands required to set up and 
-execute the task your script has been written to do. Any Linux command can be used 
-at this step. This section can be a simple call to an executable or a complex 
-loop which iterates through a series of commands.
-
-Every software program has a unique execution framework. It is the responsibility 
-of the script's author (e.g., you) to know what is required for the software used 
-in your script by reviewing the software's documentation. Regardless of which software
-your script calls, your script should be written so that the software knows the 
-location of the input and output files as well as the degree of parallelism. 
-Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
-to the value provided to the scheduler in the \option{-pe smp} option. 
-
-Jobs which touch data-input and data-output files more than once, should make use 
-of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
-\api{TMPDIR} is created when a job starts, and exists on the local disk of the
-compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
-than those to and from shared storage (which is provided over NFS). 
-
-An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
-the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
-\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
-current working directory), to make the new directory \texttt{results}, to
-execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
-output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
-to an existing directory, \texttt{processed}, that is located in the current
-working directory. TMPDIR only exists for the duration of the job, though,
-so it is very important to copy relevant results from it at job's end.
-
-% ------------------------------------------------------------------------------
-\subsection{Sample Job Script}
-
-Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
-(you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
-
-\begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
-    \caption{Source code for \file{tcsh.sh}}
-	\label{fig:tcsh.sh}
-\end{figure}
-
-This script sleeps on a node for 30 seconds, uses the 
-\tool{module} command to load the \texttt{gurobi/8.1.0} 
-environment, and then prints the list of loaded modules 
-into a file. Concentrating on the first 
-four lines, the first line is the shell declaration; the next three 
-lines are submission options passed to the scheduler. 
-The first, \texttt{-N}, attaches a name to the job (otherwise it is 
-called what the job script is called), the second, \texttt{-cwd},
-tells the scheduler to execute the job from the current working 
-directory, and not to use the default of your home directory (potentially 
-important for output-file placement), and the third, \texttt{-l h\_vmem}, 
-requests and assigns a 1GB of memory space to the job (this is an upper bound, and 
-jobs that attempt to use more will be terminated). Note that this third 
-option is \emph{not} optional (if you do not specify a memory space, 
-submission of the job will fail). Also notice the syntax that denotes a 
-scheduler option, the, \texttt{\#\$}.
-
-The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
-To submit this job: \texttt{qsub ./tcsh.sh}. You will see, \texttt{"Your job 
-X ("qsub-test") has been submitted"}. The command, \tool{qstat}, can be used 
-to look at the status of the cluster: \texttt{qstat -f -u "*"}. You will see 
-something like this: 
-
-\small
-\begin{verbatim}
-queuename                      qtype resv/used/tot. load_avg arch          states
----------------------------------------------------------------------------------
-a.q@speed-01.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-a.q@speed-03.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-a.q@speed-25.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-a.q@speed-27.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64
-     144   100.00000 qsub-test nul-uge     r     12/03/2018 16:39:30    1 
-     62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
----------------------------------------------------------------------------------
-g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
----------------------------------------------------------------------------------
-s.q@speed-08.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-s.q@speed-09.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
----------------------------------------------------------------------------------
-s.q@speed-10.encs.concordia.ca BIP   0/32/32        32.72    lx-amd64
-     62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
----------------------------------------------------------------------------------
-s.q@speed-11.encs.concordia.ca BIP   0/32/32        32.08    lx-amd64
-     62679 0.14212 CWLR_DF    a_bcdef      r     11/10/2021 17:25:19    32
----------------------------------------------------------------------------------
-s.q@speed-12.encs.concordia.ca BIP   0/32/32        32.10    lx-amd64
-     62749 0.09000 CLOUDY     z_abc        r     11/11/2021 21:58:12    32
----------------------------------------------------------------------------------
-s.q@speed-15.encs.concordia.ca BIP   0/4/32         0.03     lx-amd64
-     62753 82.47478 matlabLDPa b_bpxez      r     11/12/2021 08:49:52     4
----------------------------------------------------------------------------------
-s.q@speed-16.encs.concordia.ca BIP   0/32/32        32.31    lx-amd64
-     62751 0.09000 CLOUDY     z_abc        r     11/12/2021 06:03:54    32
----------------------------------------------------------------------------------
-s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.22    lx-amd64
----------------------------------------------------------------------------------
-...
----------------------------------------------------------------------------------
-s.q@speed-35.encs.concordia.ca BIP   0/32/32        2.78     lx-amd64
-     62754 7.22952 qlogin-tes a_tiyuu      r     11/12/2021 10:31:06    32
----------------------------------------------------------------------------------
-s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64
-etc.
-\end{verbatim}
-\normalsize
-
-Remember that you only have 30 seconds before the job is essentially over, so 
-if you do not see a similar output, either adjust the sleep time in the 
-script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} 
-output listed above shows you that your job is 
-running on node \texttt{speed-05}, that it has a job number of 144, that it 
-was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the 
-default). 
-
-Once the job finishes, there will be a new file in the directory that the job 
-was started from, with the syntax of, \texttt{"job name".o"job number"}, so 
-in this example the file is, qsub \file{test.o144}. This file represents the 
-standard output (and error, if there is any) of the job in question. If you 
-look at the contents of your newly created file, you will see that it 
-contains the output of the, \texttt{module list} command. 
-Important information is often written to this file.
-
-Congratulations on your first job! 
-
-% ------------------------------------------------------------------------------
-\subsection{Common Job Management Commands Summary}
-\label{sect:job-management-commands}
-
-Here are useful job-management commands: 
-
-\begin{itemize}
-\item
-\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
-on \texttt{speed-submit} you can submit it using this
-
-\item
-\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
-
-\item
-\texttt{qstat -f -u "*"}: display cluster status for all users. 
-
-\item
-\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
-
-\item
-\texttt{qdel [job-ID]}: delete job [job-ID]. 
-
-\item
-\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
-
-\item
-\texttt{qrls [job-ID]}: release held job [job-ID]. 
-
-\item
-\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
-\end{itemize}
-
-
-% ------------------------------------------------------------------------------
-\subsection{Advanced \tool{qsub} Options}
-\label{sect:qsub-options}
-
-In addition to the basic \tool{qsub} options presented earlier, there are a 
-few additional options that are generally useful:
-
-\begin{itemize}
-\item
-\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
-(e)nds; (a)borts. Mail is sent to the default address of,
-\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
-\texttt{-M}). The report sent when a job ends includes job 
-runtime, as well as the maximum memory value hit (\api{maxvmem}). 
-
-\item
-\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
-notification address, rather than the default (see, \texttt{-m}). 
-
-\item
-\texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
-
-\item
-\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
-that if you give a single number, that represents \emph{seconds}, not hours. 
-
-\item
-\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
-The many \tool{qsub} options available are read with, \texttt{man qsub}. Also 
-note that \tool{qsub} options can be specified during the job-submission 
-command, and these \emph{override} existing script options (if present). The 
-syntax is, \texttt{qsub [options] /PATHTOSCRIPT}, but unlike in the script, 
-the options are specified without the leading \verb+#$+
-(e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
-
-\end{itemize}
-
-% ------------------------------------------------------------------------------
-\subsection{Array Jobs}
-
-Array jobs are those that start a batch job or a parallel job multiple times. 
-Each iteration of the job array is called a task and receives a unique job ID.
-
-To submit an array job, use the \texttt{\-t} option of the \texttt{qsub} 
-command as follows:
-
-\begin{verbatim}
-qsub -t n[-m[:s]] <batch_script>
-\end{verbatim}
-
-\textbf{-t Option Syntax:}
-\begin{itemize}
-\item
-\texttt{n}: indicates the start-id.
-\item
-\texttt{m}: indicates the max-id.
-\item
-\texttt{s}: indicates the step size.
-\end{itemize}
-
-\textbf{Examples:}
-\begin{itemize}
-\item
-\texttt{qsub -t 10 array.sh}: submits a job with 1 task where the task-id is 10. 
-\item
-\texttt{qsub -t 1-10 array.sh}: submits a job with 10 tasks numbered consecutively from 1 to 10.
-\item
-\texttt{qsub -t 3-15:3 array.sh}: submits a jobs with 5 tasks numbered consecutively with step size 3
-(task-ids 3,6,9,12,15).
-\end{itemize}
-
-\textbf{Output files for Array Jobs:}
-
-The default and output and error-files are \option{job\_name.[o|e]job\_id} and\\
-\option{job\_name.[o|e]job\_id.task\_id}.
-%
-This means that Speed creates an output and an error-file for each task 
-generated by the array-job as well as one for the super-ordinate array-job. 
-To alter this behavior use the \option{-o} and \option{-e} option of
-\tool{qsub}. 
-
-For more details about Array Job options, please review the manual pages for 
-\option{qsub} by executing the following at the command line on speed-submit 
-\tool{man qsub}.
- 
-% ------------------------------------------------------------------------------
-\subsection{Requesting Multiple Cores (i.e., Multithreading Jobs)}
-
-For jobs that can take advantage of multiple machine cores, up to 32 cores
-(per job) can be requested in your script with: 
-
-\begin{verbatim}
-#$ -pe smp [#cores] 
-\end{verbatim}
-
-\textbf{Do not request more cores than you think will be useful}, as larger-core
-jobs are more difficult to schedule. On the flip side, though, if you 
-are going to be running a program that scales out to the maximum single-machine
-core count available, please (please) request 32 cores, to avoid node 
-oversubscription (i.e., to avoid overloading the CPUs).
-
-Core count associated with a job appears under, ``states'', in the,
-\texttt{qstat -f -u "*"}, output.
-
-% ------------------------------------------------------------------------------
-\subsection{Interactive Jobs}
-
-Job sessions can be interactive, instead of batch (script) based. Such 
-sessions can be useful for testing and optimising code and resource 
-requirements prior to batch submission. To request an interactive job 
-session, use, \texttt{qlogin [options]}, similarly to a 
-\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}).
-Note that the options that are available for \tool{qsub} are not necessarily
-available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
-
-% ------------------------------------------------------------------------------
-\subsection{Scheduler Environment Variables}
-
-The scheduler presents a number of environment variables that can be used in 
-your jobs. Three of the more useful are \api{TMPDIR}, \api{SGE\_O\_WORKDIR}, 
-and \api{NSLOTS}:
-
-\begin{itemize}
-\item
-\api{\$TMPDIR}=the path to the job's temporary space on the node. It
-\emph{only} exists for the duration of the job, so if data in the temporary space 
-are important, they absolutely need to be accessed before the job terminates.
-
-\item
-\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
-NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
-the path defaults to your home directory.
-
-\item
-\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
-be used in place of hardcoded thread-request declarations. 
-
-\end{itemize}
-
-\noindent
-In \xf{fig:tmpdir.sh} is a sample script, using all three.
-
-\begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{tmpdir.sh}
-    \caption{Source code for \file{tmpdir.sh}}
-	\label{fig:tmpdir.sh}
-\end{figure}
-
+% TMP scheduler-specific section
+\input{scheduler-scripting}
 
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
@@ -743,173 +390,23 @@ home directory:
 \item
 \texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
 \item
-\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \file{authorized\_keys}
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}}
 file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
 \item
-Set file permissions of \file{authorized\_keys} to 600; of your NFS-mounted home
+Set file permissions of \texttt{authorized\_keys} to 600; of your NFS-mounted home
 to 700 (note that you likely will not have to do anything here, as most people
 will have those permissions by default). 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Example Job Script: Fluent}
-
-\begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
-    \caption{Source code for \file{fluent.sh}}
-	\label{fig:fluent.sh}
-\end{figure}
-
-The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. 
-Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
-parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
-important}), and are setting \api{\$TMPDIR} as the in-job location for the
-``moment'' \file{rfile.out} file (in-job, because the last line of the script 
-copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
-Job progress can be monitored by examining the standard-out file (e.g.,
-\file{flu10000.o249}), and/or by examining the ``moment'' file in
-\file{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running 
-the job. \textbf{Caveat:} take care with journal-file file paths.
-
-% ------------------------------------------------------------------------------
-\subsection{Java Jobs}
-
-Jobs that call \tool{java} have a memory overhead, which needs to be taken 
-into account when assigning a value to \api{h\_vmem}. Even the most basic 
-\tool{java} call, \texttt{java -Xmx1G -version}, will need to have,
-\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
-Note that this memory overhead grows proportionally with the value of
-\texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G,
-\api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
-
-% TODO: add a MARF Java job
-
-% ------------------------------------------------------------------------------
-\subsection{Scheduling On The GPU Nodes}
-
-The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
-cards: each card has 2048 cores and 16GB of RAM. Though note that the P6
-is mainly a single-precision card, so unless you need the GPU double
-precision, double-precision calculations will be faster on a CPU node.
-
-Job scripts for the GPU queue differ in that they do not need these
-statements:
-
-\begin{verbatim}
-#$ -pe smp <threadcount>
-#$ -l h_vmem=<memory>G
-\end{verbatim}
-
-But do need this statement, which attaches either a single GPU, or, two
-GPUs, to the job:
-
-\begin{verbatim}
-#$ -l gpu=[1|2]
-\end{verbatim}
-
-Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
-dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
-total of \emph{four} GPUs can be actively attached to any one user at any given
-time.
-
-Once that your job script is ready, you can submit it to the GPU queue
-with:
-
-\begin{verbatim}
-qsub -q g.q ./<myscript>.sh
-\end{verbatim}
-
-And you can query \tool{nvidia-smi} on the node that is running your job with:
-
-\begin{verbatim}
-ssh <username>@speed[-05|-17] nvidia-smi
-\end{verbatim}
-
-Status of the GPU queue can be queried with:
-
-\begin{verbatim}
-qstat -f -u "*" -q g.q
-\end{verbatim}
-
-\textbf{Very important note} regarding TensorFlow and PyTorch: 
-if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
-do not use the \api{tf.distribute} and/or\\
-\api{torch.nn.DataParallel} 
-functions, as they will crash the compute node (100\% certainty). 
-This appears to be the current hardware's architecture's defect.
-%
-The workaround is to either
-% TODO: Need to link to that example
-manually effect GPU parallelisation (TensorFlow has an example on how to
-do this), or to run on a single GPU.
-
-\vspace{10pt}
-\noindent
-\textbf{Important}
-\vspace{10pt}
-
-Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
-queue but those jobs will hang and never run.
-
-There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
-in \texttt{speed-19}. Their availability is seen with, \texttt{qstat -F g}
-(note the capital): 
-
-\small
-\begin{verbatim}
-queuename                      qtype resv/used/tot. load_avg arch          states
----------------------------------------------------------------------------------
-...
----------------------------------------------------------------------------------
-g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
-        hc:gpu=6
----------------------------------------------------------------------------------
-g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
-        hc:gpu=6
----------------------------------------------------------------------------------
-...
----------------------------------------------------------------------------------
-s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.37    lx-amd64
-        hc:gpu=1
----------------------------------------------------------------------------------
-etc. 
-\end{verbatim}
-\normalsize
-
-This status demonstrates that all five are available (i.e., have not been 
-requested as resources). To specifically request a GPU node, add,
-\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
-\tool{qlogin} (statement) request. For example,
-\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You 
-will see that this job has been assigned to one of the GPU nodes:
-
-\small
-\begin{verbatim}
-queuename                      qtype resv/used/tot. load_avg arch          states
---------------------------------------------------------------------------------- 
-g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
---------------------------------------------------------------------------------- 
-g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
---------------------------------------------------------------------------------- 
-s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
----------------------------------------------------------------------------------
-etc. 
-\end{verbatim}
-\normalsize
-
-And that there are no more GPUs available on that node (\texttt{hc:gpu=0}). Note
-that no more than two GPUs can be requested for any one job. 
-
-% ------------------------------------------------------------------------------
-\section{Creating Virtual Environments}
+\subsection{Creating Virtual Environments}
 \label{sect:environments}
 
 The following documentation is specific to the \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
 
 % ------------------------------------------------------------------------------
-\subsection{Anaconda}
+\subsubsection{Anaconda}
 
 To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
 option when executing \texttt{conda create}. For example, to create an anaconda environment for 
@@ -926,7 +423,7 @@ environment in texttt{a\_user}'s home directory by default.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
-\subsubsection{List Environments}
+\paragraph{List Environments.}
 
 To view your conda environments, type: \texttt{conda info --envs}
 
@@ -938,7 +435,7 @@ base                  *  /encs/pkg/anaconda3-2019.07/root
 \end{verbatim}      
 
 % ------------------------------------------------------------------------------
-\subsubsection{Activate an Environment}
+\paragraph{Activate an Environment.}
 
 Activate the environment \texttt{\/speed\-scratch\/a\_user\/myconda} as follows
 \begin{verbatim}
@@ -959,73 +456,8 @@ into the environment.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
-\subsection{CUDA}
-
-When calling \tool{CUDA} within job scripts, it is important to create a link to
-the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
-For example, to use the \texttt{cuda-11.5} libraries, specify the following in 
-your Makefile.
-
-\begin{verbatim}
--L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
-\end{verbatim}
-
-In your job script, specify the version of \texttt{gcc} to use prior to calling 
-cuda. For example: 
-   \texttt{module load gcc/8.4}
-or
-   \texttt{module load gcc/9.3}
-
-% ------------------------------------------------------------------------------
-\subsubsection{Special Notes for sending CUDA jobs to the GPU Queue}
-
-It is not possible to create a \texttt{qlogin} session on to a node in the 
-\textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not 
-available, jobs must be submitted to the \textbf{GPU Queue} in order to compile 
-and link.
-
-We have several versions of CUDA installed in:
-\begin{verbatim}
-/encs/pkg/cuda-11.5/root/
-/encs/pkg/cuda-10.2/root/
-/encs/pkg/cuda-9.2/root
-\end{verbatim}
-
-For CUDA to compile properly for the GPU queue, edit your Makefile 
-replacing \option{\/usr\/local\/cuda} with one of the above.
-
-% ------------------------------------------------------------------------------
-\subsection{efficientdet}
-
-The following steps describing how to create an efficientdet environment on
-\emph{Speed}, were submitted by a member of Dr. Amer's research group.
-
-\begin{itemize}
-    \item 
-    Enter your ENCS user account's speed-scratch directory 
-    \verb!cd /speed-scratch/<encs_username>!
-    \item
-    load python \verb!module load python/3.8.3!
-    create virtual environment \verb!python3 -m venv <env_name>!
-    activate virtual environment \verb!source <env_name>/bin/activate.csh!
-    install DL packages for Efficientdet
-\end{itemize}
-\begin{verbatim}
-pip install tensorflow==2.7.0
-pip install lxml>=4.6.1
-pip install absl-py>=0.10.0
-pip install matplotlib>=3.0.3
-pip install numpy>=1.19.4
-pip install Pillow>=6.0.0
-pip install PyYAML>=5.1
-pip install six>=1.15.0
-pip install tensorflow-addons>=0.12
-pip install tensorflow-hub>=0.11
-pip install neural-structured-learning>=1.3.1
-pip install tensorflow-model-optimization>=0.5
-pip install Cython>=0.29.13
-pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
-\end{verbatim}
+% TMP scheduler-specific section
+\input{scheduler-job-examples}
 
 % ------------------------------------------------------------------------------
 \section{Conclusion}
@@ -1071,43 +503,14 @@ amalgamation of approximately one week's worth of past wallclock (i.e., time
 spent on the node(s)) and CPU activity (on the node(s)).
 
 \item
-Jobs should NEVER be run outside of the province of the scheduler. Repeat 
-offenders risk loss of cluster access. 
+Jobs should NEVER be run outside of the province of the scheduler.
+Repeat offenders risk loss of cluster access. 
 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Tips/Tricks}
-\label{sect:tips}
-
-\begin{itemize}
-\item
-Files/scripts must have Linux line breaks in them (not Windows ones).
-\item
-Use \tool{rsync}, not \tool{scp}, when moving data around. 
-\item
-If you are going to move many many files between NFS-mounted storage and the 
-cluster, \tool{tar} everything up first. 
-\item
-If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}),
-you will need to source a different scheduler file, and will need to 
-change the shell declaration in your script(s).
-\item
-The load displayed in \tool{qstat} by default is \api{np\_load}, which is
-load/\#cores. That means that a load of, ``1'', which represents a fully active 
-core, is displayed as $0.03$ on the node in question, as there are 32 cores 
-on a node. To display load ``as is'' (such that a node with a fully active 
-core displays a load of approximately $1.00$), add the following to your
-\file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
-
-\item
-Try to request resources that closely match what your job will use: 
-requesting many more cores or much more memory than will be needed makes a 
-job more difficult to schedule when resources are scarce.
-
-\item
-E-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
-\end{itemize}
+% TMP scheduler-specific section
+\input{scheduler-tips}
 
 % ------------------------------------------------------------------------------
 \subsection{Use Cases}
@@ -1142,6 +545,12 @@ Web service data conversion and analysis
 Genomic alignment exercises
 \end{itemize}
 \item
+\bibentry{oi-containers-poster-siggraph2023}
+\item
+\bibentry{Gopal2024Sep}
+\item
+\bibentry{Gopal2023Mob}
+\item
 \bibentry{niksirat2020}
 \end{itemize}
 
@@ -1151,90 +560,47 @@ Genomic alignment exercises
 % ------------------------------------------------------------------------------
 \section{History}
 
+% ------------------------------------------------------------------------------
 \subsection{Acknowledgments}
 \label{sect:scott-acks}
 
-The first 6 versions of this manual and early job script samples,
+\begin{itemize}
+	\item 
+The first 6 (to 6.5) versions of this manual and early UGE job script samples,
 Singularity testing and user support were produced/done by Dr.~Scott Bunnell
 during his time at Concordia as a part of the NAG/HPC group. We thank
 him for his contributions.
+	\item 
+The HTML version with devcontainer support was contributed by Anh H Nguyen.
+\end{itemize}
 
+% ------------------------------------------------------------------------------
+\subsection{Phase 3}
+
+Phase 3 had 4 vidpro nodes added from Dr.~Amer totalling 6x P6 and 6x V100
+GPUs added.
+
+% ------------------------------------------------------------------------------
+\subsection{Phase 2}
+
+Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes.
+The P6s replaced 4x of FirePro S7150.
+
+% ------------------------------------------------------------------------------
 \subsection{Phase 1}
 
 Phase 1 of Speed was of the following configuration:
 
 \begin{itemize}
 \item
-Sixteen, 32-core nodes, each with 512 GB of memory and approximately 1 TB of volatile-scratch disk space. 
+Sixteen, 32-core nodes, each with 512~GB of memory and approximately 1~TB of volatile-scratch disk space. 
 \item
-Five AMD FirePro S7150 GPUs, with 8 GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
+Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\section{Frequently Asked Questions}
-\label{sect:faqs}
-
-\subsection{"Disk quota exceeded" Error}
-\subsubsection{Probably Cause}
-The \texttt{"Disk quota exceeded"} Error occurs when your application has run out of disk space to write to. On Speed this error can be returned when:
-\begin{enumerate}
-	\item
-The \texttt{/tmp} directory on the speed node your application is running on is full and cannot be written to.
-	\item
-Your NFS-provided home is full and cannot be written to.
-\end{enumerate}
-
-\subsubsection{Possible Solutions}
-
-\begin{enumerate}
-	\item
-Use the \textbf{-cwd} job script option to make the directory that the job script
- is submitted from the \texttt{job working directory}, e.g., the directory to 
- store all output files in.
-	\item
-As previously mentioned in this manual, it is recommended to use local disk space 
-for IO intensive operations, however, as the \texttt{/tmp} on the speed machines 
-is \texttt{1GB} in size it may be necessary for scripts to store temporary data 
-elsewhere. 
-Review the documentation for the module(s) you are calling within your script to 
-determine how to set working directories for that application. 
-The basic steps for this solution are:
-\begin{itemize}
-	\item
-	Review the documentation for the module(s) you are calling within your script to 
-	determine how to set working directories for that application.
-	\item
-	Create a directory in speed-scratch for your temporary files. 
-	For example, to create a subdirector called \option{\/tmp} for user 
-	\textbf{a\_user}, in that user's speed-scratch directory execute:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/tmp}
-	\item
-	If necessary, create a subdirectory for recovery files as well:
-	\textbf{mkdir \-m 750 \/speed\-scratch\/a\_user\/recovery}
-	\item
-	Use the documentation to update your script(s) and command calls to use 
-	the working directories created in the previous steps.	
-	\end{itemize}
-\end{enumerate}
-
-\subsubsection{Example of setting working directories for \tool{COMSOL}}
-
-\begin{itemize}
-	\item 
-	Create directories for recovery, temporary, and configuration files. 
-	For example, to create these directories for \textbf{a\_user}:
-	\begin{verbatim}
-	mkdir -m 750 -p /speed-scratch/a_user/comsol/{recovery,tmp,config}
-	\end{verbatim}
-	\item
-	Add the following command switches to the COMSOL command to use the 
-	directories created for \textbf{a\_user} above:
-	\begin{verbatim} 
-	-recoverydir /speed-scratch/a_user/comsol/recovery 
-	-tmpdir /speed-scratch/a_user/comsol/tmp
-	-configuration/speed-scratch/a_user/comsol/config
-	\end{verbatim}
-\end{itemize} 
+% TMP scheduler-specific section
+\input{scheduler-faq}
 
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
@@ -1246,30 +612,36 @@ are not managed by HPC/NAG of AITS, so contact their respective representatives.
 \begin{itemize}
 \item
 \texttt{computation.encs} CPU only 3-machine cluster running longer jobs
-without a scheduler
+without a scheduler at the moment
 \item
 \texttt{apini.encs} cluster for teaching and MPI programming (see the corresponding
-course)
+course in CSSE)
 \item
-Computer Science and Software Engineering (CSSE) Virya GPU Cluster
-(2 nodes totalling 16 V100 NVIDIA GPUs), contact Alexander Aric at \texttt{gpu-help AT encs}
-to request access if you are a CSSE member
+Computer Science and Software Engineering (CSSE) Virya GPU Cluster. For CSSE 
+members only. The cluster has 4 nodes with total of 32 NVIDIA GPUs (a mix of
+V100s and A100s). To request access send email to \texttt{virya.help@concordia.ca}.
 \item
-Dr. Maria Amer's VidPro group's nodes in Speed with additional V100 and P6 GPUs
-(use \texttt{a.q} for those nodes).
+Dr. Maria Amer's VidPro group's nodes in Speed (-01, -03, -25, -27) with additional V100 and P6 GPUs.
+\item
+Dr. Amin Hammad's \texttt{construction.encs} Lambda Labs station
 \item
 Dr. Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
 \item
 Dr. Ivan Contreras' servers
 \item
-Compute Canada / Calcul Quebec
+If you are a member of School of Health (formerly PERFORM Center),
+you may have access to their local 
+\href
+{https://perform-wiki.concordia.ca/mediawiki/index.php/HPC_Cluster}
+{PERFORM's High Performance Computing (HPC) Cluster}.
+Contact Thomas Beaudry for details and how to obtain access.
+\item
+Digital Alliance (Compute Canada / Calcul Quebec)
 \end{itemize}
-
 
 % ------------------------------------------------------------------------------
 % Refs:
 %
-
 \nocite{aosa-book-vol1}
 \label{sect:bib}
 %\bibliographystyle{IEEEtran}
