@@ -137,6 +137,121 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
+## Openiss-yolov3 
+This is a case study example on image classification, for more details please visit [Openiss-yolov3](https://github.com/tariqghd/openiss-yolov3).
+
+### Speed Login Configuration 
+1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
+2. If you didn't know how to login to speed and prepare the working environment please check the manual in the follwing [link](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 2.
+
+After you logged in to speed change your working directory to `/speed-scratch/$USER` diectory.
+```
+cd /speed-scratch/$USER/
+```
+
+### Speed Setup and Development Environment Preperation
+The pre-requisites to prepare the virtual development environment using anaconda is explained in [speed manual](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 3, please check that for more inforamtion.
+1. Make sure you are in speed-scratch directory. Then Download Yolo project from [Github website](https://github.com/tariqghd/openiss-yolov3) to your speed-scratch proper diectory. 
+```
+cd /speed-scratch/$USER/
+git clone https://github.com/tariqghd/openiss-yolov3.git
+```
+2. Starting by loading anaconda module 
+```
+module load anaconda/default
+```
+3. Switch to the project directoy. Create anaconda virtual environment, and configure development librires. The name of the environment can by any name here as an example named YOLO. Activate the conda environment YOLOInteractive.
+```
+cd /speed-scratch/$USER/openiss-yolov3
+conda create -p /speed-scratch/$USER/YOLO
+conda activate /speed-scratch/$USER/YOLO
+```
+4. Install all required librires you need and upgrade pip to install opencv-contrib-python library 
+
+```
+conda install python=3.5
+conda install Keras=2.1.5
+conda install Pillow
+conda install matplotlib
+conda install -c menpo opencv
+pip install --upgrade pip 
+pip install opencv-contrib-python
+```
+
+5. Validate conda environemnt and installed packeges using following commands. Make sure the version of python and keras are same as requred.
+```
+conda info --env
+conda list
+```
+if you need to delete the created virtual environment 
+```
+conda deactivate
+conda env remove -p /speed-scratch/$USER/YOLO
+```
+### Run Interactive Script 
+File `yolo_submit.sh` is the speed script to run video example to run it you follow these steps:
+1. Run interactive job we need to keep `ssh -X` option enabled and `xming` server in your windows  working. 
+2. The `qsub` is not the proper command since we have to keep direct ssh connection to the computational node, so `qlogin` will be used. 
+3. Enter `qlogin` in the `speed-submit`. The `qlogin` will find an approriate  computational node then it will allow you to have direct `ssh -X' login to that node. Make sure you are in the right directory and activate conda environment again.
+
+```
+qlogin 
+cd /speed-scratch/$USER/openiss-yolov3
+conda activate /speed-scratch/$USER/YOLO
+```
+4. Before you run the script you need to add permission access to the project files, then start run the script `./yolo_submit.sh`    
+```
+chmod +rwx *
+./yolo_submit.sh
+```
+5. A pop up window will show a classifed live video. 
+
+Please note that since we have limited number of node with GPU support `qlogin` is not allowed to direct you to login to these server you will be directed to the availabel computation nodes in the cluster with CPU support only. 
+
+### Run Non-interactive Script 
+Before you run the script you need to add permission access to the project files using `chmod` command.   
+```
+chmod +rwx *
+```
+To run the script you will use `qsub`, you can run the task on CPU or gpu computation node as follwoing:
+1. For CPU nodes use `yolo_subCPU.sh` file 
+```
+ qsub ./yolo_subCPU.sh
+```
+
+2. For GPU nodes use `yolo_subGPU.sh` file with option -q to specify only gpu queue (g.q) submission.
+```
+qsub -q g.q ./yolo_subGPU.sh
+```
+
+
+```
+qlogin 
+cd /speed-scratch/$USER/SpeedYolo
+conda activate /speed-scratch/$USER/YOLOInteractive
+```
+4. Before you run the script you need to add permission access to the project files, then start run the script `./yolo_submit.sh`    
+```
+chmod +rwx *
+./yolo_submit.sh
+```
+5. A pop up window will show a classifed live video. 
+
+Please note that since we have limited number of node with GPU support `qlogin` is not allowed to direct you to login to these server you will be directed to the availabel computation nodes in the cluster with CPU support only. 
+
+
+For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+
+## performance comparison 
+Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of teasla P6. The project use  keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 (gpu32), for P6 (gpu) you can find that in scripts shell.    
+
+|   1GPU-P6     |    1GPU-V100  |    2GPU-V100  |    32CPU       |
+| --------------|-------------- |-------------- |----------------|
+|    22.45      |   17.15       |   23.33       |     60.42      |
+|    22.15      |   17.54       |   23.08       |     60.18      |
+|    22.18      |   17.18       |   23.13       |     60.47      |
+
+
 ## Openiss-reid-tfk ##
 
 The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
@@ -175,6 +290,7 @@ TEST DATASET: Market1501
 
 **IMPORTANT**  
 Modify the script `openiss-2-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; h_vmem= and gpu= CAN'T be enabled at the same time, more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
+
 
 ## CUDA ##
 
