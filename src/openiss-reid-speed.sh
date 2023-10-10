@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 
 # Give job a name
-#$ -N reid-job
+#$ -N openiss-reid
 
 # Send an email when the job starts, finishes or if it is aborted.
 #$ -m bea

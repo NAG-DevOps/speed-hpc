@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 ## since it is qlogin no need to configure cluster setting because qlogin choosed the proper computational node  
 # Give job a name
-#$ -N yoloInteractive
+#$ -N oi-yolo-interactive
 
 # Set output directory to current
 # #$ -cwd
