@@ -214,5 +214,85 @@ We have several versions of CUDA installed in:
 /encs/pkg/cuda-9.2/root
 \end{verbatim}
 
-For CUDA to compile properly for the GPU queue, edit your Makefile 
+For CUDA to compile properly for the GPU queue, edit your \texttt{Makefile}
 replacing \option{\/usr\/local\/cuda} with one of the above.
+
+% ------------------------------------------------------------------------------
+\subsubsection{OpenISS Examples}
+\label{sect:openiss-examples}
+
+These represent more comprehensive research-like examples of
+jobs for computer vision and other tasks with a lot longer
+runtime (a subject to the number of epochs and other parameters)
+derive from the actual research works of students and their
+theses.
+%
+These jobs require the use of CUDA and GPUs.
+These examples are available as ``native'' jobs on Speed
+and as Singularity containers.
+
+% ------------------------------------------------------------------------------
+\paragraph{OpenISS and REID}
+\label{sect:openiss-reid}
+
+The example
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}
+  {openiss-reid-speed.sh}
+illustrates a job for a computer-vision based person re-identification
+(e.g., motion capture-based tracking for stage performance) part of the OpenISS
+project by Haotao Lai~\cite{lai-haotao-mcthesis19} using TensorFlow and Keras.
+The fork of the original repo~\cite{openiss-reid-tfk} adjusted to to run on Speed is here:
+
+\begin{itemize}
+	\item \url{https://github.com/NAG-DevOps/openiss-reid-tfk}
+\end{itemize}
+
+and its detailed description on how to run it on Speed is
+in the README:
+
+\begin{itemize}
+	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\paragraph{OpenISS and YOLOv3}
+\label{sect:openiss-yolov3}
+
+The related code using YOLOv3 framework is in the
+the fork of the original repo~\cite{openiss-yolov3} adjusted
+to to run on Speed is here:
+
+\begin{itemize}
+	\item \url{https://github.com/NAG-DevOps/openiss-yolov3}
+\end{itemize}
+
+Its example job scripts can run on both CPUs and GPUs,
+as well as interactively using TensorFlow:
+
+\begin{itemize}
+	\item Interactive mode:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-interactive.sh}
+  {openiss-yolo-interactive.sh}
+	\item CPU-based job:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-cpu.sh}
+  {openiss-yolo-cpu.sh}
+	\item GPU-based jon:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-gpu.sh}
+  {openiss-yolo-gpu.sh}
+\end{itemize}
+
+The detailed description on how to run these on Speed is
+in the README at:
+
+\begin{itemize}
+	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
+\end{itemize}
+
+
+%% ------------------------------------------------------------------------------
+%\subsection{Singularity Containers}
+%\label{sect:singularity-containers}
+%
+%If the \texttt{/encs} software tree does not have a required software
+%instantaneously available, another option is to run Singularity
+%containers.
