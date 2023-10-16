@@ -288,11 +288,114 @@ in the README at:
 	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
 \end{itemize}
 
+% ------------------------------------------------------------------------------
+\subsection{Singularity Containers}
+\label{sect:singularity-containers}
 
-%% ------------------------------------------------------------------------------
-%\subsection{Singularity Containers}
-%\label{sect:singularity-containers}
+If the \texttt{/encs} software tree does not have a required software
+instantaneously available, another option is to run Singularity
+containers. We run EL7 flavor of Linux, and if some projects
+require Ubuntu or other distributions, there is a possibility
+to run that software as a container, including the ones
+translated from Docker.
+
+The example
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh}
+  {lambdal-singularity.sh}
+showcases an immediate use of a container built for the Ubuntu-based
+LambdaLabs software stack, originally built as a Docker image then
+pulled in as a Singularity container that is immediately available
+for use as that job example illustrates. The source material
+used for the docker image was our fork of their official
+repo: \url{https://github.com/NAG-DevOps/lambda-stack-dockerfiles}
+
+NOTE: It is important if you make your own containers or pull from
+DockerHub, use your \verb+/speed-scratch/$USER+ directory as these
+images may easily consume gigs of space in your home directory
+and you'd run out of quota there very fast.
+
+%\noindent
+TIP: To check for your quota, and the corresponding commands
+to find big files, see: \url{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}
+
+We likewise built equivalent OpenISS (\xs{sect:openiss-examples})
+containers from their Docker counter parts as they were used for teaching and
+research~\cite{oi-containers-poster-siggraph2023}. The
+images from \url{https://github.com/NAG-DevOps/openiss-dockerfiles}
+and their DockerHub equivalents \url{https://hub.docker.com/u/openiss}
+are found in the same public directory on \verb+/speed-scratch/nag-public+
+as the LambdaLabs Singularity image. They all have \texttt{.sif} extension.
+Some of them can be ran in both batch or interactive mode, some
+make more sense to run interactively. They cover some basics with CUDA,
+OpenGL rendering, and computer vision tasks as examples from the OpenISS
+library and other libraries, including the base images that use diffrent
+distros. We also include Jupyter notebook example with Conda support.
+
+\begin{verbatim}
+/speed-scratch/nag-public:
+
+openiss-cuda-conda-jupyter.sif
+openiss-cuda-devicequery.sif
+openiss-opengl-base.sif
+openiss-opengl-cubes.sif
+openiss-opengl-triangle.sif
+openiss-reid.sif
+openiss-xeyes.sif
+\end{verbatim}
+
+The currently recommended version of Singularity is
+\texttt{singularity/3.10.4/default}.
+
+This section comprises an introduction to working with Singularity, its 
+containers, and what can and cannot be done with Singularity on the ENCS 
+infrastructure. It is not intended to be an exhaustive presentation of 
+Singularity: the program's authors do a good job of that here:
+\url{https://www.sylabs.io/docs/}. It also assumes that you have successfully installed 
+Singularity on a user-managed/personal system (see next paragraph as to why).
+
+Singularity containers are essentially either built from an existing 
+container, or are built from scratch. Building from scratch requires a recipe 
+file (think of like a Dockerfile), and the operation \emph{must} be effected as root.
+You will not have root on the ENCS infrastructure, so any built-from-scratch containers must be created 
+on a user-managed/personal system. Root-level permissions are also required
+(in some cases, essential; in others, for proper build functionality) for 
+building from an existing container.
+%, with one exception (see, Building A 
+%Container From An Existing Container).
 %
-%If the \texttt{/encs} software tree does not have a required software
-%instantaneously available, another option is to run Singularity
-%containers.
+Three types of Singularity containers can be built: file-system; sandbox; 
+squashfs. The first two are ``writable'' (meaning that changes can persist 
+after the Singularity session ends). File-system containers are built around 
+the ext3 file system, and are a read-write ``file'', sandbox containers are 
+essentially a directory in an existing read-write space, and squashfs 
+containers are a read-only compressed ``file''. Note that file-system 
+containers \emph{cannot} be resized once built.
+
+Note that the default build is a squashfs one. Also note what Singularity's 
+authors have to say about the builds, ``A common workflow is to use the 
+``sandbox'' mode for development of the container, and then build it as a 
+default (squashfs) Singularity image when done.'' File-system containers are 
+considered to be, ``legacy'', at this point in time. When built, a \emph{very small}
+overhead is allotted to a file-system container (think, MB), and that 
+\emph{cannot} be changed.
+
+Probably for the most of your workflows you might find there is a
+Docker container exists for your tasks, in this case you
+can use the docker pull function of Singularity as a part
+of you virtual environment setup as an interactive job
+allocation:
+
+\small
+\begin{verbatim}
+qlogin
+cd /speed-scratch/$USER/
+singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+\end{verbatim}
+\normalsize
+
+\noindent
+This method can be used for converting Docker containers directly on Speed.
+On GPU nodes make sure to pass on the \option{--nv} flag to Singularity,
+so its containers could access the GPUs. See the linked example.
