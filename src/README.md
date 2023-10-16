@@ -21,6 +21,44 @@ These are examples either trivial or some are more elaborate. Some are described
   - `efficientdet.sh` -- `efficientdet` with Conda environment described below
   - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
   - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+  - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
+  - `openiss-yolo-cpu.sh`, `openiss-yolo-gpu.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
+
+# Creating Environments and Compiling Code on Speed
+
+## Correct Procedure
+### Overview of preparing environments, compiling code and testing
+- Create a qlogin session to the queue you wish to run your jobs 
+(e.g. qlogin -q g.q -l gpu=1 for GPU jobs )  
+- Within the qlogin session, create and activate an Anaconda environment in 
+your /speed-scratch/ directory using the instructions found in Section 2.11.1 of the manual: 
+https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
+- Compile your code within the environment.
+- Test your code with a limited data set.
+- Once you are satisfied with your test results, exit your qlogin session.
+
+### Once your environment and code have been tested
+- Create a job script. (see https://nag-devops.github.io/speed-hpc/#job-submission-basics)
+- Remember to Activate your Anaconda environment in the user scripting section
+- Use the qsub command to submit your job script to the correct queue
+
+### Do not use the submit node to create environments or compile code
+- Speed-submit is a virtual machine intended to submit user jobs to 
+the grid engine's scheduler. It is not intended to compile or run code. 
+- Importantly, speed-submit does not have GPU drivers. This means that code compiled on speed-submit will not be compiled against GPU drivers. 
+- Processes run outside of the scheduler on speed-submit will be killed and you will lose your work.
+
+## PIP
+By default, pip installs packages to a system-wide default location.
+
+Creating environments via pip shound NOT be done outside of an Anaconda environment.
+
+Why you should create an Anaconda environment and not use pip directly from the 
+command line:
+- Using pip directly from the command line affects the system wide environment. If all users
+use pip in this way, the packages and versions installed via pip may change while your jobs run.
+- Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
+- It is possible to create multiple conda environments for your different projects.
 
 ## Environments
 
@@ -48,7 +86,9 @@ The default shell for ENCS accounts is tcsh. Therefore, to initialize your defau
 To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
 
 For example:
-`conda create --prefix /speed-scratch/<encs_username>/myconda`
+`conda create --prefix /speed-scratch/$USER/myconda`
+
+Where `$USER` is an environment variable containing your encs_username
 
 Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
 
@@ -66,7 +106,7 @@ base                  *  /encs/pkg/anaconda3-2019.07/root
 #### Activate an Environment
 Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
 
-`conda activate /speed-scratch/<encs_username>/myconda`
+`conda activate /speed-scratch/$USER/myconda`
 
 After activating your environment, add pip to your environment by using 
 
@@ -80,10 +120,10 @@ This will install pip and pip's dependencies, including python.
 
 The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
 
-* Enter your ENCS user account's speed-scratch directory `cd /speed-scratch/<encs_username>`
+* Enter your ENCS user account's speed-scratch directory `cd /speed-scratch/$USER`
 * load python `module load python/3.8.3`
-* create virtual environment `python3 -m venv <env_name>`
-* activate virtual environment `source <env_name>/bin/activate.csh`
+* create virtual environment `python3 -m venv my_env_name`
+* activate virtual environment `source my_env_name/bin/activate.csh`
 * install DL packages for Efficientdet
 ```python
 pip install tensorflow==2.7.0
@@ -102,7 +142,168 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
-## CUDA
+## OpenISS-yolov3
+
+This is a case study example on image classification, for more details please visit [openiss-yolov3](https://github.com/NAG-DevOps/openiss-yolov3).
+
+### Speed Login Configuration 
+1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
+2. If you didn't know how to login to speed and prepare the working environment please check the manual in the follwing [link](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 2.
+
+After you logged in to speed change your working directory to `/speed-scratch/$USER` diectory.
+```
+cd /speed-scratch/$USER/
+```
+
+### Speed Setup and Development Environment Preperation
+
+The pre-requisites to prepare the virtual development environment using anaconda is explained in [speed manual](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 3, please check that for more inforamtion.
+1. Make sure you are in speed-scratch directory. Then Download OpenISS yolo3 project from [Github website](https://github.com/NAG-DevOps/openiss-yolov3) to your speed-scratch proper diectory. 
+```
+cd /speed-scratch/$USER/
+git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
+```
+2. Starting by loading anaconda module 
+```
+module load anaconda/default
+```
+3. Switch to the project directoy. Create anaconda virtual environment, and configure development librires. The name of the environment can by any name here as an example named YOLO. Activate the conda environment YOLOInteractive.
+```
+cd /speed-scratch/$USER/openiss-yolov3
+conda create -p /speed-scratch/$USER/YOLO
+conda activate /speed-scratch/$USER/YOLO
+```
+4. Install all required libraries you need and upgrade pip to install `opencv-contrib-python` library 
+
+```
+conda install python=3.5
+conda install Keras=2.1.5
+conda install Pillow
+conda install matplotlib
+conda install -c menpo opencv
+pip install --upgrade pip 
+pip install opencv-contrib-python
+```
+
+5. Validate conda environemnt and installed packages using following commands. Make sure the version of python and keras are same as requred.
+```
+conda info --env
+conda list
+```
+if you need to delete the created virtual environment 
+```
+conda deactivate
+conda env remove -p /speed-scratch/$USER/YOLO
+```
+
+### Run Interactive Script 
+
+File `openiss-yolo-interactive.sh` is the speed script to run video example to run it you follow these steps:
+1. Run interactive job we need to keep `ssh -X` option enabled and `xming` server in your windows  working. 
+2. The `qsub` is not the proper command since we have to keep direct ssh connection to the computational node, so `qlogin` will be used. 
+3. Enter `qlogin` in the `speed-submit`. The `qlogin` will find an approriate computational node then it will allow you to have direct `ssh -X` login to that node. Make sure you are in the right directory and activate conda environment again.
+```
+qlogin 
+cd /speed-scratch/$USER/openiss-yolov3
+conda activate /speed-scratch/$USER/YOLO
+```
+4. Before you run the script you need to add permission access to the project files, then start run the script `./openiss-yolo-interactive.sh`    
+```
+chmod +rwx *
+./openiss-yolo-interactive.sh
+```
+5. A pop up window will show a classifed live video. 
+
+Please note that since we have limited number of node with GPU support `qlogin` is not allowed to direct you to login to these servers you will be directed to the available computation nodes in the cluster with CPU support only. 
+
+### Run Non-interactive Script 
+Before you run the script you need to add permission access to the project files using `chmod` command.   
+```
+chmod +rwx *
+```
+To run the script you will use `qsub`, you can run the task on CPU or gpu computation node as follwoing:
+1. For CPU nodes use `openiss-yolo-cpu.sh` file 
+```
+ qsub ./openiss-yolo-cpu.sh
+```
+
+2. For GPU nodes use `openiss-yolo-gpu.sh` file with option -q to specify only gpu queue (g.q) submission.
+```
+qsub -q g.q ./openiss-yolo-gpu.sh
+```
+
+3. Once your job is allocated to a note, activate your conda environment
+```
+qlogin 
+cd /speed-scratch/$USER/SpeedYolo
+conda activate /speed-scratch/$USER/YOLOInteractive
+```
+4. Before you run the script you need to add permission access to the project files, then start run the script `./openiss-yolo-interactive.sh`    
+```
+chmod +rwx *
+./openiss-yolo-interactive.sh
+```
+5. A pop up window will show a classifed live video. 
+
+Please note that since we have limited number of node with GPU support `qlogin` is not allowed to direct you to login to these server you will be directed to the availabel computation nodes in the cluster with CPU support only. 
+
+
+For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+
+### Performance comparison
+
+Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of teasla P6. The project use  keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 (gpu32), for P6 (gpu) you can find that in scripts shell.    
+
+|   1GPU-P6     |    1GPU-V100  |    2GPU-V100  |    32CPU       |
+| --------------|-------------- |-------------- |----------------|
+|    22.45      |   17.15       |   23.33       |     60.42      |
+|    22.15      |   17.54       |   23.08       |     60.18      |
+|    22.18      |   17.18       |   23.13       |     60.47      |
+
+
+## OpenISS-reid-tfk ##
+
+The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
+
+### Environment ###
+
+The pre-requisites to prepare the environment are located in `environment.yml`. (https://github.com/NAG-DevOps/openiss-reid-tfk)
+
+Using a test dataset (Market1501) and 120 epochs as an example, we ran the script and the results were the following:
+
+Speed 1 GPU: 5hrs 25min
+
+Speed CPU - 32 cores: 2 days 22 hours
+
+TEST DATASET: Market1501
+
+---- Train images: 12936
+
+---- Query images: 3368
+
+---- Gallery images: 15913
+
+### Configuration and execution ###
+
+- Log into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/`
+- Clone the repo from https://github.com/NAG-DevOps/openiss-reid-tfk
+- Download the dataset:  go to datasets/ and run get_dataset_market1501.sh
+- In reid.py set the epochs (g_epochs=120 by default)
+- Download openiss-reid-speed.sh from this repository
+- On environment.yml comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
+- On openiss-reid-speed.sh comment or uncomment the secction accordingly (for CPU or GPU)
+- Submit the job:
+
+   On CPUs nodes: `qsub ./openiss-reid-speed.sh`
+
+   On GPUs nodes: `qsub -q g.q ./openiss-reid-speed.sh`
+
+**IMPORTANT**
+
+Modify the script `openiss-reid-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; h_vmem= and gpu= CAN'T be enabled at the same time, more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
+
+
+## CUDA ##
 
 When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the cuda-11.5 libraries, specify the following in your Makefile.
 ```
@@ -125,3 +326,17 @@ We have several versions of CUDA installed in:
 ```
 
 For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `/usr/local/cuda` with one of the above.
+
+## Python Modules
+
+By default when adding a python module /tmp is used for the temporary repository of files downloaded. /tmp on speed_submit is too small for pytorch.
+
+To add a python module:
+
+- First create you own tmp directory in /speed-scratch
+  - `mkdir /speed-scratch/$USER/tmp`
+- Use the tmp direcrtory you created
+  - `setenv TMPDIR /speed-scratch/$USER/tmp`
+- Attempt the installation of pytorch
+
+Where `$USER` is an environment variable containing your encs_username
