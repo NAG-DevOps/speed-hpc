@@ -47,7 +47,8 @@
 \and
     Gillian A. Roper
 \and
-    Network, Security and HPC Group\footnote{The group acknowledges the initial manual version VI produced by Dr.~Scott Bunnell while with us.}\\
+    Network, Security and HPC Group\footnote{The group acknowledges the initial manual version VI produced by Dr.~Scott Bunnell while with us
+		as well as Dr.~Tariq Daradkeh for his instructional support of the users and contribution of examples.}\\
     \affiliation{Gina Cody School of Engineering and Computer Science}\\
     \affiliation{Concordia University}\\
     \affiliation{Montreal, Quebec, Canada}\\
@@ -143,10 +144,19 @@ as NAG, SAG, FIS, and DOG.
 \begin{itemize}
 \item
 Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
-approximately 1~TB of volatile-scratch disk space. 
+approximately 1~TB of local volatile-scratch disk space. 
+
 \item
 Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
 CUDA, OpenGL, OpenCL, and Vulkan APIs). 
+
+\item
+4 VIDPRO nodes, with 6 P6 cards, and 6 V100 cards (32GB), and 
+256GB of RAM.
+
+\item
+7 new SPEED2 servers with 4x A100 80GB GPUs each, partitioned
+into 4x 20GB each.
 
 \item
 One AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the
@@ -165,7 +175,7 @@ To design and develop, test and run parallel, batch, and other algorithms, scrip
 Prepare them for big clusters:
 	\begin{itemize}
 	\item 
-	Digital Alliance (Calcul Quebec and Compute Canada)
+	Digital Research Alliance of Canada (Calcul Quebec and Compute Canada)
 	\item 
 	Cloud platforms
 	\end{itemize}
@@ -178,7 +188,7 @@ Anything that can fit into a 500-GB memory space and a scratch space of approxim
 \item
 CPU-based jobs. 
 \item
-CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}).
+CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}, \texttt{speed-37}--\texttt{speed-43}).
 \item
 Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \end{itemize}
@@ -208,7 +218,8 @@ Ansys, Fluent~\cite{fluent}, etc.
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
 
 In particular, there are over 2200 programs available in
-\texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
+\texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7)
+and we are building an quivalent under EL9 SPEED2 nodes.
 
 \begin{itemize}
 	\item 
@@ -279,6 +290,7 @@ use your GCS ENCS account credentials to create an SSH connection to
 
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
+\label{sect:ssh}
 
 Requirements to create connections to Speed:
 \begin{enumerate}
@@ -288,7 +300,7 @@ An active \textbf{ENCS user account} which has permission to connect to Speed.
 If you are off campus, an active connection to Concordia's VPN.
 Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
 	\item
-Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
+Windows systems require a terminal emulator such as PuTTY, Cygwin (or MobaXterm). 
 \end{enumerate}
 
 Open up a terminal window and type in the following SSH command being sure to replace
@@ -412,7 +424,7 @@ Gina Cody School of Engineering and Computer Science.
 
 To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
 option when executing \texttt{conda create}. For example, to create an anaconda environment for 
-\texttt{ai\_user}, execute the following at the command line:
+\texttt{a\_user}, execute the following at the command line:
 
 \begin{verbatim}
 conda create --prefix /speed-scratch/a_user/myconda
@@ -421,7 +433,7 @@ conda create --prefix /speed-scratch/a_user/myconda
 \vspace{10pt}
 \noindent
 \textbf{Note:} Without the \texttt{\-\-prefix} option, the \texttt{conda create} command creates the 
-environment in texttt{a\_user}'s home directory by default.
+environment in \texttt{a\_user}'s home directory by default.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
@@ -491,18 +503,18 @@ to be in your cluster-specific directory
 NFS is great for acute activity, but is not ideal for chronic activity.
 Any data that a job will 
 read more than once should be copied at the start to the scratch disk of a 
-compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), 
+compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SLURM\_SUBMIT\_DIR}), 
 any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
 job is near to finishing, those data should be copied to your NFS-mounted 
 home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps,
-\api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected 
+\api{\$SLURM\_SUBMIT\_DIR}). In other words, IO-intensive operations should be effected 
 locally whenever possible, saving network activity for the start and end of 
 jobs. 
 
 \item
 Your current resource allocation is based upon past usage, which is an 
 amalgamation of approximately one week's worth of past wallclock (i.e., time 
-spent on the node(s)) and CPU activity (on the node(s)).
+spent on the node(s)) and compute activity (on the node(s)).
 
 \item
 Jobs should NEVER be run outside of the province of the scheduler.
@@ -576,7 +588,7 @@ and theirs forks by the team.
 
 % ------------------------------------------------------------------------------
 \subsection{Acknowledgments}
-\label{sect:scott-acks}
+\label{sect:acks}
 
 \begin{itemize}
 	\item 
@@ -586,7 +598,18 @@ during his time at Concordia as a part of the NAG/HPC group. We thank
 him for his contributions.
 	\item 
 The HTML version with devcontainer support was contributed by Anh H Nguyen.
+	\item 
+Tariq Daradkeh, PhD, was our IT Instructional Specialist August 2022 to September 2023;
+working on the scheduler, scheduling research, end user support, and integration of
+examples, such as YOLOv3 in \xs{sect:openiss-yolov3} other tasks. We have a continued
+collaboration on HPC/scheduling research.
 \end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Phase 4}
+
+Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
+dubbed as ``SPEED2''.
 
 % ------------------------------------------------------------------------------
 \subsection{Phase 3}
