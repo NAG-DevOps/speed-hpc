@@ -22,6 +22,10 @@
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
 module load python/3.7.7/default
+## Create environment variables 
+setenv workdir $PWD
+mkdir -p /speed-scratch/$USER/tmp
+setenv TMPDIR /speed-scratch/$USER/tmp
 
 ## Create a virtual Python environment (env) in $TMPDIR
 srun python3.7 -m venv $TMPDIR/env
@@ -32,7 +36,7 @@ cd $GUROBI_HOME
 srun python3.7 setup.py build --build-base /tmp/${USER} install
 
 ## return to working directory
-cd $SLURM_SUBMIT_DIR
+cd $workdir
 
 ## Now, instead of using 'gurobi.sh MY_PYTHON_SCRIPT.py', you can use
 srun python MY_PYTHON_SCRIPT.py
