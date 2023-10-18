@@ -5,27 +5,34 @@
 \begin{itemize}
 \item
 Files/scripts must have Linux line breaks in them (not Windows ones).
+Use \tool{file} command to verify; and \tool{dos2unix} command
+to convert.
+
 \item
-Use \tool{rsync}, not \tool{scp}, when moving data around. 
+Use \tool{rsync}, not \tool{scp}, when moving a lot of data around.
+
 \item
 If you are going to move many many files between NFS-mounted storage and the 
 cluster, \tool{tar} everything up first. 
-\item
-If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}),
-you will need to source a different scheduler file, and will need to 
-change the shell declaration in your script(s).
-\item
-The load displayed in \tool{qstat} by default is \api{np\_load}, which is
-load/\#cores. That means that a load of, ``1'', which represents a fully active 
-core, is displayed as $0.03$ on the node in question, as there are 32 cores 
-on a node. To display load ``as is'' (such that a node with a fully active 
-core displays a load of approximately $1.00$), add the following to your
-\file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
 
 \item
-Try to request resources that closely match what your job will use: 
+If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}),
+%you will need to source a different scheduler file, and
+you will need to change the shell declaration in your script(s).
+
+% TODO:
+%\item
+%The load displayed in \tool{qstat} by default is \api{np\_load}, which is
+%load/\#cores. That means that a load of, ``1'', which represents a fully active 
+%core, is displayed as $0.03$ on the node in question, as there are 32 cores 
+%on a node. To display load ``as is'' (such that a node with a fully active 
+%core displays a load of approximately $1.00$), add the following to your
+%\file{.tcshrc} file: \texttt{setenv SGE\_LOAD\_AVG load\_avg}
+
+\item
+\textbf{Try to request resources that closely match what your job will use: 
 requesting many more cores or much more memory than will be needed makes a 
-job more difficult to schedule when resources are scarce.
+job more difficult to schedule when resources are scarce.}
 
 \item
 E-mail, \texttt{rt-ex-hpc AT encs.concordia.ca}, with any concerns/questions.
