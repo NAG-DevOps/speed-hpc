@@ -1,5 +1,6 @@
 ﻿% ------------------------------------------------------------------------------
 \subsubsection{User Scripting}
+\label{sect:scripting}
 
 The last part the job script is the scripting that will be executed by the job. 
 This part of the job script includes all commands required to set up and 
@@ -7,13 +8,18 @@ execute the task your script has been written to do. Any Linux command can be us
 at this step. This section can be a simple call to an executable or a complex 
 loop which iterates through a series of commands.
 
+Any compute heavy step is preferably should be prefixed by \tool{srun}
+as the best practice.
+
 Every software program has a unique execution framework. It is the responsibility 
 of the script's author (e.g., you) to know what is required for the software used 
 in your script by reviewing the software's documentation. Regardless of which software
 your script calls, your script should be written so that the software knows the 
-location of the input and output files as well as the degree of parallelism. 
-Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
-to the value provided to the scheduler in the \option{-pe smp} option. 
+location of the input and output files as well as the degree of parallelism.
+%
+% GE:
+%Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
+%to the value provided to the scheduler in the \option{-pe smp} option. 
 
 Jobs which touch data-input and data-output files more than once, should make use 
 of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
@@ -23,12 +29,15 @@ than those to and from shared storage (which is provided over NFS).
 
 An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
 the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
-\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
+%\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
+\texttt{\$SLURM\_SUBMIT\_DIR/references/} to \texttt{input/} (\texttt{\$SLURM\_SUBMIT\_DIR} represents the
 current working directory), to make the new directory \texttt{results}, to
 execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
 output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
 to an existing directory, \texttt{processed}, that is located in the current
-working directory. TMPDIR only exists for the duration of the job, though,
+working directory.
+% TODO: verify:
+TMPDIR only exists for the duration of the job, though,
 so it is very important to copy relevant results from it at job's end.
 
 % ------------------------------------------------------------------------------
@@ -44,12 +53,17 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 \end{figure}
 
 The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
-The lines that begin with \texttt{\#\$} are directives for the scheduler.
+%The lines that begin with \texttt{\#\$} are directives for the scheduler.
+The lines that begin with \texttt{\#SBATCH} are directives for the scheduler.
 
 \begin{itemize}
-	\item \texttt{-N} sets \emph{qsub-test} as the jobname
-	\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
-	\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+	%\item \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-J} (or \option{--job-name}) sets \emph{tcsh-test} as the job name
+	%\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	\item \texttt{--chdir} tells the scheduler to execute the job from the current working directory
+	%\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+	\item \texttt{--mem=1GB} requests and assigns 1GB of memory to the job. 
+	Generally jobs \emph{require} the \texttt{--mem} option to be set.
 \end{itemize}
 
 The script then:
@@ -142,38 +156,53 @@ Congratulations on your first job!
 Here are useful job-management commands: 
 
 \begin{itemize}
+%\item
+%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+%on \texttt{speed-submit} you can submit it using this
 \item
-\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+\texttt{sbatch -A <ACCOUNT> --t <MINUTES> --mem=20G -p <PARTITION> ./<myscript>.sh}: once that your job script is ready,
 on \texttt{speed-submit} you can submit it using this
 
 \item
-\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+\texttt{squeue -u <ENCSusername>}: you can check the status of your job(s)
 
 \item
-\texttt{qstat -f -u "*"}: display cluster status for all users. 
+%\texttt{qstat -f -u "*"}: display cluster status for all users. 
+\texttt{squeue}: display cluster status for all users. 
 
 \item
-\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+\texttt{squeue [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+
+%\item
+%\texttt{qdel [job-ID]}: delete job [job-ID]. 
+\item
+\texttt{scancel [job-ID]}: cancel job [job-ID]. 
+
+%\item
+%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
+\item
+\texttt{scontrol hold [job-ID]}: hold queued job, [job-ID], from running. 
+
+%\item
+%\texttt{qrls [job-ID]}: release held job [job-ID]. 
+\item
+\texttt{scontrol release [job-ID]}: release held job [job-ID]. 
 
 \item
-\texttt{qdel [job-ID]}: delete job [job-ID]. 
-
-\item
-\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
-
-\item
-\texttt{qrls [job-ID]}: release held job [job-ID]. 
-
-\item
+%\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
 \texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
 \end{itemize}
 
 
 % ------------------------------------------------------------------------------
-\subsection{Advanced \tool{qsub} Options}
+%\subsection{Advanced \tool{qsub} Options}
+\subsection{Advanced \tool{sbatch} Options}
+\label{sect:submit-options}
 \label{sect:qsub-options}
 
-In addition to the basic \tool{qsub} options presented earlier, there are a 
+In addition to the basic \tool{sbatch} options presented earlier, there are a 
 few additional options that are generally useful:
 
 \begin{itemize}
@@ -197,17 +226,20 @@ that if you give a single number, that represents \emph{seconds}, not hours.
 
 \item
 \texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
-The many \tool{qsub} options available are read with, \texttt{man qsub}. Also 
-note that \tool{qsub} options can be specified during the job-submission 
-command, and these \emph{override} existing script options (if present). The 
-syntax is, \texttt{qsub [options] PATHTOSCRIPT}, but unlike in the script, 
-the options are specified without the leading \verb+#$+
-(e.g., \texttt{qsub -N qsub-test -cwd -l h\_vmem=1G ./tcsh.sh}). 
 
 \end{itemize}
 
+The many \tool{sbatch} options available are read with, \texttt{man sbatch}. Also 
+note that \tool{sbatch} options can be specified during the job-submission 
+command, and these \emph{override} existing script options (if present). The 
+syntax is, \texttt{sbatch [options] PATHTOSCRIPT}, but unlike in the script, 
+the options are specified without the leading \verb+#SBATCH+
+(e.g., \texttt{sbatch -J sub-test --chdir=./ --mem=1G ./tcsh.sh}).
+
+
 % ------------------------------------------------------------------------------
 \subsection{Array Jobs}
+\label{sect:array-jobs}
 
 Array jobs are those that start a batch job or a parallel job multiple times. 
 Each iteration of the job array is called a task and receives a unique job ID.
@@ -288,23 +320,43 @@ available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}.
 \subsection{Scheduler Environment Variables}
 
 The scheduler presents a number of environment variables that can be used in 
-your jobs. Three of the more useful are \api{TMPDIR}, \api{SGE\_O\_WORKDIR}, 
-and \api{NSLOTS}:
+your jobs. You can invoke \tool{env} or \tool{printenv} in your
+job to know what hose are (most begin with the prefix \texttt{SLURM}).
+
+Some of the more useful ones are:
+%\api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
 
 \begin{itemize}
 \item
+% TODO: verify temporal existence
 \api{\$TMPDIR}=the path to the job's temporary space on the node. It
 \emph{only} exists for the duration of the job, so if data in the temporary space 
 are important, they absolutely need to be accessed before the job terminates.
 
+%\item
+%\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
+%NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+%the path defaults to your home directory.
 \item
-\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
-NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+\api{\$SLURM\_SUBMIT\_DIR}=the path to the job's working directory (likely an
+NFS-mounted path). If, \texttt{--chdir}, was stipulated, that path is taken; if not, 
+% TODO: verify if home or current:
 the path defaults to your home directory.
 
+% TODO: SLURM does not appear to have this
+%\item
+%\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
+%be used in place of hardcoded thread-request declarations. 
+
 \item
-\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
-be used in place of hardcoded thread-request declarations. 
+\api{\$SLURM\_JOBID}=your current jobs ID, useful for some manipulation
+and reporting.
+
+\item
+\api{\$SLURM\_JOB\_NODELIST}=nodes participating in your job.
+
+\item
+\api{\$SLURM\_ARRAY\_TASK\_ID}=for array jobs (see \xs{sect:array-jobs}.
 
 \end{itemize}
 
