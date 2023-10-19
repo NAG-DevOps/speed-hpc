@@ -30,7 +30,7 @@ setenv TMPDIR /speed-scratch/$USER/tmp
 ## Create a virtual Python environment (env) in $TMPDIR
 srun python3.7 -m venv $TMPDIR/env
 ## Activate the new environment
-srun source $TMPDIR/env/bin/activate.csh
+source $TMPDIR/env/bin/activate.csh
 ## Install gurobipy module
 cd $GUROBI_HOME
 srun python3.7 setup.py build --build-base /tmp/${USER} install
