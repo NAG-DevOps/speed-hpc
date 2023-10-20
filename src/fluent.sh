@@ -4,15 +4,30 @@
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
 #SBATCH --mail-user=$USER@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8      ## Request 8 cpus
+#SBATCH --nodes=1              ## Number of nodes to run on
+#SBATCH --ntasks-per-node=32   ## Number of cores
+#SBATCH --cpus-per-task=1      ## Number of MPI threads
 #SBATCH --mem=160G             ## Assign 160G memory per node 
 
+date
 
-module load ansys/19.0/default
+module avail ansys
+
+module load ansys/19.2/default
 cd $TMPDIR
 
-srun fluent 3ddp -g -i $SGE_O_WORKDIR/fluentdata/info.jou -sgepe smp > call.txt
+set FLUENTNODES = "`scontrol show hostnames`"
+set FLUENTNODES = `echo $FLUENTNODES | tr ' ' ','`
 
-srun rsync -av $TMPDIR/ $SGE_O_WORKDIR/fluentparallel/
+date
+
+srun fluent 3ddp \
+	-g -t$SLURM_NTASKS \
+	-g-cnf=$FLUENTNODES \
+	-i $SLURM_SUBMIT_DIR/fluentdata/info.jou > call.txt
+
+date
+
+srun rsync -av $TMPDIR/ $SLURM_SUBMIT_DIR/fluentparallel/
+
+date
