@@ -69,12 +69,10 @@
 
 % ------------------------------------------------------------------------------
 \begin{abstract}
-This document primarily presents a quick start
-guide to the usage of the Gina Cody School of
-Engineering and Computer Science compute server farm
-called ``Speed'' -- the GCS ENCS Speed cluster,
-managed by HPC/NAG of GCS ENCS, Concordia University,
-Montreal, Canada.
+This document presents a quick start guide to the usage of the Gina Cody School 
+of Engineering and Computer Science compute server farm called ``Speed'' -- the 
+GCS Speed cluster, managed by the HPC/ NAG group of the Academic Information 
+Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
 \end{abstract}
 
 % ------------------------------------------------------------------------------
@@ -86,7 +84,7 @@ Montreal, Canada.
 
 This document contains basic information required to use ``Speed'' as well as 
 tips and tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/or references are welcome. 
+User contributions of sample jobs and/ or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
 
 % ------------------------------------------------------------------------------
@@ -126,20 +124,19 @@ list.
 
 \begin{itemize}
 	\item 
-Serguei Mokhov, PhD, Manager, Networks, Security and HPC
+Serguei Mokhov, PhD, Manager, Networks, Security and HPC, AITS
 	\item 
-Gillian Roper, Senior Administrator, System, Information Technology
+Gillian Roper, Senior Systems Administrator, HPC, AITS
 	\item 
-Carlos Alarcón Meza, Administrator, System, High Performance Computing and Networking, Information Technology
+Carlos Alarcón Meza, Systems Administrator, HPC and Networking, AITS
 	%\item 
 %Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
 \end{itemize}
 
-We receive support from the rest of AITS teams, such
-as NAG, SAG, FIS, and DOG.
+We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
-\subsection{What Speed Comprises}
+\subsection{What Speed Consists of}
 
 \begin{itemize}
 \item
@@ -170,7 +167,7 @@ Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 
 \begin{itemize}
 \item
-To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets.
+To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets. ``Speed'' has been optimised for compute jobs that are multi-core aware, require a large memory space, or are iteration intensive.
 \item
 Prepare them for big clusters:
 	\begin{itemize}
@@ -184,7 +181,7 @@ Jobs that are too demanding for a desktop.
 \item
 Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space and a scratch space of approximately 1~TB. 
+Anything that can fit into a 500-GB memory space and a scratch space of approximately ~10TB. 
 \item
 CPU-based jobs. 
 \item
@@ -199,7 +196,7 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 
 \begin{itemize}
 \item Speed is not a web host and does not host websites.
-\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Speed is not meant for Continuous Integration (CI) automation deployments for Ansible or similar tools. 
 \item Does not run Kubernetes or other container orchestration software.
 \item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
 \item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
@@ -209,7 +206,7 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \subsection{Available Software}
 
 We have a great number of open-source software available and installed
-on Speed~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
+on ``Speed''~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
 OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
 There are also a number of commercial packages, subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaqus~\cite{abaqus}, 
@@ -218,8 +215,8 @@ Ansys, Fluent~\cite{fluent}, etc.
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
 
 In particular, there are over 2200 programs available in
-\texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7)
-and we are building an quivalent under EL9 SPEED2 nodes.
+\texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
+We are building an equivalent array of programs for the EL9 SPEED2 nodes.
 
 \begin{itemize}
 	\item 
@@ -230,16 +227,15 @@ MATLAB (R2016b, R2018a, R2018b)
 	\item 
 Fluent (19.2)
 	\item 
-Singularity (Docker-like container), can run other OS's apps, like Ubuntu's, converted Docker containers.
+Singularity containers can run other operating systems and linux distributions, like Ubuntu's, as well as converted Docker containers.
 \end{itemize}
 	\item 
 We do our best to accommodate custom software requests.
-Python environments can be used to have user-custom installs
-in the scratch directory.
+Python environments can use user-custom installs 
+from within the scratch directory.
 	\item 
-A number of specific environments are available, too.
-	\item 
-Popular examples mentioned (loaded with, \tool{module}):
+A number of specific environments are available and 
+can be loaded using the \tool{module} command:
 \begin{itemize}
 	\item 
 Python (2.3.0 - 3.5.1)
@@ -263,7 +259,7 @@ After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
 ``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
 cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
 %
-Faculty and staff may request the access directly.
+Faculty and staff may request access directly.
 Students must include the following in their message:
 
 \begin{itemize} 
@@ -288,7 +284,9 @@ Once your GCS ENCS account has been granted access to ``Speed'',
 use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 
-% ------------------------------------------------------------------------------
+All users are expected to have a basic understanding of
+ Linux and its commonly used commands. 
+ % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
 \label{sect:ssh}
 
@@ -310,9 +308,6 @@ Open up a terminal window and type in the following SSH command being sure to re
 ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
 
-All users are expected to have a basic understanding of Linux and its 
-commonly used commands. 
-
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-env}
@@ -320,11 +315,8 @@ commonly used commands.
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
-Preparing your job for submission is fairly straightforward. Editing a copy
-of the \file{template.sh} you moved into your home directory during
-\xs{sect:envsetup} is a good place to start. You can also use a job script
-example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
-directory and base your job on it.
+Preparing your job for submission is fairly straightforward. Start by basing your job script on one of the examples available in the ``src''
+directory of our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}).
 
 Job scripts are broken into four main sections: 
 \begin{itemize}
