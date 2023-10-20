@@ -1,25 +1,27 @@
 #!/encs/bin/tcsh
 
 # Give job a name
-#$ -N oi-yolo-gpu
+#SBATCH -J oi-yolo-gpu
 
 # Set output directory to current
-#$ -cwd
+#SBATCH --chdir=./
 
 # Send an email when the job starts, finishes or if it is aborted.
-#$ -m bea
+#SBATCH --mail-type=ALL
 
 # Request GPU
-#$ -l gpu=2
+#SBATCH --gpus=2
 
 # Request CPU with maximum memoy size = 40GB
-# #$ -l h_vmem=40G
+#SBATCH --mem=40G
+
+# Request CPU slots 
+#SBATCH -n 16
 
 #sleep 30
 
-# Specify the output file name in our case we commntes that system will genreate file with the same name of the job
-# -o name.qlog
-
+# Specify the output file name
+#SBATCH -o openiss-yolo-batch-gpu.log
 
 conda activate /speed-scratch/$USER/YOLO
 
@@ -27,6 +29,6 @@ conda activate /speed-scratch/$USER/YOLO
 #python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image  --gpu_num 2
 
 # Video example 
-python yolo_video.py --input video/v1.avi --output video/002.avi --gpu_num 2
+srun python yolo_video.py --input video/v1.avi --output video/002.avi --gpu_num 2
 
 conda deactivate
