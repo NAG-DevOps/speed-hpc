@@ -4,7 +4,7 @@
 
 Directives are comments included at the beginning of a job script that set the shell 
 and the options for the job scheduler. 
-
+%
 The shebang directive is always the first line of a script. In your job script, 
 this directive sets which shell your script's commands will run in. On ``Speed'', 
 we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
@@ -73,6 +73,7 @@ memory space on \texttt{speed-submit} with:
 %\end{verbatim}
 
 \begin{verbatim}
+sacct -j <jobID>
 sstat -j <jobID>
 \end{verbatim}
 
@@ -80,11 +81,12 @@ sstat -j <jobID>
 This can be customized to show specific columns:
 
 \begin{verbatim}
+sacct -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 \end{verbatim}
 
 Memory-footprint values are also provided for completed jobs in the final
 e-mail notification (as, ``maxvmsize'').
-
+%
 \emph{Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.}
