@@ -49,6 +49,9 @@ For example:
 
 Note how the command prompt changed from \verb![speed-submit] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
 
+% ------------------------------------------------------------------------------
+\subsubsection{How do I use the bash shell in an interactive session on Speed?}
+% The language here is unclear. TODO Update for clarity and provide examples
 If you use one of the below commands (make sure job request settings such
 as memory, cores, etc are set), they will allocate your interactive
 job sessions with \tool{bash} as a shell on the compute nodes:
@@ -193,7 +196,7 @@ into the database.
 % ------------------------------------------------------------------------------
 \subsubsection{Disabled nodes}
 
-It is possible that a (or a number of) the Speed nodes are disabled. Nodes are disabled if they require maintenance. 
+It is possible that one or a number of the Speed nodes are disabled. Nodes are disabled if they require maintenance. 
 To verify if Speed nodes are disabled, see if they are in a draining or drained state:
 
 %\begin{verbatim}
@@ -260,14 +263,14 @@ speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu2
 \end{verbatim}
 \normalsize
 
-Note how the some of the Speed nodes in the above list have a state of \textbf{drained}
-and the reason.
-Your job will run once the maintenance has been completed and the disabled nodes have been enabled.
+Note which nodes are in the state of \textbf{drained}. Why the state is drained can be found in the reason column.
+
+Your job will run once an occupied node becomes availble or the maintenance has been completed and the disabled nodes have a state of \textbf{idle}.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Error in job submit request.}
 
 It is possible that your job is pending, because the job requested resources that are not available within Speed.
-To verify why pending job with job id 1234 is not running, execute `\verb!sacct -j 1234!'.
-Summary of the reasons would also show up in \tool{squeue}.
+To verify why job id 1234 is not running, execute `\verb!sacct -j 1234!'.
+A summary of the reasons is available via the \tool{squeue} command.
 %and review the messages in the \textbf{scheduling info:} section.
