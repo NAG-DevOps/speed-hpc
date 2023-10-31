@@ -36,7 +36,7 @@
 %\date{Version 6.5}
 %\date{\textbf{Version 6.6-dev-07}}
 %\date{\textbf{Version 6.6} (final GE version)}
-\date{\textbf{Version 7.0-dev-01} (final GE version)}
+\date{\textbf{Version 7.0-dev-01}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -46,6 +46,8 @@
     Serguei A. Mokhov
 \and
     Gillian A. Roper
+\and
+    Carlos Alarcón Meza
 \and
     Network, Security and HPC Group\footnote{The group acknowledges the initial manual version VI produced by Dr.~Scott Bunnell while with us
 		as well as Dr.~Tariq Daradkeh for his instructional support of the users and contribution of examples.}\\
@@ -58,9 +60,10 @@
 % \authorrunning{} has to be set for the shorter version of the authors' names;
 % otherwise a warning will be rendered in the running heads.
 %
-\authorrunning{Mokhov, Roper, NAG/HPC, GCS ENCS}
+\authorrunning{Mokhov, Roper, Alarcón Meza, NAG/HPC, GCS ENCS}
 \indexedauthor{Mokhov, Serguei}
 \indexedauthor{Roper, Gillian}
+\indexedauthor{Alarcón Meza, Carlos}
 \indexedauthor{NAG/HPC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,7 +74,7 @@
 \begin{abstract}
 This document presents a quick start guide to the usage of the Gina Cody School 
 of Engineering and Computer Science compute server farm called ``Speed'' -- the 
-GCS Speed cluster, managed by the HPC/ NAG group of the Academic Information 
+GCS Speed cluster, managed by the HPC/NAG group of the Academic Information 
 Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
 \end{abstract}
 
@@ -156,7 +159,7 @@ CUDA, OpenGL, OpenCL, and Vulkan APIs).
 into 4x 20GB each.
 
 \item
-One AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the
+One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
 Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
 
 \end{itemize}
@@ -187,7 +190,7 @@ CPU-based jobs.
 \item
 CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}, \texttt{speed-37}--\texttt{speed-43}).
 \item
-Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
+Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27|37--43}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -223,11 +226,13 @@ We are building an equivalent array of programs for the EL9 SPEED2 nodes.
 Popular concrete examples:
 \begin{itemize}
 	\item 
-MATLAB (R2016b, R2018a, R2018b)
+MATLAB (R2016b, R2018a, R2018b, ...)
 	\item 
-Fluent (19.2)
+Fluent (19.2, ...)
 	\item 
-Singularity containers can run other operating systems and linux distributions, like Ubuntu's, as well as converted Docker containers.
+Singularity containers (see \xs{sect:singularity-containers}) can run other 
+operating systems and Linux distributions, like Ubuntu's, as well as 
+converted Docker containers.
 \end{itemize}
 	\item 
 We do our best to accommodate custom software requests.
@@ -254,6 +259,7 @@ OpenMPI 1.6.x, 1.8.x, 3.1.3
 
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
+\label{sect:access}
 
 After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
 ``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
@@ -283,10 +289,11 @@ and ``What Speed is Not'' (\xs{sect:speed-is-not}).
 Once your GCS ENCS account has been granted access to ``Speed'',
 use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
-
+%
 All users are expected to have a basic understanding of
- Linux and its commonly used commands. 
- % ------------------------------------------------------------------------------
+Linux and its commonly used commands. 
+
+% ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
 \label{sect:ssh}
 
@@ -384,6 +391,7 @@ Typically, only the \texttt{module load} command will be used in your script.
 
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
+\label{sect:ssh-mpi}
 
 Some programs effect their parallel processing via MPI (which is a 
 communication protocol). An example of such software is Fluent. MPI needs to 
@@ -410,9 +418,13 @@ will have those permissions by default).
 
 The following documentation is specific to the \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
+%
+Virtual environments typically instantiated via Conda or Python.
+Another option is Singularity detailed in \xs{sect:singularity-containers}.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Anaconda}
+\label{sect:conda-venv}
 
 To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
 option when executing \texttt{conda create}. For example, to create an anaconda environment for 
@@ -462,6 +474,24 @@ into the environment.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
+\subsubsection{Python}
+\label{sect:python-venv}
+
+Setting up a Python virtual environment is fairly straightforward.
+We have a simple example that use a Python virtual environment:
+
+\begin{itemize}
+	\item
+		\href
+		{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
+		{\texttt{gurobi-with-python.sh}}
+	%\item
+		%\href
+		%{}
+		%{}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-job-examples}
 
@@ -481,10 +511,10 @@ will schedule before a multi-core job of higher priority, for example.
 \begin{itemize}
 \item
 New users are restricted to a total of 32 cores: write to \url{rt-ex-hpc@encs.concordia.ca}
-if you need more temporarily (256 is the maximum possible, or, 8 jobs of 32 cores each).
+if you need more temporarily (192 is the maximum, or, 6 jobs of 32 cores each).
 
 \item
-Job sessions are a maximum of one week in length (only 24 hours, though,
+Batch job sessions are a maximum of one week in length (only 24 hours, though,
 for interactive jobs).
 
 \item
@@ -591,7 +621,7 @@ him for his contributions.
 	\item 
 The HTML version with devcontainer support was contributed by Anh H Nguyen.
 	\item 
-Tariq Daradkeh, PhD, was our IT Instructional Specialist August 2022 to September 2023;
+Dr.~Tariq Daradkeh, was our IT Instructional Specialist August 2022 to September 2023;
 working on the scheduler, scheduling research, end user support, and integration of
 examples, such as YOLOv3 in \xs{sect:openiss-yolov3} other tasks. We have a continued
 collaboration on HPC/scheduling research.
@@ -601,7 +631,7 @@ collaboration on HPC/scheduling research.
 \subsection{Phase 4}
 
 Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
-dubbed as ``SPEED2''.
+dubbed as ``SPEED2''. We also moved from Grid Engine to SLURM.
 
 % ------------------------------------------------------------------------------
 \subsection{Phase 3}
