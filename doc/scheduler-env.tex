@@ -91,29 +91,6 @@ If you would like to use \tool{bash}, please contact
 %fi
 %\end{verbatim}
 
-%\noindent
-%\textbf{NOTE:} If you have used UGE commands in the past you probably still have these
-%lines there; \textbf{they should now be removed}, as they have no use in SLURM:
-
-%csh/\tool{tcsh}:
-%Sample \file{.tcshrc} file:
-%\begin{verbatim}
-%# Speed environment set up 
-%if ($HOSTNAME == speed-submit.encs.concordia.ca) then
-%   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
-%endif
-%\end{verbatim}
-
-%Bourne shell/\tool{bash}:
-%Sample \file{.bashrc} file:
-%\begin{verbatim}
-%# Speed environment set up 
-%if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
-%    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
-%    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
-%fi
-%\end{verbatim}
-
-%Note that you will need to either log out and back in, or execute a new shell, 
-%for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
-%(\textbf{important}).
+If you are getting ``command'' not found error(s) when logging in, you
+probably have old Grid Engine environment commands. Remove them
+as per \xa{appdx:ge-to-slurm}.

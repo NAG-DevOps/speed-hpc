@@ -90,6 +90,13 @@ tips and tricks, examples, and references to projects and papers that have used 
 User contributions of sample jobs and/ or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
 
+\textbf{Note:} On October 20, 2023 with workshops prior, we have completed migration to SLURM
+from Grid Engine (UGE/AGE) as our job scheduler, so this manual has been ported to use SLURM's
+syntax and commands. If you are a long-time GE user, see \xa{appdx:uge-to-slurm} key highlights
+of the move needed to translate your GE jobs to SLURM as well as environment changes.
+These are also elaborated throughout this document and our examples as well in case you
+desire to re-read it.
+
 % ------------------------------------------------------------------------------
 \subsection{Resources}
 
@@ -190,7 +197,7 @@ CPU-based jobs.
 \item
 CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}, \texttt{speed-37}--\texttt{speed-43}).
 \item
-Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27|37--43}).
+Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27|37-43}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -634,25 +641,101 @@ collaboration on HPC/scheduling research.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 4}
+\subsection{Migration from UGE to SLURM}
+\label{appdx:uge-to-slurm}
+
+For long term users who started off with Grid Engine here are some resources
+to make a transition and mapping to the job submission process.
+
+\begin{itemize}
+\item
+Queues are called ``partitions'' in SLURM. Our mapping from the GE queues
+to SLURM partitions is as follows:
+\begin{verbatim}
+GE  => SLURM
+s.q    ps
+g.q    pg
+a.q    pa
+\end{verbatim}
+We also have a new partition \texttt{pt} that covers SPEED2 nodes,
+which previously did not exist.
+
+\item
+Commands and command options mappings are found in \xf{fig:rosetta-mappings} from\\
+\url{https://slurm.schedmd.com/rosetta.pdf}\\
+\url{https://slurm.schedmd.com/pdfs/summary.pdf}\\
+Other related helpful resources from similar organizations who either used
+SLURM for awhile or also transitioned to it:\\
+\small
+\url{https://docs.alliancecan.ca/wiki/Running_jobs}\\
+\url{https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf}\\
+\url{https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm}
+\normalsize
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/rosetta-mapping}
+\caption{Rosetta Mappings of Scheduler Commands from SchedMD}
+\label{fig:rosetta-mappings}
+\end{figure}
+
+\item
+\noindent
+\textbf{NOTE:} If you have used UGE commands in the past you probably still have these
+lines there; \textbf{they should now be removed}, as they have no use in SLURM and
+will start giving ``command not found'' errors on login when the software is removed:
+
+csh/\tool{tcsh}:
+Sample \file{.tcshrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if ($HOSTNAME == speed-submit.encs.concordia.ca) then
+   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
+endif
+\end{verbatim}
+
+Bourne shell/\tool{bash}:
+Sample \file{.bashrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
+    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
+    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
+fi
+\end{verbatim}
+
+Note that you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
+(\textbf{important}).
+
+
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Phases}
+\label{sect:phases}
+
+Brief summary of Speed evolution phases.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Phase 4}
 
 Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
 dubbed as ``SPEED2''. We also moved from Grid Engine to SLURM.
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 3}
+\subsubsection{Phase 3}
 
 Phase 3 had 4 vidpro nodes added from Dr.~Amer totalling 6x P6 and 6x V100
 GPUs added.
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 2}
+\subsubsection{Phase 2}
 
 Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes.
 The P6s replaced 4x of FirePro S7150.
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 1}
+\subsubsection{Phase 1}
 
 Phase 1 of Speed was of the following configuration:
 
