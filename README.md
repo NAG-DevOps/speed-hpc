@@ -46,6 +46,7 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 ### Technical
 
+* [Slurm Workload Manager](https://en.wikipedia.org/wiki/Slurm_Workload_Manager)
 * [Linux and other tutorials from Software Carpentry](https://software-carpentry.org/lessons/)
 * [Digital Research Alliance of Canada SLURM Examples](https://docs.alliancecan.ca/wiki/Running_jobs)
 * Concordia's subscription to [Udemy resources](https://www.concordia.ca/it/services/udemy.html)
