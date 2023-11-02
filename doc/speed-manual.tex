@@ -90,7 +90,7 @@ tips and tricks, examples, and references to projects and papers that have used 
 User contributions of sample jobs and/ or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
 
-\textbf{Note:} On October 20, 2023 with workshops prior, we have completed migration to SLURM
+\textbf{Note:} On October 20, 2023 with workshops prior, we have completed migration to SLURM (see \xf{fig:slurm-arch})
 from Grid Engine (UGE/AGE) as our job scheduler, so this manual has been ported to use SLURM's
 syntax and commands. If you are a long-time GE user, see \xa{appdx:uge-to-slurm} key highlights
 of the move needed to translate your GE jobs to SLURM as well as environment changes.
@@ -131,6 +131,7 @@ list.
 
 % ------------------------------------------------------------------------------
 \subsection{Team}
+\label{sect:speed-team}
 
 \begin{itemize}
 	\item 
@@ -147,11 +148,12 @@ We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Consists of}
+\label{sect:speed-arch}
 
 \begin{itemize}
 \item
 Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
-approximately 1~TB of local volatile-scratch disk space. 
+approximately 1~TB of local volatile-scratch disk space (pictured in \xs{fig:speed-pics}).
 
 \item
 Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
@@ -162,14 +164,26 @@ CUDA, OpenGL, OpenCL, and Vulkan APIs).
 256GB of RAM.
 
 \item
-7 new SPEED2 servers with 4x A100 80GB GPUs each, partitioned
-into 4x 20GB each.
+7 new SPEED2 servers with 64 CPU cores each 4x A100 80GB GPUs, partitioned
+into 4x 20GB each; larger local storage for TMPDIR.
 
 \item
 One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
 Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
-
 \end{itemize}
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/speed-pics}
+\caption{Speed}
+\label{fig:speed-pics}
+\end{figure}
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/slurm-arch}
+\caption{Speed SLURM Architecture}
+\label{fig:slurm-arch}
+\end{figure}
+
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
