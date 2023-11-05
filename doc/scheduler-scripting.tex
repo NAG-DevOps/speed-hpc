@@ -434,12 +434,18 @@ JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
 \label{sect:interactive-jobs}
 
 Job sessions can be interactive, instead of batch (script) based. Such 
-sessions can be useful for testing and optimising code and resource 
-requirements prior to batch submission. To request an interactive job 
+sessions can be useful for testing, debugging, and optimising code and resource 
+requirements, conda or python virtual environments setup, or any likewise
+preparatory work prior to batch submission.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Command Line}
+
+To request an interactive job 
 %session, use, \texttt{qlogin [options]}, similarly to a 
 %\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}).
 session, use, \texttt{salloc [options]}, similarly to a 
-\tool{sbatch} command-line job (e.g., \texttt{salloc -J interactive-test --mem=1G -p pg -n 8}).
+\tool{sbatch} command-line job (e.g., \texttt{salloc -J interactive-test --mem=1G -p ps -n 8}).
 %
 %Note that the options that are available for \tool{qsub} are not necessarily
 %available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
@@ -448,19 +454,92 @@ Inside the allocated \tool{salloc} session you can run shell
 commands as usual; it is recommended to use \tool{srun} for
 the heavy compute steps.
 %
-If it is a quick a short job just to compile something e.g. on
+If it is a quick a short job just to compile something, e.g., on
 a GPU node you can use an interactive \tool{srun} directly
-(note no \tool{srun} can run within \tool{srun}):
+(note no \tool{srun} can run within \tool{srun}), e.g., a 1 hour
+allocation:
 
 For \tool{tcsh}:
 \begin{verbatim}
-srun --pty -n 18 -p pg -t 60 /encs/bin/tcsh
+srun --pty -n 8 -p pg --gpus=1 -t 60 /encs/bin/tcsh
 \end{verbatim}
 
 For \tool{bash}:
 \begin{verbatim}
-srun --pty -n 18 -p pg -t 60 /encs/bin/bash
+srun --pty -n 8 -p pg --gpus=1 -t 60 /encs/bin/bash
 \end{verbatim}
+
+% ------------------------------------------------------------------------------
+\subsubsection{Graphical Applications}
+
+If you need to run an on-Speed graphical-based UI application (e.g., MALTLAB,
+Abaqus CME, etc.), or an IDE (PyCharm, VSCode, Eclipse)
+to develop and test your job's code interactively you need to enable
+X11-forwarding from your client machine to speed then to the compute node.
+To do so:
+
+\begin{enumerate}
+\item
+you need to run an X server on your client machine, such as,
+\begin{itemize}
+\item on Windows: MobaXterm with X turned on, or Xming + PuTTY with X11 forwarding, or XOrg under Cygwin
+\item on macOS: XQuarz -- use its \tool{xterm} and \texttt{ssh -X}
+\item on Linux just use \texttt{ssh -X speed.encs.concordia.ca} 
+\end{itemize}
+
+See \url{https://www.concordia.ca/ginacody/aits/support/faq/xserver.html}
+for details.
+
+\item
+verify you X connection was properly forwarded by printing the \api{DISPLAY} variable:
+
+\verb+echo $DISPLAY+
+If it has no output, then your X forwarding is not on and you may need to re-login to Speed.
+
+\item
+Use the \option{-x11} with \tool{salloc} or \tool{srun}:
+
+\verb+salloc ... --x11=first ...+
+
+\item
+Once landed on a compute node, verify \api{DISPLAY} again.
+
+\item
+While running under scheduler, unset \api{XDG\_RUNTIME\_DIR}.
+
+\item
+Launch your graphical application:
+
+\texttt{module load} the required version, then
+\tool{matlab}, or \tool{abaqus cme}, etc.
+\end{enumerate}
+
+Here's an example of starting PyCharm, of which we made a sample local installation.
+You can make a similar install under your own directory. If using VSCode, it's
+currently only supported with the \tool{--no-sandbox} option.
+
+\scriptsize
+\begin{verbatim}
+bash-3.2$ ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
+serguei@speed's password: 
+[serguei@speed-submit ~] % echo $DISPLAY
+localhost:14.0
+[serguei@speed-submit ~] % srun -p ps --pty --x11=first --mem 4000 -t 0-06:00 /encs/bin/bash
+bash-4.4$ echo $DISPLAY
+localhost:77.0
+bash-4.4$ hostname
+speed-01.encs.concordia.ca
+bash-4.4$ unset XDG_RUNTIME_DIR
+bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
+\end{verbatim}
+\normalsize
+
+\begin{figure}[htpb]
+	\includegraphics[width=\columnwidth]{images/pycharm}
+    \caption{PyCharm Starting up on a Speed Node}
+	\label{fig:pycharm}
+\end{figure}
+
 
 % ------------------------------------------------------------------------------
 \subsection{Scheduler Environment Variables}
