@@ -354,10 +354,10 @@ sbatch --array n-m[:s]] <batch_script>
 \texttt{sbatch --array=10 array.sh}: submits a job with 1 task where the task-id is 10. 
 \item
 %\texttt{qsub -t 1-10 array.sh}: submits a job with 10 tasks numbered consecutively from 1 to 10.
-\texttt{sbatch --array 1-10 array.sh}: submits a job with 10 tasks numbered consecutively from 1 to 10.
+\texttt{sbatch --array=1-10 array.sh}: submits a job with 10 tasks numbered consecutively from 1 to 10.
 \item
 %\texttt{qsub -t 3-15:3 array.sh}: submits a jobs with 5 tasks numbered consecutively with step size 3
-\texttt{sbatch --array 3-15:3 array.sh}: submits a jobs with 5 tasks numbered consecutively with step size 3
+\texttt{sbatch --array=3-15:3 array.sh}: submits a jobs with 5 tasks numbered consecutively with step size 3
 (task-ids 3,6,9,12,15).
 \end{itemize}
 
@@ -548,14 +548,14 @@ bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
 The scheduler presents a number of environment variables that can be used in 
 your jobs. You can invoke \tool{env} or \tool{printenv} in your
 job to know what hose are (most begin with the prefix \texttt{SLURM}).
-
+%
 Some of the more useful ones are:
 %\api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
 
 \begin{itemize}
 \item
 % TODO: verify temporal existence
-\api{\$TMPDIR}=the path to the job's temporary space on the node. It
+\api{\$TMPDIR} -- the path to the job's temporary space on the node. It
 \emph{only} exists for the duration of the job, so if data in the temporary space 
 are important, they absolutely need to be accessed before the job terminates.
 
@@ -564,7 +564,7 @@ are important, they absolutely need to be accessed before the job terminates.
 %NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
 %the path defaults to your home directory.
 \item
-\api{\$SLURM\_SUBMIT\_DIR}=the path to the job's working directory (likely an
+\api{\$SLURM\_SUBMIT\_DIR} -- the path to the job's working directory (likely an
 NFS-mounted path). If, \texttt{--chdir}, was stipulated, that path is taken; if not, 
 % TODO: verify if home or current:
 the path defaults to your home directory.
@@ -575,7 +575,7 @@ the path defaults to your home directory.
 %be used in place of hardcoded thread-request declarations. 
 
 \item
-\api{\$SLURM\_JOBID}=your current jobs ID, useful for some manipulation
+\api{\$SLURM\_JOBID} -- your current jobs ID, useful for some manipulation
 and reporting.
 
 \item
