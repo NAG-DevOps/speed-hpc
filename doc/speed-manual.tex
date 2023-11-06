@@ -312,7 +312,7 @@ use your GCS ENCS account credentials to create an SSH connection to
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
 %
 All users are expected to have a basic understanding of
-Linux and its commonly used commands. 
+Linux and its commonly used commands (see \xa{sect:faqs-linux} for resources).
 
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
@@ -321,12 +321,15 @@ Linux and its commonly used commands.
 Requirements to create connections to Speed:
 \begin{enumerate}
 	\item
-An active \textbf{ENCS user account} which has permission to connect to Speed.
+An active \textbf{GCS ENCS user account}, which has permission to connect to Speed
+(see \xs{sect:access}).
 	\item
 If you are off campus, an active connection to Concordia's VPN.
 Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
 	\item
-Windows systems require a terminal emulator such as PuTTY, Cygwin (or MobaXterm). 
+Windows systems require a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
+	\item
+macOS systems do have a Terminal app for this or \tool{xterm} that comes with XQuarz.
 \end{enumerate}
 
 Open up a terminal window and type in the following SSH command being sure to replace
@@ -335,6 +338,13 @@ Open up a terminal window and type in the following SSH command being sure to re
 \begin{verbatim}
 ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
+
+\noindent
+Read the AITS FAQ:
+\href
+{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}
+{How do I securely connect to a GCS server?}
+
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
