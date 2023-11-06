@@ -97,6 +97,11 @@ of the move needed to translate your GE jobs to SLURM as well as environment cha
 These are also elaborated throughout this document and our examples as well in case you
 desire to re-read it.
 
+If you wish to cite this work in your acknowledgements, you can use 
+our general DOI found on our GitHub page
+\url{https://dx.doi.org/10.5281/zenodo.5683642} or a specific
+version of the manual and scripts from that link individually.
+
 % ------------------------------------------------------------------------------
 \subsection{Resources}
 
@@ -122,16 +127,21 @@ which includes access request instructions.
 All Speed users are subscribed to the \texttt{hpc-ml} mailing
 list.
 
-\item
-\href
-	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
-	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
+% TODO: for now comment out for 7.0; if when we update that
+%       preso, we will re-link it here. However, keep the citation.
+\nocite{speed-intro-preso}.
+%\item
+%\href
+%	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
+%	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Team}
 \label{sect:speed-team}
+
+Speed is supported by:
 
 \begin{itemize}
 	\item 
@@ -144,6 +154,7 @@ Carlos Alarcón Meza, Systems Administrator, HPC and Networking, AITS
 %Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
 \end{itemize}
 
+\noindent
 We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 
 % ------------------------------------------------------------------------------
@@ -153,7 +164,7 @@ We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 \begin{itemize}
 \item
 Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
-approximately 1~TB of local volatile-scratch disk space (pictured in \xs{fig:speed-pics}).
+approximately 1~TB of local volatile-scratch disk space (pictured in \xf{fig:speed-pics}).
 
 \item
 Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
@@ -203,9 +214,11 @@ Prepare them for big clusters:
 \item
 Jobs that are too demanding for a desktop. 
 \item
-Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
+Single-core batch jobs; multithreaded jobs typically up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space and a scratch space of approximately ~10TB. 
+Multi-node multi-core jobs (MPI).
+\item
+Anything that can fit into a 500-GB memory space and a \textbf{scratch} space of approximately 10~TB. 
 \item
 CPU-based jobs. 
 \item
@@ -222,7 +235,7 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27
 \item Speed is not a web host and does not host websites.
 \item Speed is not meant for Continuous Integration (CI) automation deployments for Ansible or similar tools. 
 \item Does not run Kubernetes or other container orchestration software.
-\item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
+\item Does not run Docker. (\textbf{Note:} Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command. See \xs{sect:singularity-containers}.)
 \item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
@@ -237,7 +250,7 @@ contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaq
 Ansys, Fluent~\cite{fluent}, etc. 
 
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
-
+%
 In particular, there are over 2200 programs available in
 \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
 We are building an equivalent array of programs for the EL9 SPEED2 nodes.
@@ -264,7 +277,7 @@ A number of specific environments are available and
 can be loaded using the \tool{module} command:
 \begin{itemize}
 	\item 
-Python (2.3.0 - 3.5.1)
+Python (2.3.x - 3.11.x)
 	\item 
 Gurobi (7.0.1, 7.5.0, 8.0.0, 8.1.0)
 	\item 
@@ -364,15 +377,27 @@ Read the AITS FAQ:
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
-Preparing your job for submission is fairly straightforward. Start by basing your job script on one of the examples available in the ``src''
+Preparing your job for submission is fairly straightforward.
+Start by basing your job script on one of the examples available in the \texttt{src/}
 directory of our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}).
-
+%
 Job scripts are broken into four main sections: 
+
 \begin{itemize}
 	\item Directives
 	\item Module Loads
 	\item User Scripting
 \end{itemize}
+
+You can clone the tip of our repository to get the examples to start
+with or download them individually via a browser or command line:
+
+\small
+\begin{verbatim}
+git clone --depth=1 https://github.com/NAG-DevOps/speed-hpc.git
+cd speed-hpc/src
+\end{verbatim}
+\normalsize
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
