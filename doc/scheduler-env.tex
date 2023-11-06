@@ -2,13 +2,13 @@
 \subsubsection{Environment Set Up}
 \label{sect:envsetup}
 
-After creating an SSH connection to ``Speed'', you will need to
+After creating an SSH connection to Speed, you will need to
 make sure the \tool{srun}, \tool{sbatch}, and \tool{salloc}
 commands are available to you. 
-Type the command name at the linux prompt and press enter.
-If the command is not available, e.g.,  (``command not found'') is returned,
+Type the command name at the command prompt and press enter.
+If the command is not available, e.g., (``command not found'') is returned,
 you need to make sure your \api{\$PATH} has \texttt{/local/bin} in it.
-To view your \api{\$PATH} type \texttt{echo \$PATH} at the linux prompt.
+To view your \api{\$PATH} type \texttt{echo \$PATH} at the prompt.
 %
 %source 
 %the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
@@ -91,6 +91,6 @@ If you would like to use \tool{bash}, please contact
 %fi
 %\end{verbatim}
 
-If you are getting ``command'' not found error(s) when logging in, you
+Note, if you are getting ``command not found'' error(s) when logging in, you
 probably have old Grid Engine environment commands. Remove them
 as per \xa{appdx:uge-to-slurm}.
