@@ -325,6 +325,25 @@ but still need the course instructor's approval to use the service.
 
 In these instructions, anything bracketed like so, \verb+<>+, indicates a
 label/value to be replaced (the entire bracketed term needs replacement).
+%
+We use SLURM as the Workload Manager.
+It supports primarily two types of jobs: batch and interactive.
+Batch jobs are used to run unattended tasks.
+
+TL;DR:
+Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
+\begin{verbatim}
+#SBATCH --account=speed1 --mem=100M -t 600 -J job-name
+#SBATCH --gpus=2 --mail-type=ALL -t 600 --mail-user=$USER
+\end{verbatim}
+%
+We use \tool{srun} for every complex compute step inside the script.
+Use interactive jobs to set up virtual environments, compilation, and debugging.
+\tool{salloc} is preferred; allows multiple steps.
+\tool{srun} can start interactive jobs as well (see \xs{sect:interactive-jobs}).
+Required and common job parameters: job-name (J), mail-type, mem, ntasks (n),
+cpus-per-task, account, -p (partition).
+
 
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
@@ -399,12 +418,25 @@ cd speed-hpc/src
 \end{verbatim}
 \normalsize
 
+\noindent
+Then to quickly run some sample jobs, you can:
+\small
+\begin{verbatim}
+sbatch -p ps -t 10 bash.sh
+sbatch -p ps -t 10 env.sh
+sbatch -p ps -t 10 manual.sh
+sbatch -p pg -t 10 lambdal-singularity.sh
+\end{verbatim}
+\normalsize
+
+
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-directives}
 
 % ------------------------------------------------------------------------------
 \subsubsection{Module Loads}
+\label{sect:modules}
 
 As your job will run on a compute or GPU ``Speed'' node, and not the submit node,
 any software that is needed must be loaded by the job script. Software is loaded

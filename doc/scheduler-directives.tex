@@ -90,3 +90,30 @@ e-mail notification (as, ``maxvmsize'').
 %
 \emph{Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.}
+
+Other essential options are \option{-t} and \option{-A}.
+%
+\begin{itemize}
+\item
+\option{-t} -- is the time estimate how long your job may run. This is
+used in scheduling priority of your job. The maximum already mentioned
+is 7 days for batch and 24 hours for interactive. Specifying lesser
+time may have your job scheduled sooner. The ``best'' value for this
+does not exist and is often determined empirically from the past runs.
+
+\item
+\option{-A} -- to what projects/associations attribute the accounting to. This is usually
+your research or supervisor group or a project or some kind of
+association. When moving from GE to SLURM we ported most users to
+two default accounts \texttt{speed1} and \texttt{speed2}. These
+are generic catch-all accounts if you are unsure what to use.
+Normally we tell in our intro email which one to use, which may
+be your default account. For example,
+\texttt{aits},
+\texttt{vidpro},
+\texttt{gipsy},
+\texttt{ai2},
+\texttt{mpackir},
+\texttt{cmos}, among others.
+
+\end{itemize}

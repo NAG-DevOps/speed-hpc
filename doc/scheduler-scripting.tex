@@ -208,6 +208,13 @@ and others. \texttt{man squeue} for details.
 %\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
 \texttt{squeue --job [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
 
+\item
+\texttt{squeue -las}: displays individual job steps (for debugging
+easier to see which step failed if you used \tool{srun}).
+
+\item
+\verb+watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"+: view \tool{sinfo} information and watch the queue for your job(s).
+
 %\item
 %\texttt{qdel [job-ID]}: delete job [job-ID]. 
 \item
