@@ -9,12 +9,12 @@ The shebang directive is always the first line of a script. In your job script,
 this directive sets which shell your script's commands will run in. On ``Speed'', 
 we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
 
-To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
-
-For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
-
+To use the \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|.
+%
+For \texttt{bash}, start with \verb|#!/encs/bin/bash|.
+%
 Directives that start with \verb|#SBATCH|, set the options for the cluster's 
-SLURM scheduler. The script template, \file{template.sh}, 
+SLURM scheduler. The script template, \texttt{template.sh}, 
 provides the essentials:
 
 %\begin{verbatim}

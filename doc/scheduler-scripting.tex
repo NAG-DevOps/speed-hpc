@@ -175,8 +175,8 @@ standard output (and error, if there is any) of the job in question. If you
 look at the contents of your newly created file, you will see that it 
 contains the output of the, \texttt{module list} command. 
 Important information is often written to this file.
-
-Congratulations on your first job! 
+%
+%Congratulations on your first job! 
 
 % ------------------------------------------------------------------------------
 \subsection{Common Job Management Commands Summary}
@@ -199,7 +199,7 @@ on \texttt{speed-submit} you can submit it using this
 \item
 %\texttt{qstat -f -u "*"}: display cluster status for all users. 
 \texttt{squeue}: display cluster status for all users. 
-\option{-A} shows per account (e.g., \texttt{vidpro},
+\option{-A} shows per account (e.g., \texttt{vidpro}, \texttt{gipsy},
 \texttt{speed1}, \texttt{ai2}, \texttt{aits}, etc.),
 \option{-p} per partition (\texttt{ps}, \texttt{pg}, \texttt{pt}, \texttt{pa}),
 and others. \texttt{man squeue} for details.
@@ -452,14 +452,18 @@ To request an interactive job
 %session, use, \texttt{qlogin [options]}, similarly to a 
 %\tool{qsub} command-line job (e.g., \texttt{qlogin -N qlogin-test -l h\_vmem=1G}).
 session, use, \texttt{salloc [options]}, similarly to a 
-\tool{sbatch} command-line job (e.g., \texttt{salloc -J interactive-test --mem=1G -p ps -n 8}).
+\tool{sbatch} command-line job, e.g.,
+%
+\begin{verbatim}
+salloc -J interactive-test --mem=1G -p ps -n 8
+\end{verbatim}
 %
 %Note that the options that are available for \tool{qsub} are not necessarily
 %available for \tool{qlogin}, notably, \texttt{-cwd}, and, \texttt{-v}. 
 %
 Inside the allocated \tool{salloc} session you can run shell
 commands as usual; it is recommended to use \tool{srun} for
-the heavy compute steps.
+the heavy compute steps inside \tool{salloc}.
 %
 If it is a quick a short job just to compile something, e.g., on
 a GPU node you can use an interactive \tool{srun} directly
@@ -498,13 +502,13 @@ See \url{https://www.concordia.ca/ginacody/aits/support/faq/xserver.html}
 for details.
 
 \item
-verify you X connection was properly forwarded by printing the \api{DISPLAY} variable:
+verify your X connection was properly forwarded by printing the \api{DISPLAY} variable:
 
 \verb+echo $DISPLAY+
 If it has no output, then your X forwarding is not on and you may need to re-login to Speed.
 
 \item
-Use the \option{-x11} with \tool{salloc} or \tool{srun}:
+Use the \option{--x11} with \tool{salloc} or \tool{srun}:
 
 \verb+salloc ... --x11=first ...+
 
@@ -572,11 +576,12 @@ are important, they absolutely need to be accessed before the job terminates.
 %the path defaults to your home directory.
 \item
 \api{\$SLURM\_SUBMIT\_DIR} -- the path to the job's working directory (likely an
-NFS-mounted path). If, \texttt{--chdir}, was stipulated, that path is taken; if not, 
+NFS-mounted path). If, \option{--chdir}, was stipulated, that path is taken; if not, 
 % TODO: verify if home or current:
 the path defaults to your home directory.
 
 % TODO: SLURM does not appear to have this
+% SLURM_NTASKS
 %\item
 %\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
 %be used in place of hardcoded thread-request declarations. 
@@ -589,7 +594,7 @@ and reporting.
 \api{\$SLURM\_JOB\_NODELIST}=nodes participating in your job.
 
 \item
-\api{\$SLURM\_ARRAY\_TASK\_ID}=for array jobs (see \xs{sect:array-jobs}.
+\api{\$SLURM\_ARRAY\_TASK\_ID}=for array jobs (see \xs{sect:array-jobs}).
 
 \end{itemize}
 
