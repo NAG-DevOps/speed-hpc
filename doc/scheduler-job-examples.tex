@@ -105,14 +105,14 @@ GPUs, to the job:
 %#$ -l gpu=[1|2]
 %\end{verbatim}
 \begin{verbatim}
-#BATCH --gpu=[1|2]
+#SBATCH --gpus=[1|2]
 \end{verbatim}
 
 % TODO: verify accuracy
-Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
-dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
-total of \emph{four} GPUs can be actively attached to any one user at any given
-time.
+% Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
+% dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
+% total of \emph{four} GPUs can be actively attached to any one user at any given
+% time.
 
 Once that your job script is ready, you can submit it to the GPU partition (queue)
 with:

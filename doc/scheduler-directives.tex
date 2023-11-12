@@ -43,7 +43,6 @@ and its short option equivalents:
 #SBATCH --mail-user=$USER@encs.concordia.ca
 #SBATCH --chdir=./                  ## Use current directory as working directory
 #SBATCH -N 1
-#SBATCH --ntasks=1
 #SBATCH -n 8                        ## Request 8 cores
 #SBATCH --mem=32G                   ## Assign 32G memory per node 
 \end{verbatim}
@@ -55,10 +54,11 @@ notifications (success, error, etc. or all); replace, \verb+<corecount>+, with t
 (multithreaded) parallelism (i.e., cores) you attach to your job (up to 32 by default).
 %be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
 %is not relevant;
+
 Replace, \verb+<memory>+, with the value (in GB), that you want 
 your job's memory space to be (up to 500 depending on the node), and all jobs MUST have a memory-space 
 assignment.
-
+%
 If you are unsure about memory footprints, err on assigning a generous
 memory space to your job, so that it does not get prematurely terminated.
 %(the value given to \api{h\_vmem} is a hard memory ceiling).

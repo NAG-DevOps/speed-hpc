@@ -409,6 +409,16 @@ are going to be running a program that scales out to the maximum single-machine
 core count available, please (please) request 32 cores, to avoid node 
 oversubscription (i.e., to avoid overloading the CPUs).
 
+\textbf{Important} note about \option{--ntasks} or \option{--ntasks-per-node}
+(\option{-n}) talks about processes (usually the ones ran with \tool{srun}).
+\option{--cpus-per-task} (\option{-c}) corresponds to threads per process.
+Some programs consider them equivalent, some don't. Fluent for example
+uses \option{--ntasks-per-node=8} and \option{--cpus-per-task=1},
+some just set \option{--cpus-per-task=8} and \option{--ntasks-per-node=1}.
+If one of them is not $1$ then some applications need to be told to
+use $n*c$ total cores.
+
+
 Core count associated with a job appears under,
 %``states'', in the, \texttt{qstat -f -u "*"}, output.
 ``AllocCPUS'', in the, \texttt{qacct -j}, output.
