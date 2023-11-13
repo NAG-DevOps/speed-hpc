@@ -35,7 +35,9 @@
 % Previously VI
 %\date{Version 6.5}
 %\date{\textbf{Version 6.6-dev-07}}
-\date{\textbf{Version 6.6} (final GE version)}
+%\date{\textbf{Version 6.6} (final GE version)}
+%\date{\textbf{Version 7.0-dev-01}}
+\date{\textbf{Version 7.0}}
 
 % Authors are joined by \and and their affiliations are on the
 % subsequent lines separated by \\ just like the article class
@@ -46,7 +48,10 @@
 \and
     Gillian A. Roper
 \and
-    Network, Security and HPC Group\footnote{The group acknowledges the initial manual version VI produced by Dr.~Scott Bunnell while with us.}\\
+    Carlos Alarcón Meza
+\and
+    Network, Security and HPC Group\footnote{The group acknowledges the initial manual version VI produced by Dr.~Scott Bunnell while with us
+		as well as Dr.~Tariq Daradkeh for his instructional support of the users and contribution of examples.}\\
     \affiliation{Gina Cody School of Engineering and Computer Science}\\
     \affiliation{Concordia University}\\
     \affiliation{Montreal, Quebec, Canada}\\
@@ -56,9 +61,10 @@
 % \authorrunning{} has to be set for the shorter version of the authors' names;
 % otherwise a warning will be rendered in the running heads.
 %
-\authorrunning{Mokhov, Roper, NAG/HPC, GCS ENCS}
+\authorrunning{Mokhov, Roper, Alarcón Meza, NAG/HPC, GCS ENCS}
 \indexedauthor{Mokhov, Serguei}
 \indexedauthor{Roper, Gillian}
+\indexedauthor{Alarcón Meza, Carlos}
 \indexedauthor{NAG/HPC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,12 +73,10 @@
 
 % ------------------------------------------------------------------------------
 \begin{abstract}
-This document primarily presents a quick start
-guide to the usage of the Gina Cody School of
-Engineering and Computer Science compute server farm
-called ``Speed'' -- the GCS ENCS Speed cluster,
-managed by HPC/NAG of GCS ENCS, Concordia University,
-Montreal, Canada.
+This document presents a quick start guide to the usage of the Gina Cody School 
+of Engineering and Computer Science compute server farm called ``Speed'' -- the 
+GCS Speed cluster, managed by the HPC/NAG group of the Academic Information 
+Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
 \end{abstract}
 
 % ------------------------------------------------------------------------------
@@ -84,8 +88,20 @@ Montreal, Canada.
 
 This document contains basic information required to use ``Speed'' as well as 
 tips and tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/or references are welcome. 
+User contributions of sample jobs and/ or references are welcome. 
 Details are sent to the \texttt{hpc-ml} mailing list.
+
+\textbf{Note:} On October 20, 2023 with workshops prior, we have completed migration to SLURM (see \xf{fig:slurm-arch})
+from Grid Engine (UGE/AGE) as our job scheduler, so this manual has been ported to use SLURM's
+syntax and commands. If you are a long-time GE user, see \xa{appdx:uge-to-slurm} key highlights
+of the move needed to translate your GE jobs to SLURM as well as environment changes.
+These are also elaborated throughout this document and our examples as well in case you
+desire to re-read it.
+
+If you wish to cite this work in your acknowledgements, you can use 
+our general DOI found on our GitHub page
+\url{https://dx.doi.org/10.5281/zenodo.5683642} or a specific
+version of the manual and scripts from that link individually.
 
 % ------------------------------------------------------------------------------
 \subsection{Resources}
@@ -112,46 +128,76 @@ which includes access request instructions.
 All Speed users are subscribed to the \texttt{hpc-ml} mailing
 list.
 
-\item
-\href
-	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
-	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
+% TODO: for now comment out for 7.0; if when we update that
+%       preso, we will re-link it here. However, keep the citation.
+\nocite{speed-intro-preso}
+%\item
+%\href
+%	{https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44}
+%	{Speed Server Farm Presentation 2022}~\cite{speed-intro-preso}.
 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsection{Team}
+\label{sect:speed-team}
+
+Speed is supported by:
 
 \begin{itemize}
 	\item 
-Serguei Mokhov, PhD, Manager, Networks, Security and HPC
+Serguei Mokhov, PhD, Manager, Networks, Security and HPC, AITS
 	\item 
-Gillian Roper, Senior Administrator, System, Information Technology
+Gillian Roper, Senior Systems Administrator, HPC, AITS
 	\item 
-Carlos Alarcón Meza, Administrator, System, High Performance Computing and Networking, Information Technology
-	\item 
-Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
+Carlos Alarcón Meza, Systems Administrator, HPC and Networking, AITS
+	%\item 
+%Tariq Daradkeh, PhD, IT Instructional Specialist, Information Technology
 \end{itemize}
 
-We receive support from the rest of AITS teams, such
-as NAG, SAG, FIS, and DOG.
+\noindent
+We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.\\
+%
+\url{https://www.concordia.ca/ginacody/aits.html}
 
 % ------------------------------------------------------------------------------
-\subsection{What Speed Comprises}
+\subsection{What Speed Consists of}
+\label{sect:speed-arch}
 
 \begin{itemize}
 \item
 Twenty four (24) 32-core compute nodes, each with 512~GB of memory and 
-approximately 1~TB of volatile-scratch disk space. 
+approximately 1~TB of local volatile-scratch disk space (pictured in \xf{fig:speed-pics}).
+
 \item
 Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
 CUDA, OpenGL, OpenCL, and Vulkan APIs). 
 
 \item
-One AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the
-Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
+4 VIDPRO nodes, with 6 P6 cards, and 6 V100 cards (32GB), and 
+256GB of RAM.
 
+\item
+7 new SPEED2 servers with 64 CPU cores each 4x A100 80~GB GPUs, partitioned
+into 4x 20GB each; larger local storage for TMPDIR.
+
+\item
+One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
+Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
 \end{itemize}
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/speed-pics}
+\caption{Speed}
+\label{fig:speed-pics}
+\end{figure}
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/slurm-arch}
+\caption{Speed SLURM Architecture}
+\label{fig:slurm-arch}
+\end{figure}
+
 
 % ------------------------------------------------------------------------------
 \subsection{What Speed Is Ideal For}
@@ -159,27 +205,32 @@ Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 
 \begin{itemize}
 \item
-To design and develop, test and run parallel, batch, and other algorithms, scripts with partial data sets.
+To design and develop, test and run parallel, batch, and other algorithms, 
+scripts with partial data sets. ``Speed'' has been optimised for compute jobs 
+that are multi-core aware, require a large memory space, or are iteration 
+intensive.
 \item
 Prepare them for big clusters:
 	\begin{itemize}
 	\item 
-	Digital Alliance (Calcul Quebec and Compute Canada)
+	Digital Research Alliance of Canada (Calcul Quebec and Compute Canada)
 	\item 
 	Cloud platforms
 	\end{itemize}
 \item
 Jobs that are too demanding for a desktop. 
 \item
-Single-core batch jobs; multithreaded jobs up to 32 cores (i.e., a single machine).
+Single-core batch jobs; multithreaded jobs typically up to 32 cores (i.e., a single machine).
 \item
-Anything that can fit into a 500-GB memory space and a scratch space of approximately 1~TB. 
+Multi-node multi-core jobs (MPI).
+\item
+Anything that can fit into a 500-GB memory space and a \textbf{scratch} space of approximately 10~TB. 
 \item
 CPU-based jobs. 
 \item
-CUDA GPU jobs (\texttt{speed-05}, \texttt{speed-17}).
+CUDA GPU jobs (\texttt{speed-01|-03|-05}, \texttt{speed-17}, \texttt{speed-37}--\texttt{speed-43}).
 \item
-Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
+Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27|37-43}).
 \end{itemize}
 
 % ------------------------------------------------------------------------------
@@ -188,9 +239,9 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 
 \begin{itemize}
 \item Speed is not a web host and does not host websites.
-\item Speed is not meant for CI automation deployments for Ansible or similar tools. 
+\item Speed is not meant for Continuous Integration (CI) automation deployments for Ansible or similar tools. 
 \item Does not run Kubernetes or other container orchestration software.
-\item Does not run Docker. (Note: Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command.)
+\item Does not run Docker. (\textbf{Note:} Speed does run Singularity and many Docker containers can be converted to Singularity containers with a single command. See \xs{sect:singularity-containers}.)
 \item Speed is not for jobs executed outside of the scheduler. (Jobs running outside of the scheduler will be killed and all data lost.)
 \end{itemize}
 
@@ -198,39 +249,41 @@ Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{speed-05|17}).
 \subsection{Available Software}
 
 We have a great number of open-source software available and installed
-on Speed~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
+on ``Speed''~--~various Python, CUDA versions, {\cpp}/{\java} compilers, OpenGL,
 OpenFOAM, OpenCV, TensorFlow, OpenMPI, OpenISS, {\marf}~\cite{marf}, etc.
 There are also a number of commercial packages, subject to licensing
 contributions, available, such as MATLAB~\cite{matlab,scholarpedia-matlab}, Abaqus~\cite{abaqus}, 
 Ansys, Fluent~\cite{fluent}, etc. 
 
 To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
-
+%
 In particular, there are over 2200 programs available in
 \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
+We are building an equivalent array of programs for the EL9 SPEED2 nodes.
 
 \begin{itemize}
 	\item 
 Popular concrete examples:
 \begin{itemize}
 	\item 
-MATLAB (R2016b, R2018a, R2018b)
+MATLAB (R2016b, R2018a, R2018b, ...)
 	\item 
-Fluent (19.2)
+Fluent (19.2, ...)
 	\item 
-Singularity (Docker-like container), can run other OS's apps, like Ubuntu's, converted Docker containers.
+Singularity containers (see \xs{sect:singularity-containers}) can run other 
+operating systems and Linux distributions, like Ubuntu's, as well as 
+converted Docker containers.
 \end{itemize}
 	\item 
 We do our best to accommodate custom software requests.
-Python environments can be used to have user-custom installs
-in the scratch directory.
+Python environments can use user-custom installs 
+from within the scratch directory.
 	\item 
-A number of specific environments are available, too.
-	\item 
-Popular examples mentioned (loaded with, \tool{module}):
+A number of specific environments are available and 
+can be loaded using the \tool{module} command:
 \begin{itemize}
 	\item 
-Python (2.3.0 - 3.5.1)
+Python (2.3.x - 3.11.x)
 	\item 
 Gurobi (7.0.1, 7.5.0, 8.0.0, 8.1.0)
 	\item 
@@ -246,12 +299,13 @@ OpenMPI 1.6.x, 1.8.x, 3.1.3
 
 % ------------------------------------------------------------------------------
 \subsection{Requesting Access}
+\label{sect:access}
 
 After reviewing the ``What Speed is'' (\xs{sect:speed-is-for}) and
 ``What Speed is Not'' (\xs{sect:speed-is-not}), request access to the ``Speed'' 
 cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
 %
-Faculty and staff may request the access directly.
+CGS ENCS faculty and staff may request access directly.
 Students must include the following in their message:
 
 \begin{itemize} 
@@ -260,12 +314,42 @@ Students must include the following in their message:
 	\item Written request from the supervisor or instructor for the ENCS username to be granted access to ``Speed''
 \end{itemize}
 
+Non-GCS faculty / students need to get a ``sponsor'' within GCS, such that
+your guest GCS ENCS account is created first. A sponsor can be any GCS Faculty member
+you collaborate with. Failing that, request the approval from our Dean's Office;
+via our Associate Deans Drs.\ Eddie Hoi Ng or Emad Shihab.
+%
+External entities to Concordia who collaborate with CGS Concordia researchers,
+should also go through the Dean's office for approvals.
+%
+Non-GCS students taking a GCS course do have their GCS ENCS account created automatically,
+but still need the course instructor's approval to use the service.
+
 % ------------------------------------------------------------------------------
 \section{Job Management}
 \label{sect:job-management}
 
 In these instructions, anything bracketed like so, \verb+<>+, indicates a
 label/value to be replaced (the entire bracketed term needs replacement).
+%
+We use SLURM as the Workload Manager.
+It supports primarily two types of jobs: batch and interactive.
+Batch jobs are used to run unattended tasks.
+
+TL;DR:
+Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
+\begin{verbatim}
+#SBATCH --account=speed1 --mem=100M -t 600 -J job-name
+#SBATCH --gpus=2 --mail-type=ALL -t 600 --mail-user=$USER
+\end{verbatim}
+%
+We use \tool{srun} for every complex compute step inside the script.
+Use interactive jobs to set up virtual environments, compilation, and debugging.
+\tool{salloc} is preferred; allows multiple steps.
+\tool{srun} can start interactive jobs as well (see \xs{sect:interactive-jobs}).
+Required and common job parameters: job-name (J), mail-type, mem, ntasks (n),
+cpus-per-task, account, -p (partition).
+
 
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
@@ -275,19 +359,26 @@ and ``What Speed is Not'' (\xs{sect:speed-is-not}).
 Once your GCS ENCS account has been granted access to ``Speed'',
 use your GCS ENCS account credentials to create an SSH connection to 
 \texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
+%
+All users are expected to have a basic understanding of
+Linux and its commonly used commands (see \xa{sect:faqs-linux} for resources).
 
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
+\label{sect:ssh}
 
 Requirements to create connections to Speed:
 \begin{enumerate}
 	\item
-An active \textbf{ENCS user account} which has permission to connect to Speed.
+An active \textbf{GCS ENCS user account}, which has permission to connect to Speed
+(see \xs{sect:access}).
 	\item
 If you are off campus, an active connection to Concordia's VPN.
 Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
 	\item
-Windows systems require a terminal emulator such as PuTTY (or MobaXterm). 
+Windows systems require a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
+	\item
+macOS systems do have a Terminal app for this or \tool{xterm} that comes with XQuarz.
 \end{enumerate}
 
 Open up a terminal window and type in the following SSH command being sure to replace
@@ -297,8 +388,12 @@ Open up a terminal window and type in the following SSH command being sure to re
 ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
 
-All users are expected to have a basic understanding of Linux and its 
-commonly used commands. 
+\noindent
+Read the AITS FAQ:
+\href
+{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}
+{How do I securely connect to a GCS server?}
+
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
@@ -307,18 +402,39 @@ commonly used commands.
 % ------------------------------------------------------------------------------
 \subsection{Job Submission Basics}
 
-Preparing your job for submission is fairly straightforward. Editing a copy
-of the \file{template.sh} you moved into your home directory during
-\xs{sect:envsetup} is a good place to start. You can also use a job script
-example from our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}) ``src'' 
-directory and base your job on it.
-
+Preparing your job for submission is fairly straightforward.
+Start by basing your job script on one of the examples available in the \texttt{src/}
+directory of our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}).
+%
 Job scripts are broken into four main sections: 
+
 \begin{itemize}
 	\item Directives
 	\item Module Loads
 	\item User Scripting
 \end{itemize}
+
+You can clone the tip of our repository to get the examples to start
+with or download them individually via a browser or command line:
+
+\small
+\begin{verbatim}
+git clone --depth=1 https://github.com/NAG-DevOps/speed-hpc.git
+cd speed-hpc/src
+\end{verbatim}
+\normalsize
+
+\noindent
+Then to quickly run some sample jobs, you can:
+\small
+\begin{verbatim}
+sbatch -p ps -t 10 bash.sh
+sbatch -p ps -t 10 env.sh
+sbatch -p ps -t 10 manual.sh
+sbatch -p pg -t 10 lambdal-singularity.sh
+\end{verbatim}
+\normalsize
+
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
@@ -326,6 +442,7 @@ Job scripts are broken into four main sections:
 
 % ------------------------------------------------------------------------------
 \subsubsection{Module Loads}
+\label{sect:modules}
 
 As your job will run on a compute or GPU ``Speed'' node, and not the submit node,
 any software that is needed must be loaded by the job script. Software is loaded
@@ -379,6 +496,7 @@ Typically, only the \texttt{module load} command will be used in your script.
 
 % ------------------------------------------------------------------------------
 \subsection{SSH Keys For MPI}
+\label{sect:ssh-mpi}
 
 Some programs effect their parallel processing via MPI (which is a 
 communication protocol). An example of such software is Fluent. MPI needs to 
@@ -405,13 +523,17 @@ will have those permissions by default).
 
 The following documentation is specific to the \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
+%
+Virtual environments typically instantiated via Conda or Python.
+Another option is Singularity detailed in \xs{sect:singularity-containers}.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Anaconda}
+\label{sect:conda-venv}
 
 To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
 option when executing \texttt{conda create}. For example, to create an anaconda environment for 
-\texttt{ai\_user}, execute the following at the command line:
+\texttt{a\_user}, execute the following at the command line:
 
 \begin{verbatim}
 conda create --prefix /speed-scratch/a_user/myconda
@@ -420,7 +542,7 @@ conda create --prefix /speed-scratch/a_user/myconda
 \vspace{10pt}
 \noindent
 \textbf{Note:} Without the \texttt{\-\-prefix} option, the \texttt{conda create} command creates the 
-environment in texttt{a\_user}'s home directory by default.
+environment in \texttt{a\_user}'s home directory by default.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
@@ -457,6 +579,24 @@ into the environment.
 \vspace{10pt}
 
 % ------------------------------------------------------------------------------
+\subsubsection{Python}
+\label{sect:python-venv}
+
+Setting up a Python virtual environment is fairly straightforward.
+We have a simple example that use a Python virtual environment:
+
+\begin{itemize}
+	\item
+		\href
+		{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
+		{\texttt{gurobi-with-python.sh}}
+	%\item
+		%\href
+		%{}
+		%{}
+\end{itemize}
+
+% ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-job-examples}
 
@@ -476,11 +616,11 @@ will schedule before a multi-core job of higher priority, for example.
 \begin{itemize}
 \item
 New users are restricted to a total of 32 cores: write to \url{rt-ex-hpc@encs.concordia.ca}
-if you need more temporarily (256 is the maximum possible, or, 8 jobs of 32 cores each).
+if you need more temporarily (192 is the maximum, or, 6 jobs of 32 cores each).
 
 \item
-Job sessions are a maximum of one week in length (only 24 hours, though,
-for interactive jobs).
+Batch job sessions are a maximum of one week in length (only 24 hours, though,
+for interactive jobs, see \xs{sect:interactive-jobs}).
 
 \item
 Scripts can live in your NFS-provided home, but any substantial data need
@@ -490,18 +630,18 @@ to be in your cluster-specific directory
 NFS is great for acute activity, but is not ideal for chronic activity.
 Any data that a job will 
 read more than once should be copied at the start to the scratch disk of a 
-compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SGE\_O\_WORKDIR}), 
+compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SLURM\_SUBMIT\_DIR}), 
 any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
 job is near to finishing, those data should be copied to your NFS-mounted 
 home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps,
-\api{\$SGE\_O\_WORKDIR}). In other words, IO-intensive operations should be effected 
+\api{\$SLURM\_SUBMIT\_DIR}). In other words, IO-intensive operations should be effected 
 locally whenever possible, saving network activity for the start and end of 
 jobs. 
 
 \item
 Your current resource allocation is based upon past usage, which is an 
 amalgamation of approximately one week's worth of past wallclock (i.e., time 
-spent on the node(s)) and CPU activity (on the node(s)).
+spent on the node(s)) and compute activity (on the node(s)).
 
 \item
 Jobs should NEVER be run outside of the province of the scheduler.
@@ -552,6 +692,12 @@ Genomic alignment exercises
 \item
 \bibentry{Gopal2023Mob}
 \item
+\bibentry{cfd-modeling-turbine-2023}
+\item
+\bibentry{cfd-vaxis-turbine-wake-2022}
+\item
+\bibentry{numerical-turbulence-vawt-2021}
+\item
 \bibentry{niksirat2020}
 
 \item
@@ -575,7 +721,7 @@ and theirs forks by the team.
 
 % ------------------------------------------------------------------------------
 \subsection{Acknowledgments}
-\label{sect:scott-acks}
+\label{sect:acks}
 
 \begin{itemize}
 	\item 
@@ -585,22 +731,109 @@ during his time at Concordia as a part of the NAG/HPC group. We thank
 him for his contributions.
 	\item 
 The HTML version with devcontainer support was contributed by Anh H Nguyen.
+	\item 
+Dr.~Tariq Daradkeh, was our IT Instructional Specialist August 2022 to September 2023;
+working on the scheduler, scheduling research, end user support, and integration of
+examples, such as YOLOv3 in \xs{sect:openiss-yolov3} other tasks. We have a continued
+collaboration on HPC/scheduling research.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 3}
+\subsection{Migration from UGE to SLURM}
+\label{appdx:uge-to-slurm}
+
+For long term users who started off with Grid Engine here are some resources
+to make a transition and mapping to the job submission process.
+
+\begin{itemize}
+\item
+Queues are called ``partitions'' in SLURM. Our mapping from the GE queues
+to SLURM partitions is as follows:
+\begin{verbatim}
+GE  => SLURM
+s.q    ps
+g.q    pg
+a.q    pa
+\end{verbatim}
+We also have a new partition \texttt{pt} that covers SPEED2 nodes,
+which previously did not exist.
+
+\item
+Commands and command options mappings are found in \xf{fig:rosetta-mappings} from\\
+\url{https://slurm.schedmd.com/rosetta.pdf}\\
+\url{https://slurm.schedmd.com/pdfs/summary.pdf}\\
+Other related helpful resources from similar organizations who either used
+SLURM for awhile or also transitioned to it:\\
+\small
+\url{https://docs.alliancecan.ca/wiki/Running_jobs}\\
+\url{https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf}\\
+\url{https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm}
+\normalsize
+
+\begin{figure}[htpb]
+\includegraphics[width=\columnwidth]{images/rosetta-mapping}
+\caption{Rosetta Mappings of Scheduler Commands from SchedMD}
+\label{fig:rosetta-mappings}
+\end{figure}
+
+\item
+\noindent
+\textbf{NOTE:} If you have used UGE commands in the past you probably still have these
+lines there; \textbf{they should now be removed}, as they have no use in SLURM and
+will start giving ``command not found'' errors on login when the software is removed:
+
+csh/\tool{tcsh}:
+Sample \file{.tcshrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if ($HOSTNAME == speed-submit.encs.concordia.ca) then
+   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
+endif
+\end{verbatim}
+
+Bourne shell/\tool{bash}:
+Sample \file{.bashrc} file:
+\begin{verbatim}
+# Speed environment set up 
+if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
+    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
+    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
+fi
+\end{verbatim}
+
+Note that you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
+(\textbf{important}).
+
+
+\end{itemize}
+
+% ------------------------------------------------------------------------------
+\subsection{Phases}
+\label{sect:phases}
+
+Brief summary of Speed evolution phases.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Phase 4}
+
+Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
+dubbed as ``SPEED2''. We also moved from Grid Engine to SLURM.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Phase 3}
 
 Phase 3 had 4 vidpro nodes added from Dr.~Amer totalling 6x P6 and 6x V100
 GPUs added.
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 2}
+\subsubsection{Phase 2}
 
 Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes.
 The P6s replaced 4x of FirePro S7150.
 
 % ------------------------------------------------------------------------------
-\subsection{Phase 1}
+\subsubsection{Phase 1}
 
 Phase 1 of Speed was of the following configuration:
 
@@ -665,7 +898,13 @@ you may have access to their local
 Contact Thomas Beaudry for details and how to obtain access.
 \item
 Digital Research Alliance Canada (Compute Canada / Calcul Quebec),\\
-\url{https://alliancecan.ca/}
+\url{https://alliancecan.ca/}. Follow
+\href
+{https://alliancecan.ca/en/services/advanced-research-computing/account-management/apply-account}
+{this link}
+on the information how to obtain access (students need to be sponsored
+by their supervising faculty members, who should create accounts
+first). Their SLURM examples are here: \url{https://docs.alliancecan.ca/wiki/Running_jobs}
 
 \end{itemize}
 

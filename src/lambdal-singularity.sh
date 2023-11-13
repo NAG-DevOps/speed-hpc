@@ -1,7 +1,7 @@
 #!/encs/bin/bash
 
 # Serguei Mokhov
-# UGE-based job invocation script
+# SLURM-based job invocation script
 
 # Singulairy container for Lambda Labs Software Stack
 
@@ -9,39 +9,30 @@
 ## Job scheduler options
 ##
 
-# Run from the current directory where this script is
-#$ -cwd
-
-# How many GPUs (currently limit is set 2 max for Speed 5 and 17)
-#$ -l gpu=2
-
-# High value of memory requested
-#$ -l h_vmem=20G
-#$ -ac hv=8
-
-# Number of cores requested (approx).
-# Be conservative
-#$ -pe smp 4
-
-# Email notifications
-#$ -m bea
+#SBATCH --job-name=lambdal     ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./             ## Use currect directory as working directory (default)
+## Any partition, usually on the command line that has GPUs
+##SBATCH --partition=pg        ## Use the GPU partition (specify here or at command line wirh -p option)
+#SBATCH --gpus=1               ## How many GPUs (currently limit is set 2 max for Speed 5 and 17)
+#SBATCH --mem=20G              ## Assign memory
+#SBATCH --export=ALL,hv=8      ## Export all environment variables and set a value for the hv variable
 
 ##
 ## Job to run
 ##
 
-# 
-# Run on GPU nodes like, `qsub -q g.q ...'
-#
-
 echo "$0 : about to run gcs-lambdalabs-singularity on Speed..."
 date
+
+env
 
 # time will simply measure and print runtime
 # sigularity run -- running the image
 # then whatever script you need to run inside the container
 
-SINGULARITY=/encs/pkg/singularity-3.7.0/root/bin/singularity
+SINGULARITY=/encs/pkg/singularity-3.10.4/root/bin/singularity
 
 # bind mount the current directory, the user's speed-scratch
 #           directory, nettemp
@@ -51,13 +42,9 @@ SINGULARITY_BIND=$PWD:/speed-pwd,/speed-scratch/$USER:/my-speed-scratch,/nettemp
 
 echo "Singularity will bind mount: $SINGULARITY_BIND for user: $USER"
 
-
 time \
-	$SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
+	srun $SINGULARITY run --nv /speed-scratch/nag-public/gcs-lambdalabs-stack.sif \
 	/usr/bin/python3 -c 'import torch; print(torch.rand(5, 5).cuda()); print(\"I love Lambda Stack!\")'
-
-time \ 
-	$SINGULARITY exec touch /my-speed-scratch/test1
 
 echo "$0 : Done!"
 date

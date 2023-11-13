@@ -1,51 +1,119 @@
-﻿% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsubsection{Directives}
+\label{sect:directives}
 
 Directives are comments included at the beginning of a job script that set the shell 
 and the options for the job scheduler. 
-
+%
 The shebang directive is always the first line of a script. In your job script, 
 this directive sets which shell your script's commands will run in. On ``Speed'', 
 we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
 
-To use the \texttt{tcsh} shell, start your script with: \verb|#!/encs/bin/tcsh|
-
-For \texttt{bash}, start with: \verb|#!/encs/bin/bash|
-
-Directives that start with \verb|"#$"|, set the options for the cluster's 
-``Altair Grid Engine (AGE)'' scheduler. The script template, \file{template.sh}, 
+To use the \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|.
+%
+For \texttt{bash}, start with \verb|#!/encs/bin/bash|.
+%
+Directives that start with \verb|#SBATCH|, set the options for the cluster's 
+SLURM scheduler. The script template, \texttt{template.sh}, 
 provides the essentials:
 
+%\begin{verbatim}
+%#$ -N <jobname>
+%#$ -cwd
+%#$ -m bea
+%#$ -pe smp <corecount>
+%#$ -l h_vmem=<memory>G
+%\end{verbatim}
 \begin{verbatim}
-#$ -N <jobname>
-#$ -cwd
-#$ -m bea
-#$ -pe smp <corecount>
-#$ -l h_vmem=<memory>G
+#SBATCH --job-name=tmpdir           ## Give the job a name
+#SBATCH --mail-type=ALL             ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./                  ## Use current directory as working directory
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=<corecount> ## Request, e.g. 8 cores
+#SBATCH --mem=<memory>              ## Assign, e.g., 32G memory per node 
+\end{verbatim}
+
+and its short option equivalents:
+
+\begin{verbatim}
+#SBATCH -J tmpdir                   ## Give the job a name
+#SBATCH --mail-type=ALL             ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./                  ## Use current directory as working directory
+#SBATCH -N 1
+#SBATCH -n 8                        ## Request 8 cores
+#SBATCH --mem=32G                   ## Assign 32G memory per node 
 \end{verbatim}
 
 Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
-\option{-cwd}, makes the current working directory the ``job working directory'',
-and your standard output file will appear here; \option{-m bea}, provides e-mail
-notifications (begin/end/abort); replace, \verb+<corecount>+, with the degree of
-(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32),
-be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
-is not relevant; replace, \verb+<memory>+, with the value (in GB), that you want 
-your job's memory space to be (up to 500), and all jobs MUST have a memory-space 
-assignment.
+\option{--chdir}, makes the current working directory the ``job working directory'',
+and your standard output file will appear here; \option{--mail-type}, provides e-mail
+notifications (success, error, etc. or all); replace, \verb+<corecount>+, with the degree of
+(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32 by default).
+%be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
+%is not relevant;
 
+Replace, \verb+<memory>+, with the value (in GB), that you want 
+your job's memory space to be (up to 500 depending on the node), and all jobs MUST have a memory-space 
+assignment.
+%
 If you are unsure about memory footprints, err on assigning a generous
-memory space to your job so that it does not get prematurely terminated
-(the value given to \api{h\_vmem} is a hard memory ceiling). You can refine
-\api{h\_vmem} values for future jobs by monitoring the size of a job's active
+memory space to your job, so that it does not get prematurely terminated.
+%(the value given to \api{h\_vmem} is a hard memory ceiling).
+You can refine
+%\api{h\_vmem}
+\option{--mem}
+values for future jobs by monitoring the size of a job's active
 memory space on \texttt{speed-submit} with:
 
+%\begin{verbatim}
+%qstat -j <jobID> | grep maxvmem
+%\end{verbatim}
+
 \begin{verbatim}
-qstat -j <jobID> | grep maxvmem
+sacct -j <jobID>
+sstat -j <jobID>
+\end{verbatim}
+
+\noindent
+This can be customized to show specific columns:
+
+\begin{verbatim}
+sacct -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
+sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 \end{verbatim}
 
 Memory-footprint values are also provided for completed jobs in the final
-e-mail notification (as, ``Max vmem'').
-
+e-mail notification (as, ``maxvmsize'').
+%
 \emph{Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.}
+
+Other essential options are \option{-t} and \option{-A}.
+%
+\begin{itemize}
+\item
+\option{-t} -- is the time estimate how long your job may run. This is
+used in scheduling priority of your job. The maximum already mentioned
+is 7 days for batch and 24 hours for interactive. Specifying lesser
+time may have your job scheduled sooner. The ``best'' value for this
+does not exist and is often determined empirically from the past runs.
+
+\item
+\option{-A} -- to what projects/associations attribute the accounting to. This is usually
+your research or supervisor group or a project or some kind of
+association. When moving from GE to SLURM we ported most users to
+two default accounts \texttt{speed1} and \texttt{speed2}. These
+are generic catch-all accounts if you are unsure what to use.
+Normally we tell in our intro email which one to use, which may
+be your default account. For example,
+\texttt{aits},
+\texttt{vidpro},
+\texttt{gipsy},
+\texttt{ai2},
+\texttt{mpackir},
+\texttt{cmos}, among others.
+
+\end{itemize}

@@ -4,12 +4,13 @@
 ## Job Scheduler options 
 ##
 
-#$ -N speed-manual # job name
-#$ -cwd            # Run from directory that script is in, e.g., your speed-scratch directory
-#$ -m bea          # Email notifications at job's start and end, or on abort
-#$ -pe smp 2       # Request 2 slots from parellel environment 'smp'
-#$ -l h_vmem=1G    # set resource value h_vmem (hard virtual memory size) to 1G
-                
+#SBATCH --job-name=speed-manual ## Give the job a name
+#SBATCH --mail-type=ALL         ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --chdir=./              ## Use currect directory as working directory
+#SBATCH --cpus-per-task=2       ## Request 2 cpus
+#SBATCH --mem=1G                ## Assign memory per node 
+
 ##
 ## Job to run
 ##
@@ -21,17 +22,19 @@ date
 # Pull speed-hpc sources latest commit only to avoid
 # downloading all the history. For fun time the longer
 # running commands.
-time git clone --depth 1 --branch master https://github.com/NAG-DevOps/speed-hpc.git
+time srun git clone --depth 1 --branch master https://github.com/NAG-DevOps/speed-hpc.git
 
 # We need to be in the doc directory
 cd speed-hpc/doc
 pwd
 
 # Generate PDF manual
-time make
+time srun make
 
 # Generate the HTML manual
-time make html
+# 2023 TeXLive HTML generation gives obscure error
+setenv PATH "/encs/pkg/texlive-20220405/root/bin/x86_64-linux:$PATH"
+time srun make html
 
 # Report generated files
 ls -al *.pdf web/*

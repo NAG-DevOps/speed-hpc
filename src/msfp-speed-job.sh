@@ -1,26 +1,26 @@
 #!/encs/bin/tcsh
 
 # Serguei Mokhov
-# UGE-based job invocation script
+# SLURM job invocation script
 # mac-spoofer-flucid-processor is a Perl script -- the actual job
 
 ##
-## Job scheduler options
+## SLURM SBATCH options
 ##
 
-# Run from the current directory where this script is
-#$ -cwd
+#SBATCH --job-name=mac-spoofer-flucid-processor  ## Set the job's name
+#SBATCH --mem=20G           ## Set memory per node
+#SBATCH --chdir=./          ## Set current directory as working directory
+## Export all SLURM_* environment variables and the explicitely defined hv variable
+#SBATCH --export=ALL,hv=8   
 
-# High value of memory requeted
-#$ -l h_vmem=20G
-#$ -ac hv=8
-
-# Number of cores requested (approx).
-# Includes 4 Perl/Java processes per claim type
-#$ -pe smp 8
+## Includes 4 Perl/Java processes per claim type
+## Note: SLURM default is one task per node.
+#SBATCH --cpus-per-task=8   ## Allocate 8 cpus per task
 
 # Notifications
-#$ -m bea
+#SBATCH --mail-type=ALL ## Receive all email type notifications
+#SBATCH --mail-user=$USER@encs.concordia.ca
 
 ##
 ## Job to run
@@ -28,9 +28,10 @@
 
 # 
 # The $RT variable is initialized on the command line 
-# via -v to qsub, like, `qsub -v RT=123 ...'
+# before calling this script. Example for tcsh 
+# setenv RT 123
 
 echo "$0 : about to run mac-spoofer-flucid-processor on Speed"
-mac-spoofer-flucid-processor $RT
+srun mac-spoofer-flucid-processor $RT
 
 # EOF

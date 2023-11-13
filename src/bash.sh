@@ -1,8 +1,8 @@
 #!/encs/bin/bash
 
-#$ -N qsub-test
-#$ -cwd
-#$ -l h_vmem=1G
+#SBATCH -J bash-test    ## --job-name
+#SBATCH --mem=1G        ## memory per node
+#SBATCH --chdir=./      ## Set current directory as working directory
 
 sleep 30
 
