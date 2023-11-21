@@ -24,16 +24,12 @@ module load gurobi/9.0.2/default
 module load python/3.7.7/default
 ## Create environment variables 
 setenv workdir $PWD
-mkdir -p /speed-scratch/$USER/tmp
-setenv TMPDIR /speed-scratch/$USER/tmp
 
-## Create a virtual Python environment (env) in $TMPDIR
-srun python3.7 -m venv $TMPDIR/env
-## Activate the new environment
-source $TMPDIR/env/bin/activate.csh
+## Activate the new environment, created before (see Virtual Environment details, below)
+source /speed-scratch/$USER/tmp/YOUR_VENV_NAME/bin/activate.csh
 ## Install gurobipy module
 cd $GUROBI_HOME
-srun python3.7 setup.py build --build-base /tmp/${USER} install
+srun python setup.py build --build-base /tmp/${USER} install
 
 ## return to working directory
 cd $workdir
@@ -44,3 +40,22 @@ srun python MY_PYTHON_SCRIPT.py
 ## from gurobipy import *
 ## import multiprocessing as mp
 
+####### Virtual Environment ####### 
+# - Normally is installed once, before creating the .sh batch file
+# 
+# cd /speed-scratch/$USER
+# 
+# if using GPUs
+#     srun --partition=pg --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
+# if using CPUs only
+#     srun --partition=ps --mem=10Gb --pty /encs/bin/tcsh
+# module load python/3.7.7/default
+# mkdir -p /speed-scratch/$USER/tmp 
+# setenv TMPDIR /speed-scratch/$USER/tmp
+# setenv TMP /speed-scratch/$USER/tmp
+# python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
+# source $TMPDIR/testenv/bin/activate.csh
+# pip install modules…
+# deactivate
+# exit
+#
