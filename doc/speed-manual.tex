@@ -597,6 +597,47 @@ We have a simple example that use a Python virtual environment:
 \end{itemize}
 
 % ------------------------------------------------------------------------------
+\subsubsection{Examples}
+\label{sect:examples-venv}
+Usually, Virtual environments are created once and before sending any job to the scheduler, when sending the job to the scheduler we activate the virtualEnvironment, use it and close it at the end of the job.
+\begin{itemize}
+	\item
+		Using Conda
+		\begin{verbatim}
+			cd /speed-scratch/$USER
+			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
+			module load python/3.11.0/default
+			conda create -p /speed-scratch/$USER/pytorch-env
+			conda activate /speed-scratch/$USER/pytorch-env
+			conda install python=3.11.0
+			pip3 install torch torchvision torchaudio --index-url \ 
+			https://download.pytorch.org/whl/cu117
+			....
+			conda deactivate
+			exit
+		\end{verbatim}
+	\item
+		Using Python Venv
+		\begin{verbatim}
+			cd /speed-scratch/$USER
+			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
+			module load python/3.9.1/default
+			mkdir -p /speed-scratch/$USER/tmp 
+			setenv TMPDIR /speed-scratch/$USER/tmp
+			setenv TMP /speed-scratch/$USER/tmp
+			python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
+			source /speed-scratch/$USER/tmp/testenv/bin/activate.csh
+			pip install modules…
+			deactivate
+			exit
+		\end{verbatim}
+\end{itemize}
+\vspace{10pt}
+\noindent
+\textbf{Important Note:} partition ps is used for CPU jobs, partitions pg,pt are used for GPU jobs, no need to use \texttt{--gpus=} when preparing environments for CPU jobs.
+\vspace{10pt}
+
+% ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-job-examples}
 

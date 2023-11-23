@@ -6,6 +6,7 @@
 #SBATCH --chdir=./             ## Use currect directory as working directory (default)
 #SBATCH --partition=pg-gpu     ## Use the GPU partition (specify here or at command line wirh -p option)
 #SBATCH --gpus=2               ## How many GPUs (currently limit is set 2 max for Speed 5 and 17)
+#SBATCH --mem=4Gb
 
 # Loads matlab module version
 module load matlab/R2022a/default
