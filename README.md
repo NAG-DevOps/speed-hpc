@@ -8,7 +8,6 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 * [GCS Speed HPC Facility](https://www.concordia.ca/ginacody/aits/speed.html)
 * The Speed Manual ([PDF](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf), [HTML](https://nag-devops.github.io/speed-hpc/))
-* [Overview Slides](https://docs.google.com/presentation/d/1zu4OQBU7mbj0e34Wr3ILXLPWomkhBgqGZ8j8xYrLf44/edit?usp=sharing)
 * [AITS Service Desk](https://www.concordia.ca/ginacody/aits.html)
 
 ## Examples
@@ -25,8 +24,9 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 ### Contributors
 
 * See the overall contributors [here](https://github.com/NAG-DevOps/speed-hpc/graphs/contributors)
-* [Serguei A. Mokhov](https://github.com/smokhov) -- project lead
-* HPC/Research support team: [Gillian A. Roper](https://github.com/yulgroper), [Carlos Alarcon Meza](https://github.com/carlos-encs), [Tariq Daradkeh](https://github.com/tariqghd)
+* [Dr. Serguei A. Mokhov](https://github.com/smokhov) -- project lead
+* Current HPC/Research support team: [Gillian A. Roper](https://github.com/yulgroper), [Carlos Alarcon Meza](https://github.com/carlos-encs)
+* [Dr. Tariq Daradkeh](https://github.com/tariqghd) helped us with continuous support of Speed and its users and working on scheduling prediction. He has also integrated the OpenISS YOLOv3 example
 * [Anh H Nguyen](https://github.com/aaanh) contributed the [HTML](https://nag-devops.github.io/speed-hpc/) version of the manual and its generation off our LaTeX sources as well as the corresponding [devcontainer](https://github.com/NAG-DevOps/speed-hpc/tree/master/doc/.devcontainer) environment
 * The initial Grid Engine V6 manual was written by Dr. Scott Bunnell
 
