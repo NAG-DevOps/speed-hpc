@@ -340,7 +340,7 @@ TL;DR:
 Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
 \begin{verbatim}
 #SBATCH --account=speed1 --mem=100M -t 600 -J job-name
-#SBATCH --gpus=2 --mem=1Gb --mail-type=ALL -t 600 --mail-user=$USER
+#SBATCH --gpus=2 --mail-type=ALL -t 600 --mail-user=$USER
 \end{verbatim}
 %
 We use \tool{srun} for every complex compute step inside the script.
