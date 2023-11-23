@@ -522,12 +522,18 @@ will have those permissions by default).
 % ------------------------------------------------------------------------------
 \subsection{Creating Virtual Environments}
 \label{sect:environments}
+\label{sect:examples-venv}
 
 The following documentation is specific to the \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
 %
 Virtual environments typically instantiated via Conda or Python.
 Another option is Singularity detailed in \xs{sect:singularity-containers}.
+%
+Usually, virtual environments are created once and before sending any job to the
+scheduler, so when sending the job to the scheduler we (1) activate the virtual environment,
+(2) use it, and (3) close it at the end of the job.
+
 
 % ------------------------------------------------------------------------------
 \subsubsection{Anaconda}
@@ -573,12 +579,30 @@ conda install pip
 This will install \tool{pip} and \tool{pip}'s dependencies, including python, 
 into the environment.
 
-\vspace{10pt}
+\begin{itemize}
+	\item
+		A consolidated example using Conda:
+		\small
+		\begin{verbatim}
+			cd /speed-scratch/$USER
+			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
+			module load python/3.11.0/default
+			conda create -p /speed-scratch/$USER/pytorch-env
+			conda activate /speed-scratch/$USER/pytorch-env
+			conda install python=3.11.0
+			pip3 install torch torchvision torchaudio --index-url \ 
+			  https://download.pytorch.org/whl/cu117
+			....
+			conda deactivate
+			exit
+		\end{verbatim}
+		\normalsize
+\end{itemize}
+
 \noindent
 \textbf{Important Note:} \tool{pip} (and \tool{pip3}) are used to install modules
- from the python distribution while \texttt{conda install} installs modules from 
- anaconda's repository.
-\vspace{10pt}
+from the python distribution while \texttt{conda install} installs modules from 
+anaconda's repository.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Python}
@@ -589,37 +613,8 @@ We have a simple example that use a Python virtual environment:
 
 \begin{itemize}
 	\item
-		\href
-		{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
-		{\texttt{gurobi-with-python.sh}}
-	%\item
-		%\href
-		%{}
-		%{}
-\end{itemize}
-
-% ------------------------------------------------------------------------------
-\subsubsection{Examples}
-\label{sect:examples-venv}
-Usually, Virtual environments are created once and before sending any job to the scheduler, when sending the job to the scheduler we activate the virtualEnvironment, use it and close it at the end of the job.
-\begin{itemize}
-	\item
-		Using Conda
-		\begin{verbatim}
-			cd /speed-scratch/$USER
-			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
-			module load python/3.11.0/default
-			conda create -p /speed-scratch/$USER/pytorch-env
-			conda activate /speed-scratch/$USER/pytorch-env
-			conda install python=3.11.0
-			pip3 install torch torchvision torchaudio --index-url \ 
-			https://download.pytorch.org/whl/cu117
-			....
-			conda deactivate
-			exit
-		\end{verbatim}
-	\item
 		Using Python Venv
+		\small
 		\begin{verbatim}
 			cd /speed-scratch/$USER
 			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
@@ -633,11 +628,17 @@ Usually, Virtual environments are created once and before sending any job to the
 			deactivate
 			exit
 		\end{verbatim}
+		\normalsize
+	\item
+	    See, e.g., 
+		\href
+		{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
+		{\texttt{gurobi-with-python.sh}}
 \end{itemize}
-\vspace{10pt}
+
 \noindent
-\textbf{Important Note:} partition ps is used for CPU jobs, partitions pg,pt are used for GPU jobs, no need to use \texttt{--gpus=} when preparing environments for CPU jobs.
-\vspace{10pt}
+\textbf{Important Note:} partition \texttt{ps} is used for CPU jobs, partitions \texttt{pg}, \texttt{pt} are used
+for GPU jobs, no need to use \texttt{--gpus=} when preparing environments for CPU jobs.
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
