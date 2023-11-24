@@ -2,7 +2,7 @@
 
 #SBATCH --job-name=flu10000    ## Give the job a name
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
-#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory
 #SBATCH --nodes=1              ## Number of nodes to run on
 #SBATCH --ntasks-per-node=32   ## Number of cores
