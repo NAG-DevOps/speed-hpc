@@ -63,7 +63,8 @@ The lines that begin with \texttt{\#SBATCH} are directives for the scheduler.
 	\item \texttt{--chdir} tells the scheduler to execute the job from the current working directory
 	%\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
 	\item \texttt{--mem=1GB} requests and assigns 1GB of memory to the job. 
-	Generally jobs \emph{require} the \texttt{--mem} option to be set.
+	Jobs \emph{require} the \texttt{--mem} option to be set either in the script
+	or on the command line; \textbf{if it's missing job submission will be rejected.}
 \end{itemize}
 
 The script then:
