@@ -339,7 +339,7 @@ command as follows:
 %qsub -t n[-m[:s]] <batch_script>
 %\end{verbatim}
 \begin{verbatim}
-sbatch --array n-m[:s]] <batch_script>
+sbatch --array=n-m[:s]] <batch_script>
 \end{verbatim}
 
 \textbf{-t Option Syntax:}
@@ -398,7 +398,14 @@ For jobs that can take advantage of multiple machine cores, up to 32 cores
 %#$ -pe smp [#cores] 
 %\end{verbatim}
 \begin{verbatim}
-#SBATCH -n [#cores] 
+#SBATCH -n [#cores for processes] 
+\end{verbatim}
+
+or
+
+\begin{verbatim}
+#SBATCH -n 1
+#SBATCH -c [#cores for threads of a single process]
 \end{verbatim}
 
 Both \tool{sbatch} and \tool{salloc} support \option{-n} on the command line,
@@ -536,7 +543,7 @@ Launch your graphical application:
 \tool{matlab}, or \tool{abaqus cme}, etc.
 \end{enumerate}
 
-Here's an example of starting PyCharm, of which we made a sample local installation.
+Here's an example of starting PyCharm (see \xf{fig:pycharm}), of which we made a sample local installation.
 You can make a similar install under your own directory. If using VSCode, it's
 currently only supported with the \tool{--no-sandbox} option.
 
