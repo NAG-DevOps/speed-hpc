@@ -1,7 +1,7 @@
 % ------------------------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
 
-\begin{figure}[htpb]
+\begin{figure}[h!]
     \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
     \caption{Source code for \file{fluent.sh}}
 	\label{fig:fluent.sh}
@@ -20,6 +20,7 @@ Job progress can be monitored by examining the standard-out file (e.g.,
 \texttt{slurm-249.out}), and/or by examining the ``moment'' file in 
 \texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
 the job. \textbf{Caveat:} take care with journal-file file paths.
+\newpage
 
 % ------------------------------------------------------------------------------
 \subsection{Example Job: efficientdet}
@@ -472,7 +473,7 @@ allocation:
 
 \small
 \begin{verbatim}
-salloc --gpus=1 -n8 -t60
+salloc --gpus=1 -n8 --mem=4Gb -t60
 cd /speed-scratch/$USER/
 singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
 INFO:    Converting OCI blobs to SIF format
