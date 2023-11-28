@@ -1014,7 +1014,7 @@ bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
                                                                                
 
                                                                                
-<!-- l. 568 --><p class='noindent'><img alt='PIC' height='350' src='images/pycharm.png' width='350' />
+<!-- l. 567 --><p class='noindent'><img alt='PIC' height='412' src='images/pycharm.png' width='412' />
 </p>
 <figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>PyCharm Starting up on a Speed Node</span></figcaption><!-- tex4ht:label?: x1-250134  -->
                                                                                
@@ -1022,17 +1022,17 @@ bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
                                                                                
    </figure>
    <h5 class='subsubsectionHead'><span class='titlemark'>2.8.3   </span> <a id='x1-260002.8.3'></a>Jupyter Notebooks</h5>
-<!-- l. 577 --><p class='noindent'>This is an example of running Jupyter notebooks together with Singularity (more on Singularity see
+<!-- l. 576 --><p class='noindent'>This is an example of running Jupyter notebooks together with Singularity (more on Singularity see
 Section <a href='#x1-430002.16'>2.16<!-- tex4ht:ref: sect:singularity-containers  --></a>). Here we are using one of the OpenISS-derived containers (see Section <a href='#x1-400002.15.3'>2.15.3<!-- tex4ht:ref: sect:openiss-examples  --></a> as
 well).
-</p><!-- l. 581 --><p class='indent'>
+</p><!-- l. 580 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-26002x1'>Use the <span class='cmtt-10'>--x11 </span>with <span class='cmtt-10'>salloc </span>or <span class='cmtt-10'>srun </span>as described in the above example
      </li>
 <li class='enumerate' id='x1-26004x2'>Load Singularity module <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>module load singularity/3.10.4/default</span></span></span>
      </li>
 <li class='enumerate' id='x1-26006x3'>
-     <!-- l. 590 --><p class='noindent'>Execute this Singularity command on a single line. It’s best to save it in a shell script that you
+     <!-- l. 589 --><p class='noindent'>Execute this Singularity command on a single line. It’s best to save it in a shell script that you
      could call, since it’s long.
                                                                                
 
@@ -1044,10 +1044,10 @@ well).
       /bin/bash -c ’/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd \
       --ip="*" --port=8888 --allow-root’
 </pre>
-     <!-- l. 598 --><p class='nopar'>
+     <!-- l. 597 --><p class='nopar'>
      </p></li>
 <li class='enumerate' id='x1-26008x4'>
-     <!-- l. 602 --><p class='noindent'>Create an <span class='cmtt-10'>ssh </span>tunnel between your computer and the node (<span class='cmtt-10'>speed-XX</span>) where Jupyter is
+     <!-- l. 601 --><p class='noindent'>Create an <span class='cmtt-10'>ssh </span>tunnel between your computer and the node (<span class='cmtt-10'>speed-XX</span>) where Jupyter is
      running (Using <span class='cmtt-10'>speed-submit </span>as a “jump server”) (Preferably: PuTTY, see Figure <a href='#x1-260135'>5<!-- tex4ht:ref: fig:putty1  --></a> and
      Figure <a href='#x1-260146'>6<!-- tex4ht:ref: fig:putty2  --></a>)
                                                                                
@@ -1057,10 +1057,10 @@ well).
      <pre class='verbatim' id='verbatim-27'>
      ssh -L 8888:localhost:8888 speed-XX
 </pre>
-     <!-- l. 606 --><p class='nopar'> Don’t close the tunnel.
+     <!-- l. 605 --><p class='nopar'> Don’t close the tunnel.
      </p></li>
 <li class='enumerate' id='x1-26010x5'>
-     <!-- l. 610 --><p class='noindent'>Open a browser, and copy your Jupyter’s token, in the screenshot example in Figure <a href='#x1-260157'>7<!-- tex4ht:ref: fig:jupyter  --></a>; each
+     <!-- l. 609 --><p class='noindent'>Open a browser, and copy your Jupyter’s token, in the screenshot example in Figure <a href='#x1-260157'>7<!-- tex4ht:ref: fig:jupyter  --></a>; each
      time the token will be different, as it printed to you in the terminal.
                                                                                
 
@@ -1069,7 +1069,7 @@ well).
      <pre class='verbatim' id='verbatim-28'>
      http://localhost:8888/?token=5a52e6c0c7dfc111008a803e5303371ed0462d3d547ac3fb
 </pre>
-     <!-- l. 617 --><p class='nopar'>
+     <!-- l. 616 --><p class='nopar'>
      </p></li>
 <li class='enumerate' id='x1-26012x6'>Work with your notebook.
 </li></ol>
@@ -1082,8 +1082,7 @@ well).
                                                                                
 
                                                                                
-<!-- l. 627 --><p class='noindent'><img alt='PIC' height='39' src='images/putty1.png' width='39' />
-</p>
+<div class='fbox'><img alt='PIC' src='images/putty1.png' /></div>
 <figcaption class='caption'><span class='id'>Figure 5: </span><span class='content'>SSH tunnel configuration 1</span></figcaption><!-- tex4ht:label?: x1-260135  -->
                                                                                
 
@@ -1098,8 +1097,7 @@ well).
                                                                                
 
                                                                                
-<!-- l. 636 --><p class='noindent'><img alt='PIC' height='65' src='images/putty2.png' width='65' />
-</p>
+<div class='fbox'><img alt='PIC' src='images/putty2.png' /></div>
 <figcaption class='caption'><span class='id'>Figure 6: </span><span class='content'>SSH tunnel configuration 2</span></figcaption><!-- tex4ht:label?: x1-260146  -->
                                                                                
 
@@ -1121,7 +1119,7 @@ well).
                                                                                
    </figure>
    <h4 class='subsectionHead'><span class='titlemark'>2.9   </span> <a id='x1-270002.9'></a>Scheduler Environment Variables</h4>
-<!-- l. 653 --><p class='noindent'>The scheduler presents a number of environment variables that can be used in your jobs. You can
+<!-- l. 652 --><p class='noindent'>The scheduler presents a number of environment variables that can be used in your jobs. You can
 invoke <span class='cmtt-10'>env </span>or <span class='cmtt-10'>printenv </span>in your job to know what hose are (most begin with the prefix <span class='cmtt-10'>SLURM</span>). Some
 of the more useful ones are:
 </p>
@@ -1141,14 +1139,14 @@ of the more useful ones are:
      <li class='itemize'><span class='tctt-1000'>$</span><span class='cmtt-10'>SLURM_ARRAY_TASK_ID</span>=for array jobs (see Section <a href='#x1-210002.6'>2.6<!-- tex4ht:ref: sect:array-jobs  --></a>).
      </li>
      <li class='itemize'>
-     <!-- l. 694 --><p class='noindent'>See a more complete list here:
+     <!-- l. 693 --><p class='noindent'>See a more complete list here:
 </p>
          <ul class='itemize2'>
          <li class='itemize'><a class='url' href='https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES'><span class='cmtt-9'>https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES</span></a>
          </li>
          <li class='itemize'><a class='url' href='https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES'><span class='cmtt-9'>https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES</span></a></li></ul>
      </li></ul>
-<!-- l. 707 --><p class='noindent'>In Figure <a href='#x1-270198'>8<!-- tex4ht:ref: fig:tmpdir.sh  --></a> is a sample script, using some of these.
+<!-- l. 706 --><p class='noindent'>In Figure <a href='#x1-270198'>8<!-- tex4ht:ref: fig:tmpdir.sh  --></a> is a sample script, using some of these.
 </p>
    <figure class='figure'> 
 
@@ -1159,7 +1157,7 @@ of the more useful ones are:
                                                                                
 
                                                                                
-<!-- l. 711 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-27002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
+<!-- l. 710 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-27002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
 <span class='label'><a id='x1-27003r2'></a></span> 
 <span class='label'><a id='x1-27004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--job-name=tmpdir</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Give the job a name</span> 
 </span><span class='label'><a id='x1-27005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-type=ALL</span> </span><span class='cmitt-10x-x-80'>       </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Receive all email type notifications</span> 
@@ -1373,19 +1371,16 @@ Job progress can be monitored by examining the standard-out file (e.g., <span cl
 and/or by examining the “moment” file in <span class='cmtt-10'>/disk/nobackup/&lt;yourjob&gt; </span>(hint: it starts
 with your job-ID) on the node running the job. <span class='cmbx-10'>Caveat: </span>take care with journal-file file
 paths.
-                                                                               
-
-                                                                               
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.13   </span> <a id='x1-350002.13'></a>Example Job: efficientdet</h4>
-<!-- l. 28 --><p class='noindent'>The following steps describing how to create an efficientdet environment on <span class='cmti-10'>Speed</span>, were submitted by
+<!-- l. 27 --><p class='noindent'>The following steps describing how to create an efficientdet environment on <span class='cmti-10'>Speed</span>, were submitted by
 a member of Dr. Amer’s research group.
 </p>
      <ul class='itemize1'>
      <li class='itemize'>Enter your ENCS user account’s speed-scratch directory<br class='newline' /><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>cd /speed-scratch/&lt;encs_username&gt;</span></span></span>
      </li>
      <li class='itemize'>
-     <!-- l. 36 --><p class='noindent'>Next </p>
+     <!-- l. 35 --><p class='noindent'>Next </p>
          <ul class='itemize2'>
          <li class='itemize'>load python <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>module load python/3.8.3</span></span></span>
          </li>
@@ -1414,24 +1409,24 @@ pip install tensorflow-model-optimization&gt;=0.5
 pip install Cython&gt;=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 </pre>
-<!-- l. 64 --><p class='nopar'>
-</p><!-- l. 68 --><p class='noindent'>
+<!-- l. 63 --><p class='nopar'>
+</p><!-- l. 67 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.14   </span> <a id='x1-360002.14'></a>Java Jobs</h4>
-<!-- l. 71 --><p class='noindent'>Jobs that call <span class='cmtt-10'>java </span>have a memory overhead, which needs to be taken into account when assigning a
+<!-- l. 70 --><p class='noindent'>Jobs that call <span class='cmtt-10'>java </span>have a memory overhead, which needs to be taken into account when assigning a
 value to <span class='cmtt-10'>--mem</span>. Even the most basic <span class='cmtt-10'>java </span>call, <span class='cmtt-10'>java -Xmx1G -version</span>, will need to have,
 <span class='cmtt-10'>--mem=5G</span>, with the 4-GB difference representing the memory overhead. Note that this memory
 overhead grows proportionally with the value of <span class='cmtt-10'>-Xmx</span>. To give you an idea, when <span class='cmtt-10'>-Xmx </span>has a
 value of 100G, <span class='cmtt-10'>--mem </span>has to be at least 106G; for 200G, at least 211G; for 300G, at least
 314G.
-</p><!-- l. 85 --><p class='noindent'>
+</p><!-- l. 84 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.15   </span> <a id='x1-370002.15'></a>Scheduling On The GPU Nodes</h4>
-<!-- l. 87 --><p class='noindent'>The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6 cards: each card
+<!-- l. 86 --><p class='noindent'>The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6 cards: each card
 has 2048 cores and 16GB of RAM. Though note that the P6 is mainly a single-precision card, so
 unless you need the GPU double precision, double-precision calculations will be faster on a CPU
 node.
-</p><!-- l. 92 --><p class='indent'>   Job scripts for the GPU queue differ in that they need this statement, which attaches either a
+</p><!-- l. 91 --><p class='indent'>   Job scripts for the GPU queue differ in that they need this statement, which attaches either a
 single GPU, or, two GPUs, to the job:
                                                                                
 
@@ -1440,8 +1435,8 @@ single GPU, or, two GPUs, to the job:
    <pre class='verbatim' id='verbatim-36'>
 #SBATCH --gpus=[1|2]
 </pre>
-<!-- l. 110 --><p class='nopar'>
-</p><!-- l. 118 --><p class='indent'>   Once that your job script is ready, you can submit it to the GPU partition (queue)
+<!-- l. 109 --><p class='nopar'>
+</p><!-- l. 117 --><p class='indent'>   Once that your job script is ready, you can submit it to the GPU partition (queue)
 with:
                                                                                
 
@@ -1450,8 +1445,8 @@ with:
    <pre class='verbatim' id='verbatim-37'>
 sbatch -p pg ./&lt;myscript&gt;.sh
 </pre>
-<!-- l. 126 --><p class='nopar'>
-</p><!-- l. 128 --><p class='indent'>   And you can query <span class='cmtt-10'>nvidia-smi </span>on the node that is running your job with:
+<!-- l. 125 --><p class='nopar'>
+</p><!-- l. 127 --><p class='indent'>   And you can query <span class='cmtt-10'>nvidia-smi </span>on the node that is running your job with:
                                                                                
 
                                                                                
@@ -1459,8 +1454,8 @@ sbatch -p pg ./&lt;myscript&gt;.sh
    <pre class='verbatim' id='verbatim-38'>
 ssh &lt;username&gt;@speed[-05|-17|37-43] nvidia-smi
 </pre>
-<!-- l. 132 --><p class='nopar'>
-</p><!-- l. 134 --><p class='indent'>   Status of the GPU queue can be queried with:
+<!-- l. 131 --><p class='nopar'>
+</p><!-- l. 133 --><p class='indent'>   Status of the GPU queue can be queried with:
                                                                                
 
                                                                                
@@ -1468,14 +1463,14 @@ ssh &lt;username&gt;@speed[-05|-17|37-43] nvidia-smi
    <pre class='verbatim' id='verbatim-39'>
 sinfo -p pg --long --Node
 </pre>
-<!-- l. 141 --><p class='nopar'>
-</p><!-- l. 143 --><p class='noindent'><span class='cmbx-10'>Very important note </span>regarding TensorFlow and PyTorch: if you are planning to run TensorFlow
+<!-- l. 140 --><p class='nopar'>
+</p><!-- l. 142 --><p class='noindent'><span class='cmbx-10'>Very important note </span>regarding TensorFlow and PyTorch: if you are planning to run TensorFlow
 and/or PyTorch multi-GPU jobs, <span class='cmbx-10'>do not </span>use the <span class='cmtt-10'>tf.distribute </span>and/or<br class='newline' /><span class='cmtt-10'>torch.nn.DataParallel </span>functions on <span class='cmbx-10'>speed-01,05,17</span>, as they will crash the compute node (100%
 certainty). This appears to be the current hardware’s architecture’s defect. The workaround is to
 either manually effect GPU parallelisation (TensorFlow has an example on how to do this), or to run
 on a single GPU.
-</p><!-- l. 157 --><p class='noindent'><span class='cmbx-10'>Important</span>
-</p><!-- l. 162 --><p class='indent'>   Users without permission to use the GPU nodes can submit jobs to the <span class='cmtt-10'>pg </span>partition, but those
+</p><!-- l. 156 --><p class='noindent'><span class='cmbx-10'>Important</span>
+</p><!-- l. 161 --><p class='indent'>   Users without permission to use the GPU nodes can submit jobs to the <span class='cmtt-10'>pg </span>partition, but those
 jobs will hang and never run. Their availability is seen with:
                                                                                
 
@@ -1500,8 +1495,8 @@ speed-41       1        pt        idle 256    2:64:2
 speed-42       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
 speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
 </pre>
-<!-- l. 210 --><p class='nopar'>
-</p><!-- l. 212 --><p class='indent'>   <span class='cmr-7'>This status demonstrates that most are available (i.e., have not been requested as resources). To specifically request a
+<!-- l. 209 --><p class='nopar'>
+</p><!-- l. 211 --><p class='indent'>   <span class='cmr-7'>This status demonstrates that most are available (i.e., have not been requested as resources). To specifically request a
 GPU node, add, </span><span class='cmtt-8x-x-87'>--gpus=[#GPUs]</span><span class='cmr-7'>, to your </span><span class='cmtt-8x-x-87'>sbatch </span><span class='cmr-7'>(statement/script) or </span><span class='cmtt-8x-x-87'>salloc </span><span class='cmr-7'>(statement) request. For example,
 </span><span class='cmtt-8x-x-87'>sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh</span><span class='cmr-7'>. You will see that this job has been assigned to one of the GPU
 nodes.</span>
@@ -1519,11 +1514,11 @@ speed-17             1 pg          drained   32   
 speed-05             1 pg            mixed   32   2:16:1 515490        0      1    gpu16 gpu:6       none
 speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1    gpu32 gpu:2       none
 </pre>
-<!-- l. 262 --><p class='nopar'>
-</p><!-- l. 269 --><p class='noindent'>
+<!-- l. 261 --><p class='nopar'>
+</p><!-- l. 268 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>2.15.1   </span> <a id='x1-380002.15.1'></a>CUDA</h5>
-<!-- l. 271 --><p class='noindent'>When calling <span class='cmtt-10'>CUDA </span>within job scripts, it is important to create a link to the desired <span class='cmtt-10'>CUDA </span>libraries and
+<!-- l. 270 --><p class='noindent'>When calling <span class='cmtt-10'>CUDA </span>within job scripts, it is important to create a link to the desired <span class='cmtt-10'>CUDA </span>libraries and
 set the runtime link path to the same libraries. For example, to use the <span class='cmtt-10'>cuda-11.5 </span>libraries, specify
 the following in your <span class='cmtt-10'>Makefile</span>.
                                                                                
@@ -1533,13 +1528,13 @@ the following in your <span class='cmtt-10'>Makefile</span>.
    <pre class='verbatim' id='verbatim-42'>
 -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
 </pre>
-<!-- l. 278 --><p class='nopar'>
-</p><!-- l. 280 --><p class='indent'>   In your job script, specify the version of <span class='cmtt-10'>gcc </span>to use prior to calling cuda. For example: <span class='cmtt-10'>module
+<!-- l. 277 --><p class='nopar'>
+</p><!-- l. 279 --><p class='indent'>   In your job script, specify the version of <span class='cmtt-10'>gcc </span>to use prior to calling cuda. For example: <span class='cmtt-10'>module
 load gcc/8.4 </span>or <span class='cmtt-10'>module load gcc/9.3</span>
-</p><!-- l. 287 --><p class='noindent'>
+</p><!-- l. 286 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>2.15.2   </span> <a id='x1-390002.15.2'></a>Special Notes for sending CUDA jobs to the GPU Queue</h5>
-<!-- l. 292 --><p class='noindent'>Interactive jobs (Section <a href='#x1-230002.8'>2.8<!-- tex4ht:ref: sect:interactive-jobs  --></a>) must be submitted to the <span class='cmbx-10'>GPU partition </span>in order to compile and link.
+<!-- l. 291 --><p class='noindent'>Interactive jobs (Section <a href='#x1-230002.8'>2.8<!-- tex4ht:ref: sect:interactive-jobs  --></a>) must be submitted to the <span class='cmbx-10'>GPU partition </span>in order to compile and link.
 We have several versions of CUDA installed in:
                                                                                
 
@@ -1550,19 +1545,19 @@ We have several versions of CUDA installed in:
 /encs/pkg/cuda-10.2/root/
 /encs/pkg/cuda-9.2/root
 </pre>
-<!-- l. 301 --><p class='nopar'>
-</p><!-- l. 303 --><p class='indent'>   For CUDA to compile properly for the GPU partition, edit your <span class='cmtt-10'>Makefile </span>replacing
+<!-- l. 300 --><p class='nopar'>
+</p><!-- l. 302 --><p class='indent'>   For CUDA to compile properly for the GPU partition, edit your <span class='cmtt-10'>Makefile </span>replacing
 <span class='cmtt-10'>usrlocalcuda </span>with one of the above.
-</p><!-- l. 307 --><p class='noindent'>
+</p><!-- l. 306 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead'><span class='titlemark'>2.15.3   </span> <a id='x1-400002.15.3'></a>OpenISS Examples</h5>
-<!-- l. 310 --><p class='noindent'>These represent more comprehensive research-like examples of jobs for computer vision and other
+<!-- l. 309 --><p class='noindent'>These represent more comprehensive research-like examples of jobs for computer vision and other
 tasks with a lot longer runtime (a subject to the number of epochs and other parameters) derive from
 the actual research works of students and their theses. These jobs require the use of CUDA
 and GPUs. These examples are available as “native” jobs on Speed and as Singularity
 containers.
 </p>
-<!-- l. 321 --><p class='noindent'><span class='paragraphHead'><a id='x1-41000'></a><span class='cmbx-10'>OpenISS and REID</span></span>
+<!-- l. 320 --><p class='noindent'><span class='paragraphHead'><a id='x1-41000'></a><span class='cmbx-10'>OpenISS and REID</span></span>
 <a id='x1-41000doc'></a>
    The example <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh'>openiss-reid-speed.sh</a> illustrates a job for a computer-vision based person
 re-identification (e.g., motion capture-based tracking for stage performance) part of the OpenISS
@@ -1571,21 +1566,21 @@ to run on Speed is here:
 </p>
      <ul class='itemize1'>
      <li class='itemize'><a class='url' href='https://github.com/NAG-DevOps/openiss-reid-tfk'><span class='cmtt-10'>https://github.com/NAG-DevOps/openiss-reid-tfk</span></a></li></ul>
-<!-- l. 336 --><p class='indent'>   and its detailed description on how to run it on Speed is in the README:
+<!-- l. 335 --><p class='indent'>   and its detailed description on how to run it on Speed is in the README:
 </p>
      <ul class='itemize1'>
      <li class='itemize'><a class='url' href='https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk'><span class='cmtt-10'>https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk</span></a></li></ul>
                                                                                
 
                                                                                
-<!-- l. 344 --><p class='noindent'><span class='paragraphHead'><a id='x1-42000'></a><span class='cmbx-10'>OpenISS and YOLOv3</span></span>
+<!-- l. 343 --><p class='noindent'><span class='paragraphHead'><a id='x1-42000'></a><span class='cmbx-10'>OpenISS and YOLOv3</span></span>
 <a id='x1-42000doc'></a>
    The related code using YOLOv3 framework is in the the fork of the original repo <span class='cite'>[<a href='#Xopeniss-yolov3'>11</a>]</span> adjusted to
 to run on Speed is here:
 </p>
      <ul class='itemize1'>
      <li class='itemize'><a class='url' href='https://github.com/NAG-DevOps/openiss-yolov3'><span class='cmtt-10'>https://github.com/NAG-DevOps/openiss-yolov3</span></a></li></ul>
-<!-- l. 355 --><p class='indent'>   Its example job scripts can run on both CPUs and GPUs, as well as interactively using
+<!-- l. 354 --><p class='indent'>   Its example job scripts can run on both CPUs and GPUs, as well as interactively using
 TensorFlow:
 </p>
      <ul class='itemize1'>
@@ -1594,18 +1589,18 @@ TensorFlow:
      <li class='itemize'>CPU-based job: <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-cpu.sh'>openiss-yolo-cpu.sh</a>
      </li>
      <li class='itemize'>GPU-based jon: <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-gpu.sh'>openiss-yolo-gpu.sh</a></li></ul>
-<!-- l. 370 --><p class='indent'>   The detailed description on how to run these on Speed is in the README at:
+<!-- l. 369 --><p class='indent'>   The detailed description on how to run these on Speed is in the README at:
 </p>
      <ul class='itemize1'>
      <li class='itemize'><a class='url' href='https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3'><span class='cmtt-10'>https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3</span></a></li></ul>
-<!-- l. 378 --><p class='noindent'>
+<!-- l. 377 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead'><span class='titlemark'>2.16   </span> <a id='x1-430002.16'></a>Singularity Containers</h4>
-<!-- l. 381 --><p class='noindent'>If the <span class='cmtt-10'>/encs </span>software tree does not have a required software instantaneously available, another option
+<!-- l. 380 --><p class='noindent'>If the <span class='cmtt-10'>/encs </span>software tree does not have a required software instantaneously available, another option
 is to run Singularity containers. We run EL7 flavor of Linux, and if some projects require Ubuntu or
 other distributions, there is a possibility to run that software as a container, including the ones
 translated from Docker.
-</p><!-- l. 388 --><p class='indent'>   The example <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh'>lambdal-singularity.sh</a> showcases an immediate use of a container built for the
+</p><!-- l. 387 --><p class='indent'>   The example <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh'>lambdal-singularity.sh</a> showcases an immediate use of a container built for the
 Ubuntu-based LambdaLabs software stack, originally built as a Docker image then pulled
 in as a Singularity container that is immediately available for use as that job example
 illustrates. The source material used for the docker image was our fork of their official repo:
@@ -1613,12 +1608,12 @@ illustrates. The source material used for the docker image was our fork of their
                                                                                
 
                                                                                
-</p><!-- l. 398 --><p class='indent'>   NOTE: It is important if you make your own containers or pull from DockerHub, use your
+</p><!-- l. 397 --><p class='indent'>   NOTE: It is important if you make your own containers or pull from DockerHub, use your
 <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>/speed-scratch/$USER</span></span></span> directory as these images may easily consume gigs of space in your home
 directory and you’d run out of quota there very fast.
-</p><!-- l. 404 --><p class='indent'>   TIP: To check for your quota, and the corresponding commands to find big files, see:
+</p><!-- l. 403 --><p class='indent'>   TIP: To check for your quota, and the corresponding commands to find big files, see:
 <a class='url' href='https://www.concordia.ca/ginacody/aits/encs-data-storage.html'><span class='cmtt-10'>https://www.concordia.ca/ginacody/aits/encs-data-storage.html</span></a>
-</p><!-- l. 407 --><p class='indent'>   We likewise built equivalent OpenISS (Section <a href='#x1-400002.15.3'>2.15.3<!-- tex4ht:ref: sect:openiss-examples  --></a>) containers from their Docker
+</p><!-- l. 406 --><p class='indent'>   We likewise built equivalent OpenISS (Section <a href='#x1-400002.15.3'>2.15.3<!-- tex4ht:ref: sect:openiss-examples  --></a>) containers from their Docker
 counter parts as they were used for teaching and research <span class='cite'>[<a href='#Xoi-containers-poster-siggraph2023'>14</a>]</span>. The images from
 <a class='url' href='https://github.com/NAG-DevOps/openiss-dockerfiles'><span class='cmtt-10'>https://github.com/NAG-DevOps/openiss-dockerfiles</span></a> and their DockerHub equivalents
 <a class='url' href='https://hub.docker.com/u/openiss'><span class='cmtt-10'>https://hub.docker.com/u/openiss</span></a> are found in the same public directory on
@@ -1643,14 +1638,14 @@ openiss-opengl-triangle.sif
 openiss-reid.sif
 openiss-xeyes.sif
 </pre>
-<!-- l. 430 --><p class='nopar'>
-</p><!-- l. 432 --><p class='indent'>   The currently recommended version of Singularity is <span class='cmtt-10'>singularity/3.10.4/default</span>.
-</p><!-- l. 435 --><p class='indent'>   This section comprises an introduction to working with Singularity, its containers, and what can
+<!-- l. 429 --><p class='nopar'>
+</p><!-- l. 431 --><p class='indent'>   The currently recommended version of Singularity is <span class='cmtt-10'>singularity/3.10.4/default</span>.
+</p><!-- l. 434 --><p class='indent'>   This section comprises an introduction to working with Singularity, its containers, and what can
 and cannot be done with Singularity on the ENCS infrastructure. It is not intended to be an
 exhaustive presentation of Singularity: the program’s authors do a good job of that here:
 <a class='url' href='https://www.sylabs.io/docs/'><span class='cmtt-10'>https://www.sylabs.io/docs/</span></a>. It also assumes that you have successfully installed Singularity on a
 user-managed/personal system (see next paragraph as to why).
-</p><!-- l. 442 --><p class='indent'>   Singularity containers are essentially either built from an existing container, or are built from
+</p><!-- l. 441 --><p class='indent'>   Singularity containers are essentially either built from an existing container, or are built from
 scratch. Building from scratch requires a recipe file (think of like a Dockerfile), and the operation <span class='cmti-10'>must</span>
 be effected as root. You will not have root on the ENCS infrastructure, so any built-from-scratch
 containers must be created on a user-managed/personal system. Root-level permissions are also
@@ -1661,13 +1656,13 @@ File-system containers are built around the ext3 file system, and are a read-wri
 containers are essentially a directory in an existing read-write space, and squashfs containers are
 a read-only compressed “file”. Note that file-system containers <span class='cmti-10'>cannot </span>be resized once
 built.
-</p><!-- l. 460 --><p class='indent'>   Note that the default build is a squashfs one. Also note what Singularity’s authors have to say
+</p><!-- l. 459 --><p class='indent'>   Note that the default build is a squashfs one. Also note what Singularity’s authors have to say
 about the builds, “A common workflow is to use the “sandbox” mode for development of
 the container, and then build it as a default (squashfs) Singularity image when done.”
 File-system containers are considered to be, “legacy”, at this point in time. When built, a
 <span class='cmti-10'>very small </span>overhead is allotted to a file-system container (think, MB), and that <span class='cmti-10'>cannot </span>be
 changed.
-</p><!-- l. 468 --><p class='indent'>   Probably for the most of your workflows you might find there is a Docker container exists for your
+</p><!-- l. 467 --><p class='indent'>   Probably for the most of your workflows you might find there is a Docker container exists for your
 tasks, in this case you can use the docker pull function of Singularity as a part of you virtual
 environment setup as an interactive job allocation:
                                                                                
@@ -1681,8 +1676,8 @@ singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-d
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 </pre>
-<!-- l. 481 --><p class='nopar'>
-</p><!-- l. 484 --><p class='noindent'>This method can be used for converting Docker containers directly on Speed. On GPU nodes make
+<!-- l. 480 --><p class='nopar'>
+</p><!-- l. 483 --><p class='noindent'>This method can be used for converting Docker containers directly on Speed. On GPU nodes make
 sure to pass on the <span class='cmtt-10'>--nv </span>flag to Singularity, so its containers could access the GPUs. See the linked
 example.
 </p><!-- l. 648 --><p class='noindent'>
