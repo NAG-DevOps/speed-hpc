@@ -1,7 +1,7 @@
 % ------------------------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
 
-\begin{figure}[h!]
+\begin{figure}[htpb]
     \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
     \caption{Source code for \file{fluent.sh}}
 	\label{fig:fluent.sh}
@@ -20,7 +20,6 @@ Job progress can be monitored by examining the standard-out file (e.g.,
 \texttt{slurm-249.out}), and/or by examining the ``moment'' file in 
 \texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
 the job. \textbf{Caveat:} take care with journal-file file paths.
-\newpage
 
 % ------------------------------------------------------------------------------
 \subsection{Example Job: efficientdet}
