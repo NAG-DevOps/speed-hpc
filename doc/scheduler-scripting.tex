@@ -490,12 +490,12 @@ allocation:
 
 For \tool{tcsh}:
 \begin{verbatim}
-srun --pty -n 8 -p pg --gpus=1 -t 60 /encs/bin/tcsh
+srun --pty -n 8 -p pg --gpus=1 --mem=1Gb -t 60 /encs/bin/tcsh
 \end{verbatim}
 
 For \tool{bash}:
 \begin{verbatim}
-srun --pty -n 8 -p pg --gpus=1 -t 60 /encs/bin/bash
+srun --pty -n 8 -p pg --gpus=1 --mem=1Gb -t 60 /encs/bin/bash
 \end{verbatim}
 
 % ------------------------------------------------------------------------------
@@ -564,8 +564,8 @@ bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
 \normalsize
 
 \begin{figure}[htpb]
-	\includegraphics[width=\columnwidth]{images/pycharm}
-    \caption{PyCharm Starting up on a Speed Node}
+			\includegraphics[width=\columnwidth]{images/pycharm}
+		\caption{PyCharm Starting up on a Speed Node}
 	\label{fig:pycharm}
 \end{figure}
 
@@ -622,18 +622,21 @@ Work with your notebook.
 \end{enumerate}
 
 \begin{figure}[htbp]
-	\centering
-	\fbox{\includegraphics{images/putty1}}
+		\centering
+		\fbox{\includegraphics{images/putty1}}
 	\caption{SSH tunnel configuration 1}
 	\label{fig:putty1}
 \end{figure}
 
+
+
 \begin{figure}[htbp]
-	\centering
-	\fbox{\includegraphics{images/putty2}}
+		\centering
+		\fbox{\includegraphics{images/putty2}}
 	\caption{SSH tunnel configuration 2}
 	\label{fig:putty2}
 \end{figure}
+
 
 \begin{figure}[htbp]
 	\centering

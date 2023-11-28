@@ -20,7 +20,7 @@
 
 # Notifications
 #SBATCH --mail-type=ALL ## Receive all email type notifications
-#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 
 ##
 ## Job to run

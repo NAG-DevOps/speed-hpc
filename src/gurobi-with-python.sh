@@ -13,7 +13,7 @@
 
 #SBATCH --job-name=gurobi-with-python ## Give the job a name
 #SBATCH --mail-type=ALL               ## Receive all email type notifications
-#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 #SBATCH --chdir=./                    ## Use currect directory as working directory (default) 
                                       ## stored as $SLURM_SUBMIT_DIR
 #SBATCH --cpus-per-task=8             ## Request 8 cpus

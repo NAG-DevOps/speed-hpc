@@ -472,7 +472,7 @@ allocation:
 
 \small
 \begin{verbatim}
-salloc --gpus=1 -n8 -t60
+salloc --gpus=1 -n8 --mem=4Gb -t60
 cd /speed-scratch/$USER/
 singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
 INFO:    Converting OCI blobs to SIF format

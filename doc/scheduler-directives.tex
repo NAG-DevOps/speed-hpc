@@ -27,7 +27,7 @@ provides the essentials:
 \begin{verbatim}
 #SBATCH --job-name=tmpdir           ## Give the job a name
 #SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --mail-user=YOUR_USERNAME@encs.concordia.ca
 #SBATCH --chdir=./                  ## Use current directory as working directory
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
@@ -40,7 +40,7 @@ and its short option equivalents:
 \begin{verbatim}
 #SBATCH -J tmpdir                   ## Give the job a name
 #SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH --mail-user=$USER@encs.concordia.ca
+#SBATCH --mail-user=YOUR_USERNAME@encs.concordia.ca
 #SBATCH --chdir=./                  ## Use current directory as working directory
 #SBATCH -N 1
 #SBATCH -n 8                        ## Request 8 cores
