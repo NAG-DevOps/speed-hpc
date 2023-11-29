@@ -14,7 +14,7 @@ To use the \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|.
 For \texttt{bash}, start with \verb|#!/encs/bin/bash|.
 %
 Directives that start with \verb|#SBATCH|, set the options for the cluster's 
-SLURM scheduler. The script template, \texttt{template.sh}, 
+Slurm job scheduler. The script template, \texttt{template.sh}, 
 provides the essentials:
 
 %\begin{verbatim}
@@ -25,39 +25,42 @@ provides the essentials:
 %#$ -l h_vmem=<memory>G
 %\end{verbatim}
 \begin{verbatim}
-#SBATCH --job-name=tmpdir           ## Give the job a name
-#SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH --mail-user=YOUR_USERNAME@encs.concordia.ca
-#SBATCH --chdir=./                  ## Use current directory as working directory
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=<corecount> ## Request, e.g. 8 cores
-#SBATCH --mem=<memory>              ## Assign, e.g., 32G memory per node 
+#SBATCH --job-name=<jobname>        ## or -J. Give the job a name 
+#SBATCH --mail-type=<type>          ## Set type of email notifications
+#SBATCH --mail-user=<YOUR_USERNAME>@encs.concordia.ca 
+#SBATCH --chdir=<directory>         ## or -D, Set working directory where output files will go 
+#SBATCH --nodes=1                   ## or -N, Node count required for the job
+#SBATCH --ntasks=1                  ## or -n, Number of tasks to be launched
+#SBATCH --cpus-per-task=<corecount> ## or -c, Core count requested, e.g. 8 cores
+#SBATCH --mem=<memory>              ## Assign memory for this job, e.g., 32G memory per node 
 \end{verbatim}
 
-and its short option equivalents:
+Replace the following to adjust the job script for your project(s)
+\begin{enumerate}
+  \item \verb+<jobname>+ with a job name for the job
+  \item \verb+<YOUR_USERNAME>+ with your GCS username
+  \item \verb+<directory>+ with the fullpath to your job's working directory, e.g., where your code,
+source files and where the standard output files will be written to. By default, \verb+--chdir+
+sets the current directory as the job's working directory 
+  \item \verb+<type>+ with the type of e-mail notifications you wish to receive. Valid options are: NONE, BEGIN, END, FAIL, REQUEUE, ALL 
+  \item \verb+<corecount>+ with the degree of multithreaded parallelism (i.e., cores) allocated to your job. Up to 32 by default.
+  \item \verb+<memory>+ with the amount of memory, in GB, that you want to be allocated per node. Up to 500 depending on the node. 
+  NOTE: All jobs MUST set a value for the \verb|--mem| option.
+\end{enumerate}
+
+Example with short option equivalents:
 
 \begin{verbatim}
-#SBATCH -J tmpdir                   ## Give the job a name
+#SBATCH -J tmpdir                   ## Job's name set to 'tmpdir'
 #SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH --mail-user=YOUR_USERNAME@encs.concordia.ca
-#SBATCH --chdir=./                  ## Use current directory as working directory
-#SBATCH -N 1
-#SBATCH -n 8                        ## Request 8 cores
-#SBATCH --mem=32G                   ## Assign 32G memory per node 
+#SBATCH --mail-user=a_user@encs.concordia.ca 
+#SBATCH -D ./                       ## Use current directory as working directory
+#SBATCH -N 1                        ## Node count required for the job
+#SBATCH -n 1                        ## Number of tasks to be launched
+#SBATCH -c 1                        ## Request 8 cores
+#SBATCH --mem=32G                   ## Allocate 32G memory per node 
 \end{verbatim}
 
-Replace, \verb+<jobname>+, with the name that you want your cluster job to have;
-\option{--chdir}, makes the current working directory the ``job working directory'',
-and your standard output file will appear here; \option{--mail-type}, provides e-mail
-notifications (success, error, etc. or all); replace, \verb+<corecount>+, with the degree of
-(multithreaded) parallelism (i.e., cores) you attach to your job (up to 32 by default).
-%be sure to delete or comment out the \verb| #$ -pe smp | parameter if it 
-%is not relevant;
-
-Replace, \verb+<memory>+, with the value (in GB), that you want 
-your job's memory space to be (up to 500 depending on the node), and all jobs MUST have a memory-space 
-assignment.
 %
 If you are unsure about memory footprints, err on assigning a generous
 memory space to your job, so that it does not get prematurely terminated.
@@ -86,29 +89,25 @@ sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 \end{verbatim}
 
 Memory-footprint values are also provided for completed jobs in the final
-e-mail notification (as, ``maxvmsize'').
+e-mail notification as ``maxvmsize''.
 %
 \emph{Jobs that request a low-memory footprint are more likely to load on a busy
 cluster.}
 
-Other essential options are \option{-t} and \option{-A}.
+Other essential options are \option{--time}, or \verb|-t|, and \option{--account}, or \verb|-A|.
 %
 \begin{itemize}
 \item
-\option{-t} -- is the time estimate how long your job may run. This is
-used in scheduling priority of your job. The maximum already mentioned
-is 7 days for batch and 24 hours for interactive. Specifying lesser
-time may have your job scheduled sooner. The ``best'' value for this
-does not exist and is often determined empirically from the past runs.
+\option{--time=<time>} -- is the estimate of wall clock time required for your job to run. 
+As preiviously mentioned, the maximum is 7 days for batch and 24 hours for interactive jobs. 
+Jobs with a smaller \texttt{time} value will have a higher priority and may result in your job being scheduled sooner. 
 
 \item
-\option{-A} -- to what projects/associations attribute the accounting to. This is usually
-your research or supervisor group or a project or some kind of
-association. When moving from GE to SLURM we ported most users to
-two default accounts \texttt{speed1} and \texttt{speed2}. These
-are generic catch-all accounts if you are unsure what to use.
-Normally we tell in our intro email which one to use, which may
-be your default account. For example,
+\option{--account=<name>} -- specifies which Account, aka project or association, 
+that the Speed resources your job uses should be attributed to. When moving from 
+GE to SLURM users most users were assigned to Speed's two default accounts 
+\texttt{speed1} and \texttt{speed2}. However, users that belong to a particular research
+group or project are will have a default Account like the following
 \texttt{aits},
 \texttt{vidpro},
 \texttt{gipsy},
