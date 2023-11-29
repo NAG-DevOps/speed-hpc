@@ -1,4 +1,4 @@
-﻿% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
 
 \begin{figure}[htpb]
@@ -8,13 +8,16 @@
 \end{figure}
 
 The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. 
-Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
-parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
+%Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
+Of note, we have requested e-mail notifications (\texttt{--mail-type}), are defining the 
+%parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
+parallel environment for, \tool{fluent}, with, \texttt{-t\$SLURM\_NTASKS} and \texttt{-g-cnf=\$FLUENTNODES} (\textbf{very 
 important}), and are setting \api{\$TMPDIR} as the in-job location for the
 ``moment'' \file{rfile.out} file (in-job, because the last line of the script 
 copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
 Job progress can be monitored by examining the standard-out file (e.g.,
-\file{flu10000.o249}), and/or by examining the ``moment'' file in 
+%\file{flu10000.o249}), and/or by examining the ``moment'' file in 
+\texttt{slurm-249.out}), and/or by examining the ``moment'' file in 
 \texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
 the job. \textbf{Caveat:} take care with journal-file file paths.
 
@@ -26,14 +29,22 @@ The following steps describing how to create an efficientdet environment on
 
 \begin{itemize}
     \item 
-    Enter your ENCS user account's speed-scratch directory 
+    Enter your ENCS user account's speed-scratch directory\\ 
     \verb!cd /speed-scratch/<encs_username>!
     \item
+		Next
+		\begin{itemize}
+			\item 
     load python \verb!module load python/3.8.3!
+			\item 
     create virtual environment \verb!python3 -m venv <env_name>!
+			\item 
     activate virtual environment \verb!source <env_name>/bin/activate.csh!
+			\item 
     install DL packages for Efficientdet
+		\end{itemize}
 \end{itemize}
+\small
 \begin{verbatim}
 pip install tensorflow==2.7.0
 pip install lxml>=4.6.1
@@ -50,19 +61,24 @@ pip install tensorflow-model-optimization>=0.5
 pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 \end{verbatim}
+\normalsize
 
 % ------------------------------------------------------------------------------
 \subsection{Java Jobs}
+\label{sect:java}
 
 Jobs that call \tool{java} have a memory overhead, which needs to be taken 
-into account when assigning a value to \api{h\_vmem}. Even the most basic 
+%into account when assigning a value to \api{h\_vmem}. Even the most basic 
+into account when assigning a value to \option{--mem}. Even the most basic 
 \tool{java} call, \texttt{java -Xmx1G -version}, will need to have,
-\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
+%\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
+\texttt{--mem=5G}, with the 4-GB difference representing the memory overhead. 
 Note that this memory overhead grows proportionally with the value of
 \texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G,
-\api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
+%\api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
+\option{--mem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
 
-% TODO: add a MARF Java job
+% TODO: add MARF and GIPSY Java jobs
 
 % ------------------------------------------------------------------------------
 \subsection{Scheduling On The GPU Nodes}
@@ -72,50 +88,63 @@ cards: each card has 2048 cores and 16GB of RAM. Though note that the P6
 is mainly a single-precision card, so unless you need the GPU double
 precision, double-precision calculations will be faster on a CPU node.
 
-Job scripts for the GPU queue differ in that they do not need these
-statements:
-
-\begin{verbatim}
-#$ -pe smp <threadcount>
-#$ -l h_vmem=<memory>G
-\end{verbatim}
-
-But do need this statement, which attaches either a single GPU, or, two
+Job scripts for the GPU queue differ in that they
+%do not need these
+%statements:
+%
+%\begin{verbatim}
+%#$ -pe smp <threadcount>
+%#$ -l h_vmem=<memory>G
+%\end{verbatim}
+%
+%But do
+need this statement, which attaches either a single GPU, or, two
 GPUs, to the job:
 
+%\begin{verbatim}
+%#$ -l gpu=[1|2]
+%\end{verbatim}
 \begin{verbatim}
-#$ -l gpu=[1|2]
+#SBATCH --gpus=[1|2]
 \end{verbatim}
 
-Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
-dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
-total of \emph{four} GPUs can be actively attached to any one user at any given
-time.
+% TODO: verify accuracy
+% Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
+% dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
+% total of \emph{four} GPUs can be actively attached to any one user at any given
+% time.
 
-Once that your job script is ready, you can submit it to the GPU queue
+Once that your job script is ready, you can submit it to the GPU partition (queue)
 with:
 
+%\begin{verbatim}
+%qsub -q g.q ./<myscript>.sh
+%\end{verbatim}
 \begin{verbatim}
-qsub -q g.q ./<myscript>.sh
+sbatch -p pg ./<myscript>.sh
 \end{verbatim}
 
 And you can query \tool{nvidia-smi} on the node that is running your job with:
 
 \begin{verbatim}
-ssh <username>@speed[-05|-17] nvidia-smi
+ssh <username>@speed[-05|-17|37-43] nvidia-smi
 \end{verbatim}
 
 Status of the GPU queue can be queried with:
 
+%\begin{verbatim}
+%qstat -f -u "*" -q g.q
+%\end{verbatim}
 \begin{verbatim}
-qstat -f -u "*" -q g.q
+sinfo -p pg --long --Node
 \end{verbatim}
 
+\noindent
 \textbf{Very important note} regarding TensorFlow and PyTorch: 
 if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
-do not use the \api{tf.distribute} and/or\\
+\textbf{do not} use the \api{tf.distribute} and/or\\
 \api{torch.nn.DataParallel} 
-functions, as they will crash the compute node (100\% certainty). 
+functions on \textbf{speed-01,05,17}, as they will crash the compute node (100\% certainty). 
 This appears to be the current hardware's architecture's defect.
 %
 The workaround is to either
@@ -128,58 +157,112 @@ do this), or to run on a single GPU.
 \textbf{Important}
 \vspace{10pt}
 
-Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
-queue but those jobs will hang and never run.
+%Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
+Users without permission to use the GPU nodes can submit jobs to the \texttt{pg}
+partition, but those jobs will hang and never run.
+%
+%There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
+%in \texttt{speed-19}.
+Their availability is seen with:
+%, \texttt{qstat -F g} (note the capital): 
+%
+%\small
+%\begin{verbatim}
+%queuename                      qtype resv/used/tot. load_avg arch          states
+%---------------------------------------------------------------------------------
+%...
+%---------------------------------------------------------------------------------
+%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
+        %hc:gpu=6
+%---------------------------------------------------------------------------------
+%g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+        %hc:gpu=6
+%---------------------------------------------------------------------------------
+%...
+%---------------------------------------------------------------------------------
+%s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.37    lx-amd64
+        %hc:gpu=1
+%---------------------------------------------------------------------------------
+%etc. 
+%\end{verbatim}
+%\normalsize
 
-There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
-in \texttt{speed-19}. Their availability is seen with, \texttt{qstat -F g}
-(note the capital): 
-
-\small
+\scriptsize
 \begin{verbatim}
-queuename                      qtype resv/used/tot. load_avg arch          states
----------------------------------------------------------------------------------
-...
----------------------------------------------------------------------------------
-g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
-        hc:gpu=6
----------------------------------------------------------------------------------
-g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
-        hc:gpu=6
----------------------------------------------------------------------------------
-...
----------------------------------------------------------------------------------
-s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.37    lx-amd64
-        hc:gpu=1
----------------------------------------------------------------------------------
-etc. 
+[serguei@speed-submit src] % sinfo -p pg --long --Node
+Thu Oct 19 22:31:04 2023
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+speed-05       1        pg        idle 32     2:16:1 515490        0      1    gpu16 none
+speed-17       1        pg     drained 32     2:16:1 515490        0      1    gpu16 UGE
+speed-25       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-27       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+[serguei@speed-submit src] % sinfo -p pt --long --Node
+Thu Oct 19 22:32:39 2023
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+speed-37       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-38       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-39       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-40       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-41       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-42       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
 \end{verbatim}
-\normalsize
 
-This status demonstrates that all five are available (i.e., have not been 
+This status demonstrates that most are available (i.e., have not been 
 requested as resources). To specifically request a GPU node, add,
-\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
-\tool{qlogin} (statement) request. For example,
-\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You 
-will see that this job has been assigned to one of the GPU nodes:
+%\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
+\texttt{--gpus=[\#GPUs]}, to your \tool{sbatch} (statement/script) or
+%\tool{qlogin} (statement) request. For example,
+\tool{salloc} (statement) request. For example,
+%\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You 
+\texttt{sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh}. You 
+will see that this job has been assigned to one of the GPU nodes.
 
-\small
+%\small
+%\begin{verbatim}
+%queuename                      qtype resv/used/tot. load_avg arch          states
+%--------------------------------------------------------------------------------- 
+%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
+%--------------------------------------------------------------------------------- 
+%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
+%--------------------------------------------------------------------------------- 
+%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
+       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
+%---------------------------------------------------------------------------------
+%etc. 
+%\end{verbatim}
+%\normalsize
+
+%\small
+%\begin{verbatim}
+%queuename                      qtype resv/used/tot. load_avg arch          states
+%--------------------------------------------------------------------------------- 
+%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
+%--------------------------------------------------------------------------------- 
+%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
+%--------------------------------------------------------------------------------- 
+%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
+       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
+%---------------------------------------------------------------------------------
+%etc. 
+%\end{verbatim}
+%\normalsize
+
+\scriptsize
 \begin{verbatim}
-queuename                      qtype resv/used/tot. load_avg arch          states
---------------------------------------------------------------------------------- 
-g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
---------------------------------------------------------------------------------- 
-g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
---------------------------------------------------------------------------------- 
-s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
----------------------------------------------------------------------------------
-etc. 
+[serguei@speed-submit src] % squeue -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
+NODELIST         NODES PARTITI       STATE MIN_    S:C:T MIN_ME MIN_TMP_  WCKEY FEATURES GROUP DEPENDENCY
+speed-05             1 pg          RUNNING    1    *:*:*     1G        0 (null)   (null) 11929     (null)
+[serguei@speed-submit src] % sinfo -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
+NODELIST         NODES PARTITI       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE GRES      REASON
+speed-17             1 pg          drained   32   2:16:1 515490        0      1    gpu16 gpu:6        UGE
+speed-05             1 pg            mixed   32   2:16:1 515490        0      1    gpu16 gpu:6       none
+speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1    gpu32 gpu:2       none
 \end{verbatim}
 \normalsize
 
-And that there are no more GPUs available on that node (\texttt{hc:gpu=0}). Note
-that no more than two GPUs can be requested for any one job. 
+%And that there are no more GPUs available on that node (\texttt{hc:gpu=0}).
+%Note that no more than two GPUs can be requested for any one job. 
 
 % ------------------------------------------------------------------------------
 \subsubsection{CUDA}
@@ -187,7 +270,7 @@ that no more than two GPUs can be requested for any one job.
 When calling \tool{CUDA} within job scripts, it is important to create a link to
 the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
 For example, to use the \texttt{cuda-11.5} libraries, specify the following in 
-your Makefile.
+your \texttt{Makefile}.
 
 \begin{verbatim}
 -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
@@ -202,11 +285,13 @@ or
 % ------------------------------------------------------------------------------
 \subsubsection{Special Notes for sending CUDA jobs to the GPU Queue}
 
-It is not possible to create a \texttt{qlogin} session on to a node in the 
-\textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not 
-available, jobs must be submitted to the \textbf{GPU Queue} in order to compile 
+%It is not possible to create a \texttt{qlogin} session on to a node in the 
+%\textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not 
+%available,
+Interactive 
+jobs (\xs{sect:interactive-jobs}) must be submitted to the \textbf{GPU partition} in order to compile 
 and link.
-
+%
 We have several versions of CUDA installed in:
 \begin{verbatim}
 /encs/pkg/cuda-11.5/root/
@@ -214,7 +299,7 @@ We have several versions of CUDA installed in:
 /encs/pkg/cuda-9.2/root
 \end{verbatim}
 
-For CUDA to compile properly for the GPU queue, edit your \texttt{Makefile}
+For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
 replacing \option{\/usr\/local\/cuda} with one of the above.
 
 % ------------------------------------------------------------------------------
@@ -328,7 +413,7 @@ as the LambdaLabs Singularity image. They all have \texttt{.sif} extension.
 Some of them can be ran in both batch or interactive mode, some
 make more sense to run interactively. They cover some basics with CUDA,
 OpenGL rendering, and computer vision tasks as examples from the OpenISS
-library and other libraries, including the base images that use diffrent
+library and other libraries, including the base images that use different
 distros. We also include Jupyter notebook example with Conda support.
 
 \begin{verbatim}
@@ -387,7 +472,7 @@ allocation:
 
 \small
 \begin{verbatim}
-qlogin
+salloc --gpus=1 -n8 --mem=4Gb -t60
 cd /speed-scratch/$USER/
 singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
 INFO:    Converting OCI blobs to SIF format

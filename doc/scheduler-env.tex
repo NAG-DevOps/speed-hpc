@@ -1,34 +1,42 @@
-﻿% ------------------------------------------------------------------------------
+% ------------------------------------------------------------------------------
 \subsubsection{Environment Set Up}
 \label{sect:envsetup}
 
-After creating an SSH connection to ``Speed'', you will need to source 
-the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
-Sourcing the settings file will set the environment variables required to 
-execute scheduler commands.
-
-Based on the UNIX shell type, choose one of the following commands to source
-the settings file. 
-
-csh/\tool{tcsh}:
-\begin{verbatim}
-source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
-\end{verbatim}
-
-Bourne shell/\tool{bash}:
-\begin{verbatim}
-. /local/pkg/uge-8.6.3/root/default/common/settings.sh 
-\end{verbatim}
-
-In order to set up the default ENCS bash shell, executing the following command 
-is also required:
-\begin{verbatim}
-printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile 
-\end{verbatim}
-
-To verify that you have access to the scheduler commands execute 
-\texttt{qstat -f -u "*"}. If an error is returned, attempt sourcing 
-the settings file again.
+After creating an SSH connection to Speed, you will need to
+make sure the \tool{srun}, \tool{sbatch}, and \tool{salloc}
+commands are available to you. 
+Type the command name at the command prompt and press enter.
+If the command is not available, e.g., (``command not found'') is returned,
+you need to make sure your \api{\$PATH} has \texttt{/local/bin} in it.
+To view your \api{\$PATH} type \texttt{echo \$PATH} at the prompt.
+%
+%source 
+%the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
+%Sourcing the settings file will set the environment variables required to 
+%execute scheduler commands.
+%
+%Based on the UNIX shell type, choose one of the following commands to source
+%the settings file. 
+%
+%csh/\tool{tcsh}:
+%\begin{verbatim}
+%source /local/pkg/uge-8.6.3/root/default/common/settings.csh 
+%\end{verbatim}
+%
+%Bourne shell/\tool{bash}:
+%\begin{verbatim}
+%. /local/pkg/uge-8.6.3/root/default/common/settings.sh 
+%\end{verbatim}
+%
+%In order to set up the default ENCS bash shell, executing the following command 
+%is also required:
+%\begin{verbatim}
+%printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile 
+%\end{verbatim}
+%
+%To verify that you have access to the scheduler commands execute 
+%\texttt{qstat -f -u "*"}. If an error is returned, attempt sourcing 
+%the settings file again.
 
 The next step is to copy a job template to your home directory and to set up your
 cluster-specific storage. Execute the following command from within your
@@ -39,50 +47,50 @@ prompt and press \texttt{Enter}.)
 cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
 \end{verbatim}
 
-\textbf{Tip:} Add the source command to your shell-startup script. 
+%\textbf{Tip:} Add the source command to your shell-startup script. 
 
 \textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
 If you would like to use \tool{bash}, please contact 
 \texttt{rt-ex-hpc AT encs.concordia.ca}.
 
-For \textbf{new ENCS Users}, and/or those who don't have a shell-startup script, 
-based on your shell type use one of the following commands to copy a start up script 
-from \texttt{nul-uge}'s. home directory to your home directory. (To move to your home
-directory, type \tool{cd} at the Linux prompt and press \texttt{Enter}.)
+%For \textbf{new GCS ENCS Users}, and/or those who don't have a shell-startup script, 
+%based on your shell type use one of the following commands to copy a start up script 
+%from \texttt{nul-uge}'s home directory to your home directory. (To move to your home
+%directory, type \tool{cd} at the Linux prompt and press \texttt{Enter}.)
 
-csh/\tool{tcsh}:
-\begin{verbatim}
-cp /home/n/nul-uge/.tcshrc . 
-\end{verbatim}
+%csh/\tool{tcsh}:
+%\begin{verbatim}
+%cp /home/n/nul-uge/.tcshrc . 
+%\end{verbatim}
 
-Bourne shell/\tool{bash}:
-\begin{verbatim}
-cp /home/n/nul-uge/.bashrc . 
-\end{verbatim}
+%Bourne shell/\tool{bash}:
+%\begin{verbatim}
+%cp /home/n/nul-uge/.bashrc . 
+%\end{verbatim}
 
-Users who already have a shell-startup script, use a text editor, such as
-\tool{vim} or \tool{emacs}, to add the source request to your existing
-shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
+%Users who already have a shell-startup script, can use a text editor, such as
+%\tool{vim} or \tool{emacs}, to add the source request to your existing
+%shell-startup environment (i.e., to the \file{.tcshrc} file in your home directory). 
 
-csh/\tool{tcsh}:
-Sample \file{.tcshrc} file:
-\begin{verbatim}
-# Speed environment set up 
-if ($HOSTNAME == speed-submit.encs.concordia.ca) then
-   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
-endif
-\end{verbatim}
+%csh/\tool{tcsh}:
+%Sample \file{.tcshrc} file:
+%\begin{verbatim}
+%# Speed environment set up 
+%if ($HOSTNAME == speed-submit.encs.concordia.ca) then
+   %source /local/pkg/uge-8.6.3/root/default/common/settings.csh
+%endif
+%\end{verbatim}
+%
+%Bourne shell/\tool{bash}:
+%Sample \file{.bashrc} file:
+%\begin{verbatim}
+%# Speed environment set up 
+%if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
+    %. /local/pkg/uge-8.6.3/root/default/common/settings.sh
+    %printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
+%fi
+%\end{verbatim}
 
-Bourne shell/\tool{bash}:
-Sample \file{.bashrc} file:
-\begin{verbatim}
-# Speed environment set up 
-if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
-    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
-    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
-fi
-\end{verbatim}
-
-Note that you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
-(\textbf{important}).
+Note, if you are getting ``command not found'' error(s) when logging in, you
+probably have old Grid Engine environment commands. Remove them
+as per \xa{appdx:uge-to-slurm}.

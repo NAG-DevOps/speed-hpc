@@ -1,10 +1,12 @@
  
 /* start css.sty */
+.cmr-7{font-size:70%;}
 .cmbx-12x-x-144{font-size:172%; font-weight: bold;}
 .cmbx-12x-x-144{ font-weight: bold;}
 .cmbx-12x-x-144{ font-weight: bold;}
 .cmr-9{font-size:90%;}
 .cmtt-9{font-size:90%;font-family: monospace,monospace;}
+.cmtt-9{font-family: monospace,monospace;}
 .cmtt-9{font-family: monospace,monospace;}
 .cmtt-9{font-family: monospace,monospace;}
 .cmtt-9{font-family: monospace,monospace;}
@@ -20,19 +22,26 @@
 .cmtt-10{font-family: monospace,monospace;}
 .cmtt-10{font-family: monospace,monospace;}
 .cmtt-10{font-family: monospace,monospace;}
+.cmtt-10{font-family: monospace,monospace;}
+.tctt-1000{font-family: monospace,monospace;}
+.tctt-1000{font-family: monospace,monospace;}
 .cmti-10{ font-style: italic;}
-.tctt-1000{font-family: monospace,monospace;}
-.tctt-1000{font-family: monospace,monospace;}
 .cmitt-10{font-family: monospace,monospace; font-style: italic;}
 .cmitt-10{font-family: monospace,monospace; font-style: italic;}
+.cmtt-8x-x-87{font-size:69%;font-family: monospace,monospace;}
+.cmtt-8x-x-87{font-family: monospace,monospace;}
+.cmtt-8x-x-87{font-family: monospace,monospace;}
+.cmtt-8x-x-87{font-family: monospace,monospace;}
+.cmtt-8x-x-87{font-family: monospace,monospace;}
+.cmtt-8x-x-87{font-family: monospace,monospace;}
 .cmtt-8{font-size:80%;font-family: monospace,monospace;}
+.cmtt-8{font-family: monospace,monospace;}
 .cmtt-8{font-family: monospace,monospace;}
 .cmtt-8{font-family: monospace,monospace;}
 .cmtt-8{font-family: monospace,monospace;}
 .cmtt-8{font-family: monospace,monospace;}
 .cmitt-10x-x-80{font-size:80%;font-family: monospace,monospace; font-style: italic;}
 .cmitt-10x-x-80{font-family: monospace,monospace; font-style: italic;}
-.tcit-0800{font-size:80%;}
 .tctt-0800{font-size:80%;font-family: monospace,monospace;}
 .tctt-0800{font-family: monospace,monospace;}
 .cmti-9{font-size:90%; font-style: italic;}
@@ -53,11 +62,11 @@ div.par-math-display, div.math-display{text-align:center;}
 body{ margin:1em auto; max-width:80ch; padding:0 .62em; }
 h1,h2,h3,h4,h5 { line-height:1.2; }
 @media print{ body{ max-width:none } }
-.partHead, likepartHead { font-size: 2em; }
-.chapterHead, likechapterHead { font-size: 1.7411em; }
-.sectionHead, likesectionHead { font-size: 1.5157em; }
-.subsectionHead, likesubsectionHead { font-size: 1.3195em; }
-.subsubsectionHead, likesubsubsectionHead { font-size: 1.1487em; }
+.partHead, .likepartHead { font-size: 2em; }
+.chapterHead, .likechapterHead { font-size: 1.7411em; }
+.sectionHead, .likesectionHead { font-size: 1.5157em; }
+.subsectionHead, .likesubsectionHead { font-size: 1.3195em; }
+.subsubsectionHead, .likesubsubsectionHead { font-size: 1.1487em; }
  @media (prefers-color-scheme: dark) { img[src^="speed-manual"]{filter: invert(1); } } 
 li p.indent { text-indent: 0em }
 li p:first-child{ margin-top:0em; }
@@ -140,7 +149,6 @@ table.pmatrix {width:100%;}
 span.bar-css {text-decoration:overline;}
 img.cdots{vertical-align:middle;}
 .partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
-.chapterToc a, .chapterToc, .likechapterToc a, .likechapterToc, .appendixToc a, .appendixToc {line-height: 200%; font-weight:bold;}
 .index-item, .index-subitem, .index-subsubitem {display:block}
 div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}
 div.caption span.id{font-weight: bold; white-space: nowrap; }
@@ -160,6 +168,10 @@ div.author{white-space: nowrap;}
 div.abstract p {margin-left:5%; margin-right:5%;}
 div.abstract {width:100%;}
 .abstracttitle{text-align:center;margin-bottom:1em;}
+.subsectionToc, .likesubsectionToc {margin-left:1em;}
+.subsubsectionToc, .likesubsubsectionToc {margin-left:2em;}
+.paragraphToc, .likeparagraphToc {margin-left:3em;}
+.subparagraphToc, .likesubparagraphToc {margin-left:4em;}
 figure.float, div.figure {margin-left: auto; margin-right: auto;}
 figure.figure {text-align:center;}
 figcaption.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:center;}

@@ -1,15 +1,21 @@
 #!/encs/bin/tcsh
 
 ##
-## Job Scheduler options 
+## SLURM options 
 ##
 
-#$ -N comsole_job  # job name
-#$ -cwd            # Run from directory that script is in, e.g., your speed-scratch directory
-#$ -m bea          # Email notifications at job's start and end, or on abort
-#$ -pe smp 8       # Request 8 slots from parellel environment 'smp'
-#$ -l h_vmem=500G  # set resource value h_vmem (hard virtual memory size) to 500G
-                
+#SBATCH --job-name=comsol_job  ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      ## Request 8 cpus
+#SBATCH --mem=500G             ## Assign 500G memory per node 
+
+# Note:
+# By default, SLURM sets the working directory to the directory the job is executed from.
+# To set a different working directory use the --chdir=<directory name> SBATCH option.
+
 ##
 ## Job to run
 ##
@@ -25,11 +31,11 @@ setenv LMCOMSOL_LICENSE_FILE  <port@licence file location>
 
 # Execute the comsole batch command
 # Note: review comsol batch -help for options available
-comsol batch -inputfile <path/inputfile> \
+srun comsol batch -inputfile <path/inputfile> \
              -outputfile <path/outputfile name> \
              -batchlog <path/logfile name>
                          
 echo "$0 : Done!"
 date
 
-#EOF
+# EOF

@@ -9,29 +9,53 @@
 ## or create it inside $TMPDIR on fly as a part of your job
 #####################################################################################################################
 
-#$ -N MY_JOB
-#$ -cwd
-#$ -m bea
-#$ -pe smp 8
-#$ -l h_vmem=150G
+## SLURM options
+
+#SBATCH --job-name=gurobi-with-python ## Give the job a name
+#SBATCH --mail-type=ALL               ## Receive all email type notifications
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
+#SBATCH --chdir=./                    ## Use currect directory as working directory (default) 
+                                      ## stored as $SLURM_SUBMIT_DIR
+#SBATCH --cpus-per-task=8             ## Request 8 cpus
+#SBATCH --mem=150G                    ## Assign memory per node 
 
 ##PUT YOUR MODULE LOADS HERE
 module load gurobi/9.0.2/default
 module load python/3.7.7/default
+## Create environment variables 
+setenv workdir $PWD
 
-## Create a virtual Python environment (env) in $TMPDIR
-python3.7 -m venv $TMPDIR/env
-## Activate the new environment
-source $TMPDIR/env/bin/activate.csh
+## Activate the new environment, created before (see Virtual Environment details, below)
+source /speed-scratch/$USER/tmp/YOUR_VENV_NAME/bin/activate.csh
 ## Install gurobipy module
 cd $GUROBI_HOME
-python3.7 setup.py build --build-base /tmp/${USER} install
+srun python setup.py build --build-base /tmp/${USER} install
 
-## return to workDir
-cd $SGE_O_WORKDIR
+## return to working directory
+cd $workdir
 
 ## Now, instead of using 'gurobi.sh MY_PYTHON_SCRIPT.py', you can use
-python MY_PYTHON_SCRIPT.py
+srun python MY_PYTHON_SCRIPT.py
 ## inside MY_PYTHON_SCRIPT.py, you can use
 ## from gurobipy import *
 ## import multiprocessing as mp
+
+####### Virtual Environment ####### 
+# - Normally is installed once, before creating the .sh batch file
+# 
+# cd /speed-scratch/$USER
+# 
+# if using GPUs
+#     srun --partition=pg --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
+# if using CPUs only
+#     srun --partition=ps --mem=10Gb --pty /encs/bin/tcsh
+# module load python/3.7.7/default
+# mkdir -p /speed-scratch/$USER/tmp 
+# setenv TMPDIR /speed-scratch/$USER/tmp
+# setenv TMP /speed-scratch/$USER/tmp
+# python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
+# source $TMPDIR/testenv/bin/activate.csh
+# pip install modules…
+# deactivate
+# exit
+#

@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 
 ##
-## This script was submitted by a member of Dr. Amer's Research Group
+## This script was initially submitted by a member of Dr. Amer's Research Group
 ##
 
 ##
@@ -10,16 +10,23 @@
 ##
 
 ##
-## Job Scheduler options 
+## SLURM options 
 ##
 
-#$ -N efficientdet_pascal
-#$ -cwd      
-#$ -pe smp 8
-#$ -l h_vmem=128G
-#$ -l gpu=2
+#SBATCH --job-name=efficientdet_pascal
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 
-cd /speed-scratch/<encs_username>
+# Request GPU in Dr. Amer's partition pa
+#SBATCH --partition=pa
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8      
+#SBATCH --ntasks=1
+#SBATCH --gpus-per-node=2
+
+#SBATCH --mem=128G             ## Assign memory per node 
+
+cd /speed-scratch/$USER
 
 module load python/3.8.3
 module load cuda/11.5
@@ -27,7 +34,7 @@ source envs/tf/bin/activate.csh
 
 cd code/automl/efficientdet
 
-python3 main.py --mode=train_and_eval \
+srun python3 main.py --mode=train_and_eval \
     --train_file_pattern=tfrecord/'pascal-*-of-00100.tfrecord' \
     --val_file_pattern=tfrecord/'val-*-of-00032.tfrecord' \
     --model_name='efficientdet-d0' \

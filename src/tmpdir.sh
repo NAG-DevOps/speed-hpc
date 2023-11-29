@@ -1,13 +1,17 @@
 #!/encs/bin/tcsh
 
-#$ -N envs
-#$ -cwd
-#$ -pe smp 8
-#$ -l h_vmem=32G
+#SBATCH --job-name=tmpdir      ## Give the job a name
+#SBATCH --mail-type=ALL        ## Receive all email type notifications
+#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
+#SBATCH --chdir=./             ## Use currect directory as working directory
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8      ## Request 8 cores
+#SBATCH --mem=32G              ## Assign 32G memory per node 
 
 cd $TMPDIR
 mkdir input
-rsync -av $SGE_O_WORKDIR/references/ input/
+rsync -av $SLURM_SUBMIT_DIR/references/ input/
 mkdir results
-STAR --inFiles $TMPDIR/input --parallel $NSLOTS --outFiles $TMPDIR/results
-rsync -av $TMPDIR/results/ $SGE_O_WORKDIR/processed/
+srun STAR --inFiles $TMPDIR/input --parallel $SRUN_CPUS_PER_TASK --outFiles $TMPDIR/results
+rsync -av $TMPDIR/results/ $SLURM_SUBMIT_DIR/processed/

@@ -1,28 +1,28 @@
 #!/encs/bin/tcsh
 
 # Give job a name
-#$ -N openiss-reid
+#SBATCH -J openiss-reid
 
 # Send an email when the job starts, finishes or if it is aborted.
-#$ -m bea
+#SBATCH --mail-type=ALL
 
 # Specify the output file name
-#$ -o reid-tfk.log
+#SBATCH -o openiss-reid-tfk.log
 
 # Set output directory to current
-#$ -cwd
+#SBATCH --chdir=./
 
-# Request CPU - comment this section if the job WON'T use CPU
-# #$ -pe smp 32
-# #$ -l h_vmem=32G
+# Request CPU
+#SBATCH -n 32
+#SBATCH --mem=32G
 
 # Request GPU - comment this section if the job WON'T use GPU
-#$ -l gpu=1
+#SBATCH --gpus=1
 
 # Execute the script
 module load anaconda/default
 conda env create -f environment.yml -p /speed-scratch/$USER/reid-venv
 conda activate /speed-scratch/$USER/reid-venv
-python reid.py
+srun python reid.py
 conda deactivate
 conda env remove -p /speed-scratch/$USER/reid-venv
