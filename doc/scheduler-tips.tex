@@ -9,11 +9,11 @@ Use \tool{file} command to verify; and \tool{dos2unix} command
 to convert.
 
 \item
-Use \tool{rsync}, not \tool{scp}, when moving a lot of data around.
+Use \tool{rsync}, not \tool{scp}, when copying or moving large amounts of data.
 
 \item
-If you are going to move many many files between NFS-mounted storage and the 
-cluster, \tool{tar} everything up first. 
+Before moving a large amount of files between NFS-mounted storage and the 
+cluster, \tool{tar} up the files you plan to move first. 
 
 \item
 If you intend to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}),

@@ -19,7 +19,7 @@ Software Carpentry provides free resources to learn software, including a worksh
 
 There are a number of Udemy courses, including free ones, that will assist 
 you in learning Linux. Active Concordia faculty, staff and students have 
-access to Udemy courses such as \textbf{Linux Mastery: Master the Linux 
+access to Udemy courses. The course \textbf{Linux Mastery: Master the Linux 
 Command Line in 11.5 Hours} is a good starting point for beginners. Visit
 \url{https://www.concordia.ca/it/services/udemy.html} to learn how Concordians 
 may access Udemy.
@@ -33,7 +33,7 @@ This section describes how to use the ``bash shell'' on Speed. Review
 % ------------------------------------------------------------------------------
 \subsubsection{How do I set bash as my login shell?}
 
-In order to set your login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
+In order to set your default login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
 To make this change, create a ticket with the Service Desk (or email \texttt{help at concordia.ca}) to
 request that bash become your default login shell for your ENCS user account on all GCS servers.
 
@@ -48,20 +48,20 @@ For example:
 	bash
 \end{verbatim}	
 
-Note how the command prompt changed from \verb![speed-submit] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
+\textbf{Note} how the command prompt changed from \verb![speed-submit] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
 
 % ------------------------------------------------------------------------------
 \subsubsection{How do I use the bash shell in an interactive session on Speed?}
-% The language here is unclear. TODO Update for clarity and provide examples
-If you use one of the below commands (make sure job request settings such
-as memory, cores, etc are set), they will allocate your interactive
-job sessions with \tool{bash} as a shell on the compute nodes:
+
+Below are examples of how to use \tool{bash} as a shell in your interactive job sessions with
+ both the salloc and srun commands.
 
 \begin{itemize}
-	\item \texttt{salloc ... /encs/bin/bash}
-	\item \texttt{srun ... --pty /encs/bin/bash}
+	\item \texttt{salloc -ppt --mem=100G -N 1 -n 10 /encs/bin/bash}
+	\item \texttt{srun  --mem=50G -n 5 --pty /encs/bin/bash}
 \end{itemize}
 
+\textbf{Note:} Make sure the interactive job requests memory, cores, etc.
 % ------------------------------------------------------------------------------
 \subsubsection{How do I run scripts written in bash on Speed?}
 
