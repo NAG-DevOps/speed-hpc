@@ -3,7 +3,7 @@
 
 # Virtual Environment creation, python script at the end of slurm script execution section
 
-# job script: multicpu.sh
+# job script: pytorch-multicpu.sh
 
 #!/encs/bin/tcsh
 #SBATCH --nodes 1
@@ -21,7 +21,7 @@ time python torch-multicpu.py
 ######## END of Job Script
 
 ### Slurm Script execution
-sbatch -p ps multicpu.sh -A Your_group_id(if you have one)
+sbatch -p ps pytorch-multicpu.sh -A Your_group_id(if you have one)
 ### End of slurm script
 
 
