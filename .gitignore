@@ -19,3 +19,4 @@
 .DS_Store
 doc/speed-manual.fdb_latexmk
 doc/speed-manual.fls
+doc/speed-hpc.code-workspace
