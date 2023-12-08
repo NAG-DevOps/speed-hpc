@@ -20,7 +20,7 @@ These are examples either trivial or some are more elaborate. Some are described
   - `msfp-speed-job.sh` -- MAC Spoofer Investigation starter job script (for detailes see [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
   - `efficientdet.sh` -- `efficientdet` with Conda environment described below
   - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
-  - `pytorch-multicpu.sh` -- using Pytorch with Python virtual environment to run on CPUs
+  - `pytorch-multicpu.txt` -- using Pytorch with Python virtual environment to run on CPUs; with instructions and code ready to paste.
   - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
   - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
   - `openiss-yolo-cpu.sh`, `openiss-yolo-gpu.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
