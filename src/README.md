@@ -32,7 +32,7 @@ These are examples either trivial or some are more elaborate. Some are described
 ### Overview of preparing environments, compiling code and testing
 
 - Create an `salloc` session to the queue you wish to run your jobs 
-(e.g., `alloc -p pg --gpus=1` for GPU jobs)
+(e.g., `salloc -p pg --gpus=1` for GPU jobs)
 - Within the `salloc` session, create and activate an Anaconda environment in 
 your `/speed-scratch/` directory using the instructions found in Section 2.11.1 of the manual: 
 https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
