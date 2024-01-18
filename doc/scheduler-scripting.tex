@@ -601,7 +601,7 @@ srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratc
 Create an \tool{ssh} tunnel between your computer and the node (\texttt{speed-XX}) where Jupyter is
 running (Using \texttt{speed-submit} as a ``jump server'') (Preferably: PuTTY, see \xf{fig:putty1} and \xf{fig:putty2})
 \begin{verbatim}
-ssh -L 8888:localhost:8888 speed-XX
+ssh -L 8888:speed-XX:8888 YOUR_USER@speed-submit.encs.concordia.ca
 \end{verbatim}
 Don't close the tunnel.
 
