@@ -265,6 +265,25 @@ speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1 
 %Note that no more than two GPUs can be requested for any one job. 
 
 % ------------------------------------------------------------------------------
+\subsubsection{P6 on Multi-GPU, Multi-Node}
+
+As described lines above, P6 cards are not compatible with Distribute and DataParallel functions
+(\texttt{Pytorch, Tensorflow}) when running on Multi-GPUs.
+One workaround is to run the job in Multi-node, single GPU per node; per example:
+
+\begin{verbatim}
+#SBATCH --nodes=2
+#SBATCH --gpus-per-node=1
+\end{verbatim}
+
+On P6 nodes: \texttt{speed-05, speed-17, speed-01}
+
+The example: 
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}
+  {pytorch-multinode-multigpu.sh}
+illustrates a job for training on Multi-nodes, Multi-GPUs
+
+% ------------------------------------------------------------------------------
 \subsubsection{CUDA}
 
 When calling \tool{CUDA} within job scripts, it is important to create a link to
