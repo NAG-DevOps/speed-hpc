@@ -11,7 +11,7 @@
 #SBATCH -e myprogram%A_%a.err
 
 echo "Would be input shard: input$SLURM_ARRAY_TASK_ID.dat"
-#./myprogram input$SLURM_ARRAY_TASK_ID.dat
+#srun ./myprogram input$SLURM_ARRAY_TASK_ID.dat
 
 sleep 10
 
