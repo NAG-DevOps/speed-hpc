@@ -150,6 +150,12 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
+## Diviner Tools
+
+[Diviner Tools](https://github.com/d-chante/diviner-tools) is a custom library for pre-processing Diviner RDR LVL1 Channel 7 data by [Chantelle Dubois](https://github.com/d-chante).
+
+- [Speed-related scripts](https://github.com/d-chante/diviner-tools/tree/development/jobs/speed)
+
 ## OpenISS-yolov3
 
 This is a case study example on image classification, for more details please visit [openiss-yolov3](https://github.com/NAG-DevOps/openiss-yolov3).
