@@ -1,8 +1,44 @@
+<!-- TOC --><a name="examples"></a>
 # Examples
 
 This directory has example job scripts and some tips and tricks how to
 run certcain things.
 
+## TOC 
+
+- [Sample Jobs](#sample-jobs)
+- [Creating Environments and Compiling Code on Speed](#creating-environments-and-compiling-code-on-speed)
+   * [Correct Procedure](#correct-procedure)
+      + [Overview of preparing environments, compiling code and testing](#overview-of-preparing-environments-compiling-code-and-testing)
+      + [Once your environment and code have been tested](#once-your-environment-and-code-have-been-tested)
+      + [Do not use the submit node to create environments or compile code](#do-not-use-the-submit-node-to-create-environments-or-compile-code)
+      + [`pip`](#pip)
+   * [Environments](#environments)
+      + [Anaconda](#anaconda)
+         - [Load the Anaconda module](#load-the-anaconda-module)
+         - [Initialize Shell](#initialize-shell)
+         - [Create an Environment](#create-an-environment)
+         - [List Environments](#list-environments)
+         - [Activate an Environment](#activate-an-environment)
+- Detailed Examples
+   + [efficientdet](#efficientdet)
+   * [Diviner Tools](#diviner-tools)
+   * [OpenISS-yolov3](#openiss-yolov3)
+      + [Speed Login Configuration ](#speed-login-configuration)
+      + [Speed Setup and Development Environment Preperation](#speed-setup-and-development-environment-preperation)
+      + [Run Interactive Script ](#run-interactive-script)
+      + [Run Non-interactive Script ](#run-non-interactive-script)
+      + [Performance comparison](#performance-comparison)
+   * [OpenISS-reid-tfk](#openiss-reid-tfk)
+      + [Environment](#environment)
+      + [Configuration and execution](#configuration-and-execution)
+   * [CUDA](#cuda)
+      + [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
+   * [Python Modules](#python-modules)
+
+<!-- TOC end -->
+
+<!-- TOC --><a name="sample-jobs"></a>
 ## Sample Jobs
 
 These are examples either trivial or some are more elaborate. Some are described in the [manual](../doc/) more in detail or vice versa. The examples were written by the Speed team as well as contributed by the users or a result of solving a problem of some kind.
@@ -26,10 +62,13 @@ These are examples either trivial or some are more elaborate. Some are described
   - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
   - `openiss-yolo-cpu.sh`, `openiss-yolo-gpu.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
 
+<!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
 # Creating Environments and Compiling Code on Speed
 
+<!-- TOC --><a name="correct-procedure"></a>
 ## Correct Procedure
 
+<!-- TOC --><a name="overview-of-preparing-environments-compiling-code-and-testing"></a>
 ### Overview of preparing environments, compiling code and testing
 
 - Create an `salloc` session to the queue you wish to run your jobs 
@@ -41,12 +80,14 @@ https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
 - Test your code with a limited data set.
 - Once you are satisfied with your test results, exit your `salloc` session.
 
+<!-- TOC --><a name="once-your-environment-and-code-have-been-tested"></a>
 ### Once your environment and code have been tested
 
 - Create a job script. (see https://nag-devops.github.io/speed-hpc/#job-submission-basics)
 - Remember to Activate your Anaconda environment in the user scripting section
 - Use the `sbatch` command to submit your job script to the correct partition and account
 
+<!-- TOC --><a name="do-not-use-the-submit-node-to-create-environments-or-compile-code"></a>
 ### Do not use the submit node to create environments or compile code
 
 - `speed-submit` is a virtual machine intended to submit user jobs to 
@@ -54,6 +95,7 @@ the job scheduler. It is not intended to compile or run code.
 - **Importantly**, `speed-submit` does not have GPU drivers. This means that code compiled on `speed-submit` will not be compiled against proper GPU drivers. 
 - Processes run outside of the scheduler on `speed-submit` will be killed and you will lose your work.
 
+<!-- TOC --><a name="pip"></a>
 ### `pip`
 
 By default, `pip` installs packages to a system-wide default location.
@@ -67,12 +109,15 @@ use pip in this way, the packages and versions installed via pip may change whil
 - Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
 - It is possible to create multiple conda environments for your different projects.
 
+<!-- TOC --><a name="environments"></a>
 ## Environments
 
 Virtual Environment Creation documentation. The following documentation is specific to **Speed**.
 
+<!-- TOC --><a name="anaconda"></a>
 ### Anaconda
 
+<!-- TOC --><a name="load-the-anaconda-module"></a>
 #### Load the Anaconda module
 
 To view the Anaconda modules available, run
@@ -83,6 +128,7 @@ Load the desired version of anaconda using the module load command.
 For example:
 `module load anaconda3`
 
+<!-- TOC --><a name="initialize-shell"></a>
 #### Initialize Shell
 To initialize your shell, run
 `conda init <SHELL_NAME>`
@@ -90,6 +136,7 @@ To initialize your shell, run
 The default shell for ENCS accounts is tcsh. Therefore, to initialize your default shell run
 `conda init tcsh`
 
+<!-- TOC --><a name="create-an-environment"></a>
 #### Create an Environment
 To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
 
@@ -100,6 +147,7 @@ Where `$USER` is an environment variable containing your encs_username
 
 Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
 
+<!-- TOC --><a name="list-environments"></a>
 #### List Environments
 To view your conda environments, type 
 `conda info --envs`
@@ -111,6 +159,7 @@ base                  *  /encs/pkg/anaconda3-2019.07/root
                          /speed-scratch/<encs_username>/myconda
 ```                 
 
+<!-- TOC --><a name="activate-an-environment"></a>
 #### Activate an Environment
 Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
 
@@ -124,6 +173,7 @@ This will install pip and pip's dependencies, including python.
 
 **Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
 
+<!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
 
 The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
@@ -150,16 +200,19 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
+<!-- TOC --><a name="diviner-tools"></a>
 ## Diviner Tools
 
 [Diviner Tools](https://github.com/d-chante/diviner-tools) is a custom library for pre-processing Diviner RDR LVL1 Channel 7 data by [Chantelle Dubois](https://github.com/d-chante).
 
 - [Speed-related scripts](https://github.com/d-chante/diviner-tools/tree/development/jobs/speed)
 
+<!-- TOC --><a name="openiss-yolov3"></a>
 ## OpenISS-yolov3
 
 This is a case study example on image classification, for more details please visit [openiss-yolov3](https://github.com/NAG-DevOps/openiss-yolov3).
 
+<!-- TOC --><a name="speed-login-configuration"></a>
 ### Speed Login Configuration 
 1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
 2. If you didn't know how to login to speed and prepare the working environment please check the manual in the follwing [link](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 2.
@@ -169,6 +222,7 @@ After you logged in to speed change your working directory to `/speed-scratch/$U
 cd /speed-scratch/$USER/
 ```
 
+<!-- TOC --><a name="speed-setup-and-development-environment-preperation"></a>
 ### Speed Setup and Development Environment Preperation
 
 The pre-requisites to prepare the virtual development environment using anaconda is explained in [speed manual](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 3, please check that for more inforamtion.
@@ -210,6 +264,7 @@ conda deactivate
 conda env remove -p /speed-scratch/$USER/YOLO
 ```
 
+<!-- TOC --><a name="run-interactive-script"></a>
 ### Run Interactive Script 
 
 File `openiss-yolo-interactive.sh` is the speed script to run video example to run it you follow these steps:
@@ -230,6 +285,7 @@ chmod u+x *.sh
 
 Please note that since we have limited number of nodes with GPU support `salloc` the interactive sessions are time-limited to max 24h. 
 
+<!-- TOC --><a name="run-non-interactive-script"></a>
 ### Run Non-interactive Script 
 
 Before you run the script you need to add permission access to the project files using `chmod` command.   
@@ -249,6 +305,7 @@ sbatch -p pg ./openiss-yolo-gpu.sh
 
 For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
 
+<!-- TOC --><a name="performance-comparison"></a>
 ### Performance comparison
 
 Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of teasla P6. The project use  keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 (gpu32), for P6 (gpu16) you can find that in scripts shell.    
@@ -260,10 +317,12 @@ Time is in minutes, run Yolo with different hardware configurations GPU types V1
 |    22.18      |   17.18       |   23.13       |     60.47      |
 
 
+<!-- TOC --><a name="openiss-reid-tfk"></a>
 ## OpenISS-reid-tfk
 
 The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
 
+<!-- TOC --><a name="environment"></a>
 ### Environment
 
 The pre-requisites to prepare the environment are located in `environment.yml` (https://github.com/NAG-DevOps/openiss-reid-tfk).
@@ -282,6 +341,7 @@ TEST DATASET: Market1501
 
 ---- Gallery images: 15913
 
+<!-- TOC --><a name="configuration-and-execution"></a>
 ### Configuration and execution
 
 - Log into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/`
@@ -302,6 +362,7 @@ TEST DATASET: Market1501
 Modify the script `openiss-reid-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; `--mem=` and `gpus=` in particular, see more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
 
 
+<!-- TOC --><a name="cuda"></a>
 ## CUDA
 
 When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the `cuda-11.5` libraries, specify the following in your `Makefile`.
@@ -313,6 +374,7 @@ In your job script, specify the version of `gcc` to use prior to calling cuda. F
 or
    `module load gcc/9.3`
 
+<!-- TOC --><a name="special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg"></a>
 ### Special Notes for sending CUDA jobs to the GPU Partition (`pg`)
 
 Interactive jobs (easier to debug) should be submitted to the **GPU Queue** with `salloc` in order to compile and link CUDA code.
@@ -326,6 +388,7 @@ We have several versions of CUDA installed in:
 
 For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `/usr/local/cuda` with one of the above.
 
+<!-- TOC --><a name="python-modules"></a>
 ## Python Modules
 
 By default when adding a python module `/tmp` is used for the temporary repository of files downloaded. `/tmp` on speed-submit is too small for pytorch.
