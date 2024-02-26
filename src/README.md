@@ -23,6 +23,7 @@ run certcain things.
 - Detailed Examples
    + [efficientdet](#efficientdet)
    * [Diviner Tools](#diviner-tools)
+   * [OpenFoam](#openfoam-multinode)
    * [OpenISS-yolov3](#openiss-yolov3)
       + [Speed Login Configuration ](#speed-login-configuration)
       + [Speed Setup and Development Environment Preperation](#speed-setup-and-development-environment-preperation)
@@ -59,6 +60,7 @@ These are examples either trivial or some are more elaborate. Some are described
   - `pytorch-multicpu.txt` -- using Pytorch with Python virtual environment to run on CPUs; with instructions and code ready to paste.
   - `pytorch-multinode-multigpu.sh` -- using Pytorch with Python virtual environment to run on Multinodes and MultiGpus
   - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+  - `openfoam-multinode.sh` -- an example using OpenFoam, icoFoam solver to run on Multinodes-multicpus
   - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
   - `openiss-yolo-cpu.sh`, `openiss-yolo-gpu.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
 
