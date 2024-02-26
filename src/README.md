@@ -207,6 +207,20 @@ pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAP
 
 - [Speed-related scripts](https://github.com/d-chante/diviner-tools/tree/development/jobs/speed)
 
+<!-- TOC --><a name="openfoam-multinode"></a>
+## OpenFoam-multinode
+
+This example is taken from OpenFoam tutorials section: $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity
+1. Go to your speed-scratch directory: `cd /speed-scratch/$USER`
+2. open a salloc session
+3. Load OpenFoam module: `module load OpenFOAM/v2306/default`
+4. Copy the cavity example to your speed-scratch space: `cp -r $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity/ .`
+5. Modify cavity/system/decomposeParDict: 
+   Remove coeffs section and modify the following:
+         numberOfSubdomains  10;
+         method  scotch;
+6. Exit the salloc session, go to the cavity directory and run the script: `sbatch --mem=10Gb -pps --constraint=el9 openfoam-multinode.sh`
+
 <!-- TOC --><a name="openiss-yolov3"></a>
 ## OpenISS-yolov3
 
