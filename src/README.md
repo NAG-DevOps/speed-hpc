@@ -49,6 +49,7 @@ These are examples either trivial or some are more elaborate. Some are described
   - `tmpdir.sh` -- example use of TMPDIR on a local node
   - `bash.sh` -- example use with `bash` shell as opposed to `tcsh`
   - `manual.sh` -- example job to compile our very manual here to PDF and HTML using LaTeX
+  - `poppler.txt` -- Interactive job example: PDF rendering using poppler and pdf2image; instructions and code ready to paste.
 - Common packages:
   - `fluent.sh` -- Fluent job
   - `comsol.sh` -- Comsol job
