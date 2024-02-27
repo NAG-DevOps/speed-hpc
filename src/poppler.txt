@@ -1,0 +1,34 @@
+# Interactive job example
+# PDF rendering using poppler and pdf2image
+# It will render each PDF page to a pageXX.jpg file
+
+1. From speed-submit: salloc --mem=1Gb
+2. Create conda environment:
+   2.1 conda create --prefix /speed-scratch/$USER/poppler-venv python=3.8
+   2.2 conda activate /speed-scratch/$USER/poppler-venv
+   2.3 conda install -c conda-forge poppler
+   2.4 pip install pdf2image
+   2.5 pip install poppler-utils
+
+3. Create python script.
+
+Python script:
+from pdf2image import convert_from_path, convert_from_bytes
+from pdf2image.exceptions import (
+    PDFInfoNotInstalledError,
+    PDFPageCountError,
+    PDFSyntaxError
+)
+
+
+# Store Pdf with convert_from_path function
+images = convert_from_path('./pdf1.pdf')
+
+for i in range(len(images)):
+
+      # Save pages as images in the pdf
+    images[i].save('page'+ str(i) +'.jpg', 'JPEG')
+
+4. Execute the script: python script_name
+5. If any rendering error is shown, check if the PDF is composed correctly:
+   5.1 pdfinfo pdf1.pdf
