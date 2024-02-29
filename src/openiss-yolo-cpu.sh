@@ -23,10 +23,12 @@
 # Specify the output file name
 #SBATCH -o openiss-yolo-batch-cpu.log
 
+module load anaconda3/2023.03/default
+
 conda activate /speed-scratch/$USER/YOLO
 
 # Image example 
-#python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image  --gpu_num 2
+#srun python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image  --gpu_num 2
 
 # Video example 
 srun python yolo_video.py --input video/v1.avi --output video/001.avi #--gpu_num 2

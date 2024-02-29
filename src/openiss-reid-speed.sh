@@ -20,7 +20,7 @@
 #SBATCH --gpus=1
 
 # Execute the script
-module load anaconda/default
+module load anaconda3/2023.03/default
 conda env create -f environment.yml -p /speed-scratch/$USER/reid-venv
 conda activate /speed-scratch/$USER/reid-venv
 srun python reid.py

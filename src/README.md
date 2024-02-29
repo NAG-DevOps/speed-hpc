@@ -129,7 +129,7 @@ To view the Anaconda modules available, run
 Load the desired version of anaconda using the module load command.
 
 For example:
-`module load anaconda3`
+`module load anaconda3/2023.03/default`
 
 <!-- TOC --><a name="initialize-shell"></a>
 #### Initialize Shell
@@ -158,7 +158,7 @@ To view your conda environments, type
 ```
 # conda environments:
 #
-base                  *  /encs/pkg/anaconda3-2019.07/root
+base                  *  /encs/pkg/anaconda3-2023.03/root
                          /speed-scratch/<encs_username>/myconda
 ```                 
 
@@ -250,7 +250,7 @@ git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
 ```
 2. Starting by loading anaconda module 
 ```
-module load anaconda/default
+module load anaconda3/2023.03/default
 ```
 3. Switch to the project directoy. Create anaconda virtual environment, and configure development librires. The name of the environment can by any name here as an example named YOLO. Activate the conda environment YOLOInteractive.
 ```
