@@ -8,7 +8,7 @@ module load singularity/3.10.4/default
 
 # Executing singularity image 
 srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp \
-      --env SHELL=/bin/bash --nv /speed-scratch/nag-public/openiss-cuda-conda-jupyter.sif \
+      --env SHELL=/bin/bash --nv /speed-scratch/nag-public/jupyter-pytorch-cuda.sif \
       /bin/bash -c '/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd \
       --ip="*" --port=8888 --allow-root'
 
