@@ -35,6 +35,7 @@ run certcain things.
       + [Configuration and execution](#configuration-and-execution)
    * [CUDA](#cuda)
       + [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
+      + [Jupyter notebook example: Jupyter-Pytorch-CUDA](#jupyter-example-gpu-pytorch)
    * [Python Modules](#python-modules)
 
 <!-- TOC end -->
@@ -404,6 +405,21 @@ We have several versions of CUDA installed in:
 ```
 
 For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `/usr/local/cuda` with one of the above.
+
+<!-- TOC --><a name="jupyter-example-gpu-pytorch"></a>
+### Jupyter notebook example: Jupyter-Pytorch-CUDA
+
+Example prepared to run on speed, extracted from: https://developers.redhat.com/learning/learn:openshift-data-science:configure-jupyter-notebook-use-gpus-aiml-modeling/resource/resources:how-examine-gpu-resources-pytorch
+
+From speed-submit: 
+- Download `gpu-ml-model.ipynb` from this github to your `/speed-scratch/$USER space`
+- `salloc --mem=10Gb --gpus=1`
+
+From the node (interactive session):
+- `module load singularity/3.10.4/default`
+- `srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp --env SHELL=/bin/bash --nv /speed-scratch/nag-public/jupyter-pytorch-cuda.sif /bin/bash -c '/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd --ip="*" --port=8888 --allow-root'`
+- Follow the steps described in: https://nag-devops.github.io/speed-hpc/#jupyter-notebooks
+- When Jupyter is running on the browser, open `gpu-ml-model.ipynb` and run each cell
 
 <!-- TOC --><a name="python-modules"></a>
 ## Python Modules
