@@ -46,27 +46,31 @@ env
 # sacct and showjob commands
 
 if ( ! -d COMP371_all ) then
+  echo "Closing COMP371_all repo..."
   time srun git clone --depth=1 https://github.com/tiperiu/COMP371_all.git
 else
-  echo "Found COMP371_all already present"
+  echo "Found COMP371_all already present; pulling in case of updates..."
+  cd COMP371_all
+  time srun git pull --rebase --autostash
+  cd ..
 endif
 
 # We need to be in the raytracer directory
 cd COMP371_all/COMP371_RaytracerBase/code
 pwd
 
-# Build only if the build folder is absent
+# Create 'build' if the build folder is absent
 if ( ! -d build ) then
   mkdir build
-  cd build
-
-  # Compile
-  cmake ../
-  time srun make
 else
-  echo "Found COMP371_all already present"
-  cd build
+  echo "Found build already present"
 endif
+
+# Compile
+echo "About to build..."
+cd build
+cmake ../
+time srun make
 
 # Run and report
 echo "$0 : about to run raytraycer!"
