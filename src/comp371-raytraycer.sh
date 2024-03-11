@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 
 ##
-## Sample raytraycer batch job launching script
+## Sample raytraycer batch job launching script.
 ## Intented primarily for COMP371.
 ##
 ## Serguei Mokhov
@@ -11,7 +11,7 @@
 ##
 ## Configure your email address and possibly a repo to pull from.
 ## The script pulls the repo if not already pulled and builds
-## if not already built. To rebuild, purge the build directory.
+## if not already built.
 ##
 
 ##
@@ -32,21 +32,21 @@
 ##
 
 # timestamp
-echo "$0 : about to run COMP371 raytraycer job on Speed"
+echo "$0 : about to run a COMP371 raytraycer job on Speed"
 date
 
 # Print debug environment
 env
 
 # Pull the sources at the latest commit only to avoid
-# downloading all the history. For fun time the longer
+# downloading all the history. For fun, time the longer
 # running commands.
 #
 # srun allows to run job steps and diagnose errors with
 # sacct and showjob commands
 
 if ( ! -d COMP371_all ) then
-  echo "Closing COMP371_all repo..."
+  echo "Cloning COMP371_all repo..."
   time srun git clone --depth=1 https://github.com/tiperiu/COMP371_all.git
 else
   echo "Found COMP371_all already present; pulling in case of updates..."
