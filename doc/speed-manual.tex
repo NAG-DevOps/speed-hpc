@@ -531,17 +531,17 @@ Gina Cody School of Engineering and Computer Science.
 Virtual environments typically instantiated via Conda or Python.
 Another option is Singularity detailed in \xs{sect:singularity-containers}.
 %
-Usually, virtual environments are created once and before sending any job to the
-scheduler, so when sending the job to the scheduler we (1) activate the virtual environment,
-(2) use it, and (3) close it at the end of the job.
-
+Usually, virtual environments are created once during an interactive session before submitting
+a batch job to the scheduler. The job script submitted to the scheduler is then written to 
+(1) activate the virtual environment, (2) use it, and (3) close it at the end of the job.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Anaconda}
 \label{sect:conda-venv}
 
-To create an anaconda environment in your speed-scratch directory, use the \texttt{\-\-prefix} 
-option when executing \texttt{conda create}. For example, to create an anaconda environment for 
+Request an interactive session in the queue you wish to submit your jobs to (e.g., salloc -p pg --gpus=1 for GPU jobs).
+Once your interactive has started, create an anaconda environment in your speed-scratch directory by using 
+the \texttt{\-\-prefix} option when executing \texttt{conda create}. For example, to create an anaconda environment for 
 \texttt{a\_user}, execute the following at the command line:
 
 \begin{verbatim}
@@ -586,8 +586,8 @@ into the environment.
 		A consolidated example using Conda:
 		\small
 		\begin{verbatim}
+			salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
 			cd /speed-scratch/$USER
-			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
 			module load python/3.11.0/default
 			conda create -p /speed-scratch/$USER/pytorch-env
 			conda activate /speed-scratch/$USER/pytorch-env
@@ -596,7 +596,7 @@ into the environment.
 			  https://download.pytorch.org/whl/cu117
 			....
 			conda deactivate
-			exit
+			exit # end the salloc session
 		\end{verbatim}
 		\normalsize
 \end{itemize}
@@ -611,6 +611,8 @@ anaconda's repository.
 \label{sect:python-venv}
 
 Setting up a Python virtual environment is fairly straightforward.
+The first step is to request an interactive session in the queue you wish to submit your jobs to.
+
 We have a simple example that use a Python virtual environment:
 
 \begin{itemize}
@@ -618,8 +620,8 @@ We have a simple example that use a Python virtual environment:
 		Using Python Venv
 		\small
 		\begin{verbatim}
+			salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
 			cd /speed-scratch/$USER
-			srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
 			module load python/3.9.1/default
 			mkdir -p /speed-scratch/$USER/tmp 
 			setenv TMPDIR /speed-scratch/$USER/tmp
