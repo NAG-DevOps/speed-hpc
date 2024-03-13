@@ -177,6 +177,34 @@ This will install pip and pip's dependencies, including python.
 
 **Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
 
+<!-- TOC --><a name="no-space-left-conda"></a>
+#### No Space left error when creating Conda Environment
+You are using your /home directory as conda default directory, the tarballs and pkgs are using all the space
+
+`conda clean --all --dry-run` will show you the size of tarballs, packages, caches
+`conda clean -all` will wipe-out all unused packages, caches and tarballs
+
+If the `conda clean` hasn't freed enough space, try to set change the location of Conda pkgs to another directory, e.g:
+```
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/tmp/pkgs
+```
+
+<!-- TOC --><a name="create-conda-env-speed"></a>
+#### Example: Create Conda Environment in Speed
+On speed-submit:
+`salloc --mem=10Gb -n1 -pps`
+
+On the node where the interactive session is running:
+
+```
+setenv TMPDIR /speed-scratch/$USER/tmp
+setenv TMP /speed-scratch/$USER/tmp
+module load anaconda3/2023.03/default
+setenv CONDA_PKGS_DIRS $TMP/pkgs
+conda create -p $TMP/Venv-Name python==3.11
+conda activate $TMP/Venv-Name
+```
+
 <!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
 
@@ -235,7 +263,7 @@ This is a case study example on image classification, for more details please vi
 1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
 2. If you didn't know how to login to speed and prepare the working environment please check the manual in the follwing [link](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 2.
 
-After you logged in to speed change your working directory to `/speed-scratch/$USER` diectory.
+After you logged in to speed change your working directory to `/speed-scratch/$USER` directory.
 ```
 cd /speed-scratch/$USER/
 ```
