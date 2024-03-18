@@ -24,7 +24,7 @@
 <br />                                <span class='cmr-9'>Concordia University</span>
 <br />                              <span class='cmr-9'>Montreal, Quebec, Canada</span>
 <br />                          <a class='url' href='rt-ex-hpc~AT~encs.concordia.ca'><span class='cmtt-9'>rt-ex-hpc~AT~encs.concordia.ca</span></a><br /></div><br />
-<div class='date'><span class='cmbx-10'>Version 7.2-dev-01</span></div>
+<div class='date'><span class='cmbx-10'>Version 7.2-dev-02</span></div>
    <div class='thanks'><br /><a id='tk-1'></a><span class='thank-mark'><span class='tcrm-1000'>∗</span></span>The group acknowledges the initial manual version VI produced by Dr. Scott Bunnell while with
 us as well as Dr. Tariq Daradkeh for his instructional support of the users and contribution of
 examples.</div></div>
@@ -1217,16 +1217,21 @@ keys. In your NFS-mounted home directory:
    <h4 class='subsectionHead' id='creating-virtual-environments'><span class='titlemark'>2.11   </span> <a id='x1-290002.11'></a>Creating Virtual Environments</h4>
 <!-- l. 528 --><p class='noindent'>The following documentation is specific to the <span class='cmbx-10'>Speed </span>HPC Facility at the Gina Cody School of
 Engineering and Computer Science. Virtual environments typically instantiated via Conda or Python.
-Another option is Singularity detailed in Section <a href='#singularity-containers'>2.16<!-- tex4ht:ref: sect:singularity-containers  --></a>. Usually, virtual environments are
-created once and before sending any job to the scheduler, so when sending the job to the
-scheduler we (1) activate the virtual environment, (2) use it, and (3) close it at the end of the
-job.
-</p><!-- l. 540 --><p class='noindent'>
+Another option is Singularity detailed in Section <a href='#singularity-containers'>2.16<!-- tex4ht:ref: sect:singularity-containers  --></a>. Usually, virtual environments are created once
+during an interactive session before submitting a batch job to the scheduler. The job script submitted
+to the scheduler is then written to (1) activate the virtual environment, (2) use it, and (3) close it at
+the end of the job.
+</p><!-- l. 539 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='anaconda'><span class='titlemark'>2.11.1   </span> <a id='x1-300002.11.1'></a>Anaconda</h5>
-<!-- l. 543 --><p class='noindent'>To create an anaconda environment in your speed-scratch directory, use the <span class='cmtt-10'>prefix </span>option when
-executing <span class='cmtt-10'>conda create</span>. For example, to create an anaconda environment for <span class='cmtt-10'>a_user</span>, execute the
-following at the command line:
+<!-- l. 542 --><p class='noindent'>Request an interactive session in the queue you wish to submit your jobs to (e.g., salloc -p pg
+–gpus=1 for GPU jobs). Once your interactive has started, create an anaconda environment in your
+speed-scratch directory by using the <span class='cmtt-10'>prefix </span>option when executing <span class='cmtt-10'>conda create</span>. For example,
+                                                                               
+
+                                                                               
+to create an anaconda environment for <span class='cmtt-10'>a_user</span>, execute the following at the command
+line:
                                                                                
 
                                                                                
@@ -1280,8 +1285,8 @@ conda install pip
                                                                                
 </p>
      <pre class='verbatim' id='verbatim-33'>
+     salloc -p pg --gpus=1 --mem=10GB -A &lt;slurm account name&gt;
      cd /speed-scratch/$USER
-     srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
      module load python/3.11.0/default
      conda create -p /speed-scratch/$USER/pytorch-env
      conda activate /speed-scratch/$USER/pytorch-env
@@ -1290,27 +1295,30 @@ conda install pip
        https://download.pytorch.org/whl/cu117
      ....
      conda deactivate
-     exit
+     exit # end the salloc session
 </pre>
-     <!-- l. 600 --><p class='nopar'></p></li></ul>
-<!-- l. 604 --><p class='noindent'><span class='cmbx-10'>Important Note: </span><span class='cmtt-10'>pip </span>(and <span class='cmtt-10'>pip3</span>) are used to install modules from the python distribution while
+     <!-- l. 600 --><p class='nopar'>
+     </p></li>
+     <li class='itemize'>No Space left error: <span class='cmtt-10'>R</span>ead our Github <a href='https://github.com/NAG-DevOps/speed-hpc/tree/master/src#no-space-left-error-when-creating-conda-environment'><span class='cmtt-10'>HERE</span></a></li></ul>
+<!-- l. 610 --><p class='noindent'><span class='cmbx-10'>Important Note: </span><span class='cmtt-10'>pip </span>(and <span class='cmtt-10'>pip3</span>) are used to install modules from the python distribution while
 <span class='cmtt-10'>conda install </span>installs modules from anaconda’s repository.
-</p><!-- l. 610 --><p class='noindent'>
+</p><!-- l. 616 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='python'><span class='titlemark'>2.11.2   </span> <a id='x1-330002.11.2'></a>Python</h5>
-<!-- l. 613 --><p class='noindent'>Setting up a Python virtual environment is fairly straightforward. We have a simple example that use
-a Python virtual environment:
+<!-- l. 619 --><p class='noindent'>Setting up a Python virtual environment is fairly straightforward. The first step is to request an
+interactive session in the queue you wish to submit your jobs to.
+</p><!-- l. 622 --><p class='indent'>   We have a simple example that use a Python virtual environment:
 </p>
      <ul class='itemize1'>
      <li class='itemize'>
-     <!-- l. 618 --><p class='noindent'>Using Python Venv
+     <!-- l. 626 --><p class='noindent'>Using Python Venv
                                                                                
 
                                                                                
 </p>
      <pre class='verbatim' id='verbatim-34'>
+     salloc -p pg --gpus=1 --mem=10GB -A &lt;slurm account name&gt;
      cd /speed-scratch/$USER
-     srun --partition=p(s/g) -A Your_account --mem=10Gb --gpus=1 --pty /encs/bin/tcsh
      module load python/3.9.1/default
      mkdir -p /speed-scratch/$USER/tmp
      setenv TMPDIR /speed-scratch/$USER/tmp
@@ -1321,10 +1329,10 @@ a Python virtual environment:
      deactivate
      exit
 </pre>
-     <!-- l. 632 --><p class='nopar'>
+     <!-- l. 640 --><p class='nopar'>
      </p></li>
      <li class='itemize'>See, e.g., <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh'><span class='cmtt-10'>gurobi-with-python.sh</span></a></li></ul>
-<!-- l. 641 --><p class='noindent'><span class='cmbx-10'>Important Note: </span>partition <span class='cmtt-10'>ps </span>is used for CPU jobs, partitions <span class='cmtt-10'>pg</span>, <span class='cmtt-10'>pt </span>are used for GPU jobs, no
+<!-- l. 649 --><p class='noindent'><span class='cmbx-10'>Important Note: </span>partition <span class='cmtt-10'>ps </span>is used for CPU jobs, partitions <span class='cmtt-10'>pg</span>, <span class='cmtt-10'>pt </span>are used for GPU jobs, no
 need to use <span class='cmtt-10'>--gpus= </span>when preparing environments for CPU jobs.
 </p><!-- l. 2 --><p class='noindent'>
 </p>
@@ -1713,14 +1721,14 @@ INFO:    Starting build...
 </p><!-- l. 502 --><p class='noindent'>This method can be used for converting Docker containers directly on Speed. On GPU nodes make
 sure to pass on the <span class='cmtt-10'>--nv </span>flag to Singularity, so its containers could access the GPUs. See the linked
 example.
-</p><!-- l. 650 --><p class='noindent'>
+</p><!-- l. 658 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='conclusion'><span class='titlemark'>3   </span> <a id='x1-450003'></a>Conclusion</h3>
-<!-- l. 653 --><p class='noindent'>The cluster is, “first come, first served”, until it fills, and then job position in the queue is
+<!-- l. 661 --><p class='noindent'>The cluster is, “first come, first served”, until it fills, and then job position in the queue is
 based upon past usage. The scheduler does attempt to fill gaps, though, so sometimes a
 single-core job of lower priority will schedule before a multi-core job of higher priority, for
 example.
-</p><!-- l. 659 --><p class='noindent'>
+</p><!-- l. 667 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='important-limitations'><span class='titlemark'>3.1   </span> <a id='x1-460003.1'></a>Important Limitations</h4>
      <ul class='itemize1'>
@@ -1731,9 +1739,9 @@ example.
      interactive jobs, see Section <a href='#interactive-jobs'>2.8<!-- tex4ht:ref: sect:interactive-jobs  --></a>).
      </li>
      <li class='itemize'>
-     <!-- l. 672 --><p class='noindent'>Scripts can live in your NFS-provided home, but any substantial data need to be in your
+     <!-- l. 680 --><p class='noindent'>Scripts can live in your NFS-provided home, but any substantial data need to be in your
      cluster-specific directory (located at <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>/speed-scratch/&lt;ENCSusername&gt;/</span></span></span>).
-     </p><!-- l. 676 --><p class='noindent'>NFS is great for acute activity, but is not ideal for chronic activity. Any data that a job will
+     </p><!-- l. 684 --><p class='noindent'>NFS is great for acute activity, but is not ideal for chronic activity. Any data that a job will
      read more than once should be copied at the start to the scratch disk of a compute node
      using <span class='tctt-1000'>$</span><span class='cmtt-10'>TMPDIR </span>(and, perhaps, <span class='tctt-1000'>$</span><span class='cmtt-10'>SLURM_SUBMIT_DIR</span>), any intermediary job data should be
      produced in <span class='tctt-1000'>$</span><span class='cmtt-10'>TMPDIR</span>, and once a job is near to finishing, those data should be copied
@@ -1774,24 +1782,24 @@ example.
                                                                                
      </li>
      <li class='itemize'>E-mail, <span class='cmtt-10'>rt-ex-hpc AT encs.concordia.ca</span>, with any concerns/questions.</li></ul>
-<!-- l. 703 --><p class='noindent'>
+<!-- l. 711 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='use-cases'><span class='titlemark'>3.3   </span> <a id='x1-480003.3'></a>Use Cases</h4>
      <ul class='itemize1'>
      <li class='itemize'>
-     <!-- l. 708 --><p class='noindent'>HPC Committee’s initial batch about 6 students (end of 2019): </p>
+     <!-- l. 716 --><p class='noindent'>HPC Committee’s initial batch about 6 students (end of 2019): </p>
          <ul class='itemize2'>
          <li class='itemize'>10000 iterations job in Fluent finished in \(&lt;26\) hours vs. 46 hours in Calcul Quebec</li></ul>
      </li>
      <li class='itemize'>
-     <!-- l. 714 --><p class='noindent'>NAG’s MAC spoofer analyzer <span class='cite'>[<a href='#Xmac-spoofer-analyzer-intro-c3s2e2014'>18</a>, <a href='#Xmac-spoofer-analyzer-detail-fps2014'>17</a>]</span>, such as <a class='url' href='https://github.com/smokhov/atsm/tree/master/examples/flucid'><span class='cmtt-10'>https://github.com/smokhov/atsm/tree/master/examples/flucid</span></a>
+     <!-- l. 722 --><p class='noindent'>NAG’s MAC spoofer analyzer <span class='cite'>[<a href='#Xmac-spoofer-analyzer-intro-c3s2e2014'>18</a>, <a href='#Xmac-spoofer-analyzer-detail-fps2014'>17</a>]</span>, such as <a class='url' href='https://github.com/smokhov/atsm/tree/master/examples/flucid'><span class='cmtt-10'>https://github.com/smokhov/atsm/tree/master/examples/flucid</span></a>
      </p>
          <ul class='itemize2'>
          <li class='itemize'>compilation of forensic computing reasoning cases about false or true positives of
          hardware address spoofing in the labs</li></ul>
      </li>
      <li class='itemize'>
-     <!-- l. 721 --><p class='noindent'>S4 LAB/GIPSY R&amp;D Group’s: </p>
+     <!-- l. 729 --><p class='noindent'>S4 LAB/GIPSY R&amp;D Group’s: </p>
          <ul class='itemize2'>
          <li class='itemize'>MARFCAT and MARFPCAT (OSS signal processing and machine learning tools for
          vulnerable and weak code analysis and network packet capture analysis) <span class='cite'>[<a href='#Xmarfcat-nlp-ai2014'>20</a>, <a href='#Xmarfcat-sate2010-nist'>15</a>, <a href='#Xfingerprinting-mal-traffic'>6</a>]</span>
@@ -1836,7 +1844,7 @@ example.
      <a class='url' href='https://doi.org/10.1177/0278364920913945'><span class='cmtt-10'>https://doi.org/10.1177/0278364920913945</span></a>
      </li>
      <li class='itemize'>
-     <!-- l. 750 --><p class='noindent'>The work “Haotao Lai. An OpenISS framework specialization for deep learning-based
+     <!-- l. 758 --><p class='noindent'>The work “Haotao Lai. An OpenISS framework specialization for deep learning-based
      person re-identification.  Master’s thesis, Department of Computer Science and
      Software Engineering, Concordia University, Montreal, Canada, August 2019.
      <a class='url' href='https://spectrum.library.concordia.ca/id/eprint/985788/'><span class='cmtt-10'>https://spectrum.library.concordia.ca/id/eprint/985788/</span></a>” using TensorFlow and Keras
@@ -1850,13 +1858,13 @@ example.
          </li>
          <li class='itemize'>Haotao     Lai     et al.             OpenISS     keras-yolo3     v0.1.0,     June     2021.
          <a class='url' href='https://github.com/OpenISS/openiss-yolov3'><span class='cmtt-10'>https://github.com/OpenISS/openiss-yolov3</span></a></li></ul>
-     <!-- l. 758 --><p class='noindent'>and theirs forks by the team.
+     <!-- l. 766 --><p class='noindent'>and theirs forks by the team.
 </p>
      </li></ul>
-<!-- l. 766 --><p class='noindent'>
+<!-- l. 774 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='history'><span class='titlemark'>A   </span> <a id='x1-49000A'></a>History</h3>
-<!-- l. 769 --><p class='noindent'>
+<!-- l. 777 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='acknowledgments'><span class='titlemark'>A.1   </span> <a id='x1-50000A.1'></a>Acknowledgments</h4>
      <ul class='itemize1'>
@@ -1873,15 +1881,15 @@ example.
                                                                                
 
                                                                                
-<!-- l. 788 --><p class='noindent'>
+<!-- l. 796 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='migration-from-uge-to-slurm'><span class='titlemark'>A.2   </span> <a id='x1-51000A.2'></a>Migration from UGE to SLURM</h4>
-<!-- l. 791 --><p class='noindent'>For long term users who started off with Grid Engine here are some resources to make a transition
+<!-- l. 799 --><p class='noindent'>For long term users who started off with Grid Engine here are some resources to make a transition
 and mapping to the job submission process.
 </p>
      <ul class='itemize1'>
      <li class='itemize'>
-     <!-- l. 796 --><p class='noindent'>Queues are called “partitions” in SLURM. Our mapping from the GE queues to SLURM
+     <!-- l. 804 --><p class='noindent'>Queues are called “partitions” in SLURM. Our mapping from the GE queues to SLURM
      partitions is as follows:
                                                                                
 
@@ -1893,11 +1901,11 @@ and mapping to the job submission process.
      g.q    pg
      a.q    pa
 </pre>
-     <!-- l. 803 --><p class='nopar'> We also have a new partition <span class='cmtt-10'>pt </span>that covers SPEED2 nodes, which previously did not
+     <!-- l. 811 --><p class='nopar'> We also have a new partition <span class='cmtt-10'>pt </span>that covers SPEED2 nodes, which previously did not
      exist.
      </p></li>
      <li class='itemize'>
-     <!-- l. 808 --><p class='noindent'>Commands and command options mappings are found in Figure <a href='#-rosetta-mappings-of-scheduler-commands-from-schedmd'>10<!-- tex4ht:ref: fig:rosetta-mappings  --></a> from<br class='newline' /><a class='url' href='https://slurm.schedmd.com/rosetta.pdf'><span class='cmtt-10'>https://slurm.schedmd.com/rosetta.pdf</span></a><br class='newline' /><a class='url' href='https://slurm.schedmd.com/pdfs/summary.pdf'><span class='cmtt-10'>https://slurm.schedmd.com/pdfs/summary.pdf</span></a><br class='newline' />Other related helpful resources from similar organizations who either used SLURM for awhile or
+     <!-- l. 816 --><p class='noindent'>Commands and command options mappings are found in Figure <a href='#-rosetta-mappings-of-scheduler-commands-from-schedmd'>10<!-- tex4ht:ref: fig:rosetta-mappings  --></a> from<br class='newline' /><a class='url' href='https://slurm.schedmd.com/rosetta.pdf'><span class='cmtt-10'>https://slurm.schedmd.com/rosetta.pdf</span></a><br class='newline' /><a class='url' href='https://slurm.schedmd.com/pdfs/summary.pdf'><span class='cmtt-10'>https://slurm.schedmd.com/pdfs/summary.pdf</span></a><br class='newline' />Other related helpful resources from similar organizations who either used SLURM for awhile or
      also transitioned to it:<br class='newline' /><a class='url' href='https://docs.alliancecan.ca/wiki/Running_jobs'><span class='cmtt-9'>https://docs.alliancecan.ca/wiki/Running_jobs</span></a><br class='newline' /><a class='url' href='https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf'><span class='cmtt-9'>https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf</span></a><br class='newline' /><a class='url' href='https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm'><span class='cmtt-9'>https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm</span></a>
 </p>
      <figure class='figure' id='-rosetta-mappings-of-scheduler-commands-from-schedmd'> 
@@ -1906,10 +1914,10 @@ and mapping to the job submission process.
      </figure>
      </li>
      <li class='itemize'>
-     <!-- l. 826 --><p class='noindent'><span class='cmbx-10'>NOTE: </span>If you have used UGE commands in the past you probably still have these lines there;
+     <!-- l. 834 --><p class='noindent'><span class='cmbx-10'>NOTE: </span>If you have used UGE commands in the past you probably still have these lines there;
      <span class='cmbx-10'>they should now be removed</span>, as they have no use in SLURM and will start giving
      “command not found” errors on login when the software is removed:
-     </p><!-- l. 831 --><p class='noindent'>csh/<span class='cmtt-10'>tcsh</span>: Sample <a class='url' href='.tcshrc'><span class='cmtt-10'>.tcshrc</span></a> file:
+     </p><!-- l. 839 --><p class='noindent'>csh/<span class='cmtt-10'>tcsh</span>: Sample <a class='url' href='.tcshrc'><span class='cmtt-10'>.tcshrc</span></a> file:
                                                                                
 
                                                                                
@@ -1920,8 +1928,8 @@ and mapping to the job submission process.
         source /local/pkg/uge-8.6.3/root/default/common/settings.csh
      endif
 </pre>
-     <!-- l. 838 --><p class='nopar'>
-     </p><!-- l. 840 --><p class='noindent'>Bourne shell/<span class='cmtt-10'>bash</span>: Sample <a class='url' href='.bashrc'><span class='cmtt-10'>.bashrc</span></a> file:
+     <!-- l. 846 --><p class='nopar'>
+     </p><!-- l. 848 --><p class='noindent'>Bourne shell/<span class='cmtt-10'>bash</span>: Sample <a class='url' href='.bashrc'><span class='cmtt-10'>.bashrc</span></a> file:
                                                                                
 
                                                                                
@@ -1933,37 +1941,37 @@ and mapping to the job submission process.
          printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
      fi
 </pre>
-     <!-- l. 848 --><p class='nopar'>
-     </p><!-- l. 850 --><p class='noindent'>Note that you will need to either log out and back in, or execute a new shell, for the
+     <!-- l. 856 --><p class='nopar'>
+     </p><!-- l. 858 --><p class='noindent'>Note that you will need to either log out and back in, or execute a new shell, for the
      environment changes in the updated <a class='url' href='.tcshrc'><span class='cmtt-10'>.tcshrc</span></a> or <a class='url' href='.bashrc'><span class='cmtt-10'>.bashrc</span></a> file to be applied (<span class='cmbx-10'>important</span>).
 </p>
      </li></ul>
-<!-- l. 858 --><p class='noindent'>
+<!-- l. 866 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='phases'><span class='titlemark'>A.3   </span> <a id='x1-52000A.3'></a>Phases</h4>
-<!-- l. 861 --><p class='noindent'>Brief summary of Speed evolution phases.
-</p><!-- l. 864 --><p class='noindent'>
+<!-- l. 869 --><p class='noindent'>Brief summary of Speed evolution phases.
+</p><!-- l. 872 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='phase-'><span class='titlemark'>A.3.1   </span> <a id='x1-53000A.3.1'></a>Phase 4</h5>
-<!-- l. 866 --><p class='noindent'>Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added, dubbed as “SPEED2”. We
+<!-- l. 874 --><p class='noindent'>Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added, dubbed as “SPEED2”. We
 also moved from Grid Engine to SLURM.
-</p><!-- l. 870 --><p class='noindent'>
+</p><!-- l. 878 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='phase-1'><span class='titlemark'>A.3.2   </span> <a id='x1-54000A.3.2'></a>Phase 3</h5>
-<!-- l. 872 --><p class='noindent'>Phase 3 had 4 vidpro nodes added from Dr. Amer totalling 6x P6 and 6x V100 GPUs
+<!-- l. 880 --><p class='noindent'>Phase 3 had 4 vidpro nodes added from Dr. Amer totalling 6x P6 and 6x V100 GPUs
 added.
-</p><!-- l. 876 --><p class='noindent'>
+</p><!-- l. 884 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='phase-2'><span class='titlemark'>A.3.3   </span> <a id='x1-55000A.3.3'></a>Phase 2</h5>
-<!-- l. 878 --><p class='noindent'>Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes. The P6s replaced 4x of FirePro
+<!-- l. 886 --><p class='noindent'>Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes. The P6s replaced 4x of FirePro
 S7150.
                                                                                
 
                                                                                
-</p><!-- l. 882 --><p class='noindent'>
+</p><!-- l. 890 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='phase-3'><span class='titlemark'>A.3.4   </span> <a id='x1-56000A.3.4'></a>Phase 1</h5>
-<!-- l. 884 --><p class='noindent'>Phase 1 of Speed was of the following configuration:
+<!-- l. 892 --><p class='noindent'>Phase 1 of Speed was of the following configuration:
 </p>
      <ul class='itemize1'>
      <li class='itemize'>Sixteen,  32-core  nodes,  each  with  512 GB  of  memory  and  approximately  1 TB  of
@@ -2245,13 +2253,13 @@ and the disabled nodes have a state of <span class='cmbx-10'>idle</span>.
 <!-- l. 274 --><p class='noindent'>It is possible that your job is pending, because the job requested resources that are not available
 within Speed. To verify why job id 1234 is not running, execute ‘<span class='obeylines-h'><span class='verb'><span class='cmtt-10'>sacct -j 1234</span></span></span>’. A summary of the
 reasons is available via the <span class='cmtt-10'>squeue </span>command.
-</p><!-- l. 898 --><p class='noindent'>
+</p><!-- l. 906 --><p class='noindent'>
 </p>
                                                                                
 
                                                                                
    <h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-75000C'></a>Sister Facilities</h3>
-<!-- l. 900 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
+<!-- l. 908 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
 research group and needs, they might be available to you. They are not managed by HPC/NAG of
 AITS, so contact their respective representatives.
 </p>
@@ -2270,7 +2278,7 @@ AITS, so contact their respective representatives.
      and P6 GPUs.
      </li>
      <li class='itemize'>
-     <!-- l. 918 --><p class='noindent'>There are various Lambda Labs other GPU servers and like computers acquired by individual
+     <!-- l. 926 --><p class='noindent'>There are various Lambda Labs other GPU servers and like computers acquired by individual
      researchers; if you are member of their research group, contact them directly. These resources
      are not managed by us. </p>
          <ul class='itemize2'>
