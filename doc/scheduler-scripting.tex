@@ -534,7 +534,11 @@ Use the \option{--x11} with \tool{salloc} or \tool{srun}:
 Once landed on a compute node, verify \api{DISPLAY} again.
 
 \item
-While running under scheduler, unset \api{XDG\_RUNTIME\_DIR}.
+While running under scheduler, create a run-user directory and set the variable \api{XDG\_RUNTIME\_DIR}.
+\begin{verbatim}
+mkdir -p /speed-scratch/$USER/run-dir
+setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
+\end{verbatim}
 
 \item
 Launch your graphical application:
@@ -545,7 +549,9 @@ Launch your graphical application:
 
 Here's an example of starting PyCharm (see \xf{fig:pycharm}), of which we made a sample local installation.
 You can make a similar install under your own directory. If using VSCode, it's
-currently only supported with the \tool{--no-sandbox} option.
+currently only supported with the \tool{--no-sandbox} option. \newline
+
+BASH version:
 
 \scriptsize
 \begin{verbatim}
@@ -553,15 +559,35 @@ bash-3.2$ ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding to
 serguei@speed's password: 
 [serguei@speed-submit ~] % echo $DISPLAY
 localhost:14.0
-[serguei@speed-submit ~] % srun -p ps --pty --x11=first --mem 4000 -t 0-06:00 /encs/bin/bash
+[serguei@speed-submit ~] % salloc -p ps --x11=first --mem=4Gb -t 0-06:00 
 bash-4.4$ echo $DISPLAY
 localhost:77.0
 bash-4.4$ hostname
 speed-01.encs.concordia.ca
-bash-4.4$ unset XDG_RUNTIME_DIR
+bash-4.4$ export XDG_RUNTIME_DIR=/speed-scratch/$USER/run-dir
 bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
 \end{verbatim}
 \normalsize
+
+TCSH version:
+\scriptsize
+\begin{verbatim}
+ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
+[speed-submit] [/home/c/carlos] > echo $DISPLAY
+localhost:14.0
+[speed-submit] [/home/c/carlos] > cd /speed-scratch/$USER
+[speed-submit] [/speed-scratch/carlos] > echo $DISPLAY
+localhost:13.0
+[speed-submit] [/speed-scratch/carlos] > salloc -pps --x11=first --mem=4Gb -t 0-06:00
+[speed-07] [/speed-scratch/carlos] > echo $DISPLAY
+localhost:42.0
+[speed-07] [/speed-scratch/carlos] > hostname
+speed-07.encs.concordia.ca
+[speed-07] [/speed-scratch/carlos] > setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
+[speed-07] [/speed-scratch/carlos] > /speed-scratch/nag-public/bin/pycharm.sh
+\end{verbatim}
+\normalsize
+
 
 \begin{figure}[htpb]
 			\includegraphics[width=\columnwidth]{images/pycharm}
@@ -643,6 +669,65 @@ Work with your notebook.
 	\fbox{\includegraphics[width=1.00\textwidth]{images/jupyter.png}}
 	\caption{Jupyter running on a Speed node}
 	\label{fig:jupyter}
+\end{figure}
+
+% ------------------------------------------------------------------------------
+\subsubsection{VScode}
+\label{sect:vscode}
+
+This is an example of running VScode, it's similar to Jupyter notebooks, but it doesn't use containers.
+This a Web version, it exists the local(workstation)-remote(speed-node) version too, but it is for Advanced users (no support, execute it at your own risk).
+
+\begin{itemize}
+\item
+Environment preparation: for the FIRST time:
+\begin{enumerate}
+\item
+Go to your speed-scratch directory: \texttt{cd /speed-scratch/\$USER}
+\item
+Create a vscode directory: \texttt{mkdir vscode}
+\item
+Go to vscode: \texttt{cd vscode}
+\item
+Create home and projects: \texttt {mkdir \{home,projects\}}
+\item
+Create this directory: \texttt {mkdir -p /speed-scratch/\$USER/run-user}
+\end{enumerate}
+\item
+Running VScode
+\begin{enumerate}
+\item 
+Go to your vscode directory: \texttt{cd /speed-scratch/\$USER/vscode}
+\item
+Open interactive session: \texttt {salloc --mem=10Gb --constraint=el9}
+\item
+Set environment variable: \texttt {setenv XDG\_RUNTIME\_DIR /speed-scratch/\$USER/run-user}
+\item 
+Run VScode, change the port if needed.
+\scriptsize
+\begin{verbatim}
+/speed-scratch/nag-public/code-server-4.22.1/bin/code-server --user-data-dir=$PWD\/projects \
+--config=$PWD\/home/.config/code-server/config.yaml --bind-addr="0.0.0.0:8080" $PWD\/projects
+\end{verbatim}
+\normalsize
+\item
+Tunnel ssh creation: similar to Jupyter, see \xs{sect:jupyter}
+\item
+Open a browser and type: \texttt {localhost:8080}
+\item
+If the browser asks for password: 
+\begin{verbatim}
+cat /speed-scratch/$USER/vscode/home/.config/code-server/config.yaml
+\end{verbatim}
+
+\end{enumerate}
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+	\fbox{\includegraphics[width=1.00\textwidth]{images/vscode.png}}
+	\caption{VScode running on a Speed node}
+	\label{fig:vscode}
 \end{figure}
 
 % ------------------------------------------------------------------------------
