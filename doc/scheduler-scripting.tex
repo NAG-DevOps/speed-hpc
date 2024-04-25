@@ -260,6 +260,37 @@ available formatting options. You can define your preferred
 default format in the \api{SACCT\_FORMAT} environment variable
 in your \texttt{.cshrc} or \texttt{.bashrc} files.
 
+\item
+\texttt{seff [job-ID]}: reports on the efficiency of a job's cpu and memory utilization. 
+Don't execute it on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be misleading.
+
+If you define the following directives in your batch script, you will receive seff output in your email when your job is finished.
+\small
+\begin{verbatim}
+#SBATCH --mail-type=ALL        
+#SBATCH --mail-user=USER_NAME@encs.concordia.ca 
+## Replace USER_NAME with your encs username.
+\end{verbatim}
+\normalsize
+
+Output example:
+\small
+\begin{verbatim}
+Job ID: XXXXX
+Cluster: speed
+User/Group: user1/user1
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:04:29
+CPU Efficiency: 0.35% of 21:32:20 core-walltime
+Job Wall-clock time: 05:23:05
+Memory Utilized: 2.90 GB
+Memory Efficiency: 2.90% of 100.00 GB
+\end{verbatim}
+\normalsize
+
+
 \end{itemize}
 
 
