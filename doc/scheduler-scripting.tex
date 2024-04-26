@@ -627,7 +627,7 @@ speed-07.encs.concordia.ca
 \end{figure}
 
 % ------------------------------------------------------------------------------
-\subsubsection{Jupyter Notebooks}
+\subsubsection{Jupyter Notebooks in Singularity}
 \label{sect:jupyter}
 
 This is an example of running Jupyter notebooks together with Singularity
@@ -685,8 +685,6 @@ Work with your notebook.
 	\label{fig:putty1}
 \end{figure}
 
-
-
 \begin{figure}[htbp]
 		\centering
 		\fbox{\includegraphics{images/putty2}}
@@ -694,13 +692,72 @@ Work with your notebook.
 	\label{fig:putty2}
 \end{figure}
 
-
 \begin{figure}[htbp]
 	\centering
 	\fbox{\includegraphics[width=1.00\textwidth]{images/jupyter.png}}
 	\caption{Jupyter running on a Speed node}
 	\label{fig:jupyter}
 \end{figure}
+
+% ------------------------------------------------------------------------------
+\subsubsection{Jupyter Labs in Conda and Pytorch}
+\label{sect:jupiterlabs}
+
+This is an example of Jupyter Labs running in a Conda environment, with Pytorch
+
+\begin{itemize}
+\item
+Environment preparation: for the FIRST time:
+\begin{enumerate}
+\item
+Go to your speed-scratch directory: \texttt{cd /speed-scratch/\$USER}
+\item
+Create a Jupyter (name of your choice) directory: \texttt{mkdir -p Jupyter}
+\item
+Go to Jupyter: \texttt{cd Jupyter}
+\item
+Open an Interactive session: \texttt{salloc --mem=50G --gpus=1 -ppg} (or -ppt)
+\item
+Set env. variables, conda environment, jupyter+pytorch installation
+\scriptsize
+\begin{verbatim}
+module load anaconda3/2023.03/default
+setenv TMPDIR /speed-scratch/$USER/tmp
+setenv TMP /speed-scratch/$USER/tmp
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs 
+conda create -p /speed-scratch/$USER/Jupyter/jupyter-env 
+conda activate /speed-scratch/$USER/Jupyter/jupyter-env
+conda install -c conda-forge jupyterlab
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+exit
+\end{verbatim}
+\normalsize
+\end{enumerate}
+\item
+Running Jupyter Labs, from \textbf{speed-submit}:
+\begin{enumerate}
+\item
+Open an Interactive session: \texttt{salloc --mem=50G --gpus=1 -ppg} (or -ppt)
+\scriptsize
+\begin{verbatim}
+cd /speed-scratch/$USER/Jupyter
+module load anaconda3/2023.03/default
+setenv TMPDIR /speed-scratch/$USER/tmp
+setenv TMP /speed-scratch/$USER/tmp
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs
+conda activate /speed-scratch/$USER/Jupyter/jupyter-env
+jupyter lab --no-browser --notebook-dir=$PWD --ip="*" --port=8888 --port-retries=50
+\end{verbatim}
+\normalsize
+\item
+Verify which port the system has assigned to Jupyter: 
+\texttt{http://localhost:XXXX/lab?token=}
+\item
+SSH Tunnel creation: similar to Jupyter in Singularity, see \xs{sect:jupyter}
+\item
+Open a browser and type: \texttt {localhost:XXXX} (port assigned)
+\end{enumerate}
+\end{itemize}
 
 % ------------------------------------------------------------------------------
 \subsubsection{VScode}
@@ -742,7 +799,7 @@ Run VScode, change the port if needed.
 \end{verbatim}
 \normalsize
 \item
-Tunnel ssh creation: similar to Jupyter, see \xs{sect:jupyter}
+SSH Tunnel creation: similar to Jupyter, see \xs{sect:jupyter}
 \item
 Open a browser and type: \texttt {localhost:8080}
 \item
