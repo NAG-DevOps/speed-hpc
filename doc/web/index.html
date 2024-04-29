@@ -67,54 +67,55 @@ examples.</div></div>
 <br />    <span class='subsectionToc'>2.8 <a href='#interactive-jobs' id='QQ2-1-27'>Interactive Jobs</a></span>
 <br />     <span class='subsubsectionToc'>2.8.1 <a href='#command-line' id='QQ2-1-28'>Command Line</a></span>
 <br />     <span class='subsubsectionToc'>2.8.2 <a href='#graphical-applications' id='QQ2-1-29'>Graphical Applications</a></span>
-<br />     <span class='subsubsectionToc'>2.8.3 <a href='#jupyter-notebooks' id='QQ2-1-31'>Jupyter Notebooks</a></span>
-<br />     <span class='subsubsectionToc'>2.8.4 <a href='#vscode' id='QQ2-1-35'>VScode</a></span>
-<br />    <span class='subsectionToc'>2.9 <a href='#scheduler-environment-variables' id='QQ2-1-37'>Scheduler Environment Variables</a></span>
-<br />    <span class='subsectionToc'>2.10 <a href='#ssh-keys-for-mpi' id='QQ2-1-40'>SSH Keys For MPI</a></span>
-<br />    <span class='subsectionToc'>2.11 <a href='#creating-virtual-environments' id='QQ2-1-41'>Creating Virtual Environments</a></span>
-<br />     <span class='subsubsectionToc'>2.11.1 <a href='#anaconda' id='QQ2-1-42'>Anaconda</a></span>
-<br />     <span class='subsubsectionToc'>2.11.2 <a href='#python' id='QQ2-1-45'>Python</a></span>
-<br />    <span class='subsectionToc'>2.12 <a href='#example-job-script-fluent' id='QQ2-1-46'>Example Job Script: Fluent</a></span>
-<br />    <span class='subsectionToc'>2.13 <a href='#example-job-efficientdet' id='QQ2-1-49'>Example Job: efficientdet</a></span>
-<br />    <span class='subsectionToc'>2.14 <a href='#java-jobs' id='QQ2-1-50'>Java Jobs</a></span>
-<br />    <span class='subsectionToc'>2.15 <a href='#scheduling-on-the-gpu-nodes' id='QQ2-1-51'>Scheduling On The GPU Nodes</a></span>
-<br />     <span class='subsubsectionToc'>2.15.1 <a href='#p-on-multigpu-multinode' id='QQ2-1-52'>P6 on Multi-GPU, Multi-Node</a></span>
-<br />     <span class='subsubsectionToc'>2.15.2 <a href='#cuda' id='QQ2-1-53'>CUDA</a></span>
-<br />     <span class='subsubsectionToc'>2.15.3 <a href='#special-notes-for-sending-cuda-jobs-to-the-gpu-queue' id='QQ2-1-54'>Special Notes for sending CUDA jobs to the GPU Queue</a></span>
-<br />     <span class='subsubsectionToc'>2.15.4 <a href='#openiss-examples' id='QQ2-1-55'>OpenISS Examples</a></span>
-<br />    <span class='subsectionToc'>2.16 <a href='#singularity-containers' id='QQ2-1-58'>Singularity Containers</a></span>
-<br />   <span class='sectionToc'>3 <a href='#conclusion' id='QQ2-1-59'>Conclusion</a></span>
-<br />    <span class='subsectionToc'>3.1 <a href='#important-limitations' id='QQ2-1-60'>Important Limitations</a></span>
-<br />    <span class='subsectionToc'>3.2 <a href='#tipstricks' id='QQ2-1-61'>Tips/Tricks</a></span>
-<br />    <span class='subsectionToc'>3.3 <a href='#use-cases' id='QQ2-1-62'>Use Cases</a></span>
-<br />   <span class='sectionToc'>A <a href='#history' id='QQ2-1-63'>History</a></span>
-<br />    <span class='subsectionToc'>A.1 <a href='#acknowledgments' id='QQ2-1-64'>Acknowledgments</a></span>
-<br />    <span class='subsectionToc'>A.2 <a href='#migration-from-uge-to-slurm' id='QQ2-1-65'>Migration from UGE to SLURM</a></span>
-<br />    <span class='subsectionToc'>A.3 <a href='#phases' id='QQ2-1-67'>Phases</a></span>
-<br />     <span class='subsubsectionToc'>A.3.1 <a href='#phase-' id='QQ2-1-68'>Phase 4</a></span>
-<br />     <span class='subsubsectionToc'>A.3.2 <a href='#phase-1' id='QQ2-1-69'>Phase 3</a></span>
-<br />     <span class='subsubsectionToc'>A.3.3 <a href='#phase-2' id='QQ2-1-70'>Phase 2</a></span>
-<br />     <span class='subsubsectionToc'>A.3.4 <a href='#phase-3' id='QQ2-1-71'>Phase 1</a></span>
-<br />   <span class='sectionToc'>B <a href='#frequently-asked-questions' id='QQ2-1-72'>Frequently Asked Questions</a></span>
-<br />    <span class='subsectionToc'>B.1 <a href='#where-do-i-learn-about-linux' id='QQ2-1-73'>Where do I learn about Linux?</a></span>
-<br />    <span class='subsectionToc'>B.2 <a href='#how-to-use-the-bash-shell-on-speed' id='QQ2-1-76'>How to use the “bash shell” on Speed?</a></span>
-<br />     <span class='subsubsectionToc'>B.2.1 <a href='#how-do-i-set-bash-as-my-login-shell' id='QQ2-1-77'>How do I set bash as my login shell?</a></span>
-<br />     <span class='subsubsectionToc'>B.2.2 <a href='#how-do-i-move-into-a-bash-shell-on-speed' id='QQ2-1-78'>How do I move into a bash shell on Speed?</a></span>
-<br />     <span class='subsubsectionToc'>B.2.3 <a href='#how-do-i-use-the-bash-shell-in-an-interactive-session-on-speed' id='QQ2-1-79'>How do I use the bash shell in an interactive session on Speed?</a></span>
-<br />     <span class='subsubsectionToc'>B.2.4 <a href='#how-do-i-run-scripts-written-in-bash-on-speed' id='QQ2-1-80'>How do I run scripts written in bash on Speed?</a></span>
-<br />    <span class='subsectionToc'>B.3 <a href='#how-to-resolve-disk-quota-exceeded-errors' id='QQ2-1-81'>How to resolve “Disk quota exceeded” errors?</a></span>
-<br />     <span class='subsubsectionToc'>B.3.1 <a href='#probable-cause' id='QQ2-1-82'>Probable Cause</a></span>
-<br />     <span class='subsubsectionToc'>B.3.2 <a href='#possible-solutions' id='QQ2-1-83'>Possible Solutions</a></span>
-<br />     <span class='subsubsectionToc'>B.3.3 <a href='#example-of-setting-working-directories-for-comsol' id='QQ2-1-84'>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></a></span>
-<br />     <span class='subsubsectionToc'>B.3.4 <a href='#example-of-setting-working-directories-for-python-modules' id='QQ2-1-85'>Example of setting working directories for <span class='cmtt-10'>Python Modules</span></a></span>
-<br />    <span class='subsectionToc'>B.4 <a href='#how-do-i-check-my-jobs-status' id='QQ2-1-86'>How do I check my job’s status?</a></span>
-<br />    <span class='subsectionToc'>B.5 <a href='#why-is-my-job-pending-when-nodes-are-empty' id='QQ2-1-87'>Why is my job pending when nodes are empty?</a></span>
-<br />     <span class='subsubsectionToc'>B.5.1 <a href='#disabled-nodes' id='QQ2-1-88'>Disabled nodes</a></span>
+<br />     <span class='subsubsectionToc'>2.8.3 <a href='#jupyter-notebooks-in-singularity' id='QQ2-1-31'>Jupyter Notebooks in Singularity</a></span>
+<br />     <span class='subsubsectionToc'>2.8.4 <a href='#jupyter-labs-in-conda-and-pytorch' id='QQ2-1-35'>Jupyter Labs in Conda and Pytorch</a></span>
+<br />     <span class='subsubsectionToc'>2.8.5 <a href='#vscode' id='QQ2-1-36'>VScode</a></span>
+<br />    <span class='subsectionToc'>2.9 <a href='#scheduler-environment-variables' id='QQ2-1-38'>Scheduler Environment Variables</a></span>
+<br />    <span class='subsectionToc'>2.10 <a href='#ssh-keys-for-mpi' id='QQ2-1-41'>SSH Keys For MPI</a></span>
+<br />    <span class='subsectionToc'>2.11 <a href='#creating-virtual-environments' id='QQ2-1-42'>Creating Virtual Environments</a></span>
+<br />     <span class='subsubsectionToc'>2.11.1 <a href='#anaconda' id='QQ2-1-43'>Anaconda</a></span>
+<br />     <span class='subsubsectionToc'>2.11.2 <a href='#python' id='QQ2-1-46'>Python</a></span>
+<br />    <span class='subsectionToc'>2.12 <a href='#example-job-script-fluent' id='QQ2-1-47'>Example Job Script: Fluent</a></span>
+<br />    <span class='subsectionToc'>2.13 <a href='#example-job-efficientdet' id='QQ2-1-50'>Example Job: efficientdet</a></span>
+<br />    <span class='subsectionToc'>2.14 <a href='#java-jobs' id='QQ2-1-51'>Java Jobs</a></span>
+<br />    <span class='subsectionToc'>2.15 <a href='#scheduling-on-the-gpu-nodes' id='QQ2-1-52'>Scheduling On The GPU Nodes</a></span>
+<br />     <span class='subsubsectionToc'>2.15.1 <a href='#p-on-multigpu-multinode' id='QQ2-1-53'>P6 on Multi-GPU, Multi-Node</a></span>
+<br />     <span class='subsubsectionToc'>2.15.2 <a href='#cuda' id='QQ2-1-54'>CUDA</a></span>
+<br />     <span class='subsubsectionToc'>2.15.3 <a href='#special-notes-for-sending-cuda-jobs-to-the-gpu-queue' id='QQ2-1-55'>Special Notes for sending CUDA jobs to the GPU Queue</a></span>
+<br />     <span class='subsubsectionToc'>2.15.4 <a href='#openiss-examples' id='QQ2-1-56'>OpenISS Examples</a></span>
+<br />    <span class='subsectionToc'>2.16 <a href='#singularity-containers' id='QQ2-1-59'>Singularity Containers</a></span>
+<br />   <span class='sectionToc'>3 <a href='#conclusion' id='QQ2-1-60'>Conclusion</a></span>
+<br />    <span class='subsectionToc'>3.1 <a href='#important-limitations' id='QQ2-1-61'>Important Limitations</a></span>
+<br />    <span class='subsectionToc'>3.2 <a href='#tipstricks' id='QQ2-1-62'>Tips/Tricks</a></span>
+<br />    <span class='subsectionToc'>3.3 <a href='#use-cases' id='QQ2-1-63'>Use Cases</a></span>
+<br />   <span class='sectionToc'>A <a href='#history' id='QQ2-1-64'>History</a></span>
+<br />    <span class='subsectionToc'>A.1 <a href='#acknowledgments' id='QQ2-1-65'>Acknowledgments</a></span>
+<br />    <span class='subsectionToc'>A.2 <a href='#migration-from-uge-to-slurm' id='QQ2-1-66'>Migration from UGE to SLURM</a></span>
+<br />    <span class='subsectionToc'>A.3 <a href='#phases' id='QQ2-1-68'>Phases</a></span>
+<br />     <span class='subsubsectionToc'>A.3.1 <a href='#phase-' id='QQ2-1-69'>Phase 4</a></span>
+<br />     <span class='subsubsectionToc'>A.3.2 <a href='#phase-1' id='QQ2-1-70'>Phase 3</a></span>
+<br />     <span class='subsubsectionToc'>A.3.3 <a href='#phase-2' id='QQ2-1-71'>Phase 2</a></span>
+<br />     <span class='subsubsectionToc'>A.3.4 <a href='#phase-3' id='QQ2-1-72'>Phase 1</a></span>
+<br />   <span class='sectionToc'>B <a href='#frequently-asked-questions' id='QQ2-1-73'>Frequently Asked Questions</a></span>
+<br />    <span class='subsectionToc'>B.1 <a href='#where-do-i-learn-about-linux' id='QQ2-1-74'>Where do I learn about Linux?</a></span>
+<br />    <span class='subsectionToc'>B.2 <a href='#how-to-use-the-bash-shell-on-speed' id='QQ2-1-77'>How to use the “bash shell” on Speed?</a></span>
+<br />     <span class='subsubsectionToc'>B.2.1 <a href='#how-do-i-set-bash-as-my-login-shell' id='QQ2-1-78'>How do I set bash as my login shell?</a></span>
+<br />     <span class='subsubsectionToc'>B.2.2 <a href='#how-do-i-move-into-a-bash-shell-on-speed' id='QQ2-1-79'>How do I move into a bash shell on Speed?</a></span>
+<br />     <span class='subsubsectionToc'>B.2.3 <a href='#how-do-i-use-the-bash-shell-in-an-interactive-session-on-speed' id='QQ2-1-80'>How do I use the bash shell in an interactive session on Speed?</a></span>
+<br />     <span class='subsubsectionToc'>B.2.4 <a href='#how-do-i-run-scripts-written-in-bash-on-speed' id='QQ2-1-81'>How do I run scripts written in bash on Speed?</a></span>
+<br />    <span class='subsectionToc'>B.3 <a href='#how-to-resolve-disk-quota-exceeded-errors' id='QQ2-1-82'>How to resolve “Disk quota exceeded” errors?</a></span>
+<br />     <span class='subsubsectionToc'>B.3.1 <a href='#probable-cause' id='QQ2-1-83'>Probable Cause</a></span>
+<br />     <span class='subsubsectionToc'>B.3.2 <a href='#possible-solutions' id='QQ2-1-84'>Possible Solutions</a></span>
+<br />     <span class='subsubsectionToc'>B.3.3 <a href='#example-of-setting-working-directories-for-comsol' id='QQ2-1-85'>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></a></span>
+<br />     <span class='subsubsectionToc'>B.3.4 <a href='#example-of-setting-working-directories-for-python-modules' id='QQ2-1-86'>Example of setting working directories for <span class='cmtt-10'>Python Modules</span></a></span>
+<br />    <span class='subsectionToc'>B.4 <a href='#how-do-i-check-my-jobs-status' id='QQ2-1-87'>How do I check my job’s status?</a></span>
+<br />    <span class='subsectionToc'>B.5 <a href='#why-is-my-job-pending-when-nodes-are-empty' id='QQ2-1-88'>Why is my job pending when nodes are empty?</a></span>
                                                                                
 
                                                                                
-<br />     <span class='subsubsectionToc'>B.5.2 <a href='#error-in-job-submit-request' id='QQ2-1-89'>Error in job submit request.</a></span>
-<br />   <span class='sectionToc'>C <a href='#sister-facilities' id='QQ2-1-90'>Sister Facilities</a></span>
+<br />     <span class='subsubsectionToc'>B.5.1 <a href='#disabled-nodes' id='QQ2-1-89'>Disabled nodes</a></span>
+<br />     <span class='subsubsectionToc'>B.5.2 <a href='#error-in-job-submit-request' id='QQ2-1-90'>Error in job submit request.</a></span>
+<br />   <span class='sectionToc'>C <a href='#sister-facilities' id='QQ2-1-91'>Sister Facilities</a></span>
 <br />   <span class='sectionToc'><a href='#annotated-bibliography'>Annotated Bibliography</a></span>
    </div>
                                                                                
@@ -313,7 +314,7 @@ building an equivalent array of programs for the EL9 SPEED2 nodes.
 </p>
    <h4 class='subsectionHead' id='requesting-access'><span class='titlemark'>1.7   </span> <a id='x1-90001.7'></a>Requesting Access</h4>
 <!-- l. 307 --><p class='noindent'>After reviewing the “What Speed is” (Section <a href='#what-speed-is-ideal-for'>1.4<!-- tex4ht:ref: sect:speed-is-for  --></a>) and “What Speed is Not” (Section <a href='#what-speed-is-not'>1.5<!-- tex4ht:ref: sect:speed-is-not  --></a>), request
-access to the “Speed” cluster by emailing: <span class='cmtt-10'>rt-ex-hpc AT encs.concordia.ca</span>. CGS ENCS
+access to the “Speed” cluster by emailing: <span class='cmtt-10'>rt-ex-hpc AT encs.concordia.ca</span>. GCS ENCS
 faculty and staff may request access directly. Students must include the following in their
 message:
 </p>
@@ -327,7 +328,7 @@ message:
 <!-- l. 320 --><p class='indent'>   Non-GCS faculty / students need to get a “sponsor” within GCS, such that your guest GCS ENCS
 account is created first. A sponsor can be any GCS Faculty member you collaborate with. Failing
 that, request the approval from our Dean’s Office; via our Associate Deans Drs. Eddie Hoi Ng or
-Emad Shihab. External entities to Concordia who collaborate with CGS Concordia researchers, should
+Emad Shihab. External entities to Concordia who collaborate with GCS Concordia researchers, should
 also go through the Dean’s office for approvals. Non-GCS students taking a GCS course do have their
 GCS ENCS account created automatically, but still need the course instructor’s approval to use the
 service.
@@ -780,12 +781,48 @@ file.
      </p><!-- l. 258 --><p class='noindent'>See <span class='cmtt-10'>man sacct </span>or <span class='cmtt-10'>sacct -e </span>for details of the available formatting options. You can define your
      preferred default format in the <span class='cmtt-10'>SACCT_FORMAT </span>environment variable in your <span class='cmtt-10'>.cshrc </span>or <span class='cmtt-10'>.bashrc</span>
      files.
+     </p></li>
+     <li class='itemize'>
+     <!-- l. 264 --><p class='noindent'><span class='cmtt-10'>seff [job-ID]</span>: reports on the efficiency of a job’s cpu and memory utilization. Don’t execute it
+     on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be
+     misleading.
+     </p><!-- l. 267 --><p class='noindent'>If you define the following directives in your batch script, you will receive seff output in your
+     email when your job is finished.
+                                                                               
+
+                                                                               
+</p>
+     <pre class='verbatim' id='verbatim-18'>
+     #SBATCH --mail-type=ALL
+     #SBATCH --mail-user=USER_NAME@encs.concordia.ca
+     ## Replace USER_NAME with your encs username.
+</pre>
+     <!-- l. 273 --><p class='nopar'>
+     </p><!-- l. 276 --><p class='noindent'>Output example:
+                                                                               
+
+                                                                               
+</p>
+     <pre class='verbatim' id='verbatim-19'>
+     Job ID: XXXXX
+     Cluster: speed
+     User/Group: user1/user1
+     State: COMPLETED (exit code 0)
+     Nodes: 1
+     Cores per node: 4
+     CPU Utilized: 00:04:29
+     CPU Efficiency: 0.35% of 21:32:20 core-walltime
+     Job Wall-clock time: 05:23:05
+     Memory Utilized: 2.90 GB
+     Memory Efficiency: 2.90% of 100.00 GB
+</pre>
+     <!-- l. 290 --><p class='nopar'>
 </p>
      </li></ul>
-<!-- l. 268 --><p class='noindent'>
+<!-- l. 299 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='advanced-sbatch-options'><span class='titlemark'>2.5   </span> <a id='x1-200002.5'></a>Advanced <span class='cmtt-10'>sbatch </span>Options</h4>
-<!-- l. 272 --><p class='noindent'>In addition to the basic <span class='cmtt-10'>sbatch </span>options presented earlier, there are a few additional options that are
+<!-- l. 303 --><p class='noindent'>In addition to the basic <span class='cmtt-10'>sbatch </span>options presented earlier, there are a few additional options that are
 generally useful:
 </p>
      <ul class='itemize1'>
@@ -797,12 +834,12 @@ generally useful:
      </li>
      <li class='itemize'><span class='cmtt-10'>--mail-user email@domain.com</span>: requests that the scheduler use this e-mail notification
      address, rather than the default (see, <span class='cmtt-10'>--mail-type</span>).
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='cmtt-10'>--export=[ALL | NONE | variables]</span>: exports environment variable(s) that can be used
      by the script.
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='cmtt-10'>-t [min] </span>or <span class='cmtt-10'>DAYS-HH:MM:SS</span>: sets a job runtime of min or HH:MM:SS. Note that if you
      give a single number, that represents <span class='cmti-10'>minutes</span>, not hours.
@@ -810,35 +847,35 @@ generally useful:
      <li class='itemize'><span class='cmtt-10'>--depend=[state:job-ID]</span>: run this job only when job [job-ID] finishes. Held jobs appear
      in the queue.
 </li></ul>
-<!-- l. 316 --><p class='indent'>   The many <span class='cmtt-10'>sbatch </span>options available are read with, <span class='cmtt-10'>man sbatch</span>. Also note that <span class='cmtt-10'>sbatch </span>options can
+<!-- l. 347 --><p class='indent'>   The many <span class='cmtt-10'>sbatch </span>options available are read with, <span class='cmtt-10'>man sbatch</span>. Also note that <span class='cmtt-10'>sbatch </span>options can
 be specified during the job-submission command, and these <span class='cmti-10'>override </span>existing script options (if
 present). The syntax is, <span class='cmtt-10'>sbatch [options] PATHTOSCRIPT</span>, but unlike in the script, the options are
 specified without the leading <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>#SBATCH</span></span></span> (e.g., <span class='cmtt-10'>sbatch -J sub-test --chdir=./ --mem=1G
 ./tcsh.sh</span>).
-</p><!-- l. 325 --><p class='noindent'>
+</p><!-- l. 356 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='array-jobs'><span class='titlemark'>2.6   </span> <a id='x1-210002.6'></a>Array Jobs</h4>
-<!-- l. 328 --><p class='noindent'>Array jobs are those that start a batch job or a parallel job multiple times. Each iteration of the job
+<!-- l. 359 --><p class='noindent'>Array jobs are those that start a batch job or a parallel job multiple times. Each iteration of the job
 array is called a task and receives a unique job ID. Only supported for batch jobs; submit time \(&lt; 1\)
 second, compared to repeatedly submitting the same regular job over and over even from a
 script.
-</p><!-- l. 335 --><p class='indent'>   To submit an array job, use the <span class='cmtt-10'>--array </span>option of the <span class='cmtt-10'>sbatch </span>command as follows:
+</p><!-- l. 366 --><p class='indent'>   To submit an array job, use the <span class='cmtt-10'>--array </span>option of the <span class='cmtt-10'>sbatch </span>command as follows:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-18'>
+   <pre class='verbatim' id='verbatim-20'>
 sbatch --array=n-m[:s]] &lt;batch_script&gt;
 </pre>
-<!-- l. 343 --><p class='nopar'>
-</p><!-- l. 345 --><p class='indent'>   <span class='cmbx-10'>-t Option Syntax:</span> </p>
+<!-- l. 374 --><p class='nopar'>
+</p><!-- l. 376 --><p class='indent'>   <span class='cmbx-10'>-t Option Syntax:</span> </p>
      <ul class='itemize1'>
      <li class='itemize'><span class='cmtt-10'>n</span>: indicates the start-id.
      </li>
      <li class='itemize'><span class='cmtt-10'>m</span>: indicates the max-id.
      </li>
      <li class='itemize'><span class='cmtt-10'>s</span>: indicates the step size.</li></ul>
-<!-- l. 355 --><p class='indent'>   <span class='cmbx-10'>Examples:</span> </p>
+<!-- l. 386 --><p class='indent'>   <span class='cmbx-10'>Examples:</span> </p>
      <ul class='itemize1'>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>sbatch --array=1-50000 -N1 -i my_in_%a -o my_out_%a array.sh</span></span></span>:  submits  a  job
      with 50000 elements, %a maps to the task-id between 1 and 50K.
@@ -850,56 +887,56 @@ sbatch --array=n-m[:s]] &lt;batch_script&gt;
      </li>
      <li class='itemize'><span class='cmtt-10'>sbatch --array=3-15:3 array.sh</span>: submits a jobs with 5 tasks numbered consecutively
      with step size 3 (task-ids 3,6,9,12,15).</li></ul>
-<!-- l. 372 --><p class='indent'>   <span class='cmbx-10'>Output files for Array Jobs:</span>
-</p><!-- l. 374 --><p class='indent'>   The default and output and error-files are <span class='cmtt-10'>slurm-job_id_task_id.out</span>. This means that Speed
+<!-- l. 403 --><p class='indent'>   <span class='cmbx-10'>Output files for Array Jobs:</span>
+</p><!-- l. 405 --><p class='indent'>   The default and output and error-files are <span class='cmtt-10'>slurm-job_id_task_id.out</span>. This means that Speed
 creates an output and an error-file for each task generated by the array-job as well as
 one for the super-ordinate array-job. To alter this behavior use the <span class='cmtt-10'>-o </span>and <span class='cmtt-10'>-e </span>option of
 <span class='cmtt-10'>sbatch</span>.
-</p><!-- l. 385 --><p class='indent'>   For more details about Array Job options, please review the manual pages for <span class='cmtt-10'>sbatch </span>by executing
+</p><!-- l. 416 --><p class='indent'>   For more details about Array Job options, please review the manual pages for <span class='cmtt-10'>sbatch </span>by executing
 the following at the command line on speed-submit <span class='cmtt-10'>man sbatch</span>.
                                                                                
 
                                                                                
-</p><!-- l. 392 --><p class='noindent'>
+</p><!-- l. 423 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='requesting-multiple-cores-ie-multithreading-jobs'><span class='titlemark'>2.7   </span> <a id='x1-220002.7'></a>Requesting Multiple Cores (i.e., Multithreading Jobs)</h4>
-<!-- l. 394 --><p class='noindent'>For jobs that can take advantage of multiple machine cores, up to 32 cores (per job) can be requested
+<!-- l. 425 --><p class='noindent'>For jobs that can take advantage of multiple machine cores, up to 32 cores (per job) can be requested
 in your script with:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-19'>
+   <pre class='verbatim' id='verbatim-21'>
 #SBATCH -n [#cores for processes]
 </pre>
-<!-- l. 402 --><p class='nopar'>
-</p><!-- l. 404 --><p class='indent'>   or
+<!-- l. 433 --><p class='nopar'>
+</p><!-- l. 435 --><p class='indent'>   or
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-20'>
+   <pre class='verbatim' id='verbatim-22'>
 #SBATCH -n 1
 #SBATCH -c [#cores for threads of a single process]
 </pre>
-<!-- l. 409 --><p class='nopar'>
-</p><!-- l. 411 --><p class='indent'>   Both <span class='cmtt-10'>sbatch </span>and <span class='cmtt-10'>salloc </span>support <span class='cmtt-10'>-n </span>on the command line, and it should always be used either in
+<!-- l. 440 --><p class='nopar'>
+</p><!-- l. 442 --><p class='indent'>   Both <span class='cmtt-10'>sbatch </span>and <span class='cmtt-10'>salloc </span>support <span class='cmtt-10'>-n </span>on the command line, and it should always be used either in
 the script or on the command line as the default \(n=1\). <span class='cmbx-10'>Do not request more cores than you think
 will be useful</span>, as larger-core jobs are more difficult to schedule. On the flip side, though, if you are
 going to be running a program that scales out to the maximum single-machine core count available,
 please (please) request 32 cores, to avoid node oversubscription (i.e., to avoid overloading the
 CPUs).
-</p><!-- l. 420 --><p class='indent'>   <span class='cmbx-10'>Important </span>note about <span class='cmtt-10'>--ntasks </span>or <span class='cmtt-10'>--ntasks-per-node </span>(<span class='cmtt-10'>-n</span>) talks about processes (usually the
+</p><!-- l. 451 --><p class='indent'>   <span class='cmbx-10'>Important </span>note about <span class='cmtt-10'>--ntasks </span>or <span class='cmtt-10'>--ntasks-per-node </span>(<span class='cmtt-10'>-n</span>) talks about processes (usually the
 ones ran with <span class='cmtt-10'>srun</span>). <span class='cmtt-10'>--cpus-per-task </span>(<span class='cmtt-10'>-c</span>) corresponds to threads per process. Some programs
 consider them equivalent, some don’t. Fluent for example uses <span class='cmtt-10'>--ntasks-per-node=8 </span>and
 <span class='cmtt-10'>--cpus-per-task=1</span>, some just set <span class='cmtt-10'>--cpus-per-task=8 </span>and <span class='cmtt-10'>--ntasks-per-node=1</span>. If one of them is
 not \(1\) then some applications need to be told to use \(n*c\) total cores.
-</p><!-- l. 430 --><p class='indent'>   Core count associated with a job appears under, “AllocCPUS”, in the, <span class='cmtt-10'>qacct -j</span>, output.
+</p><!-- l. 461 --><p class='indent'>   Core count associated with a job appears under, “AllocCPUS”, in the, <span class='cmtt-10'>qacct -j</span>, output.
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-21'>
+   <pre class='verbatim' id='verbatim-23'>
 [serguei@speed-submit src] % squeue -l
 Thu Oct 19 20:32:32 2023
 JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
@@ -919,58 +956,58 @@ JobID           JobName  Partition    Account  AllocCPUS  �
 2652.6       gydra_pmi+                speed1         20  COMPLETED      0:0
 2652.7       gydra_pmi+                speed1         20  COMPLETED      0:0
 </pre>
-<!-- l. 454 --><p class='nopar'>
-</p><!-- l. 458 --><p class='noindent'>
+<!-- l. 485 --><p class='nopar'>
+</p><!-- l. 489 --><p class='noindent'>
 </p>
    <h4 class='subsectionHead' id='interactive-jobs'><span class='titlemark'>2.8   </span> <a id='x1-230002.8'></a>Interactive Jobs</h4>
-<!-- l. 461 --><p class='noindent'>Job sessions can be interactive, instead of batch (script) based. Such sessions can be useful for testing,
+<!-- l. 492 --><p class='noindent'>Job sessions can be interactive, instead of batch (script) based. Such sessions can be useful for testing,
 debugging, and optimising code and resource requirements, conda or python virtual environments
 setup, or any likewise preparatory work prior to batch submission.
-</p><!-- l. 467 --><p class='noindent'>
+</p><!-- l. 498 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='command-line'><span class='titlemark'>2.8.1   </span> <a id='x1-240002.8.1'></a>Command Line</h5>
-<!-- l. 469 --><p class='noindent'>To request an interactive job session, use, <span class='cmtt-10'>salloc [options]</span>, similarly to a <span class='cmtt-10'>sbatch </span>command-line
+<!-- l. 500 --><p class='noindent'>To request an interactive job session, use, <span class='cmtt-10'>salloc [options]</span>, similarly to a <span class='cmtt-10'>sbatch </span>command-line
 job, e.g.,
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-22'>
+   <pre class='verbatim' id='verbatim-24'>
 salloc -J interactive-test --mem=1G -p ps -n 8
 </pre>
-<!-- l. 477 --><p class='nopar'> Inside the allocated <span class='cmtt-10'>salloc </span>session you can run shell commands as usual; it is recommended to use
+<!-- l. 508 --><p class='nopar'> Inside the allocated <span class='cmtt-10'>salloc </span>session you can run shell commands as usual; it is recommended to use
 <span class='cmtt-10'>srun </span>for the heavy compute steps inside <span class='cmtt-10'>salloc</span>. If it is a quick a short job just to compile something,
 e.g., on a GPU node you can use an interactive <span class='cmtt-10'>srun </span>directly (note no <span class='cmtt-10'>srun </span>can run within <span class='cmtt-10'>srun</span>),
 e.g., a 1 hour allocation:
-</p><!-- l. 491 --><p class='indent'>   For <span class='cmtt-10'>tcsh</span>:
+</p><!-- l. 522 --><p class='indent'>   For <span class='cmtt-10'>tcsh</span>:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-23'>
+   <pre class='verbatim' id='verbatim-25'>
 srun --pty -n 8 -p pg --gpus=1 --mem=1Gb -t 60 /encs/bin/tcsh
 </pre>
-<!-- l. 494 --><p class='nopar'>
-</p><!-- l. 496 --><p class='indent'>   For <span class='cmtt-10'>bash</span>:
+<!-- l. 525 --><p class='nopar'>
+</p><!-- l. 527 --><p class='indent'>   For <span class='cmtt-10'>bash</span>:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-24'>
+   <pre class='verbatim' id='verbatim-26'>
 srun --pty -n 8 -p pg --gpus=1 --mem=1Gb -t 60 /encs/bin/bash
 </pre>
-<!-- l. 499 --><p class='nopar'>
-</p><!-- l. 502 --><p class='noindent'>
+<!-- l. 530 --><p class='nopar'>
+</p><!-- l. 533 --><p class='noindent'>
 </p>
    <h5 class='subsubsectionHead' id='graphical-applications'><span class='titlemark'>2.8.2   </span> <a id='x1-250002.8.2'></a>Graphical Applications</h5>
-<!-- l. 504 --><p class='noindent'>If you need to run an on-Speed graphical-based UI application (e.g., MALTLAB, Abaqus CME, etc.),
+<!-- l. 535 --><p class='noindent'>If you need to run an on-Speed graphical-based UI application (e.g., MALTLAB, Abaqus CME, etc.),
 or an IDE (PyCharm, VSCode, Eclipse) to develop and test your job’s code interactively you need to
 enable X11-forwarding from your client machine to speed then to the compute node. To do
 so:
-</p><!-- l. 510 --><p class='indent'>
+</p><!-- l. 541 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-25002x1'>
-     <!-- l. 512 --><p class='noindent'>you need to run an X server on your client machine, such as, </p>
+     <!-- l. 543 --><p class='noindent'>you need to run an X server on your client machine, such as, </p>
          <ul class='itemize1'>
          <li class='itemize'>on  Windows:  MobaXterm  with  X  turned  on,  or  Xming  +  PuTTY  with  X11
          forwarding, or XOrg under Cygwin
@@ -978,17 +1015,17 @@ so:
          <li class='itemize'>on macOS: XQuarz – use its <span class='cmtt-10'>xterm </span>and <span class='cmtt-10'>ssh -X</span>
          </li>
          <li class='itemize'>on Linux just use <span class='cmtt-10'>ssh -X speed.encs.concordia.ca</span></li></ul>
-     <!-- l. 519 --><p class='noindent'>See <a class='url' href='https://www.concordia.ca/ginacody/aits/support/faq/xserver.html'><span class='cmtt-10'>https://www.concordia.ca/ginacody/aits/support/faq/xserver.html</span></a> for
+     <!-- l. 550 --><p class='noindent'>See <a class='url' href='https://www.concordia.ca/ginacody/aits/support/faq/xserver.html'><span class='cmtt-10'>https://www.concordia.ca/ginacody/aits/support/faq/xserver.html</span></a> for
      details.
      </p></li>
 <li class='enumerate' id='x1-25004x2'>
-     <!-- l. 523 --><p class='noindent'>verify your X connection was properly forwarded by printing the <span class='cmtt-10'>DISPLAY </span>variable:
-     </p><!-- l. 525 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>echo $DISPLAY</span></span></span> If it has no output, then your X forwarding is not on and you may need to
+     <!-- l. 554 --><p class='noindent'>verify your X connection was properly forwarded by printing the <span class='cmtt-10'>DISPLAY </span>variable:
+     </p><!-- l. 556 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>echo $DISPLAY</span></span></span> If it has no output, then your X forwarding is not on and you may need to
      re-login to Speed.
      </p></li>
 <li class='enumerate' id='x1-25006x3'>
-     <!-- l. 529 --><p class='noindent'>Use the <span class='cmtt-10'>--x11 </span>with <span class='cmtt-10'>salloc </span>or <span class='cmtt-10'>srun</span>:
-     </p><!-- l. 531 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>salloc ... --x11=first ...</span></span></span>
+     <!-- l. 560 --><p class='noindent'>Use the <span class='cmtt-10'>--x11 </span>with <span class='cmtt-10'>salloc </span>or <span class='cmtt-10'>srun</span>:
+     </p><!-- l. 562 --><p class='noindent'><span class='obeylines-h'><span class='verb'><span class='cmtt-10'>salloc ... --x11=first ...</span></span></span>
                                                                                
 
                                                                                
@@ -996,30 +1033,30 @@ so:
 <li class='enumerate' id='x1-25008x4'>Once landed on a compute node, verify <span class='cmtt-10'>DISPLAY </span>again.
      </li>
 <li class='enumerate' id='x1-25010x5'>
-     <!-- l. 537 --><p class='noindent'>While running under scheduler, create a run-user directory and set the variable
+     <!-- l. 568 --><p class='noindent'>While running under scheduler, create a run-user directory and set the variable
      <span class='cmtt-10'>XDG_RUNTIME_DIR</span>.
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-25'>
+     <pre class='verbatim' id='verbatim-27'>
      mkdir -p /speed-scratch/$USER/run-dir
      setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
 </pre>
-     <!-- l. 541 --><p class='nopar'>
+     <!-- l. 572 --><p class='nopar'>
      </p></li>
 <li class='enumerate' id='x1-25012x6'>
-     <!-- l. 544 --><p class='noindent'>Launch your graphical application:
-     </p><!-- l. 546 --><p class='noindent'><span class='cmtt-10'>module load </span>the required version, then <span class='cmtt-10'>matlab</span>, or <span class='cmtt-10'>abaqus cme</span>, etc.</p></li></ol>
-<!-- l. 550 --><p class='indent'>   Here’s an example of starting PyCharm (see Figure <a href='#-pycharm-starting-up-on-a-speed-node'>4<!-- tex4ht:ref: fig:pycharm  --></a>), of which we made a sample local
+     <!-- l. 575 --><p class='noindent'>Launch your graphical application:
+     </p><!-- l. 577 --><p class='noindent'><span class='cmtt-10'>module load </span>the required version, then <span class='cmtt-10'>matlab</span>, or <span class='cmtt-10'>abaqus cme</span>, etc.</p></li></ol>
+<!-- l. 581 --><p class='indent'>   Here’s an example of starting PyCharm (see Figure <a href='#-pycharm-starting-up-on-a-speed-node'>4<!-- tex4ht:ref: fig:pycharm  --></a>), of which we made a sample local
 installation. You can make a similar install under your own directory. If using VSCode, it’s currently
 only supported with the <span class='cmtt-10'>--no-sandbox </span>option. <br class='newline' />
-</p><!-- l. 554 --><p class='indent'>   BASH version:
+</p><!-- l. 585 --><p class='indent'>   BASH version:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-26'>
+   <pre class='verbatim' id='verbatim-28'>
 bash-3.2$ ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
 serguei@speed’s password:
 [serguei@speed-submit ~] % echo $DISPLAY
@@ -1032,13 +1069,13 @@ speed-01.encs.concordia.ca
 bash-4.4$ export XDG_RUNTIME_DIR=/speed-scratch/$USER/run-dir
 bash-4.4$ /speed-scratch/nag-public/bin/pycharm.sh
 </pre>
-<!-- l. 569 --><p class='nopar'>
-</p><!-- l. 572 --><p class='indent'>   TCSH version:
+<!-- l. 600 --><p class='nopar'>
+</p><!-- l. 603 --><p class='indent'>   TCSH version:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-27'>
+   <pre class='verbatim' id='verbatim-29'>
 ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
 [speed-submit] [/home/c/carlos] &gt; echo $DISPLAY
 localhost:14.0
@@ -1053,7 +1090,7 @@ speed-07.encs.concordia.ca
 [speed-07] [/speed-scratch/carlos] &gt; setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
 [speed-07] [/speed-scratch/carlos] &gt; /speed-scratch/nag-public/bin/pycharm.sh
 </pre>
-<!-- l. 588 --><p class='nopar'>
+<!-- l. 619 --><p class='nopar'>
 </p>
    <figure class='figure' id='-pycharm-starting-up-on-a-speed-node'> 
 
@@ -1064,62 +1101,62 @@ speed-07.encs.concordia.ca
                                                                                
 
                                                                                
-<!-- l. 593 --><p class='noindent'><img alt='PIC' height='412' src='images/pycharm.png' width='412' />
+<!-- l. 624 --><p class='noindent'><img alt='PIC' height='412' src='images/pycharm.png' width='412' />
 </p>
 <figcaption class='caption'><span class='id'>Figure 4: </span><span class='content'>PyCharm Starting up on a Speed Node</span></figcaption><!-- tex4ht:label?: x1-250134  -->
                                                                                
 
                                                                                
    </figure>
-   <h5 class='subsubsectionHead' id='jupyter-notebooks'><span class='titlemark'>2.8.3   </span> <a id='x1-260002.8.3'></a>Jupyter Notebooks</h5>
-<!-- l. 602 --><p class='noindent'>This is an example of running Jupyter notebooks together with Singularity (more on Singularity see
+   <h5 class='subsubsectionHead' id='jupyter-notebooks-in-singularity'><span class='titlemark'>2.8.3   </span> <a id='x1-260002.8.3'></a>Jupyter Notebooks in Singularity</h5>
+<!-- l. 633 --><p class='noindent'>This is an example of running Jupyter notebooks together with Singularity (more on Singularity see
 Section <a href='#singularity-containers'>2.16<!-- tex4ht:ref: sect:singularity-containers  --></a>). Here we are using one of the OpenISS-derived containers (see Section <a href='#openiss-examples'>2.15.4<!-- tex4ht:ref: sect:openiss-examples  --></a> as
 well).
-</p><!-- l. 606 --><p class='indent'>
+</p><!-- l. 637 --><p class='indent'>
      </p><ol class='enumerate1'>
 <li class='enumerate' id='x1-26002x1'>Use the <span class='cmtt-10'>--x11 </span>with <span class='cmtt-10'>salloc </span>or <span class='cmtt-10'>srun </span>as described in the above example
      </li>
 <li class='enumerate' id='x1-26004x2'>Load Singularity module <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>module load singularity/3.10.4/default</span></span></span>
      </li>
 <li class='enumerate' id='x1-26006x3'>
-     <!-- l. 615 --><p class='noindent'>Execute this Singularity command on a single line. It’s best to save it in a shell script that you
+     <!-- l. 646 --><p class='noindent'>Execute this Singularity command on a single line. It’s best to save it in a shell script that you
      could call, since it’s long.
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-28'>
+     <pre class='verbatim' id='verbatim-30'>
      srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp \
       --env SHELL=/bin/bash --nv /speed-scratch/nag-public/openiss-cuda-conda-jupyter.sif \
       /bin/bash -c ’/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd \
       --ip="*" --port=8888 --allow-root’
 </pre>
-     <!-- l. 623 --><p class='nopar'>
+     <!-- l. 654 --><p class='nopar'>
      </p></li>
 <li class='enumerate' id='x1-26008x4'>
-     <!-- l. 627 --><p class='noindent'>Create an <span class='cmtt-10'>ssh </span>tunnel between your computer and the node (<span class='cmtt-10'>speed-XX</span>) where Jupyter is
+     <!-- l. 658 --><p class='noindent'>Create an <span class='cmtt-10'>ssh </span>tunnel between your computer and the node (<span class='cmtt-10'>speed-XX</span>) where Jupyter is
      running (Using <span class='cmtt-10'>speed-submit </span>as a “jump server”) (Preferably: PuTTY, see Figure <a href='#-ssh-tunnel-configuration-'>5<!-- tex4ht:ref: fig:putty1  --></a> and
      Figure <a href='#-ssh-tunnel-configuration-1'>6<!-- tex4ht:ref: fig:putty2  --></a>)
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-29'>
+     <pre class='verbatim' id='verbatim-31'>
      ssh -L 8888:speed-XX:8888 YOUR_USER@speed-submit.encs.concordia.ca
 </pre>
-     <!-- l. 631 --><p class='nopar'> Don’t close the tunnel.
+     <!-- l. 662 --><p class='nopar'> Don’t close the tunnel.
      </p></li>
 <li class='enumerate' id='x1-26010x5'>
-     <!-- l. 635 --><p class='noindent'>Open a browser, and copy your Jupyter’s token, in the screenshot example in Figure <a href='#-jupyter-running-on-a-speed-node'>7<!-- tex4ht:ref: fig:jupyter  --></a>; each
+     <!-- l. 666 --><p class='noindent'>Open a browser, and copy your Jupyter’s token, in the screenshot example in Figure <a href='#-jupyter-running-on-a-speed-node'>7<!-- tex4ht:ref: fig:jupyter  --></a>; each
      time the token will be different, as it printed to you in the terminal.
                                                                                
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-30'>
+     <pre class='verbatim' id='verbatim-32'>
      http://localhost:8888/?token=5a52e6c0c7dfc111008a803e5303371ed0462d3d547ac3fb
 </pre>
-     <!-- l. 642 --><p class='nopar'>
+     <!-- l. 673 --><p class='nopar'>
      </p></li>
 <li class='enumerate' id='x1-26012x6'>Work with your notebook.
 </li></ol>
@@ -1168,64 +1205,126 @@ well).
 
                                                                                
    </figure>
-   <h5 class='subsubsectionHead' id='vscode'><span class='titlemark'>2.8.4   </span> <a id='x1-270002.8.4'></a>VScode</h5>
-<!-- l. 678 --><p class='noindent'>This is an example of running VScode, it’s similar to Jupyter notebooks, but it doesn’t use containers.
+   <h5 class='subsubsectionHead' id='jupyter-labs-in-conda-and-pytorch'><span class='titlemark'>2.8.4   </span> <a id='x1-270002.8.4'></a>Jupyter Labs in Conda and Pytorch</h5>
+<!-- l. 706 --><p class='noindent'>This is an example of Jupyter Labs running in a Conda environment, with Pytorch
+</p>
+     <ul class='itemize1'>
+     <li class='itemize'>
+     <!-- l. 710 --><p class='noindent'>Environment preparation: for the FIRST time:
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-27002x1'>Go to your speed-scratch directory: <span class='cmtt-10'>cd /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER</span>
+         </li>
+<li class='enumerate' id='x1-27004x2'>Create a Jupyter (name of your choice) directory: <span class='cmtt-10'>mkdir -p Jupyter</span>
+         </li>
+<li class='enumerate' id='x1-27006x3'>Go to Jupyter: <span class='cmtt-10'>cd Jupyter</span>
+         </li>
+<li class='enumerate' id='x1-27008x4'>Open an Interactive session: <span class='cmtt-10'>salloc --mem=50G --gpus=1 -ppg </span>(or -ppt)
+         </li>
+<li class='enumerate' id='x1-27010x5'>
+         <!-- l. 721 --><p class='noindent'>Set env. variables, conda environment, jupyter+pytorch installation
+                                                                               
+
+                                                                               
+</p>
+         <pre class='verbatim' id='verbatim-33'>
+         module load anaconda3/2023.03/default
+         setenv TMPDIR /speed-scratch/$USER/tmp
+         setenv TMP /speed-scratch/$USER/tmp
+         setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs
+         conda create -p /speed-scratch/$USER/Jupyter/jupyter-env
+         conda activate /speed-scratch/$USER/Jupyter/jupyter-env
+         conda install -c conda-forge jupyterlab
+         pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+         exit
+</pre>
+         <!-- l. 733 --><p class='nopar'></p></li></ol>
+     </li>
+     <li class='itemize'>
+     <!-- l. 737 --><p class='noindent'>Running Jupyter Labs, from <span class='cmbx-10'>speed-submit</span>:
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-27012x1'>
+         <!-- l. 740 --><p class='noindent'>Open an Interactive session: <span class='cmtt-10'>salloc --mem=50G --gpus=1 -ppg </span>(or -ppt)
+                                                                               
+
+                                                                               
+</p>
+         <pre class='verbatim' id='verbatim-34'>
+         cd /speed-scratch/$USER/Jupyter
+         module load anaconda3/2023.03/default
+         setenv TMPDIR /speed-scratch/$USER/tmp
+         setenv TMP /speed-scratch/$USER/tmp
+         setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs
+         conda activate /speed-scratch/$USER/Jupyter/jupyter-env
+         jupyter lab --no-browser --notebook-dir=$PWD --ip="*" --port=8888 --port-retries=50
+</pre>
+         <!-- l. 750 --><p class='nopar'>
+         </p></li>
+<li class='enumerate' id='x1-27014x2'>Verify which port the system has assigned to Jupyter: <span class='cmtt-10'>http://localhost:XXXX/lab?token=</span>
+         </li>
+<li class='enumerate' id='x1-27016x3'>SSH Tunnel creation: similar to Jupyter in Singularity, see Section <a href='#jupyter-notebooks-in-singularity'>2.8.3<!-- tex4ht:ref: sect:jupyter  --></a>
+         </li>
+<li class='enumerate' id='x1-27018x4'>Open a browser and type: <span class='cmtt-10'>localhost:XXXX </span>(port assigned)</li></ol>
+     </li></ul>
+<!-- l. 763 --><p class='noindent'>
+</p>
+   <h5 class='subsubsectionHead' id='vscode'><span class='titlemark'>2.8.5   </span> <a id='x1-280002.8.5'></a>VScode</h5>
+<!-- l. 766 --><p class='noindent'>This is an example of running VScode, it’s similar to Jupyter notebooks, but it doesn’t use containers.
 This a Web version, it exists the local(workstation)-remote(speed-node) version too, but it is for
 Advanced users (no support, execute it at your own risk).
 </p>
      <ul class='itemize1'>
      <li class='itemize'>
-     <!-- l. 683 --><p class='noindent'>Environment preparation: for the FIRST time:
+     <!-- l. 771 --><p class='noindent'>Environment preparation: for the FIRST time:
          </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-27002x1'>Go to your speed-scratch directory: <span class='cmtt-10'>cd /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER</span>
+<li class='enumerate' id='x1-28002x1'>Go to your speed-scratch directory: <span class='cmtt-10'>cd /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER</span>
          </li>
-<li class='enumerate' id='x1-27004x2'>Create a vscode directory: <span class='cmtt-10'>mkdir vscode</span>
-         </li>
-<li class='enumerate' id='x1-27006x3'>Go to vscode: <span class='cmtt-10'>cd vscode</span>
-         </li>
-<li class='enumerate' id='x1-27008x4'>Create home and projects: <span class='cmtt-10'>mkdir </span><span class='cmsy-10'>{</span><span class='cmtt-10'>home,projects</span><span class='cmsy-10'>}</span>
-         </li>
-<li class='enumerate' id='x1-27010x5'>Create this directory: <span class='cmtt-10'>mkdir -p /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER/run-user</span></li></ol>
-     </li>
-     <li class='itemize'>
-     <!-- l. 697 --><p class='noindent'>Running VScode
-         </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-27012x1'>Go to your vscode directory: <span class='cmtt-10'>cd /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER/vscode</span>
-         </li>
-<li class='enumerate' id='x1-27014x2'>Open interactive session: <span class='cmtt-10'>salloc --mem=10Gb --constraint=el9</span>
+<li class='enumerate' id='x1-28004x2'>Create a vscode directory: <span class='cmtt-10'>mkdir vscode</span>
                                                                                
 
                                                                                
          </li>
-<li class='enumerate' id='x1-27016x3'>Set              environment              variable:               <span class='cmtt-10'>setenv XDG_RUNTIME_DIR
+<li class='enumerate' id='x1-28006x3'>Go to vscode: <span class='cmtt-10'>cd vscode</span>
+         </li>
+<li class='enumerate' id='x1-28008x4'>Create home and projects: <span class='cmtt-10'>mkdir </span><span class='cmsy-10'>{</span><span class='cmtt-10'>home,projects</span><span class='cmsy-10'>}</span>
+         </li>
+<li class='enumerate' id='x1-28010x5'>Create this directory: <span class='cmtt-10'>mkdir -p /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER/run-user</span></li></ol>
+     </li>
+     <li class='itemize'>
+     <!-- l. 785 --><p class='noindent'>Running VScode
+         </p><ol class='enumerate1'>
+<li class='enumerate' id='x1-28012x1'>Go to your vscode directory: <span class='cmtt-10'>cd /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER/vscode</span>
+         </li>
+<li class='enumerate' id='x1-28014x2'>Open interactive session: <span class='cmtt-10'>salloc --mem=10Gb --constraint=el9</span>
+         </li>
+<li class='enumerate' id='x1-28016x3'>Set              environment              variable:               <span class='cmtt-10'>setenv XDG_RUNTIME_DIR
          /speed-scratch/</span><span class='tctt-1000'>$</span><span class='cmtt-10'>USER/run-user</span>
          </li>
-<li class='enumerate' id='x1-27018x4'>
-         <!-- l. 706 --><p class='noindent'>Run VScode, change the port if needed.
+<li class='enumerate' id='x1-28018x4'>
+         <!-- l. 794 --><p class='noindent'>Run VScode, change the port if needed.
                                                                                
 
                                                                                
 </p>
-         <pre class='verbatim' id='verbatim-31'>
+         <pre class='verbatim' id='verbatim-35'>
          /speed-scratch/nag-public/code-server-4.22.1/bin/code-server --user-data-dir=$PWD\/projects \
          --config=$PWD\/home/.config/code-server/config.yaml --bind-addr="0.0.0.0:8080" $PWD\/projects
 </pre>
-         <!-- l. 711 --><p class='nopar'>
+         <!-- l. 799 --><p class='nopar'>
          </p></li>
-<li class='enumerate' id='x1-27020x5'>Tunnel ssh creation: similar to Jupyter, see Section <a href='#jupyter-notebooks'>2.8.3<!-- tex4ht:ref: sect:jupyter  --></a>
+<li class='enumerate' id='x1-28020x5'>SSH Tunnel creation: similar to Jupyter, see Section <a href='#jupyter-notebooks-in-singularity'>2.8.3<!-- tex4ht:ref: sect:jupyter  --></a>
          </li>
-<li class='enumerate' id='x1-27022x6'>Open a browser and type: <span class='cmtt-10'>localhost:8080</span>
+<li class='enumerate' id='x1-28022x6'>Open a browser and type: <span class='cmtt-10'>localhost:8080</span>
          </li>
-<li class='enumerate' id='x1-27024x7'>
-         <!-- l. 718 --><p class='noindent'>If the browser asks for password:
+<li class='enumerate' id='x1-28024x7'>
+         <!-- l. 806 --><p class='noindent'>If the browser asks for password:
                                                                                
 
                                                                                
 </p>
-         <pre class='verbatim' id='verbatim-32'>
+         <pre class='verbatim' id='verbatim-36'>
          cat /speed-scratch/$USER/vscode/home/.config/code-server/config.yaml
 </pre>
-         <!-- l. 721 --><p class='nopar'>
+         <!-- l. 809 --><p class='nopar'>
 </p>
          </li></ol>
      </li></ul>
@@ -1234,18 +1333,18 @@ Advanced users (no support, execute it at your own risk).
                                                                                
 
                                                                                
-<a id='x1-270258'></a>
+<a id='x1-280258'></a>
                                                                                
 
                                                                                
 <div class='fbox'><img alt='PIC' height='412' src='images/vscode.png' width='412' /></div>
-<figcaption class='caption'><span class='id'>Figure 8: </span><span class='content'>VScode running on a Speed node</span></figcaption><!-- tex4ht:label?: x1-270258  -->
+<figcaption class='caption'><span class='id'>Figure 8: </span><span class='content'>VScode running on a Speed node</span></figcaption><!-- tex4ht:label?: x1-280258  -->
                                                                                
 
                                                                                
    </figure>
-   <h4 class='subsectionHead' id='scheduler-environment-variables'><span class='titlemark'>2.9   </span> <a id='x1-280002.9'></a>Scheduler Environment Variables</h4>
-<!-- l. 737 --><p class='noindent'>The scheduler presents a number of environment variables that can be used in your jobs. You can
+   <h4 class='subsectionHead' id='scheduler-environment-variables'><span class='titlemark'>2.9   </span> <a id='x1-290002.9'></a>Scheduler Environment Variables</h4>
+<!-- l. 825 --><p class='noindent'>The scheduler presents a number of environment variables that can be used in your jobs. You can
 invoke <span class='cmtt-10'>env </span>or <span class='cmtt-10'>printenv </span>in your job to know what hose are (most begin with the prefix <span class='cmtt-10'>SLURM</span>). Some
 of the more useful ones are:
 </p>
@@ -1265,48 +1364,48 @@ of the more useful ones are:
      <li class='itemize'><span class='tctt-1000'>$</span><span class='cmtt-10'>SLURM_ARRAY_TASK_ID</span>=for array jobs (see Section <a href='#array-jobs'>2.6<!-- tex4ht:ref: sect:array-jobs  --></a>).
      </li>
      <li class='itemize'>
-     <!-- l. 778 --><p class='noindent'>See a more complete list here:
+     <!-- l. 866 --><p class='noindent'>See a more complete list here:
 </p>
          <ul class='itemize2'>
          <li class='itemize'><a class='url' href='https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES'><span class='cmtt-9'>https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES</span></a>
          </li>
          <li class='itemize'><a class='url' href='https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES'><span class='cmtt-9'>https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES</span></a></li></ul>
      </li></ul>
-<!-- l. 791 --><p class='noindent'>In Figure <a href='#-source-code-for-tmpdirsh'>9<!-- tex4ht:ref: fig:tmpdir.sh  --></a> is a sample script, using some of these.
+<!-- l. 879 --><p class='noindent'>In Figure <a href='#-source-code-for-tmpdirsh'>9<!-- tex4ht:ref: fig:tmpdir.sh  --></a> is a sample script, using some of these.
 </p>
    <figure class='figure' id='-source-code-for-tmpdirsh'> 
 
                                                                                
 
                                                                                
-<a id='x1-280199'></a>
+<a id='x1-290199'></a>
                                                                                
 
                                                                                
-<!-- l. 795 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-28002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
-<span class='label'><a id='x1-28003r2'></a></span> 
-<span class='label'><a id='x1-28004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--job-name=tmpdir</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Give the job a name</span> 
-</span><span class='label'><a id='x1-28005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-type=ALL</span> </span><span class='cmitt-10x-x-80'>       </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Receive all email type notifications</span> 
-</span><span class='label'><a id='x1-28006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-user=YOUR_USER_NAME@encs.concordia.ca</span> 
-</span><span class='label'><a id='x1-28007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--chdir=./</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Use currect directory as working directory</span> 
-</span><span class='label'><a id='x1-28008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--nodes=1</span> 
-</span><span class='label'><a id='x1-28009r8'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--ntasks=1</span> 
-</span><span class='label'><a id='x1-28010r9'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--cpus-per-task=8</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Request 8 cores</span> 
-</span><span class='label'><a id='x1-28011r10'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mem=32G</span> </span><span class='cmitt-10x-x-80'>             </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Assign 32G memory per node</span> 
-</span><span class='label'><a id='x1-28012r11'></a></span> 
-<span class='label'><a id='x1-28013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
-</span><span class='label'><a id='x1-28014r13'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>input</span> 
-</span><span class='label'><a id='x1-28015r14'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/references/ input/</span> 
-</span><span class='label'><a id='x1-28016r15'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>results</span> 
-</span><span class='label'><a id='x1-28017r16'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>STAR --inFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/input --parallel </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SRUN_CPUS_PER_TASK --outFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results</span> 
-</span><span class='label'><a id='x1-28018r17'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/processed/</span></span>
+<!-- l. 883 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-29002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
+<span class='label'><a id='x1-29003r2'></a></span> 
+<span class='label'><a id='x1-29004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--job-name=tmpdir</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Give the job a name</span> 
+</span><span class='label'><a id='x1-29005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-type=ALL</span> </span><span class='cmitt-10x-x-80'>       </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Receive all email type notifications</span> 
+</span><span class='label'><a id='x1-29006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-user=YOUR_USER_NAME@encs.concordia.ca</span> 
+</span><span class='label'><a id='x1-29007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--chdir=./</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Use currect directory as working directory</span> 
+</span><span class='label'><a id='x1-29008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--nodes=1</span> 
+</span><span class='label'><a id='x1-29009r8'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--ntasks=1</span> 
+</span><span class='label'><a id='x1-29010r9'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--cpus-per-task=8</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Request 8 cores</span> 
+</span><span class='label'><a id='x1-29011r10'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mem=32G</span> </span><span class='cmitt-10x-x-80'>             </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Assign 32G memory per node</span> 
+</span><span class='label'><a id='x1-29012r11'></a></span> 
+<span class='label'><a id='x1-29013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
+</span><span class='label'><a id='x1-29014r13'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>input</span> 
+</span><span class='label'><a id='x1-29015r14'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/references/ input/</span> 
+</span><span class='label'><a id='x1-29016r15'></a></span><span style='color:#000000'><span class='cmtt-8'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8'>results</span> 
+</span><span class='label'><a id='x1-29017r16'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>STAR --inFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/input --parallel </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SRUN_CPUS_PER_TASK --outFiles </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results</span> 
+</span><span class='label'><a id='x1-29018r17'></a></span><span style='color:#000000'><span class='cmtt-8'>rsync</span></span><span style='color:#000000'> <span class='cmtt-8'>-av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/results/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/processed/</span></span>
 </pre>
-<figcaption class='caption'><span class='id'>Figure 9: </span><span class='content'>Source code for <a class='url' href='tmpdir.sh'><span class='cmtt-10'>tmpdir.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-280199  -->
+<figcaption class='caption'><span class='id'>Figure 9: </span><span class='content'>Source code for <a class='url' href='tmpdir.sh'><span class='cmtt-10'>tmpdir.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-290199  -->
                                                                                
 
                                                                                
    </figure>
-   <h4 class='subsectionHead' id='ssh-keys-for-mpi'><span class='titlemark'>2.10   </span> <a id='x1-290002.10'></a>SSH Keys For MPI</h4>
+   <h4 class='subsectionHead' id='ssh-keys-for-mpi'><span class='titlemark'>2.10   </span> <a id='x1-300002.10'></a>SSH Keys For MPI</h4>
 <!-- l. 504 --><p class='noindent'>Some programs effect their parallel processing via MPI (which is a communication protocol). An
 example of such software is Fluent. MPI needs to have ‘passwordless login’ set up, which means SSH
 keys. In your NFS-mounted home directory:
@@ -1324,7 +1423,7 @@ keys. In your NFS-mounted home directory:
      permissions by default).</li></ul>
 <!-- l. 524 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='creating-virtual-environments'><span class='titlemark'>2.11   </span> <a id='x1-300002.11'></a>Creating Virtual Environments</h4>
+   <h4 class='subsectionHead' id='creating-virtual-environments'><span class='titlemark'>2.11   </span> <a id='x1-310002.11'></a>Creating Virtual Environments</h4>
 <!-- l. 528 --><p class='noindent'>The following documentation is specific to the <span class='cmbx-10'>Speed </span>HPC Facility at the Gina Cody School of
 Engineering and Computer Science. Virtual environments typically instantiated via Conda or Python.
 Another option is Singularity detailed in Section <a href='#singularity-containers'>2.16<!-- tex4ht:ref: sect:singularity-containers  --></a>. Usually, virtual environments are created once
@@ -1333,7 +1432,7 @@ to the scheduler is then written to (1) activate the virtual environment, (2) us
 the end of the job.
 </p><!-- l. 539 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='anaconda'><span class='titlemark'>2.11.1   </span> <a id='x1-310002.11.1'></a>Anaconda</h5>
+   <h5 class='subsubsectionHead' id='anaconda'><span class='titlemark'>2.11.1   </span> <a id='x1-320002.11.1'></a>Anaconda</h5>
 <!-- l. 542 --><p class='noindent'>Request an interactive session in the queue you wish to submit your jobs to (e.g., salloc -p pg
 –gpus=1 for GPU jobs). Once your interactive has started, create an anaconda environment in your
 speed-scratch directory by using the <span class='cmtt-10'>prefix </span>option when executing <span class='cmtt-10'>conda create</span>. For example,
@@ -1346,7 +1445,7 @@ line:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-33'>
+   <pre class='verbatim' id='verbatim-37'>
 module load anaconda3/2023.03/default
 conda create --prefix /speed-scratch/a_user/myconda
 </pre>
@@ -1354,13 +1453,13 @@ conda create --prefix /speed-scratch/a_user/myconda
 </p><!-- l. 553 --><p class='noindent'><span class='cmbx-10'>Note: </span>Without the <span class='cmtt-10'>prefix </span>option, the <span class='cmtt-10'>conda create </span>command creates the environment in <span class='cmtt-10'>a_user</span>’s
 home directory by default.
 </p>
-<!-- l. 559 --><p class='noindent'><span class='paragraphHead' id='list-environments'><a id='x1-32000'></a><span class='cmbx-10'>List Environments.</span></span>
+<!-- l. 559 --><p class='noindent'><span class='paragraphHead' id='list-environments'><a id='x1-33000'></a><span class='cmbx-10'>List Environments.</span></span>
    To view your conda environments, type: <span class='cmtt-10'>conda info --envs</span>
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-34'>
+   <pre class='verbatim' id='verbatim-38'>
 # conda environments:
 #
 base                  *  /encs/pkg/anaconda3-2023.03/root
@@ -1368,13 +1467,13 @@ base                  *  /encs/pkg/anaconda3-2023.03/root
 </pre>
 <!-- l. 568 --><p class='nopar'>
 </p>
-<!-- l. 571 --><p class='noindent'><span class='paragraphHead' id='activate-an-environment'><a id='x1-33000'></a><span class='cmbx-10'>Activate an Environment.</span></span>
+<!-- l. 571 --><p class='noindent'><span class='paragraphHead' id='activate-an-environment'><a id='x1-34000'></a><span class='cmbx-10'>Activate an Environment.</span></span>
    Activate the environment <span class='cmtt-10'>speedscratcha_usermyconda </span>as follows
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-35'>
+   <pre class='verbatim' id='verbatim-39'>
 conda activate /speed-scratch/a_user/myconda
 </pre>
 <!-- l. 576 --><p class='nopar'> After activating your environment, add <span class='cmtt-10'>pip </span>to your environment by using
@@ -1382,7 +1481,7 @@ conda activate /speed-scratch/a_user/myconda
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-36'>
+   <pre class='verbatim' id='verbatim-40'>
 conda install pip
 </pre>
 <!-- l. 580 --><p class='nopar'> This will install <span class='cmtt-10'>pip </span>and <span class='cmtt-10'>pip</span>’s dependencies, including python, into the environment.
@@ -1394,7 +1493,7 @@ conda install pip
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-37'>
+     <pre class='verbatim' id='verbatim-41'>
      salloc -p pg --gpus=1 --mem=10GB -A &lt;slurm account name&gt;
      cd /speed-scratch/$USER
      module load python/3.11.0/default
@@ -1414,7 +1513,7 @@ conda install pip
 <span class='cmtt-10'>conda install </span>installs modules from anaconda’s repository.
 </p><!-- l. 616 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='python'><span class='titlemark'>2.11.2   </span> <a id='x1-340002.11.2'></a>Python</h5>
+   <h5 class='subsubsectionHead' id='python'><span class='titlemark'>2.11.2   </span> <a id='x1-350002.11.2'></a>Python</h5>
 <!-- l. 619 --><p class='noindent'>Setting up a Python virtual environment is fairly straightforward. The first step is to request an
 interactive session in the queue you wish to submit your jobs to.
 </p><!-- l. 622 --><p class='indent'>   We have a simple example that use a Python virtual environment:
@@ -1426,7 +1525,7 @@ interactive session in the queue you wish to submit your jobs to.
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-38'>
+     <pre class='verbatim' id='verbatim-42'>
      salloc -p pg --gpus=1 --mem=10GB -A &lt;slurm account name&gt;
      cd /speed-scratch/$USER
      module load python/3.9.1/default
@@ -1446,51 +1545,51 @@ interactive session in the queue you wish to submit your jobs to.
 need to use <span class='cmtt-10'>--gpus= </span>when preparing environments for CPU jobs.
 </p><!-- l. 2 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='example-job-script-fluent'><span class='titlemark'>2.12   </span> <a id='x1-350002.12'></a>Example Job Script: Fluent</h4>
+   <h4 class='subsectionHead' id='example-job-script-fluent'><span class='titlemark'>2.12   </span> <a id='x1-360002.12'></a>Example Job Script: Fluent</h4>
    <figure class='figure' id='-source-code-for-fluentsh'> 
 
                                                                                
 
                                                                                
-<a id='x1-3503510'></a>
+<a id='x1-3603510'></a>
                                                                                
 
                                                                                
-<!-- l. 5 --><pre class='lstinputlisting' id='listing-3'><span class='label'><a id='x1-35002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
-<span class='label'><a id='x1-35003r2'></a></span> 
-<span class='label'><a id='x1-35004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--job-name=flu10000</span> </span><span class='cmitt-10x-x-80'>   </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Give the job a name</span> 
-</span><span class='label'><a id='x1-35005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-type=ALL</span> </span><span class='cmitt-10x-x-80'>       </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Receive all email type notifications</span> 
-</span><span class='label'><a id='x1-35006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-user=YOUR_USER_NAME@encs.concordia.ca</span> 
-</span><span class='label'><a id='x1-35007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--chdir=./</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Use currect directory as working directory</span> 
-</span><span class='label'><a id='x1-35008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--nodes=1</span> </span><span class='cmitt-10x-x-80'>             </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of nodes to run on</span> 
-</span><span class='label'><a id='x1-35009r8'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--ntasks-per-node=32</span> </span><span class='cmitt-10x-x-80'>  </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of cores</span> 
-</span><span class='label'><a id='x1-35010r9'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--cpus-per-task=1</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of MPI threads</span> 
-</span><span class='label'><a id='x1-35011r10'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mem=160G</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Assign 160G memory per node</span> 
-</span><span class='label'><a id='x1-35012r11'></a></span> 
-<span class='label'><a id='x1-35013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
-<span class='label'><a id='x1-35014r13'></a></span> 
-<span class='label'><a id='x1-35015r14'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>avail ansys</span> 
-</span><span class='label'><a id='x1-35016r15'></a></span> 
-<span class='label'><a id='x1-35017r16'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>load ansys/19.2/default</span> 
-</span><span class='label'><a id='x1-35018r17'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
-</span><span class='label'><a id='x1-35019r18'></a></span> 
-<span class='label'><a id='x1-35020r19'></a></span><span style='color:#000000'><span class='cmtt-8'>set</span></span><span style='color:#000000'> <span class='cmtt-8'>FLUENTNODES = "‘scontrol␣show␣hostnames‘"</span> 
-</span><span class='label'><a id='x1-35021r20'></a></span><span style='color:#000000'><span class='cmtt-8'>set</span></span><span style='color:#000000'> <span class='cmtt-8'>FLUENTNODES = ‘echo </span><span class='tctt-0800'>$</span><span class='cmtt-8'>FLUENTNODES | tr ’ ’ ’,’‘</span> 
-</span><span class='label'><a id='x1-35022r21'></a></span> 
-<span class='label'><a id='x1-35023r22'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
-<span class='label'><a id='x1-35024r23'></a></span> 
-<span class='label'><a id='x1-35025r24'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>fluent 3ddp \</span> 
-</span><span class='label'><a id='x1-35026r25'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>g</span></span><span style='color:#000000'> <span class='cmtt-8'>-t</span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_NTASKS \</span> 
-</span><span class='label'><a id='x1-35027r26'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>g</span></span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>cnf</span></span><span style='color:#000000'><span class='cmtt-8'>=</span></span><span style='color:#000000'><span class='tctt-0800'>$</span><span class='cmtt-8'>FLUENTNODES</span></span><span style='color:#000000'> <span class='cmtt-8'>\</span> 
-</span><span class='label'><a id='x1-35028r27'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>i</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/fluentdata/info.jou &gt; call.txt</span> 
-</span><span class='label'><a id='x1-35029r28'></a></span> 
-<span class='label'><a id='x1-35030r29'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
-<span class='label'><a id='x1-35031r30'></a></span> 
-<span class='label'><a id='x1-35032r31'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>rsync -av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/fluentparallel/</span> 
-</span><span class='label'><a id='x1-35033r32'></a></span> 
-<span class='label'><a id='x1-35034r33'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span>
+<!-- l. 5 --><pre class='lstinputlisting' id='listing-3'><span class='label'><a id='x1-36002r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>tcsh</span></span> 
+<span class='label'><a id='x1-36003r2'></a></span> 
+<span class='label'><a id='x1-36004r3'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--job-name=flu10000</span> </span><span class='cmitt-10x-x-80'>   </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Give the job a name</span> 
+</span><span class='label'><a id='x1-36005r4'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-type=ALL</span> </span><span class='cmitt-10x-x-80'>       </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Receive all email type notifications</span> 
+</span><span class='label'><a id='x1-36006r5'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mail-user=YOUR_USER_NAME@encs.concordia.ca</span> 
+</span><span class='label'><a id='x1-36007r6'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--chdir=./</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Use currect directory as working directory</span> 
+</span><span class='label'><a id='x1-36008r7'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--nodes=1</span> </span><span class='cmitt-10x-x-80'>             </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of nodes to run on</span> 
+</span><span class='label'><a id='x1-36009r8'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--ntasks-per-node=32</span> </span><span class='cmitt-10x-x-80'>  </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of cores</span> 
+</span><span class='label'><a id='x1-36010r9'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--cpus-per-task=1</span> </span><span class='cmitt-10x-x-80'>     </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Number of MPI threads</span> 
+</span><span class='label'><a id='x1-36011r10'></a></span><span style='color:#000000'><span class='cmitt-10x-x-80'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-80'>SBATCH</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>--mem=160G</span> </span><span class='cmitt-10x-x-80'>            </span><span style='color:#000000'><span class='cmitt-10x-x-80'>##</span></span><span style='color:#000000'> <span class='cmitt-10x-x-80'>Assign 160G memory per node</span> 
+</span><span class='label'><a id='x1-36012r11'></a></span> 
+<span class='label'><a id='x1-36013r12'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
+<span class='label'><a id='x1-36014r13'></a></span> 
+<span class='label'><a id='x1-36015r14'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>avail ansys</span> 
+</span><span class='label'><a id='x1-36016r15'></a></span> 
+<span class='label'><a id='x1-36017r16'></a></span><span style='color:#000000'><span class='cmtt-8'>module</span></span><span style='color:#000000'> <span class='cmtt-8'>load ansys/19.2/default</span> 
+</span><span class='label'><a id='x1-36018r17'></a></span><span style='color:#000000'><span class='cmtt-8'>cd</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR</span> 
+</span><span class='label'><a id='x1-36019r18'></a></span> 
+<span class='label'><a id='x1-36020r19'></a></span><span style='color:#000000'><span class='cmtt-8'>set</span></span><span style='color:#000000'> <span class='cmtt-8'>FLUENTNODES = "‘scontrol␣show␣hostnames‘"</span> 
+</span><span class='label'><a id='x1-36021r20'></a></span><span style='color:#000000'><span class='cmtt-8'>set</span></span><span style='color:#000000'> <span class='cmtt-8'>FLUENTNODES = ‘echo </span><span class='tctt-0800'>$</span><span class='cmtt-8'>FLUENTNODES | tr ’ ’ ’,’‘</span> 
+</span><span class='label'><a id='x1-36022r21'></a></span> 
+<span class='label'><a id='x1-36023r22'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
+<span class='label'><a id='x1-36024r23'></a></span> 
+<span class='label'><a id='x1-36025r24'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>fluent 3ddp \</span> 
+</span><span class='label'><a id='x1-36026r25'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>g</span></span><span style='color:#000000'> <span class='cmtt-8'>-t</span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_NTASKS \</span> 
+</span><span class='label'><a id='x1-36027r26'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>g</span></span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>cnf</span></span><span style='color:#000000'><span class='cmtt-8'>=</span></span><span style='color:#000000'><span class='tctt-0800'>$</span><span class='cmtt-8'>FLUENTNODES</span></span><span style='color:#000000'> <span class='cmtt-8'>\</span> 
+</span><span class='label'><a id='x1-36028r27'></a></span><span class='cmtt-8'>        </span><span style='color:#000000'><span class='cmtt-8'>-</span></span><span style='color:#000000'><span class='cmtt-8'>i</span></span><span style='color:#000000'> <span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/fluentdata/info.jou &gt; call.txt</span> 
+</span><span class='label'><a id='x1-36029r28'></a></span> 
+<span class='label'><a id='x1-36030r29'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span> 
+<span class='label'><a id='x1-36031r30'></a></span> 
+<span class='label'><a id='x1-36032r31'></a></span><span style='color:#000000'><span class='cmtt-8'>srun</span></span><span style='color:#000000'> <span class='cmtt-8'>rsync -av </span><span class='tctt-0800'>$</span><span class='cmtt-8'>TMPDIR/ </span><span class='tctt-0800'>$</span><span class='cmtt-8'>SLURM_SUBMIT_DIR/fluentparallel/</span> 
+</span><span class='label'><a id='x1-36033r32'></a></span> 
+<span class='label'><a id='x1-36034r33'></a></span><span style='color:#000000'><span class='cmtt-8'>date</span></span>
 </pre>
-<figcaption class='caption'><span class='id'>Figure 10: </span><span class='content'>Source code for <a class='url' href='fluent.sh'><span class='cmtt-10'>fluent.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-3503510  -->
+<figcaption class='caption'><span class='id'>Figure 10: </span><span class='content'>Source code for <a class='url' href='fluent.sh'><span class='cmtt-10'>fluent.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-3603510  -->
                                                                                
 
                                                                                
@@ -1505,7 +1604,7 @@ and/or by examining the “moment” file in <span class='cmtt-10'>/disk/nobacku
 with your job-ID) on the node running the job. <span class='cmbx-10'>Caveat: </span>take care with journal-file file
 paths.
 </p>
-   <h4 class='subsectionHead' id='example-job-efficientdet'><span class='titlemark'>2.13   </span> <a id='x1-360002.13'></a>Example Job: efficientdet</h4>
+   <h4 class='subsectionHead' id='example-job-efficientdet'><span class='titlemark'>2.13   </span> <a id='x1-370002.13'></a>Example Job: efficientdet</h4>
 <!-- l. 27 --><p class='noindent'>The following steps describing how to create an efficientdet environment on <span class='cmti-10'>Speed</span>, were submitted by
 a member of Dr. Amer’s research group.
 </p>
@@ -1526,7 +1625,7 @@ a member of Dr. Amer’s research group.
                                                                                
 
                                                                                
-<pre class='verbatim' id='verbatim-39'>
+<pre class='verbatim' id='verbatim-43'>
 pip install tensorflow==2.7.0
 pip install lxml&gt;=4.6.1
 pip install absl-py&gt;=0.10.0
@@ -1545,7 +1644,7 @@ pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=Python
 <!-- l. 63 --><p class='nopar'>
 </p><!-- l. 67 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='java-jobs'><span class='titlemark'>2.14   </span> <a id='x1-370002.14'></a>Java Jobs</h4>
+   <h4 class='subsectionHead' id='java-jobs'><span class='titlemark'>2.14   </span> <a id='x1-380002.14'></a>Java Jobs</h4>
 <!-- l. 70 --><p class='noindent'>Jobs that call <span class='cmtt-10'>java </span>have a memory overhead, which needs to be taken into account when assigning a
 value to <span class='cmtt-10'>--mem</span>. Even the most basic <span class='cmtt-10'>java </span>call, <span class='cmtt-10'>java -Xmx1G -version</span>, will need to have,
 <span class='cmtt-10'>--mem=5G</span>, with the 4-GB difference representing the memory overhead. Note that this memory
@@ -1554,7 +1653,7 @@ value of 100G, <span class='cmtt-10'>--mem </span>has to be at least 106G; for 2
 314G.
 </p><!-- l. 84 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='scheduling-on-the-gpu-nodes'><span class='titlemark'>2.15   </span> <a id='x1-380002.15'></a>Scheduling On The GPU Nodes</h4>
+   <h4 class='subsectionHead' id='scheduling-on-the-gpu-nodes'><span class='titlemark'>2.15   </span> <a id='x1-390002.15'></a>Scheduling On The GPU Nodes</h4>
 <!-- l. 86 --><p class='noindent'>The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6 cards: each card
 has 2048 cores and 16GB of RAM. Though note that the P6 is mainly a single-precision card, so
 unless you need the GPU double precision, double-precision calculations will be faster on a CPU
@@ -1565,7 +1664,7 @@ single GPU, or, two GPUs, to the job:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-40'>
+   <pre class='verbatim' id='verbatim-44'>
 #SBATCH --gpus=[1|2]
 </pre>
 <!-- l. 109 --><p class='nopar'>
@@ -1575,7 +1674,7 @@ with:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-41'>
+   <pre class='verbatim' id='verbatim-45'>
 sbatch -p pg ./&lt;myscript&gt;.sh
 </pre>
 <!-- l. 125 --><p class='nopar'>
@@ -1584,7 +1683,7 @@ sbatch -p pg ./&lt;myscript&gt;.sh
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-42'>
+   <pre class='verbatim' id='verbatim-46'>
 ssh &lt;username&gt;@speed[-05|-17|37-43] nvidia-smi
 </pre>
 <!-- l. 131 --><p class='nopar'>
@@ -1593,7 +1692,7 @@ ssh &lt;username&gt;@speed[-05|-17|37-43] nvidia-smi
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-43'>
+   <pre class='verbatim' id='verbatim-47'>
 sinfo -p pg --long --Node
 </pre>
 <!-- l. 140 --><p class='nopar'>
@@ -1609,7 +1708,7 @@ jobs will hang and never run. Their availability is seen with:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-44'>
+   <pre class='verbatim' id='verbatim-48'>
 [serguei@speed-submit src] % sinfo -p pg --long --Node
 Thu Oct 19 22:31:04 2023
 NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
@@ -1637,7 +1736,7 @@ nodes.</span>
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-45'>
+   <pre class='verbatim' id='verbatim-49'>
 [serguei@speed-submit src] % squeue -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
 NODELIST         NODES PARTITI       STATE MIN_    S:C:T MIN_ME MIN_TMP_  WCKEY FEATURES GROUP DEPENDENCY
 speed-05             1 pg          RUNNING    1    *:*:*     1G        0 (null)   (null) 11929     (null)
@@ -1650,7 +1749,7 @@ speed-[25,27]        2 pg             idle   32   2:
 <!-- l. 261 --><p class='nopar'>
 </p><!-- l. 268 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='p-on-multigpu-multinode'><span class='titlemark'>2.15.1   </span> <a id='x1-390002.15.1'></a>P6 on Multi-GPU, Multi-Node</h5>
+   <h5 class='subsubsectionHead' id='p-on-multigpu-multinode'><span class='titlemark'>2.15.1   </span> <a id='x1-400002.15.1'></a>P6 on Multi-GPU, Multi-Node</h5>
 <!-- l. 270 --><p class='noindent'>As described lines above, P6 cards are not compatible with Distribute and DataParallel functions
 (<span class='cmtt-10'>Pytorch, Tensorflow</span>) when running on Multi-GPUs. One workaround is to run the job in
 Multi-node, single GPU per node; per example:
@@ -1658,7 +1757,7 @@ Multi-node, single GPU per node; per example:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-46'>
+   <pre class='verbatim' id='verbatim-50'>
 #SBATCH --nodes=2
 #SBATCH --gpus-per-node=1
 </pre>
@@ -1668,7 +1767,7 @@ Multi-node, single GPU per node; per example:
 Multi-GPUs
 </p><!-- l. 287 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='cuda'><span class='titlemark'>2.15.2   </span> <a id='x1-400002.15.2'></a>CUDA</h5>
+   <h5 class='subsubsectionHead' id='cuda'><span class='titlemark'>2.15.2   </span> <a id='x1-410002.15.2'></a>CUDA</h5>
 <!-- l. 289 --><p class='noindent'>When calling <span class='cmtt-10'>CUDA </span>within job scripts, it is important to create a link to the desired <span class='cmtt-10'>CUDA </span>libraries and
 set the runtime link path to the same libraries. For example, to use the <span class='cmtt-10'>cuda-11.5 </span>libraries, specify
 the following in your <span class='cmtt-10'>Makefile</span>.
@@ -1676,7 +1775,7 @@ the following in your <span class='cmtt-10'>Makefile</span>.
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-47'>
+   <pre class='verbatim' id='verbatim-51'>
 -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
 </pre>
 <!-- l. 296 --><p class='nopar'>
@@ -1684,14 +1783,14 @@ the following in your <span class='cmtt-10'>Makefile</span>.
 load gcc/8.4 </span>or <span class='cmtt-10'>module load gcc/9.3</span>
 </p><!-- l. 305 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='special-notes-for-sending-cuda-jobs-to-the-gpu-queue'><span class='titlemark'>2.15.3   </span> <a id='x1-410002.15.3'></a>Special Notes for sending CUDA jobs to the GPU Queue</h5>
+   <h5 class='subsubsectionHead' id='special-notes-for-sending-cuda-jobs-to-the-gpu-queue'><span class='titlemark'>2.15.3   </span> <a id='x1-420002.15.3'></a>Special Notes for sending CUDA jobs to the GPU Queue</h5>
 <!-- l. 310 --><p class='noindent'>Interactive jobs (Section <a href='#interactive-jobs'>2.8<!-- tex4ht:ref: sect:interactive-jobs  --></a>) must be submitted to the <span class='cmbx-10'>GPU partition </span>in order to compile and link.
 We have several versions of CUDA installed in:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-48'>
+   <pre class='verbatim' id='verbatim-52'>
 /encs/pkg/cuda-11.5/root/
 /encs/pkg/cuda-10.2/root/
 /encs/pkg/cuda-9.2/root
@@ -1701,15 +1800,15 @@ We have several versions of CUDA installed in:
 <span class='cmtt-10'>usrlocalcuda </span>with one of the above.
 </p><!-- l. 325 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='openiss-examples'><span class='titlemark'>2.15.4   </span> <a id='x1-420002.15.4'></a>OpenISS Examples</h5>
+   <h5 class='subsubsectionHead' id='openiss-examples'><span class='titlemark'>2.15.4   </span> <a id='x1-430002.15.4'></a>OpenISS Examples</h5>
 <!-- l. 328 --><p class='noindent'>These represent more comprehensive research-like examples of jobs for computer vision and other
 tasks with a lot longer runtime (a subject to the number of epochs and other parameters) derive from
 the actual research works of students and their theses. These jobs require the use of CUDA
 and GPUs. These examples are available as “native” jobs on Speed and as Singularity
 containers.
 </p>
-<!-- l. 339 --><p class='noindent'><span class='paragraphHead' id='openiss-and-reid'><a id='x1-43000'></a><span class='cmbx-10'>OpenISS and REID</span></span>
-<a id='x1-43000doc'></a>
+<!-- l. 339 --><p class='noindent'><span class='paragraphHead' id='openiss-and-reid'><a id='x1-44000'></a><span class='cmbx-10'>OpenISS and REID</span></span>
+<a id='x1-44000doc'></a>
    The example <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh'>openiss-reid-speed.sh</a> illustrates a job for a computer-vision based person
 re-identification (e.g., motion capture-based tracking for stage performance) part of the OpenISS
 project by Haotao Lai <span class='cite'>[<a href='#Xlai-haotao-mcthesis19'>10</a>]</span> using TensorFlow and Keras. The fork of the original repo <span class='cite'>[<a href='#Xopeniss-reid-tfk'>12</a>]</span> adjusted to
@@ -1724,8 +1823,8 @@ to run on Speed is here:
                                                                                
 
                                                                                
-<!-- l. 362 --><p class='noindent'><span class='paragraphHead' id='openiss-and-yolov'><a id='x1-44000'></a><span class='cmbx-10'>OpenISS and YOLOv3</span></span>
-<a id='x1-44000doc'></a>
+<!-- l. 362 --><p class='noindent'><span class='paragraphHead' id='openiss-and-yolov'><a id='x1-45000'></a><span class='cmbx-10'>OpenISS and YOLOv3</span></span>
+<a id='x1-45000doc'></a>
    The related code using YOLOv3 framework is in the the fork of the original repo <span class='cite'>[<a href='#Xopeniss-yolov3'>11</a>]</span> adjusted to
 to run on Speed is here:
 </p>
@@ -1746,7 +1845,7 @@ TensorFlow:
      <li class='itemize'><a class='url' href='https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3'><span class='cmtt-10'>https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3</span></a></li></ul>
 <!-- l. 396 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='singularity-containers'><span class='titlemark'>2.16   </span> <a id='x1-450002.16'></a>Singularity Containers</h4>
+   <h4 class='subsectionHead' id='singularity-containers'><span class='titlemark'>2.16   </span> <a id='x1-460002.16'></a>Singularity Containers</h4>
 <!-- l. 399 --><p class='noindent'>If the <span class='cmtt-10'>/encs </span>software tree does not have a required software instantaneously available, another option
 is to run Singularity containers. We run EL7 flavor of Linux, and if some projects require Ubuntu or
 other distributions, there is a possibility to run that software as a container, including the ones
@@ -1778,7 +1877,7 @@ support.
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-49'>
+   <pre class='verbatim' id='verbatim-53'>
 /speed-scratch/nag-public:
 
 openiss-cuda-conda-jupyter.sif
@@ -1820,7 +1919,7 @@ environment setup as an interactive job allocation:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-50'>
+   <pre class='verbatim' id='verbatim-54'>
 salloc --gpus=1 -n8 --mem=4Gb -t60
 cd /speed-scratch/$USER/
 singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
@@ -1833,14 +1932,14 @@ sure to pass on the <span class='cmtt-10'>--nv </span>flag to Singularity, so it
 example.
 </p><!-- l. 658 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='conclusion'><span class='titlemark'>3   </span> <a id='x1-460003'></a>Conclusion</h3>
+   <h3 class='sectionHead' id='conclusion'><span class='titlemark'>3   </span> <a id='x1-470003'></a>Conclusion</h3>
 <!-- l. 661 --><p class='noindent'>The cluster is, “first come, first served”, until it fills, and then job position in the queue is
 based upon past usage. The scheduler does attempt to fill gaps, though, so sometimes a
 single-core job of lower priority will schedule before a multi-core job of higher priority, for
 example.
 </p><!-- l. 667 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='important-limitations'><span class='titlemark'>3.1   </span> <a id='x1-470003.1'></a>Important Limitations</h4>
+   <h4 class='subsectionHead' id='important-limitations'><span class='titlemark'>3.1   </span> <a id='x1-480003.1'></a>Important Limitations</h4>
      <ul class='itemize1'>
      <li class='itemize'>New users are restricted to a total of 32 cores: write to <a class='url' href='rt-ex-hpc@encs.concordia.ca'><span class='cmtt-10'>rt-ex-hpc@encs.concordia.ca</span></a>
      if you need more temporarily (192 is the maximum, or, 6 jobs of 32 cores each).
@@ -1871,7 +1970,7 @@ example.
 </li></ul>
 <!-- l. 2 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='tipstricks'><span class='titlemark'>3.2   </span> <a id='x1-480003.2'></a>Tips/Tricks</h4>
+   <h4 class='subsectionHead' id='tipstricks'><span class='titlemark'>3.2   </span> <a id='x1-490003.2'></a>Tips/Tricks</h4>
      <ul class='itemize1'>
      <li class='itemize'>Files/scripts must have Linux line breaks in them (not Windows ones). Use <span class='cmtt-10'>file </span>command
      to verify; and <span class='cmtt-10'>dos2unix </span>command to convert.
@@ -1894,7 +1993,7 @@ example.
      <li class='itemize'>E-mail, <span class='cmtt-10'>rt-ex-hpc AT encs.concordia.ca</span>, with any concerns/questions.</li></ul>
 <!-- l. 711 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='use-cases'><span class='titlemark'>3.3   </span> <a id='x1-490003.3'></a>Use Cases</h4>
+   <h4 class='subsectionHead' id='use-cases'><span class='titlemark'>3.3   </span> <a id='x1-500003.3'></a>Use Cases</h4>
      <ul class='itemize1'>
      <li class='itemize'>
      <!-- l. 716 --><p class='noindent'>HPC Committee’s initial batch about 6 students (end of 2019): </p>
@@ -1973,10 +2072,10 @@ example.
      </li></ul>
 <!-- l. 774 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='history'><span class='titlemark'>A   </span> <a id='x1-50000A'></a>History</h3>
+   <h3 class='sectionHead' id='history'><span class='titlemark'>A   </span> <a id='x1-51000A'></a>History</h3>
 <!-- l. 777 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='acknowledgments'><span class='titlemark'>A.1   </span> <a id='x1-51000A.1'></a>Acknowledgments</h4>
+   <h4 class='subsectionHead' id='acknowledgments'><span class='titlemark'>A.1   </span> <a id='x1-52000A.1'></a>Acknowledgments</h4>
      <ul class='itemize1'>
      <li class='itemize'>The first 6 (to 6.5) versions of this manual and early UGE job script samples, Singularity
      testing and user support were produced/done by Dr. Scott Bunnell during his time at
@@ -1986,14 +2085,14 @@ example.
      </li>
      <li class='itemize'>Dr. Tariq  Daradkeh,  was  our  IT  Instructional  Specialist  August  2022  to  September
      2023; working on the scheduler, scheduling research, end user support, and integration
-     of  examples,  such  as  YOLOv3  in  Section <a href='#x1-44000doc'>2.15.4.0<!-- tex4ht:ref: sect:openiss-yolov3  --></a>  other  tasks.  We  have  a  continued
+     of  examples,  such  as  YOLOv3  in  Section <a href='#x1-45000doc'>2.15.4.0<!-- tex4ht:ref: sect:openiss-yolov3  --></a>  other  tasks.  We  have  a  continued
      collaboration on HPC/scheduling research.</li></ul>
                                                                                
 
                                                                                
 <!-- l. 796 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='migration-from-uge-to-slurm'><span class='titlemark'>A.2   </span> <a id='x1-52000A.2'></a>Migration from UGE to SLURM</h4>
+   <h4 class='subsectionHead' id='migration-from-uge-to-slurm'><span class='titlemark'>A.2   </span> <a id='x1-53000A.2'></a>Migration from UGE to SLURM</h4>
 <!-- l. 799 --><p class='noindent'>For long term users who started off with Grid Engine here are some resources to make a transition
 and mapping to the job submission process.
 </p>
@@ -2005,7 +2104,7 @@ and mapping to the job submission process.
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-51'>
+     <pre class='verbatim' id='verbatim-55'>
      GE  =&gt; SLURM
      s.q    ps
      g.q    pg
@@ -2019,8 +2118,8 @@ and mapping to the job submission process.
      also transitioned to it:<br class='newline' /><a class='url' href='https://docs.alliancecan.ca/wiki/Running_jobs'><span class='cmtt-9'>https://docs.alliancecan.ca/wiki/Running_jobs</span></a><br class='newline' /><a class='url' href='https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf'><span class='cmtt-9'>https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf</span></a><br class='newline' /><a class='url' href='https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm'><span class='cmtt-9'>https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm</span></a>
 </p>
      <figure class='figure' id='-rosetta-mappings-of-scheduler-commands-from-schedmd'> 
-<a id='x1-5200111'></a> <img alt='PIC' height='412' src='images/rosetta-mapping.png' width='412' />
-<figcaption class='caption'><span class='id'>Figure 11: </span><span class='content'>Rosetta Mappings of Scheduler Commands from SchedMD</span></figcaption><!-- tex4ht:label?: x1-5200111  -->
+<a id='x1-5300111'></a> <img alt='PIC' height='412' src='images/rosetta-mapping.png' width='412' />
+<figcaption class='caption'><span class='id'>Figure 11: </span><span class='content'>Rosetta Mappings of Scheduler Commands from SchedMD</span></figcaption><!-- tex4ht:label?: x1-5300111  -->
      </figure>
      </li>
      <li class='itemize'>
@@ -2032,7 +2131,7 @@ and mapping to the job submission process.
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-52'>
+     <pre class='verbatim' id='verbatim-56'>
      # Speed environment set up
      if ($HOSTNAME == speed-submit.encs.concordia.ca) then
         source /local/pkg/uge-8.6.3/root/default/common/settings.csh
@@ -2044,7 +2143,7 @@ and mapping to the job submission process.
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-53'>
+     <pre class='verbatim' id='verbatim-57'>
      # Speed environment set up
      if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
          . /local/pkg/uge-8.6.3/root/default/common/settings.sh
@@ -2058,21 +2157,21 @@ and mapping to the job submission process.
      </li></ul>
 <!-- l. 866 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='phases'><span class='titlemark'>A.3   </span> <a id='x1-53000A.3'></a>Phases</h4>
+   <h4 class='subsectionHead' id='phases'><span class='titlemark'>A.3   </span> <a id='x1-54000A.3'></a>Phases</h4>
 <!-- l. 869 --><p class='noindent'>Brief summary of Speed evolution phases.
 </p><!-- l. 872 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='phase-'><span class='titlemark'>A.3.1   </span> <a id='x1-54000A.3.1'></a>Phase 4</h5>
+   <h5 class='subsubsectionHead' id='phase-'><span class='titlemark'>A.3.1   </span> <a id='x1-55000A.3.1'></a>Phase 4</h5>
 <!-- l. 874 --><p class='noindent'>Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added, dubbed as “SPEED2”. We
 also moved from Grid Engine to SLURM.
 </p><!-- l. 878 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='phase-1'><span class='titlemark'>A.3.2   </span> <a id='x1-55000A.3.2'></a>Phase 3</h5>
+   <h5 class='subsubsectionHead' id='phase-1'><span class='titlemark'>A.3.2   </span> <a id='x1-56000A.3.2'></a>Phase 3</h5>
 <!-- l. 880 --><p class='noindent'>Phase 3 had 4 vidpro nodes added from Dr. Amer totalling 6x P6 and 6x V100 GPUs
 added.
 </p><!-- l. 884 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='phase-2'><span class='titlemark'>A.3.3   </span> <a id='x1-56000A.3.3'></a>Phase 2</h5>
+   <h5 class='subsubsectionHead' id='phase-2'><span class='titlemark'>A.3.3   </span> <a id='x1-57000A.3.3'></a>Phase 2</h5>
 <!-- l. 886 --><p class='noindent'>Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes. The P6s replaced 4x of FirePro
 S7150.
                                                                                
@@ -2080,7 +2179,7 @@ S7150.
                                                                                
 </p><!-- l. 890 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='phase-3'><span class='titlemark'>A.3.4   </span> <a id='x1-57000A.3.4'></a>Phase 1</h5>
+   <h5 class='subsubsectionHead' id='phase-3'><span class='titlemark'>A.3.4   </span> <a id='x1-58000A.3.4'></a>Phase 1</h5>
 <!-- l. 892 --><p class='noindent'>Phase 1 of Speed was of the following configuration:
 </p>
      <ul class='itemize1'>
@@ -2091,20 +2190,20 @@ S7150.
      OpenGL, OpenCL, and Vulkan APIs).</li></ul>
 <!-- l. 2 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='frequently-asked-questions'><span class='titlemark'>B   </span> <a id='x1-58000B'></a>Frequently Asked Questions</h3>
+   <h3 class='sectionHead' id='frequently-asked-questions'><span class='titlemark'>B   </span> <a id='x1-59000B'></a>Frequently Asked Questions</h3>
 <!-- l. 6 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='where-do-i-learn-about-linux'><span class='titlemark'>B.1   </span> <a id='x1-59000B.1'></a>Where do I learn about Linux?</h4>
+   <h4 class='subsectionHead' id='where-do-i-learn-about-linux'><span class='titlemark'>B.1   </span> <a id='x1-60000B.1'></a>Where do I learn about Linux?</h4>
 <!-- l. 9 --><p class='noindent'>All Speed users are expected to have a basic understanding of Linux and its commonly used
 commands.
 </p><!-- l. 12 --><p class='noindent'>
 </p>
-   <h5 class='likesubsubsectionHead' id='software-carpentry'><a id='x1-60000'></a>Software Carpentry</h5>
+   <h5 class='likesubsubsectionHead' id='software-carpentry'><a id='x1-61000'></a>Software Carpentry</h5>
 <!-- l. 14 --><p class='noindent'>Software Carpentry provides free resources to learn software, including a workshop on the Unix shell.
 <a class='url' href='https://software-carpentry.org/lessons/'><span class='cmtt-10'>https://software-carpentry.org/lessons/</span></a>
 </p><!-- l. 18 --><p class='noindent'>
 </p>
-   <h5 class='likesubsubsectionHead' id='udemy'><a id='x1-61000'></a>Udemy</h5>
+   <h5 class='likesubsubsectionHead' id='udemy'><a id='x1-62000'></a>Udemy</h5>
 <!-- l. 20 --><p class='noindent'>There are a number of Udemy courses, including free ones, that will assist you in learning Linux.
 Active Concordia faculty, staff and students have access to Udemy courses. The course <span class='cmbx-10'>Linux
 Mastery: Master the Linux Command Line in 11.5 Hours </span>is a good starting point for
@@ -2115,25 +2214,25 @@ may access Udemy.
                                                                                
 </p><!-- l. 28 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='how-to-use-the-bash-shell-on-speed'><span class='titlemark'>B.2   </span> <a id='x1-62000B.2'></a>How to use the “bash shell” on Speed?</h4>
+   <h4 class='subsectionHead' id='how-to-use-the-bash-shell-on-speed'><span class='titlemark'>B.2   </span> <a id='x1-63000B.2'></a>How to use the “bash shell” on Speed?</h4>
 <!-- l. 30 --><p class='noindent'>This section describes how to use the “bash shell” on Speed. Review Section <a href='#environment-set-up'>2.1.2<!-- tex4ht:ref: sect:envsetup  --></a> to ensure that your
 bash environment is set up.
 </p><!-- l. 34 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='how-do-i-set-bash-as-my-login-shell'><span class='titlemark'>B.2.1   </span> <a id='x1-63000B.2.1'></a>How do I set bash as my login shell?</h5>
+   <h5 class='subsubsectionHead' id='how-do-i-set-bash-as-my-login-shell'><span class='titlemark'>B.2.1   </span> <a id='x1-64000B.2.1'></a>How do I set bash as my login shell?</h5>
 <!-- l. 36 --><p class='noindent'>In order to set your default login shell to bash on Speed, your login shell on all GCS servers must be
 changed to bash. To make this change, create a ticket with the Service Desk (or email <span class='cmtt-10'>help at
 concordia.ca</span>) to request that bash become your default login shell for your ENCS user account on
 all GCS servers.
 </p><!-- l. 41 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='how-do-i-move-into-a-bash-shell-on-speed'><span class='titlemark'>B.2.2   </span> <a id='x1-64000B.2.2'></a>How do I move into a bash shell on Speed?</h5>
+   <h5 class='subsubsectionHead' id='how-do-i-move-into-a-bash-shell-on-speed'><span class='titlemark'>B.2.2   </span> <a id='x1-65000B.2.2'></a>How do I move into a bash shell on Speed?</h5>
 <!-- l. 43 --><p class='noindent'>To move to the bash shell, type <span class='cmbx-10'>bash </span>at the command prompt. For example:
                                                                                
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-54'>
+   <pre class='verbatim' id='verbatim-58'>
 [speed-submit] [/home/a/a_user] &gt; bash
 bash-4.4$ echo $0
 bash
@@ -2143,7 +2242,7 @@ bash
 <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>bash-4.4$</span></span></span> after entering the bash shell.
 </p><!-- l. 54 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='how-do-i-use-the-bash-shell-in-an-interactive-session-on-speed'><span class='titlemark'>B.2.3   </span> <a id='x1-65000B.2.3'></a>How do I use the bash shell in an interactive session on Speed?</h5>
+   <h5 class='subsubsectionHead' id='how-do-i-use-the-bash-shell-in-an-interactive-session-on-speed'><span class='titlemark'>B.2.3   </span> <a id='x1-66000B.2.3'></a>How do I use the bash shell in an interactive session on Speed?</h5>
 <!-- l. 56 --><p class='noindent'>Below are examples of how to use <span class='cmtt-10'>bash </span>as a shell in your interactive job sessions with both the salloc
 and srun commands.
 </p>
@@ -2153,41 +2252,41 @@ and srun commands.
      <li class='itemize'><span class='cmtt-10'>srun --mem=50G -n 5 --pty /encs/bin/bash</span></li></ul>
 <!-- l. 64 --><p class='indent'>   <span class='cmbx-10'>Note: </span>Make sure the interactive job requests memory, cores, etc.
 </p>
-   <h5 class='subsubsectionHead' id='how-do-i-run-scripts-written-in-bash-on-speed'><span class='titlemark'>B.2.4   </span> <a id='x1-66000B.2.4'></a>How do I run scripts written in bash on Speed?</h5>
+   <h5 class='subsubsectionHead' id='how-do-i-run-scripts-written-in-bash-on-speed'><span class='titlemark'>B.2.4   </span> <a id='x1-67000B.2.4'></a>How do I run scripts written in bash on Speed?</h5>
 <!-- l. 68 --><p class='noindent'>To execute bash scripts on Speed:
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-66002x1'>Ensure that the shebang of your bash job script is <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>#!/encs/bin/bash</span></span></span>
+<li class='enumerate' id='x1-67002x1'>Ensure that the shebang of your bash job script is <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>#!/encs/bin/bash</span></span></span>
      </li>
-<li class='enumerate' id='x1-66004x2'>Use the <span class='cmtt-10'>sbatch </span>command to submit your job script to the scheduler.</li></ol>
+<li class='enumerate' id='x1-67004x2'>Use the <span class='cmtt-10'>sbatch </span>command to submit your job script to the scheduler.</li></ol>
 <!-- l. 76 --><p class='indent'>   The Speed GitHub contains a sample <a href='https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh'>bash job script</a>.
                                                                                
 
                                                                                
 </p><!-- l. 82 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='how-to-resolve-disk-quota-exceeded-errors'><span class='titlemark'>B.3   </span> <a id='x1-67000B.3'></a>How to resolve “Disk quota exceeded” errors?</h4>
+   <h4 class='subsectionHead' id='how-to-resolve-disk-quota-exceeded-errors'><span class='titlemark'>B.3   </span> <a id='x1-68000B.3'></a>How to resolve “Disk quota exceeded” errors?</h4>
 <!-- l. 85 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='probable-cause'><span class='titlemark'>B.3.1   </span> <a id='x1-68000B.3.1'></a>Probable Cause</h5>
+   <h5 class='subsubsectionHead' id='probable-cause'><span class='titlemark'>B.3.1   </span> <a id='x1-69000B.3.1'></a>Probable Cause</h5>
 <!-- l. 87 --><p class='noindent'>The “<span class='cmtt-10'>Disk quota exceeded</span>” Error occurs when your application has run out of disk space to write
 to. On Speed this error can be returned when:
 </p><!-- l. 90 --><p class='indent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-68002x1'>Your NFS-provided home is full and cannot be written to. You can verify this using <span class='cmtt-10'>quota</span>
+<li class='enumerate' id='x1-69002x1'>Your NFS-provided home is full and cannot be written to. You can verify this using <span class='cmtt-10'>quota</span>
      and <span class='cmtt-10'>bigfiles </span>commands.
      </li>
-<li class='enumerate' id='x1-68004x2'>The <span class='cmtt-10'>/tmp </span>directory on the speed node your application is running on is full and cannot
+<li class='enumerate' id='x1-69004x2'>The <span class='cmtt-10'>/tmp </span>directory on the speed node your application is running on is full and cannot
      be written to.</li></ol>
 <!-- l. 99 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='possible-solutions'><span class='titlemark'>B.3.2   </span> <a id='x1-69000B.3.2'></a>Possible Solutions</h5>
+   <h5 class='subsubsectionHead' id='possible-solutions'><span class='titlemark'>B.3.2   </span> <a id='x1-70000B.3.2'></a>Possible Solutions</h5>
 <!-- l. 101 --><p class='noindent'>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-69002x1'>Use the <span class='cmtt-10'>--chdir </span>job script option to set the directory that the job script is submitted
+<li class='enumerate' id='x1-70002x1'>Use the <span class='cmtt-10'>--chdir </span>job script option to set the directory that the job script is submitted
      from the <span class='cmtt-10'>job working directory</span>. The <span class='cmtt-10'>job working directory </span>is the directory that
      the job will write output files in.
      </li>
-<li class='enumerate' id='x1-69004x2'>
+<li class='enumerate' id='x1-70004x2'>
      <!-- l. 107 --><p class='noindent'>The use local disk space is generally recommended for IO intensive operations. However, as the
      size of <span class='cmtt-10'>/tmp </span>on speed nodes is <span class='cmtt-10'>1TB </span>it can be necessary for scripts to store temporary data
      elsewhere. Review the documentation for each module called within your script to determine
@@ -2208,7 +2307,7 @@ to. On Speed this error can be returned when:
 
                                                                                
 </p>
-         <pre class='verbatim' id='verbatim-55'>
+         <pre class='verbatim' id='verbatim-59'>
          mkdir -m 750 /speed-scratch/$USER/output
           
 </pre>
@@ -2220,7 +2319,7 @@ to. On Speed this error can be returned when:
 
                                                                                
 </p>
-         <pre class='verbatim' id='verbatim-56'>
+         <pre class='verbatim' id='verbatim-60'>
          mkdir -m 750 /speed-scratch/$USER/recovery
 </pre>
          <!-- l. 129 --><p class='nopar'>
@@ -2231,7 +2330,7 @@ to. On Speed this error can be returned when:
 <!-- l. 135 --><p class='noindent'>In the above example, <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>$USER</span></span></span> is an environment variable containing your ENCS username.
 </p><!-- l. 138 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='example-of-setting-working-directories-for-comsol'><span class='titlemark'>B.3.3   </span> <a id='x1-70000B.3.3'></a>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></h5>
+   <h5 class='subsubsectionHead' id='example-of-setting-working-directories-for-comsol'><span class='titlemark'>B.3.3   </span> <a id='x1-71000B.3.3'></a>Example of setting working directories for <span class='cmtt-10'>COMSOL</span></h5>
      <ul class='itemize1'>
      <li class='itemize'>
      <!-- l. 142 --><p class='noindent'>Create directories for recovery, temporary, and configuration files. For example, to create these
@@ -2240,7 +2339,7 @@ to. On Speed this error can be returned when:
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-57'>
+     <pre class='verbatim' id='verbatim-61'>
      mkdir -m 750 -p /speed-scratch/$USER/comsol/{recovery,tmp,config}
 </pre>
      <!-- l. 146 --><p class='nopar'>
@@ -2252,7 +2351,7 @@ to. On Speed this error can be returned when:
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-58'>
+     <pre class='verbatim' id='verbatim-62'>
      -recoverydir /speed-scratch/$USER/comsol/recovery
      -tmpdir /speed-scratch/$USER/comsol/tmp
      -configuration/speed-scratch/$USER/comsol/config
@@ -2261,7 +2360,7 @@ to. On Speed this error can be returned when:
 <!-- l. 157 --><p class='noindent'>In the above example, <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>$USER</span></span></span> is an environment variable containing your ENCS username.
 </p><!-- l. 160 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='example-of-setting-working-directories-for-python-modules'><span class='titlemark'>B.3.4   </span> <a id='x1-71000B.3.4'></a>Example of setting working directories for <span class='cmtt-10'>Python Modules</span></h5>
+   <h5 class='subsubsectionHead' id='example-of-setting-working-directories-for-python-modules'><span class='titlemark'>B.3.4   </span> <a id='x1-72000B.3.4'></a>Example of setting working directories for <span class='cmtt-10'>Python Modules</span></h5>
 <!-- l. 162 --><p class='noindent'>By default when adding a python module the <span class='cmtt-10'>/tmp </span>directory is set as the temporary repository for
 files downloads. The size of the <span class='cmtt-10'>/tmp </span>directory on <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>speed-submit</span></span></span> is too small for pytorch. To add a
 python module </p>
@@ -2272,7 +2371,7 @@ python module </p>
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-59'>
+     <pre class='verbatim' id='verbatim-63'>
        mkdir /speed-scratch/$USER/tmp
 </pre>
      <!-- l. 170 --><p class='nopar'>
@@ -2283,7 +2382,7 @@ python module </p>
 
                                                                                
 </p>
-     <pre class='verbatim' id='verbatim-60'>
+     <pre class='verbatim' id='verbatim-64'>
        setenv TMPDIR /speed-scratch/$USER/tmp
 </pre>
      <!-- l. 175 --><p class='nopar'>
@@ -2292,17 +2391,17 @@ python module </p>
 <!-- l. 180 --><p class='indent'>   In the above example, <span class='obeylines-h'><span class='verb'><span class='cmtt-10'>$USER</span></span></span> is an environment variable containing your ENCS username.
 </p><!-- l. 183 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='how-do-i-check-my-jobs-status'><span class='titlemark'>B.4   </span> <a id='x1-72000B.4'></a>How do I check my job’s status?</h4>
+   <h4 class='subsectionHead' id='how-do-i-check-my-jobs-status'><span class='titlemark'>B.4   </span> <a id='x1-73000B.4'></a>How do I check my job’s status?</h4>
 <!-- l. 188 --><p class='noindent'>When a job with a job id of 1234 is running or terminated, the status of that job can be tracked using
 ‘<span class='obeylines-h'><span class='verb'><span class='cmtt-10'>sacct -j 1234</span></span></span>’. <span class='cmtt-10'>squeue -j 1234 </span>can show while the job is sitting in the queue as well. Long term
 statistics on the job after its terminated can be found using <span class='cmtt-10'>sstat -j 1234 </span>after <span class='cmtt-10'>slurmctld </span>purges it
 its tracking state into the database.
 </p><!-- l. 195 --><p class='noindent'>
 </p>
-   <h4 class='subsectionHead' id='why-is-my-job-pending-when-nodes-are-empty'><span class='titlemark'>B.5   </span> <a id='x1-73000B.5'></a>Why is my job pending when nodes are empty?</h4>
+   <h4 class='subsectionHead' id='why-is-my-job-pending-when-nodes-are-empty'><span class='titlemark'>B.5   </span> <a id='x1-74000B.5'></a>Why is my job pending when nodes are empty?</h4>
 <!-- l. 198 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='disabled-nodes'><span class='titlemark'>B.5.1   </span> <a id='x1-74000B.5.1'></a>Disabled nodes</h5>
+   <h5 class='subsubsectionHead' id='disabled-nodes'><span class='titlemark'>B.5.1   </span> <a id='x1-75000B.5.1'></a>Disabled nodes</h5>
 <!-- l. 200 --><p class='noindent'>It is possible that one or a number of the Speed nodes are disabled. Nodes are disabled if they require
 maintenance. To verify if Speed nodes are disabled, see if they are in a draining or drained
 state:
@@ -2310,7 +2409,7 @@ state:
 
                                                                                
 </p>
-   <pre class='verbatim' id='verbatim-61'>
+   <pre class='verbatim' id='verbatim-65'>
 [serguei@speed-submit src] % sinfo --long --Node
 Thu Oct 19 21:25:12 2023
 NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
@@ -2359,7 +2458,7 @@ column.
 and the disabled nodes have a state of <span class='cmbx-10'>idle</span>.
 </p><!-- l. 272 --><p class='noindent'>
 </p>
-   <h5 class='subsubsectionHead' id='error-in-job-submit-request'><span class='titlemark'>B.5.2   </span> <a id='x1-75000B.5.2'></a>Error in job submit request.</h5>
+   <h5 class='subsubsectionHead' id='error-in-job-submit-request'><span class='titlemark'>B.5.2   </span> <a id='x1-76000B.5.2'></a>Error in job submit request.</h5>
 <!-- l. 274 --><p class='noindent'>It is possible that your job is pending, because the job requested resources that are not available
 within Speed. To verify why job id 1234 is not running, execute ‘<span class='obeylines-h'><span class='verb'><span class='cmtt-10'>sacct -j 1234</span></span></span>’. A summary of the
 reasons is available via the <span class='cmtt-10'>squeue </span>command.
@@ -2368,7 +2467,7 @@ reasons is available via the <span class='cmtt-10'>squeue </span>command.
                                                                                
 
                                                                                
-   <h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-76000C'></a>Sister Facilities</h3>
+   <h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-77000C'></a>Sister Facilities</h3>
 <!-- l. 908 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
 research group and needs, they might be available to you. They are not managed by HPC/NAG of
 AITS, so contact their respective representatives.
@@ -2423,8 +2522,8 @@ AITS, so contact their respective representatives.
                                                                                
 
                                                                                
-<p id='annotated-bibliography'><a id='Q1-1-91'></a>
-   </p><h3 class='likesectionHead' id='references'><a id='x1-77000'></a><span class='cmr-9'>References</span></h3>
+<p id='annotated-bibliography'><a id='Q1-1-92'></a>
+   </p><h3 class='likesectionHead' id='references'><a id='x1-78000'></a><span class='cmr-9'>References</span></h3>
 <!-- l. 1 --><p class='noindent'>
     </p><div class='thebibliography'>
     <p class='bibitem'><span class='biblabel'>
