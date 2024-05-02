@@ -23,9 +23,9 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 ### Contributors
 
-* See the overall contributors [here](https://github.com/NAG-DevOps/speed-hpc/graphs/contributors)
+* See the overall GitHub contributors [here](https://github.com/NAG-DevOps/speed-hpc/graphs/contributors)
 * [Dr. Serguei A. Mokhov](https://github.com/smokhov) -- project lead
-* Current HPC/Research support team: [Gillian A. Roper](https://github.com/yulgroper), [Carlos Alarcon Meza](https://github.com/carlos-encs)
+* Current HPC/Research support team: [Gillian A. Roper](https://github.com/yulgroper), [Carlos Alarcon Meza](https://github.com/carlos-encs), [Farah Salhany](https://github.com/salhanyf)
 * [Dr. Tariq Daradkeh](https://github.com/tariqghd) helped us with continuous support of Speed and its users and working on scheduling prediction. He has also integrated the OpenISS YOLOv3 example
 * [Anh H Nguyen](https://github.com/aaanh) contributed the [HTML](https://nag-devops.github.io/speed-hpc/) version of the manual and its generation off our LaTeX sources as well as the corresponding [devcontainer](https://github.com/NAG-DevOps/speed-hpc/tree/master/doc/.devcontainer) environment
 * The initial Grid Engine V6 manual was written by Dr. Scott Bunnell
