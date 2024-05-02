@@ -20,4 +20,4 @@ module list
 # -nojvm : Tells Matlab to run without the Java Virtual Machine to reduce overhead
 # test.m : Matlab commands file
 
-srun matlab -nodisplay -nodesktop -nojvm < test.m
+srun matlab -nodisplay -nodesktop -nojvm < matlab-example.m
