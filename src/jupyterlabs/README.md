@@ -21,6 +21,7 @@ Run the script `run.sh`, everytime you want to execute jupyterlabs
 
 ## Browsing
 After Execution, create an ssh tunnel (read https://nag-devops.github.io/speed-hpc/#jupyter-notebooks-in-singularity)
+
 Open a browser: http://localhost:XXXX/lab?token=XXXXXXXXXX
 
 ## REMINDER
