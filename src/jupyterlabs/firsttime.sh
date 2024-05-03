@@ -8,4 +8,5 @@ setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs
 conda create -p /speed-scratch/$USER/Jupyter/jupyter-env -y
 conda activate /speed-scratch/$USER/Jupyter/jupyter-env
 conda install -c conda-forge jupyterlab -y
-pip3 install -y torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip3 install --quiet torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+exit
