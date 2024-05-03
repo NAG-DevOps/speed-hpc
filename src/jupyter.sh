@@ -7,10 +7,7 @@
 module load singularity/3.10.4/default
 
 # Executing singularity image 
-srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp \
-      --env SHELL=/bin/bash --nv /speed-scratch/nag-public/jupyter-pytorch-cuda.sif \
-      /bin/bash -c '/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd \
-      --ip="*" --port=8888 --allow-root'
+srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp --env SHELL=/bin/bash --nv /speed-scratch/nag-public/jupyter-pytorch-cuda.sif /bin/bash -c '/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd --ip="0.0.0.0" --port=8888 --allow-root'
 
 ## If you receive an error like:   FATAL:container creation failed: exec: "/usr/bin/nvidia-container-cli"
 ## remove the parameter: --nv and execute again srun singularity ...
