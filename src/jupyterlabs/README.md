@@ -7,7 +7,7 @@ This directory has example scripts to run Jupyter Labs+conda+python without cont
 ## Preparation
 After opening an interactive session (salloc)
 
-Run the script firsttime.sh, ONLY 1 time, it will
+Run the script `firsttime.sh`, ONLY 1 time, it will
 - Create a /speed-scratch/$USER/Jupyter directory: change Jupyter to any name of your choice
 - Set environment variables for tmp directories and for CONDA_PKGS_DIRS 
 - Create a conda environmen named: jupyter-env (change it to any name of your choice)
@@ -17,7 +17,7 @@ Run the script firsttime.sh, ONLY 1 time, it will
 ## Execution
 After opening an interactive session (salloc)
 
-Run the script run.sh, everytime you want to execute jupyterlabs
+Run the script `run.sh`, everytime you want to execute jupyterlabs
 
 ## Browsing
 After Execution, create an ssh tunnel (read https://nag-devops.github.io/speed-hpc/#jupyter-notebooks-in-singularity)
