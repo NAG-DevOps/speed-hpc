@@ -1,3 +1,5 @@
+#!/encs/bin/tcsh
+
 cd /speed-scratch/$USER/Jupyter
 module load anaconda3/2023.03/default
 setenv TMPDIR /speed-scratch/$USER/tmp
