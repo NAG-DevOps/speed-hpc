@@ -6,6 +6,7 @@ This directory has example scripts to run Jupyter Labs+conda+python without cont
 <!-- TOC --><a name="Preparation"></a>
 ## Preparation
 After opening an interactive session (salloc)
+
 Run the script firsttime.sh, ONLY 1 time, it will
 - Create a /speed-scratch/$USER/Jupyter directory: change Jupyter to any name of your choice
 - Set environment variables for tmp directories and for CONDA_PKGS_DIRS 
@@ -15,6 +16,7 @@ Run the script firsttime.sh, ONLY 1 time, it will
 
 ## Execution
 After opening an interactive session (salloc)
+
 Run the script run.sh, everytime you want to execute jupyterlabs
 
 ## Browsing
