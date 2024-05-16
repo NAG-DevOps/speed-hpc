@@ -11,7 +11,6 @@
 
 #SBATCH --job-name=lambdal     ## Give the job a name
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
-#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory (default)
 ## Any partition, usually on the command line that has GPUs
 ##SBATCH --partition=pg        ## Use the GPU partition (specify here or at command line wirh -p option)

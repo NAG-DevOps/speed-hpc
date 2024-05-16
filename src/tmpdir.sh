@@ -2,7 +2,6 @@
 
 #SBATCH --job-name=tmpdir      ## Give the job a name
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
-#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 #SBATCH --chdir=./             ## Use currect directory as working directory
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

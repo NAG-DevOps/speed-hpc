@@ -15,7 +15,6 @@
 
 #SBATCH --job-name=efficientdet_pascal
 #SBATCH --mail-type=ALL        ## Receive all email type notifications
-#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 
 # Request GPU in Dr. Amer's partition pa
 #SBATCH --partition=pa

@@ -25,7 +25,6 @@
 #SBATCH --mem=1G                   ## Assign memory per node 
 #SBATCH -p pt                      ## Teaching partition by default; can be ps
 #SBATCH -A comp371w14              ## Speed Slurm account 
-#SBATCH --mail-user=YOUR_USER_NAME@encs.concordia.ca
 
 ##
 ## Job to run
