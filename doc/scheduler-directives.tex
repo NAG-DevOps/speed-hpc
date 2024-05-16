@@ -27,7 +27,6 @@ provides the essentials:
 \begin{verbatim}
 #SBATCH --job-name=<jobname>        ## or -J. Give the job a name 
 #SBATCH --mail-type=<type>          ## Set type of email notifications
-#SBATCH --mail-user=<YOUR_USERNAME>@encs.concordia.ca 
 #SBATCH --chdir=<directory>         ## or -D, Set working directory where output files will go 
 #SBATCH --nodes=1                   ## or -N, Node count required for the job
 #SBATCH --ntasks=1                  ## or -n, Number of tasks to be launched
@@ -38,7 +37,6 @@ provides the essentials:
 Replace the following to adjust the job script for your project(s)
 \begin{enumerate}
   \item \verb+<jobname>+ with a job name for the job
-  \item \verb+<YOUR_USERNAME>+ with your GCS username
   \item \verb+<directory>+ with the fullpath to your job's working directory, e.g., where your code,
 source files and where the standard output files will be written to. By default, \verb+--chdir+
 sets the current directory as the job's working directory 
@@ -53,7 +51,6 @@ Example with short option equivalents:
 \begin{verbatim}
 #SBATCH -J tmpdir                   ## Job's name set to 'tmpdir'
 #SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH --mail-user=a_user@encs.concordia.ca 
 #SBATCH -D ./                       ## Use current directory as working directory
 #SBATCH -N 1                        ## Node count required for the job
 #SBATCH -n 1                        ## Number of tasks to be launched

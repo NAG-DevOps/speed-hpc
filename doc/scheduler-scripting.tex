@@ -264,12 +264,10 @@ in your \texttt{.cshrc} or \texttt{.bashrc} files.
 \texttt{seff [job-ID]}: reports on the efficiency of a job's cpu and memory utilization. 
 Don't execute it on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be misleading.
 
-If you define the following directives in your batch script, you will receive seff output in your email when your job is finished.
+If you define the following directive in your batch script, your ENCS email address will receive an email with seff output when your job is finished.
 \small
 \begin{verbatim}
 #SBATCH --mail-type=ALL        
-#SBATCH --mail-user=USER_NAME@encs.concordia.ca 
-## Replace USER_NAME with your encs username.
 \end{verbatim}
 \normalsize
 
