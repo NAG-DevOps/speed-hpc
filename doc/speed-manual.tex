@@ -342,16 +342,15 @@ Batch jobs are used to run unattended tasks.
 TL;DR:
 Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
 \begin{verbatim}
-#SBATCH --account=speed1 --mem=100M -t 600 -J job-name
+#SBATCH --mem=100M -t 600 -J <job-name> -A <slurm account>
+#SBATCH -p pg --gpus=2 --mail-type=ALL
 \end{verbatim}
 %
 We use \tool{srun} for every complex compute step inside the script.
 Use interactive jobs to set up virtual environments, compilation, and debugging.
 \tool{salloc} is preferred; allows multiple steps.
 \tool{srun} can start interactive jobs as well (see \xs{sect:interactive-jobs}).
-Required and common job parameters: job-name (J), mail-type, mem, ntasks (n),
-cpus-per-task, account, -p (partition).
-
+Required and common job parameters: memory (mem), time (t), job-name (J), slurm project account (A), partition (p), mail-type, ntasks (n), cpus-per-task.
 
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
