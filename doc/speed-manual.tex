@@ -611,6 +611,17 @@ from the python distribution while \texttt{conda install} installs modules from
 anaconda's repository.
 
 % ------------------------------------------------------------------------------
+\paragraph{Conda Env without --prefix: }
+
+If you don't want to use the \texttt{\-\-prefix} option every time you create a new environment and you don't want to use the default \texttt{\-\$HOME}.
+Create a new directory an set the following variables to point to the new created directory, e.g:
+\begin{verbatim}
+	setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
+	setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
+\end{verbatim}
+If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} or \texttt{.bashrc} (depending on the default shell you are using)
+
+% ------------------------------------------------------------------------------
 \subsubsection{Python}
 \label{sect:python-venv}
 
