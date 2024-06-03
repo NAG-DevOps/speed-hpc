@@ -179,7 +179,7 @@ This will install pip and pip's dependencies, including python.
 
 <!-- TOC --><a name="no-space-left-conda"></a>
 #### No Space left error when creating Conda Environment
-You are using your /home directory as conda default directory, the tarballs and pkgs are using all the space
+You are using your `$HOME` directory as conda default directory, the tarballs and pkgs are using all the space
 
 `conda clean --all --dry-run` will show you the size of tarballs, packages, caches
 `conda clean -all` will wipe-out all unused packages, caches and tarballs
@@ -204,6 +204,15 @@ setenv CONDA_PKGS_DIRS $TMP/pkgs
 conda create -p $TMP/Venv-Name python==3.11
 conda activate $TMP/Venv-Name
 ```
+#### Conda envs without prefix
+If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
+
+```
+setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
+```
+
+If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using)
 
 <!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
