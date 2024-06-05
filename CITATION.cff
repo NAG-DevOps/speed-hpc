@@ -1,0 +1,61 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Speed: Gina Cody School HPC Facility: Scripts, Tools, and
+  Refs
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Serguei
+    family-names: Mokhov
+    affiliation: Concordia University
+    orcid: 'https://orcid.org/0000-0002-8791-4790'
+  - given-names: Gillian
+    family-names: Roper
+    affiliation: Concordia University
+    orcid: 'https://orcid.org/0009-0005-4385-1723'
+  - given-names: Carlos Alarcon
+    family-names: Meza
+    affiliation: Concordia University
+    orcid: 'https://orcid.org/0009-0002-3366-6821'
+  - name: 'et al,'
+    city: Montreal
+    country: CA
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.5683642
+    description: All versions
+repository-code: 'https://github.com/NAG-DevOps/speed-hpc'
+url: 'https://www.concordia.ca/ginacody/aits/speed.html'
+abstract: >-
+  This document contains basic information required to use
+  “Speed” as well as tips and tricks, examples, and
+  references to projects and papers that have used Speed.
+  User contributions of sample jobs and/ or references are
+  welcome.
+keywords:
+  - HPC
+  - Speed
+  - examples
+license: Apache-2.0
+references:
+  - authors:
+      - given-names: Serguei
+        family-names: Mokhov
+      - given-names: Jonathan
+        family-names: Llewellyn
+      - given-names: Carlos Alarcon
+        family-names: Meza
+      - given-names: Tariq
+        family-names: Daradkeh
+      - given-names: Gillian
+        family-names: Roper
+    date-released: "2023-07-23"
+    doi: 10.1145/3588028.3603676
+    title: "The use of Containers in OpenGL, ML and HPC for Teaching and Research Support"
+    type: poster
+    version: 1.0.0
