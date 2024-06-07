@@ -4,7 +4,7 @@ Our base manual is written in LaTeX.
 
 - `speed-manual.tex` -- is the main file
 - `speed-manual.tcp` -- if you use TeXnicCenter on Windows
-- `speed-manual.pdf` -- periodically redered PDF file
+- `speed-manual.pdf` -- periodically rendered PDF file
 - `Makefile` -- to build on Linux or macOS
     - `make` -- to compile the PDF manual
     - `make html` -- to compile HTML manual

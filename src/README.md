@@ -396,7 +396,7 @@ TEST DATASET: Market1501
 - In `reid.py` set the epochs (`g_epochs=120` by default)
 - Download `openiss-reid-speed.sh` from this repository
 - On `environment.yml` comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
-- On `openiss-reid-speed.sh` comment or uncomment the secction accordingly (for CPU or GPU)
+- On `openiss-reid-speed.sh` comment or uncomment the resourse allocation section accordingly (GPU is default), make sure you only request CPU or GPU but not both
 - Submit the job:
 
    On CPUs nodes: `sbatch ./openiss-reid-speed.sh`
