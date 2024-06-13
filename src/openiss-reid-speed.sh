@@ -12,11 +12,13 @@
 # Set output directory to current
 #SBATCH --chdir=./
 
-# Request CPU
-#SBATCH -n 32
+# Request Memory
 #SBATCH --mem=32G
 
-# Request GPU - comment this section if the job WON'T use GPU
+# Request CPU - comment this section if the job needs GPUs 
+##SBATCH -n 32
+
+# Request GPU - comment this section if the job needs CPUs and uncomment the previous section
 #SBATCH --gpus=1
 
 # Execute the script
