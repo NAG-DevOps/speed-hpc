@@ -11,8 +11,3 @@ source /speed-scratch/$USER/tmp/pytorchcpu/bin/activate.csh
 echo "starting training..."
 
 time python torch-multicpu.py
-######## END of Job Script
-
-### Slurm Script execution
-sbatch -p ps pytorch-multicpu.sh -A Your_group_id(if you have one)
-### End of slurm script
