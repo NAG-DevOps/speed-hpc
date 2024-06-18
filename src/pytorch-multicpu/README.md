@@ -9,7 +9,8 @@ Adapted to SPEED from https://docs.alliancecan.ca/wiki/PyTorch
 cd /speed-scratch/$USER
 salloc -p ps --mem=20G --mail-type=ALL
 (compute node)
-./firsttime.sh
+time ./firsttime.sh
+(takes about 5 mins)
 exit
 (speed-submit)
 sbatch -p ps pytorch-multicpu.sh
