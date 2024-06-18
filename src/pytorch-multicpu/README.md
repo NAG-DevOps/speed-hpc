@@ -14,5 +14,5 @@ time ./firsttime.sh
 exit
 (speed-submit)
 sbatch -p ps pytorch-multicpu.sh
-tail -f slurm-JOBID.out
+tail -f EXECUTIONHOST-JOBID.out
 ```
