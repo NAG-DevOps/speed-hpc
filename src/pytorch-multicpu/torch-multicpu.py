@@ -1,45 +1,3 @@
-## Adapted to SPEED from:
-## https://docs.alliancecan.ca/wiki/PyTorch
-
-# Virtual Environment creation, python script at the end of slurm script execution section
-#### Virtual ENV creation. One time only:
-cd /speed-scratch/$USER
-salloc -p ps --mem=20Gb -A Your_group_id(if you have one)
-module load python/3.9.18/default
-setenv TMP /speed-scratch/$USER/tmp
-setenv TMPDIR /speed-scratch/$USER/tmp
-python -m venv $TMPDIR/pytorchcpu
-source $TMPDIR/pytorchcpu/bin/activate.csh
-pip install torch torchvision
-pip install urllib3==1.26.6
-deactivate
-### END of VEnv creation
-
-
-# job script: pytorch-multicpu.sh
-
-#!/encs/bin/tcsh
-#SBATCH --nodes 1
-#SBATCH --tasks-per-node=1
-#SBATCH --cpus-per-task=4 # change this parameter to 2,4,6,... to see the effect on performance
-
-#SBATCH --mem=24G
-#SBATCH --time=0:05:00
-#SBATCH --output=%N-%j.out
-
-source /speed-scratch/$USER/tmp/pytorchcpu/bin/activate.csh
-echo "starting training..."
-
-time python torch-multicpu.py
-######## END of Job Script
-
-### Slurm Script execution
-sbatch -p ps pytorch-multicpu.sh -A Your_group_id(if you have one)
-### End of slurm script
-
-
-
-
 ### Python script torch-multicpu.py
 
 import numpy as np
@@ -61,8 +19,10 @@ import os
 
 parser = argparse.ArgumentParser(description='cifar10 classification models, cpu performance test')
 parser.add_argument('--lr', default=0.1, help='')
-parser.add_argument('--batch_size', type=int, default=512, help='')
-parser.add_argument('--num_workers', type=int, default=0, help='')
+#parser.add_argument('--batch_size', type=int, default=512, help='')
+parser.add_argument('--batch_size', type=int, default=4, help='')
+#parser.add_argument('--num_workers', type=int, default=0, help='')
+parser.add_argument('--num_workers', type=int, default=4, help='')
 
 def main():
 
@@ -100,7 +60,8 @@ def main():
     ### Run this line on a login node with "download=True" prior to submitting your job, or manually download the data from
     ### https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz and place it under ./data
 
-    dataset_train = CIFAR10(root='./data', train=True, download=False, transform=transform_train)
+    #dataset_train = CIFAR10(root='./data', train=True, download=False, transform=transform_train)
+    dataset_train = CIFAR10(root='./data', train=True, download=True, transform=transform_train)
 
     train_loader = DataLoader(dataset_train, batch_size=args.batch_size, num_workers=args.num_workers)
 
@@ -127,8 +88,11 @@ def main():
 
     total_time = time.time() - total_start
 
+    print("Total time: ", total_time)
+    print("Perf      : ", perf)
+    print("CPUs      : ", os.environ['SLURM_CPUS_PER_TASK'])
+
 if __name__=='__main__':
    main()
 
 ### END of Python script   
-
