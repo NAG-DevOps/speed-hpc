@@ -19,8 +19,10 @@ import os
 
 parser = argparse.ArgumentParser(description='cifar10 classification models, cpu performance test')
 parser.add_argument('--lr', default=0.1, help='')
-parser.add_argument('--batch_size', type=int, default=512, help='')
-parser.add_argument('--num_workers', type=int, default=0, help='')
+#parser.add_argument('--batch_size', type=int, default=512, help='')
+parser.add_argument('--batch_size', type=int, default=4, help='')
+#parser.add_argument('--num_workers', type=int, default=0, help='')
+parser.add_argument('--num_workers', type=int, default=4, help='')
 
 def main():
 
@@ -58,7 +60,8 @@ def main():
     ### Run this line on a login node with "download=True" prior to submitting your job, or manually download the data from
     ### https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz and place it under ./data
 
-    dataset_train = CIFAR10(root='./data', train=True, download=False, transform=transform_train)
+    #dataset_train = CIFAR10(root='./data', train=True, download=False, transform=transform_train)
+    dataset_train = CIFAR10(root='./data', train=True, download=True, transform=transform_train)
 
     train_loader = DataLoader(dataset_train, batch_size=args.batch_size, num_workers=args.num_workers)
 
@@ -84,6 +87,10 @@ def main():
        perf.append(images_per_sec)
 
     total_time = time.time() - total_start
+
+    print("Total time: ", total_time)
+    print("Perf      : ", perf)
+    print("CPUs      : ", os.environ['SLURM_CPUS_PER_TASK'])
 
 if __name__=='__main__':
    main()
