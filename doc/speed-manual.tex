@@ -76,10 +76,9 @@
 
 % ------------------------------------------------------------------------------
 \begin{abstract}
-This document presents a quick start guide to the usage of the Gina Cody School 
-of Engineering and Computer Science compute server farm called ``Speed'' -- the 
-GCS Speed cluster, managed by the HPC/NAG group of the Academic Information 
-Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
+This document serves as a quick start guide to using the Gina Cody School of Engineering and Computer Science (GCS ENCS) 
+compute server farm, known as "Speed." Managed by the HPC/NAG group of the 
+Academic Information Technology Services (AITS) at GCS, Concordia University, Montreal, Canada
 \end{abstract}
 
 % ------------------------------------------------------------------------------
@@ -89,47 +88,40 @@ Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
 % ------------------------------------------------------------------------------
 \section{Introduction}
 
-This document contains basic information required to use ``Speed'' as well as 
-tips and tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/ or references are welcome. 
-Details are sent to the \texttt{hpc-ml} mailing list.
+This document contains basic information required to use “Speed”, along with tips, 
+tricks, examples, and references to projects and papers that have used Speed. 
+User contributions of sample jobs and/or references are welcome. If you wish to cite this work in your acknowledgments, 
+use our general DOI found on our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub page}.\\
 
-\textbf{Note:} On October 20, 2023 with workshops prior, we have completed migration to SLURM (see \xf{fig:slurm-arch})
-from Grid Engine (UGE/AGE) as our job scheduler, so this manual has been ported to use SLURM's
-syntax and commands. If you are a long-time GE user, see \xa{appdx:uge-to-slurm} key highlights
-of the move needed to translate your GE jobs to SLURM as well as environment changes.
-These are also elaborated throughout this document and our examples as well in case you
-desire to re-read it.
-
-If you wish to cite this work in your acknowledgements, you can use 
-our general DOI found on our GitHub page
-\url{https://dx.doi.org/10.5281/zenodo.5683642} or a specific
-version of the manual and scripts from that link individually.
+\textbf{Note:} On October 20, 2023, we completed the migration to SLURM (see \xf{fig:slurm-arch})
+from Grid Engine (UGE/AGE) as our job scheduler. This manual has been updated to use SLURM’s syntax and commands. 
+If you are a long-time GE user, refer to \xa{appdx:uge-to-slurm} for key highlights needed to 
+translate your GE jobs to SLURM as well as environment changes. 
+These changes are also elaborated throughout this document and our examples.
 
 % ------------------------------------------------------------------------------
 \subsection{Resources}
 
 \begin{itemize}
 \item
-Our public GitHub page where the manual and sample job scripts
-are maintained (pull-requests (PRs), subject to review, are welcome):\\
-\url{https://github.com/NAG-DevOps/speed-hpc}\\
-\url{https://github.com/NAG-DevOps/speed-hpc/pulls}
+Public GitHub page where the manual and sample job scripts are maintained at \url{https://github.com/NAG-DevOps/speed-hpc}
+	\begin{itemize}
+		\item Pull requests (PRs) are subject to review and are welcome: \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
+	\end{itemize}
 
 \item
-PDF version of this manual:\\
-\url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}\\
-HTML version of this manual:\\
-\url{https://nag-devops.github.io/speed-hpc/}
+Speed Manual:
+	\begin{itemize}
+		\item PDF version of the manual: \url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}
+		\item HTML version of the manual: \url{https://nag-devops.github.io/speed-hpc/}
+	\end{itemize}
 
 \item
-Our official Concordia page for the ``Speed'' cluster:\\
-\url{https://www.concordia.ca/ginacody/aits/speed.html}\\
-which includes access request instructions.
+Concordia official page for "Speed" cluster which includes access request instructions.
+\url{https://www.concordia.ca/ginacody/aits/speed.html}
 
 \item
-All Speed users are subscribed to the \texttt{hpc-ml} mailing
-list.
+All Speed users are subscribed to the \texttt{hpc-ml} mailing list.
 
 % TODO: for now comment out for 7.0; if when we update that
 %       preso, we will re-link it here. However, keep the citation.
@@ -190,15 +182,17 @@ Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 \end{itemize}
 
 \begin{figure}[htpb]
-\includegraphics[width=\columnwidth]{images/speed-pics}
-\caption{Speed}
-\label{fig:speed-pics}
+	\centering
+	\includegraphics[width=\columnwidth]{images/speed-pics}
+	\caption{Speed}
+	\label{fig:speed-pics}
 \end{figure}
 
 \begin{figure}[htpb]
-\includegraphics[width=\columnwidth]{images/slurm-arch}
-\caption{Speed SLURM Architecture}
-\label{fig:slurm-arch}
+	\centering
+	\includegraphics[width=\columnwidth]{images/slurm-arch}
+	\caption{Speed SLURM Architecture}
+	\label{fig:slurm-arch}
 \end{figure}
 
 
@@ -208,12 +202,12 @@ Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 
 \begin{itemize}
 \item
-To design and develop, test and run parallel, batch, and other algorithms, 
-scripts with partial data sets. ``Speed'' has been optimised for compute jobs 
-that are multi-core aware, require a large memory space, or are iteration 
-intensive.
+Design, develop, test, and run parallel, batch, and other algorithms and scripts with partial data sets.
+“Speed” has been optimized for compute jobs that are multi-core aware,
+require a large memory space, or are iteration intensive.
+
 \item
-Prepare them for big clusters:
+Prepare jobs for large clusters such as:
 	\begin{itemize}
 	\item 
 	Digital Research Alliance of Canada (Calcul Quebec and Compute Canada)
@@ -227,13 +221,13 @@ Single-core batch jobs; multithreaded jobs typically up to 32 cores (i.e., a sin
 \item
 Multi-node multi-core jobs (MPI).
 \item
-Anything that can fit into a 500-GB memory space and a \textbf{scratch} space of approximately 10~TB. 
+Anything that can fit into a 500-GB memory space and a \textbf{speed scratch} space of approximately 10~TB. 
 \item
 CPU-based jobs. 
 \item
-CUDA GPU jobs (\texttt{speed-01|-03|-05}, \texttt{speed-17}, \texttt{speed-37}--\texttt{speed-43}).
+CUDA GPU jobs.
 \item
-Non-CUDA GPU jobs using OpenCL (\texttt{speed-19} and \texttt{-01|03|05|17|25|27|37-43}).
+Non-CUDA GPU jobs using OpenCL.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
