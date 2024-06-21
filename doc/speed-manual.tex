@@ -77,8 +77,8 @@
 % ------------------------------------------------------------------------------
 \begin{abstract}
 This document serves as a quick start guide to using the Gina Cody School of Engineering and Computer Science (GCS ENCS) 
-compute server farm, known as "Speed." Managed by the HPC/NAG group of the 
-Academic Information Technology Services (AITS) at GCS, Concordia University, Montreal, Canada
+compute server farm, known as ``Speed.'' Managed by the HPC/NAG group of the 
+Academic Information Technology Services (AITS) at GCS, Concordia University, Montreal, Canada.
 \end{abstract}
 
 % ------------------------------------------------------------------------------
@@ -87,17 +87,18 @@ Academic Information Technology Services (AITS) at GCS, Concordia University, Mo
 
 % ------------------------------------------------------------------------------
 \section{Introduction}
-
-This document contains basic information required to use “Speed”, along with tips, 
-tricks, examples, and references to projects and papers that have used Speed. 
-User contributions of sample jobs and/or references are welcome. If you wish to cite this work in your acknowledgments, 
-use our general DOI found on our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub page}.\\
+This document contains basic information required to use ``Speed'', along with tips, 
+tricks, examples, and references to projects and papers that have used Speed.
+User contributions of sample jobs and/or references are welcome. 
 
 \textbf{Note:} On October 20, 2023, we completed the migration to SLURM (see \xf{fig:slurm-arch})
 from Grid Engine (UGE/AGE) as our job scheduler. This manual has been updated to use SLURM’s syntax and commands. 
 If you are a long-time GE user, refer to \xa{appdx:uge-to-slurm} for key highlights needed to 
 translate your GE jobs to SLURM as well as environment changes. 
-These changes are also elaborated throughout this document and our examples.
+These changes are also elaborated throughout this document and our examples.\\
+
+If you wish to cite this work in your acknowledgements, you can use our general DOI found on our GitHub page
+\url{https://dx.doi.org/10.5281/zenodo.5683642} or a specific version of the manual and scripts from that link individually.
 
 % ------------------------------------------------------------------------------
 \subsection{Resources}
@@ -117,7 +118,7 @@ Speed Manual:
 	\end{itemize}
 
 \item
-Concordia official page for "Speed" cluster which includes access request instructions.
+Concordia official page for ``Speed'' cluster which includes access request instructions.
 \url{https://www.concordia.ca/ginacody/aits/speed.html}
 
 \item
@@ -203,7 +204,7 @@ Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 \begin{itemize}
 \item
 Design, develop, test, and run parallel, batch, and other algorithms and scripts with partial data sets.
-“Speed” has been optimized for compute jobs that are multi-core aware,
+``Speed'' has been optimized for compute jobs that are multi-core aware,
 require a large memory space, or are iteration intensive.
 
 \item
