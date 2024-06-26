@@ -285,26 +285,27 @@ For detailed instructions, refer to the Concordia
 % ------------------------------------------------------------------------------
 \section{Job Management}
 \label{sect:job-management}
-
-In these instructions, anything bracketed like so, \verb+<>+, indicates a
-label/value to be replaced (the entire bracketed term needs replacement).
-%
 We use SLURM as the Workload Manager.
 It supports primarily two types of jobs: batch and interactive.
-Batch jobs are used to run unattended tasks.
+Batch jobs are used to run unattended tasks, whereas, interactive jobs are are ideal for setting up virtual environments, compilation, and debugging.\\
 
-TL;DR:
+\textbf{Note:} In the following instructions, anything bracketed like, \verb+<>+, indicates a
+label/value to be replaced (the entire bracketed term needs replacement).\\
+%
 Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
 \begin{verbatim}
 #SBATCH --mem=100M -t 600 -J <job-name> -A <slurm account>
 #SBATCH -p pg --gpus=2 --mail-type=ALL
 \end{verbatim}
 %
-We use \tool{srun} for every complex compute step inside the script.
-Use interactive jobs to set up virtual environments, compilation, and debugging.
-\tool{salloc} is preferred; allows multiple steps.
-\tool{srun} can start interactive jobs as well (see \xs{sect:interactive-jobs}).
-Required and common job parameters: memory (mem), time (t), job-name (J), slurm project account (A), partition (p), mail-type, ntasks (n), cpus-per-task.
+For complex compute steps within a script, use \tool{srun}. We recommend using \tool{salloc} for interactive jobs as it supports multiple steps.
+However, srun can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
+%
+Common and required job parameters include:
+\begin{verbatim}
+memory (--mem), time (-t), job-name (-J), slurm project account (-A), partition (-p), 
+mail type (--mail-type), ntasks (-n), CPUs per task (--cpus-per-task).
+\end{verbatim}
 
 % ------------------------------------------------------------------------------
 \subsection{Getting Started}
@@ -312,43 +313,33 @@ Required and common job parameters: memory (mem), time (t), job-name (J), slurm 
 Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
 and ``What Speed is Not'' (\xs{sect:speed-is-not}).
 Once your GCS ENCS account has been granted access to ``Speed'',
-use your GCS ENCS account credentials to create an SSH connection to 
-\texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}). 
-%
-All users are expected to have a basic understanding of
+use your ENCS account credentials to create an SSH connection to 
+\texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}).\\
+
+\noindent All users are expected to have a basic understanding of
 Linux and its commonly used commands (see \xa{sect:faqs-linux} for resources).
 
 % ------------------------------------------------------------------------------
 \subsubsection{SSH Connections}
 \label{sect:ssh}
 
-Requirements to create connections to Speed:
+Requirements to create connections to ``Speed'':
 \begin{enumerate}
-	\item
-An active \textbf{GCS ENCS user account}, which has permission to connect to Speed
-(see \xs{sect:access}).
-	\item
-If you are off campus, an active connection to Concordia's VPN.
-Accessing Concordia's VPN requires a Concordia \textbf{netname}. 
-	\item
-Windows systems require a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
-	\item
-macOS systems do have a Terminal app for this or \tool{xterm} that comes with XQuarz.
+	\item \textbf{Active GCS ENCS user account:} Ensure you have an active GCS ENCS user account with 
+	permission to connect to Speed (see \xs{sect:access}).
+	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia’s VPN, 
+	which requires a Concordia netname.
+	\item \textbf{Terminal Emulator for Windows:} Windows systems use a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
+	\item \textbf{Terminal for macOS:} macOS systems have a built-in Terminal app or \tool{xterm} that comes with XQuartz.
 \end{enumerate}
 
-Open up a terminal window and type in the following SSH command being sure to replace
-\verb!<ENCSusername>! with your ENCS account's username.
-
+\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account’s username:
 \begin{verbatim}
 ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
 
 \noindent
-Read the AITS FAQ:
-\href
-{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}
-{How do I securely connect to a GCS server?}
-
+For detailed instructions on securely connecting to a GCS server, refer to the AITS FAQ: \href{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}{How do I securely connect to a GCS server?}
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
@@ -359,37 +350,19 @@ Read the AITS FAQ:
 
 Preparing your job for submission is fairly straightforward.
 Start by basing your job script on one of the examples available in the \texttt{src/}
-directory of our GitHub's (\url{https://github.com/NAG-DevOps/speed-hpc}).
-%
-Job scripts are broken into four main sections: 
-
-\begin{itemize}
-	\item Directives
-	\item Module Loads
-	\item User Scripting
-\end{itemize}
-
-You can clone the tip of our repository to get the examples to start
-with or download them individually via a browser or command line:
-
-\small
+directory of our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub repository}. You can clone the repository to get the examples to start with via the command line:
 \begin{verbatim}
 git clone --depth=1 https://github.com/NAG-DevOps/speed-hpc.git
 cd speed-hpc/src
 \end{verbatim}
-\normalsize
 
-\noindent
-Then to quickly run some sample jobs, you can:
-\small
+\noindent The job script is a shell script that contains directives, module loads, and user scripting. To quickly run some sample jobs, use the following commands:
 \begin{verbatim}
-sbatch -p ps -t 10 bash.sh
 sbatch -p ps -t 10 env.sh
+sbatch -p ps -t 10 bash.sh
 sbatch -p ps -t 10 manual.sh
 sbatch -p pg -t 10 lambdal-singularity.sh
 \end{verbatim}
-\normalsize
-
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
@@ -399,51 +372,34 @@ sbatch -p pg -t 10 lambdal-singularity.sh
 \subsubsection{Module Loads}
 \label{sect:modules}
 
-As your job will run on a compute or GPU ``Speed'' node, and not the submit node,
-any software that is needed must be loaded by the job script. Software is loaded
-within the script just as it would be from the command line.
-
-To see a list of which modules are available, execute the following from the 
-command line on \texttt{speed-submit}.
+After setting the directives in your job script, the next section typically involves loading 
+the necessary software modules. The \texttt{module} command is used to manage the user environment, 
+make sure to load all the modules your job depends on. You can check available modules with the 
+module avail command. Loading the correct modules ensures that your environment is properly 
+set up for execution.
 
 \begin{verbatim}
 module avail
+module -t avail matlab		## show the list for a particular program (e.g., matlab)
+module -t avail m		    ## show the list for all programs starting with m     
 \end{verbatim}
 
-To list for a particular program (\tool{matlab}, for example):
-
+\noindent For example, insert the following in your script to load the \tool{matlab/R2023a} module:
 \begin{verbatim}
-module -t avail matlab
+module load matlab/R2023a/default
 \end{verbatim}
 
-Which, of course, can be shortened to match all that start with a
-particular letter:
+\noindent To remove a module from active use, replace \option{load} by \option{unload}.\\
 
-\begin{verbatim}
-module -t avail m
-\end{verbatim}
-
-Insert the following in your script to load the \tool{matlab/R2020a}) module:
-
-\begin{verbatim}
-module load matlab/R2020a/default
-\end{verbatim}
-
-Use, \option{unload}, in place of, \option{load}, to remove a module from active use.
-
-To list loaded modules:
-
+\noindent To list loaded modules:
 \begin{verbatim}
 module list
 \end{verbatim}
 
-To purge all software in your working environment:
-
+\noindent To purge all software in your working environment:
 \begin{verbatim}
 module purge
 \end{verbatim}
-
-Typically, only the \texttt{module load} command will be used in your script.
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section

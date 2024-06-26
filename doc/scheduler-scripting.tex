@@ -1,44 +1,39 @@
 % ------------------------------------------------------------------------------
 \subsubsection{User Scripting}
 \label{sect:scripting}
+The final part of the job script involves the commands that will be executed by the job.
+This section should include all necessary commands to set up and run the tasks 
+your script is designed to perform. You can use any Linux command in this section, 
+ranging from a simple executable call to a complex loop iterating through multiple commands.\\
 
-The last part the job script is the scripting that will be executed by the job. 
-This part of the job script includes all commands required to set up and 
-execute the task your script has been written to do. Any Linux command can be used 
-at this step. This section can be a simple call to an executable or a complex 
-loop which iterates through a series of commands.
+\noindent \textbf{Best Practice}: prefix any compute-heavy step with \tool{srun}.
+This ensures you gain proper insights on the execution of your job.\\
 
-Any compute heavy step is preferably should be prefixed by \tool{srun}
-as the best practice.
+\noindent Each software program may have its own execution framework, as it's the script's author (e.g., you) 
+responsibility to review the software's documentation to understand its requirements.
+Your script should be written to clearly specify the location of input and output files and the degree of parallelism needed.\\
 
-Every software program has a unique execution framework. It is the responsibility 
-of the script's author (e.g., you) to know what is required for the software used 
-in your script by reviewing the software's documentation. Regardless of which software
-your script calls, your script should be written so that the software knows the 
-location of the input and output files as well as the degree of parallelism.
-%
 % GE:
 %Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
 %to the value provided to the scheduler in the \option{-pe smp} option. 
 
-Jobs which touch data-input and data-output files more than once, should make use 
-of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
-\api{TMPDIR} is created when a job starts, and exists on the local disk of the
-compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
-than those to and from shared storage (which is provided over NFS). 
+\noindent Jobs that involve multiple interactions with data input and output files, should make use of \api{TMPDIR}, 
+a scheduler-provided workspace nearly 1~TB in size.
+\api{TMPDIR} is created on the local disk of the compute node at the start of a job, offering faster I/O operations 
+compared to shared storage (provided over NFS).
 
-An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
-the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
+%\noindent A sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
+%the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
 %\texttt{\$SGE\_O\_WORKDIR/references/} to \texttt{input/} (\texttt{\$SGE\_O\_WORKDIR} represents the
-\texttt{\$SLURM\_SUBMIT\_DIR/references/} to \texttt{input/} (\texttt{\$SLURM\_SUBMIT\_DIR} represents the
-current working directory), to make the new directory \texttt{results}, to
-execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
-output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
-to an existing directory, \texttt{processed}, that is located in the current
-working directory.
+%\texttt{\$SLURM\_SUBMIT\_DIR/references/} to \texttt{input/} (\texttt{\$SLURM\_SUBMIT\_DIR} represents the
+%current working directory), to make the new directory \texttt{results}, to
+%execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
+%output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
+%to an existing directory, \texttt{processed}
+%working directory.
 % TODO: verify:
-TMPDIR only exists for the duration of the job, though,
-so it is very important to copy relevant results from it at job's end.
+%TMPDIR only exists for the duration of the job, though,
+%so it is very important to copy relevant results from it at job's end.
 
 % ------------------------------------------------------------------------------
 \subsection{Sample Job Script}
