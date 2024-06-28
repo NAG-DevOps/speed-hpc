@@ -1,0 +1,132 @@
+% ------------------------------------------------------------------------------
+Here's a basic job script, \file{tcsh.sh} shown in \xf{fig:tcsh.sh}.
+You can copy it from our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub repository}.
+
+\begin{figure}[htpb]
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
+	\caption{Source code for \file{tcsh.sh}}
+	\label{fig:tcsh.sh}
+\end{figure}
+
+\noindent The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
+The lines that begin with \texttt{\#SBATCH} are directives for the scheduler.
+\begin{itemize}
+	%\item \texttt{-N} sets \emph{qsub-test} as the jobname
+	\item \texttt{-J} (or \option{--job-name}) sets \emph{tcsh-test} as the job name.
+	%\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
+	%\item \texttt{--chdir} tells the scheduler to execute the job from the current working directory
+	%\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
+	\item \texttt{--mem=1GB} requests and assigns 1GB of memory to the job. 
+	Jobs require the \texttt{--mem} option to be set either in the script
+	or on the command line; \textbf{if it's missing, job submission will be rejected.}
+\end{itemize}
+
+\noindent The script then:
+\begin{enumerate}
+	\item Sleeps on a node for 30 seconds
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
+	\item Prints the list of loaded modules into a file
+\end{enumerate}
+
+%The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
+\noindent The scheduler command, \tool{sbatch}, is used to submit (non-interactive) jobs. 
+%From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}.
+From an ssh session on \texttt{speed-submit}, submit this job with \texttt{sbatch ./tcsh.sh}.
+%You will see, \texttt{"Your job X ("qsub-test") has been submitted"}.
+You will see, \texttt{"Submitted batch job 2653"} where $2653$ is a job ID assigned.
+%The command, \tool{qstat}, can be used 
+The commands, \tool{squeue} and \tool{sinfo} can be used 
+%to look at the status of the cluster: \texttt{qstat -f -u "*"}.
+to look at the status of the cluster: \texttt{squeue}.
+You will see something like this: 
+
+%\small
+%\begin{verbatim}
+%queuename                      qtype resv/used/tot. load_avg arch          states
+%---------------------------------------------------------------------------------
+%a.q@speed-01.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%a.q@speed-03.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%a.q@speed-25.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%a.q@speed-27.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64
+     %144   100.00000 qsub-test nul-uge     r     12/03/2018 16:39:30    1 
+     %62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
+%---------------------------------------------------------------------------------
+%g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
+%---------------------------------------------------------------------------------
+%s.q@speed-08.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%s.q@speed-09.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
+%---------------------------------------------------------------------------------
+%s.q@speed-10.encs.concordia.ca BIP   0/32/32        32.72    lx-amd64
+     %62624 0.09843 case_talle x_yzabc      r     11/09/2021 16:50:09    32
+%---------------------------------------------------------------------------------
+%s.q@speed-11.encs.concordia.ca BIP   0/32/32        32.08    lx-amd64
+     %62679 0.14212 CWLR_DF    a_bcdef      r     11/10/2021 17:25:19    32
+%---------------------------------------------------------------------------------
+%s.q@speed-12.encs.concordia.ca BIP   0/32/32        32.10    lx-amd64
+     %62749 0.09000 CLOUDY     z_abc        r     11/11/2021 21:58:12    32
+%---------------------------------------------------------------------------------
+%s.q@speed-15.encs.concordia.ca BIP   0/4/32         0.03     lx-amd64
+     %62753 82.47478 matlabLDPa b_bpxez      r     11/12/2021 08:49:52     4
+%---------------------------------------------------------------------------------
+%s.q@speed-16.encs.concordia.ca BIP   0/32/32        32.31    lx-amd64
+     %62751 0.09000 CLOUDY     z_abc        r     11/12/2021 06:03:54    32
+%---------------------------------------------------------------------------------
+%s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.22    lx-amd64
+%---------------------------------------------------------------------------------
+%...
+%---------------------------------------------------------------------------------
+%s.q@speed-35.encs.concordia.ca BIP   0/32/32        2.78     lx-amd64
+     %62754 7.22952 qlogin-tes a_tiyuu      r     11/12/2021 10:31:06    32
+%---------------------------------------------------------------------------------
+%s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64
+%etc.
+\small
+\begin{verbatim}
+[serguei@speed-submit src] % squeue -l
+Thu Oct 19 11:38:54 2023
+JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+ 2641        ps interact   b_user  RUNNING   19:16:09 1-00:00:00      1 speed-07
+ 2652        ps interact   a_user  RUNNING      41:40 1-00:00:00      1 speed-07
+ 2654        ps tcsh-tes  serguei  RUNNING       0:01 7-00:00:00      1 speed-07
+[serguei@speed-submit src] % sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+ps*          up 7-00:00:00     14  drain speed-[08-10,12,15-16,20-22,30-32,35-36]
+ps*          up 7-00:00:00      1    mix speed-07
+ps*          up 7-00:00:00      7   idle speed-[11,19,23-24,29,33-34]
+pg           up 1-00:00:00      1  drain speed-17
+pg           up 1-00:00:00      3   idle speed-[05,25,27]
+pt           up 7-00:00:00      7   idle speed-[37-43]
+pa           up 7-00:00:00      4   idle speed-[01,03,25,27]
+\end{verbatim}
+\normalsize
+
+Remember that you only have 30 seconds before the job is essentially over, so 
+if you do not see a similar output, either adjust the sleep time in the 
+%script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} 
+script, or execute the \tool{sbatch} statement more quickly. The \tool{squeue} 
+output listed above shows you that your job is running on node \texttt{speed-07}, 
+that it has a job number of 2654, its time limit of 7 days, etc.
+% TODO
+%, that it 
+%was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the 
+%default). 
+
+Once the job finishes, there will be a new file in the directory that the job 
+%was started from, with the syntax of, \texttt{"job name".o"job number"}, so 
+was started from, with the syntax of, \texttt{slurm-"job id".out}, so 
+%in this example the file is, qsub \file{test.o144}. This file represents the 
+in this example the file is, \file{slurm-2654.out}. This file represents the 
+standard output (and error, if there is any) of the job in question. If you 
+look at the contents of your newly created file, you will see that it 
+contains the output of the, \texttt{module list} command. 
+Important information is often written to this file.
+%
+%Congratulations on your first job!

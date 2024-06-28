@@ -1,0 +1,26 @@
+% ------------------------------------------------------------------------------
+%						2 Job Management
+% ------------------------------------------------------------------------------
+%
+We use SLURM as the workload manager.
+It supports primarily two types of jobs: batch and interactive.
+Batch jobs are used to run unattended tasks, whereas, 
+interactive jobs are are ideal for setting up virtual environments, compilation, and debugging.\\
+%
+\noindent \textbf{Note:} In the following instructions, anything bracketed like, \verb+<>+, indicates a
+label/value to be replaced (the entire bracketed term needs replacement).\\
+
+\noindent Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
+\begin{verbatim}
+    #SBATCH --mem=100M -t 600 -J <job-name> -A <slurm account>
+    #SBATCH -p pg --gpus=2 --mail-type=ALL
+\end{verbatim}
+%
+For complex compute steps within a script, use \tool{srun}. We recommend using \tool{salloc} for interactive jobs as it supports multiple steps.
+However, srun can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
+%
+Common and required job parameters include:
+\begin{verbatim}
+memory (--mem), time (-t), job-name (-J), slurm project account (-A), partition (-p), 
+mail type (--mail-type), ntasks (-n), CPUs per task (--cpus-per-task).
+\end{verbatim}

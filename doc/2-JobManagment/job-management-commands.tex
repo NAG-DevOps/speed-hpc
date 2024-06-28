@@ -1,0 +1,108 @@
+% ------------------------------------------------------------------------------
+Here are useful job-management commands: 
+
+\begin{itemize}
+%\item
+%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+%on \texttt{speed-submit} you can submit it using this
+\item
+\texttt{sbatch -A <ACCOUNT> --t <MINUTES> --mem=20G -p <PARTITION> ./<myscript>.sh}: once that your job script is ready,
+on \texttt{speed-submit} you can submit it using this
+
+\item
+%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+\texttt{squeue -u <ENCSusername>}: you can check the status of your job(s)
+
+\item
+%\texttt{qstat -f -u "*"}: display cluster status for all users. 
+\texttt{squeue}: display cluster status for all users. 
+\option{-A} shows per account (e.g., \texttt{vidpro}, \texttt{gipsy},
+\texttt{speed1}, \texttt{ai2}, \texttt{aits}, etc.),
+\option{-p} per partition (\texttt{ps}, \texttt{pg}, \texttt{pt}, \texttt{pa}),
+and others. \texttt{man squeue} for details.
+
+\item
+%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+\texttt{squeue --job [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+
+\item
+\texttt{squeue -las}: displays individual job steps (for debugging
+easier to see which step failed if you used \tool{srun}).
+
+\item
+\verb+watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"+: view \tool{sinfo} information and watch the queue for your job(s).
+
+%\item
+%\texttt{qdel [job-ID]}: delete job [job-ID]. 
+\item
+\texttt{scancel [job-ID]}: cancel job [job-ID]. 
+
+%\item
+%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
+\item
+\texttt{scontrol hold [job-ID]}: hold queued job, [job-ID], from running. 
+
+%\item
+%\texttt{qrls [job-ID]}: release held job [job-ID]. 
+\item
+\texttt{scontrol release [job-ID]}: release held job [job-ID]. 
+
+\item
+%\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
+\texttt{sacct -j [job-ID]}: get job stats.
+%for completed job [job-ID].
+\api{maxvmem} is one of the more useful stats that you can elect to display
+as a format option.
+
+\small
+\begin{verbatim}
+% sacct -j 2654
+JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+2654          tcsh-test         ps     speed1          1  COMPLETED      0:0
+2654.batch        batch                speed1          1  COMPLETED      0:0
+2654.extern      extern                speed1          1  COMPLETED      0:0
+% sacct -j 2654 -o jobid,user,account,MaxVMSize,Reason%10,TRESUsageOutMax%30
+JobID             User    Account  MaxVMSize     Reason        TRESUsageOutMax
+------------ --------- ---------- ---------- ---------- ----------------------
+2654           serguei     speed1                  None
+2654.batch                 speed1    296840K             energy=0,fs/disk=1975
+2654.extern                speed1    296312K              energy=0,fs/disk=343
+\end{verbatim}
+\normalsize
+
+See \texttt{man sacct} or \texttt{sacct -e} for details of the
+available formatting options. You can define your preferred
+default format in the \api{SACCT\_FORMAT} environment variable
+in your \texttt{.cshrc} or \texttt{.bashrc} files.
+
+\item
+\texttt{seff [job-ID]}: reports on the efficiency of a job's cpu and memory utilization. 
+Don't execute it on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be misleading.
+
+If you define the following directive in your batch script, your ENCS email address will receive an email with seff output when your job is finished.
+\small
+\begin{verbatim}
+#SBATCH --mail-type=ALL        
+\end{verbatim}
+\normalsize
+
+Output example:
+\small
+\begin{verbatim}
+Job ID: XXXXX
+Cluster: speed
+User/Group: user1/user1
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:04:29
+CPU Efficiency: 0.35% of 21:32:20 core-walltime
+Job Wall-clock time: 05:23:05
+Memory Utilized: 2.90 GB
+Memory Efficiency: 2.90% of 100.00 GB
+\end{verbatim}
+\normalsize
+
+
+\end{itemize}

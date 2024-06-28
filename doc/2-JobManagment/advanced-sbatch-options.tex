@@ -1,0 +1,51 @@
+% ------------------------------------------------------------------------------
+In addition to the basic \tool{sbatch} options presented earlier, there are a 
+few additional options that are generally useful:
+
+\begin{itemize}
+\item
+%\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
+%(e)nds; (a)borts. Mail is sent to the default address of,
+%\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
+%\texttt{-M}). The report sent when a job ends includes job 
+%runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+\texttt{--mail-type=TYPE}: requests that the scheduler e-mail you when a job changes
+state. Where \texttt{TYPE} is \texttt{ALL}, \texttt{BEGIN}, \texttt{END}, or \texttt{FAIL}.
+% TODO: verify
+Mail is sent to the default address of, \\
+\texttt{"<ENCSusername>@encs.concordia.ca"}, which you can consult
+via \texttt{webmail.encs} via the VPN, on login.encs via \tool{alpine}
+or setup forwarding to @concordia.ca address or offsite,
+unless a different address is supplied (see, \texttt{--mail-user}).
+% TODO: double-check
+The report sent when a job ends includes job 
+runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+
+\item
+%\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
+%notification address, rather than the default (see, \texttt{-m}). 
+\texttt{--mail-user email@domain.com}: requests that the scheduler use this e-mail 
+notification address, rather than the default (see, \texttt{--mail-type}). 
+
+\item
+%\texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
+\texttt{--export=[ALL | NONE | variables]}: exports environment variable(s) that can be used by the script.
+
+\item
+%\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
+%that if you give a single number, that represents \emph{seconds}, not hours. 
+\texttt{-t [min]} or \texttt{DAYS-HH:MM:SS}: sets a job runtime of min or HH:MM:SS. Note 
+that if you give a single number, that represents \emph{minutes}, not hours. 
+
+\item
+%\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
+\texttt{--depend=[state:job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
+
+\end{itemize}
+
+The many \tool{sbatch} options available are read with, \texttt{man sbatch}. Also 
+note that \tool{sbatch} options can be specified during the job-submission 
+command, and these \emph{override} existing script options (if present). The 
+syntax is, \texttt{sbatch [options] PATHTOSCRIPT}, but unlike in the script, 
+the options are specified without the leading \verb+#SBATCH+
+(e.g., \texttt{sbatch -J sub-test --chdir=./ --mem=1G ./tcsh.sh}).

@@ -1,0 +1,63 @@
+For jobs that can take advantage of multiple machine cores, up to 32 cores
+(per job) can be requested in your script with: 
+
+%\begin{verbatim}
+%#$ -pe smp [#cores] 
+%\end{verbatim}
+\begin{verbatim}
+#SBATCH -n [#cores for processes] 
+\end{verbatim}
+
+or
+
+\begin{verbatim}
+#SBATCH -n 1
+#SBATCH -c [#cores for threads of a single process]
+\end{verbatim}
+
+Both \tool{sbatch} and \tool{salloc} support \option{-n} on the command line,
+and it should always be used either in the script or on the command line as the
+default $n=1$.
+\textbf{Do not request more cores than you think will be useful}, as larger-core
+jobs are more difficult to schedule. On the flip side, though, if you 
+are going to be running a program that scales out to the maximum single-machine
+core count available, please (please) request 32 cores, to avoid node 
+oversubscription (i.e., to avoid overloading the CPUs).
+
+\textbf{Important} note about \option{--ntasks} or \option{--ntasks-per-node}
+(\option{-n}) talks about processes (usually the ones ran with \tool{srun}).
+\option{--cpus-per-task} (\option{-c}) corresponds to threads per process.
+Some programs consider them equivalent, some don't. Fluent for example
+uses \option{--ntasks-per-node=8} and \option{--cpus-per-task=1},
+some just set \option{--cpus-per-task=8} and \option{--ntasks-per-node=1}.
+If one of them is not $1$ then some applications need to be told to
+use $n*c$ total cores.
+
+
+Core count associated with a job appears under,
+%``states'', in the, \texttt{qstat -f -u "*"}, output.
+``AllocCPUS'', in the, \texttt{qacct -j}, output.
+
+\small
+\begin{verbatim}
+[serguei@speed-submit src] % squeue -l
+Thu Oct 19 20:32:32 2023
+JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+ 2652        ps interact   a_user  RUNNING   9:35:18 1-00:00:00      1 speed-07
+[serguei@speed-submit src] % sacct -j 2652
+JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
+------------ ---------- ---------- ---------- ---------- ---------- --------
+2652         interacti+         ps     speed1         20    RUNNING      0:0
+2652.intera+ interacti+                speed1         20    RUNNING      0:0
+2652.extern      extern                speed1         20    RUNNING      0:0
+2652.0       gydra_pmi+                speed1         20  COMPLETED      0:0
+2652.1       gydra_pmi+                speed1         20  COMPLETED      0:0
+2652.2       gydra_pmi+                speed1         20     FAILED      7:0
+2652.3       gydra_pmi+                speed1         20     FAILED      7:0
+2652.4       gydra_pmi+                speed1         20  COMPLETED      0:0
+2652.5       gydra_pmi+                speed1         20  COMPLETED      0:0
+2652.6       gydra_pmi+                speed1         20  COMPLETED      0:0
+2652.7       gydra_pmi+                speed1         20  COMPLETED      0:0
+\end{verbatim}
+\normalsize
+

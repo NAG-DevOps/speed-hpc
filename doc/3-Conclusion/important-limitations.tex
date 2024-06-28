@@ -1,0 +1,35 @@
+\begin{itemize}
+    \item
+    New users are restricted to a total of 32 cores: write to \url{rt-ex-hpc@encs.concordia.ca}
+    if you need more temporarily (192 is the maximum, or, 6 jobs of 32 cores each).
+    
+    \item
+    Batch job sessions are a maximum of one week in length (only 24 hours, though,
+    for interactive jobs, see \xs{sect:interactive-jobs}).
+    
+    \item
+    Scripts can live in your NFS-provided home, but any substantial data need
+    to be in your cluster-specific directory
+    (located at \verb+/speed-scratch/<ENCSusername>/+).
+    
+    NFS is great for acute activity, but is not ideal for chronic activity.
+    Any data that a job will 
+    read more than once should be copied at the start to the scratch disk of a 
+    compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SLURM\_SUBMIT\_DIR}), 
+    any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
+    job is near to finishing, those data should be copied to your NFS-mounted 
+    home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps,
+    \api{\$SLURM\_SUBMIT\_DIR}). In other words, IO-intensive operations should be effected 
+    locally whenever possible, saving network activity for the start and end of 
+    jobs. 
+    
+    \item
+    Your current resource allocation is based upon past usage, which is an 
+    amalgamation of approximately one week's worth of past wallclock (i.e., time 
+    spent on the node(s)) and compute activity (on the node(s)).
+    
+    \item
+    Jobs should NEVER be run outside of the province of the scheduler.
+    Repeat offenders risk loss of cluster access. 
+    
+\end{itemize}

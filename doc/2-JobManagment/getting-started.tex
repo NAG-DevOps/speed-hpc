@@ -1,14 +1,50 @@
-% ------------------------------------------------------------------------------
+% ------------- 2.1 Getting Started ----------------------------
+
+Before getting started, please review the 
+``What Speed is'' (\xs{sect:speed-is-for})
+and ``What Speed is Not'' (\xs{sect:speed-is-not}).
+Once your GCS ENCS account has been granted access to ``Speed'',
+use your ENCS account credentials to create an SSH connection to \texttt{speed} (an alias for\\
+\texttt{speed-submit.encs.concordia.ca}).
+\noindent All users are expected to have a basic understanding of
+Linux and its commonly used commands (see \xa{sect:faqs} for resources).
+
+% -------------- 2.1.1 SSH Connections ---------------------------
+\subsubsection{SSH Connections}
+\label{sect:ssh}
+
+Requirements to create connections to ``Speed'':
+\begin{enumerate}
+	\item \textbf{Active GCS ENCS user account:} Ensure you have an active GCS ENCS user account with 
+	permission to connect to Speed (see \xs{sect:access-requests}).
+	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia’s VPN, 
+	which requires a Concordia netname.
+	\item \textbf{Terminal Emulator for Windows:} Windows systems use a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
+	\item \textbf{Terminal for macOS:} macOS systems have a built-in Terminal app or \tool{xterm} that comes with XQuartz.
+\end{enumerate}
+
+\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account’s username:
+\begin{verbatim}
+    ssh <ENCSusername>@speed.encs.concordia.ca
+\end{verbatim}
+
+\noindent
+For detailed instructions on securely connecting to a GCS server, refer to the AITS FAQ: 
+\href{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}{How do I securely connect to a GCS server?}
+
+% -------------- 2.1.2 Environment Set Up-------------------------
 \subsubsection{Environment Set Up}
 \label{sect:envsetup}
 
 After creating an SSH connection to Speed, you will need to make sure the 
 \tool{srun}, \tool{sbatch}, and \tool{salloc} commands are available to you. 
 To check this, type each command at the prompt and press Enter.
-If any command is not found, e.g., (``command not found'') is returned,
-you need to make sure your \api{\$PATH} includes \texttt{/local/bin}.
-You can check your \api{\$PATH} by typing:
-\texttt{echo \$PATH} at the prompt.\\
+If ``command not found'' is returned, you need to make sure your \api{\$PATH} includes \texttt{/local/bin}.
+You can check your \api{\$PATH} by typing:\\
+\begin{verbatim}
+    echo $PATH
+\end{verbatim}
+
 %
 %source 
 %the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
@@ -47,16 +83,15 @@ home directory.
 \noindent Next, copy the job template to your cluster-specific storage
 \begin{itemize}
     \item From Windows drive to Speed:\\ 
-    \verb|cp /winhome/<1st letter of $USER>/$USER/template.sh /speed-scratch/$USER/|
+    \verb|cp /winhome/<1st letter of $USER>/$USER/example.sh /speed-scratch/$USER/|
     \item From Linux drive to Speed:\\
-    \verb|cp ~/template.sh /speed-scratch/$USER/|
+    \verb|cp ~/example.sh /speed-scratch/$USER/|
 \end{itemize}
 
-%\textbf{Tip:} Add the source command to your shell-startup script. 
-
-\noindent\textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
+\noindent \textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
 If you would like to use \tool{bash}, please contact \texttt{rt-ex-hpc AT encs.concordia.ca}.\\
 
+%\textbf{Tip:} Add the source command to your shell-startup script. 
 %For \textbf{new GCS ENCS Users}, and/or those who don't have a shell-startup script, 
 %based on your shell type use one of the following commands to copy a start up script 
 %from \texttt{nul-uge}'s home directory to your home directory. (To move to your home

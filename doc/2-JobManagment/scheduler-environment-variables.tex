@@ -1,0 +1,65 @@
+% ------------------------------------------------------------------------------
+\label{sect:env-vars}
+
+The scheduler presents a number of environment variables that can be used in 
+your jobs. You can invoke \tool{env} or \tool{printenv} in your
+job to know what hose are (most begin with the prefix \texttt{SLURM}).
+%
+Some of the more useful ones are:
+%\api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
+
+\begin{itemize}
+\item
+% TODO: verify temporal existence
+\api{\$TMPDIR} -- the path to the job's temporary space on the node. It
+\emph{only} exists for the duration of the job, so if data in the temporary space 
+are important, they absolutely need to be accessed before the job terminates.
+
+%\item
+%\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
+%NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+%the path defaults to your home directory.
+\item
+\api{\$SLURM\_SUBMIT\_DIR} -- the path to the job's working directory (likely an
+NFS-mounted path). If, \option{--chdir}, was stipulated, that path is taken; if not, 
+% TODO: verify if home or current:
+the path defaults to your home directory.
+
+% TODO: SLURM does not appear to have this
+% SLURM_NTASKS
+%\item
+%\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
+%be used in place of hardcoded thread-request declarations. 
+
+\item
+\api{\$SLURM\_JOBID} -- your current jobs ID, useful for some manipulation
+and reporting.
+
+\item
+\api{\$SLURM\_JOB\_NODELIST}=nodes participating in your job.
+
+\item
+\api{\$SLURM\_ARRAY\_TASK\_ID}=for array jobs (see \xs{sect:array-jobs}).
+
+\item
+See a more complete list here:
+
+\small
+\begin{itemize}
+\item
+\url{https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES}
+\item
+\url{https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES}
+\end{itemize}
+\normalsize
+
+\end{itemize}
+
+\noindent
+In \xf{fig:tmpdir.sh} is a sample script, using some of these.
+
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{tmpdir.sh}
+    \caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}

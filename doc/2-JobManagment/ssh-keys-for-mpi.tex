@@ -1,0 +1,20 @@
+\label{sect:ssh-mpi}
+
+Some programs effect their parallel processing via MPI (which is a 
+communication protocol). An example of such software is Fluent. MPI needs to 
+have `passwordless login' set up, which means SSH keys. In your NFS-mounted 
+home directory:
+
+\begin{itemize}
+\item
+\texttt{cd .ssh}
+\item
+\texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
+\item
+\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}}
+file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
+\item
+Set file permissions of \texttt{authorized\_keys} to 600; of your NFS-mounted home
+to 700 (note that you likely will not have to do anything here, as most people
+will have those permissions by default). 
+\end{itemize}
