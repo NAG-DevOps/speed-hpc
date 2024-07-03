@@ -188,48 +188,59 @@ Here is a summary of useful job management commands for handling various aspects
 job submission and monitoring on the Speed cluster:
 
 \begin{itemize}
-	%\item
-	%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
-	%on \texttt{speed-submit} you can submit it using this
-	\item Submitting a job:\\
-	\texttt{sbatch -A <ACCOUNT> -t <MINUTES> --mem=<MEMORY> -p <PARTITION> ./<myscript>.sh}
+	\item Submitting a job:
+	\begin{verbatim}
+		sbatch -A <ACCOUNT> -t <MINUTES> --mem=<MEMORY> -p <PARTITION> ./<myscript>.sh
+	\end{verbatim}
 
-	%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
-	\item Checking your job(s) status:\\
-	\texttt{squeue -u <ENCSusername>}
+	\item Checking your job(s) status:
+	\begin{verbatim}
+		squeue -u <ENCSusername>
+	\end{verbatim}
 
-	%\texttt{qstat -f -u "*"}: display cluster status for all users. 
-	\item Displaying cluster status:\\
-	\texttt{squeue}
+	\item Displaying cluster status:
+	\begin{verbatim}
+		squeue
+	\end{verbatim}
 		\begin{itemize}
 			\item Use \option{-A} for per account (e.g., \texttt{-A vidpro}, \texttt{-A aits}), 
 			\item Use \option{-p} for per partition (e.g., \texttt{-p ps}, \texttt{-p pg}, \texttt{-p pt}), etc.
 		\end{itemize}
 
-	%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
-	\item Displaying job information:\\
-	\texttt{squeue --job <job-ID>}
+	\item Displaying job information:
+	\begin{verbatim}
+		squeue --job <job-ID>
+	\end{verbatim}
 
-	\item Displaying individual job steps: (to see which step failed if you used \tool{srun})\\
-	\texttt{squeue -las}
+	\item Displaying individual job steps: (to see which step failed if you used \tool{srun})
+	\begin{verbatim}
+		squeue -las
+	\end{verbatim}
 
-	\item Monitoring job and cluster status: (view \tool{sinfo} and watch the queue for your job(s))\\
-	\verb+watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"+
+	\item Monitoring job and cluster status: (view \tool{sinfo} and watch the queue for your job(s))
+	\begin{verbatim}
+		watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"
+	\end{verbatim}
 
-	%\texttt{qdel [job-ID]}: delete job [job-ID]. 
-	\item Canceling a job:\\
-	\texttt{scancel <job-ID>}
+	\item Canceling a job:
+	\begin{verbatim}
+		scancel <job-ID>
+	\end{verbatim}
 
-	%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
-	\item Holding a job:\\
-	\texttt{scontrol hold <job-ID>}
+	\item Holding a job:
+	\begin{verbatim}
+		scontrol hold <job-ID>
+	\end{verbatim}
 
-	%\texttt{qrls [job-ID]}: release held job [job-ID]. 
-	\item Releasing a job:\\
-	\texttt{scontrol release <job-ID>}
+	\item Releasing a job:
+	\begin{verbatim}
+		scontrol release <job-ID>
+	\end{verbatim}
 
-	\item Getting job statistics: (including useful metrics like ``maxvmem'')\\
-	\texttt{sacct -j <job-ID>}
+	\item Getting job statistics: (including useful metrics like ``maxvmem'')
+	\begin{verbatim}
+		sacct -j <job-ID>
+	\end{verbatim}
 	
 	\api{maxvmem} is one of the more useful stats that you can elect to display
 	as a format option.
@@ -279,64 +290,95 @@ job submission and monitoring on the Speed cluster:
 	\normalsize
 \end{itemize}
 
+%\begin{itemize}
+	%\item
+	%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+	%on \texttt{speed-submit} you can submit it using this
+	%\item
+	%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+	%\item
+	%\texttt{qstat -f -u "*"}: display cluster status for all users. 
+	%\item
+	%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+	%\item
+	%\texttt{qdel [job-ID]}: delete job [job-ID]. 
+	%item
+	%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running.
+	%item
+	%\texttt{qrls [job-ID]}: release held job [job-ID]. 
+%\end{itemize}
 
-% ------------------------------------------------------------------------------
+% -------------- 2.5 Advanced sbatch Options ------------------
+% -------------------------------------------------------------
 %\subsection{Advanced \tool{qsub} Options}
 \subsection{Advanced \tool{sbatch} Options}
 \label{sect:submit-options}
 \label{sect:qsub-options}
 
-In addition to the basic \tool{sbatch} options presented earlier, there are a 
-few additional options that are generally useful:
+In addition to the basic sbatch options presented earlier, 
+there are several advanced options that are generally useful:
 
 \begin{itemize}
-\item
-%\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
-%(e)nds; (a)borts. Mail is sent to the default address of,
-%\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
-%\texttt{-M}). The report sent when a job ends includes job 
-%runtime, as well as the maximum memory value hit (\api{maxvmem}). 
-\texttt{--mail-type=TYPE}: requests that the scheduler e-mail you when a job changes
-state. Where \texttt{TYPE} is \texttt{ALL}, \texttt{BEGIN}, \texttt{END}, or \texttt{FAIL}.
-% TODO: verify
-Mail is sent to the default address of, \\
-\texttt{"<ENCSusername>@encs.concordia.ca"}, which you can consult
-via \texttt{webmail.encs} via the VPN, on login.encs via \tool{alpine}
-or setup forwarding to @concordia.ca address or offsite,
-unless a different address is supplied (see, \texttt{--mail-user}).
-% TODO: double-check
-The report sent when a job ends includes job 
-runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+	%\texttt{-m bea}: requests that the scheduler e-mail you when a job (b)egins;
+	%(e)nds; (a)borts. Mail is sent to the default address of,
+	%\texttt{"username@encs.concordia.ca"}, unless a different address is supplied (see, 
+	%\texttt{-M}). The report sent when a job ends includes job 
+	%runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+	\item E-mail notifications:
+	\begin{verbatim}
+		--mail-type=<TYPE>
+	\end{verbatim}
+	Requests the scheduler to send an email when the job changes state.
+	\texttt{<TYPE>} can be \texttt{ALL}, \texttt{BEGIN}, \texttt{END}, or \texttt{FAIL}.
+	Mail is sent to the default address of, \texttt{"<ENCSusername>@encs.concordia.ca"}, 
+	which you can consult via \texttt{webmail.encs} unless a different address is supplied 
+	(see, \texttt{--mail-user}).
+	% TODO: double-check
+	The report sent when a job ends includes job 
+	runtime, as well as the maximum memory value hit (\api{maxvmem}). 
+	\begin{verbatim}
+		--mail-user email@domain.com
+	\end{verbatim}
+	Specifies a different email address for notifications rather than the default.
+	%\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
+	%notification address, rather than the default (see, \texttt{-m}). 
 
-\item
-%\texttt{-M email@domain.com}: requests that the scheduler use this e-mail 
-%notification address, rather than the default (see, \texttt{-m}). 
-\texttt{--mail-user email@domain.com}: requests that the scheduler use this e-mail 
-notification address, rather than the default (see, \texttt{--mail-type}). 
+	\item Export environment variables used by the script.:
+	\begin{verbatim}
+		--export=ALL
+		--export=NONE
+		--export=VARIABLES
+	\end{verbatim}
+	%\texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
 
-\item
-%\texttt{-v variable[=value]}: exports an environment variable that can be used by the script.
-\texttt{--export=[ALL | NONE | variables]}: exports environment variable(s) that can be used by the script.
+	\item Job runtime:
+	%\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
+	%that if you give a single number, that represents \emph{seconds}, not hours.
+	\begin{verbatim}
+		-t <MINUTES> or DAYS-HH:MM:SS
+	\end{verbatim} 
+	sets a job runtime of min or HH:MM:SS. Note that if you give a single number, that represents \emph{minutes}, not hours. 
 
-\item
-%\texttt{-l h\_rt=[hour]:[min]:[sec]}: sets a job runtime of HH:MM:SS. Note 
-%that if you give a single number, that represents \emph{seconds}, not hours. 
-\texttt{-t [min]} or \texttt{DAYS-HH:MM:SS}: sets a job runtime of min or HH:MM:SS. Note 
-that if you give a single number, that represents \emph{minutes}, not hours. 
-
-\item
-%\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
-\texttt{--depend=[state:job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
-
+	\item Job Dependencies:
+	%\texttt{-hold\_jid [job-ID]}: run this job only when job [job-ID] finishes. Held jobs appear in the queue. 
+	\begin{verbatim}
+		--depend=<state:job-ID>
+	\end{verbatim} 
+	Runs the job only when the specified job <job-ID> finishes. This is useful for creating job chains where 
+	subsequent jobs depend on the completion of previous ones.
 \end{itemize}
 
-The many \tool{sbatch} options available are read with, \texttt{man sbatch}. Also 
-note that \tool{sbatch} options can be specified during the job-submission 
+\noindent \textbf{Note:} \tool{sbatch} options can be specified during the job-submission 
 command, and these \emph{override} existing script options (if present). The 
-syntax is, \texttt{sbatch [options] PATHTOSCRIPT}, but unlike in the script, 
-the options are specified without the leading \verb+#SBATCH+
-(e.g., \texttt{sbatch -J sub-test --chdir=./ --mem=1G ./tcsh.sh}).
-
+syntax is
+\begin{verbatim}
+	sbatch [options] PATHTOSCRIPT
+\end{verbatim}
+but unlike in the script, the options are specified without the leading \verb+#SBATCH+
+e.g.: 
+\begin{verbatim}
+	sbatch -J sub-test --chdir=./ --mem=1G ./tcsh.sh
+\end{verbatim}
 
 % ------------------------------------------------------------------------------
 \subsection{Array Jobs}
