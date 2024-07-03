@@ -1,31 +1,28 @@
-% ------------------------------------------------------------------------------
-\subsubsection{User Scripting}
-\label{sect:scripting}
+%  2.2.3 User Scripting
+% -------------------
+% TMP scheduler-specific section
 
-The last part the job script is the scripting that will be executed by the job. 
-This part of the job script includes all commands required to set up and 
-execute the task your script has been written to do. Any Linux command can be used 
-at this step. This section can be a simple call to an executable or a complex 
-loop which iterates through a series of commands.
+The final part of the job script involves the commands that will be executed by the job.
+This section should include all necessary commands to set up and run the tasks 
+your script is designed to perform. You can use any Linux command in this section, 
+ranging from a simple executable call to a complex loop iterating through multiple commands.\\
 
-Any compute heavy step is preferably should be prefixed by \tool{srun}
-as the best practice.
+\noindent \textbf{Best Practice}: prefix any compute-heavy step with \tool{srun}.
+This ensures you gain proper insights on the execution of your job.\\
 
-Every software program has a unique execution framework. It is the responsibility 
-of the script's author (e.g., you) to know what is required for the software used 
-in your script by reviewing the software's documentation. Regardless of which software
-your script calls, your script should be written so that the software knows the 
-location of the input and output files as well as the degree of parallelism.
+\noindent Each software program may have its own execution framework, as it's the script's author (e.g., you) 
+responsibility to review the software's documentation to understand its requirements.
+Your script should be written to clearly specify the location of input and output files and the degree of parallelism needed.\\
+
 %
 % GE:
 %Note that the cluster-specific environment variable, \api{NSLOTS}, resolves 
 %to the value provided to the scheduler in the \option{-pe smp} option. 
 
-Jobs which touch data-input and data-output files more than once, should make use 
-of \api{TMPDIR}, a scheduler-provided working space almost 1~TB in size.
-\api{TMPDIR} is created when a job starts, and exists on the local disk of the
-compute node executing your job. Using \api{TMPDIR} results in faster I/O operations 
-than those to and from shared storage (which is provided over NFS). 
+\noindent Jobs that involve multiple interactions with data input and output files, should make use of \api{TMPDIR}, 
+a scheduler-provided workspace nearly 1~TB in size.
+\api{TMPDIR} is created on the local disk of the compute node at the start of a job, offering faster I/O operations 
+compared to shared storage (provided over NFS).
 
 An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
 the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
@@ -40,11 +37,13 @@ working directory.
 TMPDIR only exists for the duration of the job, though,
 so it is very important to copy relevant results from it at job's end.
 
-% ------------------------------------------------------------------------------
+% -------------- 2.3 Sample Job Script ----------------------
+% -----------------------------------------------------------
 \subsection{Sample Job Script}
+\label{sect:sample-job-script}
 
-Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
-(you can copy it from our GitHub page or from \texttt{/home/n/nul-uge}).
+Here's a basic job script, \file{tcsh.sh} shown in \xf{fig:tcsh.sh}.
+You can copy it from our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub repository}.
 
 \begin{figure}[htpb]
 	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily]{tcsh.sh}
@@ -52,40 +51,41 @@ Now, let's look at a basic job script, \file{tcsh.sh} in \xf{fig:tcsh.sh}
 	\label{fig:tcsh.sh}
 \end{figure}
 
-The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
-%The lines that begin with \texttt{\#\$} are directives for the scheduler.
+\noindent The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
 The lines that begin with \texttt{\#SBATCH} are directives for the scheduler.
-
+%The lines that begin with \texttt{\#\$} are directives for the scheduler.
 \begin{itemize}
 	%\item \texttt{-N} sets \emph{qsub-test} as the jobname
-	\item \texttt{-J} (or \option{--job-name}) sets \emph{tcsh-test} as the job name
+	\item \texttt{-J} (or \option{--job-name}) sets \emph{tcsh-test} as the job name.
 	%\item \texttt{-cwd} tells the scheduler to execute the job from the current working directory
-	\item \texttt{--chdir} tells the scheduler to execute the job from the current working directory
+	%\item \texttt{--chdir} tells the scheduler to execute the job from the current working directory
 	%\item \texttt{-l h\_vmem=1GB} requests and assigns 1GB of memory to the job. CPU jobs \emph{require} the \texttt{-l h\_vmem} option to be set.
 	\item \texttt{--mem=1GB} requests and assigns 1GB of memory to the job. 
-	Jobs \emph{require} the \texttt{--mem} option to be set either in the script
-	or on the command line; \textbf{if it's missing job submission will be rejected.}
+	Jobs require the \texttt{--mem} option to be set either in the script
+	or on the command line; \textbf{if it's missing, job submission will be rejected.}
 \end{itemize}
 
-The script then:
-
-\begin{itemize}
-	\item Sleeps on a node for 30 seconds
-	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment
-	\item Prints the list of loaded modules into a file
-\end{itemize}
+\noindent The script then:
+\begin{enumerate}
+	\item Sleeps on a node for 30 seconds.
+	\item Uses the \tool{module} command to load the \texttt{gurobi/8.1.0} environment.
+	\item Prints the list of loaded modules into a file.
+\end{enumerate}
 
 %The scheduler command, \tool{qsub}, is used to submit (non-interactive) jobs. 
-The scheduler command, \tool{sbatch}, is used to submit (non-interactive) jobs. 
+\noindent The scheduler command, \tool{sbatch}, is used to submit (non-interactive) jobs. 
 %From an ssh session on speed-submit, submit this job with \texttt{qsub ./tcsh.sh}.
-From an ssh session on speed-submit, submit this job with \texttt{sbatch ./tcsh.sh}.
+From an ssh session on ``speed-submit'', submit this job with
+\begin{verbatim}
+    sbatch ./tcsh.sh
+\end{verbatim}
+
 %You will see, \texttt{"Your job X ("qsub-test") has been submitted"}.
-You will see, \texttt{"Submitted batch job 2653"} where $2653$ is a job ID assigned.
+\noindent You will see, \texttt{Submitted batch job 2653} where $2653$ is a job ID assigned.
 %The command, \tool{qstat}, can be used 
 The commands, \tool{squeue} and \tool{sinfo} can be used 
 %to look at the status of the cluster: \texttt{qstat -f -u "*"}.
 to look at the status of the cluster: \texttt{squeue -l}.
-You will see something like this: 
 
 %\small
 %\begin{verbatim}
@@ -135,6 +135,7 @@ You will see something like this:
 %---------------------------------------------------------------------------------
 %s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64
 %etc.
+
 \small
 \begin{verbatim}
 [serguei@speed-submit src] % squeue -l
@@ -155,13 +156,12 @@ pa           up 7-00:00:00      4   idle speed-[01,03,25,27]
 \end{verbatim}
 \normalsize
 
-Remember that you only have 30 seconds before the job is essentially over, so 
+\noindent \textbf{Remember} that you only have 30 seconds before the job is essentially over, so 
 if you do not see a similar output, either adjust the sleep time in the 
 %script, or execute the \tool{qstat} statement more quickly. The \tool{qstat} 
 script, or execute the \tool{sbatch} statement more quickly. The \tool{squeue} 
-output listed above shows you that your job is 
-running on node \texttt{speed-07}, that it has a job number of 2654,
-its time limit of 7 days, etc.
+output listed above shows that your job 2654 is running on node \texttt{speed-07}, 
+and its time limit is 7 days, etc.\\
 % TODO
 %, that it 
 %was started at 16:39:30 on 12/03/2018, and that it is a single-core job (the 
@@ -169,7 +169,7 @@ its time limit of 7 days, etc.
 
 Once the job finishes, there will be a new file in the directory that the job 
 %was started from, with the syntax of, \texttt{"job name".o"job number"}, so 
-was started from, with the syntax of, \texttt{slurm-"job id".out}, so 
+was started from, with the syntax of, \texttt{slurm-<job id>.out}, so 
 %in this example the file is, qsub \file{test.o144}. This file represents the 
 in this example the file is, \file{slurm-2654.out}. This file represents the 
 standard output (and error, if there is any) of the job in question. If you 
@@ -179,116 +179,104 @@ Important information is often written to this file.
 %
 %Congratulations on your first job! 
 
-% ------------------------------------------------------------------------------
+% -------------- 2.4 Common Job Management Commands Summary ---
+% -------------------------------------------------------------
 \subsection{Common Job Management Commands Summary}
 \label{sect:job-management-commands}
 
-Here are useful job-management commands: 
+Here is a summary of useful job management commands for handling various aspects of 
+job submission and monitoring on the Speed cluster:
 
 \begin{itemize}
-%\item
-%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
-%on \texttt{speed-submit} you can submit it using this
-\item
-\texttt{sbatch -A <ACCOUNT> --t <MINUTES> --mem=20G -p <PARTITION> ./<myscript>.sh}: once that your job script is ready,
-on \texttt{speed-submit} you can submit it using this
+	%\item
+	%\texttt{qsub ./<myscript>.sh}: once that your job script is ready,
+	%on \texttt{speed-submit} you can submit it using this
+	\item Submitting a job:\\
+	\texttt{sbatch -A <ACCOUNT> -t <MINUTES> --mem=<MEMORY> -p <PARTITION> ./<myscript>.sh}
 
-\item
-%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
-\texttt{squeue -u <ENCSusername>}: you can check the status of your job(s)
+	%\texttt{qstat -f -u <ENCSusername>}: you can check the status of your job(s)
+	\item Checking your job(s) status:\\
+	\texttt{squeue -u <ENCSusername>}
 
-\item
-%\texttt{qstat -f -u "*"}: display cluster status for all users. 
-\texttt{squeue}: display cluster status for all users. 
-\option{-A} shows per account (e.g., \texttt{vidpro}, \texttt{gipsy},
-\texttt{speed1}, \texttt{ai2}, \texttt{aits}, etc.),
-\option{-p} per partition (\texttt{ps}, \texttt{pg}, \texttt{pt}, \texttt{pa}),
-and others. \texttt{man squeue} for details.
+	%\texttt{qstat -f -u "*"}: display cluster status for all users. 
+	\item Displaying cluster status:\\
+	\texttt{squeue}
+		\begin{itemize}
+			\item Use \option{-A} for per account (e.g., \texttt{-A vidpro}, \texttt{-A aits}), 
+			\item Use \option{-p} for per partition (e.g., \texttt{-p ps}, \texttt{-p pg}, \texttt{-p pt}), etc.
+		\end{itemize}
 
-\item
-%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
-\texttt{squeue --job [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+	%\texttt{qstat -j [job-ID]}: display job information for [job-ID] (said job may be actually running, or waiting in the queue). 
+	\item Displaying job information:\\
+	\texttt{squeue --job <job-ID>}
 
-\item
-\texttt{squeue -las}: displays individual job steps (for debugging
-easier to see which step failed if you used \tool{srun}).
+	\item Displaying individual job steps: (to see which step failed if you used \tool{srun})\\
+	\texttt{squeue -las}
 
-\item
-\verb+watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"+: view \tool{sinfo} information and watch the queue for your job(s).
+	\item Monitoring job and cluster status: (view \tool{sinfo} and watch the queue for your job(s))\\
+	\verb+watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"+
 
-%\item
-%\texttt{qdel [job-ID]}: delete job [job-ID]. 
-\item
-\texttt{scancel [job-ID]}: cancel job [job-ID]. 
+	%\texttt{qdel [job-ID]}: delete job [job-ID]. 
+	\item Canceling a job:\\
+	\texttt{scancel <job-ID>}
 
-%\item
-%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
-\item
-\texttt{scontrol hold [job-ID]}: hold queued job, [job-ID], from running. 
+	%\texttt{qhold [job-ID]}: hold queued job, [job-ID], from running. 
+	\item Holding a job:\\
+	\texttt{scontrol hold <job-ID>}
 
-%\item
-%\texttt{qrls [job-ID]}: release held job [job-ID]. 
-\item
-\texttt{scontrol release [job-ID]}: release held job [job-ID]. 
+	%\texttt{qrls [job-ID]}: release held job [job-ID]. 
+	\item Releasing a job:\\
+	\texttt{scontrol release <job-ID>}
 
-\item
-%\texttt{qacct -j [job-ID]}: get job stats. for completed job [job-ID]. \api{maxvmem} is one of the more useful stats. 
-\texttt{sacct -j [job-ID]}: get job stats.
-%for completed job [job-ID].
-\api{maxvmem} is one of the more useful stats that you can elect to display
-as a format option.
+	\item Getting job statistics: (including useful metrics like ``maxvmem'')\\
+	\texttt{sacct -j <job-ID>}
+	
+	\api{maxvmem} is one of the more useful stats that you can elect to display
+	as a format option.
+	\small
+	\begin{verbatim}
+	% sacct -j 2654
+	JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
+	------------ ---------- ---------- ---------- ---------- ---------- --------
+	2654          tcsh-test         ps     speed1          1  COMPLETED      0:0
+	2654.batch        batch                speed1          1  COMPLETED      0:0
+	2654.extern      extern                speed1          1  COMPLETED      0:0
+	% sacct -j 2654 -o jobid,user,account,MaxVMSize,Reason%10,TRESUsageOutMax%30
+	JobID             User    Account  MaxVMSize     Reason        TRESUsageOutMax
+	------------ --------- ---------- ---------- ---------- ----------------------
+	2654           serguei     speed1                  None
+	2654.batch                 speed1    296840K             energy=0,fs/disk=1975
+	2654.extern                speed1    296312K              energy=0,fs/disk=343
+	\end{verbatim}
+	\normalsize
+	See \texttt{man sacct} or \texttt{sacct -e} for details of the available formatting options. 
+	You can define your preferred default format in the \api{SACCT\_FORMAT} environment variable
+	in your \texttt{.cshrc} or \texttt{.bashrc} files.
 
-\small
-\begin{verbatim}
-% sacct -j 2654
-JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
------------- ---------- ---------- ---------- ---------- ---------- --------
-2654          tcsh-test         ps     speed1          1  COMPLETED      0:0
-2654.batch        batch                speed1          1  COMPLETED      0:0
-2654.extern      extern                speed1          1  COMPLETED      0:0
-% sacct -j 2654 -o jobid,user,account,MaxVMSize,Reason%10,TRESUsageOutMax%30
-JobID             User    Account  MaxVMSize     Reason        TRESUsageOutMax
------------- --------- ---------- ---------- ---------- ----------------------
-2654           serguei     speed1                  None
-2654.batch                 speed1    296840K             energy=0,fs/disk=1975
-2654.extern                speed1    296312K              energy=0,fs/disk=343
-\end{verbatim}
-\normalsize
+	\item Displaying job efficiency: (including cpu and memory utilization)\\
+	\texttt{seff <job-ID>}\\
+	Don't execute it on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be misleading.
+	If you define the following directive in your batch script, your ENCS email address will receive an email with seff output when your job is finished.
+	\begin{verbatim}
+	#SBATCH --mail-type=ALL        
+	\end{verbatim}
 
-See \texttt{man sacct} or \texttt{sacct -e} for details of the
-available formatting options. You can define your preferred
-default format in the \api{SACCT\_FORMAT} environment variable
-in your \texttt{.cshrc} or \texttt{.bashrc} files.
-
-\item
-\texttt{seff [job-ID]}: reports on the efficiency of a job's cpu and memory utilization. 
-Don't execute it on RUNNING jobs (only on completed/finished jobs), efficiency statistics may be misleading.
-
-If you define the following directive in your batch script, your ENCS email address will receive an email with seff output when your job is finished.
-\small
-\begin{verbatim}
-#SBATCH --mail-type=ALL        
-\end{verbatim}
-\normalsize
-
-Output example:
-\small
-\begin{verbatim}
-Job ID: XXXXX
-Cluster: speed
-User/Group: user1/user1
-State: COMPLETED (exit code 0)
-Nodes: 1
-Cores per node: 4
-CPU Utilized: 00:04:29
-CPU Efficiency: 0.35% of 21:32:20 core-walltime
-Job Wall-clock time: 05:23:05
-Memory Utilized: 2.90 GB
-Memory Efficiency: 2.90% of 100.00 GB
-\end{verbatim}
-\normalsize
-
-
+	Output example:
+	\small
+	\begin{verbatim}
+	Job ID: XXXXX
+	Cluster: speed
+	User/Group: user1/user1
+	State: COMPLETED (exit code 0)
+	Nodes: 1
+	Cores per node: 4
+	CPU Utilized: 00:04:29
+	CPU Efficiency: 0.35% of 21:32:20 core-walltime
+	Job Wall-clock time: 05:23:05
+	Memory Utilized: 2.90 GB
+	Memory Efficiency: 2.90% of 100.00 GB
+	\end{verbatim}
+	\normalsize
 \end{itemize}
 
 
@@ -830,7 +818,7 @@ Create a vscode directory: \texttt{mkdir vscode}
 \item
 Go to vscode: \texttt{cd vscode}
 \item
-Create home and projects: \texttt {mkdir \{home,projects\}}
+Create home and projects: \texttt{mkdir \{home,projects\}}
 \item
 Create this directory: \texttt {mkdir -p /speed-scratch/\$USER/run-user}
 \end{enumerate}
