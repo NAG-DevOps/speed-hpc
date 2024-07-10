@@ -452,46 +452,115 @@ set up for execution.
 %	2.8.3 Jupyter Notebooks in Singularity
 %	2.8.4 JupyterLab in Conda and Pytorch
 % 	2.8.5 JupyterLab + Pytorch in Python venv
+%  	2.8.6 Visual Studio Code
 
-% ------------------------------------------------------------------------------
-\subsection{SSH Keys For MPI}
-\label{sect:ssh-mpi}
+% -------------- 2.9 Scheduler Environment Variables ----------
+% -------------------------------------------------------------
+\subsection{Scheduler Environment Variables}
+\label{sect:env-vars}
 
-Some programs effect their parallel processing via MPI (which is a 
-communication protocol). An example of such software is Fluent. MPI needs to 
-have `passwordless login' set up, which means SSH keys. In your NFS-mounted 
-home directory:
+The scheduler provides several environment variables that can be useful in your job scripts. 
+These variables can be accessed within the job using commands like \tool{env} or \tool{printenv}. 
+Many of these variables start with the prefix \texttt{SLURM}.\\
+
+\noindent Here are some of the most useful environment variables:
+%\api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
 
 \begin{itemize}
-\item
-\texttt{cd .ssh}
-\item
-\texttt{ssh-keygen -t ed25519} (default location; blank passphrase) 
-\item
-\texttt{cat id\_ed25519.pub >> authorized\_keys} (if the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}}
-file already exists) \emph{OR} \texttt{cat id\_ed25519.pub > authorized\_keys} (if does not) 
-\item
-Set file permissions of \texttt{authorized\_keys} to 600; of your NFS-mounted home
-to 700 (note that you likely will not have to do anything here, as most people
-will have those permissions by default). 
+	\item \api{\$TMPDIR}:
+	% TODO: verify temporal existence
+	This is the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job.
+	If you need the data from this temporary space, ensure you copy it before the job terminates.
+
+	\item \api{\$SLURM\_SUBMIT\_DIR}:
+	% TODO: verify if home or current:
+	%\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
+	%NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
+	%the path defaults to your home directory.
+	The path to the job's working directory (likely an NFS-mounted path).
+	If, \option{--chdir}, was stipulated, that path is taken; if not, 
+	the path defaults to your home directory.
+	
+	\item \api{\$SLURM\_JOBID}:
+	% TODO: SLURM does not appear to have this
+	This variable holds the current job's ID, which is useful for job manipulation and reporting.
+
+	% SLURM_NTASKS
+	%\item
+	%\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
+	%be used in place of hardcoded thread-request declarations. 
+
+	\item \api{\$SLURM\_JOB\_NODELIST}:
+	This lists the nodes participating in your job.
+
+	\item \api{\$SLURM\_ARRAY\_TASK\_ID}:
+	For array jobs, this variable represents the task ID 
+	(refer to \xs{sect:array-jobs} for more details on array jobs).
 \end{itemize}
 
-% ------------------------------------------------------------------------------
+\noindent For a more comprehensive list of environment variables, refer to the SLURM documentation for 
+\href{https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES}{Input Environment Variables} and
+\href{https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES}{Output Environment Variables}.\\
+
+\noindent Here's an example script (see \xf{fig:tmpdir.sh}) that utilizes some of these environment variables:
+
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\scriptsize\ttfamily]{tmpdir.sh}
+    \caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}
+
+% -------------- 2.10 SSH Keys for MPI ------------------------
+% -------------------------------------------------------------
+\subsection{SSH Keys for MPI}
+\label{sect:ssh-mpi}
+
+Some programs, such as Fluent, utilize MPI (Message Passing Interface) for parallel processing. 
+MPI requires `passwordless login', which is achieved through SSH keys. Here are the steps to set up SSH keys for MPI:
+
+\begin{itemize}
+	\item Navigate to the \texttt{.ssh} directory
+	\begin{verbatim}cd .ssh\end{verbatim}
+
+	\item Generate a new SSH key pair (Accept the default location and leave the passphrase blank)
+	\begin{verbatim}ssh-keygen -t ed25519\end{verbatim}
+
+	\item Authorize the Public Key:
+	\begin{verbatim}cat id_ed25519.pub >> authorized_keys\end{verbatim} 
+	If the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}} file does not exist, use
+	\begin{verbatim}cat id_ed25519.pub > authorized_keys\end{verbatim}
+
+	\item Set permissions: ensure the correct permissions are set for the `authorized\_keys' file and your home directory,
+	(most users will already have these permissions by default.):
+	\begin{verbatim}
+	chmod 600 ~/.ssh/authorized_keys
+	chmod 700 ~
+	\end{verbatim}
+\end{itemize}
+
+% -------------- 2.11 Creating Virtual Environments -----------
+% -------------------------------------------------------------
 \subsection{Creating Virtual Environments}
 \label{sect:environments}
 \label{sect:examples-venv}
 
-The following documentation is specific to the \textbf{Speed} HPC Facility at the
+The following documentation is specific to \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
 %
-Virtual environments typically instantiated via Conda or Python.
-Another option is Singularity detailed in \xs{sect:singularity-containers}.
-%
-Usually, virtual environments are created once during an interactive session before submitting
-a batch job to the scheduler. The job script submitted to the scheduler is then written to 
-(1) activate the virtual environment, (2) use it, and (3) close it at the end of the job.
+Virtual environments are typically created using Conda or Python.
+Another option is Singularity (detailed in \xs{sect:singularity-containers}).\\
 
-% ------------------------------------------------------------------------------
+These environments are usually created once during an interactive session before submitting a batch job to the scheduler. 
+The job script submitted to the scheduler should:
+
+\begin{enumerate}
+	\item Activate the virtual environment.
+	\item Use the virtual environment.
+	\item Deactivate the virtual environment at the end of the job.
+\end{enumerate}
+
+%  2.11.1 Anaconda
+% -------------------
 \subsubsection{Anaconda}
 \label{sect:conda-venv}
 
