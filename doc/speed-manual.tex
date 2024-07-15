@@ -548,11 +548,10 @@ The following documentation is specific to \textbf{Speed} HPC Facility at the
 Gina Cody School of Engineering and Computer Science.
 %
 Virtual environments are typically created using Conda or Python.
-Another option is Singularity (detailed in \xs{sect:singularity-containers}).\\
-
-These environments are usually created once during an interactive session before submitting a batch job to the scheduler. 
+Another option is Singularity (detailed in \xs{sect:singularity-containers}).
+These environments are usually created once during an interactive session 
+before submitting a batch job to the scheduler. 
 The job script submitted to the scheduler should:
-
 \begin{enumerate}
 	\item Activate the virtual environment.
 	\item Use the virtual environment.
@@ -564,127 +563,102 @@ The job script submitted to the scheduler should:
 \subsubsection{Anaconda}
 \label{sect:conda-venv}
 
-Request an interactive session in the queue you wish to submit your jobs to (e.g., salloc -p pg --gpus=1 for GPU jobs).
-Once your interactive has started, create an anaconda environment in your speed-scratch directory by using 
-the \texttt{\-\-prefix} option when executing \texttt{conda create}. For example, to create an anaconda environment for 
-\texttt{a\_user}, execute the following at the command line:
+To create an Anaconda environment, follow these steps:
+\begin{enumerate}
+	\item Request an interactive session
+	\begin{verbatim}
+		salloc -p pg --gpus=1
+	\end{verbatim}
 
+	\item Load Anaconda module and create Anaconda environment in your speed-scratch directory by using 
+	the \texttt{\-\-prefix} option (without this option, the environment will be created in your home directory by default).
+	\begin{verbatim}
+		module load anaconda3/2023.03/default
+		conda create --prefix /speed-scratch/$USER/myconda
+	\end{verbatim}
+
+	\item List environments (to view your conda environment)
+	\begin{verbatim}
+		conda info --envs
+		# conda environments:
+		#
+		base                  *  /encs/pkg/anaconda3-2023.03/root
+                         		/speed-scratch/a_user/myconda
+	\end{verbatim}
+
+	\item Activate the environment
+	\begin{verbatim}
+		conda activate /speed-scratch/$USER/myconda
+	\end{verbatim}
+
+	\item Add \tool{pip} to your environment (this will install \tool{pip} and \tool{pip}'s dependencies
+	, including python, into the environment.)
+	\begin{verbatim}
+		conda install pip
+	\end{verbatim}
+\end{enumerate}   
+
+\noindent A consolidated example using Conda:
 \begin{verbatim}
-module load anaconda3/2023.03/default
-conda create --prefix /speed-scratch/a_user/myconda
+	salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
+	cd /speed-scratch/$USER
+	module load python/3.11.0/default
+	conda create -p /speed-scratch/$USER/pytorch-env
+	conda activate /speed-scratch/$USER/pytorch-env
+	conda install python=3.11.0
+	pip3 install torch torchvision torchaudio --index-url \ 
+		https://download.pytorch.org/whl/cu117
+	....
+	conda deactivate
+	exit # end the salloc session
 \end{verbatim}
 
-\vspace{10pt}
-\noindent
-\textbf{Note:} Without the \texttt{\-\-prefix} option, the \texttt{conda create} command creates the 
-environment in \texttt{a\_user}'s home directory by default.
-\vspace{10pt}
+\noindent If you encounter \textbf{no space left error} while creating Conda environment, refer to our Github 
+\href{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#no-space-left-error-when-creating-conda-environment}
+{\texttt{HERE}}.\\
 
-% ------------------------------------------------------------------------------
-\paragraph{List Environments.}
+\noindent \textbf{Important Note:} \tool{pip} (and \tool{pip3}) are package installers for Python. When you use
+\texttt{pip install}, it installs packages from the Python Package Index (PyPI), whereas, 
+\texttt{conda install} installs packages from Anaconda's repository.
 
-To view your conda environments, type: \texttt{conda info --envs}
-
+\paragraph{Conda Env without \tool{--prefix}:}
+If you don't want to use the \texttt{--prefix} option every time you create a new environment and 
+do not want to use the default home directory, you can create a new directory and set the following 
+variables to point to the new created directory, e.g:
 \begin{verbatim}
-# conda environments:
-#
-base                  *  /encs/pkg/anaconda3-2023.03/root
-                         /speed-scratch/a_user/myconda
-\end{verbatim}      
-
-% ------------------------------------------------------------------------------
-\paragraph{Activate an Environment.}
-
-Activate the environment \texttt{\/speed\-scratch\/a\_user\/myconda} as follows
-\begin{verbatim}
-conda activate /speed-scratch/a_user/myconda
+	mkdir -p /speed-scratch/$USER/conda
+	setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda
+	setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkg
 \end{verbatim}
-After activating your environment, add \tool{pip} to your environment by using 
-\begin{verbatim}
-conda install pip
-\end{verbatim}
-This will install \tool{pip} and \tool{pip}'s dependencies, including python, 
-into the environment.
+\noindent If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} 
+or \texttt{.bashrc} (depending on the default shell you are using)
 
-\begin{itemize}
-	\item
-		A consolidated example using Conda:
-		\small
-		\begin{verbatim}
-			salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
-			cd /speed-scratch/$USER
-			module load python/3.11.0/default
-			conda create -p /speed-scratch/$USER/pytorch-env
-			conda activate /speed-scratch/$USER/pytorch-env
-			conda install python=3.11.0
-			pip3 install torch torchvision torchaudio --index-url \ 
-			  https://download.pytorch.org/whl/cu117
-			....
-			conda deactivate
-			exit # end the salloc session
-		\end{verbatim}
-		\normalsize
-	\item
-	    No Space left error: 
-			\texttt Read our Github
-		\href
-		{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#no-space-left-error-when-creating-conda-environment}
-		{\texttt{HERE}}
-\end{itemize}
-
-\noindent
-\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are used to install modules
-from the python distribution while \texttt{conda install} installs modules from 
-anaconda's repository.
-
-% ------------------------------------------------------------------------------
-\paragraph{Conda Env without --prefix: }
-
-If you don't want to use the \texttt{\-\-prefix} option every time you create a new environment and you don't want to use the default \texttt{\-\$HOME}.
-Create a new directory an set the following variables to point to the new created directory, e.g:
-\begin{verbatim}
-	setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
-	setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
-\end{verbatim}
-If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} or \texttt{.bashrc} (depending on the default shell you are using)
-
-% ------------------------------------------------------------------------------
+%  2.11.2 Python
+% -------------------
 \subsubsection{Python}
 \label{sect:python-venv}
+Setting up a Python virtual environment is straightforward.
+Here's an example that use a Python virtual environment:
 
-Setting up a Python virtual environment is fairly straightforward.
-The first step is to request an interactive session in the queue you wish to submit your jobs to.
+\begin{verbatim}
+	salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
+	cd /speed-scratch/$USER
+	module load python/3.9.1/default
+	mkdir -p /speed-scratch/$USER/tmp 
+	setenv TMPDIR /speed-scratch/$USER/tmp
+	setenv TMP /speed-scratch/$USER/tmp
+	python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
+	source /speed-scratch/$USER/tmp/testenv/bin/activate.csh
+	pip install modules…
+	deactivate
+	exit
+\end{verbatim}
 
-We have a simple example that use a Python virtual environment:
+\noindent See, e.g., \href
+{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}{\texttt{gurobi-with-python.sh}}\\
 
-\begin{itemize}
-	\item
-		Using Python Venv
-		\small
-		\begin{verbatim}
-			salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
-			cd /speed-scratch/$USER
-			module load python/3.9.1/default
-			mkdir -p /speed-scratch/$USER/tmp 
-			setenv TMPDIR /speed-scratch/$USER/tmp
-			setenv TMP /speed-scratch/$USER/tmp
-			python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
-			source /speed-scratch/$USER/tmp/testenv/bin/activate.csh
-			pip install modules…
-			deactivate
-			exit
-		\end{verbatim}
-		\normalsize
-	\item
-	    See, e.g., 
-		\href
-		{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
-		{\texttt{gurobi-with-python.sh}}
-\end{itemize}
-
-\noindent
-\textbf{Important Note:} partition \texttt{ps} is used for CPU jobs, partitions \texttt{pg}, \texttt{pt} are used
-for GPU jobs, no need to use \texttt{--gpus=} when preparing environments for CPU jobs.
+\noindent \textbf{Important Note:} partition \texttt{ps} is used for CPU jobs, while \texttt{pg}, \texttt{pt} are used
+for GPU jobs. You do not need to use \texttt{--gpus} when preparing environments for CPU jobs.
 
 % ------------------------------------------------------------------------------
 % TMP scheduler-specific section
