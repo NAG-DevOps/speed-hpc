@@ -663,6 +663,7 @@ for GPU jobs. You do not need to use \texttt{--gpus} when preparing environments
 % -------------- 2.12 Example Job Script: Fluent --------------
 % -------------------------------------------------------------
 % TMP scheduler-specific section
+% TODO: delete the file and move the content here
 \input{scheduler-job-examples}
 
 % scheduler-job-examples includes: 
@@ -674,153 +675,156 @@ for GPU jobs. You do not need to use \texttt{--gpus} when preparing environments
 % 	2.15.2 CUDA
 %   2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
 %   2.15.4 OpenISS Examples
-%   
+% 2.16 Singularity Containers
 
+% ------------------------------------------------------------------------------
+%						3 Conclusion
 % ------------------------------------------------------------------------------
 \section{Conclusion}
 \label{sect:conclusion}
 
-The cluster is, ``first come, first served'', until it fills, and then job
-position in the queue is based upon past usage. The scheduler does attempt
-to fill gaps, though, so sometimes a single-core job of lower priority
-will schedule before a multi-core job of higher priority, for example.
+The cluster operates on a ``first-come, first-served'' basis until it reaches full capacity.
+After that, job positions in the queue are determined based on past usage.
+The scheduler does attempt to fill gaps, so occasionally, a single-core job with lower priority 
+may be scheduled before a multi-core job with higher priority.
 
-% ------------------------------------------------------------------------------
+% -------------- 3.1 Important Limitations --------------------
+% -------------------------------------------------------------
 \subsection{Important Limitations}
 \label{sect:limitations}
 
+While Speed is a powerful tool, it is essential to recognize its limitations to use it effectively:
+
 \begin{itemize}
-\item
-New users are restricted to a total of 32 cores: write to \url{rt-ex-hpc@encs.concordia.ca}
-if you need more temporarily (192 is the maximum, or, 6 jobs of 32 cores each).
+	\item New users are limited to a total of 32 cores. If you need more cores temporarily 
+	(up to 192 cores or six jobs of 32 cores each), please contact \url{rt-ex-hpc@encs.concordia.ca}.
 
-\item
-Batch job sessions are a maximum of one week in length (only 24 hours, though,
-for interactive jobs, see \xs{sect:interactive-jobs}).
+	\item Batch job sessions can run for a maximum of one week. 
+	Interactive jobs are limited to 24 hours see \xs{sect:interactive-jobs}.
 
-\item
-Scripts can live in your NFS-provided home, but any substantial data need
-to be in your cluster-specific directory
-(located at \verb+/speed-scratch/<ENCSusername>/+).
+	\item Scripts can live in your NFS-provided home directory, but substantial data 
+	should be stored in your cluster-specific directory (located at \verb+/speed-scratch/<ENCSusername>/+).
 
-NFS is great for acute activity, but is not ideal for chronic activity.
-Any data that a job will 
-read more than once should be copied at the start to the scratch disk of a 
-compute node using \api{\$TMPDIR} (and, perhaps, \api{\$SLURM\_SUBMIT\_DIR}), 
-any intermediary job data should be produced in \api{\$TMPDIR}, and once a 
-job is near to finishing, those data should be copied to your NFS-mounted 
-home (or other NFS-mounted space) from \api{\$TMPDIR} (to, perhaps,
-\api{\$SLURM\_SUBMIT\_DIR}). In other words, IO-intensive operations should be effected 
-locally whenever possible, saving network activity for the start and end of 
-jobs. 
+	NFS is suitable for short-term activities but not for long-term operations.
+	Data that a job will read multiple times should be copied at the start to the scratch disk of a compute node using
+	\api{\$TMPDIR} (and possibly \api{\$SLURM\_SUBMIT\_DIR}). 
+	Intermediate job data should be produced in \api{\$TMPDIR}, and once a job is near completion,
+	this data should be copied to your NFS-mounted home directory (or other NFS-mounted space).
+	In other words, IO-intensive operations should be performed locally whenever possible, 
+	reserving network activity for the start and end of jobs.
 
-\item
-Your current resource allocation is based upon past usage, which is an 
-amalgamation of approximately one week's worth of past wallclock (i.e., time 
-spent on the node(s)) and compute activity (on the node(s)).
+	\item Your current resource allocation is based on past usage, 
+	which considers approximately one week’s worth of past wall clock time 
+	(time spent on the node(s)) and compute activity (on the node(s)).
 
-\item
-Jobs should NEVER be run outside of the province of the scheduler.
-Repeat offenders risk loss of cluster access. 
-
+	\item Jobs must always be run within the scheduler's system. Repeat offenders who 
+	run jobs outside the scheduler risk losing cluster access.
 \end{itemize}
 
-% ------------------------------------------------------------------------------
+% -------------- 3.2 Tips/Tricks ------------------------------
+% -------------------------------------------------------------
 % TMP scheduler-specific section
-\input{scheduler-tips}
+% TODO: delete the file since it's not needed
+% \input{scheduler-tips}
+\subsection{Tips/Tricks}
+\label{sect:tips}
 
-% ------------------------------------------------------------------------------
+\begin{itemize}
+	\item Ensure that files and scripts have Linux line breaks.
+	Use the \tool{file} command to verify and \tool{dos2unix} to convert if necessary.
+
+	\item Use \tool{rsync}, not \tool{scp} for copying or moving large amounts of data.
+	
+	\item Before transferring a large number of files between NFS-mounted storage and 
+	the cluster, compress the files into a \tool{tar} archive.
+
+	\item If you plan to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}), 
+	change the shell declaration at the beginning of your script(s).
+
+	\item Request resources (cores, memory) that closely match the actual needs of your job.
+	Requesting significantly more than necessary can make your job harder to schedule when resources are limited.
+
+	\item For any concerns or questions, email \texttt{rt-ex-hpc AT encs.concordia.ca}
+\end{itemize}
+
+% -------------- 3.3 Use Cases --------------------------------
+% -------------------------------------------------------------
 \subsection{Use Cases}
 \label{sect:cases}
 
 \begin{itemize}
-	\item 
-HPC Committee's initial batch about 6 students (end of 2019):
-\begin{itemize}
-	\item 
-10000 iterations job in Fluent finished in $<26$ hours vs. 46 hours in Calcul Quebec
-\end{itemize}
-	\item 
-NAG's MAC spoofer analyzer~\cite{mac-spoofer-analyzer-intro-c3s2e2014,mac-spoofer-analyzer-detail-fps2014},
-such as \url{https://github.com/smokhov/atsm/tree/master/examples/flucid}
-\begin{itemize}
-	\item 
-compilation of forensic computing reasoning cases about false or true positives of hardware address spoofing in the labs
-\end{itemize}
-	\item 
-S4 LAB/GIPSY R\&D Group's:
-\begin{itemize}
-	\item 
-MARFCAT and MARFPCAT (OSS signal processing and machine learning tools for 
-vulnerable and weak code analysis and network packet capture
-analysis)~\cite{marfcat-nlp-ai2014,marfcat-sate2010-nist,fingerprinting-mal-traffic}
-	\item 
-Web service data conversion and analysis
-	\item 
-{\flucid} encoders (translation of large log data into {\flucid}~\cite{mokhov-phd-thesis-2013} for forensic analysis)
-	\item 
-Genomic alignment exercises
-\end{itemize}
-\item
-\bibentry{oi-containers-poster-siggraph2023}
-\item
-\bibentry{Gopal2024Sep}
-\item
-\bibentry{Gopal2023Mob}
-\item
-\bibentry{roof-mounted-vawt-2023}
-\item
-\bibentry{root-mounted-vawt-corner-2023}
-\item
-\bibentry{cfd-modeling-turbine-2023}
-\item
-\bibentry{small-vaxis-turbine-corner-2022}
-\item
-\bibentry{cfd-vaxis-turbine-wake-2022}
-\item
-\bibentry{numerical-turbulence-vawt-2021}
-\item
-\bibentry{niksirat2020}
+	\item HPC Committee's initial batch about 6 students (end of 2019):
+	\begin{itemize}
+		\item 10000 iterations job in Fluent finished in $<26$ hours vs. 46 hours in Calcul Quebec
+	\end{itemize}
 
-\item
-The work ``\bibentry{lai-haotao-mcthesis19}'' using TensorFlow and Keras on OpenISS
-adjusted to run on Speed based on the repositories:
-\begin{itemize}
-	\item 
-\bibentry{openiss-reid-tfk} and
-	\item
-\bibentry{openiss-yolov3}
-\end{itemize}
-and theirs forks by the team.
+	\item NAG's MAC spoofer analyzer~\cite{mac-spoofer-analyzer-intro-c3s2e2014,mac-spoofer-analyzer-detail-fps2014},
+	such as \url{https://github.com/smokhov/atsm/tree/master/examples/flucid}
+	\begin{itemize}
+		\item compilation of forensic computing reasoning cases about false or true positives of hardware address spoofing in the labs
+	\end{itemize}
 
+	\item S4 LAB/GIPSY R\&D Group's:
+	\begin{itemize}
+		\item MARFCAT and MARFPCAT (OSS signal processing and machine learning tools for 
+		vulnerable and weak code analysis and network packet capture
+		analysis)~\cite{marfcat-nlp-ai2014,marfcat-sate2010-nist,fingerprinting-mal-traffic}
+		\item Web service data conversion and analysis
+		\item {\flucid} encoders (translation of large log data into {\flucid}~\cite{mokhov-phd-thesis-2013} for forensic analysis)
+		\item Genomic alignment exercises
+	\end{itemize}
+
+	\item \bibentry{oi-containers-poster-siggraph2023}
+	\item \bibentry{Gopal2024Sep}
+	\item \bibentry{Gopal2023Mob}
+	% the next one is not visible (it produces an error)
+	%\item \bibentry{roof-mounted-vawt-2023}
+	\item \bibentry{root-mounted-vawt-corner-2023}
+	\item \bibentry{cfd-modeling-turbine-2023}
+	\item \bibentry{small-vaxis-turbine-corner-2022}
+	\item \bibentry{cfd-vaxis-turbine-wake-2022}
+	\item \bibentry{numerical-turbulence-vawt-2021}
+	\item \bibentry{niksirat2020}
+
+	\item The work ``\bibentry{lai-haotao-mcthesis19}'' using TensorFlow and Keras on OpenISS
+	adjusted to run on Speed based on the repositories:
+	\begin{itemize}
+		\item \bibentry{openiss-reid-tfk} and
+		\item \bibentry{openiss-yolov3}
+	\end{itemize}
+	and theirs forks by the team.
 \end{itemize}
 
 % ------------------------------------------------------------------------------
 \appendix
 
 % ------------------------------------------------------------------------------
+%						A History 
+% ------------------------------------------------------------------------------
 \section{History}
 
-% ------------------------------------------------------------------------------
+% A.1 Acknowledgments
+% -------------------------------------------------------------
 \subsection{Acknowledgments}
 \label{sect:acks}
 
 \begin{itemize}
 	\item 
-The first 6 (to 6.5) versions of this manual and early UGE job script samples,
+The first 6 to 6.5 versions of this manual and early UGE job script samples,
 Singularity testing and user support were produced/done by Dr.~Scott Bunnell
 during his time at Concordia as a part of the NAG/HPC group. We thank
 him for his contributions.
 	\item 
 The HTML version with devcontainer support was contributed by Anh H Nguyen.
 	\item 
-Dr.~Tariq Daradkeh, was our IT Instructional Specialist August 2022 to September 2023;
+Dr.~Tariq Daradkeh, was our IT Instructional Specialist from August 2022 to September 2023;
 working on the scheduler, scheduling research, end user support, and integration of
-examples, such as YOLOv3 in \xs{sect:openiss-yolov3} other tasks. We have a continued
+examples, such as YOLOv3 in \xs{sect:openiss-yolov3} and other tasks. We have a continued
 collaboration on HPC/scheduling research.
 \end{itemize}
 
-% ------------------------------------------------------------------------------
+% A.2 Migration from UGE to SLURM
+% -------------------------------------------------------------
 \subsection{Migration from UGE to SLURM}
 \label{appdx:uge-to-slurm}
 
@@ -845,12 +849,10 @@ Commands and command options mappings are found in \xf{fig:rosetta-mappings} fro
 \url{https://slurm.schedmd.com/rosetta.pdf}\\
 \url{https://slurm.schedmd.com/pdfs/summary.pdf}\\
 Other related helpful resources from similar organizations who either used
-SLURM for awhile or also transitioned to it:\\
-\small
+SLURM for a while or also transitioned to it:\\
 \url{https://docs.alliancecan.ca/wiki/Running_jobs}\\
 \url{https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf}\\
 \url{https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm}
-\normalsize
 
 \begin{figure}[htpb]
 \includegraphics[width=\columnwidth]{images/rosetta-mapping}
@@ -864,8 +866,7 @@ SLURM for awhile or also transitioned to it:\\
 lines there; \textbf{they should now be removed}, as they have no use in SLURM and
 will start giving ``command not found'' errors on login when the software is removed:
 
-csh/\tool{tcsh}:
-Sample \file{.tcshrc} file:
+csh/\tool{tcsh}: sample \file{.tcshrc} file:
 \begin{verbatim}
 # Speed environment set up 
 if ($HOSTNAME == speed-submit.encs.concordia.ca) then
@@ -873,8 +874,7 @@ if ($HOSTNAME == speed-submit.encs.concordia.ca) then
 endif
 \end{verbatim}
 
-Bourne shell/\tool{bash}:
-Sample \file{.bashrc} file:
+Bourne shell/\tool{bash}: sample \file{.bashrc} file:
 \begin{verbatim}
 # Speed environment set up 
 if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
@@ -883,14 +883,13 @@ if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
 fi
 \end{verbatim}
 
-Note that you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied 
-(\textbf{important}).
-
+\textbf{IMPORTANT NOTE:} you will need to either log out and back in, or execute a new shell, 
+for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied.
 
 \end{itemize}
 
-% ------------------------------------------------------------------------------
+% A.3 Phases
+% -------------------------------------------------------------
 \subsection{Phases}
 \label{sect:phases}
 
@@ -927,9 +926,13 @@ Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, 
 \end{itemize}
 
 % ------------------------------------------------------------------------------
+%						B Frequently Asked Questions 
+% ------------------------------------------------------------------------------
 % TMP scheduler-specific section
 \input{scheduler-faq}
 
+% ------------------------------------------------------------------------------
+%						C Sister Facilities
 % ------------------------------------------------------------------------------
 \section{Sister Facilities}
 

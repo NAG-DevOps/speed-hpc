@@ -96,7 +96,7 @@ is mainly a single-precision card, so unless you need GPU double precision,
 double-precision calculations will be faster on a CPU node.
 
 \noindent Job scripts for the GPU queue differ in that they need this statement,
-which attaches either a single GPU, or, two GPUs, to the job:
+which attaches either a single GPU or two GPUs to the job:
 \begin{verbatim}
   #SBATCH --gpus=[1|2]
 \end{verbatim}
@@ -142,7 +142,7 @@ which attaches either a single GPU, or, two GPUs, to the job:
 if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
 do not use the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
 on \textbf{speed-01, speed-05, or speed-17}, as they will crash the compute node (100\% certainty). 
-This appears to be the current hardware's architecture's defect.
+This appears to be a defect in the current hardware architecture.
 %
 % TODO: Need to link to that example
 The workaround is to either manually effect GPU parallelisation
@@ -315,39 +315,30 @@ replacing \option{\/usr\/local\/cuda} with one of the above.
 These examples represent more comprehensive research-like jobs
 for computer vision and other tasks with longer runtime (subject to the number of epochs and other parameters).
 They derive from the actual research works of students and their theses and require the use of CUDA and GPUs.
-%
-These examples are available as ``native'' jobs on Speed
-and as Singularity containers.
+These examples are available as ``native'' jobs on Speed and as Singularity containers.
 
-Examples include:
+\noindent Examples include:
 \paragraph{OpenISS and REID}
 \label{sect:openiss-reid}
 
-a computer-vision based person re-identification 
+A computer-vision-based person re-identification 
 (e.g., motion capture-based tracking for stage performance) part of the OpenISS
 project by Haotao Lai~\cite{lai-haotao-mcthesis19} using TensorFlow and Keras.
-
-\noindent The script is available here:
-\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}{openiss-reid-speed.sh}
+The script is available here:
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}{openiss-reid-speed.sh}.
 The fork of the original repo~\cite{openiss-reid-tfk} adjusted to run on Speed is available here:
 \href{https://github.com/NAG-DevOps/openiss-reid-tfk}{openiss-reid-tfk}.
-And its detailed description on how to run it on Speed is in the README:
+Detailed instructions on how to run it on Speed are in the README:
 \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk}
 
-% ------------------------------------------------------------------------------
 \paragraph{OpenISS and YOLOv3}
 \label{sect:openiss-yolov3}
 
 The related code using YOLOv3 framework is in the
 the fork of the original repo~\cite{openiss-yolov3} adjusted
-to to run on Speed is here:
+to to run on Speed is available here: \href{https://github.com/NAG-DevOps/openiss-yolov3}{openiss-yolov3}.\\
 
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/openiss-yolov3}
-\end{itemize}
-
-Its example job scripts can run on both CPUs and GPUs,
-as well as interactively using TensorFlow:
+\noindent Example job scripts can run on both CPUs and GPUs, as well as interactively using TensorFlow:
 
 \begin{itemize}
 	\item Interactive mode:
@@ -356,126 +347,98 @@ as well as interactively using TensorFlow:
 	\item CPU-based job:
   \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-cpu.sh}
   {openiss-yolo-cpu.sh}
-	\item GPU-based jon:
+	\item GPU-based job:
   \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-gpu.sh}
   {openiss-yolo-gpu.sh}
 \end{itemize}
 
-The detailed description on how to run these on Speed is
-in the README at:
+\noindent Detailed instructions on how to run these on Speed are in the README: 
+\url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
 
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
-\end{itemize}
-
-% ------------------------------------------------------------------------------
+% -------------- 2.16 Singularity Containers ------------------
+% -------------------------------------------------------------
 \subsection{Singularity Containers}
 \label{sect:singularity-containers}
 
-If the \texttt{/encs} software tree does not have a required software
-instantaneously available, another option is to run Singularity
-containers. We run EL7 flavor of Linux, and if some projects
-require Ubuntu or other distributions, there is a possibility
-to run that software as a container, including the ones
-translated from Docker.
+Singularity is a container platform designed to execute applications in a portable, 
+reproducible, and secure manner. Unlike Docker, Singularity does not require root privileges, 
+making it more suitable for HPC environments. If the \tool{/encs} software tree does not have 
+the required software available, another option is to run Singularity containers. 
+We run EL7 flavor of Linux, and if some projects require Ubuntu or 
+other distributions, it is possible to run that software as a container, 
+including those converted from Docker. The currently recommended version of Singularity 
+is \texttt{singularity/3.10.4/default}.\\
 
 The example
-  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh}
-  {lambdal-singularity.sh}
-showcases an immediate use of a container built for the Ubuntu-based
-LambdaLabs software stack, originally built as a Docker image then
-pulled in as a Singularity container that is immediately available
-for use as that job example illustrates. The source material
-used for the docker image was our fork of their official
-repo: \url{https://github.com/NAG-DevOps/lambda-stack-dockerfiles}
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh}{lambdal-singularity.sh}
+showcases an immediate use of a container built for the Ubuntu-based LambdaLabs software stack, 
+originally built as a Docker image then pulled in as a Singularity container. The source material
+used for the docker image was our fork of their official repository: 
+\url{https://github.com/NAG-DevOps/lambda-stack-dockerfiles}.\\
 
-NOTE: It is important if you make your own containers or pull from
-DockerHub, use your \verb+/speed-scratch/$USER+ directory as these
-images may easily consume gigs of space in your home directory
-and you'd run out of quota there very fast.
+\noindent \textbf{Note}: If you make your own containers or pull from DockerHub,
+use your \verb+/speed-scratch/$USER+ directory, as these images may easily 
+consume gigabytes of space in your home directory, quickly exhausting your quota.\\
 
-%\noindent
-TIP: To check for your quota, and the corresponding commands
-to find big files, see: \url{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}
+\noindent \textbf{Tip}: To check your quota and find big files, 
+see: \href{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}{ENCS Data Storage}.\\
 
-We likewise built equivalent OpenISS (\xs{sect:openiss-examples})
-containers from their Docker counter parts as they were used for teaching and
-research~\cite{oi-containers-poster-siggraph2023}. The
-images from \url{https://github.com/NAG-DevOps/openiss-dockerfiles}
-and their DockerHub equivalents \url{https://hub.docker.com/u/openiss}
-are found in the same public directory on \verb+/speed-scratch/nag-public+
-as the LambdaLabs Singularity image. They all have \texttt{.sif} extension.
-Some of them can be ran in both batch or interactive mode, some
-make more sense to run interactively. They cover some basics with CUDA,
-OpenGL rendering, and computer vision tasks as examples from the OpenISS
-library and other libraries, including the base images that use different
-distros. We also include Jupyter notebook example with Conda support.
+We have also built equivalent OpenISS (\xs{sect:openiss-examples}) containers from their Docker 
+counterparts for teaching and research purposes~\cite{oi-containers-poster-siggraph2023}. 
+The images from \url{https://github.com/NAG-DevOps/openiss-dockerfiles}
+and their DockerHub equivalents \url{https://hub.docker.com/u/openiss} can be found in 
+\verb+/speed-scratch/nag-public+ with a `\texttt{.sif}' extension.
+Some can be run in both batch and interactive modes, covering basics with CUDA, OpenGL rendering, 
+and computer vision tasks. Examples include Jupyter notebooks with Conda support.
 
 \begin{verbatim}
-/speed-scratch/nag-public:
-
-openiss-cuda-conda-jupyter.sif
-openiss-cuda-devicequery.sif
-openiss-opengl-base.sif
-openiss-opengl-cubes.sif
-openiss-opengl-triangle.sif
-openiss-reid.sif
-openiss-xeyes.sif
+  /speed-scratch/nag-public:
+  openiss-cuda-conda-jupyter.sif
+  openiss-cuda-devicequery.sif
+  openiss-opengl-base.sif
+  openiss-opengl-cubes.sif
+  openiss-opengl-triangle.sif
+  openiss-reid.sif
+  openiss-xeyes.sif
 \end{verbatim}
 
-The currently recommended version of Singularity is
-\texttt{singularity/3.10.4/default}.
+This section introduces working with Singularity, its containers, and what can and cannot 
+be done with Singularity on the ENCS infrastructure. For comprehensive documentation, 
+refer to the authors' guide: \url{https://www.sylabs.io/docs/}.\\
 
-This section comprises an introduction to working with Singularity, its 
-containers, and what can and cannot be done with Singularity on the ENCS 
-infrastructure. It is not intended to be an exhaustive presentation of 
-Singularity: the program's authors do a good job of that here:
-\url{https://www.sylabs.io/docs/}. It also assumes that you have successfully installed 
-Singularity on a user-managed/personal system (see next paragraph as to why).
+%It also assumes that you have successfully installed 
+%Singularity on a user-managed/personal system (see next paragraph as to why).
 
-Singularity containers are essentially either built from an existing 
-container, or are built from scratch. Building from scratch requires a recipe 
-file (think of like a Dockerfile), and the operation \emph{must} be effected as root.
-You will not have root on the ENCS infrastructure, so any built-from-scratch containers must be created 
-on a user-managed/personal system. Root-level permissions are also required
-(in some cases, essential; in others, for proper build functionality) for 
-building from an existing container.
-%, with one exception (see, Building A 
-%Container From An Existing Container).
-%
-Three types of Singularity containers can be built: file-system; sandbox; 
-squashfs. The first two are ``writable'' (meaning that changes can persist 
-after the Singularity session ends). File-system containers are built around 
-the ext3 file system, and are a read-write ``file'', sandbox containers are 
-essentially a directory in an existing read-write space, and squashfs 
-containers are a read-only compressed ``file''. Note that file-system 
-containers \emph{cannot} be resized once built.
+Singularity containers are either built from an existing container, or from scratch. 
+Building from scratch requires a recipe file (think of like a Dockerfile) and
+must be done with root permissions, which are not available on the ENCS infrastructure. 
+Therefore, built-from-scratch containers must be created on a user-managed/personal system. 
+There are three types of Singularity containers:
+% with one exception (see, Building A Container From An Existing Container).
 
-Note that the default build is a squashfs one. Also note what Singularity's 
-authors have to say about the builds, ``A common workflow is to use the 
-``sandbox'' mode for development of the container, and then build it as a 
-default (squashfs) Singularity image when done.'' File-system containers are 
-considered to be, ``legacy'', at this point in time. When built, a \emph{very small}
-overhead is allotted to a file-system container (think, MB), and that 
-\emph{cannot} be changed.
+\begin{itemize}
+  \item File-system containers: built around the ext3 file system and are read-write ``file'', but cannot be resized once built.
+  \item Sandbox containers: essentially a directory in an existing read-write space and are also read-write.
+  \item Squashfs containers: read-only compressed ``file''and are read-only. It is the default build type.
+\end{itemize}
 
-Probably for the most of your workflows you might find there is a
-Docker container exists for your tasks, in this case you
-can use the docker pull function of Singularity as a part
-of you virtual environment setup as an interactive job
-allocation:
+\noindent ``A common workflow is to use the ``sandbox'' mode for container development and then build it as a 
+default (squashfs) Singularity image when done.'' says the Singularity's authors about builds.
+File-system containers are considered legacy and are not commonly used.\\
+
+For many workflows, a Docker container might already exist. In this case, you can use Singularity's 
+docker pull function as part of your virtual environment setup in an interactive job allocation:
 
 \small
 \begin{verbatim}
-salloc --gpus=1 -n8 --mem=4Gb -t60
-cd /speed-scratch/$USER/
-singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
+  salloc --gpus=1 -n8 --mem=4Gb -t60
+  cd /speed-scratch/$USER/
+  singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
+  INFO:    Converting OCI blobs to SIF format
+  INFO:    Starting build...
 \end{verbatim}
 \normalsize
 
-\noindent
-This method can be used for converting Docker containers directly on Speed.
-On GPU nodes make sure to pass on the \option{--nv} flag to Singularity,
-so its containers could access the GPUs. See the linked example.
+\noindent This method can be used for converting Docker containers directly on Speed.
+On GPU nodes, make sure to pass on the \option{--nv} flag to Singularity so its containers 
+could access the GPUs. See the linked example for more details.
