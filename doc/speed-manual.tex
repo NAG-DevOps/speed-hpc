@@ -191,16 +191,26 @@ Speed is supported by:
 	CUDA, OpenGL, OpenCL, and Vulkan APIs). 
 
 	\item
-	4 VIDPRO nodes, with 6 P6 cards, and 6 V100 cards (32GB), and 
+	4 VIDPRO nodes (ECE. Dr.~Amer), with 6 P6 cards, and 6 V100 cards (32GB), and 
 	256GB of RAM.
 
 	\item
 	7 new SPEED2 servers with 256 CPU cores each 4x~A100 80~GB GPUs, partitioned
-	into 4x~20GB MIGs  each; larger local storage for TMPDIR.
+	into 4x~20GB MIGs  each; larger local storage for TMPDIR (see \xf{fig:speed-architecture-full}).
 
 	\item
 	One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
-	Direct~X, OpenGL, OpenCL, and Vulkan APIs). 
+	Direct~X, OpenGL, OpenCL, and Vulkan APIs).
+
+ 	\item
+  	Salus compute node (CSSE CLAC, Drs.~Bergler and Kosseim), 56 cores and 728GB of RAM, see \xf{fig:speed-architecture-full}.
+
+	\item
+ 	Magic subcluster partition (ECE, Dr.~Khendek, 11 nodes, see \xf{fig:speed-architecture-full}).
+
+  	\item
+   	Nebular subcluster partition (CIISE, Drs. Yan, Assi, Ghafouri, et al., Nebulae GPU node with 2x RTX 48GB cards,
+    	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture-full}).
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -208,6 +218,13 @@ Speed is supported by:
 	\includegraphics[width=\columnwidth]{images/speed-pics}
 	\caption{Speed}
 	\label{fig:speed-pics}
+\end{figure}
+
+\begin{figure}[htpb]
+	\centering
+	\includegraphics[width=\columnwidth]{images/speed-architecture-full}
+	\caption{Speed Cluster Hardware Architecture}
+	\label{fig:speed-architecture-full}
 \end{figure}
 
 \begin{figure}[htpb]
