@@ -96,17 +96,23 @@ Academic Information Technology Services (AITS) at GCS, Concordia University, Mo
 
 This document contains basic information required to use ``Speed'', along with tips, 
 tricks, examples, and references to projects and papers that have used Speed.
-User contributions of sample jobs and/or references are welcome. \\
+User contributions of sample jobs and/or references are welcome.\\
 
-\noindent \textbf{Note:} On October 20, 2023, we completed the migration to SLURM 
+\noindent
+\textbf{Note:} On October 20, 2023, we completed the migration to SLURM 
 from Grid Engine (UGE/AGE) as our job scheduler. 
-This manual has been updated to use SLURM’s syntax and commands. 
+This manual has been updated to use SLURM's syntax and commands. 
 If you are a long-time GE user, refer to \xa{appdx:uge-to-slurm} for key highlights needed to 
 translate your GE jobs to SLURM as well as environment changes. 
-These changes are also elaborated throughout this document and our examples.\\
+These changes are also elaborated throughout this document and our examples.
+
+% ------------------------------------------------------------------------------
+\subsection{Citing Us}
+\label{sect:citing-speed-hpc}
 
 If you wish to cite this work in your acknowledgements, you can use our general DOI found on our GitHub page
 \url{https://dx.doi.org/10.5281/zenodo.5683642} or a specific version of the manual and scripts from that link individually.
+You can also use the ``cite this repository'' feature of GitHub.
 
 % ----------------------------- 1.1 Resources ----------------------------------
 % ------------------------------------------------------------------------------
@@ -115,16 +121,21 @@ If you wish to cite this work in your acknowledgements, you can use our general 
 
 \begin{itemize}
 	\item
-	Public GitHub page where the manual and sample job scripts are maintained at \url{https://github.com/NAG-DevOps/speed-hpc}
+	Public GitHub page where the manual and sample job scripts are maintained at\\
+	\url{https://github.com/NAG-DevOps/speed-hpc}
 		\begin{itemize}
-			\item Pull requests (PRs) are subject to review and are welcome: \url{https://github.com/NAG-DevOps/speed-hpc/pulls}
+			\item Pull requests (PRs) are subject to review and are welcome:\\
+			\url{https://github.com/NAG-DevOps/speed-hpc/pulls}
 		\end{itemize}
 
 	\item
 	Speed Manual:
 		\begin{itemize}
-			\item PDF version of the manual: \url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}
-			\item HTML version of the manual: \url{https://nag-devops.github.io/speed-hpc/}
+			\item PDF version of the manual:\\
+			\url{https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf}
+			
+			\item HTML version of the manual:\\
+			\url{https://nag-devops.github.io/speed-hpc/}
 		\end{itemize}
 
 	\item
@@ -176,7 +187,7 @@ Speed is supported by:
 	approximately 1~TB of local volatile-scratch disk space (pictured in \xf{fig:speed-pics}).
 
 	\item
-	Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of memory (compatible with the 
+	Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of GPU memory (compatible with the 
 	CUDA, OpenGL, OpenCL, and Vulkan APIs). 
 
 	\item
@@ -184,8 +195,8 @@ Speed is supported by:
 	256GB of RAM.
 
 	\item
-	7 new SPEED2 servers with 64 CPU cores each 4x A100 80~GB GPUs, partitioned
-	into 4x 20GB each; larger local storage for TMPDIR.
+	7 new SPEED2 servers with 256 CPU cores each 4x~A100 80~GB GPUs, partitioned
+	into 4x~20GB MIGs  each; larger local storage for TMPDIR.
 
 	\item
 	One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
@@ -259,16 +270,17 @@ Speed is supported by:
 \label{sect:available-software}
 
 There are a wide range of open-source and commercial software available and installed on ``Speed.'' 
-This includes Abaqus~\cite{abaqus}, AllenNLP, Anaconda (Anaconda, Anaconda2, Anaconda3), ANSYS, Bazel, \
+This includes Abaqus~\cite{abaqus}, AllenNLP, Anaconda (Anaconda, Anaconda2, Anaconda3), ANSYS, Bazel,
 COMSOL, CPLEX, CUDA, Eclipse, Fluent~\cite{fluent}, Gurobi, MATLAB~\cite{matlab,scholarpedia-matlab}, 
 OMNeT++, OpenCV, OpenFOAM, OpenMPI, OpenPMIx, ParaView, PyTorch, QEMU, R, Rust, and Singularity.
 Programming environments include various versions of Python, C++/Java compilers, TensorFlow, OpenGL, OpenISS, and {\marf}~\cite{marf}.\\
 
 In particular, there are over 2200 programs available in \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
-We are building an equivalent array of programs for the EL9 SPEED2 nodes. To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{Speed}. 
+We are building an equivalent array of programs for the EL9 SPEED2 nodes. To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.\\
 
-\noindent \textbf{Note:} We do our best to accommodate custom software requests. Python environments can use user-custom installs 
-from within the scratch directory.\\
+\noindent
+\textbf{Note:} We do our best to accommodate custom software requests. Python environments can use user-custom installs 
+from within the scratch directory.
 
 % ----------------------------- 1.7 Requesting Access --------------------------
 % ------------------------------------------------------------------------------
@@ -287,11 +299,11 @@ cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
 		\item Name and email (CC) of the supervisor or instructor
 		\item Written request from the supervisor or instructor for the ENCS username to be granted access to ``Speed.''
 	\end{itemize}
-	\item Non-GCS students taking a GCS course will have their GCS ENCS account created automatically, but still need the course instructor’s approval to use the service.
+	\item Non-GCS students taking a GCS course will have their GCS ENCS account created automatically, but still need the course instructor's approval to use the service.
 	\item Non-GCS faculty and students need to get a ``sponsor'' within GCS, so that a guest GCS ENCS account is created first. A sponsor can be any GCS Faculty member
 	you collaborate with. Failing that, request the approval from our Dean's Office;
 	via our Associate Deans Drs.\ Eddie Hoi Ng or Emad Shihab.
-	\item External entities collaborating with GCS Concordia researchers should also go through the Dean’s office for approvals.
+	\item External entities collaborating with GCS Concordia researchers should also go through the Dean's office for approvals.
 \end{itemize}
 
 For detailed instructions, refer to the Concordia 
@@ -348,13 +360,13 @@ Requirements to create connections to ``Speed'':
 \begin{enumerate}
 	\item \textbf{Active GCS ENCS user account:} Ensure you have an active GCS ENCS user account with 
 	permission to connect to Speed (see \xs{sect:access-requests}).
-	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia’s VPN, 
+	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia's VPN, 
 	which requires a Concordia netname.
 	\item \textbf{Terminal Emulator for Windows:} Windows systems use a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
 	\item \textbf{Terminal for macOS:} macOS systems have a built-in Terminal app or \tool{xterm} that comes with XQuartz.
 \end{enumerate}
 
-\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account’s username:
+\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account's username:
 \begin{verbatim}
     ssh <ENCSusername>@speed.encs.concordia.ca
 \end{verbatim}
@@ -717,7 +729,7 @@ While Speed is a powerful tool, it is essential to recognize its limitations to 
 	reserving network activity for the start and end of jobs.
 
 	\item Your current resource allocation is based on past usage, 
-	which considers approximately one week’s worth of past wall clock time 
+	which considers approximately one week's worth of past wall clock time 
 	(time spent on the node(s)) and compute activity (on the node(s)).
 
 	\item Jobs must always be run within the scheduler's system. Repeat offenders who 
