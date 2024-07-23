@@ -15,6 +15,10 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 * [`src/`](src/) -- sample job scripts
 * [`doc/`](doc/) -- user manual sources 
 
+## Software List
+
+* [EL7 and EL9 Software List](software-list.md) on Speed
+
 ## Contributing and TODO
 
 * [Public issue tracker](https://github.com/NAG-DevOps/speed-hpc/issues)
