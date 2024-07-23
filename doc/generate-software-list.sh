@@ -10,9 +10,9 @@ cat > "$OUTFILE.tex" << LATEX_HEADER
 \section{Software Installed On Speed}
 \label{sect:software-details}
 
-This is s generated section by a script; last updated on \textit{$GENERATED_ON}.
-We hae two major software trees: Scientific Linux 7 (EL7), which is
-outgoing, and AlmaLinux 9 (EL9), after major synchronization of software
+This is a generated section by a script; last updated on \textit{$GENERATED_ON}.
+We have two major software trees: Scientific Linux 7 (EL7), which is
+outgoing, and AlmaLinux 9 (EL9). After major synchronization of software
 packages is complete, we will stop maintaining the EL7 tree and
 will migrade the remaining nodes to EL9.
 
@@ -23,7 +23,7 @@ NOTE: this list does not include packages installed directly on the OS (yet).
 \label{sect:software-el7}
 
 Not all packages are intended for HPC, but the common tree is available
-on Speed as well as teaching lab desktops.
+on Speed as well as teaching labs' desktops.
 
 \begin{itemize}
 LATEX_HEADER
