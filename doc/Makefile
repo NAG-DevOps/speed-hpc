@@ -53,6 +53,12 @@ $(DELIVERABLE)-arxiv.tex: to-arxiv.pl $(DELIVERABLE).tex
 	./to-arxiv.pl < $(DELIVERABLE).tex > $(DELIVERABLE)-arxiv.tex
 	perl -pi -e 's/\{content\}/\{content-arxiv\}/g' $(DELIVERABLE)-arxiv.tex
 
+software-list: software-list.tex ../software-list.md
+software-list.tex ../software-list.md: generate-software-list.sh
+	@echo "Generating software list. Don't forget to run make afterwards to recompile the manual."
+	./generate-software-list.sh
+	mv -f software-list.md ..
+
 acm: $(DELIVERABLE)-acm.pdf
 
 $(DELIVERABLE)-acm.pdf: $(DELIVERABLE)-acm.tex content-acm.tex Makefile
