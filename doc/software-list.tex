@@ -3,11 +3,16 @@
 \section{Software Installed On Speed}
 \label{sect:software-details}
 
-This is a generated section by a script; last updated on \textit{Tue Jul 23 10:22:01 PM EDT 2024}.
+This is a generated section by a script; last updated on \textit{Tue Jul 23 10:48:52 PM EDT 2024}.
 We have two major software trees: Scientific Linux 7 (EL7), which is
 outgoing, and AlmaLinux 9 (EL9). After major synchronization of software
 packages is complete, we will stop maintaining the EL7 tree and
-will migrade the remaining nodes to EL9.
+will migrate the remaining nodes to EL9.
+
+Use \option{--constraint=el7} to select EL7-only installed nodes for their
+software packages. Conversely, use \option{--constraint=el9} for the EL9-only
+software. These options would be used as a part of your job parameters
+in either \api{\#SBATCH} or on the command line.
 
 \noindent
 \textbf{NOTE:} this list does not include packages installed directly on the OS (yet).
@@ -19,6 +24,7 @@ will migrade the remaining nodes to EL9.
 Not all packages are intended for HPC, but the common tree is available
 on Speed as well as teaching labs' desktops.
 
+\scriptsize
 \begin{multicols}{3}
 \begin{itemize}
 \item \verb|a2ps-4.13b|
@@ -978,11 +984,13 @@ on Speed as well as teaching labs' desktops.
 \item \verb|zlib-1.2.13|
 \end{itemize}
 \end{multicols}
+\normalsize
 
 % -----------------------------------------------------------------------------
 \subsection{EL9}
 \label{sect:software-el9}
 
+\scriptsize
 \begin{multicols}{3}
 \begin{itemize}
 \item \verb|a2ps-4.14|
@@ -1174,5 +1182,6 @@ on Speed as well as teaching labs' desktops.
 \item \verb|xemacs-21.4.24|
 \end{itemize}
 \end{multicols}
+\normalsize
 
 % EOF

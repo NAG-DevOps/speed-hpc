@@ -24,7 +24,7 @@ all: $(DELIVERABLE).pdf
 #all: arxiv acm
 #all: arxiv
 
-$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex
+$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex software-list.tex
 	@echo "Compiling *.tex files..."
 	pdflatex $(PDFLATEXFLAGS) $(DELIVERABLE)
 	@echo "Compiling bibliography..."

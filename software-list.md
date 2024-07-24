@@ -1,10 +1,14 @@
 # Software Installed On Speed {#sect:software-details}
 
 This is a generated section by a script; last updated on *Tue Jul 23
-10:22:01 PM EDT 2024*. We have two major software trees: Scientific
+10:48:52 PM EDT 2024*. We have two major software trees: Scientific
 Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After major
 synchronization of software packages is complete, we will stop
-maintaining the EL7 tree and will migrade the remaining nodes to EL9.
+maintaining the EL7 tree and will migrate the remaining nodes to EL9.
+
+Use to select EL7-only installed nodes for their software packages.
+Conversely, use for the EL9-only software. These options would be used
+as a part of your job parameters in either or on the command line.
 
 **NOTE:** this list does not include packages installed directly on the
 OS (yet).
