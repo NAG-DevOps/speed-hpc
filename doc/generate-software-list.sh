@@ -16,7 +16,8 @@ outgoing, and AlmaLinux 9 (EL9). After major synchronization of software
 packages is complete, we will stop maintaining the EL7 tree and
 will migrade the remaining nodes to EL9.
 
-NOTE: this list does not include packages installed directly on the OS (yet).
+\noindent
+\textbf{NOTE:} this list does not include packages installed directly on the OS (yet).
 
 % -----------------------------------------------------------------------------
 \subsection{EL7}
@@ -25,6 +26,7 @@ NOTE: this list does not include packages installed directly on the OS (yet).
 Not all packages are intended for HPC, but the common tree is available
 on Speed as well as teaching labs' desktops.
 
+\begin{multicols}{3}
 \begin{itemize}
 LATEX_HEADER
 
@@ -36,11 +38,13 @@ ls -1 /encs/ArchDep/x86_64.EL7/pkg/ \
 
 cat >> "$OUTFILE.tex" << LATEX_EL9_HEADER
 \end{itemize}
+\end{multicols}
 
 % -----------------------------------------------------------------------------
 \subsection{EL9}
 \label{sect:software-el9}
 
+\begin{multicols}{3}
 \begin{itemize}
 LATEX_EL9_HEADER
 
@@ -53,6 +57,7 @@ ls -1 /encs/ArchDep/x86_64.EL9/pkg/ \
 
 cat >> "$OUTFILE.tex" << LATEX_FOOTER
 \end{itemize}
+\end{multicols}
 
 % EOF
 LATEX_FOOTER

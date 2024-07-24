@@ -1,18 +1,21 @@
 # Software Installed On Speed {#sect:software-details}
 
 This is a generated section by a script; last updated on *Tue Jul 23
-07:16:34 PM EDT 2024*. We have two major software trees: Scientific
+10:22:01 PM EDT 2024*. We have two major software trees: Scientific
 Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After major
 synchronization of software packages is complete, we will stop
 maintaining the EL7 tree and will migrade the remaining nodes to EL9.
 
-NOTE: this list does not include packages installed directly on the OS
-(yet).
+**NOTE:** this list does not include packages installed directly on the
+OS (yet).
 
 ## EL7 {#sect:software-el7}
 
 Not all packages are intended for HPC, but the common tree is available
 on Speed as well as teaching labs' desktops.
+
+::: multicols
+3
 
 -   `a2ps-4.13b`
 
@@ -1923,8 +1926,12 @@ on Speed as well as teaching labs' desktops.
 -   `zip-3.0`
 
 -   `zlib-1.2.13`
+:::
 
 ## EL9 {#sect:software-el9}
+
+::: multicols
+3
 
 -   `a2ps-4.14`
 
@@ -2299,3 +2306,4 @@ on Speed as well as teaching labs' desktops.
 -   `tmux-3.2a`
 
 -   `xemacs-21.4.24`
+:::
