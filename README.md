@@ -38,6 +38,7 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 ### Conferences
 
+* Tariq Daradkeh, Gillian Roper, Carlos Alarcon Meza, and Serguei Mokhov. **HPC jobs classification and resource prediction to minimize job failures.** In International Conference on Computer Systems and Technologies 2024 (CompSysTech ’24), New York, NY, USA, June 2024. ACM. [DOI: 10.1145/3674912.3674914](https://doi.org/10.1145/3674912.3674914)
 * Serguei Mokhov, Jonathan Llewellyn, Carlos Alarcon Meza, Tariq Daradkeh, and Gillian Roper. 2023. **The use of Containers in OpenGL, ML and HPC for Teaching and Research Support.** In ACM SIGGRAPH 2023 Posters (SIGGRAPH '23). Association for Computing Machinery, New York, NY, USA, Article 49, 1–2. [DOI: 10.1145/3588028.3603676](https://doi.org/10.1145/3588028.3603676)
 
 ### Related Repositories
@@ -48,13 +49,19 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
     * https://github.com/NAG-DevOps/openiss-reid-tfk
     * https://github.com/NAG-DevOps/kg-recommendation-framework
 
-### Technical
+### Educational
 
-* [Slurm Workload Manager](https://en.wikipedia.org/wiki/Slurm_Workload_Manager)
 * [Linux and other tutorials from Software Carpentry](https://software-carpentry.org/lessons/)
 * [Digital Research Alliance of Canada SLURM Examples](https://docs.alliancecan.ca/wiki/Running_jobs)
 * Concordia's subscription to [Udemy resources](https://www.concordia.ca/it/services/udemy.html)
+
+### Technical
+
+* [Slurm Workload Manager](https://en.wikipedia.org/wiki/Slurm_Workload_Manager)
+* [NVIDIA A100](https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/a100/pdf/nvidia-a100-datasheet-us-nvidia-1758950-r4-web.pdf)
+* [NVIDIA V100](https://images.nvidia.com/content/technologies/volta/pdf/tesla-volta-v100-datasheet-letter-fnl-web.pdf)
 * [NVIDIA Tesla P6](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/solutions/resources/documents1/Tesla-P6-Product-Brief.pdf)
+* [NVIDIA RTX 6000 Ada Generation](https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/rtx-6000/proviz-print-rtx6000-datasheet-web-2504660.pdf)
 * [AMD Tonga FirePro S7100X](https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#FirePro_Server_Series_(S000x/Sxx_000))
 
 ### Legacy
