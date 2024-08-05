@@ -11,6 +11,10 @@
 % For multicolumn itemized lists
 \usepackage{multicol}
 
+% Down to the level of the paragraph (4)
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
 % Folders with images
 \makeatletter
 \providecommand*{\input@path}{}
@@ -143,7 +147,7 @@ You can also use the ``cite this repository'' feature of GitHub.
 		\end{itemize}
 
 	\item
-	Concordia official page for ``Speed'' cluster which includes access request instructions.
+	Concordia official page for ``Speed'' cluster, which includes access request instructions.
 	\url{https://www.concordia.ca/ginacody/aits/speed.html}
 
 	\item
@@ -200,21 +204,21 @@ Speed is supported by:
 
 	\item
 	7 new SPEED2 servers with 256 CPU cores each 4x~A100 80~GB GPUs, partitioned
-	into 4x~20GB MIGs  each; larger local storage for TMPDIR (see \xf{fig:speed-architecture-full}).
+	into 4x~20GB MIGs each; larger local storage for TMPDIR (see \xf{fig:speed-architecture-full}).
 
 	\item
 	One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
 	Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 
  	\item
-  	Salus compute node (CSSE CLAC, Drs.~Bergler and Kosseim), 56 cores and 728GB of RAM, see \xf{fig:speed-architecture-full}.
+  Salus compute node (CSSE CLAC, Drs.~Bergler and Kosseim), 56 cores and 728GB of RAM, see \xf{fig:speed-architecture-full}.
 
 	\item
  	Magic subcluster partition (ECE, Dr.~Khendek, 11 nodes, see \xf{fig:speed-architecture-full}).
 
-  	\item
-   	Nebular subcluster partition (CIISE, Drs. Yan, Assi, Ghafouri, et al., Nebulae GPU node with 2x RTX 48GB cards,
-    	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture-full}).
+	\item
+	Nebular subcluster partition (CIISE, Drs.~Yan, Assi, Ghafouri, et al., Nebulae GPU node with 2x RTX 6000 Ada 48GB cards,
+	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture-full}).
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -298,7 +302,7 @@ Programming environments include various versions of Python, C++/Java compilers,
 
 In particular, there are over 2200 programs available in \texttt{/encs/bin} and \texttt{/encs/pkg} under Scientific Linux 7 (EL7).
 We are building an equivalent array of programs for the EL9 SPEED2 nodes. To see the packages available, run \texttt{ls -al /encs/pkg/} on \texttt{speed.encs}.
-See a complete list in \xa{sect:software-list}.\\
+See a complete list in \xa{sect:software-details}.\\
 
 \noindent
 \textbf{Note:} We do our best to accommodate custom software requests. Python environments can use user-custom installs 
@@ -357,13 +361,30 @@ label/value to be replaced (the entire bracketed term needs replacement).\\
 \end{verbatim}
 %
 For complex compute steps within a script, use \tool{srun}. We recommend using \tool{salloc} for interactive jobs as it supports multiple steps.
-However, srun can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
+However, \tool{srun} can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
 %
 Common and required job parameters include:
-\begin{verbatim}
-memory (--mem), time (-t), job-name (-J), slurm project account (-A), partition (-p), 
-mail type (--mail-type), ntasks (-n), CPUs per task (--cpus-per-task).
-\end{verbatim}
+%
+\begin{multicols}{2}
+\begin{itemize}
+	\item 
+memory (\option{--mem}),
+	\item 
+time (\option{-t}),
+	\item 
+\option{--job-name} (\option{-J}),
+	\item 
+slurm project account (\option{-A}),
+	\item 
+partition (\option{-p}), 
+	\item 
+mail type (\option{--mail-type}),
+	\item 
+ntasks (\option{-n}),
+	\item 
+CPUs per task (\option{--cpus-per-task}).
+\end{itemize}
+\end{multicols}
 
 % -------------- 2.1 Getting Started ------------------------
 % -----------------------------------------------------------
@@ -442,29 +463,33 @@ To quickly run some sample jobs, use the following commands:
 
 %  2.2.2 Module Loads
 % -------------------
-\subsubsection{Module Loads}
+%\subsubsection{Module Loads}
+\subsubsection{Working with Modules}
 \label{sect:modules}
 
 After setting the directives in your job script, the next section typically involves loading 
-the necessary software modules. The \texttt{module} command is used to manage the user environment, 
+the necessary software modules. The \tool{module} command is used to manage the user environment, 
 make sure to load all the modules your job depends on. You can check available modules with the 
 module avail command. Loading the correct modules ensures that your environment is properly 
-set up for execution.
-
-\begin{verbatim}
-    module avail
-    module -t avail matlab		## show the list for a particular program (e.g., matlab)
-    module -t avail m		    ## show the list for all programs starting with m     
-\end{verbatim}
+set up for execution.\\
 
 \noindent To list for a particular program (\tool{matlab}, for example):
+%
+\small
+\begin{verbatim}
+    module avail
+    module -t avail matlab  ## show the list for a particular program (e.g., matlab)
+    module -t avail m       ## show the list for all programs starting with m     
+\end{verbatim}
+\normalsize
 
 \noindent For example, insert the following in your script to load the \tool{matlab/R2023a} module:
 \begin{verbatim}
     module load matlab/R2023a/default
 \end{verbatim}
 
-\noindent \textbf{Note:} you can remove a module from active use by replacing \option{load} by \option{unload}.\\
+\noindent
+\textbf{Note:} you can remove a module from active use by replacing \option{load} by \option{unload}.\\
     
 \noindent To list loaded modules:
 \begin{verbatim}
@@ -507,33 +532,32 @@ These variables can be accessed within the job using commands like \tool{env} or
 Many of these variables start with the prefix \texttt{SLURM}.\\
 
 \noindent Here are some of the most useful environment variables:
-%\api{TMPDIR}, \api{SGE\_O\_WORKDIR}, and \api{NSLOTS}:
 
 \begin{itemize}
-	\item \api{\$TMPDIR}:
+	\item
+	\api{\$TMPDIR} (and \api{\$SLURM\_TMPDIR}):
 	% TODO: verify temporal existence
 	This is the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job.
 	If you need the data from this temporary space, ensure you copy it before the job terminates.
 
-	\item \api{\$SLURM\_SUBMIT\_DIR}:
-	% TODO: verify if home or current:
-	%\api{\$SGE\_O\_WORKDIR}=the path to the job's working directory (likely an
-	%NFS-mounted path). If, \texttt{-cwd}, was stipulated, that path is taken; if not, 
-	%the path defaults to your home directory.
+	\item
+	\api{\$SLURM\_SUBMIT\_DIR}:
 	The path to the job's working directory (likely an NFS-mounted path).
 	If, \option{--chdir}, was stipulated, that path is taken; if not, 
 	the path defaults to your home directory.
 	
-	\item \api{\$SLURM\_JOBID}:
-	% TODO: SLURM does not appear to have this
-	This variable holds the current job's ID, which is useful for job manipulation and reporting.
+	\item
+	\api{\$SLURM\_JOBID}:
+	This variable holds the current job's ID, which is useful for job
+	manipulation and reporting within the job's process.
 
-	% SLURM_NTASKS
-	%\item
-	%\api{\$NSLOTS}=the number of cores requested for the job. This variable can 
-	%be used in place of hardcoded thread-request declarations. 
+	\item
+	\api{\$SLURM\_NTASKS}: the number of cores requested for the job. This variable can 
+	be used in place of hardcoded thread-request declarations, e.g., for
+	Fluent or similar.
 
-	\item \api{\$SLURM\_JOB\_NODELIST}:
+	\item
+	\api{\$SLURM\_JOB\_NODELIST}:
 	This lists the nodes participating in your job.
 
 	\item \api{\$SLURM\_ARRAY\_TASK\_ID}:
@@ -541,11 +565,14 @@ Many of these variables start with the prefix \texttt{SLURM}.\\
 	(refer to \xs{sect:array-jobs} for more details on array jobs).
 \end{itemize}
 
-\noindent For a more comprehensive list of environment variables, refer to the SLURM documentation for 
+\noindent
+For a more comprehensive list of environment variables, refer to the SLURM documentation for 
 \href{https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES}{Input Environment Variables} and
 \href{https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES}{Output Environment Variables}.\\
 
-\noindent Here's an example script (see \xf{fig:tmpdir.sh}) that utilizes some of these environment variables:
+\noindent
+An example script that utilizes some of these environment variables
+is in \xf{fig:tmpdir.sh}.
 
 \begin{figure}[htpb]
     \lstinputlisting[language=csh,frame=single,basicstyle=\scriptsize\ttfamily]{tmpdir.sh}
@@ -562,19 +589,31 @@ Some programs, such as Fluent, utilize MPI (Message Passing Interface) for paral
 MPI requires `passwordless login', which is achieved through SSH keys. Here are the steps to set up SSH keys for MPI:
 
 \begin{itemize}
-	\item Navigate to the \texttt{.ssh} directory
-	\begin{verbatim}cd .ssh\end{verbatim}
+	\item
+	Navigate to the \texttt{.ssh} directory
+	\begin{verbatim}
+	cd ~/.ssh
+	\end{verbatim}
 
-	\item Generate a new SSH key pair (Accept the default location and leave the passphrase blank)
-	\begin{verbatim}ssh-keygen -t ed25519\end{verbatim}
+	\item
+	Generate a new SSH key pair (Accept the default location and leave the passphrase blank)
+	\begin{verbatim}
+	ssh-keygen -t ed25519
+	\end{verbatim}
 
-	\item Authorize the Public Key:
-	\begin{verbatim}cat id_ed25519.pub >> authorized_keys\end{verbatim} 
+	\item
+	Authorize the Public Key:
+	\begin{verbatim}
+	cat id_ed25519.pub >> authorized_keys
+	\end{verbatim} 
 	If the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}} file does not exist, use
-	\begin{verbatim}cat id_ed25519.pub > authorized_keys\end{verbatim}
+	\begin{verbatim}
+	cat id_ed25519.pub > authorized_keys
+	\end{verbatim}
 
-	\item Set permissions: ensure the correct permissions are set for the `authorized\_keys' file and your home directory,
-	(most users will already have these permissions by default.):
+	\item
+	Set permissions: ensure the correct permissions are set for the `authorized\_keys' file and your home directory
+	(most users will already have these permissions by default):
 	\begin{verbatim}
 	chmod 600 ~/.ssh/authorized_keys
 	chmod 700 ~
@@ -587,13 +626,16 @@ MPI requires `passwordless login', which is achieved through SSH keys. Here are 
 \label{sect:environments}
 \label{sect:examples-venv}
 
-The following documentation is specific to \textbf{Speed} HPC Facility at the
-Gina Cody School of Engineering and Computer Science.
+The following documentation is specific to \textbf{Speed}.
+%HPC Facility at the
+%Gina Cody School of Engineering and Computer Science.
+Other clusters may have their own requirements.
 %
 Virtual environments are typically created using Conda or Python.
 Another option is Singularity (detailed in \xs{sect:singularity-containers}).
 These environments are usually created once during an interactive session 
 before submitting a batch job to the scheduler. 
+%
 The job script submitted to the scheduler should:
 \begin{enumerate}
 	\item Activate the virtual environment.
@@ -613,78 +655,88 @@ To create an Anaconda environment, follow these steps:
 		salloc -p pg --gpus=1
 	\end{verbatim}
 
-	\item Load Anaconda module and create Anaconda environment in your speed-scratch directory by using 
-	the \texttt{\-\-prefix} option (without this option, the environment will be created in your home directory by default).
+	\item
+	Load the Anaconda module and create your Anaconda environment in your speed-scratch directory by using 
+	the \option{--prefix} option (without this option, the environment will be created in your home directory by default).
 	\begin{verbatim}
 		module load anaconda3/2023.03/default
 		conda create --prefix /speed-scratch/$USER/myconda
 	\end{verbatim}
 
-	\item List environments (to view your conda environment)
+	\item
+	List environments (to view your conda environment)
 	\begin{verbatim}
 		conda info --envs
 		# conda environments:
 		#
 		base                  *  /encs/pkg/anaconda3-2023.03/root
-                         		/speed-scratch/a_user/myconda
+                         		 /speed-scratch/a_user/myconda
 	\end{verbatim}
 
-	\item Activate the environment
+	\item
+	Activate the environment
 	\begin{verbatim}
 		conda activate /speed-scratch/$USER/myconda
 	\end{verbatim}
 
-	\item Add \tool{pip} to your environment (this will install \tool{pip} and \tool{pip}'s dependencies
-	, including python, into the environment.)
+	\item
+	Add \tool{pip} to your environment (this will install \tool{pip} and \tool{pip}'s dependencies,
+	including \tool{python}, into the environment.)
 	\begin{verbatim}
 		conda install pip
 	\end{verbatim}
 \end{enumerate}   
 
-\noindent A consolidated example using Conda:
+\noindent
+A consolidated example using Conda:
 \begin{verbatim}
-	salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
-	cd /speed-scratch/$USER
-	module load python/3.11.0/default
-	conda create -p /speed-scratch/$USER/pytorch-env
-	conda activate /speed-scratch/$USER/pytorch-env
-	conda install python=3.11.0
-	pip3 install torch torchvision torchaudio --index-url \ 
-		https://download.pytorch.org/whl/cu117
-	....
-	conda deactivate
-	exit # end the salloc session
+salloc -p pg --gpus=1 --mem=10G -A <slurm account name>
+cd /speed-scratch/$USER
+module load python/3.11.0/default
+conda create -p /speed-scratch/$USER/pytorch-env
+conda activate /speed-scratch/$USER/pytorch-env
+conda install python=3.11.0
+pip3 install torch torchvision torchaudio --index-url \ 
+  https://download.pytorch.org/whl/cu117
+....
+conda deactivate
+exit # end the salloc session
 \end{verbatim}
 
-\noindent If you encounter \textbf{no space left error} while creating Conda environment, refer to our Github 
-\href{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#no-space-left-error-when-creating-conda-environment}
-{\texttt{HERE}}.\\
+\noindent
+If you encounter \textbf{no space left error} while creating Conda environments, please refer to
+\xa{sect:quota-exceeded}. Likely you forgot \option{--prefix} or environment variables below.\\
 
-\noindent \textbf{Important Note:} \tool{pip} (and \tool{pip3}) are package installers for Python. When you use
+\noindent
+\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are package installers for Python. When you use
 \texttt{pip install}, it installs packages from the Python Package Index (PyPI), whereas, 
 \texttt{conda install} installs packages from Anaconda's repository.
 
-\paragraph{Conda Env without \tool{--prefix}:}
-If you don't want to use the \texttt{--prefix} option every time you create a new environment and 
-do not want to use the default home directory, you can create a new directory and set the following 
-variables to point to the new created directory, e.g:
-\begin{verbatim}
-	mkdir -p /speed-scratch/$USER/conda
-	setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda
-	setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkg
-\end{verbatim}
-\noindent If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} 
-or \texttt{.bashrc} (depending on the default shell you are using)
+% -----------------------------------------------------------------------------
+\paragraph{Conda Env without \option{--prefix}}
 
-%  2.11.2 Python
-% -------------------
+If you don't want to use the \option{--prefix} option every time you create a new environment and 
+do not want to use the default home directory, you can create a new directory and set the following 
+variables to point to the newly created directory, e.g.:
+\begin{verbatim}
+mkdir -p /speed-scratch/$USER/conda
+setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda
+setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkg
+\end{verbatim}
+\noindent
+If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} 
+or \texttt{.bashrc} (depending on the default shell you are using).
+
+% 2.11.2 Python
+% -----------------------------------------------------------------------------
 \subsubsection{Python}
 \label{sect:python-venv}
+
 Setting up a Python virtual environment is straightforward.
 Here's an example that use a Python virtual environment:
 
 \begin{verbatim}
-	salloc -p pg --gpus=1 --mem=10GB -A <slurm account name>
+	salloc -p pg --gpus=1 --mem=10G -A <slurm account name>
 	cd /speed-scratch/$USER
 	module load python/3.9.1/default
 	mkdir -p /speed-scratch/$USER/tmp 
@@ -692,16 +744,25 @@ Here's an example that use a Python virtual environment:
 	setenv TMP /speed-scratch/$USER/tmp
 	python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
 	source /speed-scratch/$USER/tmp/testenv/bin/activate.csh
-	pip install modules…
+	pip install modules...
 	deactivate
 	exit
 \end{verbatim}
 
-\noindent See, e.g., \href
-{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}{\texttt{gurobi-with-python.sh}}\\
+\noindent
+See, e.g.,
+\href
+  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
+	{\texttt{gurobi-with-python.sh}}\\
 
-\noindent \textbf{Important Note:} partition \texttt{ps} is used for CPU jobs, while \texttt{pg}, \texttt{pt} are used
-for GPU jobs. You do not need to use \texttt{--gpus} when preparing environments for CPU jobs.
+\noindent
+\textbf{Important Note:} our partition \texttt{ps} is used for CPU jobs, while \texttt{pg},
+\texttt{pt}, and \texttt{cl} are used for GPU jobs. You do not need to use \option{--gpus}
+when preparing environments for CPU jobs.\\
+
+\noindent
+\textbf{Note:} Python enviornments are also preferred over Conda
+in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 
 % -------------- 2.12 Example Job Script: Fluent --------------
 % -------------------------------------------------------------
@@ -739,28 +800,34 @@ may be scheduled before a multi-core job with higher priority.
 While Speed is a powerful tool, it is essential to recognize its limitations to use it effectively:
 
 \begin{itemize}
-	\item New users are limited to a total of 32 cores. If you need more cores temporarily 
-	(up to 192 cores or six jobs of 32 cores each), please contact \url{rt-ex-hpc@encs.concordia.ca}.
+	\item
+	New users are limited to a total of 32 cores and 4 GPUs. If you need more cores temporarily,
+	%(up to 192 cores or six jobs of 32 cores each),
+	please contact \texttt{rt-ex-hpc AT encs.concordia.ca}.
 
-	\item Batch job sessions can run for a maximum of one week. 
+	\item
+	Batch job sessions can run for a maximum of one week. 
 	Interactive jobs are limited to 24 hours see \xs{sect:interactive-jobs}.
 
-	\item Scripts can live in your NFS-provided home directory, but substantial data 
+	\item
+	Scripts can live in your NFS-provided home directory, but substantial data 
 	should be stored in your cluster-specific directory (located at \verb+/speed-scratch/<ENCSusername>/+).
 
 	NFS is suitable for short-term activities but not for long-term operations.
-	Data that a job will read multiple times should be copied at the start to the scratch disk of a compute node using
+	\textbf{Data that a job will read multiple times} should be copied at the start to the scratch disk of a compute node using
 	\api{\$TMPDIR} (and possibly \api{\$SLURM\_SUBMIT\_DIR}). 
 	Intermediate job data should be produced in \api{\$TMPDIR}, and once a job is near completion,
-	this data should be copied to your NFS-mounted home directory (or other NFS-mounted space).
-	In other words, IO-intensive operations should be performed locally whenever possible, 
-	reserving network activity for the start and end of jobs.
+	these data should be copied to your NFS-mounted home directory (or other NFS-mounted space).
+	\textbf{In other words, IO-intensive operations should be performed locally whenever possible, 
+	reserving network activity for the start and end of jobs.}
 
-	\item Your current resource allocation is based on past usage, 
+	\item
+	Your current resource allocation is based on past usage,
 	which considers approximately one week's worth of past wall clock time 
 	(time spent on the node(s)) and compute activity (on the node(s)).
 
-	\item Jobs must always be run within the scheduler's system. Repeat offenders who 
+	\item
+	Jobs must always be run within the scheduler's system. Repeat offenders who 
 	run jobs outside the scheduler risk losing cluster access.
 \end{itemize}
 
@@ -773,21 +840,27 @@ While Speed is a powerful tool, it is essential to recognize its limitations to 
 \label{sect:tips}
 
 \begin{itemize}
-	\item Ensure that files and scripts have Linux line breaks.
+	\item
+	Ensure that files and scripts have Linux line breaks.
 	Use the \tool{file} command to verify and \tool{dos2unix} to convert if necessary.
 
-	\item Use \tool{rsync}, not \tool{scp} for copying or moving large amounts of data.
+	\item
+	Use \tool{rsync} (preferred over \tool{scp}) for copying or moving large amounts of data.
 	
-	\item Before transferring a large number of files between NFS-mounted storage and 
+	\item
+	Before transferring a large number of files between NFS-mounted storage and 
 	the cluster, compress the files into a \tool{tar} archive.
 
-	\item If you plan to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}), 
+	\item
+	If you plan to use a different shell (e.g., \tool{bash}~\cite{aosa-book-vol1-bash}), 
 	change the shell declaration at the beginning of your script(s).
 
-	\item Request resources (cores, memory) that closely match the actual needs of your job.
+	\item
+	Request resources (cores, memory, GPUs) that closely match the actual needs of your job.
 	Requesting significantly more than necessary can make your job harder to schedule when resources are limited.
 
-	\item For any concerns or questions, email \texttt{rt-ex-hpc AT encs.concordia.ca}
+	\item
+	For any concerns or questions, email \texttt{rt-ex-hpc AT encs.concordia.ca}
 \end{itemize}
 
 % -------------- 3.3 Use Cases --------------------------------
@@ -796,18 +869,21 @@ While Speed is a powerful tool, it is essential to recognize its limitations to 
 \label{sect:cases}
 
 \begin{itemize}
-	\item HPC Committee's initial batch about 6 students (end of 2019):
+	\item
+	HPC Committee's initial batch about 6 students (end of 2019):
 	\begin{itemize}
 		\item 10000 iterations job in Fluent finished in $<26$ hours vs. 46 hours in Calcul Quebec
 	\end{itemize}
 
-	\item NAG's MAC spoofer analyzer~\cite{mac-spoofer-analyzer-intro-c3s2e2014,mac-spoofer-analyzer-detail-fps2014},
+	\item
+	NAG's MAC spoofer analyzer~\cite{mac-spoofer-analyzer-intro-c3s2e2014,mac-spoofer-analyzer-detail-fps2014},
 	such as \url{https://github.com/smokhov/atsm/tree/master/examples/flucid}
 	\begin{itemize}
 		\item compilation of forensic computing reasoning cases about false or true positives of hardware address spoofing in the labs
 	\end{itemize}
 
-	\item S4 LAB/GIPSY R\&D Group's:
+	\item
+	S4 LAB/GIPSY R\&D Group's:
 	\begin{itemize}
 		\item MARFCAT and MARFPCAT (OSS signal processing and machine learning tools for 
 		vulnerable and weak code analysis and network packet capture
@@ -907,9 +983,9 @@ SLURM for a while or also transitioned to it:\\
 \url{https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm}
 
 \begin{figure}[htpb]
-\includegraphics[width=\columnwidth]{images/rosetta-mapping}
-\caption{Rosetta Mappings of Scheduler Commands from SchedMD}
-\label{fig:rosetta-mappings}
+	\includegraphics[width=\columnwidth]{images/rosetta-mapping}
+	\caption{Rosetta Mappings of Scheduler Commands from SchedMD}
+	\label{fig:rosetta-mappings}
 \end{figure}
 
 \item
@@ -994,8 +1070,9 @@ are not managed by HPC/NAG of AITS, so contact their respective representatives.
 
 \begin{itemize}
 \item
-\texttt{computation.encs} CPU only 3-machine cluster running longer jobs
-without a scheduler at the moment
+\texttt{computation.encs} is a CPU only 3-machine cluster running longer jobs
+without a scheduler at the moment. Shares the same EL7 software tree as Speed.
+See \url{https://www.concordia.ca/ginacody/aits/public-servers.html}.
 \item
 \texttt{apini.encs} cluster for teaching and MPI programming (see the corresponding
 course in CSSE)
@@ -1025,26 +1102,26 @@ Dr. Maria Amer's \texttt{venom.encs} Lambda Labs station
 Dr. Leon Wang's \texttt{guerrera.encs} DGX station
 \end{itemize}
 \item
-Dr. Ivan Contreras' servers (managed by AITS)
+Dr. Ivan Contreras' 4 Operations Research group servers (managed by AITS).
 \item
 If you are a member of School of Health (formerly PERFORM Center),
 you may have access to their local 
 \href
-{https://perform-wiki.concordia.ca/mediawiki/index.php/HPC_Cluster}
-{PERFORM's High Performance Computing (HPC) Cluster}.
+	{https://perform-wiki.concordia.ca/mediawiki/index.php/HPC_Cluster}
+	{PERFORM's High Performance Computing (HPC) Cluster}.
 Contact Thomas Beaudry for details and how to obtain access.
 \item
 All Concordia students have access to the Library's small
 \href
-{https://library.concordia.ca/technology/sandbox/}
-{Technology Sandbox}
+	{https://library.concordia.ca/technology/sandbox/}
+	{Technology Sandbox}
 testing cluster that also runs Slurm. Email \texttt{sean.cooney AT concordia.ca} for details.
 \item
 Digital Research Alliance Canada (Compute Canada / Calcul Quebec),\\
 \url{https://alliancecan.ca/}. Follow
 \href
-{https://alliancecan.ca/en/services/advanced-research-computing/account-management/apply-account}
-{this link}
+	{https://alliancecan.ca/en/services/advanced-research-computing/account-management/apply-account}
+	{this link}
 on the information how to obtain access (students need to be sponsored
 by their supervising faculty members, who should create accounts
 first). Their SLURM examples are here: \url{https://docs.alliancecan.ca/wiki/Running_jobs}
@@ -1052,7 +1129,7 @@ first). Their SLURM examples are here: \url{https://docs.alliancecan.ca/wiki/Run
 \end{itemize}
 
 % ------------------------------------------------------------------------------
-%						Software List 
+%	Software List 
 % ------------------------------------------------------------------------------
 \input{software-list}
 

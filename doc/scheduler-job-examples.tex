@@ -4,21 +4,18 @@
 
 \begin{figure}[htpb]
   \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
-  \caption{Source code for \file{fluent.sh}}
+  \caption{Source code for \texttt{fluent.sh}}
   \label{fig:fluent.sh}
 \end{figure}
 
 The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. 
-%Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
-Notable aspects of this script include requesting e-mail notifications (\texttt{--mail-type}), 
-defining the parallel environment for Fluent with \texttt{-t\$SLURM\_NTASKS} and \texttt{-g-cnf=\$FLUENTNODES}, 
-%parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
+Notable aspects of this script include requesting e-mail notifications (\option{--mail-type}), 
+defining the parallel environment for Fluent with \option{-t\$SLURM\_NTASKS} and \option{-g-cnf=\$FLUENTNODES}, 
 and setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file.
 The script also copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home after the job completes.
 Job progress can be monitored by examining the standard-out file (e.g.,
-%\file{flu10000.o249}), and/or by examining the ``moment'' file in 
-\texttt{slurm-249.out}), and/or by examining the ``moment'' file in 
-\texttt{/disk/nobackup/<yourjob>} (it starts with your job-ID) on the node running
+\texttt{slurm-249.out}), and/or by examining the ``moment'' file in TMPDIR (usually
+\texttt{/disk/nobackup/<yourjob>} (it starts with your job-ID)) on the node running
 the job. Be cautious with journal-file paths.
 
 % -------------- 2.13 Example Job Script: EfficientDet --------
@@ -26,40 +23,40 @@ the job. Be cautious with journal-file paths.
 \subsection{Example Job: EfficientDet}
 
 The following steps describe how to create an EfficientDet environment on Speed, 
-as submitted by a member of Dr. Amer’s research group:
+as submitted by a member of Dr. Amer's research group:
 
 \begin{itemize}
   \item Navigate to your \texttt{speed-scratch} directory:
   \begin{verbatim}
-    cd /speed-scratch/$USER
+	cd /speed-scratch/$USER
   \end{verbatim}
   \item Load Python module
   \begin{verbatim}
-    module load python/3.8.3
+	module load python/3.8.3
   \end{verbatim}
   \item Create and activate the virtual environment
   \begin{verbatim}
-    python3 -m venv <env_name>
-    source <env_name>/bin/activate.csh
+	python3 -m venv <env_name>
+	source <env_name>/bin/activate.csh
   \end{verbatim}
   \item Install DL packages for EfficientDet
   \small
   \begin{verbatim}
-    pip install tensorflow==2.7.0
-    pip install lxml>=4.6.1
-    pip install absl-py>=0.10.0
-    pip install matplotlib>=3.0.3
-    pip install numpy>=1.19.4
-    pip install Pillow>=6.0.0
-    pip install PyYAML>=5.1
-    pip install six>=1.15.0
-    pip install tensorflow-addons>=0.12
-    pip install tensorflow-hub>=0.11
-    pip install neural-structured-learning>=1.3.1
-    pip install tensorflow-model-optimization>=0.5
-    pip install Cython>=0.29.13
-    pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
-    \end{verbatim}
+	pip install tensorflow==2.7.0
+	pip install lxml>=4.6.1
+	pip install absl-py>=0.10.0
+	pip install matplotlib>=3.0.3
+	pip install numpy>=1.19.4
+	pip install Pillow>=6.0.0
+	pip install PyYAML>=5.1
+	pip install six>=1.15.0
+	pip install tensorflow-addons>=0.12
+	pip install tensorflow-hub>=0.11
+	pip install neural-structured-learning>=1.3.1
+	pip install tensorflow-model-optimization>=0.5
+	pip install Cython>=0.29.13
+	pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
+	\end{verbatim}
   \normalsize
 \end{itemize}
 
@@ -69,15 +66,12 @@ as submitted by a member of Dr. Amer’s research group:
 \label{sect:java}
 
 Jobs that call Java have a memory overhead, which needs to be taken 
-%into account when assigning a value to \api{h\_vmem}. Even the most basic 
 into account when assigning a value to \option{--mem}. Even the most basic 
 Java call, such as \texttt{Java -Xmx1G -version}, will need to have,
-%\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
 \texttt{--mem=5G}, with the 4 GB difference representing the memory overhead. 
 \textbf{Note} that this memory overhead grows proportionally with the value of
-\texttt{-Xmx}.
+\texttt{-Xmx}. For example,
 
-For example, 
 \begin{itemize}
   \item When \texttt{-Xmx} has a value of 100G, \option{--mem} has to be at least 106G.
   \item For \texttt{-Xmx} of 200G, \option{--mem} has to be at least 211G.
@@ -95,50 +89,39 @@ cards. Each card has 2048 cores and 16GB of RAM. Note that the P6
 is mainly a single-precision card, so unless you need GPU double precision, 
 double-precision calculations will be faster on a CPU node.
 
-\noindent Job scripts for the GPU queue differ in that they need this statement,
+\noindent
+Job scripts for the GPU queue differ in that they need this statement,
 which attaches either a single GPU or two GPUs to the job:
 \begin{verbatim}
-  #SBATCH --gpus=[1|2]
+  #SBATCH --gpus=[1|x]
 \end{verbatim}
+The default max quota for x is 4.
 
-%do not need these
-%statements:
-%\begin{verbatim}
-%#$ -pe smp <threadcount>
-%#$ -l h_vmem=<memory>G
-%\end{verbatim}
-
-%\begin{verbatim}
-%#$ -l gpu=[1|2]
-%\end{verbatim}
-
-% TODO: verify accuracy
-% Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
-% dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
-% total of \emph{four} GPUs can be actively attached to any one user at any given time.
-
-\noindent Once your job script is ready, submit it to the GPU partition (queue) with:
-%\begin{verbatim}
-%qsub -q g.q ./<myscript>.sh
-%\end{verbatim}
+\noindent
+Once your job script is ready, submit it to the GPU partition (queue) with:
 \begin{verbatim}
   sbatch -p pg ./<myscript>.sh
 \end{verbatim}
 
-\noindent You can query \tool{nvidia-smi} on the node running your job with:
+\noindent
+You can query \tool{nvidia-smi} on the node running your job with:
 \begin{verbatim}
-  ssh <username>@speed[-05|-17|37-43] nvidia-smi
+  ssh <ENCSusername>@speed[-05|-17|37-43] nvidia-smi
 \end{verbatim}
 
 \noindent The status of the GPU queue can be queried with:
-%\begin{verbatim}
-%qstat -f -u "*" -q g.q
-%\end{verbatim}
 \begin{verbatim}
   sinfo -p pg --long --Node
 \end{verbatim}
 
-\noindent \textbf{Important note for TensorFlow and PyTorch users:}:
+\noindent
+You can query \tool{rocm-smi} on the AMD GPU node running your job with:
+\begin{verbatim}
+  ssh <ENCSusername>@speed-19 rocm-smi
+\end{verbatim}
+
+\noindent
+\textbf{Important note for TensorFlow and PyTorch users:}:
 if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
 do not use the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
 on \textbf{speed-01, speed-05, or speed-17}, as they will crash the compute node (100\% certainty). 
@@ -149,7 +132,6 @@ The workaround is to either manually effect GPU parallelisation
 (TensorFlow provides an example on how to do this), or to run on a single GPU.\\
 
 \noindent \textbf{Important}:
-%Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
 Users without permission to use the GPU nodes can submit jobs to the \texttt{pg}
 partition, but those jobs will hang and never run.
 Their availability can be seen with:
@@ -158,26 +140,6 @@ Their availability can be seen with:
 %in \texttt{speed-19}.
 %, \texttt{qstat -F g} (note the capital): 
 %
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%---------------------------------------------------------------------------------
-%...
-%---------------------------------------------------------------------------------
-%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
-        %hc:gpu=6
-%---------------------------------------------------------------------------------
-%g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
-        %hc:gpu=6
-%---------------------------------------------------------------------------------
-%...
-%---------------------------------------------------------------------------------
-%s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.37    lx-amd64
-        %hc:gpu=1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
 \small
 \begin{verbatim}
 [serguei@speed-submit src] % sinfo -p pg --long --Node
@@ -200,15 +162,13 @@ speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu2
 \end{verbatim}
 \normalsize
 
-\noindent To specifically request a GPU node, add, \texttt{--gpus=[\#GPUs]},
-%\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
+\noindent
+To specifically request a GPU node, add, \texttt{--gpus=[\#GPUs]},
 to your \tool{sbatch} statement/script or \tool{salloc} statement request.
-%\tool{qlogin} (statement) request. For example,
 For example:
 \begin{verbatim}
   sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh
 \end{verbatim}
-%\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}.
 
 %\small
 %\begin{verbatim}
@@ -260,7 +220,7 @@ speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1 
 % -------------------
 \subsubsection{P6 on Multi-GPU, Multi-Node}
 
-As described earlier, P6 cards are not compatible with \tool{Distribute} and \tool{DataParallel} functions
+As described earlier, P6 cards are not compatible with \api{Distribute} and \api{DataParallel} functions
 (\tool{PyTorch}, \tool{Tensorflow}) when running on multiple GPUs.
 One workaround is to run the job in Multi-node, single GPU per node
 (this applies to P6 nodes: speed-05, speed-17, speed-01):
@@ -270,7 +230,9 @@ One workaround is to run the job in Multi-node, single GPU per node
 \end{verbatim}
 
 \noindent An example script for training on multiple nodes with multiple GPUs is provided in 
-\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}{pytorch-multinode-multigpu.sh}
+\href
+  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}
+	{pytorch-multinode-multigpu.sh}
 illustrates a job for training on Multi-Nodes, Multi-GPUs
 
 %  2.15.2 CUDA

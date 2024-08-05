@@ -1,42 +1,50 @@
-% ------------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
 %						B Frequently Asked Questions 
-% ------------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
 \section{Frequently Asked Questions}
 \label{sect:faqs}
 
 % B.1 Where do I learn about Linux?
-% -------------------------------------------------------------
+% -----------------------------------------------------------------------------
 \subsection{Where do I learn about Linux?}
 \label{sect:faqs-linux}
 
 All Speed users are expected to have a basic understanding of Linux and its commonly used commands.
 Here are some recommended resources:
 
+% -----------------------------------------------------------------------------
 \paragraph*{Software Carpentry}
+
 Software Carpentry provides free resources to learn software, including a workshop on the Unix shell.
 Visit \href{https://software-carpentry.org/lessons/}{Software Carpentry Lessons} to learn more.
 
+% -----------------------------------------------------------------------------
 \paragraph*{Udemy}
+
 There are numerous Udemy courses, including free ones, that will help you learn Linux. 
 Active Concordia faculty, staff and students have access to Udemy courses. 
 A recommended starting point for beginners is the course ``Linux Mastery: Master the Linux Command Line in 11.5 Hours''.
 Visit \href{https://www.concordia.ca/it/services/udemy.html}{Concordia's Udemy page} to learn how Concordians can access Udemy.
 
 % B.2 How to bash shell on Speed?
-% -------------------------------------------------------------
-\subsection{How to use bash shell on \tool{Speed}?}
+% -----------------------------------------------------------------------------
+\subsection{How to use bash shell on Speed?}
 \label{sect:faqs-bash}
 
 This section provides comprehensive instructions on how to utilize the bash shell on the Speed cluster.
 
 % B.2.1 How do I set bash as my login shell?
+% -----------------------------------------------------------------------------
 \subsubsection{How do I set bash as my login shell?}
+
 To set your default login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
 To make this change, create a ticket with the Service Desk (or email \texttt{help at concordia.ca}) to
 request that bash become your default login shell for your ENCS user account on all GCS servers.
 
 % B.2.2 How do I move into a bash shell on Speed?
-\subsubsection{How do I move into a bash shell on \tool{Speed}?}
+% -----------------------------------------------------------------------------
+\subsubsection{How do I move into a bash shell on Speed?}
+
 To move to the bash shell, type \textbf{bash} at the command prompt:
 \begin{verbatim}
 	[speed-submit] [/home/a/a_user] > bash
@@ -44,22 +52,26 @@ To move to the bash shell, type \textbf{bash} at the command prompt:
 	bash
 \end{verbatim}	
 
-\noindent \textbf{Note} how the command prompt changes from 
+\noindent
+\textbf{Note} how the command prompt changes from 
 ``\verb![speed-submit] [/home/a/a_user] >!'' to ``\verb!bash-4.4$!'' after entering the bash shell.
 
 % B.2.3 How do I use the bash shell in an interactive session on Speed?
-\subsubsection{How do I use the bash shell in an interactive session on \tool{Speed}?}
+% -----------------------------------------------------------------------------
+\subsubsection{How do I use the bash shell in an interactive session on Speed?}
+
 Below are examples of how to use \tool{bash} as a shell in your interactive job sessions 
 with both the \tool{salloc} and \tool{srun} commands.
 
 \begin{itemize}
 	\item \texttt{salloc -ppt --mem=100G -N 1 -n 10 /encs/bin/bash}
-	\item \texttt{srun  --mem=50G -n 5 --pty /encs/bin/bash}
+	\item \texttt{srun --mem=50G -n 5 --pty /encs/bin/bash}
 \end{itemize}
 
 \noindent\textbf{Note:} Make sure the interactive job requests memory, cores, etc.
 
 % B.2.4 How do I run scripts written in bash on Speed?
+% -----------------------------------------------------------------------------
 \subsubsection{How do I run scripts written in bash on \tool{Speed}?}
 
 To execute bash scripts on Speed:
@@ -74,8 +86,10 @@ To execute bash scripts on Speed:
 % B.3 How to resolve “Disk quota exceeded” errors?
 % -------------------------------------------------------------
 \subsection{How to resolve ``Disk quota exceeded'' errors?}
+\label{sect:quota-exceeded}
 
 % B.3.1 Probable Cause
+% -----------------------------------------------------------------------------
 \subsubsection{Probable Cause}
 
 The ``\texttt{Disk quota exceeded}'' error occurs when your application has 
@@ -87,6 +101,7 @@ run out of disk space to write to. On \tool{Speed}, this error can be returned w
 \end{enumerate}
 
 % B.3.2 Possible Solutions
+% -----------------------------------------------------------------------------
 \subsubsection{Possible Solutions}
 
 \begin{enumerate}
@@ -119,6 +134,7 @@ run out of disk space to write to. On \tool{Speed}, this error can be returned w
 \noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
 % B.3.3 Example of setting working directories for COMSOL
+% -----------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{COMSOL}}
 
 \begin{itemize}
@@ -137,6 +153,7 @@ run out of disk space to write to. On \tool{Speed}, this error can be returned w
 \noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
 % B.3.4 Example of setting working directories for Python Modules
+% -----------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{Python Modules}}
 
 By default when adding a Python module, the \texttt{/tmp} directory is set as the temporary repository for files downloads.
@@ -156,7 +173,7 @@ To add a Python module
 \noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
 % B.4 How do I check my job's status?
-% -------------------------------------------------------------
+% -----------------------------------------------------------------------------
 \subsection{How do I check my job's status?}
 
 %When a job with a job id of 1234 is running, the status of that job can be tracked using \verb!`qstat -j 1234`!.
@@ -181,32 +198,15 @@ you can track its status using the following commands:
 \end{itemize}
 
 % B.5 Why is my job pending when nodes are empty?
-% -------------------------------------------------------------
+% -----------------------------------------------------------------------------
 \subsection{Why is my job pending when nodes are empty?}
 
 % B.5.1 Disabled nodes
+% -----------------------------------------------------------------------------
 \subsubsection{Disabled nodes}
+
 It is possible that one or more of the Speed nodes are disabled for maintenance.
 To verify if Speed nodes are disabled, check if they are in a draining or drained state:
-
-%\begin{verbatim}
-%qstat -f -qs d
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%---------------------------------------------------------------------------------
-%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.27     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-10.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-16.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-19.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-24.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
-%\end{verbatim}
 
 \small
 \begin{verbatim}
@@ -260,6 +260,7 @@ The reason for the drained state can be found in the \textbf{reason} column.\\
 and the disabled nodes have a state of \textbf{idle}.
 
 % B.5.2 Error in job submit request.
+% -----------------------------------------------------------------------------
 \subsubsection{Error in job submit request.}
 
 It is possible that your job is pending because it requested resources that are not available within Speed. 
@@ -268,5 +269,5 @@ To verify why job ID 1234 is not running, execute:
 	sacct -j 1234
 \end{verbatim}
 
-\noindent A summary of the reasons can be obtained via the \tool{squeue} command.
-%and review the messages in the \textbf{scheduling info:} section.
+\noindent
+A summary of the reasons can be obtained via the \tool{squeue} command.
