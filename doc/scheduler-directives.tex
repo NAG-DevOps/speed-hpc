@@ -1,115 +1,96 @@
-% ------------------------------------------------------------------------------
-\subsubsection{Directives}
-\label{sect:directives}
+%  2.2.1 Directives
+% -------------------
+% TMP scheduler-specific section
 
 Directives are comments included at the beginning of a job script that set the shell 
-and the options for the job scheduler. 
+and the options for the job scheduler.
 %
 The shebang directive is always the first line of a script. In your job script, 
 this directive sets which shell your script's commands will run in. On ``Speed'', 
-we recommend that your script use a shell from the \texttt{/encs/bin} directory. 
+we recommend that your script use a shell from the \texttt{/encs/bin} directory.\\
 
 To use the \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|.
-%
-For \texttt{bash}, start with \verb|#!/encs/bin/bash|.
-%
-Directives that start with \verb|#SBATCH|, set the options for the cluster's 
-Slurm job scheduler. The script template, \texttt{template.sh}, 
-provides the essentials:
+For \texttt{bash}, start with \verb|#!/encs/bin/bash|.\\
 
-%\begin{verbatim}
-%#$ -N <jobname>
-%#$ -cwd
-%#$ -m bea
-%#$ -pe smp <corecount>
-%#$ -l h_vmem=<memory>G
-%\end{verbatim}
+Directives that start with \verb|#SBATCH| set the options for the cluster's 
+SLURM job scheduler. The following provides an example of some essential directives:
+
+\small
 \begin{verbatim}
-#SBATCH --job-name=<jobname>        ## or -J. Give the job a name 
-#SBATCH --mail-type=<type>          ## Set type of email notifications
-#SBATCH --chdir=<directory>         ## or -D, Set working directory where output files will go 
-#SBATCH --nodes=1                   ## or -N, Node count required for the job
-#SBATCH --ntasks=1                  ## or -n, Number of tasks to be launched
-#SBATCH --cpus-per-task=<corecount> ## or -c, Core count requested, e.g. 8 cores
-#SBATCH --mem=<memory>              ## Assign memory for this job, e.g., 32G memory per node 
+    #SBATCH --job-name=<jobname>        ## or -J. Give the job a name 
+    #SBATCH --mail-type=<type>          ## set type of email notifications
+    #SBATCH --chdir=<directory>         ## or -D, set working directory for the job
+    #SBATCH --nodes=1                   ## or -N, node count required for the job
+    #SBATCH --ntasks=1                  ## or -n, number of tasks to be launched
+    #SBATCH --cpus-per-task=<corecount> ## or -c, core count requested, e.g. 8 cores
+    #SBATCH --mem=<memory>              ## assign memory for this job,
+                                        ## e.g., 32G memory per node 
 \end{verbatim}
+\normalsize
 
-Replace the following to adjust the job script for your project(s)
-\begin{enumerate}
-  \item \verb+<jobname>+ with a job name for the job
-  \item \verb+<directory>+ with the fullpath to your job's working directory, e.g., where your code,
-source files and where the standard output files will be written to. By default, \verb+--chdir+
-sets the current directory as the job's working directory 
-  \item \verb+<type>+ with the type of e-mail notifications you wish to receive. Valid options are: NONE, BEGIN, END, FAIL, REQUEUE, ALL 
-  \item \verb+<corecount>+ with the degree of multithreaded parallelism (i.e., cores) allocated to your job. Up to 32 by default.
-  \item \verb+<memory>+ with the amount of memory, in GB, that you want to be allocated per node. Up to 500 depending on the node. 
-  NOTE: All jobs MUST set a value for the \verb|--mem| option.
-\end{enumerate}
+\noindent Replace the following to adjust the job script for your project(s)
+\begin{itemize}
+    \item \verb+<jobname>+ with a job name for the job. This name will be displayed in the job queue.
+    \item \verb+<directory>+ with the fullpath to your job's working directory, e.g., where your code, 
+    source files and where the standard output files will be written to. 
+    By default, \verb+--chdir+ sets the current directory as the job's working directory.
+    \item \verb+<type>+ with the type of e-mail notifications you wish to receive. 
+    Valid options are: NONE, BEGIN, END, FAIL, REQUEUE, ALL.
+    \item \verb+<corecount>+ with the degree of multithreaded parallelism (i.e., cores) allocated to your job. Up to 32 by default.
+    \item \verb+<memory>+ with the amount of memory, in GB, that you want to be allocated per node. Up to 500 depending on the node.\\
+    \textbf{Note}: All jobs MUST set a value for the \option{--mem} option.
+\end{itemize}
 
-Example with short option equivalents:
-
+\noindent Example with short option equivalents:
+\small
 \begin{verbatim}
-#SBATCH -J tmpdir                   ## Job's name set to 'tmpdir'
-#SBATCH --mail-type=ALL             ## Receive all email type notifications
-#SBATCH -D ./                       ## Use current directory as working directory
-#SBATCH -N 1                        ## Node count required for the job
-#SBATCH -n 1                        ## Number of tasks to be launched
-#SBATCH -c 8                        ## Request 8 cores
-#SBATCH --mem=32G                   ## Allocate 32G memory per node 
+    #SBATCH -J myjob              ## Job's name set to 'myjob'
+    #SBATCH --mail-type=ALL       ## Receive all email type notifications
+    #SBATCH -D ./                 ## Use current directory as working directory
+    #SBATCH -N 1                  ## Node count required for the job
+    #SBATCH -n 1                  ## Number of tasks to be launched
+    #SBATCH -c 8                  ## Request 8 cores
+    #SBATCH --mem=32G             ## Allocate 32G memory per node 
 \end{verbatim}
+\normalsize
 
-%
-If you are unsure about memory footprints, err on assigning a generous
+\noindent \textbf{Tip:} If you are unsure about memory footprints, err on assigning a generous
 memory space to your job, so that it does not get prematurely terminated.
-%(the value given to \api{h\_vmem} is a hard memory ceiling).
-You can refine
-%\api{h\_vmem}
-\option{--mem}
-values for future jobs by monitoring the size of a job's active
+You can refine \option{--mem} values for future jobs by monitoring the size of a job's active
 memory space on \texttt{speed-submit} with:
 
-%\begin{verbatim}
-%qstat -j <jobID> | grep maxvmem
-%\end{verbatim}
-
 \begin{verbatim}
-sacct -j <jobID>
-sstat -j <jobID>
+    sacct -j <jobID>
+    sstat -j <jobID>
 \end{verbatim}
 
-\noindent
-This can be customized to show specific columns:
+\noindent This can be customized to show specific columns:
 
 \begin{verbatim}
-sacct -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
-sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
+    sacct -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
+    sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 \end{verbatim}
 
-Memory-footprint values are also provided for completed jobs in the final
-e-mail notification as ``maxvmsize''.
-%
+\noindent Memory-footprint efficiency values (\tool{seff}) are also provided for completed jobs in the final
+email notification as ``maxvmsize''.
 \emph{Jobs that request a low-memory footprint are more likely to load on a busy
-cluster.}
+cluster.}\\
 
-Other essential options are \option{--time}, or \verb|-t|, and \option{--account}, or \verb|-A|.
-%
+\noindent Other essential options are \option{--time}, or \option{-t}, and \option{--account}, or \option{-A}.
 \begin{itemize}
-\item
-\option{--time=<time>} -- is the estimate of wall clock time required for your job to run. 
-As preiviously mentioned, the maximum is 7 days for batch and 24 hours for interactive jobs. 
-Jobs with a smaller \texttt{time} value will have a higher priority and may result in your job being scheduled sooner. 
+    \item \option{--time=<time>} -- is the estimate of wall clock time required for your job to run. 
+    As previously mentioned, the maximum is 7 days for batch and 24 hours for interactive jobs. 
+    Jobs with a smaller \texttt{time} value will have a higher priority and may result in your job being scheduled sooner. 
 
-\item
-\option{--account=<name>} -- specifies which Account, aka project or association, 
-that the Speed resources your job uses should be attributed to. When moving from 
-GE to SLURM users most users were assigned to Speed's two default accounts 
-\texttt{speed1} and \texttt{speed2}. However, users that belong to a particular research
-group or project are will have a default Account like the following
-\texttt{aits},
-\texttt{vidpro},
-\texttt{gipsy},
-\texttt{ai2},
-\texttt{mpackir},
-\texttt{cmos}, among others.
-
+    \item \option{--account=<name>} -- specifies which Account, aka project or association, 
+    that the Speed resources your job uses should be attributed to. When moving from 
+    GE to SLURM users most users were assigned to Speed's two default accounts 
+    \texttt{speed1} and \texttt{speed2}. However, users that belong to a particular research
+    group or project are will have a default Account like the following
+    \texttt{aits},
+    \texttt{vidpro},
+    \texttt{gipsy},
+    \texttt{ai2},
+    \texttt{mpackir},
+    \texttt{cmos}, among others.
 \end{itemize}

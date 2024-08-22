@@ -1,14 +1,18 @@
-% ------------------------------------------------------------------------------
-\subsubsection{Environment Set Up}
-\label{sect:envsetup}
+%  2.1.2 Environment Set Up
+% --------------------------
+% TMP scheduler-specific section
 
 After creating an SSH connection to Speed, you will need to
 make sure the \tool{srun}, \tool{sbatch}, and \tool{salloc}
-commands are available to you. 
-Type the command name at the command prompt and press enter.
-If the command is not available, e.g., (``command not found'') is returned,
-you need to make sure your \api{\$PATH} has \texttt{/local/bin} in it.
-To view your \api{\$PATH} type \texttt{echo \$PATH} at the prompt.
+commands are available to you.
+To check this, type each command at the prompt and press Enter.
+If ``command not found'' is returned, you need to make sure your \api{\$PATH} 
+includes \texttt{/local/bin}.
+You can check your \api{\$PATH} by typing:
+\begin{verbatim}
+    echo $PATH
+\end{verbatim}
+
 %
 %source 
 %the ``Altair Grid Engine (AGE)'' scheduler's settings file. 
@@ -38,20 +42,24 @@ To view your \api{\$PATH} type \texttt{echo \$PATH} at the prompt.
 %\texttt{qstat -f -u "*"}. If an error is returned, attempt sourcing 
 %the settings file again.
 
-The next step is to copy a job template to your home directory and to set up your
-cluster-specific storage. Execute the following command from within your
-home directory. (To move to your home directory, type \texttt{cd} at the Linux
-prompt and press \texttt{Enter}.) 
-
+\noindent The next step is to set up your cluster-specific storage ``speed-scratch'', to do so, execute the following command from within your
+home directory. 
 \begin{verbatim}
-cp /home/n/nul-uge/template.sh . && mkdir /speed-scratch/$USER
+    mkdir -p /speed-scratch/$USER && cd /speed-scratch/$USER
 \end{verbatim}
 
-%\textbf{Tip:} Add the source command to your shell-startup script. 
+\noindent Next, copy a job template to your cluster-specific storage
+\begin{itemize}
+    \item From Windows drive G: to Speed:\\ 
+    \verb|cp /winhome/<1st letter of $USER>/$USER/example.sh /speed-scratch/$USER/|
+    \item From Linux drive U: to Speed:\\
+    \verb|cp ~/example.sh /speed-scratch/$USER/|
+\end{itemize}
 
-\textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
-If you would like to use \tool{bash}, please contact 
-\texttt{rt-ex-hpc AT encs.concordia.ca}.
+\noindent \textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
+If you would like to use \tool{bash}, please contact \texttt{rt-ex-hpc AT encs.concordia.ca}.\\
+
+%\textbf{Tip:} Add the source command to your shell-startup script. 
 
 %For \textbf{new GCS ENCS Users}, and/or those who don't have a shell-startup script, 
 %based on your shell type use one of the following commands to copy a start up script 
@@ -91,6 +99,6 @@ If you would like to use \tool{bash}, please contact
 %fi
 %\end{verbatim}
 
-\textbf{Note:} If a ``command not found'' error appears after you log in to speed,
-your user account many have probably have defunct Grid Engine environment commands. 
-See \xa{appdx:uge-to-slurm} to learn how to prevent this error on login.
+\noindent \textbf{Note:} If you encounter a ``command not found'' error after logging in to Speed, 
+your user account may have defunct Grid Engine environment commands. 
+See \xa{appdx:uge-to-slurm} for instructions on how to resolve this issue.

@@ -1,225 +1,214 @@
-% ------------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
+%						B Frequently Asked Questions 
+% -----------------------------------------------------------------------------
 \section{Frequently Asked Questions}
 \label{sect:faqs}
 
-% ------------------------------------------------------------------------------
+% B.1 Where do I learn about Linux?
+% -----------------------------------------------------------------------------
 \subsection{Where do I learn about Linux?}
 \label{sect:faqs-linux}
 
 All Speed users are expected to have a basic understanding of Linux and its commonly used commands.
+Here are some recommended resources:
 
-% ------------------------------------------------------------------------------
-\subsubsection*{Software Carpentry}
+% -----------------------------------------------------------------------------
+\paragraph*{Software Carpentry}
 
 Software Carpentry provides free resources to learn software, including a workshop on the Unix shell.
-\url{https://software-carpentry.org/lessons/} 
+Visit \href{https://software-carpentry.org/lessons/}{Software Carpentry Lessons} to learn more.
 
-% ------------------------------------------------------------------------------
-\subsubsection*{Udemy}
+% -----------------------------------------------------------------------------
+\paragraph*{Udemy}
 
-There are a number of Udemy courses, including free ones, that will assist 
-you in learning Linux. Active Concordia faculty, staff and students have 
-access to Udemy courses. The course \textbf{Linux Mastery: Master the Linux 
-Command Line in 11.5 Hours} is a good starting point for beginners. Visit
-\url{https://www.concordia.ca/it/services/udemy.html} to learn how Concordians 
-may access Udemy.
+There are numerous Udemy courses, including free ones, that will help you learn Linux. 
+Active Concordia faculty, staff and students have access to Udemy courses. 
+A recommended starting point for beginners is the course ``Linux Mastery: Master the Linux Command Line in 11.5 Hours''.
+Visit \href{https://www.concordia.ca/it/services/udemy.html}{Concordia's Udemy page} to learn how Concordians can access Udemy.
 
-% ------------------------------------------------------------------------------
-\subsection{How to use the ``bash shell'' on Speed?}
+% B.2 How to bash shell on Speed?
+% -----------------------------------------------------------------------------
+\subsection{How to use bash shell on Speed?}
+\label{sect:faqs-bash}
 
-This section describes how to use the ``bash shell'' on Speed. Review
-\xs{sect:envsetup} to ensure that your bash environment is set up.
+This section provides comprehensive instructions on how to utilize the bash shell on the Speed cluster.
 
-% ------------------------------------------------------------------------------
+% B.2.1 How do I set bash as my login shell?
+% -----------------------------------------------------------------------------
 \subsubsection{How do I set bash as my login shell?}
 
-In order to set your default login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
+To set your default login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
 To make this change, create a ticket with the Service Desk (or email \texttt{help at concordia.ca}) to
 request that bash become your default login shell for your ENCS user account on all GCS servers.
 
-% ------------------------------------------------------------------------------
+% B.2.2 How do I move into a bash shell on Speed?
+% -----------------------------------------------------------------------------
 \subsubsection{How do I move into a bash shell on Speed?}
 
-To move to the bash shell, type \textbf{bash} at the command prompt.
-For example:
+To move to the bash shell, type \textbf{bash} at the command prompt:
 \begin{verbatim}
 	[speed-submit] [/home/a/a_user] > bash
 	bash-4.4$ echo $0
 	bash
 \end{verbatim}	
 
-\textbf{Note} how the command prompt changed from \verb![speed-submit] [/home/a/a_user] >! to \verb!bash-4.4$! after entering the bash shell.
+\noindent
+\textbf{Note} how the command prompt changes from 
+``\verb![speed-submit] [/home/a/a_user] >!'' to ``\verb!bash-4.4$!'' after entering the bash shell.
 
-% ------------------------------------------------------------------------------
+% B.2.3 How do I use the bash shell in an interactive session on Speed?
+% -----------------------------------------------------------------------------
 \subsubsection{How do I use the bash shell in an interactive session on Speed?}
 
-Below are examples of how to use \tool{bash} as a shell in your interactive job sessions with
- both the salloc and srun commands.
+Below are examples of how to use \tool{bash} as a shell in your interactive job sessions 
+with both the \tool{salloc} and \tool{srun} commands.
 
 \begin{itemize}
 	\item \texttt{salloc -ppt --mem=100G -N 1 -n 10 /encs/bin/bash}
-	\item \texttt{srun  --mem=50G -n 5 --pty /encs/bin/bash}
+	\item \texttt{srun --mem=50G -n 5 --pty /encs/bin/bash}
 \end{itemize}
 
-\textbf{Note:} Make sure the interactive job requests memory, cores, etc.
-% ------------------------------------------------------------------------------
-\subsubsection{How do I run scripts written in bash on Speed?}
+\noindent\textbf{Note:} Make sure the interactive job requests memory, cores, etc.
+
+% B.2.4 How do I run scripts written in bash on Speed?
+% -----------------------------------------------------------------------------
+\subsubsection{How do I run scripts written in bash on \tool{Speed}?}
 
 To execute bash scripts on Speed:
 \begin{enumerate}
-	\item 
-Ensure that the shebang of your bash job script is \verb+#!/encs/bin/bash+
-	\item 
-Use the \tool{sbatch} command to submit your job script to the scheduler.
+	\item Ensure that the shebang of your bash job script is \verb+#!/encs/bin/bash+
+	\item Use the \tool{sbatch} command to submit your job script to the scheduler.
 \end{enumerate}
 
-The Speed GitHub contains a sample
-\href
-  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh}
-	{bash job script}.
+\noindent Check Speed GitHub for a 
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh}{sample bash job script}.
 
-% ------------------------------------------------------------------------------
+% B.3 How to resolve “Disk quota exceeded” errors?
+% -------------------------------------------------------------
 \subsection{How to resolve ``Disk quota exceeded'' errors?}
+\label{sect:quota-exceeded}
 
-% ------------------------------------------------------------------------------
+% B.3.1 Probable Cause
+% -----------------------------------------------------------------------------
 \subsubsection{Probable Cause}
 
-The ``\texttt{Disk quota exceeded}'' Error occurs when your application has 
-run out of disk space to write to. On Speed this error can be returned when:
- 
+The ``\texttt{Disk quota exceeded}'' error occurs when your application has 
+run out of disk space to write to. On \tool{Speed}, this error can be returned when:
 \begin{enumerate}
-	\item
-Your NFS-provided home is full and cannot be written to.
-You can verify this using \tool{quota} and \tool{bigfiles} commands.
-	\item
-The \texttt{/tmp} directory on the speed node your application is running on is full and cannot be written to.
+	\item The NFS-provided home is full and cannot be written to.
+	You can verify this using the \tool{quota} and \tool{bigfiles} commands.
+	\item The ``\texttt{/tmp}'' directory on the speed node where your application is running is full and cannot be written to.
 \end{enumerate}
 
-% ------------------------------------------------------------------------------
+% B.3.2 Possible Solutions
+% -----------------------------------------------------------------------------
 \subsubsection{Possible Solutions}
 
 \begin{enumerate}
-	\item
-Use the \option{--chdir} job script option to set the directory that the job 
-script is submitted from the \texttt{job working directory}. The
-\texttt{job working directory} is the directory that the job will write output files in.
- 	\item
-The use local disk space is generally recommended for IO intensive operations.
-However, as the size of \texttt{/tmp} on speed nodes 
-is \texttt{1TB} it can be necessary for scripts to store temporary data 
-elsewhere.
-Review the documentation for each module called within your script to 
-determine how to set working directories for that application. 
-The basic steps for this solution are:
-\begin{itemize}
-	\item
-	Review the documentation on how to set working directories for 
-	each module called by the job script.
-	\item
-	Create a working directory in speed-scratch for output files. 
-	For example, this command will create a subdirectory called \textbf{output}
-	in your \verb!speed-scratch! directory:
-	 \begin{verbatim}
-		mkdir -m 750 /speed-scratch/$USER/output
-	 \end{verbatim}
-	\item
-	To create a subdirectory for recovery files:
-	\begin{verbatim}
-		mkdir -m 750 /speed-scratch/$USER/recovery
-	\end{verbatim}
-	\item
-	Update the job script to write output to the subdirectories you created in
-	your \verb!speed-scratch! directory, e.g., \verb!/speed-scratch/$USER/output!.
+	\item Use the \option{--chdir} job script option to set the job working directory.
+	This is the directory where the job will write output files.
+
+ 	\item Although local disk space is recommended for IO-intensive operations, the 
+ 	`\texttt{/tmp}' directory on \tool{Speed} nodes is limited to 1TB, so it may be necessary 
+	to store temporary data elsewhere. Review the documentation for each module
+	used in your script to determine how to set working directories.
+	The basic steps are:
+	\begin{itemize}
+		\item
+		Determine how to set working directories for each module used in your job script.
+		\item
+		Create a working directory in \tool{speed-scratch} for output files:
+		\begin{verbatim}
+			mkdir -m 750 /speed-scratch/$USER/output
+		\end{verbatim}
+		\item
+		Create a subdirectory for recovery files:
+		\begin{verbatim}
+			mkdir -m 750 /speed-scratch/$USER/recovery
+		\end{verbatim}
+		\item
+		Update the job script to write output to the directories created in your 
+		\tool{speed-scratch} directory, e.g., \verb!/speed-scratch/$USER/output!.
 	\end{itemize}
 \end{enumerate}
-In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
-% ------------------------------------------------------------------------------
+% B.3.3 Example of setting working directories for COMSOL
+% -----------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{COMSOL}}
 
 \begin{itemize}
-	\item 
-	Create directories for recovery, temporary, and configuration files. 
-	For example, to create these directories for your GCS ENCS user account:
+	\item Create directories for recovery, temporary, and configuration files. 
 	\begin{verbatim}
-	mkdir -m 750 -p /speed-scratch/$USER/comsol/{recovery,tmp,config}
+		mkdir -m 750 -p /speed-scratch/$USER/comsol/{recovery,tmp,config}
 	\end{verbatim}
-	\item
-	Add the following command switches to the COMSOL command to use the 
+	\item Add the following command switches to the COMSOL command to use the 
 	directories created above:
 	\begin{verbatim} 
-	-recoverydir /speed-scratch/$USER/comsol/recovery 
-	-tmpdir /speed-scratch/$USER/comsol/tmp
-	-configuration/speed-scratch/$USER/comsol/config
+		-recoverydir /speed-scratch/$USER/comsol/recovery 
+		-tmpdir /speed-scratch/$USER/comsol/tmp
+		-configuration/speed-scratch/$USER/comsol/config
 	\end{verbatim}
 \end{itemize} 
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
-In the above example, \verb!$USER! is an environment variable containing your ENCS username.
-
-% ------------------------------------------------------------------------------
+% B.3.4 Example of setting working directories for Python Modules
+% -----------------------------------------------------------------------------
 \subsubsection{Example of setting working directories for \tool{Python Modules}}
 
-By default when adding a python module the \texttt{/tmp} directory is set as the temporary repository for files downloads. 
-The size of the \texttt{/tmp} directory on \verb!speed-submit! is too small for pytorch.
-To add a python module
+By default when adding a Python module, the \texttt{/tmp} directory is set as the temporary repository for files downloads.
+The size of the \texttt{/tmp} directory on \verb!speed-submit! is too small for PyTorch.
+To add a Python module
 \begin{itemize}
-    \item 	
-	Create your own tmp directory in your \verb!speed-scratch! directory
+    \item Create your own tmp directory in your \verb!speed-scratch! directory:
 	\begin{verbatim} 
-  mkdir /speed-scratch/$USER/tmp
+  		mkdir /speed-scratch/$USER/tmp
 	\end{verbatim}
-	\item
-  Use the tmp directory you created
+	\item Use the temporary directory you created
 	\begin{verbatim} 
-  setenv TMPDIR /speed-scratch/$USER/tmp
+  		setenv TMPDIR /speed-scratch/$USER/tmp
 	\end{verbatim}
-    \item
-	Attempt the installation of pytorch
+    \item Attempt the installation of PyTorch
 \end{itemize}
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
 
-In the above example, \verb!$USER! is an environment variable containing your ENCS username.
-
-% ------------------------------------------------------------------------------
+% B.4 How do I check my job's status?
+% -----------------------------------------------------------------------------
 \subsection{How do I check my job's status?}
 
 %When a job with a job id of 1234 is running, the status of that job can be tracked using \verb!`qstat -j 1234`!.
 %Likewise, if the job is pending, the \verb!`qstat -j 1234`! command will report as to why the job is not scheduled or running.
 %Once the job has finished, or has been killed, the \textbf{qacct} command must be used to query the job's status, e.g., \verb!`qaact -j [jobid]`!. 
-When a job with a job id of 1234 is running or terminated, the status of that job can be tracked using `\verb!sacct -j 1234!'.
-\texttt{squeue -j 1234} can show while the job is sitting in the queue as well.
-Long term statistics on the job after its terminated can be found using
-\texttt{sstat -j 1234} after \tool{slurmctld} purges it its tracking state
-into the database.
+When a job with a job ID of 1234 is running or terminated, 
+you can track its status using the following commands:
+\begin{itemize}
+	\item Use the ``sacct'' command to view the status of a job:
+	\begin{verbatim} 
+		sacct -j 1234
+	\end{verbatim}
+	\item Use the ``squeue'' command to see if the job is sitting in the queue:
+	\begin{verbatim} 
+		squeue -j 1234
+	\end{verbatim}
+	\item Use the ``sstat'' command to find long-term statistics on the job after it has terminated 
+	and the \tool{slurmctld} has purged it from its tracking state into the database:
+	\begin{verbatim} 
+		sstat -j 1234
+	\end{verbatim}
+\end{itemize}
 
-% ------------------------------------------------------------------------------
+% B.5 Why is my job pending when nodes are empty?
+% -----------------------------------------------------------------------------
 \subsection{Why is my job pending when nodes are empty?}
 
-% ------------------------------------------------------------------------------
+% B.5.1 Disabled nodes
+% -----------------------------------------------------------------------------
 \subsubsection{Disabled nodes}
 
-It is possible that one or a number of the Speed nodes are disabled. Nodes are disabled if they require maintenance. 
-To verify if Speed nodes are disabled, see if they are in a draining or drained state:
+It is possible that one or more of the Speed nodes are disabled for maintenance.
+To verify if Speed nodes are disabled, check if they are in a draining or drained state:
 
-%\begin{verbatim}
-%qstat -f -qs d
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%---------------------------------------------------------------------------------
-%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.27     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-07.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-10.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-16.encs.concordia.ca BIP   0/0/32         0.02     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-19.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-24.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64      d
-%---------------------------------------------------------------------------------
-%s.q@speed-36.encs.concordia.ca BIP   0/0/32         0.03     lx-amd64      d
-%\end{verbatim}
-
-\scriptsize
+\small
 \begin{verbatim}
 [serguei@speed-submit src] % sinfo --long --Node
 Thu Oct 19 21:25:12 2023
@@ -264,14 +253,21 @@ speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu2
 \end{verbatim}
 \normalsize
 
-Note which nodes are in the state of \textbf{drained}. Why the state is drained can be found in the reason column.
+\noindent Note which nodes are in the state of \textbf{drained}.
+The reason for the drained state can be found in the \textbf{reason} column.\\
 
-Your job will run once an occupied node becomes availble or the maintenance has been completed and the disabled nodes have a state of \textbf{idle}.
+\noindent Your job will run once an occupied node becomes availble or the maintenance is completed, 
+and the disabled nodes have a state of \textbf{idle}.
 
-% ------------------------------------------------------------------------------
+% B.5.2 Error in job submit request.
+% -----------------------------------------------------------------------------
 \subsubsection{Error in job submit request.}
 
-It is possible that your job is pending, because the job requested resources that are not available within Speed.
-To verify why job id 1234 is not running, execute `\verb!sacct -j 1234!'.
-A summary of the reasons is available via the \tool{squeue} command.
-%and review the messages in the \textbf{scheduling info:} section.
+It is possible that your job is pending because it requested resources that are not available within Speed. 
+To verify why job ID 1234 is not running, execute:
+\begin{verbatim} 
+	sacct -j 1234
+\end{verbatim}
+
+\noindent
+A summary of the reasons can be obtained via the \tool{squeue} command.

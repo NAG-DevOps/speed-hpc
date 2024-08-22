@@ -1,193 +1,178 @@
-% ------------------------------------------------------------------------------
+% -------------- 2.12 Example Job Script: Fluent --------------
+% -------------------------------------------------------------
 \subsection{Example Job Script: Fluent}
 
 \begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
-    \caption{Source code for \file{fluent.sh}}
-	\label{fig:fluent.sh}
+  \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
+  \caption{Source code for \texttt{fluent.sh}}
+  \label{fig:fluent.sh}
 \end{figure}
 
 The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores. 
-%Of note, we have requested e-mail notifications (\texttt{-m}), are defining the 
-Of note, we have requested e-mail notifications (\texttt{--mail-type}), are defining the 
-%parallel environment for, \tool{fluent}, with, \texttt{-sgepe smp} (\textbf{very 
-parallel environment for, \tool{fluent}, with, \texttt{-t\$SLURM\_NTASKS} and \texttt{-g-cnf=\$FLUENTNODES} (\textbf{very 
-important}), and are setting \api{\$TMPDIR} as the in-job location for the
-``moment'' \file{rfile.out} file (in-job, because the last line of the script 
-copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home). 
+Notable aspects of this script include requesting e-mail notifications (\option{--mail-type}), 
+defining the parallel environment for Fluent with \option{-t\$SLURM\_NTASKS} and \option{-g-cnf=\$FLUENTNODES}, 
+and setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file.
+The script also copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home after the job completes.
 Job progress can be monitored by examining the standard-out file (e.g.,
-%\file{flu10000.o249}), and/or by examining the ``moment'' file in 
-\texttt{slurm-249.out}), and/or by examining the ``moment'' file in 
-\texttt{/disk/nobackup/<yourjob>} (hint: it starts with your job-ID) on the node running
-the job. \textbf{Caveat:} take care with journal-file file paths.
+\texttt{slurm-249.out}), and/or by examining the ``moment'' file in TMPDIR (usually
+\texttt{/disk/nobackup/<yourjob>} (it starts with your job-ID)) on the node running
+the job. Be cautious with journal-file paths.
 
-% ------------------------------------------------------------------------------
-\subsection{Example Job: efficientdet}
+% -------------- 2.13 Example Job Script: EfficientDet --------
+% -------------------------------------------------------------
+\subsection{Example Job: EfficientDet}
 
-The following steps describing how to create an efficientdet environment on
-\emph{Speed}, were submitted by a member of Dr. Amer's research group.
+The following steps describe how to create an EfficientDet environment on Speed, 
+as submitted by a member of Dr. Amer's research group:
 
 \begin{itemize}
-    \item 
-    Enter your ENCS user account's speed-scratch directory\\ 
-    \verb!cd /speed-scratch/<encs_username>!
-    \item
-		Next
-		\begin{itemize}
-			\item 
-    load python \verb!module load python/3.8.3!
-			\item 
-    create virtual environment \verb!python3 -m venv <env_name>!
-			\item 
-    activate virtual environment \verb!source <env_name>/bin/activate.csh!
-			\item 
-    install DL packages for Efficientdet
-		\end{itemize}
+  \item Navigate to your \texttt{speed-scratch} directory:
+  \begin{verbatim}
+	cd /speed-scratch/$USER
+  \end{verbatim}
+  \item Load Python module
+  \begin{verbatim}
+	module load python/3.8.3
+  \end{verbatim}
+  \item Create and activate the virtual environment
+  \begin{verbatim}
+	python3 -m venv <env_name>
+	source <env_name>/bin/activate.csh
+  \end{verbatim}
+  \item Install DL packages for EfficientDet
+  \small
+  \begin{verbatim}
+	pip install tensorflow==2.7.0
+	pip install lxml>=4.6.1
+	pip install absl-py>=0.10.0
+	pip install matplotlib>=3.0.3
+	pip install numpy>=1.19.4
+	pip install Pillow>=6.0.0
+	pip install PyYAML>=5.1
+	pip install six>=1.15.0
+	pip install tensorflow-addons>=0.12
+	pip install tensorflow-hub>=0.11
+	pip install neural-structured-learning>=1.3.1
+	pip install tensorflow-model-optimization>=0.5
+	pip install Cython>=0.29.13
+	pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
+	\end{verbatim}
+  \normalsize
 \end{itemize}
-\small
-\begin{verbatim}
-pip install tensorflow==2.7.0
-pip install lxml>=4.6.1
-pip install absl-py>=0.10.0
-pip install matplotlib>=3.0.3
-pip install numpy>=1.19.4
-pip install Pillow>=6.0.0
-pip install PyYAML>=5.1
-pip install six>=1.15.0
-pip install tensorflow-addons>=0.12
-pip install tensorflow-hub>=0.11
-pip install neural-structured-learning>=1.3.1
-pip install tensorflow-model-optimization>=0.5
-pip install Cython>=0.29.13
-pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
-\end{verbatim}
-\normalsize
 
-% ------------------------------------------------------------------------------
+% -------------- 2.14 Java Jobs -------------------------------
+% -------------------------------------------------------------
 \subsection{Java Jobs}
 \label{sect:java}
 
-Jobs that call \tool{java} have a memory overhead, which needs to be taken 
-%into account when assigning a value to \api{h\_vmem}. Even the most basic 
+Jobs that call Java have a memory overhead, which needs to be taken 
 into account when assigning a value to \option{--mem}. Even the most basic 
-\tool{java} call, \texttt{java -Xmx1G -version}, will need to have,
-%\texttt{-l h\_vmem=5G}, with the 4-GB difference representing the memory overhead. 
-\texttt{--mem=5G}, with the 4-GB difference representing the memory overhead. 
-Note that this memory overhead grows proportionally with the value of
-\texttt{-Xmx}. To give you an idea, when \texttt{-Xmx} has a value of 100G,
-%\api{h\_vmem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
-\option{--mem} has to be at least 106G; for 200G, at least 211G; for 300G, at least 314G.
+Java call, such as \texttt{Java -Xmx1G -version}, will need to have,
+\texttt{--mem=5G}, with the 4 GB difference representing the memory overhead. 
+\textbf{Note} that this memory overhead grows proportionally with the value of
+\texttt{-Xmx}. For example,
+
+\begin{itemize}
+  \item When \texttt{-Xmx} has a value of 100G, \option{--mem} has to be at least 106G.
+  \item For \texttt{-Xmx} of 200G, \option{--mem} has to be at least 211G.
+  \item For \texttt{-Xmx} of 300G, \option{--mem} has to be at least 314G.
+\end{itemize}
 
 % TODO: add MARF and GIPSY Java jobs
 
-% ------------------------------------------------------------------------------
-\subsection{Scheduling On The GPU Nodes}
+% -------------- 2.15 Scheduling on the GPU Nodes -------------
+% -------------------------------------------------------------
+\subsection{Scheduling on the GPU Nodes}
+\label{sect:gpu-scheduling}
 
-The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
-cards: each card has 2048 cores and 16GB of RAM. Though note that the P6
-is mainly a single-precision card, so unless you need the GPU double
-precision, double-precision calculations will be faster on a CPU node.
+Speed has various GPU types in various subclusters of its nodes.
 
-Job scripts for the GPU queue differ in that they
-%do not need these
-%statements:
-%
-%\begin{verbatim}
-%#$ -pe smp <threadcount>
-%#$ -l h_vmem=<memory>G
-%\end{verbatim}
-%
-%But do
-need this statement, which attaches either a single GPU, or, two
-GPUs, to the job:
+\begin{itemize}
+	\item \texttt{speed-05} and \texttt{speed-17}:
+The primary SPEED1 cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
+cards. Each card has 2048 cores and 16GB of RAM. Note that the P6
+is mainly a single-precision card, so unless you need GPU double precision, 
+double-precision calculations will be faster on a CPU node.
+	\item \texttt{speed-01}:
+This \texttt{vidpro} node (see \xf{fig:speed-architecture-full}, contact Dr.~Maria Amer) is identical
+to 05 and 17 in its GPU configuration, but managed by the priority
+for the vidpro group, that is a \texttt{pg} job scheduled there
+is a subject for preemption.
+	\item \texttt{speed-03}, \texttt{speed-25}, \texttt{speed-25}:
+These \texttt{vidpro} nodes feature NVIDIA V100 cards with 32GB of RAM.
+Like \texttt{speed-01}, the priority is of the vidpro group, who
+purchased the nodes, and others' jobs are a subject from preemption
+within \texttt{pg}, \texttt{pt}, and \texttt{cl} partitions.
+	\item \texttt{speed-37}~--~\texttt{speed-43}:
+SPEED2 nodes, the main backbone of the teaching partition \texttt{pt},
+have 4x A100 80GB GPUs each, partitioned into average 4x MIGs of 20GB
+each, with exceptions.
+	\item \texttt{nebulae}:
+A member of the Nebular subcluster (contact Dr.~Jun Yan), has 2x 48GB
+RTX Ada 6000 cards. This node is in the \texttt{pn} partition.
+	\item \texttt{speed-19}:
+Has an AMD GPU, Tonga, 16GB of GPU ram.
+This node along with the majority of the NVIDIA GPU nodes are in the
+\texttt{cl} partition (with restrictions) to run OpenCL, Vulkan,
+and HIP jobs.
+\end{itemize}
 
-%\begin{verbatim}
-%#$ -l gpu=[1|2]
-%\end{verbatim}
+\noindent
+Job scripts for the GPU queues differ in that they need these statements,
+which attach either a single GPU or more GPUs to the job with the
+appropriate partition:
 \begin{verbatim}
-#SBATCH --gpus=[1|2]
+  #SBATCH --gpus=[1|x]
+  #SBATCH -p [pg|pt|cl|pa]
+\end{verbatim}
+The default max quota for $x$ is 4.
+
+\noindent
+Once your job script is ready, submit it to the GPU partition (queue) with:
+\begin{verbatim}
+  sbatch --mem=<MEMORY> -p pg ./<myscript>.sh
+\end{verbatim}
+\option{--mem} and \option{-p} can reside in the script.
+
+\noindent
+You can query \tool{nvidia-smi} on the node \textbf{running your job} with:
+\begin{verbatim}
+  ssh <ENCSusername>@speed-[01|03|05|17|25|27|37-43]|nebulae nvidia-smi
 \end{verbatim}
 
-% TODO: verify accuracy
-% Single-GPU jobs are granted 5~CPU cores and 80GB of system memory, and
-% dual-GPU jobs are granted 10~CPU cores and 160GB of system memory. A
-% total of \emph{four} GPUs can be actively attached to any one user at any given
-% time.
-
-Once that your job script is ready, you can submit it to the GPU partition (queue)
-with:
-
-%\begin{verbatim}
-%qsub -q g.q ./<myscript>.sh
-%\end{verbatim}
+\noindent The status of the GPU queues can be queried e.g. with:
 \begin{verbatim}
-sbatch -p pg ./<myscript>.sh
-\end{verbatim}
-
-And you can query \tool{nvidia-smi} on the node that is running your job with:
-
-\begin{verbatim}
-ssh <username>@speed[-05|-17|37-43] nvidia-smi
-\end{verbatim}
-
-Status of the GPU queue can be queried with:
-
-%\begin{verbatim}
-%qstat -f -u "*" -q g.q
-%\end{verbatim}
-\begin{verbatim}
-sinfo -p pg --long --Node
+  sinfo -p pg --long --Node
+  sinfo -p pt --long --Node
+  sinfo -p cl --long --Node
+  sinfo -p pa --long --Node
+  sinfo -p pn --long --Node
 \end{verbatim}
 
 \noindent
-\textbf{Very important note} regarding TensorFlow and PyTorch: 
-if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
-\textbf{do not} use the \api{tf.distribute} and/or\\
-\api{torch.nn.DataParallel} 
-functions on \textbf{speed-01,05,17}, as they will crash the compute node (100\% certainty). 
-This appears to be the current hardware's architecture's defect.
+You can query \tool{rocm-smi} on the AMD GPU node running your job with:
+\begin{verbatim}
+  ssh <ENCSusername>@speed-19 rocm-smi
+\end{verbatim}
+
+\noindent
+\textbf{Important note for TensorFlow and PyTorch users}:
+if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, please
+\textbf{do not use} the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
+on \textbf{speed-01, speed-05, or speed-17}, as they will crash the compute node (100\% certainty). 
+This appears to be a defect in the current hardware architecture.
 %
-The workaround is to either
 % TODO: Need to link to that example
-manually effect GPU parallelisation (TensorFlow has an example on how to
-do this), or to run on a single GPU.
+The workaround is to either manually effect GPU parallelisation (see \xs{sect:multi-node-gpu})
+(TensorFlow provides an example on how to do this), or to run on a single GPU,
+which is now the default for those nodes.\\
 
-\vspace{10pt}
-\noindent
-\textbf{Important}
-\vspace{10pt}
-
-%Users without permission to use the GPU nodes can submit jobs to the \texttt{g.q}
-Users without permission to use the GPU nodes can submit jobs to the \texttt{pg}
-partition, but those jobs will hang and never run.
+\noindent \textbf{Important}:
+Users without permission to use the GPU nodes can submit jobs to the various GPU
+partitions, but those jobs will hang and never run.
+Their availability can be seen with:
 %
-%There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
-%in \texttt{speed-19}.
-Their availability is seen with:
-%, \texttt{qstat -F g} (note the capital): 
-%
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%---------------------------------------------------------------------------------
-%...
-%---------------------------------------------------------------------------------
-%g.q@speed-05.encs.concordia.ca BIP   0/0/32         0.04     lx-amd64
-        %hc:gpu=6
-%---------------------------------------------------------------------------------
-%g.q@speed-17.encs.concordia.ca BIP   0/0/32         0.01     lx-amd64
-        %hc:gpu=6
-%---------------------------------------------------------------------------------
-%...
-%---------------------------------------------------------------------------------
-%s.q@speed-19.encs.concordia.ca BIP   0/32/32        32.37    lx-amd64
-        %hc:gpu=1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
-
-\scriptsize
+\small
 \begin{verbatim}
 [serguei@speed-submit src] % sinfo -p pg --long --Node
 Thu Oct 19 22:31:04 2023
@@ -207,48 +192,19 @@ speed-41       1        pt        idle 256    2:64:2 980275        0      1 gpu2
 speed-42       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
 speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
 \end{verbatim}
+\normalsize
 
-This status demonstrates that most are available (i.e., have not been 
-requested as resources). To specifically request a GPU node, add,
-%\texttt{-l g=[\#GPUs]}, to your \tool{qsub} (statement/script) or
-\texttt{--gpus=[\#GPUs]}, to your \tool{sbatch} (statement/script) or
-%\tool{qlogin} (statement) request. For example,
-\tool{salloc} (statement) request. For example,
-%\texttt{qsub -l h\_vmem=1G -l g=1 ./count.sh}. You 
-\texttt{sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh}. You 
-will see that this job has been assigned to one of the GPU nodes.
+\noindent
+To specifically request a GPU node, add, \texttt{--gpus=[\#GPUs]},
+to your \tool{sbatch} statement/script or \tool{salloc} statement request.
+For example:
+\begin{verbatim}
+  sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh
+\end{verbatim}
+The request can be further specified to a specific node using \option{-w}
+or a GPU type or feature.
 
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%--------------------------------------------------------------------------------- 
-%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
-
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%--------------------------------------------------------------------------------- 
-%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
-
-\scriptsize
+\footnotesize
 \begin{verbatim}
 [serguei@speed-submit src] % squeue -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
 NODELIST         NODES PARTITI       STATE MIN_    S:C:T MIN_ME MIN_TMP_  WCKEY FEATURES GROUP DEPENDENCY
@@ -261,117 +217,90 @@ speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1 
 \end{verbatim}
 \normalsize
 
-%And that there are no more GPUs available on that node (\texttt{hc:gpu=0}).
-%Note that no more than two GPUs can be requested for any one job. 
-
-% ------------------------------------------------------------------------------
+%  2.15.1 P6 on Multi-GPU, Multi-Node
+% -------------------
 \subsubsection{P6 on Multi-GPU, Multi-Node}
+\label{sect:multi-node-gpu}
 
-As described lines above, P6 cards are not compatible with Distribute and DataParallel functions
-(\texttt{Pytorch, Tensorflow}) when running on Multi-GPUs.
-One workaround is to run the job in Multi-node, single GPU per node; per example:
-
+As described earlier, P6 cards are not compatible with \api{Distribute} and \api{DataParallel} functions
+(\textbf{PyTorch}, \textbf{Tensorflow}) when running on multiple GPUs.
+One workaround is to run the job in Multi-node, single GPU per node
+(this applies to P6 nodes: speed-05, speed-17, speed-01):
 \begin{verbatim}
-#SBATCH --nodes=2
-#SBATCH --gpus-per-node=1
+  #SBATCH --nodes=2
+  #SBATCH --gpus-per-node=1
 \end{verbatim}
 
-On P6 nodes: \texttt{speed-05, speed-17, speed-01}
+\noindent An example script for training on multiple nodes with multiple GPUs is provided in 
+\href
+  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}
+	{pytorch-multinode-multigpu.sh}
+illustrates a job for training on Multi-Nodes, Multi-GPUs
 
-The example: 
-  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}
-  {pytorch-multinode-multigpu.sh}
-illustrates a job for training on Multi-nodes, Multi-GPUs
-
-% ------------------------------------------------------------------------------
+%  2.15.2 CUDA
+% -------------------
 \subsubsection{CUDA}
+\label{sect:cuda}
 
-When calling \tool{CUDA} within job scripts, it is important to create a link to
-the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
-For example, to use the \texttt{cuda-11.5} libraries, specify the following in 
-your \texttt{Makefile}.
-
+When calling \textbf{CUDA} within job scripts, it is important to link to the desired
+the desired \textbf{CUDA} libraries and set the runtime link path to the same libraries. 
+For example, to use the \texttt{cuda-11.5} libraries, specify the following in your \texttt{Makefile}.
 \begin{verbatim}
--L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
+  -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
 \end{verbatim}
 
-In your job script, specify the version of \texttt{gcc} to use prior to calling 
-cuda. For example: 
-   \texttt{module load gcc/8.4}
-or
-   \texttt{module load gcc/9.3}
-
-% ------------------------------------------------------------------------------
-\subsubsection{Special Notes for sending CUDA jobs to the GPU Queue}
-
-%It is not possible to create a \texttt{qlogin} session on to a node in the 
-%\textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not 
-%available,
-Interactive 
-jobs (\xs{sect:interactive-jobs}) must be submitted to the \textbf{GPU partition} in order to compile 
-and link.
-%
-We have several versions of CUDA installed in:
+\noindent In your job script, specify the version of \texttt{GCC} to use prior to calling CUDA:
 \begin{verbatim}
-/encs/pkg/cuda-11.5/root/
-/encs/pkg/cuda-10.2/root/
-/encs/pkg/cuda-9.2/root
+  module load gcc/9.3
 \end{verbatim}
 
-For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
-replacing \option{\/usr\/local\/cuda} with one of the above.
+%  2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
+% -------------------
+\subsubsection{Special Notes for Sending CUDA Jobs to the GPU Queues}
 
-% ------------------------------------------------------------------------------
+Interactive jobs (\xs{sect:interactive-jobs}) must be submitted to the GPU partition to compile and link.
+Several versions of CUDA are installed in:
+\begin{verbatim}
+  /encs/pkg/cuda-11.5/root/
+  /encs/pkg/cuda-10.2/root/
+  /encs/pkg/cuda-9.2/root
+\end{verbatim}
+
+\noindent For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
+replacing \texttt{\/usr\/local\/cuda} with one of the above.
+
+%  2.15.4 OpenISS Examples
+% -------------------
 \subsubsection{OpenISS Examples}
 \label{sect:openiss-examples}
 
-These represent more comprehensive research-like examples of
-jobs for computer vision and other tasks with a lot longer
-runtime (a subject to the number of epochs and other parameters)
-derive from the actual research works of students and their
-theses.
-%
-These jobs require the use of CUDA and GPUs.
-These examples are available as ``native'' jobs on Speed
-and as Singularity containers.
+These examples represent more comprehensive research-like jobs
+for computer vision and other tasks with longer runtime (subject to the number of epochs and other parameters).
+They derive from the actual research works of students and their theses and require the use of CUDA and GPUs.
+These examples are available as ``native'' jobs on Speed and as Singularity containers.
 
-% ------------------------------------------------------------------------------
+\noindent Examples include:
 \paragraph{OpenISS and REID}
 \label{sect:openiss-reid}
 
-The example
-  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}
-  {openiss-reid-speed.sh}
-illustrates a job for a computer-vision based person re-identification
+A computer-vision-based person re-identification 
 (e.g., motion capture-based tracking for stage performance) part of the OpenISS
 project by Haotao Lai~\cite{lai-haotao-mcthesis19} using TensorFlow and Keras.
-The fork of the original repo~\cite{openiss-reid-tfk} adjusted to to run on Speed is here:
+The script is available here:
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}{openiss-reid-speed.sh}.
+The fork of the original repo~\cite{openiss-reid-tfk} adjusted to run on Speed is available here:
+\href{https://github.com/NAG-DevOps/openiss-reid-tfk}{openiss-reid-tfk}.
+Detailed instructions on how to run it on Speed are in the README:
+\url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk}
 
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/openiss-reid-tfk}
-\end{itemize}
-
-and its detailed description on how to run it on Speed is
-in the README:
-
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk}
-\end{itemize}
-
-% ------------------------------------------------------------------------------
 \paragraph{OpenISS and YOLOv3}
 \label{sect:openiss-yolov3}
 
 The related code using YOLOv3 framework is in the
 the fork of the original repo~\cite{openiss-yolov3} adjusted
-to to run on Speed is here:
+to to run on Speed is available here: \href{https://github.com/NAG-DevOps/openiss-yolov3}{openiss-yolov3}.\\
 
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/openiss-yolov3}
-\end{itemize}
-
-Its example job scripts can run on both CPUs and GPUs,
-as well as interactively using TensorFlow:
+\noindent Example job scripts can run on both CPUs and GPUs, as well as interactively using TensorFlow:
 
 \begin{itemize}
 	\item Interactive mode:
@@ -380,126 +309,98 @@ as well as interactively using TensorFlow:
 	\item CPU-based job:
   \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-cpu.sh}
   {openiss-yolo-cpu.sh}
-	\item GPU-based jon:
+	\item GPU-based job:
   \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-gpu.sh}
   {openiss-yolo-gpu.sh}
 \end{itemize}
 
-The detailed description on how to run these on Speed is
-in the README at:
+\noindent Detailed instructions on how to run these on Speed are in the README: 
+\url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
 
-\begin{itemize}
-	\item \url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}
-\end{itemize}
-
-% ------------------------------------------------------------------------------
+% -------------- 2.16 Singularity Containers ------------------
+% -------------------------------------------------------------
 \subsection{Singularity Containers}
 \label{sect:singularity-containers}
 
-If the \texttt{/encs} software tree does not have a required software
-instantaneously available, another option is to run Singularity
-containers. We run EL7 flavor of Linux, and if some projects
-require Ubuntu or other distributions, there is a possibility
-to run that software as a container, including the ones
-translated from Docker.
+Singularity is a container platform designed to execute applications in a portable, 
+reproducible, and secure manner. Unlike Docker, Singularity does not require root privileges, 
+making it more suitable for HPC environments. If the \tool{/encs} software tree does not have 
+the required software available, another option is to run Singularity containers. 
+We run EL7 and EL9 flavors of Linux, and if some projects require Ubuntu or 
+other distributions, it is possible to run that software as a container, 
+including those converted from Docker. The currently recommended version of Singularity 
+is \texttt{singularity/3.10.4/default}.\\
 
 The example
-  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh}
-  {lambdal-singularity.sh}
-showcases an immediate use of a container built for the Ubuntu-based
-LambdaLabs software stack, originally built as a Docker image then
-pulled in as a Singularity container that is immediately available
-for use as that job example illustrates. The source material
-used for the docker image was our fork of their official
-repo: \url{https://github.com/NAG-DevOps/lambda-stack-dockerfiles}
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/lambdal-singularity.sh}{lambdal-singularity.sh}
+showcases an immediate use of a container built for the Ubuntu-based LambdaLabs software stack, 
+originally built as a Docker image then pulled in as a Singularity container. The source material
+used for the docker image was our fork of their official repository: 
+\url{https://github.com/NAG-DevOps/lambda-stack-dockerfiles}.\\
 
-NOTE: It is important if you make your own containers or pull from
-DockerHub, use your \verb+/speed-scratch/$USER+ directory as these
-images may easily consume gigs of space in your home directory
-and you'd run out of quota there very fast.
+\noindent \textbf{Note}: If you make your own containers or pull from DockerHub,
+use your \verb+/speed-scratch/$USER+ directory, as these images may easily 
+consume gigabytes of space in your home directory, quickly exhausting your quota.\\
 
-%\noindent
-TIP: To check for your quota, and the corresponding commands
-to find big files, see: \url{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}
+\noindent \textbf{Tip}: To check your quota and find big files, 
+see \xs{sect:quota-exceeded} and
+\href{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}{ENCS Data Storage}.\\
 
-We likewise built equivalent OpenISS (\xs{sect:openiss-examples})
-containers from their Docker counter parts as they were used for teaching and
-research~\cite{oi-containers-poster-siggraph2023}. The
-images from \url{https://github.com/NAG-DevOps/openiss-dockerfiles}
-and their DockerHub equivalents \url{https://hub.docker.com/u/openiss}
-are found in the same public directory on \verb+/speed-scratch/nag-public+
-as the LambdaLabs Singularity image. They all have \texttt{.sif} extension.
-Some of them can be ran in both batch or interactive mode, some
-make more sense to run interactively. They cover some basics with CUDA,
-OpenGL rendering, and computer vision tasks as examples from the OpenISS
-library and other libraries, including the base images that use different
-distros. We also include Jupyter notebook example with Conda support.
+We have also built equivalent OpenISS (\xs{sect:openiss-examples}) containers from their Docker 
+counterparts for teaching and research purposes~\cite{oi-containers-poster-siggraph2023}. 
+The images from \url{https://github.com/NAG-DevOps/openiss-dockerfiles}
+and their DockerHub equivalents \url{https://hub.docker.com/u/openiss} can be found in 
+\verb+/speed-scratch/nag-public+ with a `\texttt{.sif}' extension.
+Some can be run in both batch and interactive modes, covering basics with CUDA, OpenGL rendering, 
+and computer vision tasks. Examples include Jupyter notebooks with Conda support.
 
 \begin{verbatim}
-/speed-scratch/nag-public:
-
-openiss-cuda-conda-jupyter.sif
-openiss-cuda-devicequery.sif
-openiss-opengl-base.sif
-openiss-opengl-cubes.sif
-openiss-opengl-triangle.sif
-openiss-reid.sif
-openiss-xeyes.sif
+  /speed-scratch/nag-public:
+  openiss-cuda-conda-jupyter.sif
+  openiss-cuda-devicequery.sif
+  openiss-opengl-base.sif
+  openiss-opengl-cubes.sif
+  openiss-opengl-triangle.sif
+  openiss-reid.sif
+  openiss-xeyes.sif
 \end{verbatim}
 
-The currently recommended version of Singularity is
-\texttt{singularity/3.10.4/default}.
+This section introduces working with Singularity, its containers, and what can and cannot 
+be done with Singularity on the ENCS infrastructure. For comprehensive documentation, 
+refer to the authors' guide: \url{https://www.sylabs.io/docs/}.\\
 
-This section comprises an introduction to working with Singularity, its 
-containers, and what can and cannot be done with Singularity on the ENCS 
-infrastructure. It is not intended to be an exhaustive presentation of 
-Singularity: the program's authors do a good job of that here:
-\url{https://www.sylabs.io/docs/}. It also assumes that you have successfully installed 
-Singularity on a user-managed/personal system (see next paragraph as to why).
+Singularity containers are either built from an existing container, or from scratch. 
+Building from scratch requires a recipe file (think of like a Dockerfile) and
+must be done with root permissions, which are not available on the ENCS infrastructure. 
+Therefore, built-from-scratch containers must be created on a user-managed/personal system. 
+There are three types of Singularity containers:
+% with one exception (see, Building A Container From An Existing Container).
 
-Singularity containers are essentially either built from an existing 
-container, or are built from scratch. Building from scratch requires a recipe 
-file (think of like a Dockerfile), and the operation \emph{must} be effected as root.
-You will not have root on the ENCS infrastructure, so any built-from-scratch containers must be created 
-on a user-managed/personal system. Root-level permissions are also required
-(in some cases, essential; in others, for proper build functionality) for 
-building from an existing container.
-%, with one exception (see, Building A 
-%Container From An Existing Container).
-%
-Three types of Singularity containers can be built: file-system; sandbox; 
-squashfs. The first two are ``writable'' (meaning that changes can persist 
-after the Singularity session ends). File-system containers are built around 
-the ext3 file system, and are a read-write ``file'', sandbox containers are 
-essentially a directory in an existing read-write space, and squashfs 
-containers are a read-only compressed ``file''. Note that file-system 
-containers \emph{cannot} be resized once built.
+\begin{itemize}
+  \item File-system containers: built around the ext3 file system and are read-write ``file'', but cannot be resized once built.
+  \item Sandbox containers: essentially a directory in an existing read-write space and are also read-write.
+  \item Squashfs containers: read-only compressed ``file'' and are read-only. It is the default build type.
+\end{itemize}
 
-Note that the default build is a squashfs one. Also note what Singularity's 
-authors have to say about the builds, ``A common workflow is to use the 
-``sandbox'' mode for development of the container, and then build it as a 
-default (squashfs) Singularity image when done.'' File-system containers are 
-considered to be, ``legacy'', at this point in time. When built, a \emph{very small}
-overhead is allotted to a file-system container (think, MB), and that 
-\emph{cannot} be changed.
+\noindent
+``A common workflow is to use the ``sandbox'' mode for container development and then build it as a 
+default (squashfs) Singularity image when done.'' says the Singularity's authors about builds.
+File-system containers are considered legacy and are not commonly used.\\
 
-Probably for the most of your workflows you might find there is a
-Docker container exists for your tasks, in this case you
-can use the docker pull function of Singularity as a part
-of you virtual environment setup as an interactive job
-allocation:
+For many workflows, a Docker container might already exist. In this case, you can use Singularity's 
+docker pull function as part of your virtual environment setup in an interactive job allocation:
 
 \small
 \begin{verbatim}
-salloc --gpus=1 -n8 --mem=4Gb -t60
-cd /speed-scratch/$USER/
-singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
-INFO:    Converting OCI blobs to SIF format
-INFO:    Starting build...
+  salloc --gpus=1 -n8 --mem=4Gb -t60
+  cd /speed-scratch/$USER/
+  singularity pull openiss-cuda-devicequery.sif docker://openiss/openiss-cuda-devicequery
+  INFO:    Converting OCI blobs to SIF format
+  INFO:    Starting build...
 \end{verbatim}
 \normalsize
 
 \noindent
 This method can be used for converting Docker containers directly on Speed.
-On GPU nodes make sure to pass on the \option{--nv} flag to Singularity,
-so its containers could access the GPUs. See the linked example.
+On GPU nodes, make sure to pass on the \option{--nv} flag to Singularity so its containers 
+could access the GPUs. See the linked example for more details.

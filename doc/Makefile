@@ -24,7 +24,7 @@ all: $(DELIVERABLE).pdf
 #all: arxiv acm
 #all: arxiv
 
-$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex
+$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex software-list.tex
 	@echo "Compiling *.tex files..."
 	pdflatex $(PDFLATEXFLAGS) $(DELIVERABLE)
 	@echo "Compiling bibliography..."
@@ -52,6 +52,12 @@ content-arxiv.tex: content.tex
 $(DELIVERABLE)-arxiv.tex: to-arxiv.pl $(DELIVERABLE).tex
 	./to-arxiv.pl < $(DELIVERABLE).tex > $(DELIVERABLE)-arxiv.tex
 	perl -pi -e 's/\{content\}/\{content-arxiv\}/g' $(DELIVERABLE)-arxiv.tex
+
+software-list: software-list.tex ../software-list.md
+software-list.tex ../software-list.md: generate-software-list.sh
+	@echo "Generating software list. Don't forget to run make afterwards to recompile the manual."
+	./generate-software-list.sh
+	mv -f software-list.md ..
 
 acm: $(DELIVERABLE)-acm.pdf
 
