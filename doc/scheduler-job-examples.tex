@@ -83,35 +83,70 @@ Java call, such as \texttt{Java -Xmx1G -version}, will need to have,
 % -------------- 2.15 Scheduling on the GPU Nodes -------------
 % -------------------------------------------------------------
 \subsection{Scheduling on the GPU Nodes}
+\label{sect:gpu-scheduling}
 
-The primary cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
+Speed has various GPU types in various subclusters of its nodes.
+
+\begin{itemize}
+	\item \texttt{speed-05} and \texttt{speed-17}:
+The primary SPEED1 cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
 cards. Each card has 2048 cores and 16GB of RAM. Note that the P6
 is mainly a single-precision card, so unless you need GPU double precision, 
 double-precision calculations will be faster on a CPU node.
+	\item \texttt{speed-01}:
+This \texttt{vidpro} node (see \xf{fig:speed-architecture-full}, contact Dr.~Maria Amer) is identical
+to 05 and 17 in its GPU configuration, but managed by the priority
+for the vidpro group, that is a \texttt{pg} job scheduled there
+is a subject for preemption.
+	\item \texttt{speed-03}, \texttt{speed-25}, \texttt{speed-25}:
+These \texttt{vidpro} nodes feature NVIDIA V100 cards with 32GB of RAM.
+Like \texttt{speed-01}, the priority is of the vidpro group, who
+purchased the nodes, and others' jobs are a subject from preemption
+within \texttt{pg}, \texttt{pt}, and \texttt{cl} partitions.
+	\item \texttt{speed-37}~--~\texttt{speed-43}:
+SPEED2 nodes, the main backbone of the teaching partition \texttt{pt},
+have 4x A100 80GB GPUs each, partitioned into average 4x MIGs of 20GB
+each, with exceptions.
+	\item \texttt{nebulae}:
+A member of the Nebular subcluster (contact Dr.~Jun Yan), has 2x 48GB
+RTX Ada 6000 cards. This node is in the \texttt{pn} partition.
+	\item \texttt{speed-19}:
+Has an AMD GPU, Tonga, 16GB of GPU ram.
+This node along with the majority of the NVIDIA GPU nodes are in the
+\texttt{cl} partition (with restrictions) to run OpenCL, Vulkan,
+and HIP jobs.
+\end{itemize}
 
 \noindent
-Job scripts for the GPU queue differ in that they need this statement,
-which attaches either a single GPU or two GPUs to the job:
+Job scripts for the GPU queues differ in that they need these statements,
+which attach either a single GPU or more GPUs to the job with the
+appropriate partition:
 \begin{verbatim}
   #SBATCH --gpus=[1|x]
+  #SBATCH -p [pg|pt|cl|pa]
 \end{verbatim}
-The default max quota for x is 4.
+The default max quota for $x$ is 4.
 
 \noindent
 Once your job script is ready, submit it to the GPU partition (queue) with:
 \begin{verbatim}
-  sbatch -p pg ./<myscript>.sh
+  sbatch --mem=<MEMORY> -p pg ./<myscript>.sh
 \end{verbatim}
+\option{--mem} and \option{-p} can reside in the script.
 
 \noindent
-You can query \tool{nvidia-smi} on the node running your job with:
+You can query \tool{nvidia-smi} on the node \textbf{running your job} with:
 \begin{verbatim}
-  ssh <ENCSusername>@speed[-05|-17|37-43] nvidia-smi
+  ssh <ENCSusername>@speed-[01|03|05|17|25|27|37-43]|nebulae nvidia-smi
 \end{verbatim}
 
-\noindent The status of the GPU queue can be queried with:
+\noindent The status of the GPU queues can be queried e.g. with:
 \begin{verbatim}
   sinfo -p pg --long --Node
+  sinfo -p pt --long --Node
+  sinfo -p cl --long --Node
+  sinfo -p pa --long --Node
+  sinfo -p pn --long --Node
 \end{verbatim}
 
 \noindent
@@ -121,24 +156,21 @@ You can query \tool{rocm-smi} on the AMD GPU node running your job with:
 \end{verbatim}
 
 \noindent
-\textbf{Important note for TensorFlow and PyTorch users:}:
-if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, 
-do not use the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
+\textbf{Important note for TensorFlow and PyTorch users}:
+if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, please
+\textbf{do not use} the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
 on \textbf{speed-01, speed-05, or speed-17}, as they will crash the compute node (100\% certainty). 
 This appears to be a defect in the current hardware architecture.
 %
 % TODO: Need to link to that example
-The workaround is to either manually effect GPU parallelisation
-(TensorFlow provides an example on how to do this), or to run on a single GPU.\\
+The workaround is to either manually effect GPU parallelisation (see \xs{sect:multi-node-gpu})
+(TensorFlow provides an example on how to do this), or to run on a single GPU,
+which is now the default for those nodes.\\
 
 \noindent \textbf{Important}:
-Users without permission to use the GPU nodes can submit jobs to the \texttt{pg}
-partition, but those jobs will hang and never run.
+Users without permission to use the GPU nodes can submit jobs to the various GPU
+partitions, but those jobs will hang and never run.
 Their availability can be seen with:
-%
-%There are two GPUs in both \texttt{speed-05} and \texttt{speed-17}, and one 
-%in \texttt{speed-19}.
-%, \texttt{qstat -F g} (note the capital): 
 %
 \small
 \begin{verbatim}
@@ -169,36 +201,8 @@ For example:
 \begin{verbatim}
   sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh
 \end{verbatim}
-
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%--------------------------------------------------------------------------------- 
-%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
-
-%\small
-%\begin{verbatim}
-%queuename                      qtype resv/used/tot. load_avg arch          states
-%--------------------------------------------------------------------------------- 
-%g.q@speed-05.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%g.q@speed-17.encs.concordia.ca BIP 0/0/32 0.01 lx-amd64  hc:gpu=6 
-%--------------------------------------------------------------------------------- 
-%s.q@speed-19.encs.concordia.ca BIP 0/1/32 0.04 lx-amd64  hc:gpu=0 (haff=1.000000) 
-       %538 100.00000 count.sh   sbunnell     r     03/07/2019 02:39:39     1
-%---------------------------------------------------------------------------------
-%etc. 
-%\end{verbatim}
-%\normalsize
+The request can be further specified to a specific node using \option{-w}
+or a GPU type or feature.
 
 \footnotesize
 \begin{verbatim}
@@ -213,15 +217,13 @@ speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1 
 \end{verbatim}
 \normalsize
 
-%And that there are no more GPUs available on that node (\texttt{hc:gpu=0}).
-%Note that no more than two GPUs can be requested for any one job. 
-
 %  2.15.1 P6 on Multi-GPU, Multi-Node
 % -------------------
 \subsubsection{P6 on Multi-GPU, Multi-Node}
+\label{sect:multi-node-gpu}
 
 As described earlier, P6 cards are not compatible with \api{Distribute} and \api{DataParallel} functions
-(\tool{PyTorch}, \tool{Tensorflow}) when running on multiple GPUs.
+(\textbf{PyTorch}, \textbf{Tensorflow}) when running on multiple GPUs.
 One workaround is to run the job in Multi-node, single GPU per node
 (this applies to P6 nodes: speed-05, speed-17, speed-01):
 \begin{verbatim}
@@ -238,9 +240,10 @@ illustrates a job for training on Multi-Nodes, Multi-GPUs
 %  2.15.2 CUDA
 % -------------------
 \subsubsection{CUDA}
+\label{sect:cuda}
 
-When calling \tool{CUDA} within job scripts, it is important to link to the desired
-the desired \tool{CUDA} libraries and set the runtime link path to the same libraries. 
+When calling \textbf{CUDA} within job scripts, it is important to link to the desired
+the desired \textbf{CUDA} libraries and set the runtime link path to the same libraries. 
 For example, to use the \texttt{cuda-11.5} libraries, specify the following in your \texttt{Makefile}.
 \begin{verbatim}
   -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
@@ -253,11 +256,8 @@ For example, to use the \texttt{cuda-11.5} libraries, specify the following in y
 
 %  2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
 % -------------------
-\subsubsection{Special Notes for Sending CUDA Jobs to the GPU Queue}
+\subsubsection{Special Notes for Sending CUDA Jobs to the GPU Queues}
 
-%It is not possible to create a \texttt{qlogin} session on to a node in the 
-%\textbf{GPU Queue} (\texttt{g.q}). As direct logins to these nodes is not 
-%available,
 Interactive jobs (\xs{sect:interactive-jobs}) must be submitted to the GPU partition to compile and link.
 Several versions of CUDA are installed in:
 \begin{verbatim}
@@ -267,7 +267,7 @@ Several versions of CUDA are installed in:
 \end{verbatim}
 
 \noindent For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
-replacing \option{\/usr\/local\/cuda} with one of the above.
+replacing \texttt{\/usr\/local\/cuda} with one of the above.
 
 %  2.15.4 OpenISS Examples
 % -------------------
@@ -326,7 +326,7 @@ Singularity is a container platform designed to execute applications in a portab
 reproducible, and secure manner. Unlike Docker, Singularity does not require root privileges, 
 making it more suitable for HPC environments. If the \tool{/encs} software tree does not have 
 the required software available, another option is to run Singularity containers. 
-We run EL7 flavor of Linux, and if some projects require Ubuntu or 
+We run EL7 and EL9 flavors of Linux, and if some projects require Ubuntu or 
 other distributions, it is possible to run that software as a container, 
 including those converted from Docker. The currently recommended version of Singularity 
 is \texttt{singularity/3.10.4/default}.\\
@@ -343,7 +343,8 @@ use your \verb+/speed-scratch/$USER+ directory, as these images may easily
 consume gigabytes of space in your home directory, quickly exhausting your quota.\\
 
 \noindent \textbf{Tip}: To check your quota and find big files, 
-see: \href{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}{ENCS Data Storage}.\\
+see \xs{sect:quota-exceeded} and
+\href{https://www.concordia.ca/ginacody/aits/encs-data-storage.html}{ENCS Data Storage}.\\
 
 We have also built equivalent OpenISS (\xs{sect:openiss-examples}) containers from their Docker 
 counterparts for teaching and research purposes~\cite{oi-containers-poster-siggraph2023}. 
@@ -368,9 +369,6 @@ This section introduces working with Singularity, its containers, and what can a
 be done with Singularity on the ENCS infrastructure. For comprehensive documentation, 
 refer to the authors' guide: \url{https://www.sylabs.io/docs/}.\\
 
-%It also assumes that you have successfully installed 
-%Singularity on a user-managed/personal system (see next paragraph as to why).
-
 Singularity containers are either built from an existing container, or from scratch. 
 Building from scratch requires a recipe file (think of like a Dockerfile) and
 must be done with root permissions, which are not available on the ENCS infrastructure. 
@@ -381,10 +379,11 @@ There are three types of Singularity containers:
 \begin{itemize}
   \item File-system containers: built around the ext3 file system and are read-write ``file'', but cannot be resized once built.
   \item Sandbox containers: essentially a directory in an existing read-write space and are also read-write.
-  \item Squashfs containers: read-only compressed ``file''and are read-only. It is the default build type.
+  \item Squashfs containers: read-only compressed ``file'' and are read-only. It is the default build type.
 \end{itemize}
 
-\noindent ``A common workflow is to use the ``sandbox'' mode for container development and then build it as a 
+\noindent
+``A common workflow is to use the ``sandbox'' mode for container development and then build it as a 
 default (squashfs) Singularity image when done.'' says the Singularity's authors about builds.
 File-system containers are considered legacy and are not commonly used.\\
 
@@ -401,6 +400,7 @@ docker pull function as part of your virtual environment setup in an interactive
 \end{verbatim}
 \normalsize
 
-\noindent This method can be used for converting Docker containers directly on Speed.
+\noindent
+This method can be used for converting Docker containers directly on Speed.
 On GPU nodes, make sure to pass on the \option{--nv} flag to Singularity so its containers 
 could access the GPUs. See the linked example for more details.
