@@ -12,7 +12,7 @@ date
 
 module avail ansys
 
-module load ansys/19.2/default
+module load ansys/2023R2/default
 cd $TMPDIR
 
 set FLUENTNODES = "`scontrol show hostnames`"
