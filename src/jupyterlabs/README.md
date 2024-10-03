@@ -1,14 +1,16 @@
 <!-- TOC --><a name="README"></a>
 # Jupyter Lab on HPC Cluster
 
-This folder contains scripts and instructions for setting up and running Jupyter Lab on the HPC cluster using Conda without container. These scripts are designed to simplify the process of allocating resources, setting up environments, and starting Jupyter Lab.
+This folder contains scripts and instructions for setting up and running Jupyter Lab on the HPC cluster Speed using Conda without a container. These scripts are designed to simplify the process of allocating resources, setting up environments, and starting a Jupyter Lab process.
 
 <!-- TOC --><a name="Prerequisites"></a>
 ## Prerequisites
-Before starting, ensure you have access to the HPC cluster.
+
+Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc/#requesting-access) to the HPC cluster.
 
 <!-- TOC --><a name="Instructions"></a>
 ## Instructions
+
 ### For first time use, we need to
 
 * start an interactive session
@@ -21,26 +23,34 @@ Before starting, ensure you have access to the HPC cluster.
         conda init tcsh
         source ~/.tcshrc
 
-* run `setup-conda.sh`
+* run `setup-conda.sh` (on the ompute node `salloc` brought you to, **no**t on `speed-submit`)
 
         ./setup-conda.sh
 
     The script will:
-    - create a `/speed-scratch/$USER/Jupyter` directory (change Jupyter to any name of your choice)
+    - create a `/speed-scratch/$USER/Jupyter` directory (change Jupyter to any name of your choice in the script)
     - set environment variables for **TMP** directories and for **CONDA_PKGS_DIRS** 
     - create a conda environment named **jupyter-env**
     - install JupyterLabs and pytorch
     - exit the interactive session
 
-## Launching Jupeter
-* Run the `start_jupyterlab.sh` script each time you need to launch Jupyterlab
+## Launching Jupyter Labs Instance
+
+* Run the `start_jupyterlab.sh` script each time you need to launch JupyterLab from the submit node
 
         ./start_jupyterlab.sh
 
     The script will:
-    - allocate resources for your job
+    - allocate resources for your job on a compute node
     - start jupyter server by running `run_jupyterlab.sh`
     - print the ssh command that you can use to connect to the compute node runnung the jupyter notebook (this is done in a new terminal)
     - print the token/link to the jupyter server to paste in a web browser (starting with `http://127.0.0.1/...`)
+
+## Refernces
+
+* [More ways of running Jupyter notebooks are documented in our manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks)
+  * From containers
+  * Using Conda venv (like here)
+  * Using Python venv
 
 <!-- TOC end -->
