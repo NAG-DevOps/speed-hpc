@@ -23,7 +23,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
         conda init tcsh
         source ~/.tcshrc
 
-* run `setup-conda.sh` (on the ompute node `salloc` brought you to, **no**t on `speed-submit`)
+* run `setup-conda.sh` (on the ompute node `salloc` brought you to, **not** on `speed-submit`)
 
         ./setup-conda.sh
 
@@ -46,7 +46,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
     - print the ssh command that you can use to connect to the compute node runnung the jupyter notebook (this is done in a new terminal)
     - print the token/link to the jupyter server to paste in a web browser (starting with `http://127.0.0.1/...`)
 
-## Refernces
+## References
 
 * [More ways of running Jupyter notebooks are documented in our manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks)
   * From containers
