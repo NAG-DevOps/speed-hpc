@@ -373,49 +373,53 @@ Time is in minutes, run Yolo with different hardware configurations GPU types V1
 
 
 <!-- TOC --><a name="openiss-reid-tfk"></a>
-## OpenISS-reid-tfk
+## OpenISS Person Re-Identification Baseline
 
-The following steps will provide the information required to execute the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on *SPEED*
+The following are the steps required to run the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on the *Speed* cluster. This implementatoin is based on tensorflow and keras
 
-<!-- TOC --><a name="environment"></a>
-### Environment
+<!-- TOC --><a name="Prerequisites"></a>
+### Prerequisites
 
-The pre-requisites to prepare the environment are located in `environment.yml` (https://github.com/NAG-DevOps/openiss-reid-tfk).
+#### Dataset
+   Using the Market1501 dataset which consist of 
+   - Train images: 12,936
+   - Query images: 3,368
+   - Gallery images: 15,913
 
-Using a test dataset (Market1501) and 120 epochs as an example, we ran the script and the results were the following:
+   Running for 10 epochs as an example, the results for different Speed configurations were:
+   - Using GPU: 29 minute
+   - Using CPUs (32 cores): 6 hours and 49 minute
 
-Speed 1 GPU: 5hrs 25min
-
-Speed CPU - 32 cores: 2 days 22 hours
-
-TEST DATASET: Market1501
-
----- Train images: 12936
-
----- Query images: 3368
-
----- Gallery images: 15913
+#### Environment Setup
+   The environment setup instructions are located in `environment.yml` (https://github.com/NAG-DevOps/openiss-reid-tfk). Ensure all dependencies are correctly installed.
 
 <!-- TOC --><a name="configuration-and-execution"></a>
 ### Configuration and execution
 
-- Log into Speed, go to your speed-scratch directory:  `cd /speed-scratch/$USER/`
-- Clone the repo from https://github.com/NAG-DevOps/openiss-reid-tfk
-- Download the dataset: go to `datasets/` and run `get_dataset_market1501.sh`
-- In `reid.py` set the epochs (`g_epochs=120` by default)
-- Download `openiss-reid-speed.sh` from this repository
-- On `environment.yml` comment or uncomment tensorflow accordingly (for CPU or GPU, GPU is default)
-- On `openiss-reid-speed.sh` comment or uncomment the resourse allocation section accordingly (GPU is default), make sure you only request CPU or GPU but not both
+- Log into Speed and navigate to your speed-scratch directory:
+      
+      ssh $USER@speed.encs.concordia.ca
+      cd /speed-scratch/$USER/
+
+- Clone the GitHub repo from https://github.com/NAG-DevOps/openiss-reid-tfk
+
+- Download the dataset: Navigate to the `datasets/` directory, make the script executable, and run `get_dataset_market1501.sh`:
+
+      chmod u+x *.sh && ./get_dataset_market1501.sh
+
+- Download `openiss-reid-speed.sh` execution script from this repository.
+
+- In `reid.py` set the number of epochs (`g_epochs=120` by default)
+
+- In `environment.yml` comment/uncomment the TensorFlow section depending on whether you are running on CPU or GPU. GPU is enabled by default.
+
+- In `openiss-reid-speed.sh` comment/uncomment the resource allocation lines for either CPU or GPU, depending on the target node (GPU is default). Ensure that only one type (CPU or GPU) is requested.
+
 - Submit the job:
 
-   On CPUs nodes: `sbatch ./openiss-reid-speed.sh`
+   For CPU nodes: `sbatch ./openiss-reid-speed.sh`
 
-   On GPUs nodes: `sbatch -p pg ./openiss-reid-speed.sh`
-
-**IMPORTANT**
-
-Modify the script `openiss-reid-speed.sh` to setup the job to be ready for CPUs or GPUs nodes; `--mem=` and `gpus=` in particular, see more information about these parameters on https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf
-
+   For GPU nodes: `sbatch -p pg ./openiss-reid-speed.sh`
 
 <!-- TOC --><a name="cuda"></a>
 ## CUDA
