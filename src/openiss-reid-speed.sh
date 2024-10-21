@@ -23,8 +23,8 @@
 
 # Execute the script
 module load anaconda3/2023.03/default
-conda env create -f environment.yml -p ../reid-venv
-conda activate ../reid-venv
+conda env create -f environment.yml -p /speed-scratch/$USER/reid-venv
+conda activate /speed-scratch/$USER/reid-venv
 srun python reid.py
 conda deactivate
-conda env remove -p ../reid-venv
+conda env remove -p /speed-scratch/$USER/reid-venv
