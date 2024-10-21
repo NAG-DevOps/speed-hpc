@@ -1,22 +1,22 @@
 #!/encs/bin/tcsh
 
-# Give job a name
-#SBATCH -J openiss-reid
+# Job name
+#SBATCH --job-name openiss-reid
 
-# Send an email when the job starts, finishes or if it is aborted.
+# Recieve email notifications when the job starts, finishes or fails.
 #SBATCH --mail-type=ALL
-
-# Specify the output file name
-#SBATCH -o openiss-reid-tfk.log
 
 # Set output directory to current
 #SBATCH --chdir=./
 
+# Specify the output file name
+#SBATCH -o openiss-reid-output-%A.log
+
 # Request Memory
-#SBATCH --mem=32G
+#SBATCH --mem=20G
 
 # Request CPU - comment this section if the job needs GPUs 
-##SBATCH -n 32
+##SBATCH -c 32
 
 # Request GPU - comment this section if the job needs CPUs and uncomment the previous section
 #SBATCH --gpus=1
