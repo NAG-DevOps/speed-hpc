@@ -1,5 +1,8 @@
 <!-- TOC --><a name="README"></a>
-# One Job With Multiple MIG Devices - SAME NODE
+# Single Job With Multiple MIG Devices - SAME NODE
+# README
+
+Adapted to Speed from: https://wiki.orc.gmu.edu/mkdocs/slurm_with_multiple_mig_devices/
 
 This document only shows how to run multiple independent CUDA processes in a single slurm job. Distributed training with pytorch, tensorflow or any other common ML/DL framework is not currently possible using MIG devices
 
