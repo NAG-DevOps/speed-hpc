@@ -4,8 +4,8 @@
 This directory has example job scripts and some tips and tricks how to
 run certcain things.
 
+<!-- TOC start -->
 ## TOC 
-
 - [Sample Jobs](#sample-jobs)
 - [Creating Environments and Compiling Code on Speed](#creating-environments-and-compiling-code-on-speed)
    * [Correct Procedure](#correct-procedure)
@@ -25,19 +25,18 @@ run certcain things.
    * [Diviner Tools](#diviner-tools)
    * [OpenFoam](#openfoam-multinode)
    * [OpenISS-yolov3](#openiss-yolov3)
-      + [Speed Login Configuration ](#speed-login-configuration)
-      + [Speed Setup and Development Environment Preperation](#speed-setup-and-development-environment-preperation)
-      + [Run Interactive Script ](#run-interactive-script)
-      + [Run Non-interactive Script ](#run-non-interactive-script)
-      + [Performance comparison](#performance-comparison)
+      + [Prerequisites](#prerequisites-openiss-yolov3)
+      + [Configuration and Execution](#configuration-and-execution-openiss-yolov3)
+         - [Run Non-interactive Script](#run-non-interactive-openiss-yolov3)
+         - [Run Interactive Script ](#run-interactive-openiss-yolov3)
+      + [Performance Comparison](#performance-comparison-openiss-yolov3)
    * [OpenISS-reid-tfk](#openiss-reid-tfk)
-      + [Environment](#environment)
+      + [Prerequisities](#prerequisites-openiss-reid)
       + [Configuration and execution](#configuration-and-execution)
    * [CUDA](#cuda)
       + [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
       + [Jupyter notebook example: Jupyter-Pytorch-CUDA](#jupyter-example-gpu-pytorch)
    * [Python Modules](#python-modules)
-
 <!-- TOC end -->
 
 <!-- TOC --><a name="sample-jobs"></a>
@@ -262,122 +261,98 @@ This example is taken from OpenFoam tutorials section: $FOAM_TUTORIALS/incompres
          method  scotch;
 6. Exit the salloc session, go to the cavity directory and run the script: `sbatch --mem=10Gb -pps --constraint=el9 openfoam-multinode.sh`
 
-<!-- TOC --><a name="openiss-yolov3"></a>
+<!-- TOC --><a id="openiss-yolov3"></a>
 ## OpenISS-yolov3
 
-This is a case study example on image classification, for more details please visit [openiss-yolov3](https://github.com/NAG-DevOps/openiss-yolov3).
+This is a case study example on image classification, for more details please visit [OpenISS keras-yolo3](https://github.com/NAG-DevOps/openiss-yolov3).
 
-<!-- TOC --><a name="speed-login-configuration"></a>
-### Speed Login Configuration 
-1. As an interactive option is supported that show live video, you will need to enable ssh login with -X support. Please check this [link](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html) to do that.
-2. If you didn't know how to login to speed and prepare the working environment please check the manual in the follwing [link](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 2.
+<!-- TOC --><a id="prerequisites-openiss-yolov3"></a>
+### Prerequisites
 
-After you logged in to speed change your working directory to `/speed-scratch/$USER` directory.
-```
-cd /speed-scratch/$USER/
-```
+   #### Images and Videos
+   Images and videos can be from any source, but a sample video and images are provided in `video` and `image` folders in the [OpenISS-YOLOv3 Github repository](https://github.com/NAG-DevOps/openiss-yolov3).
 
-<!-- TOC --><a name="speed-setup-and-development-environment-preperation"></a>
-### Speed Setup and Development Environment Preperation
+   #### YOLOv3 Weights
+   The YOLOv3 weights can be downloaded from [YOLO website](http://pjreddie.com/darknet/yolo/). However the script provided includes a command to `wget` the weights from the link above.
 
-The pre-requisites to prepare the virtual development environment using anaconda is explained in [speed manual](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf) section 3, please check that for more inforamtion.
-1. Make sure you are in speed-scratch directory. Then Download OpenISS yolo3 project from [Github](https://github.com/NAG-DevOps/openiss-yolov3) to your speed-scratch proper diectory. 
-```
-cd /speed-scratch/$USER/
-git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
-```
-2. Starting by loading anaconda module 
-```
-module load anaconda3/2023.03/default
-```
-3. Switch to the project directoy. Create anaconda virtual environment, and configure development librires. The name of the environment can by any name here as an example named YOLO. Activate the conda environment YOLOInteractive.
-```
-cd /speed-scratch/$USER/openiss-yolov3
-conda create -p /speed-scratch/$USER/YOLO
-conda activate /speed-scratch/$USER/YOLO
-```
-4. Install all required libraries you need and upgrade pip to install `opencv-contrib-python` library 
+   #### Environment Setup
+   To set up the virtual development environment, refer to section 2.11 of the Speed manual [Creating Virtual Environments](https://nag-devops.github.io/speed-hpc/#anaconda) for detailed information.
 
-```
-conda install python=3.5
-conda install Keras=2.1.5
-conda install Pillow
-conda install matplotlib
-conda install -c menpo opencv
-pip install --upgrade pip 
-pip install opencv-contrib-python
-```
+<!-- TOC --><a id="configuration-and-execution-openiss-yolov3"></a>
+### Configuration and execution
+- Log into SPEED and navigate to your `speed-scratch` directory:
 
-5. Validate conda environemnt and installed packages using following commands. Make sure the version of python and keras are same as requred.
-```
-conda info --env
-conda list
-```
-if you need to delete the created virtual environment 
-```
-conda deactivate
-conda env remove -p /speed-scratch/$USER/YOLO
-```
+      ssh $USER@speed.encs.concordia.ca
+      cd /speed-scratch/$USER/
 
-<!-- TOC --><a name="run-interactive-script"></a>
-### Run Interactive Script 
+   **Note**: To see a live video in an interactive session, enable X11 forwarding. Linux can run X11, however, to run X server on:
+	- Windows: use MobaXterm or Putty
+	- MacOS: use XQuarz with its xterm
 
-File `openiss-yolo-interactive.sh` is the speed script to run video example to run it you follow these steps:
-1. Run interactive job we need to keep `ssh -X` option enabled and `Xming` server in your windows is working (MobaXterm provides an alternative; on macOS use XQuartz). 
-2. The `sbatch` is not the proper command since we have to keep direct ssh connection to the computational node, so `salloc` will be used. 
-3. Enter `salloc` in the `speed-submit`. The `salloc` will find an approriate computational node then it will allow you to have direct `ssh -X` login to that node. Make sure you are in the right directory and activate conda environment again.
-```
-salloc --x11=first -t 60 -n 16 --mem=40G -p pg
-cd /speed-scratch/$USER/openiss-yolov3
-conda activate /speed-scratch/$USER/YOLO
-```
-4. Before you run the script you need to add permission access to the project files, then start run the script `./openiss-yolo-interactive.sh`    
-```
-chmod u+x *.sh
-./openiss-yolo-interactive.sh
-```
-5. A pop up window will show a classifed live video. 
+   For more information refer to [How to Launch X11 applications](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html)
 
-Please note that since we have limited number of nodes with GPU support `salloc` the interactive sessions are time-limited to max 24h. 
+- Clone the [OpenISS-YOLOv3 Github repository](https://github.com/NAG-DevOps/openiss-yolov3)
 
-<!-- TOC --><a name="run-non-interactive-script"></a>
-### Run Non-interactive Script 
+      git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
+      cd /speed-scratch/$USER/openiss-yolov3
 
-Before you run the script you need to add permission access to the project files using `chmod` command.   
-```
-chmod u+x *.sh
-```
-To run the script you will use `sbatch`, you can run the task on CPU or GPU compute nodes as follwoing:
-1. For CPU nodes use `openiss-yolo-cpu.sh` file 
-```
-sbatch ./openiss-yolo-cpu.sh
-```
+<!-- TOC --><a id="run-non-interactive-openiss-yolov3"></a>
+#### Run Non-interactive Script 
+   - Download and run `openiss-yolo-speed.sh` script from [Speed-HPC Github repository](https://github.com/NAG-DevOps/speed-hpc/tree/master/src).
 
-2. For GPU nodes use `openiss-yolo-gpu.sh` file with option -p to specify a GPU partition (`pg`) for submission.
-```
-sbatch -p pg ./openiss-yolo-gpu.sh
-```
+         sbatch ./openiss-yolo-speed.sh
 
-For Tiny YOLOv3, just do in a similar way, just specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+The script performs the following:
+   - Configures job resources and paths for Conda environments.
+   - Creates, or activates the Conda environment, and installs required packages if necessary.
+   - Downloads YOLOv3 weights.
+   - Converts the Darknet YOLO model to Keras format.      
+   - Runs YOLO inference on a sample video.
+   - Deactivates the Conda environment and exits.
 
-<!-- TOC --><a name="performance-comparison"></a>
+<!-- TOC --><a id="run-interactive-openiss-yolov3"></a>
+#### Run Interactive Script
+   *Note* To run interactive job we need to use `ssh -X`
+   - Request resources with `salloc` command
+
+         salloc --x11=first --mem=60G -n 32 --gpus=1 -p pt
+
+   - Download and run `openiss-yolo-interactive.sh` script from [Speed-HPC Github repository](https://github.com/NAG-DevOps/speed-hpc/tree/master/src). You need to add permission access to the project files.
+
+         chmod u+x *.sh 
+         ./openiss-yolo-interactive.sh
+
+   - A pop up window will show a classifed live video. 
+
+The script does the following:
+   - Prepare and create Conda environment based on `environment.yml`
+   - Download YOLOv3 Weights
+   - Convert the Darknet YOLO model into a Keras model using `convert.py`
+   - Run YOLO inference on a sample video in an intaractive mode
+
+**Note**: If you need to delete the created virtual environment
+
+      conda deactivate
+      conda env remove -p /speed-scratch/$USER/envs/yolo_env
+
+   For Tiny YOLOv3, it can be run in the same way, but you will need to specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+
+<!-- TOC --><a name="performance-comparison-openiss-yolov3"></a>
 ### Performance comparison
 
-Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of teasla P6. The project use  keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 (gpu32), for P6 (gpu16) you can find that in scripts shell.    
-
+Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of tesla P6. The project uses keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 is gpu32, and for P6 is gpu16, you can find that in scripts shell.
 |   1GPU-P6     |    1GPU-V100  |    2GPU-V100  |    32CPU       |
 | --------------|-------------- |-------------- |----------------|
 |    22.45      |   17.15       |   23.33       |     60.42      |
 |    22.15      |   17.54       |   23.08       |     60.18      |
 |    22.18      |   17.18       |   23.13       |     60.47      |
 
-
 <!-- TOC --><a name="openiss-reid-tfk"></a>
 ## OpenISS Person Re-Identification Baseline
 
 The following are the steps required to run the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on the *Speed* cluster. This implementatoin is based on tensorflow and keras
 
-<!-- TOC --><a name="Prerequisites"></a>
+<!-- TOC --><a name="prerequisites-openiss-reid"></a>
 ### Prerequisites
 
 #### Dataset
