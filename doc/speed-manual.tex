@@ -574,227 +574,55 @@ in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 \appendix
 
 
-% ------------------------------------------------------------------------------
-%						A History 
-% ------------------------------------------------------------------------------
+% A History
+% -------------------------------------------------------------
 \section{History}
+\label{sect:history}
+\input{04-appendix/history.tex}
 
+% Includes:
 % A.1 Acknowledgments
-% -------------------------------------------------------------
-\subsection{Acknowledgments}
-\label{sect:acks}
-
-\begin{itemize}
-	\item 
-The first 6 to 6.5 versions of this manual and early UGE job script samples,
-Singularity testing and user support were produced/done by Dr.~Scott Bunnell
-during his time at Concordia as a part of the NAG/HPC group. We thank
-him for his contributions.
-	\item 
-The HTML version with devcontainer support was contributed by Anh H Nguyen.
-	\item 
-Dr.~Tariq Daradkeh, was our IT Instructional Specialist from August 2022 to September 2023;
-working on the scheduler, scheduling research, end user support, and integration of
-examples, such as YOLOv3 in \xs{sect:openiss-yolov3} and other tasks. We have a continued
-collaboration on HPC/scheduling research (see~\cite{job-failure-prediction-compsysarch2024}).
-\end{itemize}
-
 % A.2 Migration from UGE to SLURM
-% -------------------------------------------------------------
-\subsection{Migration from UGE to SLURM}
-\label{appdx:uge-to-slurm}
-
-For long term users who started off with Grid Engine here are some resources
-to make a transition and mapping to the job submission process.
-
-\begin{itemize}
-\item
-Queues are called ``partitions'' in SLURM. Our mapping from the GE queues
-to SLURM partitions is as follows:
-\begin{verbatim}
-GE  => SLURM
-s.q    ps
-g.q    pg
-a.q    pa
-\end{verbatim}
-We also have a new partition \texttt{pt} that covers SPEED2 nodes,
-which previously did not exist.
-
-\item
-Commands and command options mappings are found in \xf{fig:rosetta-mappings} from\\
-\url{https://slurm.schedmd.com/rosetta.pdf}\\
-\url{https://slurm.schedmd.com/pdfs/summary.pdf}\\
-Other related helpful resources from similar organizations who either used
-SLURM for a while or also transitioned to it:\\
-\url{https://docs.alliancecan.ca/wiki/Running_jobs}\\
-\url{https://www.depts.ttu.edu/hpcc/userguides/general_guides/Conversion_Table_1.pdf}\\
-\url{https://docs.mpcdf.mpg.de/doc/computing/clusters/aux/migration-from-sge-to-slurm}
-
-\begin{figure}[htpb]
-	\includegraphics[width=\columnwidth]{images/rosetta-mapping}
-	\caption{Rosetta Mappings of Scheduler Commands from SchedMD}
-	\label{fig:rosetta-mappings}
-\end{figure}
-
-\item
-\noindent
-\textbf{NOTE:} If you have used UGE commands in the past you probably still have these
-lines there; \textbf{they should now be removed}, as they have no use in SLURM and
-will start giving ``command not found'' errors on login when the software is removed:
-
-csh/\tool{tcsh}: sample \file{.tcshrc} file:
-\begin{verbatim}
-# Speed environment set up 
-if ($HOSTNAME == speed-submit.encs.concordia.ca) then
-   source /local/pkg/uge-8.6.3/root/default/common/settings.csh
-endif
-\end{verbatim}
-
-Bourne shell/\tool{bash}: sample \file{.bashrc} file:
-\begin{verbatim}
-# Speed environment set up 
-if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
-    . /local/pkg/uge-8.6.3/root/default/common/settings.sh
-    printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
-fi
-\end{verbatim}
-
-\textbf{IMPORTANT NOTE:} you will need to either log out and back in, or execute a new shell, 
-for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied.
-
-\end{itemize}
-
 % A.3 Phases
+
+
+% B Frequently Asked Questions
 % -------------------------------------------------------------
-\subsection{Phases}
-\label{sect:phases}
+\section{Frequently Asked Questions}
+\label{sect:faqs}
+\input{04-appendix/faq.tex}
+% TO DELETE
+%\input{scheduler-faq}
 
-Brief summary of Speed evolution phases.
+% Includes:
+% B.1 Where do I learn about Linux?
+% B.2 How to bash shell on Speed?
+% B.3 How to resolve “Disk quota exceeded” errors?
+% B.4 How do I check my job's status?
+% B.5 Why is my job pending when nodes are empty?
 
-% ------------------------------------------------------------------------------
-\subsubsection{Phase 5}
 
-Phase 5 saw incorporation of the Salus, Magic, and Nebular
-subclusters (see \xf{fig:speed-architecture-full}).
-
-% ------------------------------------------------------------------------------
-\subsubsection{Phase 4}
-
-Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
-dubbed as ``SPEED2''. We also moved from Grid Engine to SLURM.
-
-% ------------------------------------------------------------------------------
-\subsubsection{Phase 3}
-
-Phase 3 had 4 vidpro nodes added from Dr.~Amer totalling 6x P6 and 6x V100
-GPUs added.
-
-% ------------------------------------------------------------------------------
-\subsubsection{Phase 2}
-
-Phase 2 saw 6x NVIDIA Tesla P6 added and 8x more compute nodes.
-The P6s replaced 4x of FirePro S7150.
-
-% ------------------------------------------------------------------------------
-\subsubsection{Phase 1}
-
-Phase 1 of Speed was of the following configuration:
-
-\begin{itemize}
-\item
-Sixteen, 32-core nodes, each with 512~GB of memory and approximately 1~TB of volatile-scratch disk space. 
-\item
-Five AMD FirePro S7150 GPUs, with 8~GB of memory (compatible with the Direct X, OpenGL, OpenCL, and Vulkan APIs). 
-\end{itemize}
-
-% ------------------------------------------------------------------------------
-%						B Frequently Asked Questions 
-% ------------------------------------------------------------------------------
-% TMP scheduler-specific section
-\input{scheduler-faq}
-
-% ------------------------------------------------------------------------------
-%						C Sister Facilities
-% ------------------------------------------------------------------------------
+% C Sister Facilities
+% -------------------------------------------------------------
 \section{Sister Facilities}
 \label{sect:sister-facilities}
+\input{04-appendix/sister-facilities.tex}
 
-Below is a list of resources and facilities similar to Speed at various capacities.
-Depending on your research group and needs, they might be available to you. They
-are not managed by HPC/NAG of AITS, so contact their respective representatives.
 
-\begin{itemize}
-\item
-\texttt{computation.encs} is a CPU-only 3-machine cluster running longer jobs
-without a scheduler at the moment. Shares the same EL7 software tree as Speed's EL7 nodes
-as well as lab desktops.
-See \url{https://www.concordia.ca/ginacody/aits/public-servers.html}.
-\item
-\texttt{apini.encs} cluster for teaching and MPI programming (see the corresponding
-course in CSSE), managed by CSSE
-\item
-Computer Science and Software Engineering (CSSE) Virya GPU Cluster. For CSSE 
-members only. The cluster has 4 nodes with total of 32 NVIDIA GPUs (a mix of
-V100s and A100s). To request access send email to \texttt{virya.help AT concordia.ca}.
-This includes an Atlas Analytics partition of Dr.~Mahdi Husseini.
-\item
-Dr.~Eugene Belilovsky hightower Exxact, and megatower graphcore clusters.
-\item
-Dr.~Maria Amer's VidPro group's nodes in Speed (-01, -03, -25, -27) with additional V100 and P6 GPUs.
-\item
-There are various Lambda Labs other GPU servers and like computers
-acquired by individual researchers; if you are member of their
-research group, contact them directly. These resources are not
-managed by us.
-\begin{itemize}
-\item
-Dr.~Amin Hammad's \texttt{construction.encs} Lambda Labs station
-\item
-Dr.~Hassan Rivaz's \texttt{impactlab.encs} Lambda Labs station
-\item
-Dr.~Nizar Bouguila's \texttt{xailab.encs} Lambda Labs station
-\item
-Dr.~Roch Glitho's \texttt{femto.encs} server
-\item
-Dr.~Maria Amer's \texttt{venom.encs} Lambda Labs station
-\item
-Dr.~Leon Wang's \texttt{guerrera.encs} DGX station
-\end{itemize}
-\item
-Dr.~Ivan Contreras' 4 Operations Research group servers (managed by AITS).
-\item
-If you are a member of School of Health (formerly PERFORM Center),
-you may have access to their local 
-\href
-	{https://perform-wiki.concordia.ca/mediawiki/index.php/HPC_Cluster}
-	{PERFORM's High Performance Computing (HPC) Cluster}.
-Contact Thomas Beaudry for details and how to obtain access.
-\item
-All Concordia students have access to the Library's small
-\href
-	{https://library.concordia.ca/technology/sandbox/}
-	{Technology Sandbox}
-testing cluster that also runs Slurm. Email \texttt{sean.cooney AT concordia.ca} for details.
-\item
-Digital Research Alliance Canada (Compute Canada / Calcul Quebec),\\
-\url{https://alliancecan.ca/}. Follow
-\href
-	{https://alliancecan.ca/en/services/advanced-research-computing/account-management/apply-account}
-	{this link}
-on the information how to obtain access (students need to be sponsored
-by their supervising faculty members, who should create accounts
-first). Their SLURM examples are here: \url{https://docs.alliancecan.ca/wiki/Running_jobs}
+% D Software List
+% -------------------------------------------------------------
+\section{Software Installed On Speed}
+\label{sect:software-list}
+\input{04-appendix/software-list.tex}
 
-\end{itemize}
+% Includes:
+% D.1 EL7
+% D.2 EL9
+
 
 % ------------------------------------------------------------------------------
-%	Software List 
+%						References
 % ------------------------------------------------------------------------------
-\input{software-list}
-
-% ------------------------------------------------------------------------------
-% Refs:
-%
 \nocite{aosa-book-vol1}
 \label{sect:bib}
 %\bibliographystyle{IEEEtran}
@@ -806,6 +634,7 @@ first). Their SLURM examples are here: \url{https://docs.alliancecan.ca/wiki/Run
 \clearpage
 \addcontentsline{toc}{section}{Annotated Bibliography} 
 \bibliography{speed-manual}
+
 
 %------------------------------------------------------------------------------
 \end{document}
