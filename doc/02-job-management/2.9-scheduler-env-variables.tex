@@ -1,0 +1,56 @@
+% 2.9 Scheduler Environment Variables
+% -------------------------------------------------------------
+\subsection{Scheduler Environment Variables}
+\label{sect:env-vars}
+
+The scheduler provides several environment variables that can be useful in your job scripts.
+These variables can be accessed within the job using commands like \tool{env} or \tool{printenv}.
+Many of these variables start with the prefix \texttt{SLURM}.
+
+\noindent Here are some of the most useful environment variables:
+
+\begin{itemize}
+	\item
+	\api{\$TMPDIR} (and \api{\$SLURM\_TMPDIR}):
+	% TODO: verify temporal existence
+	This is the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job.
+	If you need the data from this temporary space, ensure you copy it before the job terminates.
+
+	\item
+	\api{\$SLURM\_SUBMIT\_DIR}:
+	The path to the job's working directory (likely an NFS-mounted path).
+	If, \option{--chdir}, was stipulated, that path is taken; if not,
+	the path defaults to your home directory.
+
+	\item
+	\api{\$SLURM\_JOBID}:
+	This variable holds the current job's ID, which is useful for job
+	manipulation and reporting within the job's process.
+
+	\item
+	\api{\$SLURM\_NTASKS}: the number of cores requested for the job. This variable can
+	be used in place of hardcoded thread-request declarations, e.g., for
+	Fluent or similar.
+
+	\item
+	\api{\$SLURM\_JOB\_NODELIST}:
+	This lists the nodes participating in your job.
+
+	\item \api{\$SLURM\_ARRAY\_TASK\_ID}:
+	For array jobs, this variable represents the task ID
+	(refer to \xs{sect:array-jobs} for more details on array jobs).
+\end{itemize}
+
+\noindent For a more comprehensive list of environment variables,
+refer to the SLURM documentation for
+\href{https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES}{Input Environment Variables} and
+\href{https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES}{Output Environment Variables}.
+
+\noindent An example script that utilizes some of these environment variables
+is in \xf{fig:tmpdir.sh}.
+
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\scriptsize\ttfamily]{tmpdir.sh}
+    \caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}
