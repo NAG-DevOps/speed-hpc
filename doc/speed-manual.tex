@@ -106,6 +106,7 @@ Concordia University, Montreal, Canada.
 \section{Introduction}
 \label{sect:introduction}
 \input{01-introduction/introduction-main.tex}
+
 % Includes:
 % 1.1 Citing US
 % 1.2 Resources
@@ -114,445 +115,51 @@ Concordia University, Montreal, Canada.
 % 1.5 What Speed Is Ideal For
 % 1.6 What Speed Is Not
 % 1.7 Available Software
+% 1.8 Requesting Access
 
 % ------------------------------------------------------------------------------
 %						2 Job Management
 % ------------------------------------------------------------------------------
 \section{Job Management}
 \label{sect:job-management}
+\input{02-job-management/job-management-main.tex}
 
-We use SLURM as the workload manager. It supports primarily two types of jobs: batch and interactive.
-Batch jobs are used to run unattended tasks, whereas, 
-interactive jobs are are ideal for setting up virtual environments, compilation, and debugging.\\
-
-\noindent \textbf{Note:} In the following instructions, anything bracketed like, \verb+<>+, indicates a
-label/value to be replaced (the entire bracketed term needs replacement).\\
-
-\noindent Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
-\begin{verbatim}
-    #SBATCH --mem=100M -t 600 -J <job-name> -A <slurm account>
-    #SBATCH -p pg --gpus=2 --mail-type=ALL
-\end{verbatim}
-%
-For complex compute steps within a script, use \tool{srun}. We recommend using \tool{salloc} for interactive jobs as it supports multiple steps.
-However, \tool{srun} can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
-%
-Common and required job parameters include:
-%
-\begin{multicols}{2}
-\begin{itemize}
-	\item 
-memory (\option{--mem}),
-	\item 
-time (\option{-t}),
-	\item 
-\option{--job-name} (\option{-J}),
-	\item 
-slurm project account (\option{-A}),
-	\item 
-partition (\option{-p}), 
-	\item 
-mail type (\option{--mail-type}),
-	\item 
-ntasks (\option{-n}),
-	\item 
-CPUs per task (\option{--cpus-per-task}).
-\end{itemize}
-\end{multicols}
-
-% -------------- 2.1 Getting Started ------------------------
-% -----------------------------------------------------------
-\subsection{Getting Started}
-\label{sect:getting-started}
-
-Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
-and ``What Speed is Not'' (\xs{sect:speed-is-not}).
-Once your GCS ENCS account has been granted access to ``Speed'',
-use your GCS ENCS account credentials to create an SSH connection to 
-\texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}).\\
-
-All users are expected to have a basic understanding of
-Linux and its commonly used commands (see \xa{sect:faqs} for resources).
-
-%  2.1.1 SSH Connections 
-% -----------------------
-\subsubsection{SSH Connections}
-\label{sect:ssh}
-
-Requirements to create connections to ``Speed'':
-\begin{enumerate}
-	\item \textbf{Active GCS ENCS user account:} Ensure you have an active GCS ENCS user account with 
-	permission to connect to Speed (see \xs{sect:access-requests}).
-	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia's VPN, 
-	which requires a Concordia netname.
-	\item \textbf{Terminal Emulator for Windows:} Windows systems use a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
-	\item \textbf{Terminal for macOS:} macOS systems have a built-in Terminal app or \tool{xterm} that comes with XQuartz.
-\end{enumerate}
-
-\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account's username:
-\begin{verbatim}
-    ssh <ENCSusername>@speed.encs.concordia.ca
-\end{verbatim}
-
-\noindent For detailed instructions on securely connecting to a GCS server, refer to the AITS FAQ: 
-\href{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}{How do I securely connect to a GCS server?}
-
-%  2.1.2 Environment Set Up
-% --------------------------
-% TMP scheduler-specific section
-\subsubsection{Environment Set Up}
-\label{sect:envsetup}
-\input{scheduler-env}
-
-% -------------- 2.2 Job Submission Basics ------------------
-% -----------------------------------------------------------
-\subsection{Job Submission Basics}
-\label{sect:job-submission-basics}
-
-Preparing your job for submission is fairly straightforward.
-Start by basing your job script on one of the examples available in the \texttt{src/}
-directory of our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub repository}.
-You can clone the repository to get the examples to start with via the command line:
-
-\begin{verbatim}
-    git clone --depth=1 https://github.com/NAG-DevOps/speed-hpc.git
-    cd speed-hpc/src
-\end{verbatim}
-
-\noindent The job script is a shell script that contains directives, module loads, and user scripting.
-To quickly run some sample jobs, use the following commands:
-\begin{verbatim}
-    sbatch -p ps -t 10 env.sh
-    sbatch -p ps -t 10 bash.sh
-    sbatch -p ps -t 10 manual.sh
-    sbatch -p pg -t 10 lambdal-singularity.sh
-\end{verbatim}
-
-%  2.2.1 Directives
-% -------------------
-% TMP scheduler-specific section
-\subsubsection{Directives}
-\label{sect:directives}
-\input{scheduler-directives}
-
-%  2.2.2 Module Loads
-% -------------------
-%\subsubsection{Module Loads}
-\subsubsection{Working with Modules}
-\label{sect:modules}
-
-After setting the directives in your job script, the next section typically involves loading 
-the necessary software modules. The \tool{module} command is used to manage the user environment, 
-make sure to load all the modules your job depends on. You can check available modules with the 
-module avail command. Loading the correct modules ensures that your environment is properly 
-set up for execution.\\
-
-\noindent To list for a particular program (\tool{matlab}, for example):
-%
-\small
-\begin{verbatim}
-    module avail
-    module -t avail matlab  ## show the list for a particular program (e.g., matlab)
-    module -t avail m       ## show the list for all programs starting with m     
-\end{verbatim}
-\normalsize
-
-\noindent For example, insert the following in your script to load the \tool{matlab/R2023a} module:
-\begin{verbatim}
-    module load matlab/R2023a/default
-\end{verbatim}
-
-\noindent
-\textbf{Note:} you can remove a module from active use by replacing \option{load} by \option{unload}.\\
-    
-\noindent To list loaded modules:
-\begin{verbatim}
-    module list
-\end{verbatim}
-    
-\noindent To purge all software in your working environment:
-\begin{verbatim}
-    module purge
-\end{verbatim}
-
-%  2.2.3 User Scripting
-% -------------------
-% TMP scheduler-specific section
-\subsubsection{User Scripting}
-\label{sect:scripting}
-\input{scheduler-scripting}
-
-% scheduler-scripting also includes: 
+% Includes:
+% 2.1 Getting Started
+%   2.1.1 SSH Connections
+%   2.1.2 Environment Set Up
+% 2.2 Job Submission Basics
+%  	2.2.1 Directives
+%   2.2.2 Working with Modules
+%   2.2.3 User Scripting
 % 2.3 Sample Job Script
-% 2.4 Common Job Management Commands Summary
+% 2.4 Common Job Management Commands
 % 2.5 Advanced sbatch Options
 % 2.6 Array Jobs
 % 2.7 Requesting Multiple Cores
 % 2.8 Interactive Jobs
 %  	2.8.1 Command Line
 %  	2.8.2 Graphical Applications
-%	2.8.3 Jupyter Notebooks in Singularity
-%	2.8.4 JupyterLab in Conda and Pytorch
-% 	2.8.5 JupyterLab + Pytorch in Python venv
-%  	2.8.6 Visual Studio Code
-
-% -------------- 2.9 Scheduler Environment Variables ----------
-% -------------------------------------------------------------
-\subsection{Scheduler Environment Variables}
-\label{sect:env-vars}
-
-The scheduler provides several environment variables that can be useful in your job scripts. 
-These variables can be accessed within the job using commands like \tool{env} or \tool{printenv}. 
-Many of these variables start with the prefix \texttt{SLURM}.\\
-
-\noindent Here are some of the most useful environment variables:
-
-\begin{itemize}
-	\item
-	\api{\$TMPDIR} (and \api{\$SLURM\_TMPDIR}):
-	% TODO: verify temporal existence
-	This is the path to the job's temporary space on the node. It \emph{only} exists for the duration of the job.
-	If you need the data from this temporary space, ensure you copy it before the job terminates.
-
-	\item
-	\api{\$SLURM\_SUBMIT\_DIR}:
-	The path to the job's working directory (likely an NFS-mounted path).
-	If, \option{--chdir}, was stipulated, that path is taken; if not, 
-	the path defaults to your home directory.
-	
-	\item
-	\api{\$SLURM\_JOBID}:
-	This variable holds the current job's ID, which is useful for job
-	manipulation and reporting within the job's process.
-
-	\item
-	\api{\$SLURM\_NTASKS}: the number of cores requested for the job. This variable can 
-	be used in place of hardcoded thread-request declarations, e.g., for
-	Fluent or similar.
-
-	\item
-	\api{\$SLURM\_JOB\_NODELIST}:
-	This lists the nodes participating in your job.
-
-	\item \api{\$SLURM\_ARRAY\_TASK\_ID}:
-	For array jobs, this variable represents the task ID 
-	(refer to \xs{sect:array-jobs} for more details on array jobs).
-\end{itemize}
-
-\noindent
-For a more comprehensive list of environment variables, refer to the SLURM documentation for 
-\href{https://slurm.schedmd.com/srun.html#SECTION_INPUT-ENVIRONMENT-VARIABLES}{Input Environment Variables} and
-\href{https://slurm.schedmd.com/srun.html#SECTION_OUTPUT-ENVIRONMENT-VARIABLES}{Output Environment Variables}.\\
-
-\noindent
-An example script that utilizes some of these environment variables
-is in \xf{fig:tmpdir.sh}.
-
-\begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\scriptsize\ttfamily]{tmpdir.sh}
-    \caption{Source code for \file{tmpdir.sh}}
-	\label{fig:tmpdir.sh}
-\end{figure}
-
-% -------------- 2.10 SSH Keys for MPI ------------------------
-% -------------------------------------------------------------
-\subsection{SSH Keys for MPI}
-\label{sect:ssh-mpi}
-
-Some programs, such as Fluent, utilize MPI (Message Passing Interface) for parallel processing. 
-MPI requires `passwordless login', which is achieved through SSH keys. Here are the steps to set up SSH keys for MPI:
-
-\begin{itemize}
-	\item
-	Navigate to the \texttt{.ssh} directory
-	\begin{verbatim}
-	cd ~/.ssh
-	\end{verbatim}
-
-	\item
-	Generate a new SSH key pair (Accept the default location and leave the passphrase blank)
-	\begin{verbatim}
-	ssh-keygen -t ed25519
-	\end{verbatim}
-
-	\item
-	Authorize the Public Key:
-	\begin{verbatim}
-	cat id_ed25519.pub >> authorized_keys
-	\end{verbatim} 
-	If the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}} file does not exist, use
-	\begin{verbatim}
-	cat id_ed25519.pub > authorized_keys
-	\end{verbatim}
-
-	\item
-	Set permissions: ensure the correct permissions are set for the `authorized\_keys' file and your home directory
-	(most users will already have these permissions by default):
-	\begin{verbatim}
-	chmod 600 ~/.ssh/authorized_keys
-	chmod 700 ~
-	\end{verbatim}
-\end{itemize}
-
-% -------------- 2.11 Creating Virtual Environments -----------
-% -------------------------------------------------------------
-\subsection{Creating Virtual Environments}
-\label{sect:environments}
-\label{sect:examples-venv}
-
-The following documentation is specific to \textbf{Speed}.
-%HPC Facility at the
-%Gina Cody School of Engineering and Computer Science.
-Other clusters may have their own requirements.
-%
-Virtual environments are typically created using Conda or Python.
-Another option is Singularity (detailed in \xs{sect:singularity-containers}).
-These environments are usually created once during an interactive session 
-before submitting a batch job to the scheduler. 
-%
-The job script submitted to the scheduler should:
-\begin{enumerate}
-	\item Activate the virtual environment.
-	\item Use the virtual environment.
-	\item Deactivate the virtual environment at the end of the job.
-\end{enumerate}
-
-%  2.11.1 Anaconda
-% -------------------
-\subsubsection{Anaconda}
-\label{sect:conda-venv}
-
-To create an Anaconda environment, follow these steps:
-\begin{enumerate}
-	\item Request an interactive session
-	\begin{verbatim}
-		salloc -p pg --gpus=1
-	\end{verbatim}
-
-	\item
-	Load the Anaconda module and create your Anaconda environment in your speed-scratch directory by using 
-	the \option{--prefix} option (without this option, the environment will be created in your home directory by default).
-	\begin{verbatim}
-		module load anaconda3/2023.03/default
-		conda create --prefix /speed-scratch/$USER/myconda
-	\end{verbatim}
-
-	\item
-	List environments (to view your conda environment)
-	\begin{verbatim}
-		conda info --envs
-		# conda environments:
-		#
-		base                  *  /encs/pkg/anaconda3-2023.03/root
-                         		 /speed-scratch/a_user/myconda
-	\end{verbatim}
-
-	\item
-	Activate the environment
-	\begin{verbatim}
-		conda activate /speed-scratch/$USER/myconda
-	\end{verbatim}
-
-	\item
-	Add \tool{pip} to your environment (this will install \tool{pip} and \tool{pip}'s dependencies,
-	including \tool{python}, into the environment.)
-	\begin{verbatim}
-		conda install pip
-	\end{verbatim}
-\end{enumerate}   
-
-\noindent
-A consolidated example using Conda:
-\begin{verbatim}
-salloc -p pg --gpus=1 --mem=10G -A <slurm account name>
-cd /speed-scratch/$USER
-module load python/3.11.0/default
-conda create -p /speed-scratch/$USER/pytorch-env
-conda activate /speed-scratch/$USER/pytorch-env
-conda install python=3.11.0
-pip3 install torch torchvision torchaudio --index-url \ 
-  https://download.pytorch.org/whl/cu117
-....
-conda deactivate
-exit # end the salloc session
-\end{verbatim}
-
-\noindent
-If you encounter \textbf{no space left error} while creating Conda environments, please refer to
-\xa{sect:quota-exceeded}. Likely you forgot \option{--prefix} or environment variables below.\\
-
-\noindent
-\textbf{Important Note:} \tool{pip} (and \tool{pip3}) are package installers for Python. When you use
-\texttt{pip install}, it installs packages from the Python Package Index (PyPI), whereas, 
-\texttt{conda install} installs packages from Anaconda's repository.
-
-% -----------------------------------------------------------------------------
-\paragraph{Conda Env without \option{--prefix}}
-
-If you don't want to use the \option{--prefix} option every time you create a new environment and 
-do not want to use the default home directory, you can create a new directory and set the following 
-variables to point to the newly created directory, e.g.:
-\begin{verbatim}
-mkdir -p /speed-scratch/$USER/conda
-setenv CONDA_ENVS_PATH /speed-scratch/$USER/conda
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/conda/pkg
-\end{verbatim}
-\noindent
-If you want to make these changes permanent, add the variables to your \texttt{.tcshrc} 
-or \texttt{.bashrc} (depending on the default shell you are using).
-
-% 2.11.2 Python
-% -----------------------------------------------------------------------------
-\subsubsection{Python}
-\label{sect:python-venv}
-
-Setting up a Python virtual environment is straightforward.
-Here's an example that use a Python virtual environment:
-
-\begin{verbatim}
-	salloc -p pg --gpus=1 --mem=10G -A <slurm account name>
-	cd /speed-scratch/$USER
-	module load python/3.9.1/default
-	mkdir -p /speed-scratch/$USER/tmp 
-	setenv TMPDIR /speed-scratch/$USER/tmp
-	setenv TMP /speed-scratch/$USER/tmp
-	python -m venv $TMPDIR/testenv (testenv=name of the virtualEnv)
-	source /speed-scratch/$USER/tmp/testenv/bin/activate.csh
-	pip install modules...
-	deactivate
-	exit
-\end{verbatim}
-
-\noindent
-See, e.g.,
-\href
-  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/gurobi-with-python.sh}
-	{\texttt{gurobi-with-python.sh}}\\
-
-\noindent
-\textbf{Important Note:} our partition \texttt{ps} is used for CPU jobs, while \texttt{pg},
-\texttt{pt}, and \texttt{cl} are used for GPU jobs. You do not need to use \option{--gpus}
-when preparing environments for CPU jobs.\\
-
-\noindent
-\textbf{Note:} Python enviornments are also preferred over Conda
-in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
-
-% -------------- 2.12 Example Job Script: Fluent --------------
-% -------------------------------------------------------------
-% TMP scheduler-specific section
-% TODO: delete the file and move the content here
-\input{scheduler-job-examples}
-
-% scheduler-job-examples includes: 
-% 2.12 Sample Job Script: fluent
+%   2.8.3 Jupyter Notebooks
+%      2.8.3.1 Jupyter Notebook in Singularity
+%      2.8.3.2 Jupyter Notebook in Conda
+%      2.8.3.3 Jupyter Notebook in Python Virtual Env
+%   2.8.4 Visual Studio Code
+% 2.9 Scheduler Environment Variables
+% 2.10 SSH Keys for MPI
+% 2.11 Creating Virtual Environments
+%  	2.11.1 Anaconda
+%  	2.11.2 Python
+% 2.12 Sample Job Script: Fluent
 % 2.13 Example Job Script: EfficientDet
 % 2.14 Java Jobs
-% 2.15 Scheduling on the GPU Nodes
+% 2.15 Scheduling on the GPU Node
 %  	2.15.1 P6 on Multi-GPU, Multi-Node
 % 	2.15.2 CUDA
 %   2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
 %   2.15.4 OpenISS Examples
+%      2.15.4.1 OpenISS and REID
+%      2.15.4.2 OpenISS and YOLOv3
 % 2.16 Singularity Containers
 
 % ------------------------------------------------------------------------------
@@ -567,12 +174,10 @@ in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 % 3.2 Tips/Tricks
 % 3.3 Use Cases
 
-
 % ------------------------------------------------------------------------------
 %						Appendix
 % ------------------------------------------------------------------------------
 \appendix
-
 
 % A History
 % -------------------------------------------------------------
@@ -584,7 +189,6 @@ in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 % A.1 Acknowledgments
 % A.2 Migration from UGE to SLURM
 % A.3 Phases
-
 
 % B Frequently Asked Questions
 % -------------------------------------------------------------
@@ -601,13 +205,11 @@ in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 % B.4 How do I check my job's status?
 % B.5 Why is my job pending when nodes are empty?
 
-
 % C Sister Facilities
 % -------------------------------------------------------------
 \section{Sister Facilities}
 \label{sect:sister-facilities}
 \input{04-appendix/sister-facilities.tex}
-
 
 % D Software List
 % -------------------------------------------------------------
@@ -619,22 +221,22 @@ in some clusters, see a note in~\xs{sect:jupyterlabs-venv}.
 % D.1 EL7
 % D.2 EL9
 
-
 % ------------------------------------------------------------------------------
 %						References
 % ------------------------------------------------------------------------------
 \nocite{aosa-book-vol1}
 \label{sect:bib}
-%\bibliographystyle{IEEEtran}
+
 \bibliographystyle{plain}
+
+%\bibliographystyle{IEEEtran}
 %\bibliographystyle{alpha}
 %\bibliographystyle{unsrt}
 %\bibliographystyle{abbrv}
 % Create a section for references otherwise it appears to be part of the "Sister Facilities" Appendix
 \clearpage
-\addcontentsline{toc}{section}{Annotated Bibliography} 
+\addcontentsline{toc}{section}{Annotated Bibliography}
 \bibliography{speed-manual}
-
 
 %------------------------------------------------------------------------------
 \end{document}

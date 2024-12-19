@@ -1,0 +1,111 @@
+% 2.4 Common Job Management Commands
+% -------------------------------------------------------------
+\subsection{Common Job Management Commands}
+\label{sect:job-management-commands}
+
+Here is a summary of useful job management commands for handling various aspects of
+job submission and monitoring on the Speed cluster:
+
+\begin{itemize}
+    \item Submitting a job:
+	\begin{verbatim}
+		sbatch -A <ACCOUNT> --mem=<MEMORY> -p <PARTITION> ./<myscript>.sh
+	\end{verbatim}
+
+	\item Checking your job(s) status:
+	\begin{verbatim}
+		squeue -u <ENCSusername>
+	\end{verbatim}
+
+	\item Displaying cluster status:
+	\begin{verbatim}
+		squeue
+	\end{verbatim}
+		\begin{itemize}
+			\item Use \option{-A} for per account (e.g., \texttt{-A vidpro}, \texttt{-A aits})
+			\item Use \option{-p} for per partition (e.g., \texttt{-p ps}, \texttt{-p pg}, \texttt{-p pt}), etc.
+		\end{itemize}
+
+	\item Displaying job information:
+	\begin{verbatim}
+		squeue --job <job-ID>
+	\end{verbatim}
+
+	\item Displaying individual job steps: (to see which step failed if you used \tool{srun})
+	\begin{verbatim}
+		squeue -las
+	\end{verbatim}
+
+	\item Monitoring job and cluster status: (view \tool{sinfo} and watch the queue for your job(s))
+	\begin{verbatim}
+		watch -n 1 "sinfo -Nel -pps,pt,pg,pa && squeue -la"
+	\end{verbatim}
+
+	\item Canceling a job:
+	\begin{verbatim}
+		scancel <job-ID>
+	\end{verbatim}
+
+	\item Holding a job:
+	\begin{verbatim}
+		scontrol hold <job-ID>
+	\end{verbatim}
+
+	\item Releasing a job:
+	\begin{verbatim}
+		scontrol release <job-ID>
+	\end{verbatim}
+
+	\item Getting job statistics: (including useful metrics like ``maxvmem'')
+	\begin{verbatim}
+		sacct -j <job-ID>
+	\end{verbatim}
+    \api{maxvmem} is one of the more useful stats that you can elect to display as a format option.
+
+    \small
+	\begin{verbatim}
+	% sacct -j 2654
+	JobID           JobName  Partition    Account  AllocCPUS      State ExitCode
+	------------ ---------- ---------- ---------- ---------- ---------- --------
+	2654               envs         ps     speed1          1  COMPLETED      0:0
+	2654.batch        batch                speed1          1  COMPLETED      0:0
+	2654.extern      extern                speed1          1  COMPLETED      0:0
+	% sacct -j 2654 -o jobid,user,account,MaxVMSize,Reason%10,TRESUsageOutMax%30
+	JobID             User    Account  MaxVMSize     Reason        TRESUsageOutMax
+	------------ --------- ---------- ---------- ---------- ----------------------
+	2654           serguei     speed1                  None
+	2654.batch                 speed1    296840K             energy=0,fs/disk=1975
+	2654.extern                speed1    296312K              energy=0,fs/disk=343
+	\end{verbatim}
+    \normalsize
+
+	See \texttt{man sacct} or \texttt{sacct -e} for details of the available formatting options.
+	You can define your preferred default format in the \api{SACCT\_FORMAT} environment variable
+	in your \texttt{.cshrc} or \texttt{.bashrc} files.
+
+	\item Displaying job efficiency: (including CPU and memory utilization)
+	\begin{verbatim}
+	    seff <job-ID>
+	\end{verbatim}
+    Don't execute it on \texttt{RUNNING} jobs (only on completed/finished jobs), else
+	efficiency statistics may be misleading. If you define the following directive in your batch script,
+    your GCS ENCS email address will receive an email with \tool{seff}'s output when your job is finished.
+	\begin{verbatim}
+	    #SBATCH --mail-type=ALL
+	\end{verbatim}
+
+	Output example:
+	\begin{verbatim}
+    Job ID: XXXXX
+    Cluster: speed
+    User/Group: user1/user1
+    State: COMPLETED (exit code 0)
+    Nodes: 1
+    Cores per node: 4
+    CPU Utilized: 00:04:29
+    CPU Efficiency: 0.35% of 21:32:20 core-walltime
+    Job Wall-clock time: 05:23:05
+    Memory Utilized: 2.90 GB
+    Memory Efficiency: 2.90% of 100.00 GB
+	\end{verbatim}
+\end{itemize}

@@ -1,0 +1,22 @@
+% 2.12 Example Job Script: Fluent
+% -------------------------------------------------------------
+% TODO: delete the file
+%\input{scheduler-job-examples}
+\subsection{Example Job Script: Fluent}
+\label{sect:example-fluent}
+
+\begin{figure}[htpb]
+  \lstinputlisting[language=csh,frame=single,basicstyle=\footnotesize\ttfamily]{fluent.sh}
+  \caption{Source code for \texttt{fluent.sh}}
+  \label{fig:fluent.sh}
+\end{figure}
+
+The job script in \xf{fig:fluent.sh} runs Fluent in parallel over 32 cores.
+Notable aspects of this script include requesting e-mail notifications (\option{--mail-type}),
+defining the parallel environment for Fluent with \option{-t\$SLURM\_NTASKS} and \option{-g-cnf=\$FLUENTNODES},
+and setting \api{\$TMPDIR} as the in-job location for the ``moment'' \file{rfile.out} file.
+The script also copies everything from \api{\$TMPDIR} to a directory in the user's NFS-mounted home after the job completes.
+Job progress can be monitored by examining the standard-out file (e.g.,
+\texttt{slurm-249.out}), and/or by examining the ``moment'' file in TMPDIR (usually
+\texttt{/disk/nobackup/<yourjob>} (it starts with your job-ID)) on the node running
+the job. Be cautious with journal-file paths.
