@@ -1,0 +1,19 @@
+% 2.14 Java Jobs
+% -------------------------------------------------------------
+\subsection{Java Jobs}
+\label{sect:java}
+
+Jobs that call Java have a memory overhead, which needs to be taken
+into account when assigning a value to \option{--mem}. Even the most basic
+Java call, such as \texttt{Java -Xmx1G -version}, will need to have,
+\texttt{--mem=5G}, with the 4 GB difference representing the memory overhead.
+\textbf{Note} that this memory overhead grows proportionally with the value of
+\texttt{-Xmx}. For example,
+
+\begin{itemize}
+  \item When \texttt{-Xmx} has a value of 100G, \option{--mem} has to be at least 106G.
+  \item For \texttt{-Xmx} of 200G, \option{--mem} has to be at least 211G.
+  \item For \texttt{-Xmx} of 300G, \option{--mem} has to be at least 314G.
+\end{itemize}
+
+% TODO: add MARF and GIPSY Java jobs

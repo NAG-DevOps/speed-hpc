@@ -1,0 +1,236 @@
+% 2.15 Scheduling on the GPU Nodes
+% -------------------------------------------------------------
+\subsection{Scheduling on the GPU Nodes}
+\label{sect:gpu-scheduling}
+
+Speed has various GPU types in various subclusters of its nodes.
+
+\begin{itemize}
+	\item \texttt{speed-05} and \texttt{speed-17}:
+The primary SPEED1 cluster has two GPU nodes, each with six Tesla (CUDA-compatible) P6
+cards. Each card has 2048 cores and 16GB of RAM. Note that the P6
+is mainly a single-precision card, so unless you need GPU double precision,
+double-precision calculations will be faster on a CPU node.
+	\item \texttt{speed-01}:
+This \texttt{vidpro} node (see \xf{fig:speed-architecture-full}, contact Dr.~Maria Amer) is identical
+to 05 and 17 in its GPU configuration, but managed by the priority
+for the vidpro group, that is a \texttt{pg} job scheduled there
+is a subject for preemption.
+	\item \texttt{speed-03}, \texttt{speed-25}, \texttt{speed-25}:
+These \texttt{vidpro} nodes feature NVIDIA V100 cards with 32GB of RAM.
+Like \texttt{speed-01}, the priority is of the vidpro group, who
+purchased the nodes, and others' jobs are a subject from preemption
+within \texttt{pg}, \texttt{pt}, and \texttt{cl} partitions.
+	\item \texttt{speed-37}~--~\texttt{speed-43}:
+SPEED2 nodes, the main backbone of the teaching partition \texttt{pt},
+have 4x A100 80GB GPUs each, partitioned into average 4x MIGs of 20GB
+each, with exceptions.
+	\item \texttt{nebulae}:
+A member of the Nebular subcluster (contact Dr.~Jun Yan), has 2x 48GB
+RTX Ada 6000 cards. This node is in the \texttt{pn} partition.
+	\item \texttt{speed-19}:
+Has an AMD GPU, Tonga, 16GB of GPU ram.
+This node along with the majority of the NVIDIA GPU nodes are in the
+\texttt{cl} partition (with restrictions) to run OpenCL, Vulkan,
+and HIP jobs.
+\end{itemize}
+
+\noindent
+Job scripts for the GPU queues differ in that they need these statements,
+which attach either a single GPU or more GPUs to the job with the
+appropriate partition:
+\begin{verbatim}
+  #SBATCH --gpus=[1|x]
+  #SBATCH -p [pg|pt|cl|pa]
+\end{verbatim}
+The default max quota for $x$ is 4.
+
+\noindent
+Once your job script is ready, submit it to the GPU partition (queue) with:
+\begin{verbatim}
+  sbatch --mem=<MEMORY> -p pg ./<myscript>.sh
+\end{verbatim}
+\option{--mem} and \option{-p} can reside in the script.
+
+\noindent
+You can query \tool{nvidia-smi} on the node \textbf{running your job} with:
+\begin{verbatim}
+  ssh <ENCSusername>@speed-[01|03|05|17|25|27|37-43]|nebulae nvidia-smi
+\end{verbatim}
+
+\noindent The status of the GPU queues can be queried e.g. with:
+\begin{verbatim}
+  sinfo -p pg --long --Node
+  sinfo -p pt --long --Node
+  sinfo -p cl --long --Node
+  sinfo -p pa --long --Node
+  sinfo -p pn --long --Node
+\end{verbatim}
+
+\noindent
+You can query \tool{rocm-smi} on the AMD GPU node running your job with:
+\begin{verbatim}
+  ssh <ENCSusername>@speed-19 rocm-smi
+\end{verbatim}
+
+\noindent
+\textbf{Important note for TensorFlow and PyTorch users}:
+if you are planning to run TensorFlow and/or PyTorch multi-GPU jobs, please
+\textbf{do not use} the \api{tf.distribute} and/or \api{torch.nn.DataParallel} functions 
+on \textbf{speed-01, speed-05, or speed-17}, as they will crash the compute node (100\% certainty). 
+This appears to be a defect in the current hardware architecture.
+%
+% TODO: Need to link to that example
+The workaround is to either manually effect GPU parallelisation (see \xs{sect:multi-node-gpu})
+(TensorFlow provides an example on how to do this), or to run on a single GPU,
+which is now the default for those nodes.\\
+
+\noindent \textbf{Important}:
+Users without permission to use the GPU nodes can submit jobs to the various GPU
+partitions, but those jobs will hang and never run.
+Their availability can be seen with:
+%
+\small
+\begin{verbatim}
+[serguei@speed-submit src] % sinfo -p pg --long --Node
+Thu Oct 19 22:31:04 2023
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+speed-05       1        pg        idle 32     2:16:1 515490        0      1    gpu16 none
+speed-17       1        pg     drained 32     2:16:1 515490        0      1    gpu16 UGE
+speed-25       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-27       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+[serguei@speed-submit src] % sinfo -p pt --long --Node
+Thu Oct 19 22:32:39 2023
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+speed-37       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-38       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-39       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-40       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-41       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-42       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+\end{verbatim}
+\normalsize
+
+\noindent
+To specifically request a GPU node, add, \texttt{--gpus=[\#GPUs]},
+to your \tool{sbatch} statement/script or \tool{salloc} statement request.
+For example:
+\begin{verbatim}
+  sbatch -t 10 --mem=1G --gpus=1 -p pg ./tcsh.sh
+\end{verbatim}
+The request can be further specified to a specific node using \option{-w}
+or a GPU type or feature.
+
+\footnotesize
+\begin{verbatim}
+[serguei@speed-submit src] % squeue -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
+NODELIST         NODES PARTITI       STATE MIN_    S:C:T MIN_ME MIN_TMP_  WCKEY FEATURES GROUP DEPENDENCY
+speed-05             1 pg          RUNNING    1    *:*:*     1G        0 (null)   (null) 11929     (null)
+[serguei@speed-submit src] % sinfo -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
+NODELIST         NODES PARTITI       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE GRES      REASON
+speed-17             1 pg          drained   32   2:16:1 515490        0      1    gpu16 gpu:6        UGE
+speed-05             1 pg            mixed   32   2:16:1 515490        0      1    gpu16 gpu:6       none
+speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1    gpu32 gpu:2       none
+\end{verbatim}
+\normalsize
+
+%  2.15.1 P6 on Multi-GPU, Multi-Node
+% -------------------
+\subsubsection{P6 on Multi-GPU, Multi-Node}
+\label{sect:multi-node-gpu}
+
+As described earlier, P6 cards are not compatible with \api{Distribute} and \api{DataParallel} functions
+(\textbf{PyTorch}, \textbf{Tensorflow}) when running on multiple GPUs.
+One workaround is to run the job in Multi-node, single GPU per node
+(this applies to P6 nodes: speed-05, speed-17, speed-01):
+\begin{verbatim}
+  #SBATCH --nodes=2
+  #SBATCH --gpus-per-node=1
+\end{verbatim}
+
+\noindent An example script for training on multiple nodes with multiple GPUs is provided in 
+\href
+  {https://github.com/NAG-DevOps/speed-hpc/blob/master/src/pytorch-multinode-multigpu.sh}
+	{pytorch-multinode-multigpu.sh}
+illustrates a job for training on Multi-Nodes, Multi-GPUs
+
+%  2.15.2 CUDA
+% -------------------
+\subsubsection{CUDA}
+\label{sect:cuda}
+
+When calling \textbf{CUDA} within job scripts, it is important to link to the desired
+the desired \textbf{CUDA} libraries and set the runtime link path to the same libraries. 
+For example, to use the \texttt{cuda-11.5} libraries, specify the following in your \texttt{Makefile}.
+\begin{verbatim}
+  -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
+\end{verbatim}
+
+\noindent In your job script, specify the version of \texttt{GCC} to use prior to calling CUDA:
+\begin{verbatim}
+  module load gcc/9.3
+\end{verbatim}
+
+%  2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
+% -------------------
+\subsubsection{Special Notes for Sending CUDA Jobs to the GPU Queues}
+
+Interactive jobs (\xs{sect:interactive-jobs}) must be submitted to the GPU partition to compile and link.
+Several versions of CUDA are installed in:
+\begin{verbatim}
+  /encs/pkg/cuda-11.5/root/
+  /encs/pkg/cuda-10.2/root/
+  /encs/pkg/cuda-9.2/root
+\end{verbatim}
+
+\noindent For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
+replacing \texttt{\/usr\/local\/cuda} with one of the above.
+
+%  2.15.4 OpenISS Examples
+% -------------------
+\subsubsection{OpenISS Examples}
+\label{sect:openiss-examples}
+
+These examples represent more comprehensive research-like jobs
+for computer vision and other tasks with longer runtime (subject to the number of epochs and other parameters).
+They derive from the actual research works of students and their theses and require the use of CUDA and GPUs.
+These examples are available as ``native'' jobs on Speed and as Singularity containers.
+
+\noindent Examples include:
+\paragraph{OpenISS and REID}
+\label{sect:openiss-reid}
+
+A computer-vision-based person re-identification 
+(e.g., motion capture-based tracking for stage performance) part of the OpenISS
+project by Haotao Lai~\cite{lai-haotao-mcthesis19} using TensorFlow and Keras.
+The script is available here:
+\href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-reid-speed.sh}{openiss-reid-speed.sh}.
+The fork of the original repo~\cite{openiss-reid-tfk} adjusted to run on Speed is available here:
+\href{https://github.com/NAG-DevOps/openiss-reid-tfk}{openiss-reid-tfk}.
+Detailed instructions on how to run it on Speed are in the README:
+\url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk}
+
+\paragraph{OpenISS and YOLOv3}
+\label{sect:openiss-yolov3}
+
+The related code using YOLOv3 framework is in the
+the fork of the original repo~\cite{openiss-yolov3} adjusted
+to to run on Speed is available here: \href{https://github.com/NAG-DevOps/openiss-yolov3}{openiss-yolov3}.\\
+
+\noindent Example job scripts can run on both CPUs and GPUs, as well as interactively using TensorFlow:
+
+\begin{itemize}
+	\item Interactive mode:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-interactive.sh}
+  {openiss-yolo-interactive.sh}
+	\item CPU-based job:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-cpu.sh}
+  {openiss-yolo-cpu.sh}
+	\item GPU-based job:
+  \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/openiss-yolo-gpu.sh}
+  {openiss-yolo-gpu.sh}
+\end{itemize}
+
+\noindent Detailed instructions on how to run these on Speed are in the README: 
+\url{https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3}

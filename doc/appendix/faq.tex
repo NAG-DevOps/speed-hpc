@@ -1,0 +1,227 @@
+% -----------------------------------------------------------------------------
+%						B Frequently Asked Questions
+% -----------------------------------------------------------------------------
+\section{Frequently Asked Questions}
+\label{sect:faqs}
+
+% B.1 Where do I learn about Linux?
+% -------------------------------------------------------------
+\subsection{Where do I learn about Linux?}
+\label{sect:faqs-linux}
+
+All Speed users are expected to have a basic understanding of Linux and its commonly used commands.
+Here are some recommended resources:
+
+\paragraph*{Software Carpentry}:
+Software Carpentry provides free resources to learn software, including a workshop on the Unix shell.
+Visit \href{https://software-carpentry.org/lessons/}{Software Carpentry Lessons} to learn more.
+
+\paragraph*{Udemy}:
+There are numerous Udemy courses, including free ones, that will help you learn Linux.
+Active Concordia faculty, staff and students have access to Udemy courses.
+A recommended starting point for beginners is the course ``Linux Mastery: Master the Linux Command Line in 11.5 Hours''.
+Visit \href{https://www.concordia.ca/it/services/udemy.html}{Concordia's Udemy page} to learn how Concordians can access Udemy.
+
+% B.2 How to bash shell on Speed?
+% -------------------------------------------------------------
+\subsection{How to use bash shell on Speed?}
+\label{sect:faqs-bash}
+
+This section provides comprehensive instructions on how to utilize the bash shell on the Speed cluster.
+
+\subsubsection{How do I set bash as my login shell?}
+To set your default login shell to bash on Speed, your login shell on all GCS servers must be changed to bash.
+To make this change, create a ticket with the Service Desk (or email \texttt{help at concordia.ca}) to
+request that bash become your default login shell for your ENCS user account on all GCS servers.
+
+\subsubsection{How do I move into a bash shell on Speed?}
+To move to the bash shell, type \textbf{bash} at the command prompt:
+\begin{verbatim}
+	[speed-submit] [/home/a/a_user] > bash
+	bash-4.4$ echo $0
+	bash
+\end{verbatim}
+\noindent\textbf{Note} how the command prompt changes from
+``\verb![speed-submit] [/home/a/a_user] >!'' to ``\verb!bash-4.4$!'' after entering the bash shell.
+
+\subsubsection{How do I use the bash shell in an interactive session on Speed?}
+Below are examples of how to use \tool{bash} as a shell in your interactive job sessions
+with both the \tool{salloc} and \tool{srun} commands.
+\begin{itemize}
+	\item \texttt{salloc -ppt --mem=100G -N 1 -n 10 /encs/bin/bash}
+	\item \texttt{srun --mem=50G -n 5 --pty /encs/bin/bash}
+\end{itemize}
+\noindent\textbf{Note:} Make sure the interactive job requests memory, cores, etc.
+
+\subsubsection{How do I run scripts written in bash on \tool{Speed}?}
+To execute bash scripts on Speed:
+\begin{enumerate}
+	\item Ensure that the shebang of your bash job script is \verb+#!/encs/bin/bash+
+	\item Use the \tool{sbatch} command to submit your job script to the scheduler.
+\end{enumerate}
+\noindent Check Speed GitHub for a \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/bash.sh}{sample bash job script}.
+
+% B.3 How to resolve “Disk quota exceeded” errors?
+% -------------------------------------------------------------
+\subsection{How to resolve ``Disk quota exceeded'' errors?}
+\label{sect:quota-exceeded}
+
+\subsubsection{Probable Cause}
+The ``\texttt{Disk quota exceeded}'' error occurs when your application has
+run out of disk space to write to. On \tool{Speed}, this error can be returned when:
+\begin{enumerate}
+	\item The NFS-provided home is full and cannot be written to.
+	You can verify this using the \tool{quota} and \tool{bigfiles} commands.
+	\item The ``\texttt{/tmp}'' directory on the speed node where your application is running is full and cannot be written to.
+\end{enumerate}
+
+\subsubsection{Possible Solutions}
+\begin{enumerate}
+	\item Use the \option{--chdir} job script option to set the job working directory.
+	This is the directory where the job will write output files.
+
+ 	\item Although local disk space is recommended for IO-intensive operations, the 
+ 	`\texttt{/tmp}' directory on \tool{Speed} nodes is limited to 1TB, so it may be necessary 
+	to store temporary data elsewhere. Review the documentation for each module
+	used in your script to determine how to set working directories.
+	The basic steps are:
+	\begin{itemize}
+	\item
+	Determine how to set working directories for each module used in your job script.
+	\item
+	Create a working directory in \tool{speed-scratch} for output files:
+	\begin{verbatim}
+		mkdir -m 750 /speed-scratch/$USER/output
+	\end{verbatim}
+	\item
+	Create a subdirectory for recovery files:
+	\begin{verbatim}
+		mkdir -m 750 /speed-scratch/$USER/recovery
+	\end{verbatim}
+	\item
+	Update the job script to write output to the directories created in your \tool{speed-scratch} directory,
+	e.g., \verb!/speed-scratch/$USER/output!.
+	\end{itemize}
+\end{enumerate}
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
+\subsubsection{Example of setting working directories for \tool{COMSOL}}
+\begin{itemize}
+	\item Create directories for recovery, temporary, and configuration files.
+	\begin{verbatim}
+		mkdir -m 750 -p /speed-scratch/$USER/comsol/{recovery,tmp,config}
+	\end{verbatim}
+	\item Add the following command switches to the COMSOL command to use the directories created above:
+	\begin{verbatim}
+		-recoverydir /speed-scratch/$USER/comsol/recovery
+		-tmpdir /speed-scratch/$USER/comsol/tmp
+		-configuration/speed-scratch/$USER/comsol/config
+	\end{verbatim}
+\end{itemize}
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
+\subsubsection{Example of setting working directories for \tool{Python Modules}}
+By default when adding a Python module, the \texttt{/tmp} directory is set as the temporary repository for files downloads.
+The size of the \texttt{/tmp} directory on \verb!speed-submit! is too small for PyTorch.
+To add a Python module
+\begin{itemize}
+    \item Create your own tmp directory in your \verb!speed-scratch! directory:
+	\begin{verbatim}
+  		mkdir /speed-scratch/$USER/tmp
+	\end{verbatim}
+	\item Use the temporary directory you created
+	\begin{verbatim}
+  		setenv TMPDIR /speed-scratch/$USER/tmp
+	\end{verbatim}
+    \item Attempt the installation of PyTorch
+\end{itemize}
+\noindent In the above example, \verb!$USER! is an environment variable containing your ENCS username.
+
+% B.4 How do I check my job's status?
+% -------------------------------------------------------------
+\subsection{How do I check my job's status?}
+\label{sect:faq-job-status}
+
+When a job with a job ID of 1234 is running or terminated, you can track its status using the following commands to check its status:
+\begin{itemize}
+	\item Use the ``sacct'' command to view the status of a job:
+	\begin{verbatim}
+		sacct -j 1234
+	\end{verbatim}
+	\item Use the ``squeue'' command to see if the job is sitting in the queue:
+	\begin{verbatim}
+		squeue -j 1234
+	\end{verbatim}
+	\item Use the ``sstat'' command to find long-term statistics on the job after it has terminated
+	and the \tool{slurmctld} has purged it from its tracking state into the database:
+	\begin{verbatim}
+		sstat -j 1234
+	\end{verbatim}
+\end{itemize}
+
+% B.5 Why is my job pending when nodes are empty?
+% -------------------------------------------------------------
+\subsection{Why is my job pending when nodes are empty?}
+
+\subsubsection{Disabled nodes}
+It is possible that one or more of the Speed nodes are disabled for maintenance.
+To verify if Speed nodes are disabled, check if they are in a draining or drained state:
+
+\small
+\begin{verbatim}
+[serguei@speed-submit src] % sinfo --long --Node
+Thu Oct 19 21:25:12 2023
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+speed-01       1        pa        idle 32     2:16:1 257458        0      1    gpu16 none
+speed-03       1        pa        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-05       1        pg        idle 32     2:16:1 515490        0      1    gpu16 none
+speed-07       1       ps*       mixed 32     2:16:1 515490        0      1    cpu32 none
+speed-08       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-09       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-10       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-11       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-12       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-15       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-16       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-17       1        pg     drained 32     2:16:1 515490        0      1    gpu16 UGE
+speed-19       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-20       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-21       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-22       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-23       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-24       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-25       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-25       1        pa        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-27       1        pg        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-27       1        pa        idle 32     2:16:1 257458        0      1    gpu32 none
+speed-29       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-30       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-31       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-32       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-33       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-34       1       ps*        idle 32     2:16:1 515490        0      1    cpu32 none
+speed-35       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-36       1       ps*     drained 32     2:16:1 515490        0      1    cpu32 UGE
+speed-37       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-38       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-39       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-40       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-41       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-42       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+speed-43       1        pt        idle 256    2:64:2 980275        0      1 gpu20,mi none
+\end{verbatim}
+\normalsize
+
+\noindent Note which nodes are in the state of \textbf{drained}.
+The reason for the drained state can be found in the \textbf{reason} column.
+Your job will run once an occupied node becomes availble or the maintenance is completed,
+and the disabled nodes have a state of \textbf{idle}.
+
+\subsubsection{Error in job submit request.}
+It is possible that your job is pending because it requested resources that are not available within Speed. 
+To verify why job ID 1234 is not running, execute:
+\begin{verbatim}
+	sacct -j 1234
+\end{verbatim}
+
+\noindent A summary of the reasons can be obtained via the \tool{squeue} command.

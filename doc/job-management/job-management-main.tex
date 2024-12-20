@@ -1,0 +1,133 @@
+% ------------------------------------------------------------------------------
+%						2 Job Management
+% ------------------------------------------------------------------------------
+\section{Job Management}
+\label{sect:job-management}
+
+We use SLURM as the workload manager. It supports primarily two types of jobs:
+batch and interactive. Batch jobs are used to run unattended tasks, whereas,
+interactive jobs are are ideal for setting up virtual environments, compilation, and debugging.
+
+\noindent\textbf{Note:} In the following instructions, anything bracketed like, \verb+<>+,
+indicates a label/value to be replaced (the entire bracketed term needs replacement).
+
+\noindent Job instructions in a script start with \verb+#SBATCH+ prefix, for example:
+\begin{verbatim}
+    #SBATCH --mem=100M -t 600 -J <job-name> -A <slurm account>
+    #SBATCH -p pg --gpus=1 --mail-type=ALL
+\end{verbatim}
+
+For complex compute steps within a script, use \tool{srun}. We recommend using \tool{salloc}
+for interactive jobs as it supports multiple steps. However, \tool{srun}
+can also be used to start interactive jobs (see \xs{sect:interactive-jobs}).
+Common and required job parameters include:
+
+Common and required job parameters include:
+%\begin{multicols}{2}
+\begin{itemize}
+	\item Memory (\option{--mem=<mem>[M|G|T]}),
+	\item Partition/Queue (\option{-p <partition>}),
+	\item Job name (\option{--job-name=<name>} or \option{-J <name>}),
+	\item Wall Clock Limit (\option{-t <min> or -t <days-hh:mm:ss>}),
+	\item Event Notification (\option{--mail-type=<events>}),
+	\item Email Address (\option{--mail-user=<address>}),
+	\item Slurm Account (\option{--account=<account> or -A <account>}),
+	\item Tasks Per Node (\option{--tasks-per-node=<count>}),
+	\item CPUs Per Task (\option{--cpus-per-task=<count>}),
+	\item CPU Count ntasks (\option{-n <count>}).
+\end{itemize}
+%\end{multicols}
+
+% 2.1 Getting Started
+% -------------------------------------------------------------
+\input{job-management/getting-started.tex}
+
+% includes:
+%	2.1.1 SSH Connections
+%	2.1.2 Environment Set Up
+
+% 2.2 Job Submission Basics
+% -------------------------------------------------------------
+\input{job-management/job-submission-basics.tex}
+
+% includes:
+%	2.2.1 Directives
+%	2.2.2 Working with Modules
+%	2.2.3 User Scripting
+
+% 2.3 Sample Job Script
+% -------------------------------------------------------------
+\input{job-management/sample-job-script.tex}
+
+% 2.4 Common Job Management Commands
+% -------------------------------------------------------------
+\input{job-management/common-job-commands.tex}
+
+% 2.5 Advanced sbatch Options
+% -------------------------------------------------------------
+\input{job-management/advanced-sbatch-options.tex}
+
+% 2.6 Array Jobs
+% -------------------------------------------------------------
+\input{job-management/array-jobs.tex}
+
+% 2.7 Requesting Multiple Cores (i.e., Multithreading Jobs)
+% -------------------------------------------------------------
+\input{job-management/requesting-multiple-cores.tex}
+
+% 2.8 Interactive Jobs
+% -------------------------------------------------------------
+\input{job-management/interactive-jobs.tex}
+
+% includes:
+%	2.8.1 Command Line
+%	2.8.2 Graphical Applications
+%	2.8.3 Jupyter Notebooks
+%		2.8.3.1 Jupyter Notebook in Singularity
+%		2.8.3.2 Jupyter Notebook in Conda
+%		2.8.3.3 Jupyter Notebook in Python Virtual Env
+%	2.8.4 Visual Studio Code
+
+% 2.9 Scheduler Environment Variables
+% -------------------------------------------------------------
+\input{job-management/scheduler-env-variables.tex}
+
+% 2.10 SSH Keys for MPI
+% -------------------------------------------------------------
+\input{job-management/ssh-keys.tex}
+
+% 2.11 Creating Virtual Environments
+% -------------------------------------------------------------
+\input{job-management/creating-virtual-envs.tex}
+
+% includes:
+%	2.11.1 Anaconda
+%		2.11.1.1 Conda Env without --prefix
+%	2.11.2 Python
+
+% 2.12 Example Job Script: Fluent
+% -------------------------------------------------------------
+\include{job-management/ex-fluent.tex}
+
+% 2.13 Example Job: EfficientDet
+% -------------------------------------------------------------
+\input{job-management/ex-efficiendet.tex}
+
+% 2.14 Java Jobs
+% -------------------------------------------------------------
+\input{job-management/java-jobs.tex}
+
+% 2.15 Scheduling on the GPU Nodes
+% -------------------------------------------------------------
+\input{job-management/scheduling-on-gpus.tex}
+
+%	2.15.1 P6 on Multi-GPU, Multi-Node
+%	2.15.2 CUDA
+%	2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queues
+%	2.15.4 OpenISS Examples
+%		2.15.4.1 OpenISS and REID
+%		2.15.4.2 OpenISS and YOLOv3
+
+% 2.16 Singularity Containers
+% -------------------------------------------------------------
+\input{job-management/singularity-containers.tex}

@@ -1,0 +1,73 @@
+% 2.1 Getting Started
+% -------------------------------------------------------------
+\subsection{Getting Started}
+\label{sect:getting-started}
+
+Before getting started, please review the ``What Speed is'' (\xs{sect:speed-is-for})
+and ``What Speed is Not'' (\xs{sect:speed-is-not}).
+Once your GCS ENCS account has been granted access to ``Speed'',
+use your GCS ENCS account credentials to create an SSH connection to
+\texttt{speed} (an alias for \texttt{speed-submit.encs.concordia.ca}).
+
+All users are expected to have a basic understanding of
+Linux and its commonly used commands (see \xa{sect:faqs} for resources).
+
+%  2.1.1 SSH Connection
+% -----------------------
+\subsubsection{SSH Connections}
+\label{sect:ssh-connection}
+
+Requirements to create SSH connection to ``Speed'':
+\begin{enumerate}
+	\item \textbf{Active GCS ENCS user account:} Ensure you have an active GCS ENCS user account with
+	permission to connect to Speed (see \xs{sect:access-requests}).
+	\item \textbf{VPN Connection} (for off-campus access): If you are off-campus, you wil need to establish an active connection to Concordia's VPN,
+	which requires a Concordia netname.
+	\item \textbf{Terminal Emulator for Windows:} Windows systems use a terminal emulator such as PuTTY, Cygwin, or MobaXterm.
+	\item \textbf{Terminal for macOS:} macOS systems have a built-in Terminal app or \tool{xterm} that comes with XQuartz.
+\end{enumerate}
+
+\noindent To create an SSH connection to Speed, open a terminal window and type the following command, replacing \verb!<ENCSusername>! with your ENCS account's username:
+\begin{verbatim}
+    ssh <ENCSusername>@speed.encs.concordia.ca
+\end{verbatim}
+
+\noindent For detailed instructions on securely connecting to a GCS server, refer to the AITS FAQ:
+\href{https://www.concordia.ca/ginacody/aits/support/faq/ssh-to-gcs.html}{How do I securely connect to a GCS server?}
+
+%  2.1.2 Environment Set Up
+% --------------------------
+\subsubsection{Environment Set Up}
+\label{sect:envsetup}
+%TO BE DELETED
+%\input{scheduler-env}
+%
+
+After creating an SSH connection to Speed, you will need to make sure the \tool{srun}, \tool{sbatch}, and \tool{salloc}
+commands are available to you. To check this, type each command at the prompt and press Enter.
+If ``command not found'' is returned, you need to make sure your \api{\$PATH} includes \texttt{/local/bin}.
+You can check your path by typing:
+\begin{verbatim}
+    echo $PATH
+\end{verbatim}
+
+\noindent The next step is to set up your cluster-specific storage ``speed-scratch'', to do so, execute the following command from within your
+home directory.
+\begin{verbatim}
+    mkdir -p /speed-scratch/$USER && cd /speed-scratch/$USER
+\end{verbatim}
+
+\noindent Next, copy a job template to your cluster-specific storage
+\begin{itemize}
+    \item From Windows drive G: to Speed:\\
+    \verb|cp /winhome/<1st letter of $USER>/$USER/<script>.sh /speed-scratch/$USER/|
+    \item From Linux drive U: to Speed:\\
+    \verb|cp ~/<script>.sh /speed-scratch/$USER/|
+\end{itemize}
+
+\noindent \textbf{Tip:} the default shell for GCS ENCS users is \tool{tcsh}.
+If you would like to use \tool{bash}, please contact \texttt{rt-ex-hpc AT encs.concordia.ca}.
+
+\noindent \textbf{Note:} If you encounter a ``command not found'' error after logging in to Speed,
+your user account may have defunct Grid Engine environment commands.
+See \xa{appdx:uge-to-slurm} for instructions on how to resolve this issue.

@@ -1,0 +1,57 @@
+% 2.5 Advanced sbatch Options
+% -------------------------------------------------------------
+\subsection{Advanced \tool{sbatch} Options}
+\label{sect:submit-options}
+
+In addition to the basic sbatch options presented earlier,
+there are several advanced options that are generally useful:
+
+\begin{itemize}
+	\item E-mail notifications: requests the scheduler to send an email when the job changes state.
+	\begin{verbatim}
+		--mail-type=<TYPE>
+	\end{verbatim}
+	\texttt{<TYPE>} can be \texttt{ALL}, \texttt{BEGIN}, \texttt{END}, or \texttt{FAIL}.
+
+	Mail is sent to the default address of \tool{<ENCSusername>@encs.concordia.ca}
+
+	Which you can consult via \url{webmail.encs.concordia.ca} (use VPN from off-campus)
+	unless a different address is supplied (see, \option{--mail-user}). The report sent when
+    a job ends includes job runtime, as well as the maximum memory value hit (\api{maxvmem}).
+
+    To specify a different email address for notifications rather than the default, use
+    \begin{verbatim}
+		--mail-user email@domain.com
+	\end{verbatim}
+
+	\item Export environment variables used by the script:
+	\begin{verbatim}
+		--export=ALL
+		--export=NONE
+		--export=VARIABLES
+	\end{verbatim}
+
+	\item Job runtime: sets a job runtime of min or HH:MM:SS. Note that if you give a single number,
+	that represents \emph{minutes}, not hours. The set runtime should not exceed
+	the default maximums of 24h for interactive jobs and 7 days for batch jobs.
+	\begin{verbatim}
+		-t <MINUTES> or DAYS-HH:MM:SS
+	\end{verbatim}
+
+	\item Job Dependencies: Runs the job only when the specified job \verb|<job-ID>| finishes.
+    This is useful for creating job chains where subsequent jobs depend on the completion of previous ones.
+	\begin{verbatim}
+		--depend=<state:job-ID>
+	\end{verbatim}
+\end{itemize}
+
+\noindent \textbf{Note:} \tool{sbatch} options can be specified during the job-submission command,
+and these \emph{override} existing script options (if present). The syntax is
+\begin{verbatim}
+	sbatch [options] path/to/script
+\end{verbatim}
+but unlike in the script, the options are specified without the leading \verb+#SBATCH+
+e.g.:
+\begin{verbatim}
+	sbatch -J sub-test --chdir=./ --mem=1G ./env.sh
+\end{verbatim}

@@ -1,0 +1,36 @@
+% 2.10 SSH Keys for MPI
+% -------------------------------------------------------------
+\subsection{SSH Keys for MPI}
+\label{sect:ssh-mpi}
+
+Some programs, such as Fluent, utilize MPI (Message Passing Interface) for parallel processing.
+MPI requires `passwordless login', which is achieved through SSH keys.
+Here are the steps to set up SSH keys for MPI:
+
+\begin{itemize}
+	\item Navigate to the \texttt{.ssh} directory
+	\begin{verbatim}
+	cd ~/.ssh
+	\end{verbatim}
+
+	\item Generate a new SSH key pair (Accept the default location and leave the passphrase blank)
+	\begin{verbatim}
+	ssh-keygen -t ed25519
+	\end{verbatim}
+
+	\item Authorize the Public Key:
+	\begin{verbatim}
+	cat id_ed25519.pub >> authorized_keys
+	\end{verbatim}
+	If the \texttt{\href{https://www.ssh.com/academy/ssh/authorized-keys-file}{authorized\_keys}} file does not exist, use
+	\begin{verbatim}
+	cat id_ed25519.pub > authorized_keys
+	\end{verbatim}
+
+	\item Set permissions: ensure the correct permissions are set for the `authorized\_keys' file and your home directory
+	(most users will already have these permissions by default):
+	\begin{verbatim}
+	chmod 600 ~/.ssh/authorized_keys
+	chmod 700 ~
+	\end{verbatim}
+\end{itemize}

@@ -1,0 +1,96 @@
+% 2.3 Sample Job Script
+% -------------------------------------------------------------
+\subsection{Sample Job Script}
+\label{sect:sample-job-script}
+
+Here's a basic job script, \file{env.sh} shown in \xf{fig:env.sh}.
+You can copy it from our \href{https://github.com/NAG-DevOps/speed-hpc}{GitHub repository}.
+
+\small
+\begin{figure}[htpb]
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily\scriptsize]{env.sh}
+	\caption{Source code for \file{env.sh}}
+	\label{fig:env.sh}
+\end{figure}
+\normalsize
+
+\noindent The first line is the shell declaration (also know as a shebang) and sets the shell to \emph{tcsh}.
+The lines that begin with \texttt{\#SBATCH} are directives for the scheduler.
+
+\begin{itemize}
+	\item \option{-J} (or \option{--job-name}) sets \emph{envs} as the job name.
+	\item \option{--mail-type} sets the type of notifications.
+	\item \option{--chdir} sets the working directory.
+	\item \option{--nodes} specifies the number of required nodes.
+	\item \option{--ntasks} specifies the number of tasks.
+	\item \option{--cpus-per-task} requests 1 cpus.
+	\item \option{--mem=} requests memory.
+
+    \textbf{Note:} Jobs require the \option{--mem} option to be set either in the script
+	or on the command line; \textbf{job submission will be rejected if it's missing.}
+\end{itemize}
+
+\noindent The script then:
+\begin{enumerate}
+    \item Creates a directory.
+	\item Sets TMPDIR to a larger storage.
+	\item Prints current date.
+	\item Prints env variables.
+	\item Prints current date again.
+\end{enumerate}
+
+\noindent The scheduler command, \tool{sbatch}, is used to submit (non-interactive) jobs.
+From an ssh session on ``speed-submit'', submit this job with
+\begin{verbatim}
+    sbatch ./env.sh
+\end{verbatim}
+
+\noindent You will see, \texttt{Submitted batch job <JOB ID>}.
+The commands \tool{squeue} and \tool{sinfo} can be used to look at the queue and the status of the cluster
+%\texttt{squeue -l} and \texttt{sinfo -la}.
+
+\small
+\begin{verbatim}
+[serguei@speed-submit src] % squeue -l
+Thu Oct 19 11:38:54 2023
+JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
+ 2641        ps interact   b_user   RUNNING   19:16:09 1-00:00:00      1 speed-07
+ 2652        ps interact   a_user   RUNNING      41:40 1-00:00:00      1 speed-07
+ 2654        ps envs       serguei  RUNNING       0:01 7-00:00:00      1 speed-07
+
+[serguei@speed-submit src] % sinfo
+PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+ps*          up 7-00:00:00      8  drng@ speed-[09-11,15-16,20-21,36]
+ps*          up 7-00:00:00      3   drng speed-[38,42-43]
+ps*          up 7-00:00:00      2  drain magic-node-[04,08]
+ps*          up 7-00:00:00      4    mix magic-node-07,salus,speed-[07,37]
+ps*          up 7-00:00:00      7  alloc magic-node-06,speed-[08,12,22-24,29]
+ps*          up 7-00:00:00     13   idle magic-node-[05,09-10],speed-[19,30-35,39-41]
+pg           up 7-00:00:00      1 drain* speed-05
+pg           up 7-00:00:00      2    mix speed-[01,17]
+pt           up 7-00:00:00      4   drng speed-[27,38,42-43]
+pt           up 7-00:00:00      2    mix speed-[17,37]
+pt           up 7-00:00:00      3   idle speed-[39-41]
+pa           up 7-00:00:00      1   drng speed-27
+pa           up 7-00:00:00      1    mix speed-01
+pa           up 7-00:00:00      2   idle speed-[03,25]
+cl           up 7-00:00:00      1 drain* speed-05
+cl           up 7-00:00:00      4   drng speed-[27,38,42-43]
+cl           up 7-00:00:00      3    mix speed-[01,17,37]
+cl           up 7-00:00:00      6   idle speed-[03,19,25,39-41]
+pc           up 7-00:00:00      1    mix salus
+pm           up 7-00:00:00      2  drain magic-node-[04,08]
+pm           up 7-00:00:00      1    mix magic-node-07
+pm           up 7-00:00:00      1  alloc magic-node-06
+pm           up 7-00:00:00      3   idle magic-node-[05,09-10]
+pn           up 7-00:00:00      1  down* stellar
+pn           up 7-00:00:00      2   idle matrix,nebulae
+\end{verbatim}
+\normalsize
+
+Once the job finishes, there will be a new file in the directory that the job was started from,
+with the syntax of, \texttt{slurm-<job id>.out}. This file represents the standard output
+(and error, if there is any) of the job in question.
+Important information is often written to this file.
+%
+%Congratulations on your first job!
