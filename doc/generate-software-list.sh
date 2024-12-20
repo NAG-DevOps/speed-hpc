@@ -11,7 +11,7 @@ cat > "$OUTFILE.tex" << LATEX_HEADER
 % -----------------------------------------------------------------------------
 % $0
 \section{Software Installed On Speed}
-\label{sect:software-details}
+\label{sect:software-list}
 
 This is a generated section by a script; last updated on \textit{$GENERATED_ON}.
 We have two major software trees: Scientific Linux 7 (EL7), which is

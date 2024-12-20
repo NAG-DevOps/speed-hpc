@@ -1,7 +1,7 @@
-# Software Installed On Speed {#sect:software-details}
+# Software Installed On Speed {#sect:software-list}
 
-This is a generated section by a script; last updated on *Tue Jul 23
-10:48:52 PM EDT 2024*. We have two major software trees: Scientific
+This is a generated section by a script; last updated on *Fri Dec 20
+04:37:31 PM EST 2024*. We have two major software trees: Scientific
 Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After major
 synchronization of software packages is complete, we will stop
 maintaining the EL7 tree and will migrate the remaining nodes to EL9.
@@ -1287,6 +1287,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `OpenFOAM-2.3.1`
 
+-   `OpenFOAM-2.4.0`
+
 -   `OpenFOAM-3.0.1`
 
 -   `OpenFOAM-5.0`
@@ -2005,6 +2007,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `DbVisualizer-24.1.5`
 
+-   `EasyBuild`
+
 -   `emacs-27.2`
 
 -   `expect-5.45.4`
@@ -2066,6 +2070,8 @@ on Speed as well as teaching labs' desktops.
 -   `firefox_french-91.9.0`
 
 -   `firefox_french-91.9.1`
+
+-   `gcc-11.3.0`
 
 -   `gcc-12.2.0`
 
@@ -2141,6 +2147,10 @@ on Speed as well as teaching labs' desktops.
 
 -   `matlab-R2023b`
 
+-   `matlab-R2024a`
+
+-   `matlab-R2024b`
+
 -   `mesa-19.0.3`
 
 -   `modules-3.2.10`
@@ -2194,6 +2204,10 @@ on Speed as well as teaching labs' desktops.
 -   `ocaml-4.01.0`
 
 -   `OpenFOAM-11.0`
+
+-   `OpenFOAM-12.0`
+
+-   `OpenFOAM-2.4.0`
 
 -   `OpenFOAM-8.0`
 
