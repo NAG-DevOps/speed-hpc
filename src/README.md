@@ -53,7 +53,7 @@ These are examples either trivial or some are more elaborate. Some are described
 - Common packages:
   - `fluent.sh` -- Fluent job
   - `comsol.sh` -- Comsol job
-  - `matlab-sge.sh` -- MATLAB job
+  - `matlab/matlab-slurm.sh` -- MATLAB job
 - Advanced or research examples:
   - `msfp-speed-job.sh` -- MAC Spoofer Investigation starter job script (for detailes see [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
   - `efficientdet.sh` -- `efficientdet` with Conda environment described below
