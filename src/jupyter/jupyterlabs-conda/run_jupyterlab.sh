@@ -8,9 +8,12 @@ if (! $?CONDA_PREFIX) then
     module load anaconda3/2023.03/default
 endif
 
-# Set temporary directories for faster I/O
+# Set temporary directories
+# (For faster I/O to use /nobackup local disk space comment these out)
 setenv TMPDIR /speed-scratch/$USER/tmp
 setenv TMP /speed-scratch/$USER/tmp
+
+# Keep shared conda packages on any node
 setenv CONDA_PKGS_DIRS /speed-scratch/$USER/Jupyter/pkgs
 
 # Activate the Conda environment
@@ -27,7 +30,6 @@ set user = `whoami`
 # Get an available port for Jupyter
 set port = `python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()'`
 
-
 # Print SSH tunneling instructions
 echo "To connect to the compute node ${node} on speed.encs.concordia.ca running your Jupyter notebook server, \n\
 use the following SSH command in a new terminal on your workstation/laptop:\n\n\
@@ -35,9 +37,8 @@ ssh -L ${port}:${node}:${port} ${user}@speed.encs.concordia.ca\n\n\
 Then, copy the URL provided below by the Jupyter server (starting with http://127.0.0.1/...) and paste it into your browser.\n\n\
 Remember to close any open notebooks and shut down the Jupyter client in your browser before exiting to avoid manual job cancellation."
 
-
 # Start the Jupyter server in the background
 echo "Starting Jupyter server in background with requested resources"
 jupyter lab --no-browser --notebook-dir=$PWD --ip="0.0.0.0" --port=${port} --port-retries=50
 
-
+# EOF
