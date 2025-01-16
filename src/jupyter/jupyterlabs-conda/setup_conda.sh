@@ -3,7 +3,7 @@
 echo "Setting some initial vairables..."
 date
 
-set JUPYTER_DATA_DIR /speed-scratch/$USER/Jupyter
+set JUPYTER_DATA_DIR = /speed-scratch/$USER/Jupyter
 
 mkdir -p $JUPYTER_DATA_DIR
 
