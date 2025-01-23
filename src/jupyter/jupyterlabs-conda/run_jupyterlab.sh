@@ -8,6 +8,9 @@ if (! $?CONDA_PREFIX) then
     module load anaconda3/2023.03/default
 endif
 
+module load python/3.11.6/default
+module load cuda/11.8/default
+
 # Set temporary directories
 # (For faster I/O to use /nobackup local disk space comment these out)
 setenv TMPDIR /speed-scratch/$USER/tmp
