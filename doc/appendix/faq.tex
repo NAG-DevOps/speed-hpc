@@ -228,23 +228,23 @@ To verify why job ID 1234 is not running, execute:
 
 % B.6 How to Handle /tmp Overflow on Speed Nodes?
 % -------------------------------------------------------------
-\subsection{How to Handle \tool{/tmp} Overflow on Speed Nodes?}
+\subsection{How to Handle \texttt{/tmp} Overflow on Speed Nodes?}
 \label{sect:faq-tmp-on-speed}
 
-Users may encounter a full \tool{/tmp} directory on Speed nodes when running LlamaIndex (or similar applications).
-This happens when temporary files are written directly to \tool{/tmp} instead of a designated scratch space which causes job failures or system instability.
+Users may encounter a full \texttt{/tmp} directory on Speed nodes when running LlamaIndex (or similar applications).
+This happens when temporary files are written directly to \texttt{/tmp} instead of a designated scratch space which causes job failures or system instability.
 
 \subsubsection{Cause}
 \begin{itemize}
-	\item Hardcoded paths like "/tmp" in scripts can lead to issues.
-	\item LlamaIndex (and other ML-related tools) may default to storing temporary and cache files in \tool{/tmp}.
+	\item Hardcoded paths like \texttt{/tmp} in scripts can lead to issues.
+	\item LlamaIndex (and other ML-related tools) may default to storing temporary and cache files in \texttt{/tmp}.
 \end{itemize}
 
 \subsubsection{Solution}
 \begin{itemize}
 
-	\item Use \tool{TMPDIR} instead of \tool{/tmp} to set a temporary directory for your job 
-		as \tool{TMPDIR} maps to \tool{/nobackup} or \tool{/nobackup2} which have more storage.
+	\item Use \texttt{TMPDIR} instead of \texttt{/tmp} to set a temporary directory for your job 
+		as \texttt{TMPDIR} maps to \texttt{/nobackup} or \texttt{/nobackup2} which have more storage.
 		\begin{verbatim}
 			setenv TMP $TMPDIR
 			setenv TEMP $TMPDIR
@@ -267,5 +267,4 @@ This happens when temporary files are written directly to \tool{/tmp} instead of
 				db = chromadb.PersistentClient(path=db_path)
 			\end{verbatim}
 		\end{itemize}
-
 \end{itemize}
