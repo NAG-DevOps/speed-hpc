@@ -225,3 +225,47 @@ To verify why job ID 1234 is not running, execute:
 \end{verbatim}
 
 \noindent A summary of the reasons can be obtained via the \tool{squeue} command.
+
+% B.6 How to Handle /tmp Overflow on Speed Nodes?
+% -------------------------------------------------------------
+\subsection{How to Handle \tool{/tmp} Overflow on Speed Nodes?}
+\label{sect:faq-tmp-on-speed}
+
+Users may encounter a full \tool{/tmp} directory on Speed nodes when running LlamaIndex (or similar applications).
+This happens when temporary files are written directly to \tool{/tmp} instead of a designated scratch space which causes job failures or system instability.
+
+\subsubsection{Cause}
+\begin{itemize}
+	\item Hardcoded paths like "/tmp" in scripts can lead to issues.
+	\item LlamaIndex (and other ML-related tools) may default to storing temporary and cache files in \tool{/tmp}.
+\end{itemize}
+
+\subsubsection{Solution}
+\begin{itemize}
+
+	\item Use \tool{TMPDIR} instead of \tool{/tmp} to set a temporary directory for your job 
+		as \tool{TMPDIR} maps to \tool{/nobackup} or \tool{/nobackup2} which have more storage.
+		\begin{verbatim}
+			setenv TMP $TMPDIR
+			setenv TEMP $TMPDIR
+		\end{verbatim}
+
+	\item Set cache and temporary directories in your script.
+		\begin{itemize}
+			\item Example fix for LlamaIndex:
+			\begin{verbatim}
+				mkdir -p $TMPDIR/$USER
+				setenv LLAMA_INDEX_CACHE_DIR $TMPDIR/$USER
+			\end{verbatim}
+		\end{itemize}
+
+	\item Ensure the Python script uses the correct temporary directory
+		\begin{itemize}
+			\item Example fix for Chromadb in LlamaIndex:
+			\begin{verbatim}
+				db_path = os.path.join(os.getenv("TMPDIR"), "db")
+				db = chromadb.PersistentClient(path=db_path)
+			\end{verbatim}
+		\end{itemize}
+
+\end{itemize}
