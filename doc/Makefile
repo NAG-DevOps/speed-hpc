@@ -87,6 +87,7 @@ html:
 		make4ht $(DELIVERABLE) -a debug mathjax -c speed-manual.cfg -d web && \
 		mv ./web/$(DELIVERABLE).html ./web/index.html && \
 		rm $(DELIVERABLE).html $(DELIVERABLE).css
+		mkdir -p ./web/generator
 		cp -f ../src/job-script-generator/* ./web/generator/
 #
 # Clean up
