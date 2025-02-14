@@ -125,13 +125,10 @@ examples.</div></div><section class='abstract' role='doc-abstract'>
 
                                                                                
 <br />  <span class='subsubsectionToc'>B.5.2 <a href='#error-in-job-submit-request' id='QQ2-1-96'>Error in job submit request.</a></span>
-<br /> <span class='subsectionToc'>B.6 <a href='#how-to-handle-tmp-overflow-on-speed-nodes' id='QQ2-1-97'>How to Handle <span class='cmtt-10'>/tmp </span>Overflow on Speed Nodes?</a></span>
-<br />  <span class='subsubsectionToc'>B.6.1 <a href='#cause' id='QQ2-1-98'>Cause</a></span>
-<br />  <span class='subsubsectionToc'>B.6.2 <a href='#solution' id='QQ2-1-99'>Solution</a></span>
-<br /><span class='sectionToc'>C <a href='#sister-facilities' id='QQ2-1-100'>Sister Facilities</a></span>
-<br /><span class='sectionToc'>D <a href='#software-installed-on-speed' id='QQ2-1-101'>Software Installed On Speed</a></span>
-<br /> <span class='subsectionToc'>D.1 <a href='#el' id='QQ2-1-102'>EL7</a></span>
-<br /> <span class='subsectionToc'>D.2 <a href='#el1' id='QQ2-1-103'>EL9</a></span>
+<br /><span class='sectionToc'>C <a href='#sister-facilities' id='QQ2-1-97'>Sister Facilities</a></span>
+<br /><span class='sectionToc'>D <a href='#software-installed-on-speed' id='QQ2-1-98'>Software Installed On Speed</a></span>
+<br /> <span class='subsectionToc'>D.1 <a href='#el' id='QQ2-1-99'>EL7</a></span>
+<br /> <span class='subsectionToc'>D.2 <a href='#el1' id='QQ2-1-100'>EL9</a></span>
 <br /><span class='sectionToc'><a href='#annotated-bibliography'>Annotated Bibliography</a></span>
 </div>
                                                                                
@@ -1565,61 +1562,20 @@ dependencies)
      <!-- l. 231 --><p class='nopar'>
 </p>
      <figure class='figure' id='-source-code-for-setupcondash'> 
-<a id='x1-290619'></a> <!-- l. 235 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-29008r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>tcsh</span></span> 
+<a id='x1-290209'></a> <!-- l. 235 --><pre class='lstinputlisting' id='listing-2'><span class='label'><a id='x1-29008r1'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>!/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>encs</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>bin</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>tcsh</span></span> 
 <span class='label'><a id='x1-29009r2'></a></span> 
-<span class='label'><a id='x1-29010r3'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>echo</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>"Setting␣some␣initial␣vairables..."</span> 
-</span><span class='label'><a id='x1-29011r4'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>date</span></span> 
-<span class='label'><a id='x1-29012r5'></a></span> 
-<span class='label'><a id='x1-29013r6'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>set</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR = /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/Jupyter</span> 
-</span><span class='label'><a id='x1-29014r7'></a></span> 
-<span class='label'><a id='x1-29015r8'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>-p </span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR</span> 
-</span><span class='label'><a id='x1-29016r9'></a></span> 
-<span class='label'><a id='x1-29017r10'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>Set these if want to share</span> 
-</span><span class='label'><a id='x1-29018r11'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>TMPDIR /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/tmp</span> 
-</span><span class='label'><a id='x1-29019r12'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>TMP /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/tmp</span> 
-</span><span class='label'><a id='x1-29020r13'></a></span> 
-<span class='label'><a id='x1-29021r14'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>CONDA_PKGS_DIRS </span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR/pkgs</span> 
-</span><span class='label'><a id='x1-29022r15'></a></span> 
-<span class='label'><a id='x1-29023r16'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>echo</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>"Setting␣conda␣env..."</span> 
-</span><span class='label'><a id='x1-29024r17'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>date</span></span> 
-<span class='label'><a id='x1-29025r18'></a></span> 
-<span class='label'><a id='x1-29026r19'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>module</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>load anaconda3/2023.03/default</span> 
-</span><span class='label'><a id='x1-29027r20'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>module</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>load python/3.11.6/default</span> 
-</span><span class='label'><a id='x1-29028r21'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>module</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>load cuda/11.8/default</span> 
-</span><span class='label'><a id='x1-29029r22'></a></span> 
-<span class='label'><a id='x1-29030r23'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>create -p </span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR/jupyter-env -y</span> 
-</span><span class='label'><a id='x1-29031r24'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>activate </span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR/jupyter-env</span> 
-</span><span class='label'><a id='x1-29032r25'></a></span> 
-<span class='label'><a id='x1-29033r26'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>conda</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>install -c conda-forge jupyterlab -y</span> 
-</span><span class='label'><a id='x1-29034r27'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>install -c conda-forge python=3.11 jupyterlab -y</span> 
-</span><span class='label'><a id='x1-29035r28'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>conda</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>install -c conda-forge python=3.11 cupy jupyterlab -y</span> 
-</span><span class='label'><a id='x1-29036r29'></a></span> 
-<span class='label'><a id='x1-29037r30'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>echo</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>"Installing␣initial␣Python␣packages..."</span> 
-</span><span class='label'><a id='x1-29038r31'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>date</span></span> 
-<span class='label'><a id='x1-29039r32'></a></span> 
-<span class='label'><a id='x1-29040r33'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>pip3 install --quiet torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118</span> 
-</span><span class='label'><a id='x1-29041r34'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>pip3 install --quiet torch torchvision --index-url https://download.pytorch.org/whl/cu118</span> 
-</span><span class='label'><a id='x1-29042r35'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>pip3</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>install --quiet torch --index-url https://download.pytorch.org/whl/cu118</span> 
-</span><span class='label'><a id='x1-29043r36'></a></span> 
-<span class='label'><a id='x1-29044r37'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>echo</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>"Peparin␣some␣notebooks..."</span> 
-</span><span class='label'><a id='x1-29045r38'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>date</span></span> 
-<span class='label'><a id='x1-29046r39'></a></span> 
-<span class='label'><a id='x1-29047r40'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>Get some initial notebooks up</span> 
-</span><span class='label'><a id='x1-29048r41'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>cp</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>-f ../*.ipynb </span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR</span> 
-</span><span class='label'><a id='x1-29049r42'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>wget</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>--directory-prefix=</span><span class='tcit-0800x-x-87'>$</span><span class='cmitt-10x-x-70'>JUPYTER_DATA_DIR \</span> 
-</span><span class='label'><a id='x1-29050r43'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> </span><span class='cmitt-10x-x-70'> </span><span style='color:#000000'><span class='cmitt-10x-x-70'>https</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>://</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>raw</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>.</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>githubusercontent</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>.</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>com</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>NAG</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>-</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>DevOps</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>formation_cpu</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>-</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>gpu</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>refs</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>heads</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>master</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>/</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>GPU_Workshop</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>.</span></span><span style='color:#000000'><span class='cmitt-10x-x-70'>ipynb</span></span> 
-<span class='label'><a id='x1-29051r44'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>git</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>clone --depth=1 https://github.com/NAG-DevOps/formation_cpu-gpu</span> 
-</span><span class='label'><a id='x1-29052r45'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>cd</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>formation_cpu-gpu</span> 
-</span><span class='label'><a id='x1-29053r46'></a></span><span class='cmtt-8x-x-87'>  </span><span style='color:#000000'><span class='cmtt-8x-x-87'>mv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>-f GPU_Workshop.ipynb images get_cifar10.sh "</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>JUPYTER_DATA_DIR/"</span> 
-</span><span class='label'><a id='x1-29054r47'></a></span><span class='cmtt-8x-x-87'>  </span><span style='color:#000000'><span class='cmtt-8x-x-87'>cd</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>..</span> 
-</span><span class='label'><a id='x1-29055r48'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>rm</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>-rf formation_cpu-gpu</span> 
-</span><span class='label'><a id='x1-29056r49'></a></span> 
-<span class='label'><a id='x1-29057r50'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>echo</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>"Done."</span> 
-</span><span class='label'><a id='x1-29058r51'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>date</span></span> 
-<span class='label'><a id='x1-29059r52'></a></span> 
-<span class='label'><a id='x1-29060r53'></a></span><span style='color:#000000'><span class='cmitt-10x-x-70'>#</span></span><span style='color:#000000'> <span class='cmitt-10x-x-70'>EOF</span></span>
+<span class='label'><a id='x1-29010r3'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>mkdir</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>-p /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/Jupyter</span> 
+</span><span class='label'><a id='x1-29011r4'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>module</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>load anaconda3/2023.03/default</span> 
+</span><span class='label'><a id='x1-29012r5'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>TMPDIR /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/tmp</span> 
+</span><span class='label'><a id='x1-29013r6'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>TMP /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/tmp</span> 
+</span><span class='label'><a id='x1-29014r7'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>setenv</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>CONDA_PKGS_DIRS /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/Jupyter/pkgs</span> 
+</span><span class='label'><a id='x1-29015r8'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>create -p /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/Jupyter/jupyter-env -y</span> 
+</span><span class='label'><a id='x1-29016r9'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>activate /speed-scratch/</span><span class='tctt-0800x-x-87'>$</span><span class='cmtt-8x-x-87'>USER/Jupyter/jupyter-env</span> 
+</span><span class='label'><a id='x1-29017r10'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>conda</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>install -c conda-forge jupyterlab -y</span> 
+</span><span class='label'><a id='x1-29018r11'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>pip3</span></span><span style='color:#000000'> <span class='cmtt-8x-x-87'>install --quiet torch --index-url https://download.pytorch.org/whl/cu118</span> 
+</span><span class='label'><a id='x1-29019r12'></a></span><span style='color:#000000'><span class='cmtt-8x-x-87'>exit</span></span>
      </pre>
-     <figcaption class='caption'><span class='id'>Figure 9: </span><span class='content'>Source code for <a class='url' href='setup_conda.sh'><span class='cmtt-10'>setup_conda.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-290619  -->
+     <figcaption class='caption'><span class='id'>Figure 9: </span><span class='content'>Source code for <a class='url' href='setup_conda.sh'><span class='cmtt-10'>setup_conda.sh</span></a></span></figcaption><!-- tex4ht:label?: x1-290209  -->
      </figure>
      </li></ol>
 <!-- l. 242 --><p class='noindent'>The script will: </p>
@@ -1635,7 +1591,7 @@ dependencies)
      <li class='itemize'>exit the interactive session</li></ul>
 <!-- l. 251 --><p class='noindent'><span class='cmbx-10'>Launching Jupyter Labs instance from speed-submit:</span>
      </p><ol class='enumerate1'>
-<li class='enumerate' id='x1-29063x1'>
+<li class='enumerate' id='x1-29022x1'>
      <!-- l. 253 --><p class='noindent'>Run the <span class='cmtt-10'>start_jupyterlab.sh </span>script each time you need to launch JupyterLab from the
      submit node The script will: </p>
                                                                                
@@ -1652,7 +1608,7 @@ dependencies)
          <li class='itemize'>print the token/link to the jupyter server to paste in a web browser (starting with
          http://127.0.0.1/...)</li></ul>
      </li>
-<li class='enumerate' id='x1-29065x2'>Open a browser, and copy your Jupyter’s token and paste it in the browser’s URL
+<li class='enumerate' id='x1-29024x2'>Open a browser, and copy your Jupyter’s token and paste it in the browser’s URL
      field.</li></ol>
 <!-- l. 268 --><p class='noindent'><span class='paragraphHead' id='jupyter-notebook-in-python-venv'><span class='titlemark'><span class='cmbx-10'>2.8.3.3   </span></span> <a id='x1-300002.8.3.3'></a><span class='cmbx-10'>Jupyter Notebook in Python venv</span></span>
 This is an example of Jupyter Labs running in a Python Virtual environment on Speed.
@@ -3062,67 +3018,9 @@ Speed. To verify why job ID 1234 is not running, execute:
 sacct -j 1234</pre>
 <!-- l. 225 --><p class='nopar'>
 </p><!-- l. 227 --><p class='noindent'>A summary of the reasons can be obtained via the <span class='cmtt-10'>squeue </span>command.
-</p><!-- l. 231 --><p class='noindent'>
+</p><!-- l. 4 --><p class='noindent'>
 </p>
-<h4 class='subsectionHead' id='how-to-handle-tmp-overflow-on-speed-nodes'><span class='titlemark'>B.6   </span> <a id='x1-80000B.6'></a>How to Handle <span class='cmtt-10'>/tmp </span>Overflow on Speed Nodes?</h4>
-<!-- l. 234 --><p class='noindent'>Users may encounter a full <span class='cmtt-10'>/tmp </span>directory on Speed nodes when running LlamaIndex (or similar
-applications). This happens when temporary files are written directly to <span class='cmtt-10'>/tmp </span>instead of a designated
-scratch space which causes job failures or system instability.
-</p><!-- l. 237 --><p class='noindent'>
-</p>
-<h5 class='subsubsectionHead' id='cause'><span class='titlemark'>B.6.1   </span> <a id='x1-81000B.6.1'></a>Cause</h5>
-     <ul class='itemize1'>
-     <li class='itemize'>Hardcoded paths like ”/tmp” in scripts can lead to issues.
-     </li>
-     <li class='itemize'>LlamaIndex (and other ML-related tools) may default to storing temporary and cache
-     files in <span class='cmtt-10'>/tmp</span>.</li></ul>
-<!-- l. 243 --><p class='noindent'>
-</p>
-<h5 class='subsubsectionHead' id='solution'><span class='titlemark'>B.6.2   </span> <a id='x1-82000B.6.2'></a>Solution</h5>
-     <ul class='itemize1'>
-     <li class='itemize'>
-     <!-- l. 246 --><p class='noindent'>Use <span class='cmtt-10'>TMPDIR </span>instead of <span class='cmtt-10'>/tmp </span>to set a temporary directory for your job as <span class='cmtt-10'>TMPDIR </span>maps to
-     <span class='cmtt-10'>/nobackup </span>or <span class='cmtt-10'>/nobackup2 </span>which have more storage.
-                                                                               
-
-                                                                               
-</p>
-     <pre class='verbatim' id='verbatim-115'>
-     setenv TMP $TMPDIR
-     setenv TEMP $TMPDIR</pre>
-     <!-- l. 251 --><p class='nopar'>
-     </p></li>
-     <li class='itemize'>
-     <!-- l. 253 --><p class='noindent'>Set cache and temporary directories in your script. </p>
-         <ul class='itemize2'>
-         <li class='itemize'>
-         <!-- l. 255 --><p class='noindent'>Example fix for LlamaIndex:
-                                                                               
-
-                                                                               
-</p>
-         <pre class='verbatim' id='verbatim-116'>
-         mkdir -p $TMPDIR/$USER
-         setenv LLAMA_INDEX_CACHE_DIR $TMPDIR/$USER</pre>
-         <!-- l. 259 --><p class='nopar'></p></li></ul>
-     </li>
-     <li class='itemize'>
-     <!-- l. 262 --><p class='noindent'>Ensure the Python script uses the correct temporary directory </p>
-         <ul class='itemize2'>
-         <li class='itemize'>
-         <!-- l. 264 --><p class='noindent'>Example fix for Chromadb in LlamaIndex:
-                                                                               
-
-                                                                               
-</p>
-         <pre class='verbatim' id='verbatim-117'>
-         db_path = os.path.join(os.getenv("TMPDIR"), "db")
-         db = chromadb.PersistentClient(path=db_path)</pre>
-         <!-- l. 268 --><p class='nopar'></p></li></ul>
-     </li></ul>
-<!-- l. 4 --><p class='noindent'>
-</p>
-<h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-83000C'></a>Sister Facilities</h3>
+<h3 class='sectionHead' id='sister-facilities'><span class='titlemark'>C   </span> <a id='x1-80000C'></a>Sister Facilities</h3>
 <!-- l. 7 --><p class='noindent'>Below is a list of resources and facilities similar to Speed at various capacities. Depending on your
 research group and needs, they might be available to you. They are not managed by HPC/NAG of
 AITS, so contact their respective representatives.
@@ -3142,9 +3040,6 @@ AITS, so contact their respective representatives.
      an Atlas Analytics partition of Dr. Mahdi Husseini.
      </li>
      <li class='itemize'>Dr. Eugene Belilovsky hightower Exxact, and megatower graphcore clusters.
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'>Dr. Maria Amer’s VidPro group’s nodes in Speed (-01, -03, -25, -27) with additional V100
      and P6 GPUs.
@@ -3172,9 +3067,6 @@ AITS, so contact their respective representatives.
      <li class='itemize'>If you are a member of School of Health (formerly PERFORM Center), you may have access to
      their local <a href='https://perform-wiki.concordia.ca/mediawiki/index.php/HPC_Cluster'>PERFORM’s High Performance Computing (HPC) Cluster</a>. Contact Thomas
      Beaudry for details and how to obtain access.
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'>All Concordia students have access to the Library’s small <a href='https://library.concordia.ca/technology/sandbox/'>Technology Sandbox</a> testing cluster
      that also runs Slurm. Email <span class='cmtt-10'>sean.cooney AT concordia.ca </span>for details.
@@ -3185,7 +3077,7 @@ AITS, so contact their respective representatives.
 </li></ul>
 <!-- l. 3 --><p class='noindent'>
 </p>
-<h3 class='sectionHead' id='software-installed-on-speed'><span class='titlemark'>D   </span> <a id='x1-84000D'></a>Software Installed On Speed</h3>
+<h3 class='sectionHead' id='software-installed-on-speed'><span class='titlemark'>D   </span> <a id='x1-81000D'></a>Software Installed On Speed</h3>
 <!-- l. 6 --><p class='noindent'>This is a generated section by a script; last updated on <span class='cmti-10'>Fri Dec 20 04:37:31 PM EST 2024</span>. We have
 two major software trees: Scientific Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After
 major synchronization of software packages is complete, we will stop maintaining the EL7 tree and
@@ -3196,7 +3088,7 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
 </p><!-- l. 17 --><p class='noindent'><span class='cmbx-10'>NOTE: </span>this list does not include packages installed directly on the OS (yet).
 </p><!-- l. 21 --><p class='noindent'>
 </p>
-<h4 class='subsectionHead' id='el'><span class='titlemark'>D.1   </span> <a id='x1-85000D.1'></a>EL7</h4>
+<h4 class='subsectionHead' id='el'><span class='titlemark'>D.1   </span> <a id='x1-82000D.1'></a>EL7</h4>
 <!-- l. 24 --><p class='noindent'>Not all packages are intended for HPC, but the common tree is available on Speed as well as teaching
 labs’ desktops.
 </p>
@@ -3205,11 +3097,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>a2ps-4.13b</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>a2ps-4.14</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2019</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2019</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2020</span></span></span>
      </li>
@@ -3240,11 +3132,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda-1.7.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda2-2019.07</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda2-5.1.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda2-5.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda3-2019.07</span></span></span>
      </li>
@@ -3275,11 +3167,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-19.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2019R3</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2020R2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2020R2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2021R1</span></span></span>
      </li>
@@ -3310,11 +3202,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>arduino-1.6.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ArgoUML-0.34</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>arpack-3.0.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>arpack-3.0.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ARWpost-3.1</span></span></span>
      </li>
@@ -3345,11 +3237,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>autoson-1.4.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>babl-0.1.12</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bash-4.4</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bash-4.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>basilisk-19_3_23</span></span></span>
      </li>
@@ -3380,11 +3272,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>blender-2.78c</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bogofilter-1.2.4</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>booksim-2.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>booksim-2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>boost-1.51.0</span></span></span>
      </li>
@@ -3415,11 +3307,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Check-0.15.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>chrome-101.0.4951.54</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>chromium-31.0.1650.63</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>chromium-31.0.1650.63</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cilkplus-4.8</span></span></span>
      </li>
@@ -3450,11 +3342,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>comsol-4.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>comsol-5.6</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>comsol-6.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>comsol-6.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>comsol-6.1</span></span></span>
      </li>
@@ -3485,11 +3377,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-22.1.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cppunit-1.13.2</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CST-2014</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CST-2014</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CST-2019</span></span></span>
      </li>
@@ -3520,11 +3412,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-7.86.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-7.87.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-8.1.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-8.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cvs-1.11.23</span></span></span>
      </li>
@@ -3555,11 +3447,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ece-eclipse-jee.juno</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ece-eclipse-jee.luna</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ecj-25</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ecj-25</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ECLiPSe-6.0_192</span></span></span>
      </li>
@@ -3590,11 +3482,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>electromagnetics_suite-2023R1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>emacs-24.4</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>emacs-25.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>emacs-25.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>enscript-1.6.5.2</span></span></span>
      </li>
@@ -3625,11 +3517,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fftw-3.2.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fftw-3.3.10</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fftw-3.3.8</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fftw-3.3.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.11.0</span></span></span>
      </li>
@@ -3660,11 +3552,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-38.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-45.9.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-52.9.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-52.9.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-60.9.0</span></span></span>
      </li>
@@ -3695,11 +3587,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-24.8.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-31.7.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-38.8.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-38.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-45.9.0</span></span></span>
      </li>
@@ -3730,11 +3622,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>freerdp-1.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>freetype-2.4.12</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FSL-6.0.5</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FSL-6.0.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fsl-6.0.6.2</span></span></span>
      </li>
@@ -3765,11 +3657,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-5.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-5.2.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-5.4.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-5.4.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-6.1.0</span></span></span>
      </li>
@@ -3800,11 +3692,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghc-7.6.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-10.0.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-8.50</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-8.50</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-9.25</span></span></span>
      </li>
@@ -3835,11 +3727,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>git-2.35.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>git-2.5.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gl2ps-1.3.8</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gl2ps-1.3.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glade3-3.8.3</span></span></span>
      </li>
@@ -3870,11 +3762,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gnuplot-4.6.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gnuplot-5.0.1</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gnuplot-5.0.3</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gnuplot-5.0.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.10.2</span></span></span>
      </li>
@@ -3905,11 +3797,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gromacs-5.0.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gsl-2.6</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gtkwave-3.3.15</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gtkwave-3.3.15</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gts-121130</span></span></span>
      </li>
@@ -3940,11 +3832,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gv-3.7.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-1.0.4</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-1.1.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-1.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-2.4.1</span></span></span>
      </li>
@@ -3975,11 +3867,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.38</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.39</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.52</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.52</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.53</span></span></span>
      </li>
@@ -4010,11 +3902,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ImageMagick-6.9.4.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ImageMagick-7.0.8.42</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>imap-2007e</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>imap-2007e</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>instantclient-19.3.0.0.0</span></span></span>
      </li>
@@ -4045,11 +3937,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-2.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-3.0.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-3.1.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-3.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ipe-7.1.3</span></span></span>
      </li>
@@ -4080,11 +3972,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-7u80</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u101</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u111</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u111</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u121</span></span></span>
      </li>
@@ -4115,11 +4007,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-6_32b</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-6u45</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-6u45</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-7u80</span></span></span>
      </li>
@@ -4150,11 +4042,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u231</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u91</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-7</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-7_32b</span></span></span>
      </li>
@@ -4185,11 +4077,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lapack-3.4.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lasso-2.6.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lib3ds-1.3.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lib3ds-1.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive-3.1.2</span></span></span>
      </li>
@@ -4220,11 +4112,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libjwt-1.15.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libksba-1.6.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.1.8</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.1.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.3.7</span></span></span>
      </li>
@@ -4255,11 +4147,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lispworks-7.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lispworks-8.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Logiscope-6.6.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Logiscope-6.6.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Logiscope-7.1</span></span></span>
      </li>
@@ -4290,11 +4182,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>m4-1.4.17</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mairix-0.23</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>make-4.4.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>make-4.4.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>maple-2019.1</span></span></span>
      </li>
@@ -4325,11 +4217,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mercurial-3.0.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mercurial-5.6.1</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mesa-19.0.3</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mesa-19.0.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>metamail-2.7</span></span></span>
      </li>
@@ -4360,11 +4252,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-3.2.10</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-4.6.1</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-5.3.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-5.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-current</span></span></span>
      </li>
@@ -4395,11 +4287,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpc-1.0.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpfr-2.4.2</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpich-4.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpich-4.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>MPlayer-1.1.1</span></span></span>
      </li>
@@ -4430,11 +4322,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.16</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.18</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.22</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.22</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.23</span></span></span>
      </li>
@@ -4465,11 +4357,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nasm-2.10.07</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nasm-2.14.02</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nasm-2.15.05</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nasm-2.15.05</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncl-6.6.2</span></span></span>
      </li>
@@ -4500,11 +4392,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ninja-1.10.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nltk-3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nltk-3.3</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nltk-3.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nmh-1.1rc3</span></span></span>
      </li>
@@ -4535,11 +4427,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ns-3.26</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ntbtls-0.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nvtop-3.0.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nvtop-3.0.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ocaml-3.12.1</span></span></span>
      </li>
@@ -4570,11 +4462,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>opencv-4.0.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>opencv-4.5.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>opencv-4.5.4</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>opencv-4.5.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openesb-2.3.1</span></span></span>
      </li>
@@ -4605,11 +4497,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2012</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2106</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2206</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2206</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2212</span></span></span>
      </li>
@@ -4640,11 +4532,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.0.2o</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.0.2u</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1a</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1.current</span></span></span>
      </li>
@@ -4675,11 +4567,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.6</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.7</span></span></span>
      </li>
@@ -4710,11 +4602,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>parallel-20200322</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ParaView-5.11.2</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>parmetis-4.0.3</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>parmetis-4.0.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pc2-9.3.1</span></span></span>
      </li>
@@ -4745,11 +4637,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.5.11</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.5.12</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.5.38</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.5.38</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.6.33</span></span></span>
      </li>
@@ -4780,11 +4672,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-11.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-12</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-12.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-12.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-12.3</span></span></span>
      </li>
@@ -4815,11 +4707,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.5.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.7.10</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.7.11</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.7.11</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.10.13</span></span></span>
      </li>
@@ -4850,11 +4742,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.18</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.3</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.9</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.9</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.9.1</span></span></span>
      </li>
@@ -4885,11 +4777,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>qt_sdk-1.2.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>quota-1.3</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.4.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.4.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.4.2</span></span></span>
      </li>
@@ -4920,11 +4812,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>RSA-8.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.1.1</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.3.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.5.0</span></span></span>
      </li>
@@ -4955,11 +4847,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scala-2.12.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scalapack-2.2.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SciTE-3.4.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SciTE-3.4.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scons-2.3.1</span></span></span>
      </li>
@@ -4990,11 +4882,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>singularity-3.7.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>slicer-4.11.20210226</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Smarty-2.6.26</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Smarty-2.6.26</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>smpeg-2.0.0</span></span></span>
      </li>
@@ -5025,11 +4917,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-13.06.012</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-14.06.013</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-15.04.010</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-15.04.010</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>stealfile-1.0</span></span></span>
      </li>
@@ -5060,11 +4952,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcl-8.6.13</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcmalloc-1.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcsh-6.18.01</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcsh-6.18.01</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>teams-1.5.00</span></span></span>
      </li>
@@ -5095,11 +4987,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20220405</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20230324</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texstudio-2.12.16</span></span></span>
      </li>
@@ -5130,11 +5022,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird_french-115.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird_french-115.10.2</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tidy-5.7.28</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tidy-5.7.28</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tix-8.1.4</span></span></span>
      </li>
@@ -5165,11 +5057,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.100</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.104</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.107</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.107</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.2</span></span></span>
      </li>
@@ -5200,11 +5092,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>transfig-3.2.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unafold-3.8</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unafold-3.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unrar-3.8.2</span></span></span>
      </li>
@@ -5235,11 +5127,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>web-helpers-1.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>websphinx-0.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>weka-3.8.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>weka-3.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>wget-1.16</span></span></span>
      </li>
@@ -5270,11 +5162,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xemacs-21.5.34</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xfig-3.2.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xmgr-4.1.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xmgr-4.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xmlsec1-1.2.31</span></span></span>
      </li>
@@ -5296,17 +5188,17 @@ labs’ desktops.
 </div>
 <!-- l. 991 --><p class='noindent'>
 </p>
-<h4 class='subsectionHead' id='el1'><span class='titlemark'>D.2   </span> <a id='x1-86000D.2'></a>EL9</h4>
+<h4 class='subsectionHead' id='el1'><span class='titlemark'>D.2   </span> <a id='x1-83000D.2'></a>EL9</h4>
 <div class='columns-3'>
      <ul class='itemize1'>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>a2ps-4.14</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2021</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2023</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2023</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>acl-10.1.express</span></span></span>
      </li>
@@ -5337,11 +5229,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>aspell-0.60.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bash-4.4</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-0.2.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-0.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bison-3.7.2</span></span></span>
      </li>
@@ -5372,11 +5264,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-7.86.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>DbVisualizer-24.1.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>EasyBuild</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>EasyBuild</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>emacs-27.2</span></span></span>
      </li>
@@ -5407,11 +5299,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.11.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.8.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.9.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.9.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.9.1</span></span></span>
      </li>
@@ -5442,11 +5334,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-91.9.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-91.9.1</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-11.3.0</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-11.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-12.2.0</span></span></span>
      </li>
@@ -5477,11 +5369,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gv-3.7.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.55</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.57</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.57</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>http-parser-2.9.4</span></span></span>
      </li>
@@ -5512,11 +5404,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.4.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libyaml-0.2.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lynx-2.8.9</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lynx-2.8.9</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lz4-1.9.4</span></span></span>
      </li>
@@ -5547,11 +5439,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpich-4.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>MRtrix-3.0.3</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-5.7.43</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-5.7.43</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.31</span></span></span>
      </li>
@@ -5582,11 +5474,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>node-v12.18.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>node-v16.13.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nvtop-3.0.1</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nvtop-3.0.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ocaml-4.01.0</span></span></span>
      </li>
@@ -5617,11 +5509,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>oracle-19c</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ParaView-5.11.2</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.30.3</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.30.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pgadmin4-7.6</span></span></span>
      </li>
@@ -5652,11 +5544,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.9.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.9.18</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>qt-5.14.2</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>qt-5.14.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>qt-5.15.10</span></span></span>
      </li>
@@ -5687,11 +5579,11 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20220405</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20230324</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
                                                                                
 
                                                                                
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird-102.11.1</span></span></span>
      </li>
@@ -5724,8 +5616,8 @@ labs’ desktops.
                                                                                
 
                                                                                
-<p id='annotated-bibliography'><a id='Q1-1-104'></a>
-</p><h3 class='likesectionHead' id='references'><a id='x1-87000'></a><span class='cmr-9'>References</span></h3>
+<p id='annotated-bibliography'><a id='Q1-1-101'></a>
+</p><h3 class='likesectionHead' id='references'><a id='x1-84000'></a><span class='cmr-9'>References</span></h3>
 <!-- l. 1 --><p class='noindent'>
     </p><div class='thebibliography'>
     <p class='bibitem'><span class='biblabel'>
