@@ -26,9 +26,9 @@ jobs:
       - name: Set up Pages
         uses: actions/configure-pages@v2
       - name: Upload web build outputs
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "./doc/web"
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

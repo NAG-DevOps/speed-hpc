@@ -9,7 +9,7 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 * [GCS Speed HPC Facility](https://www.concordia.ca/ginacody/aits/speed.html)
 * The Speed Manual ([PDF](https://github.com/NAG-DevOps/speed-hpc/blob/master/doc/speed-manual.pdf), [HTML](https://nag-devops.github.io/speed-hpc/))
 * [AITS Service Desk](https://www.concordia.ca/ginacody/aits.html)
-
+* [Job Script Generator](https://nag-devops.github.io/speed-hpc/generator.html)
 ## Examples
 
 * [`src/`](src/) -- sample job scripts
