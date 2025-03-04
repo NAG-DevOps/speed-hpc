@@ -12,7 +12,7 @@ from pdf2image.exceptions import (
     PDFPopplerTimeoutError,
 )
 
-pdf_file = "speed-workshop.pdf"
+pdf_file = "example.pdf"
 output_dir = "./output"
 
 if not os.path.exists(output_dir):

@@ -29,9 +29,10 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
 `pdf-to-jpg.py`
 imports all the required modules, finds the specified pdf to convert, and saves the pdf pages as JPEG files into output folder in the same directory.
 
-**Note**: replace speed-workshop.pdf with a pdf of your choice, and update the variable `pdf_file = "speed-workshop.pdf"` with the name of your file.
+**Note**: replace example.pdf with a pdf of your choice, and update the variable `pdf_file = "example.pdf"` with the name of your file.
 
 **Note**: If any rendering error is shown, check if the PDF is composed correctly:
 
-        pdfinfo speed-workshop.pdf
+        pdfinfo example.pdf
+        
 <!-- TOC end -->
