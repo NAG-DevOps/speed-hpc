@@ -31,4 +31,7 @@ imports all the required modules, finds the specified pdf to convert, and saves 
 
 **Note**: replace speed-workshop.pdf with a pdf of your choice, and update the variable `pdf_file = "speed-workshop.pdf"` with the name of your file.
 
+**Note**: If any rendering error is shown, check if the PDF is composed correctly:
+
+        pdfinfo speed-workshop.pdf
 <!-- TOC end -->
