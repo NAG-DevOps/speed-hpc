@@ -1,0 +1,1 @@
+firefox --kiosk /local/pkg/tools/SlurmScriptGenerator/index.html 2>/dev/null
