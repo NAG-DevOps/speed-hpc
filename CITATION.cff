@@ -22,6 +22,9 @@ authors:
     family-names: Meza
     affiliation: Concordia University
     orcid: 'https://orcid.org/0009-0002-3366-6821'
+  - given-names: Farah
+    family-names: Salhany
+    affiliation: Concordia University
   - name: 'et al,'
     city: Montreal
     country: CA
@@ -33,7 +36,7 @@ repository-code: 'https://github.com/NAG-DevOps/speed-hpc'
 url: 'https://www.concordia.ca/ginacody/aits/speed.html'
 abstract: >-
   This document contains basic information required to use
-  “Speed” as well as tips and tricks, examples, and
+  "Speed" as well as tips and tricks, examples, and
   references to projects and papers that have used Speed.
   User contributions of sample jobs and/ or references are
   welcome.
