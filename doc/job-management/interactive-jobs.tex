@@ -323,42 +323,39 @@ jupyter lab --no-browser --notebook-dir=$PWD --ip="0.0.0.0" --port=8888 --port-r
 \subsubsection{Visual Studio Code}
 \label{sect:vscode}
 
-This is an example of running VScode, it's similar to Jupyter notebooks, but
-it doesn't use containers. \textbf{Note:} this a Web-based version; there exists the local
-(workstation)~--~remote (speed-node) client-server version too, but it is for advanced users
-and is out of scope here (so no support, use it at your own risk).
+This is an example of running VS Code on Speed
 
-\begin{itemize}
-\item Environment preparation: for the FIRST time:
+\textbf{Note: } There are two ways to run Visual Studio Code (VS Code) on Speed.
+
+% 2.8.4.1 Web-based Version
+% ----------------------------------------------
+\paragraph{Web-based Version}
+\label{sect:web-based-vscode}
+\noindent Similar to Jupyter notebooks.
+
 \begin{enumerate}
-    \item Go to your speed-scratch directory: \texttt{cd /speed-scratch/\$USER}
-    \item Create a vscode directory: \texttt{mkdir vscode}
-    \item Create another directory: \texttt{mkdir -p /speed-scratch/\$USER/run-user}
+    \item Start an interactive session: \texttt{salloc --job-name=vs-code --mem=10G}
+    \item Run the script: \texttt{./vscode_web.sh}
+    \begin{itemize}
+        \item Create a vscode directory (with subdirectories run-user and workspace)
+        \item Set the environment variable \texttt{XDG\_RUNTIME\_DIR} appropriately. 
+        \item Print the SSH tunnel command required to forward port 8080 from the compute node to your local machine.
+        \item Launch code-server in the background, which generates a configuration file (including the VS Code password).
+    \end{itemize}
+    \item Connect from your local machine:
+    \begin{itemize}
+        \item Open your web browser and navigate to http://localhost:8080.
+        \item If prompted for a password, use the password printed by the script.
+    \end{itemize}
 \end{enumerate}
 
-\item Running VScode
-\begin{enumerate}
-    \item Go to your vscode directory:
-    \texttt{cd /speed-scratch/\$USER/vscode}
-    \item Open interactive session:
-    \texttt{salloc --mem=10Gb --constraint=el9}
-    \item Set environment variable:
-    \texttt{setenv XDG\_RUNTIME\_DIR /speed-scratch/\$USER/run-user}
-    \item Run VScode, change the port if needed.
-    \scriptsize
-    \begin{verbatim}
-/speed-scratch/nag-public/code-server-4.22.1/bin/code-server --user-data-dir=$PWD\/projects \
---config=$PWD\/home/.config/code-server/config.yaml --bind-addr="0.0.0.0:8080" $PWD\/projects
-    \end{verbatim}
-    \normalsize
-    \item SSH Tunnel creation: similar to Jupyter, see \xs{sect:jupyter-singularity}
-    \item Open a browser and type: \texttt{localhost:8080}
-    \item If the browser asks for a password, consult:
-    \begin{verbatim}
-    cat /speed-scratch/$USER/vscode/home/.config/code-server/config.yaml
-    \end{verbatim}
-\end{enumerate}
-\end{itemize}
+\small
+\begin{figure}[htpb]
+    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily\scriptsize]{../../src/vscode/vscode_web.sh}
+    \caption{Source code for \file{vscode_web.sh}}
+    \label{fig:vscode_web.sh}
+\end{figure}
+\normalsize
 
 \begin{figure}[htbp]
 	\centering
@@ -366,3 +363,9 @@ and is out of scope here (so no support, use it at your own risk).
 	\caption{VScode running on a Speed node}
 	\label{fig:vscode}
 \end{figure}
+
+% 2.8.4.2 Local Version
+% ----------------------------------------------
+\paragraph{Local Version}
+\label{sect:local-vscode}
+\noindent If you prefer running VS Code without needing a separate browser-based code-server. Instructions can be found in \tool{/src/vscode} \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/vscode}{README.md} file.
