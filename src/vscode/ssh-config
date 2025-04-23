@@ -1,0 +1,11 @@
+# Speed-submit (login) node
+Host speed
+HostName speed.encs.concordia.ca
+User <ENCSusername>
+
+# Speed compute node
+Host speed-compute
+HostName <compute-node>.encs.concordia.ca
+User <ENCSusername>
+ProxyJump speed
+ForwardAgent yes
