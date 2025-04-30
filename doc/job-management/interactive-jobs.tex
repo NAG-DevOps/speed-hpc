@@ -331,19 +331,20 @@ This is an example of running VS Code on Speed
 % ----------------------------------------------
 \paragraph{Web-based Version}
 \label{sect:web-based-vscode}
-\noindent Similar to Jupyter notebooks.
+Similar to Jupyter notebooks.
 
 \begin{enumerate}
     \item Start an interactive session: \texttt{salloc --job-name=vs-code --mem=10G}
-    \item Run the script: \texttt{./vscode_web.sh}
+    \item Run the script \texttt{./vscode\_web.sh} located in \tool{/src/vscode} directory. The script will:
     \begin{itemize}
         \item Create a vscode directory (with subdirectories run-user and workspace)
-        \item Set the environment variable \texttt{XDG\_RUNTIME\_DIR} appropriately. 
+        \item Set the environment variable \texttt{XDG\_RUNTIME\_DIR} appropriately.
         \item Print the SSH tunnel command required to forward port 8080 from the compute node to your local machine.
         \item Launch code-server in the background, which generates a configuration file (including the VS Code password).
     \end{itemize}
-    \item Connect from your local machine:
+    \item Connect from your local machine by performing the following steps:
     \begin{itemize}
+        \item Open a new terminal window and run the SSH tunnel command printed by the script.
         \item Open your web browser and navigate to http://localhost:8080.
         \item If prompted for a password, use the password printed by the script.
     \end{itemize}
@@ -360,7 +361,7 @@ This is an example of running VS Code on Speed
 \begin{figure}[htbp]
 	\centering
 	\fbox{\includegraphics[width=0.9\textwidth]{images/vscode.png}}
-	\caption{VScode running on a Speed node}
+	\caption{running VS Code (web) on a Speed node}
 	\label{fig:vscode}
 \end{figure}
 
@@ -368,4 +369,5 @@ This is an example of running VS Code on Speed
 % ----------------------------------------------
 \paragraph{Local Version}
 \label{sect:local-vscode}
-\noindent If you prefer running VS Code without needing a separate browser-based code-server. Instructions can be found in \tool{/src/vscode} \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/vscode}{README.md} file.
+If you prefer to run VS Code directly on your local machine without relying on a browser-based code-server, 
+detailed instructions are available in the \tool{/src/vscode} \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/vscode}{README.md} file.
