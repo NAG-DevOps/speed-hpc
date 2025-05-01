@@ -2,7 +2,6 @@
 % -------------------------------------------------------------
 \subsection{Interactive Jobs}
 \label{sect:interactive-jobs}
-
 Interactive job sessions allow you to interact with the system in real-time.
 These sessions are particularly useful for tasks such as testing, debugging, optimizing code,
 setting up environments, and other preparatory work before submitting batch jobs.
@@ -15,6 +14,7 @@ setting up environments, and other preparatory work before submitting batch jobs
 To request an interactive job session, use the \texttt{salloc} command with appropriate options.
 This is similar to submitting a batch job but allows you to run shell commands interactively
 within the allocated resources. For example:
+
 \begin{verbatim}
 	salloc -J interactive-test --mem=1G -p ps -n 8
 \end{verbatim}
@@ -24,11 +24,11 @@ It is recommended to use \tool{srun} for compute-intensive steps within \tool{sa
 If you need a quick, short job just to compile something on a GPU node,
 you can use an interactive srun directly. For example, a 1-hour allocation:
 
-\textbf{For tcsh}:
+For tcsh:
 \begin{verbatim}
 	srun --pty -n 8 -p pg --gpus=1 --mem=1G -t 60 /encs/bin/tcsh
 \end{verbatim}
-\textbf{For bash}:
+For bash:
 \begin{verbatim}
 	srun --pty -n 8 -p pg --gpus=1 --mem=1G -t 60 /encs/bin/bash
 \end{verbatim}
@@ -39,7 +39,7 @@ you can use an interactive srun directly. For example, a 1-hour allocation:
 \label{sect:graphical-applications}
 
 To run graphical UI applications (e.g., MALTLAB, Abaqus CME, IDEs like PyCharm, VSCode, Eclipse, etc.) on Speed,
-you need to enable X11 forwarding from your client machine Speed then to the compute node.
+you need to enable X11 forwarding from your client machine Speed then to the compute node.\\
 To do so, follow these steps:
 \begin{enumerate}
 \item Run an X server on your client machine:
@@ -85,7 +85,7 @@ non-interactive or use VirtualGL.
 \textbf{Note:} If using VSCode, it's currently only supported with the \tool{--no-sandbox} option.
 
 \textbf{TCSH version:}
-\small
+\scriptsize
 \begin{verbatim}
     ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
     [speed-submit] [/home/c/carlos] > echo $DISPLAY
@@ -104,7 +104,7 @@ non-interactive or use VirtualGL.
 \normalsize
 
 \textbf{BASH version:}
-\small
+\scriptsize
     \begin{verbatim}
     bash-3.2$ ssh -X speed (XQuartz xterm, PuTTY or MobaXterm have X11 forwarding too)
     serguei@speed's password:

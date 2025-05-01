@@ -2,15 +2,13 @@
 % -------------------
 % TMP scheduler-specific section
 
-Directives are comments included at the beginning of a job script that set the shell 
-and the options for the job scheduler.
-%
-The shebang directive is always the first line of a script. In your job script, 
-this directive sets which shell your script's commands will run in. On ``Speed'', 
-we recommend that your script use a shell from the \texttt{/encs/bin} directory.\\
+Directives are comments included at the beginning of a job script that set the shell and the options for the job scheduler. 
+The shebang directive is always the first line of a script. 
+In your job script, this directive sets which shell your script's commands will run in. On ``Speed'', 
+we recommend that your script use a shell from the \texttt{/encs/bin} directory.
 
-To use the \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|.
-For \texttt{bash}, start with \verb|#!/encs/bin/bash|.\\
+To specify the shell for your script, begin with the appropriate shebang line:\\
+use \verb|#!/encs/bin/tcsh| for the tcsh shell, or \verb|#!/encs/bin/bash| for bash.
 
 Directives that start with \verb|#SBATCH| set the options for the cluster's 
 SLURM job scheduler. The following provides an example of some essential directives:
@@ -71,10 +69,9 @@ memory space on \texttt{speed-submit} with:
     sstat -o jobid,maxvmsize,ntasks%7,tresusageouttot%25 -j <jobID>
 \end{verbatim}
 
-\noindent Memory-footprint efficiency values (\tool{seff}) are also provided for completed jobs in the final
-email notification as ``maxvmsize''.
-\emph{Jobs that request a low-memory footprint are more likely to load on a busy
-cluster.}\\
+Memory-footprint efficiency values (\tool{seff}) are also provided for completed jobs in the final email notification as ``maxvmsize''.
+
+\emph{Jobs that request a low-memory footprint are more likely to load on a busy cluster.}
 
 \noindent Other essential options are \option{--time}, or \option{-t}, and \option{--account}, or \option{-A}.
 \begin{itemize}

@@ -63,14 +63,16 @@ lines there; \textbf{they should now be removed}, as they have no use in SLURM a
 will start giving ``command not found'' errors on login when the software is removed:
 
 csh/\tool{tcsh}: sample \file{.tcshrc} file:
+\scriptsize
 \begin{verbatim}
     # Speed environment set up
     if ($HOSTNAME == speed-submit.encs.concordia.ca) then
     source /local/pkg/uge-8.6.3/root/default/common/settings.csh
     endif
 \end{verbatim}
-
+\normalsize
 Bourne shell/\tool{bash}: sample \file{.bashrc} file:
+\scriptsize
 \begin{verbatim}
     # Speed environment set up
     if [ $HOSTNAME = "speed-submit.encs.concordia.ca" ]; then
@@ -78,6 +80,7 @@ Bourne shell/\tool{bash}: sample \file{.bashrc} file:
         printenv ORGANIZATION | grep -qw ENCS || . /encs/Share/bash/profile
     fi
 \end{verbatim}
+\normalsize
 
 \textbf{IMPORTANT NOTE:} you will need to either log out and back in, or execute a new shell, 
 for the environment changes in the updated \file{.tcshrc} or \file{.bashrc} file to be applied.
@@ -92,7 +95,7 @@ Brief summary of Speed evolution phases:
 
 \subsubsection{Phase 5}
 Phase 5 saw incorporation of the Salus, Magic, and Nebular
-subclusters (see \xf{fig:speed-architecture-full}).
+subclusters (see \xf{fig:speed-architecture}).
 
 \subsubsection{Phase 4}
 Phase 4 had 7 SuperMicro servers with 4x A100 80GB GPUs each added,
