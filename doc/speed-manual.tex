@@ -14,6 +14,12 @@
 % For newline, simply insert an empty line
 \usepackage{parskip}
 
+% For including images
+\usepackage{graphicx}
+\usepackage{adjustbox}
+% For customizing headers/footers
+\usepackage{fancyhdr}
+
 % Down to the level of the paragraph (4)
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
@@ -27,6 +33,19 @@
 
 \input{commands}
 
+% Footer setup
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\thepage}
+\fancyfoot[C]{
+  \begin{minipage}[t]{\textwidth}
+    \hfill
+    \raisebox{-0.5\height}{\includegraphics[height=1.5cm]{images/concordia-logo-50th.png}}
+  \end{minipage}
+}
+\renewcommand{\headrulewidth}{0pt}  % remove header line
+\renewcommand{\footrulewidth}{0pt}  % remove footer line
+
 %% Document
 % ------------------------------------------------------------------------------
 \begin{document}
@@ -35,11 +54,14 @@
 % ------------------------------------------------------------------------------
 % Regular title as in the article class.
 %
-\title{Speed: The GCS ENCS Cluster}
+\title{
+    \includegraphics[height=6cm]{images/concordia-logo-50th-tagline.png}
+    \\[1.5em]
+    Speed: The GCS ENCS Cluster}
 
 % \titlerunning{} has to be set to either the main title or its shorter
 % version for the running heads. Use {\sf} for highlighting your system
-% name, application, or a tool.
+% name, application,  or a tool.
 
 \titlerunning{Speed: The GCS ENCS Cluster}
 

@@ -106,29 +106,34 @@ We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture}).
 \end{itemize}
 
-% Speed front image
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\columnwidth]{images/speed2.jpg}
-    \caption{Speed Front}
-    \label{fig:speed-front}
+	% Speed front image
+    \begin{minipage}[b]{0.49\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/speed2.jpg}
+        \caption{Speed Front}
+        \label{fig:speed-front}
+    \end{minipage}
+    \hfill
+	% Speed back image
+    \begin{minipage}[b]{0.49\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/speed1.jpg}
+        \caption{Speed Back}
+        \label{fig:speed-back}
+    \end{minipage}
 \end{figure}
-\vspace{-1em}
-% Speed back image
+
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\columnwidth]{images/speed1.jpg}
-    \caption{Speed Back}
-    \label{fig:speed-back}
+    \begin{adjustbox}{center, width=0.2\textwidth}
+        \includegraphics{images/SpeedArchitecture-March 2025.jpg}
+    \end{adjustbox}
+    \caption{Speed Cluster Hardware Architecture}
+    \label{fig:speed-architecture}
 \end{figure}
-\vspace{-1em}
-% Speed architecture image
-\begin{figure*}[htpb]
-	\centering
-	\includegraphics[width=\columnwidth]{images/SpeedArchitecture-March 2025.jpg}
-	\caption{Speed Cluster Hardware Architecture}
-	\label{fig:speed-architecture}
-\end{figure*}
+
 % Slurm architecture image
 \begin{figure}[htpb]
 	\centering
