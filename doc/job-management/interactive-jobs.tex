@@ -24,11 +24,11 @@ It is recommended to use \tool{srun} for compute-intensive steps within \tool{sa
 If you need a quick, short job just to compile something on a GPU node,
 you can use an interactive srun directly. For example, a 1-hour allocation:
 
-For tcsh:
+\textbf{For tcsh}:
 \begin{verbatim}
 	srun --pty -n 8 -p pg --gpus=1 --mem=1G -t 60 /encs/bin/tcsh
 \end{verbatim}
-For bash:
+\textbf{For bash}:
 \begin{verbatim}
 	srun --pty -n 8 -p pg --gpus=1 --mem=1G -t 60 /encs/bin/bash
 \end{verbatim}
@@ -335,10 +335,10 @@ Similar to Jupyter notebooks.
 
 \begin{enumerate}
     \item Start an interactive session: \texttt{salloc --job-name=vs-code --mem=10G}
-    \item Run the script \texttt{./vscode\_web.sh} located in \tool{/src/vscode} directory. The script will:
+    \item Run the script \texttt{./vscode\_web.sh} located in \texttt{/src/vscode} directory. The script will:
     \begin{itemize}
         \item Create a vscode directory (with subdirectories run-user and workspace)
-        \item Set the environment variable \texttt{XDG\_RUNTIME\_DIR} appropriately.
+        \item Set the environment variable \api{XDG\_RUNTIME\_DIR} appropriately.
         \item Print the SSH tunnel command required to forward port 8080 from the compute node to your local machine.
         \item Launch code-server in the background, which generates a configuration file (including the VS Code password).
     \end{itemize}
