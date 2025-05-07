@@ -71,7 +71,7 @@ File-system containers are considered legacy and are not commonly used.\\
 For many workflows, a Docker container might already exist. In this case, you can use Singularity's 
 docker pull function as part of your virtual environment setup in an interactive job allocation:
 
-\small
+\scriptsize
 \begin{verbatim}
   salloc --gpus=1 -n8 --mem=4Gb -t60
   cd /speed-scratch/$USER/

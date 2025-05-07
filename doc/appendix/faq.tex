@@ -99,7 +99,7 @@ run out of disk space to write to. On \tool{Speed}, this error can be returned w
 		mkdir -m 750 /speed-scratch/$USER/recovery
 	\end{verbatim}
 	\item
-	Update the job script to write output to the directories created in your \tool{speed-scratch} directory,
+	Update job script to write output to the directories created in your \tool{speed-scratch} directory,
 	e.g., \verb!/speed-scratch/$USER/output!.
 	\end{itemize}
 \end{enumerate}
@@ -167,7 +167,7 @@ When a job with a job ID of 1234 is running or terminated, you can track its sta
 It is possible that one or more of the Speed nodes are disabled for maintenance.
 To verify if Speed nodes are disabled, check if they are in a draining or drained state:
 
-\small
+\scriptsize
 \begin{verbatim}
 [serguei@speed-submit src] % sinfo --long --Node
 Thu Oct 19 21:25:12 2023

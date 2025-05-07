@@ -83,7 +83,7 @@ We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 
 \begin{itemize}
 	\item Twenty four (24) 32-core compute nodes, each with 512~GB of memory and
-	approximately 1~TB of local volatile-scratch disk space (pictured in \xf{fig:speed-pics}).
+	approximately 1~TB of local volatile-scratch disk space (pictured in \xf{fig:speed-front}).
 
 	\item Twelve (12) NVIDIA Tesla P6 GPUs, with 16~GB of GPU memory (compatible with the
 	CUDA, OpenGL, OpenCL, and Vulkan APIs).
@@ -92,34 +92,47 @@ We receive support from the rest of AITS teams, such as NAG, SAG, FIS, and DOG.
 	256GB of RAM.
 
 	\item 7 new SPEED2 servers with 256 CPU cores each 4x~A100 80~GB GPUs, partitioned
-	into 4x~20GB MIGs each; larger local storage for TMPDIR (see \xf{fig:speed-architecture-full}).
+	into 4x~20GB MIGs each; larger local storage for TMPDIR (see \xf{fig:speed-architecture}).
 
 	\item One AMD FirePro S7150 GPU, with 8~GB of memory (compatible with the
 	Direct~X, OpenGL, OpenCL, and Vulkan APIs).
 
  	\item Salus compute node (CSSE CLAC, Drs.~Bergler and Kosseim), 56 cores and 728GB of RAM,
-	see \xf{fig:speed-architecture-full}.
+	see \xf{fig:speed-architecture}.
 
-	\item Magic subcluster partition (ECE, Dr.~Khendek, 11 nodes, see \xf{fig:speed-architecture-full}).
+	\item Magic subcluster partition (ECE, Dr.~Khendek, 11 nodes, see \xf{fig:speed-architecture}).
 
 	\item Nebular subcluster partition (CIISE, Drs.~Yan, Assi, Ghafouri, et al., Nebulae GPU node with 2x RTX 6000 Ada 48GB cards,
-	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture-full}).
+	Stellar compute node, and Matrix 177TB storage/compute node, see \xf{fig:speed-architecture}).
 \end{itemize}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=\columnwidth]{images/speed-pics}
-	\caption{Speed}
-	\label{fig:speed-pics}
+\begin{figure}[htbp]
+    \centering
+	% Speed front image
+    \begin{minipage}[b]{0.49\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/speed2.jpg}
+        \caption{Speed Front}
+        \label{fig:speed-front}
+    \end{minipage}
+    \hfill
+	% Speed back image
+    \begin{minipage}[b]{0.49\columnwidth}
+        \centering
+        \includegraphics[width=\linewidth]{images/speed1.jpg}
+        \caption{Speed Back}
+        \label{fig:speed-back}
+    \end{minipage}
 \end{figure}
 
-\begin{figure}[htpb]
-	\centering
-	\includegraphics[width=\columnwidth]{images/speed-architecture-full}
-	\caption{Speed Cluster Hardware Architecture}
-	\label{fig:speed-architecture-full}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth]{images/SpeedArchitecture-March_2025.jpg}
+    \caption{Speed Cluster Hardware Architecture}
+    \label{fig:speed-architecture}
 \end{figure}
 
+% Slurm architecture image
 \begin{figure}[htpb]
 	\centering
 	\includegraphics[width=\columnwidth]{images/slurm-arch}

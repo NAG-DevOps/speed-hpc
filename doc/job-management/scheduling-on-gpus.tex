@@ -12,7 +12,7 @@ cards. Each card has 2048 cores and 16GB of RAM. Note that the P6
 is mainly a single-precision card, so unless you need GPU double precision,
 double-precision calculations will be faster on a CPU node.
 	\item \texttt{speed-01}:
-This \texttt{vidpro} node (see \xf{fig:speed-architecture-full}, contact Dr.~Maria Amer) is identical
+This \texttt{vidpro} node (see \xf{fig:speed-architecture}, contact Dr.~Maria Amer) is identical
 to 05 and 17 in its GPU configuration, but managed by the priority
 for the vidpro group, that is a \texttt{pg} job scheduled there
 is a subject for preemption.
@@ -90,7 +90,7 @@ Users without permission to use the GPU nodes can submit jobs to the various GPU
 partitions, but those jobs will hang and never run.
 Their availability can be seen with:
 %
-\small
+\scriptsize
 \begin{verbatim}
 [serguei@speed-submit src] % sinfo -p pg --long --Node
 Thu Oct 19 22:31:04 2023
@@ -122,7 +122,7 @@ For example:
 The request can be further specified to a specific node using \option{-w}
 or a GPU type or feature.
 
-\footnotesize
+\scriptsize
 \begin{verbatim}
 [serguei@speed-submit src] % squeue -p pg -o "%15N %.6D %7P %.11T %.4c %.8z %.6m %.8d %.6w %.8f %20G %20E"
 NODELIST         NODES PARTITI       STATE MIN_    S:C:T MIN_ME MIN_TMP_  WCKEY FEATURES GROUP DEPENDENCY
@@ -184,8 +184,8 @@ Several versions of CUDA are installed in:
   /encs/pkg/cuda-9.2/root
 \end{verbatim}
 
-\noindent For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile}
-replacing \texttt{\/usr\/local\/cuda} with one of the above.
+For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile} replacing\\
+\texttt{\/usr\/local\/cuda} with one of the above.
 
 %  2.15.4 OpenISS Examples
 % -------------------
