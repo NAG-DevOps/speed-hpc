@@ -371,3 +371,28 @@ Similar to Jupyter notebooks.
 \label{sect:local-vscode}
 If you prefer to run VS Code directly on your local machine without relying on a browser-based code-server, 
 detailed instructions are available in the \tool{/src/vscode} \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/vscode}{README.md} file.
+
+% 2.8.5 Job Script Generator
+% ---------------------------
+\subsubsection{Job Script Generator}
+\label{sect:job-script-generator}
+The Job Script Generator is a web-based tool that allows users to create SLURM job scripts for Speed.
+It provides a user-friendly interface to configure job parameters such as memory, time, partition, shell type, number of cores, and required modules.
+The generated script can then be used to submit jobs to the Speed cluster using the \tool{sbatch} command.\\
+
+The generator is available at: \url{https://nag-devops.github.io/speed-hpc/generator.html}
+
+\noindent You can also launch the generator directly from a compute node using Firefox with X11 forwarding:
+\scriptsize
+\begin{verbatim}
+    ssh -X speed
+    [speed-submit] > cd /speed-scratch/$USER
+    [speed-submit] > salloc --x11=first --mem=4Gb
+    [speed-07] > mkdir -p /speed-scratch/$USER/run-dir
+    [speed-07] > setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
+    [speed-07] > cd /speed-scratch/$USER/speed-hpc/src/job-script-generator
+    [speed-07] > ./generator
+\end{verbatim}
+\normalsize
+
+% we should add a screenshot of the generator
