@@ -16,7 +16,12 @@
 *.xref
 *.out
 *.dvi
+
 .DS_Store
+
 doc/speed-manual.fdb_latexmk
 doc/speed-manual.fls
 doc/speed-hpc.code-workspace
+
+# Ignore tmp symlink
+src/job-script-generator/images
