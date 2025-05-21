@@ -1,7 +1,27 @@
 #!/encs/bin/tcsh
 
-# Run graphical Fire
+# Run graphical Firefox in kiosk mode
+
 # assumes --x11=first was passed
-firefox --kiosk /local/pkg/tools/SlurmScriptGenerator/index.html 2>/dev/null
+if (! $?DISPLAY ) then
+  echo "DISPLAY is not set; not in graphical mode"
+  exit 1
+endif
+
+mkdir -p /speed-scratch/$USER/run-dir
+setenv XDG_RUNTIME_DIR /speed-scratch/$USER/run-dir
+
+ln -s ../../doc/images .
+
+if (! $?SLURM_JOB_ID ) then
+  echo "Did not detect Slurm job ID... running on"
+  hostname
+  echo "Will spin a job to a compute node..."
+  srun --mem=1G -c 2 --mail-type=ALL --x11=first firefox --kiosk generator.html 2>/dev/null
+else
+  echo -n "Running on "
+  hostname
+  firefox --kiosk generator.html 2>/dev/null
+endif
 
 # EOF
