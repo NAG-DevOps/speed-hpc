@@ -24,7 +24,7 @@ all: $(DELIVERABLE).pdf
 #all: arxiv acm
 #all: arxiv
 
-$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex software-list.tex
+$(DELIVERABLE).pdf: $(DELIVERABLE).tex $(DELIVERABLE).bib Makefile commands.tex software-list
 	@echo "Compiling *.tex files..."
 	pdflatex $(PDFLATEXFLAGS) $(DELIVERABLE)
 	@echo "Compiling bibliography..."
@@ -84,10 +84,11 @@ to-acm.pl: to-arxiv.pl
 # Building static HTML requires `make4ht`
 # Works with existing environment
 html:
-		make4ht $(DELIVERABLE) -a debug mathjax -c speed-manual.cfg -d web && \
+	make4ht $(DELIVERABLE) -a debug mathjax -c speed-manual.cfg -d web && \
 		mv ./web/$(DELIVERABLE).html ./web/index.html && \
 		rm $(DELIVERABLE).html $(DELIVERABLE).css
-		cp -f ../src/job-script-generator/* ./web/
+	cp -f ../src/job-script-generator/* ./web/
+
 #
 # Clean up
 #
