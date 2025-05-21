@@ -1,0 +1,7 @@
+#!/encs/bin/tcsh
+
+# Run graphical Fire
+# assumes --x11=first was passed
+firefox --kiosk /local/pkg/tools/SlurmScriptGenerator/index.html 2>/dev/null
+
+# EOF
