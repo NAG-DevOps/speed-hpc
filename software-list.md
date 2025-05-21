@@ -1,7 +1,7 @@
 # Software Installed On Speed {#sect:software-list}
 
-This is a generated section by a script; last updated on *Fri Dec 20
-04:37:31 PM EST 2024*. We have two major software trees: Scientific
+This is a generated section by a script; last updated on *Wed May 21
+02:44:36 PM EDT 2025*. We have two major software trees: Scientific
 Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After major
 synchronization of software packages is complete, we will stop
 maintaining the EL7 tree and will migrate the remaining nodes to EL9.
@@ -116,6 +116,8 @@ on Speed as well as teaching labs' desktops.
 -   `ANTs-2.3.5`
 
 -   `ApacheDirectoryStudio-1.5.3`
+
+-   `apr-1.7.5`
 
 -   `arduino-1.6.8`
 
@@ -739,6 +741,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `httpd-2.4.57`
 
+-   `httpd-2.4.63`
+
 -   `httpd-current`
 
 -   `http-parser-2.9.4`
@@ -794,6 +798,8 @@ on Speed as well as teaching labs' desktops.
 -   `invtools-3.0.0`
 
 -   `invtools-3.1.0`
+
+-   `invtools-3.2.0`
 
 -   `ipe-7.1.3`
 
@@ -1835,17 +1841,15 @@ on Speed as well as teaching labs' desktops.
 
 -   `tomcat-7.0.91`
 
--   `tomcat7-current`
-
 -   `tomcat-9.0.79`
+
+-   `tomcat-9.0.98`
 
 -   `tomcat9-current`
 
 -   `tomcat_connectors-1.2.42`
 
 -   `tomcat_connectors-1.2.46`
-
--   `tomcat-current`
 
 -   `transfig-3.2.5`
 
@@ -1947,6 +1951,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `acl-10.1.express`
 
+-   `ADS-2020u1`
+
 -   `alpine-2.24`
 
 -   `alpine-2.25`
@@ -1965,13 +1971,25 @@ on Speed as well as teaching labs' desktops.
 
 -   `ansys-2023R2`
 
+-   `ansys-2024R2`
+
 -   `ant-1.10.11`
 
 -   `ant-1.10.2`
 
 -   `ANTs-2.3.5`
 
+-   `arduino-1.6.8`
+
+-   `ArgoUML-0.34`
+
+-   `aspectj-1.8.6`
+
 -   `aspell-0.60.8`
+
+-   `automake-1.15.1`
+
+-   `automake-1.17`
 
 -   `bash-4.4`
 
@@ -1989,6 +2007,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `cmake-3.18.4`
 
+-   `compat-glibc`
+
 -   `comsol-6.0`
 
 -   `comsol-6.1`
@@ -1997,9 +2017,19 @@ on Speed as well as teaching labs' desktops.
 
 -   `cplex-20.1.0`
 
+-   `cplex-22.1.1`
+
+-   `CST-2019`
+
+-   `CST-2020`
+
+-   `cuda-10.2`
+
 -   `cuda-11.5`
 
 -   `cuda-11.8`
+
+-   `cuda-12.8`
 
 -   `cups-2.3.3`
 
@@ -2085,6 +2115,8 @@ on Speed as well as teaching labs' desktops.
 
 -   `ghostscript-9.50`
 
+-   `glibc-2.28`
+
 -   `gmp-4.3.2`
 
 -   `go-1.12`
@@ -2105,6 +2137,10 @@ on Speed as well as teaching labs' desktops.
 
 -   `httpd-2.4.57`
 
+-   `httpd-2.4.63`
+
+-   `httpd-current`
+
 -   `http-parser-2.9.4`
 
 -   `hwloc-2.8.0`
@@ -2115,9 +2151,21 @@ on Speed as well as teaching labs' desktops.
 
 -   `jdk-17.0.2`
 
+-   `jdk-19`
+
+-   `jdk-19.0.2`
+
 -   `jdk_32b-8u231`
 
+-   `jdk-6`
+
+-   `jdk_64b-6u45`
+
+-   `jdk_64b-7u80`
+
 -   `jdk_64b-8u231`
+
+-   `jdk-7`
 
 -   `jdk-8`
 
@@ -2133,7 +2181,11 @@ on Speed as well as teaching labs' desktops.
 
 -   `LibreOffice-7.4.7`
 
+-   `libxml2-2.9.4`
+
 -   `libyaml-0.2.5`
+
+-   `libzip-1.5.1`
 
 -   `lynx-2.8.9`
 
@@ -2163,9 +2215,15 @@ on Speed as well as teaching labs' desktops.
 
 -   `mpfr-2.4.2`
 
+-   `mpfr-3.1.6`
+
 -   `mpich-4.1.2`
 
 -   `MRtrix-3.0.3`
+
+-   `mysql-5.1.66`
+
+-   `mysql-5.6.43`
 
 -   `mysql-5.7.43`
 
@@ -2193,6 +2251,10 @@ on Speed as well as teaching labs' desktops.
 
 -   `ncurses-6.4`
 
+-   `net-snmp-5.4.1`
+
+-   `net-snmp-5.9.1`
+
 -   `nmh-1.7.1`
 
 -   `node-v12.18.0`
@@ -2202,6 +2264,10 @@ on Speed as well as teaching labs' desktops.
 -   `nvtop-3.0.1`
 
 -   `ocaml-4.01.0`
+
+-   `oidentd-3.1.0`
+
+-   `oniguruma-6.9.5`
 
 -   `OpenFOAM-11.0`
 
@@ -2219,6 +2285,10 @@ on Speed as well as teaching labs' desktops.
 
 -   `openpmix-5.0.1`
 
+-   `openssl-1.0.2.current`
+
+-   `openssl-1.0.2u`
+
 -   `openssl-1.1.1.current`
 
 -   `openssl-1.1.1n`
@@ -2229,15 +2299,23 @@ on Speed as well as teaching labs' desktops.
 
 -   `oracle-19c`
 
+-   `os-overrides-1.0`
+
 -   `ParaView-5.11.2`
 
 -   `perl-5.30.3`
 
 -   `pgadmin4-7.6`
 
+-   `php-7.4.33`
+
 -   `postgresql-12`
 
 -   `postgresql-12.3`
+
+-   `postgresql-8.3.18`
+
+-   `print-utils-1.0`
 
 -   `python-2.7.11`
 
@@ -2275,7 +2353,13 @@ on Speed as well as teaching labs' desktops.
 
 -   `singularity-3.10.4`
 
+-   `singularity_containers`
+
 -   `sqlite-3.44.2`
+
+-   `StarCCM-15.04.010`
+
+-   `stealfile-1.0`
 
 -   `STSLib-1.0`
 
@@ -2322,6 +2406,20 @@ on Speed as well as teaching labs' desktops.
 -   `tk-8.6.13`
 
 -   `tmux-3.2a`
+
+-   `tomcat-10.1.35`
+
+-   `tomcat10-current`
+
+-   `tomcat-9.0.79`
+
+-   `tomcat-9.0.98`
+
+-   `tomcat9-current`
+
+-   `tomcat_connectors-1.2.46`
+
+-   `user-utils-1.0`
 
 -   `xemacs-21.4.24`
 :::
