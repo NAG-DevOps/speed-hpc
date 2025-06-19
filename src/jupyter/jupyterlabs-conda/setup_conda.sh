@@ -33,8 +33,9 @@ date
 # pip3 install --quiet torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 # pip3 install --quiet torch torchvision --index-url https://download.pytorch.org/whl/cu118
 pip3 install --quiet torch --index-url https://download.pytorch.org/whl/cu118
+pip3 install transformers
 
-echo "Peparin some notebooks..."
+echo "Preparing some notebooks..."
 date
 
 # Get some initial notebooks up

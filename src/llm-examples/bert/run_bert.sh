@@ -7,9 +7,10 @@ echo "==================================="
 module load anaconda/2023.03/default
 
 # Define environment variables
-set ENV_NAME = "llm_env"
+#set ENV_NAME = "llm_env"
 set ENV_DIR = "/speed-scratch/$USER/envs"
-set ENV_PATH = "$ENV_DIR/$ENV_NAME"
+#set ENV_PATH = "$ENV_DIR/$ENV_NAME"
+set ENV_PATH = "/speed-scratch/f_salha/Jupyter/jupyter-env"
 
 mkdir -p $ENV_DIR/{tmp,pkgs,huggingface,cache}
 
@@ -20,18 +21,18 @@ setenv PIP_CACHE_DIR $ENV_DIR/cache
 setenv HF_HOME $ENV_DIR/huggingface
 setenv HF_HUB_CACHE $ENV_DIR/cache
 
-echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
-conda create -p "$ENV_PATH" python=3.11 -y
+#echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
+#conda create -p "$ENV_PATH" python=3.11 -y
 	
-echo "Activating environment $ENV_NAME..."
+echo "Activating environment..."
 conda activate "$ENV_PATH"
 	
 if ($status != 0) then
     echo "Failed to activate Conda environment."
-	exit 1
+    exit 1
 endif
 
-pip install torch transformers
+#pip install torch transformers
 	
 echo "==================================="
 date
