@@ -22,4 +22,18 @@ We leverage the following repos as examples for these OpenCL jobs:
 They are forks of the original projects with our modifications to make
 them compile and run on Speed.
 
-- `cl-bench.sh` runs amd-gpu-benchmark 
+- `cl-bench.sh` runs `amd-gpu-benchmark`
+- `cl-examples.sh` runs a subset of `OpenCL-examples`
+- OpenCL-examples -- examples that work and included in tests
+  - `add_numbers`
+  - `Hello_World`
+  - `mandelbrot` -- compiles and runs, prints not output
+  - `sum_array`
+  - `square_array`
+  - `waste`
+- OpenCL-examples -- need work or require X11, excluded from tests:
+  - `auger` -- requires clRNG to be downloaded to compile
+  - `cf4ocl` -- requires archived `cf4ocl` to be downloaded to compile
+  - `RayTraced_Quaternion_Julia-Set_Example` -- requires X and the client OpenGL AMD GPU match
+  - `N-BodySimulation` -- currently an XCode only project
+  - `rng` -- also relies on clRNG to be downloaded to compile
