@@ -8,7 +8,7 @@ in most cases interoperate or convert OpenCL and CUDA applications.
 Driver and hardware-dependent.
 
 speed-19 currently has AMD GPU. The OpenCL examples *should* also work
-on NVIDIA GPUs. The 'cl' parition covers most of the GPUs including
+on NVIDIA GPUs. The `cl` parition covers most of the GPUs including
 AMDGPU and NVIDIA.
 
 ## Examples
@@ -19,8 +19,8 @@ We leverage the following repos as examples for these OpenCL jobs:
 - https://github.com/NAG-DevOps/OpenCL-Tutorials
 - https://github.com/NAG-DevOps/OpenCL-examples
 
-They are forks of the original projects with our modifications to make
-them compile and run on Speed.
+They are modified forks of the original projects with our modifications to make
+them compile and run on Speed. Some examples require graphics and interaction.
 
 - `cl-bench.sh` runs `amd-gpu-benchmark`
 - `cl-examples.sh` runs a subset of `OpenCL-examples`
@@ -37,3 +37,8 @@ them compile and run on Speed.
   - `RayTraced_Quaternion_Julia-Set_Example` -- requires X and the client OpenGL AMD GPU match
   - `N-BodySimulation` -- currently an XCode only project
   - `rng` -- also relies on clRNG to be downloaded to compile
+- `cl-tutorials.sh` runs a subset of `OpenCL-Tutorials`
+  - `tutorial_1`
+  - `tutorial_2` -- requires graphics to display images
+  - `tutorial_3`
+  - `tutorial_4`
