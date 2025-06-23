@@ -41,9 +41,22 @@ else
   popd
 endif
 
+echo "$0 rocm-smi..."
+date
+rocm-smi -a
+
+echo "$0 clinfo..."
+date
+/opt/amdgpu-pro/bin/clinfo
+
 echo "$0 compiling..."
 date
 pushd $REPO
+  module load gcc/7.3/default
+  which gcc
+  gcc -v
+  set CC = `which gcc`
+  set CCX = `which g++`
   make  
 popd
 
