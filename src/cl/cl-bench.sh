@@ -35,7 +35,7 @@ if ( ! -d $REPO ) then
   echo "Cloning $REPO repo..."
   time srun git clone --depth=1 "$GHBASE"/"$REPO".git
 else
-  echo "Found COMP371_all already present; pulling in case of updates..."
+  echo "Found $REPO already present; pulling in case of updates..."
   pushd $REPO
     time srun git pull --rebase --autostash
   popd
