@@ -65,6 +65,7 @@ These are examples either trivial or some are more elaborate. Some are described
   - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
   - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
   - `gpaw/*` -- a sample to run GPAW
+  - `cl/*` -- samples to run [OpenCL](cl/) jobs from examples, tutorials, and an AMDGPU benchmark
 
 <!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
 # Creating Environments and Compiling Code on Speed
