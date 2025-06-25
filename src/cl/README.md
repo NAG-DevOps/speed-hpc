@@ -1,6 +1,6 @@
 # OpenCL-like application examples
 
-We use some of the OpenCL examples and benchmarks as an alternaive to CUDA.
+We use some of the OpenCL examples and benchmarks as an alternative to CUDA.
 Especially for AMDGPUs. This can be later extended to HIP.
 
 Note, OpenCL is deprecated and HIP can work in various environments and

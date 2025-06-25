@@ -1,7 +1,7 @@
 #!/encs/bin/tcsh
 
 #
-# Runs an set of OpenCL examples from a repo
+# Runs a set of OpenCL examples from a repo
 #
 
 #SBATCH -J cl-examples
