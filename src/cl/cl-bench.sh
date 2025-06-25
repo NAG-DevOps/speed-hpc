@@ -55,8 +55,8 @@ pushd $REPO
   module load gcc/7.3/default
   which gcc
   gcc -v
-  set CC = `which gcc`
-  set CCX = `which g++`
+  setenv CC `which gcc`
+  setenv CCX `which g++`
   make  
 popd
 
