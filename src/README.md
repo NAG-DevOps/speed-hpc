@@ -42,30 +42,33 @@ run certcain things.
 <!-- TOC --><a name="sample-jobs"></a>
 ## Sample Jobs
 
-These are examples either trivial or some are more elaborate. Some are described in the [manual](../doc/) more in detail or vice versa. The examples were written by the Speed team as well as contributed by the users or a result of solving a problem of some kind.
+This directory contains a range of job script examples. Some are basic, while others showcase advanced or research-specific workflows. Many are discussed in more detail in the Speed [Manual](https://nag-devops.github.io/speed-hpc/), and others are included here to complement it. They were written by the Speed team, contributed by users, or created as solutions to specific problems.
 
-- Basic examples:
-  - `tcsh.sh` -- default `tcsh` job script example
-  - `tmpdir.sh` -- example use of TMPDIR on a local node
-  - `bash.sh` -- example use with `bash` shell as opposed to `tcsh`
-  - `manual.sh` -- example job to compile our very manual here to PDF and HTML using LaTeX
-  - `poppler.txt` -- Interactive job example: PDF rendering using poppler and pdf2image; instructions and code ready to paste.
-- Common packages:
-  - `fluent.sh` -- Fluent job
-  - `comsol.sh` -- Comsol job
-  - `matlab/matlab-slurm.sh` -- MATLAB job
-- Advanced or research examples:
-  - `msfp-speed-job.sh` -- MAC Spoofer Investigation starter job script (for detailes see [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
-  - `efficientdet.sh` -- `efficientdet` with Conda environment described below
-  - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
-  - `pytorch-multicpu.txt` -- using Pytorch with Python virtual environment to run on CPUs; with instructions and code ready to paste.
-  - `pytorch-multinode-multigpu.sh` -- using Pytorch with Python virtual environment to run on Multinodes and MultiGpus
-  - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
-  - `openfoam-multinode.sh` -- an example using OpenFoam, icoFoam solver to run on Multinodes-multicpus
-  - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
-  - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
-  - `gpaw/*` -- a sample to run GPAW
+- Basic Examples:
+  - `tcsh.sh` -- Default job script using the `tcsh` shell.
+  - `bash.sh` -- Equivalent job script using `bash` shell as opposed to `tcsh`.
+  - `tmpdir.sh` -- Demonstrates use of `TMPDIR` on a local node.
+  - `manual.sh` -- Builds the Speed manual to PDF and HTML using LaTeX.
+  - `poppler/` -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script (`poppler.sh`), python code, and example pdf.
 
+- Common Software Packages:
+  - `fluent.sh` -- Example job for ANSYS Fluent.
+  - `comsol.sh` -- Job script for COMSOL Multiphysics.
+  - `matlab/` -- Incluses batch job for MATLAB.
+
+- Research & Advanced Examples:
+  - `msfp-speed-job.sh` -- MAC Spoofer analysis script (see more detailes [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
+  - `efficientdet.sh` -- Uses a Conda environment for EfficientDet training.
+  - `gurobi-with-python.sh` -- Gurobi with Python virtual environment.
+  - `pytorch-multicpu/` -- Using Pytorch with Python virtual environment to run on CPUs.
+  - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
+  - `lambdal-singularity.sh` -- Uses Singularity container to run LambdaLabs software stack on GPU node. Based on this github repo [Lambda Stack Dockerfiles](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+  - `openfoam-multinode.sh` -- Runs OpenFOAM’s icoFoam solver across multiple CPU nodes.
+  - `openiss-reid-speed.sh` -- OpenISS for person re-identification. See more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk).
+  - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
+  - `gpaw/` -- Example job scrits for GPAW simulaptions.
+
+  
 <!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
 # Creating Environments and Compiling Code on Speed
 
