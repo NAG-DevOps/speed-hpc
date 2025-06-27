@@ -6,7 +6,8 @@
 
 #SBATCH -J cl-examples
 #SBATCH --mem=50G
-#SBATCH -p cl
+##SBATCH -p cl
+#SBATCH -p hip
 #SBATCH -n 1
 #SBATCH -c 8
 #SBATCH -w speed-19
