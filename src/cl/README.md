@@ -1,13 +1,14 @@
 # OpenCL-like application examples
 
 We use some of the OpenCL examples and benchmarks as an alternaive to CUDA.
-Especially for AMDGPUs. This can be later extended to HIP.
+Especially for AMD GPUs. This can be later extended to HIP or Vulkan jobs.
 
-Note, OpenCL is deprecated and HIP can work in various environments and
+Note, OpenCL is more portable, but usually slower on NVIDIA devcices than
+CUDA, and CUDA to HIP can work for AMD GPUs in various environments and
 in most cases interoperate or convert OpenCL and CUDA applications.
-Driver and hardware-dependent.
+(Driver and hardware-dependent.)
 
-speed-19 currently has AMD GPU. The OpenCL examples *should* also work
+speed-19 currently has an AMD GPU. The OpenCL examples *should* also work
 on NVIDIA GPUs. The `cl` parition covers most of the GPUs including
 AMDGPU and NVIDIA.
 
@@ -15,14 +16,15 @@ PyTorch and TensorFlow also support AMD GPUs.
 
 ## Examples
 
-We leverage the following repos as examples for these OpenCL jobs:
+We leverage the following repo forks as examples for these OpenCL jobs:
 
 - https://github.com/NAG-DevOps/amd-gpu-benchmark
 - https://github.com/NAG-DevOps/OpenCL-Tutorials
 - https://github.com/NAG-DevOps/OpenCL-examples
 
 They are modified forks of the original projects with our modifications to make
-them compile and run on Speed. Some examples require graphics and interaction.
+them compile and run on Speed. Some examples require graphics and interaction
+and are excluded from automated batch tests.
 
 - `cl-all.sh` launches all the below; assuming a submit node
 - `cl-bench.sh` runs `amd-gpu-benchmark`
@@ -45,3 +47,8 @@ them compile and run on Speed. Some examples require graphics and interaction.
   - `tutorial_2` -- requires graphics to display images
   - `tutorial_3`
   - `tutorial_4` -- needs boost with compute
+
+## References
+
+- https://www.khronos.org/opencl/ (latest OpenCL spec release is 3.0.18 of April 2025, most devices in Speed run 2.x)
+- https://en.wikipedia.org/wiki/OpenCL
