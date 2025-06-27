@@ -1,6 +1,6 @@
 # OpenCL-like application examples
 
-We use some of the OpenCL examples and benchmarks as an alternaive to CUDA.
+We use some of the OpenCL examples and benchmarks as an alternative to CUDA.
 Especially for AMD GPUs. This can be later extended to HIP or Vulkan jobs.
 
 Note, OpenCL is more portable, but usually slower on NVIDIA devcices than
