@@ -42,32 +42,37 @@ run certcain things.
 <!-- TOC --><a name="sample-jobs"></a>
 ## Sample Jobs
 
-This directory contains a range of job script examples. Some are basic, while others showcase advanced or research-specific workflows. Many are discussed in more detail in the Speed [Manual](https://nag-devops.github.io/speed-hpc/), and others are included here to complement it. They were written by the Speed team, contributed by users, or created as solutions to specific problems.
+This directory contains a range of job script examples. Some are basic, while others showcase advanced or research-specific workflows. Many are discussed in more detail in the Speed [Manual](https://nag-devops.github.io/speed-hpc/), and others are included here to complement it. They were created by the Speed team, contributed by users, or developed as solutions to specific problems.
 
 - Basic Examples:
-  - `tcsh.sh` -- Default job script using the `tcsh` shell.
-  - `bash.sh` -- Equivalent job script using `bash` shell as opposed to `tcsh`.
+  - `bash.sh` -- Batch job script using the `bash` shell.
+  - `tcsh.sh` -- Batch job script using the default `tcsh` shell.
   - `tmpdir.sh` -- Demonstrates use of `TMPDIR` on a local node.
-  - `manual.sh` -- Builds the Speed manual to PDF and HTML using LaTeX.
-  - `poppler/` -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script (`poppler.sh`), python code, and example pdf.
+  - `manual.sh` -- Builds the Speed manual (PDF and HTML) using LaTeX.
+  - `env.sh` -- Prints job environment variables for debugging.
+  - `poppler/` -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script `poppler.sh`, python code, and example pdf.
 
 - Common Software Packages:
-  - `fluent.sh` -- Example job for ANSYS Fluent.
   - `comsol.sh` -- Job script for COMSOL Multiphysics.
+  - `fluent.sh` -- Example job for ANSYS Fluent.
   - `matlab/` -- Incluses batch job for MATLAB.
+  - `vscode/` -- Incluses instructions on how to run VS Code both locally and as a web-based version.
 
 - Research & Advanced Examples:
-  - `msfp-speed-job.sh` -- MAC Spoofer analysis script (see more detailes [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
-  - `efficientdet.sh` -- Uses a Conda environment for EfficientDet training.
-  - `gurobi-with-python.sh` -- Gurobi with Python virtual environment.
-  - `pytorch-multicpu/` -- Using Pytorch with Python virtual environment to run on CPUs.
-  - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
+  - `efficientdet.sh` -- Runs EfficientDet model using a Conda environment.
+  - `gurobi-with-python.sh` -- Uses Gurobi with a Python virtual environment.
   - `lambdal-singularity.sh` -- Uses Singularity container to run LambdaLabs software stack on GPU node. Based on this github repo [Lambda Stack Dockerfiles](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+  - `msfp-speed-job.sh` -- MAC Spoofer analysis script (see more detailes [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
   - `openfoam-multinode.sh` -- Runs OpenFOAM’s icoFoam solver across multiple CPU nodes.
   - `openiss-reid-speed.sh` -- OpenISS for person re-identification. See more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk).
   - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
-  - `gpaw/` -- Example job scrits for GPAW simulaptions.
+  - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
 
+  - `gpaw/` -- Example job scrits for GPAW simulaptions.
+  - `jupyter/` -- Hands-on examples for launching JupyterLab using Conda.
+  - `llm-examples/` -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
+  - `pytorch-multicpu/` -- Using Pytorch with Python virtual environment to run on CPUs.
+  - `single-job-multi-mig/` -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
   
 <!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
 # Creating Environments and Compiling Code on Speed
