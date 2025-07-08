@@ -89,6 +89,23 @@ cat >> "$OUTFILE.tex" << LATEX_FOOTER
 \end{multicols}
 \normalsize
 
+% -----------------------------------------------------------------------------
+\subsection{EB}
+\label{sect:software-EB}
+
+\scriptsize
+\begin{multicols}{3}
+\begin{itemize}
+LATEX_EB_HEADER
+
+/encs/pkg/EasyBuild/root/./list.sh
+cat /encs/pkg/EasyBuild/root/eb-list.txt | sed 's/^/\\item \\verb|/g' | sed 's/$/|/g' >> "$OUTFILE.tex"
+
+cat >> "$OUTFILE.tex" << LATEX_FOOTER
+\end{itemize}
+\end{multicols}
+\normalsize
+
 % EOF
 LATEX_FOOTER
 
