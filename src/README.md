@@ -1,46 +1,43 @@
-<!-- TOC --><a name="examples"></a>
-# Examples
 
-This directory has example job scripts and some tips and tricks how to
+This directory has example job scripts and some tips and tricks on how to
 run certcain things.
 
 <!-- TOC start -->
-## TOC 
+# Table of Contents 
+- [Table of Contents](#table-of-contents)
 - [Sample Jobs](#sample-jobs)
-- [Creating Environments and Compiling Code on Speed](#creating-environments-and-compiling-code-on-speed)
-   * [Correct Procedure](#correct-procedure)
-      + [Overview of preparing environments, compiling code and testing](#overview-of-preparing-environments-compiling-code-and-testing)
-      + [Once your environment and code have been tested](#once-your-environment-and-code-have-been-tested)
-      + [Do not use the submit node to create environments or compile code](#do-not-use-the-submit-node-to-create-environments-or-compile-code)
-      + [`pip`](#pip)
-   * [Environments](#environments)
-      + [Anaconda](#anaconda)
-         - [Load the Anaconda module](#load-the-anaconda-module)
-         - [Initialize Shell](#initialize-shell)
-         - [Create an Environment](#create-an-environment)
-         - [List Environments](#list-environments)
-         - [Activate an Environment](#activate-an-environment)
-- Detailed Examples
-   + [efficientdet](#efficientdet)
-   * [Diviner Tools](#diviner-tools)
-   * [OpenFoam](#openfoam-multinode)
-   * [OpenISS-yolov3](#openiss-yolov3)
-      + [Prerequisites](#prerequisites-openiss-yolov3)
-      + [Configuration and Execution](#configuration-and-execution-openiss-yolov3)
-         - [Run Non-interactive Script](#run-non-interactive-openiss-yolov3)
-         - [Run Interactive Script ](#run-interactive-openiss-yolov3)
-      + [Performance Comparison](#performance-comparison-openiss-yolov3)
-   * [OpenISS-reid-tfk](#openiss-reid-tfk)
-      + [Prerequisities](#prerequisites-openiss-reid)
-      + [Configuration and execution](#configuration-and-execution)
-   * [CUDA](#cuda)
-      + [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
-      + [Jupyter notebook example: Jupyter-Pytorch-CUDA](#jupyter-example-gpu-pytorch)
-   * [Python Modules](#python-modules)
+- [Creating Virtual Environments](#creating-virtual-environments)
+  - [Procedure](#procedure)
+  - [Environments](#environments)
+    - [Anaconda](#anaconda)
+    - [Python](#python)
+  - [Environment Variables](#environment-variables)
+      - [pip](#pip)
+    - [efficientdet](#efficientdet)
+  - [Diviner Tools](#diviner-tools)
+  - [OpenFoam-multinode](#openfoam-multinode)
+  - [OpenISS-yolov3](#openiss-yolov3)
+    - [Prerequisites](#prerequisites)
+      - [Images and Videos](#images-and-videos)
+      - [YOLOv3 Weights](#yolov3-weights)
+      - [Environment Setup](#environment-setup)
+    - [Configuration and execution](#configuration-and-execution)
+      - [Run Non-interactive Script](#run-non-interactive-script)
+      - [Run Interactive Script](#run-interactive-script)
+    - [Performance comparison](#performance-comparison)
+  - [OpenISS Person Re-Identification Baseline](#openiss-person-re-identification-baseline)
+    - [Prerequisites](#prerequisites-1)
+      - [Dataset](#dataset)
+      - [Environment Setup](#environment-setup-1)
+    - [Configuration and execution](#configuration-and-execution-1)
+  - [CUDA](#cuda)
+    - [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
+    - [Jupyter notebook example: Jupyter-Pytorch-CUDA](#jupyter-notebook-example-jupyter-pytorch-cuda)
+  - [Python Modules](#python-modules)
 <!-- TOC end -->
 
 <!-- TOC --><a name="sample-jobs"></a>
-## Sample Jobs
+# Sample Jobs
 
 This directory contains a range of job script examples. Some are basic, while others showcase advanced or research-specific workflows. Many are discussed in more detail in the Speed [Manual](https://nag-devops.github.io/speed-hpc/), and others are included here to complement it. They were created by the Speed team, contributed by users, or developed as solutions to specific problems.
 
@@ -74,41 +71,121 @@ This directory contains a range of job script examples. Some are basic, while ot
   - `pytorch-multicpu/` -- Using Pytorch with Python virtual environment to run on CPUs.
   - `single-job-multi-mig/` -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
   
-<!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
-# Creating Environments and Compiling Code on Speed
+<!-- TOC --><a name="creating-environments"></a>
+# Creating Virtual Environments
 
-<!-- TOC --><a name="correct-procedure"></a>
-## Correct Procedure
+<!-- TOC --><a name="procedure"></a>
+## Procedure
+- Do not compile or create environments on `speed-submit{1|2}`
 
-<!-- TOC --><a name="overview-of-preparing-environments-compiling-code-and-testing"></a>
-### Overview of preparing environments, compiling code and testing
+   These are tiny virtual machines intended for job submission only and lack GPU drivers. All work/processes running outside the scheduler will be terminated.
 
-- Create an `salloc` session to the queue you wish to run your jobs 
-(e.g., `salloc -p pg --gpus=1` for GPU jobs)
-- Within the `salloc` session, create and activate an Anaconda environment in 
-your `/speed-scratch/` directory using the instructions found in Section 2.11.1 of the manual: 
-https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
-- Compile your code within the environment.
-- Test your code with a limited data set.
-- Once you are satisfied with your test results, exit your `salloc` session.
+- Start an Interactive session with `salloc` (e.g., `salloc -p pg --gpus=1`)
+- Create and activate your environment
 
-<!-- TOC --><a name="once-your-environment-and-code-have-been-tested"></a>
-### Once your environment and code have been tested
+   Use `/speed-scratch/$USER` for all environments.
 
-- Create a job script. (see https://nag-devops.github.io/speed-hpc/#job-submission-basics)
-- Remember to Activate your Anaconda environment in the user scripting section
-- Use the `sbatch` command to submit your job script to the correct partition and account
+- Compile and test your code within the environment. Once done, exit your `salloc` session.
 
-<!-- TOC --><a name="do-not-use-the-submit-node-to-create-environments-or-compile-code"></a>
-### Do not use the submit node to create environments or compile code
+- Prepare a job script (refer [Job Submission Basics](https://nag-devops.github.io/speed-hpc/#job-submission-basics))
 
-- `speed-submit` is a virtual machine intended to submit user jobs to 
-the job scheduler. It is not intended to compile or run code. 
-- **Importantly**, `speed-submit` does not have GPU drivers. This means that code compiled on `speed-submit` will not be compiled against proper GPU drivers. 
-- Processes run outside of the scheduler on `speed-submit` will be killed and you will lose your work.
+   Use [Job Script Generator](nag-devops.github.io/speed-hpc/generator.html), and make sure you activate your environment and specify the correct resources.
 
-<!-- TOC --><a name="pip"></a>
-### `pip`
+- Submit your job with `sbatch`
+
+<!-- TOC --><a name="environments"></a>
+## Environments
+The following documentation is specific to **Speed**.
+
+<!-- TOC --><a name="anaconda"></a>
+### Anaconda
+- **List available modules for Anaconda and load the required version**.
+   ```  
+   module avail anaconda
+   module load anaconda3/2023.03/default
+   ```
+
+- **Initialize Conda for your shell** (only done once) **and source it** (or log out and log back in)
+   ```
+   conda init tcsh
+   source ~/.tcshrc
+   ```
+   The default shell for ENCS accounts is tcsh.
+
+- **Start an interactive session**
+   ```
+   # For CPU-based environments
+   salloc --mem=20G
+
+   # For GPU-based environments
+   salloc --mem=20G --gpus=1
+   ```
+
+- **Create anaconda environment** (Once per project)
+
+   It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues (default conda creates the environment in your home directory), thus we use the `-p` or `--prefix`.
+   ```
+   conda create -p /speed-scratch/$USER/<env_name> -y
+   ```
+   `$USER` is a parameter, either replace it by your ENCS username or the system will automatically do the work.
+
+   **NOTE** If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
+   ```
+   setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
+   setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
+   ```
+   If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using).
+
+- Activate the environment
+   ```
+   conda activate /speed-scratch/$USER/<env_name>
+   ```
+   After activating the environment, install the required packages for your environment with `conda install` or `pip install`.
+
+- Verify and list your conda environments
+   ```
+   conda info --envs
+   # conda environments:
+   #
+   base                 *  /encs/pkg/anaconda3-2023.03/root
+                           /speed-scratch/$USER/<env_name>
+   ```
+
+- Deactivate the environment
+   ```
+   conda deactivate
+   ```
+
+- To delete/remove the environment (if no longer needed)
+   ```
+   conda env remove -p /speed-scratch/$USER/<env_name>
+   conda clean --all --yes
+   ```
+
+   To resolve "Disk Quota Error", check https://nag-devops.github.io/speed-hpc/#how-to-resolve-disk-quota-exceeded-errors
+
+<!-- TOC --><a name="python"></a>
+### Python
+
+
+
+**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
+
+
+On the node where the interactive session is running:
+```
+setenv TMPDIR /speed-scratch/$USER/tmp
+setenv TMP /speed-scratch/$USER/tmp
+module load anaconda3/2023.03/default
+setenv CONDA_PKGS_DIRS $TMP/pkgs
+conda create -p $TMP/Venv-Name python==3.11
+conda activate $TMP/Venv-Name
+```
+
+
+<!-- TOC --><a name="environment-variables"></a>
+## Environment Variables
+#### pip
 
 By default, `pip` installs packages to a system-wide default location.
 
@@ -120,107 +197,6 @@ command line:
 use pip in this way, the packages and versions installed via pip may change while your jobs run.
 - Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
 - It is possible to create multiple conda environments for your different projects.
-
-<!-- TOC --><a name="environments"></a>
-## Environments
-
-Virtual Environment Creation documentation. The following documentation is specific to **Speed**.
-
-<!-- TOC --><a name="anaconda"></a>
-### Anaconda
-
-<!-- TOC --><a name="load-the-anaconda-module"></a>
-#### Load the Anaconda module
-
-To view the Anaconda modules available, run
-`module avail anaconda`
-
-Load the desired version of anaconda using the module load command.
-
-For example:
-`module load anaconda3/2023.03/default`
-
-<!-- TOC --><a name="initialize-shell"></a>
-#### Initialize Shell
-To initialize your shell, run
-`conda init <SHELL_NAME>`
-
-The default shell for ENCS accounts is tcsh. Therefore, to initialize your default shell run
-`conda init tcsh`
-
-<!-- TOC --><a name="create-an-environment"></a>
-#### Create an Environment
-To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
-
-For example:
-`conda create --prefix /speed-scratch/$USER/myconda`
-
-Where `$USER` is an environment variable containing your encs_username
-
-Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
-
-<!-- TOC --><a name="list-environments"></a>
-#### List Environments
-To view your conda environments, type 
-`conda info --envs`
-
-```
-# conda environments:
-#
-base                  *  /encs/pkg/anaconda3-2023.03/root
-                         /speed-scratch/<encs_username>/myconda
-```                 
-
-<!-- TOC --><a name="activate-an-environment"></a>
-#### Activate an Environment
-Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
-
-`conda activate /speed-scratch/$USER/myconda`
-
-After activating your environment, add pip to your environment by using 
-
-`conda install pip`
-
-This will install pip and pip's dependencies, including python.
-
-**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
-
-<!-- TOC --><a name="no-space-left-conda"></a>
-#### No Space left error when creating Conda Environment
-You are using your `$HOME` directory as conda default directory, the tarballs and pkgs are using all the space
-
-`conda clean --all --dry-run` will show you the size of tarballs, packages, caches
-`conda clean -all` will wipe-out all unused packages, caches and tarballs
-
-If the `conda clean` hasn't freed enough space, try to set change the location of Conda pkgs to another directory, e.g:
-```
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/tmp/pkgs
-```
-
-<!-- TOC --><a name="create-conda-env-speed"></a>
-#### Example: Create Conda Environment in Speed
-On speed-submit:
-`salloc --mem=10Gb -n1 -pps`
-
-On the node where the interactive session is running:
-
-```
-setenv TMPDIR /speed-scratch/$USER/tmp
-setenv TMP /speed-scratch/$USER/tmp
-module load anaconda3/2023.03/default
-setenv CONDA_PKGS_DIRS $TMP/pkgs
-conda create -p $TMP/Venv-Name python==3.11
-conda activate $TMP/Venv-Name
-```
-#### Conda envs without prefix
-If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
-
-```
-setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
-```
-
-If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using)
 
 <!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
@@ -436,7 +412,7 @@ For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `
 
 Example prepared to run on speed, extracted from: https://developers.redhat.com/learning/learn:openshift-data-science:configure-jupyter-notebook-use-gpus-aiml-modeling/resource/resources:how-examine-gpu-resources-pytorch
 
-From speed-submit: 
+From `speed-submit{1|2}`: 
 - Download `gpu-ml-model.ipynb` from this github to your `/speed-scratch/$USER space`
 - `salloc --mem=10Gb --gpus=1`
 
