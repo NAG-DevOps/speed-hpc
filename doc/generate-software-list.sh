@@ -65,22 +65,24 @@ ls -1 /encs/ArchDep/x86_64.EL9/pkg/ \
   | sed 's/$/|/g' \
   >> "$OUTFILE.tex"
 
-cat >> "$OUTFILE.tex" << LATEX_FOOTER
+cat >> "$OUTFILE.tex" << LATEX_EB9_HEADER
 \end{itemize}
 \end{multicols}
 \normalsize
 
 % -----------------------------------------------------------------------------
-\subsection{EB}
-\label{sect:software-EB}
+\subsection{EB9}
+\label{sect:software-eb9}
 
 \scriptsize
 \begin{multicols}{3}
 \begin{itemize}
-LATEX_EB_HEADER
+LATEX_EB9_HEADER
 
-/encs/pkg/EasyBuild/root/./list.sh
-cat /encs/pkg/EasyBuild/root/eb-list.txt | sed 's/^/\\item \\verb|/g' | sed 's/$/|/g' >> "$OUTFILE.tex"
+/encs/pkg/EasyBuild/root/./list.sh > /dev/null 2>&1
+
+cat eb-list.txt | sed 's/^/\\item \\verb|/g' | sed 's/$/|/g' >> "$OUTFILE.tex"
+rm -f eb-list.txt
 
 cat >> "$OUTFILE.tex" << LATEX_FOOTER
 \end{itemize}
