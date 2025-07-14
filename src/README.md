@@ -136,7 +136,7 @@ The following documentation is specific to **Speed**.
    ```
    If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using).
 
-- Activate the environment
+- **Activate the environment**
    ```
    conda activate /speed-scratch/$USER/<env_name>
    ```
@@ -151,7 +151,7 @@ The following documentation is specific to **Speed**.
                            /speed-scratch/$USER/<env_name>
    ```
 
-- Deactivate the environment
+- **Deactivate the environment**
    ```
    conda deactivate
    ```
@@ -166,22 +166,26 @@ The following documentation is specific to **Speed**.
 
 <!-- TOC --><a name="python"></a>
 ### Python
-
-
-
-**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
-
-
-On the node where the interactive session is running:
-```
-setenv TMPDIR /speed-scratch/$USER/tmp
-setenv TMP /speed-scratch/$USER/tmp
-module load anaconda3/2023.03/default
-setenv CONDA_PKGS_DIRS $TMP/pkgs
-conda create -p $TMP/Venv-Name python==3.11
-conda activate $TMP/Venv-Name
-```
-
+- **List available modules for Anaconda and load the required version**.
+   ```  
+   module avail python
+   module load python/3.11.0/default
+   ```
+- **Create Python environment and activate it**
+  
+  It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues
+  ```
+  python -m venv /speed-scratch/$USER/<env_name>
+  source /speed-scratch/$USER/<env_name>/bin/activate.csh
+  ```
+- **Install required packages**
+  ```
+  pip install
+  ```
+- **Deactivate the environment**
+  ```
+  deactivate
+  ```
 
 <!-- TOC --><a name="environment-variables"></a>
 ## Environment Variables
@@ -197,6 +201,17 @@ command line:
 use pip in this way, the packages and versions installed via pip may change while your jobs run.
 - Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
 - It is possible to create multiple conda environments for your different projects.
+
+**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
+
+
+On the node where the interactive session is running:
+```
+setenv TMPDIR /speed-scratch/$USER/tmp
+setenv TMP /speed-scratch/$USER/tmp
+setenv CONDA_PKGS_DIRS $TMP/pkgs
+
+```
 
 <!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
