@@ -12,7 +12,6 @@ run certcain things.
     - [Anaconda](#anaconda)
     - [Python](#python)
   - [Environment Variables](#environment-variables)
-      - [pip](#pip)
     - [efficientdet](#efficientdet)
   - [Diviner Tools](#diviner-tools)
   - [OpenFoam-multinode](#openfoam-multinode)
@@ -189,29 +188,37 @@ The following documentation is specific to **Speed**.
 
 <!-- TOC --><a name="environment-variables"></a>
 ## Environment Variables
-#### pip
+These variables control where temporary files are stored. This helps prevent exceeding disk quotas in your home directory.
 
-By default, `pip` installs packages to a system-wide default location.
+Set these variables in your shell before installing packages or running jobs, especially if using Conda or Python virtual environments.
 
-Creating environments via `pip` shound NOT be done outside of an Anaconda environment.
+- **For general temporary storage**
+  ```
+  setenv TMP /speed-scratch/$USER/tmp
+  setenv TMPDIR /speed-scratch/$USER/tmp
+  ```
 
-Why you should create an Anaconda environment and not use pip directly from the 
-command line:
-- Using pip directly from the command line affects the system wide environment. If all users
-use pip in this way, the packages and versions installed via pip may change while your jobs run.
-- Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
-- It is possible to create multiple conda environments for your different projects.
+- **For Python pip cache**
+  ```
+  setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
+  ```
 
-**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
+- **For Conda packages**
+  ```
+  setenv CONDA_PKGS_DIRS /speed-scratch/$USER/pkgs
+  ```
 
+- **For Hugging Face** (if using Transformers or Datasets)
+  ```
+  setenv HF_HOME /speed-scratch/$USER/huggingface
+  setenv HF_HUB_CACHE /speed-scratch/$USER/huggingface/cache
+  ```
 
-On the node where the interactive session is running:
-```
-setenv TMPDIR /speed-scratch/$USER/tmp
-setenv TMP /speed-scratch/$USER/tmp
-setenv CONDA_PKGS_DIRS $TMP/pkgs
-
-```
+- **For Singularity containers**
+  ```
+  setenv SINGULARITY_TMPDIR /speed-scratch/$USER/tmp
+  setenv SINGULARITY_CACHEDIR /speed-scratch/$USER/tmp/cache
+  ```
 
 <!-- TOC --><a name="efficientdet"></a>
 ### efficientdet
