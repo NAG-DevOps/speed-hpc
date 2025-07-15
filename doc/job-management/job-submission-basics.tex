@@ -27,18 +27,16 @@ To quickly run some sample jobs, use the following commands:
 \subsubsection{Directives}
 \label{sect:directives}
 \input{scheduler-directives}
-%TO BE DELETED
-%\input{scheduler-directives}
-%
 
 Directives are comments included at the beginning of a job script that set the shell
 and the options for the job scheduler.
 
-The shebang directive is always the first line of a script. In your job script,
-this directive sets which shell your script's commands will run in. On ``Speed'',
-we recommend that your script use a shell from the \texttt{/encs/bin} directory.
+The shebang directive is always the first line of a script. 
+In your job script, this directive sets which shell your script's commands will run in. 
+On ``Speed'', we recommend that your script use a shell from the \texttt{/encs/bin} directory.
 
-To use \texttt{tcsh} shell, start your script with \verb|#!/encs/bin/tcsh|. For \texttt{bash}, use \verb|#!/encs/bin/bash| instead.
+To specify the shell for your script, begin with the appropriate shebang line:\\
+use use \verb|#!/encs/bin/tcsh| for the tcsh shell, or \verb|#!/encs/bin/bash| for bash.
 
 Directives that start with \verb|#SBATCH| set the options for the cluster's SLURM job scheduler.
 The following provides an example of some essential directives:
@@ -163,9 +161,6 @@ To purge all software in your working environment:
 % -------------------
 \subsubsection{User Scripting}
 \label{sect:scripting}
-%TO BE DELETED
-%\input{scheduler-scripting}
-%
 
 The final part of the job script involves the commands that will be executed by the job.
 This section should include all necessary commands to set up and run the tasks
