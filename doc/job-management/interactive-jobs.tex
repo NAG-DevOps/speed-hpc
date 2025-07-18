@@ -1,4 +1,4 @@
-% 2.8 Interactive Jobs
+% Interactive Jobs
 % -------------------------------------------------------------
 \subsection{Interactive Jobs}
 \label{sect:interactive-jobs}
@@ -6,7 +6,7 @@ Interactive job sessions allow you to interact with the system in real-time.
 These sessions are particularly useful for tasks such as testing, debugging, optimizing code,
 setting up environments, and other preparatory work before submitting batch jobs.
 
-%  2.8.1 Command Line
+% Command Line
 % -------------------
 \subsubsection{Command Line}
 \label{sect:command-line}
@@ -33,7 +33,7 @@ you can use an interactive srun directly. For example, a 1-hour allocation:
 	srun --pty -n 8 -p pg --gpus=1 --mem=1G -t 60 /encs/bin/bash
 \end{verbatim}
 
-% 2.8.2 Graphical Applications
+% Graphical Applications
 % -----------------------------
 \subsubsection{Graphical Applications}
 \label{sect:graphical-applications}
@@ -126,12 +126,12 @@ non-interactive or use VirtualGL.
 	\label{fig:pycharm}
 \end{figure}
 
-% 2.8.3 Jupyter Notebooks
+% Jupyter Notebooks
 % ------------------------
 \subsubsection{Jupyter Notebooks}
 \label{sect:jupyter-notebooks}
 
-% 2.8.3.1 Jupyter Notebook in Singularity
+% Jupyter Notebook in Singularity
 % ---------------------------------------
 \paragraph{Jupyter Notebook in Singularity}
 \label{sect:jupyter-singularity}
@@ -203,7 +203,7 @@ and paste it in the browser's URL field. In our case, the URL is:
 \noindent Another sample is the OpenISS-derived containers with Conda and Jupyter,
 see \xs{sect:openiss-examples} for details.
 
-% 2.8.3.2 Jupyter Notebook in Conda
+% Jupyter Notebook in Conda
 % ----------------------------------
 \paragraph{Jupyter Notebook in Conda}
 \label{sect:jupyter-conda}
@@ -263,7 +263,7 @@ The script will:
 \end{enumerate}
 
 
-% 2.8.3.3 Jupyter Notebook in Python Virtual Env
+% Jupyter Notebook in Python Virtual Env
 % ----------------------------------------------
 \paragraph{Jupyter Notebook in Python venv}
 \label{sect:jupyter-python}
@@ -318,7 +318,7 @@ jupyter lab --no-browser --notebook-dir=$PWD --ip="0.0.0.0" --port=8888 --port-r
 \end{itemize}
 
 
-% 2.8.4 Visual Studio Code
+% Visual Studio Code
 % ------------------------
 \subsubsection{Visual Studio Code}
 \label{sect:vscode}
@@ -327,7 +327,7 @@ This is an example of running VS Code on Speed
 
 \textbf{Note: } There are two ways to run Visual Studio Code (VS Code) on Speed.
 
-% 2.8.4.1 Web-based Version
+% Web-based Version
 % ----------------------------------------------
 \paragraph{Web-based Version}
 \label{sect:web-based-vscode}
@@ -365,14 +365,14 @@ Similar to Jupyter notebooks.
 	\label{fig:vscode}
 \end{figure}
 
-% 2.8.4.2 Local Version
+% Local Version
 % ----------------------------------------------
 \paragraph{Local Version}
 \label{sect:local-vscode}
 If you prefer to run VS Code directly on your local machine without relying on a browser-based code-server, 
 detailed instructions are available in the \tool{/src/vscode} \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/vscode}{README.md} file.
 
-% 2.8.5 Job Script Generator
+% Job Script Generator
 % ---------------------------
 \subsubsection{Job Script Generator}
 \label{sect:job-script-generator}
