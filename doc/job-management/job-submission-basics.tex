@@ -134,7 +134,7 @@ set up for execution.
 \small
 \begin{verbatim}
     module avail
-    module -t avail matlab  ## show the list for a particular program (e.g., matlab)
+   module -t avail matlab  ## show the list for a particular program (e.g., matlab)
     module -t avail m       ## show the list for all programs starting with `m'
 \end{verbatim}
 \normalsize
@@ -178,17 +178,21 @@ a scheduler-provided workspace nearly 1~TB in size.
 \api{TMPDIR} is created on the local disk of the compute node at the start of a job, offering faster I/O operations
 compared to shared storage (provided over NFS).
 
-%TO BE DELETED 
-% example in /home/n/nul-uge/templateTMPDIR.sh is not accessible.
+\noindent An sample job script using \api{TMPDIR} is \texttt{tmpdir.sh}.
 
-%An sample job script using \api{TMPDIR} is available at \texttt{/home/n/nul-uge/templateTMPDIR.sh}: 
-%the job is instructed to change to \api{\$TMPDIR}, to make the new directory \texttt{input}, to copy data from
-%\texttt{\$SLURM\_SUBMIT\_DIR/references/} to \texttt{input/} (\api{\$SLURM\_SUBMIT\_DIR} represents the
-%current working directory), to make the new directory \texttt{results}, to
-%execute the program (which takes input from \texttt{\$TMPDIR/input/} and writes
-%output to \texttt{\$TMPDIR/results/}), and finally to copy the total end results
-%to an existing directory, \texttt{processed}, that is located in the current
-%working directory.
-% TODO: verify:
-%\api{TMPDIR} only exists for the duration of the job, though,
-%so it is very important to copy relevant results from it at job's end.
+\small
+\begin{figure}[htpb]
+	\lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily\scriptsize]{tmpdir.sh}
+	\caption{Source code for \file{tmpdir.sh}}
+	\label{fig:tmpdir.sh}
+\end{figure}
+\normalsize
+
+\noindent The job script begins by switching to the temporary working directory defined by \api{TMPDIR}.
+It then creates a new subdirectory called \texttt{input} and copies data from the
+\texttt{\$SLURM\_SUBMIT\_DIR/references/} which represents the job submission directory into this created folder.
+A second directory, \texttt{results}, is also created to store the output. The job then executes the program using \texttt{srun}, 
+reading from \texttt{$TMPDIR/input/} and writing results to \texttt{$TMPDIR/results/}. 
+Once the computation is complete, the output files are copied back to the \texttt{processed} directory in the original submission folder.
+
+\noindent \textbf{Note:} \api{TMPDIR} only exists for the duration of the job, so it is crucial to copy relevant results from it at the end of the job.
