@@ -52,9 +52,10 @@ chmod u+x *.sh && ./get_dataset_market1501.sh
 
 <!-- TOC --><a name="performance-openiss-reid"></a>
 ### Performance
-Training for 10 epochs, the results for different Speed configurations were:
+Training for 120 epochs, the results for different Speed configurations were:
 
 |      Resource     |      Time      |
 | ----------------- | -------------- |
-|       1 GPU       |    ~29 mins    |
-|      32 CPUs      |  ~6h 49 mins   |
+|       1 GPU       |  ~5h 25 mins   |
+|      32 CPUs      |  ~55h 7 mins   |
+
