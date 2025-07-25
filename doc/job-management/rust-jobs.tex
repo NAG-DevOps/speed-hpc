@@ -1,0 +1,23 @@
+% Rust Jobs
+% -------------------------------------------------------------
+\subsection{Rust Jobs}
+\label{sect:rust}
+
+To run Rust jobs, one can (1) either use the \tools{rustc} and
+related tools installed on the EL9 OS on the nodes, or (2) if
+a more recent libraries and compilers are neede, uses
+can install them in their \texttt{/speed-scratch/\$USER/}
+space. Below is an example setting up a user-level
+install assuming \tool{tcsh}:
+
+\scriptsize
+\begin{verbatim}
+$ salloc --mem=1G
+$ setenv RUSTUP_HOME /speed-scratch/$USER/.rustup
+$ setenv CARGO_HOME /speed-scratch/$USER/.cargo
+$ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+\end{verbatim}
+\normalsize
+
+After that is done, compiled Rust jobs can be ran as any other
+batch or interactive jobs described in earlier sections.
