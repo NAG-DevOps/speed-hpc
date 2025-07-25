@@ -1,4 +1,4 @@
-% 2.15 Scheduling on the GPU Nodes
+% Scheduling on the GPU Nodes
 % -------------------------------------------------------------
 \subsection{Scheduling on the GPU Nodes}
 \label{sect:gpu-scheduling}
@@ -135,7 +135,7 @@ speed-[25,27]        2 pg             idle   32   2:16:1 257458        0      1 
 \end{verbatim}
 \normalsize
 
-%  2.15.1 P6 on Multi-GPU, Multi-Node
+% P6 on Multi-GPU, Multi-Node
 % -------------------
 \subsubsection{P6 on Multi-GPU, Multi-Node}
 \label{sect:multi-node-gpu}
@@ -155,7 +155,7 @@ One workaround is to run the job in Multi-node, single GPU per node
 	{pytorch-multinode-multigpu.sh}
 illustrates a job for training on Multi-Nodes, Multi-GPUs
 
-%  2.15.2 CUDA
+% CUDA
 % -------------------
 \subsubsection{CUDA}
 \label{sect:cuda}
@@ -172,7 +172,7 @@ For example, to use the \texttt{cuda-11.5} libraries, specify the following in y
   module load gcc/9.3
 \end{verbatim}
 
-%  2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queue
+% Special Notes for Sending CUDA Jobs to the GPU Queue
 % -------------------
 \subsubsection{Special Notes for Sending CUDA Jobs to the GPU Queues}
 
@@ -187,7 +187,7 @@ Several versions of CUDA are installed in:
 For CUDA to compile properly for the GPU partition, edit your \texttt{Makefile} replacing\\
 \texttt{\/usr\/local\/cuda} with one of the above.
 
-%  2.15.4 OpenISS Examples
+% OpenISS Examples
 % -------------------
 \subsubsection{OpenISS Examples}
 \label{sect:openiss-examples}

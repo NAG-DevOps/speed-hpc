@@ -38,96 +38,70 @@ Common and required job parameters include:
 \end{itemize}
 %\end{multicols}
 
-% 2.1 Getting Started
+% Getting Started
 % -------------------------------------------------------------
 \input{job-management/getting-started.tex}
 
-% includes:
-%	2.1.1 SSH Connections
-%	2.1.2 Environment Set Up
-
-% 2.2 Job Submission Basics
+% Job Submission Basics
 % -------------------------------------------------------------
 \input{job-management/job-submission-basics.tex}
 
-% includes:
-%	2.2.1 Directives
-%	2.2.2 Working with Modules
-%	2.2.3 User Scripting
-
-% 2.3 Sample Job Script
+% Sample Job Script
 % -------------------------------------------------------------
 \input{job-management/sample-job-script.tex}
 
-% 2.4 Common Job Management Commands
+% Common Job Management Commands
 % -------------------------------------------------------------
 \input{job-management/common-job-commands.tex}
 
-% 2.5 Advanced sbatch Options
+% Advanced sbatch Options
 % -------------------------------------------------------------
 \input{job-management/advanced-sbatch-options.tex}
 
-% 2.6 Array Jobs
+% Array Jobs
 % -------------------------------------------------------------
 \input{job-management/array-jobs.tex}
 
-% 2.7 Requesting Multiple Cores (i.e., Multithreading Jobs)
+% Requesting Multiple Cores (i.e., Multithreading Jobs)
 % -------------------------------------------------------------
 \input{job-management/requesting-multiple-cores.tex}
 
-% 2.8 Interactive Jobs
+% Interactive Jobs
 % -------------------------------------------------------------
 \input{job-management/interactive-jobs.tex}
 
-% includes:
-%	2.8.1 Command Line
-%	2.8.2 Graphical Applications
-%	2.8.3 Jupyter Notebooks
-%		2.8.3.1 Jupyter Notebook in Singularity
-%		2.8.3.2 Jupyter Notebook in Conda
-%		2.8.3.3 Jupyter Notebook in Python Virtual Env
-%	2.8.4 Visual Studio Code
-
-% 2.9 Scheduler Environment Variables
+% Scheduler Environment Variables
 % -------------------------------------------------------------
 \input{job-management/scheduler-env-variables.tex}
 
-% 2.10 SSH Keys for MPI
+% SSH Keys for MPI
 % -------------------------------------------------------------
 \input{job-management/ssh-keys.tex}
 
-% 2.11 Creating Virtual Environments
+% Creating Virtual Environments
 % -------------------------------------------------------------
 \input{job-management/creating-virtual-envs.tex}
 
-% includes:
-%	2.11.1 Anaconda
-%		2.11.1.1 Conda Env without --prefix
-%	2.11.2 Python
-
-% 2.12 Example Job Script: Fluent
+% Example Job Script: Fluent
 % -------------------------------------------------------------
 \include{job-management/ex-fluent.tex}
 
-% 2.13 Example Job: EfficientDet
+% Example Job: EfficientDet
 % -------------------------------------------------------------
 \input{job-management/ex-efficiendet.tex}
 
-% 2.14 Java Jobs
+% Java Jobs
 % -------------------------------------------------------------
 \input{job-management/java-jobs.tex}
 
-% 2.15 Scheduling on the GPU Nodes
+% Rust Jobs
+% -------------------------------------------------------------
+\input{job-management/rust-jobs.tex}
+
+% Scheduling on the GPU Nodes
 % -------------------------------------------------------------
 \input{job-management/scheduling-on-gpus.tex}
 
-%	2.15.1 P6 on Multi-GPU, Multi-Node
-%	2.15.2 CUDA
-%	2.15.3 Special Notes for Sending CUDA Jobs to the GPU Queues
-%	2.15.4 OpenISS Examples
-%		2.15.4.1 OpenISS and REID
-%		2.15.4.2 OpenISS and YOLOv3
-
-% 2.16 Singularity Containers
+% Singularity Containers
 % -------------------------------------------------------------
 \input{job-management/singularity-containers.tex}
