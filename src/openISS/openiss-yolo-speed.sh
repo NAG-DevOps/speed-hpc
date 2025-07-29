@@ -1,11 +1,14 @@
 #!/encs/bin/tcsh
 
 #SBATCH --job-name openiss-yolo
-#SBATCH --mail-type=ALL
-#SBATCH --chdir=./
-#SBATCH -o output-%A.log
+#SBATCH --mail-type=ALL                 ## Receive all email type notifications
+#SBATCH --chdir=./                      ## Use currect directory as working directory (default) 
+#SBATCH -o openiss-yolo-output-%A.log   ## Specify output file name
 
-# Request Resources
+##
+## Request Resources
+##
+
 #SBATCH --mem=60G
 #SBATCH -n 32
 #SBATCH --gpus=1
@@ -15,59 +18,28 @@
 module load anaconda3/2023.03/default
 module load cuda/9.2/default
 
-# Define environment name and path 
-set ENV_NAME = "yolo_env"
-set ENV_DIR = "/speed-scratch/$USER/envs"
-set ENV_PATH = "$ENV_DIR/$ENV_NAME"
-set TMP_DIR = "/speed-scratch/$USER/envs/tmp"
-set PKGS_DIR = "/speed-scratch/$USER/envs/pkgs"
+# Define environment variables
+set ENV_DIR = "/speed-scratch/$USER/yolo-venv"
+mkdir -p $ENV_DIR/{tmp,pkgs,cache}
 
-mkdir -p $ENV_DIR
-mkdir -p $TMP_DIR
-mkdir -p $PKGS_DIR
+setenv TMP $ENV_DIR/tmp
+setenv TMPDIR $ENV_DIR/tmp 
+setenv CONDA_PKGS_DIRS $ENV_DIR/pkgs
+setenv PIP_CACHE_DIR $ENV_DIR/cache
 
-setenv TMP $TMP_DIR
-setenv TMPDIR $TMP_DIR
-setenv CONDA_PKGS_DIRS $PKGS_DIR
+echo "Creating Conda environment at $ENV_DIR..."
+echo "===================================================="
+conda create -y -p "$ENV_DIR" python=3.5 keras=2.1.5 -c conda-forge
 
-# Check if the environment exists
-conda env list | grep "$ENV_NAME"
-if ($status == 0) then
-    echo "Environment $ENV_NAME already exists. Activating it..."
-    echo "======================================================"
-    conda activate "$ENV_PATH"
+conda activate "$ENV_DIR"
 
-    if ($status != 0) then
-        echo "Error: Failed to activate Conda environment."
-        exit 1
-	endif
-else
-	echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
-    echo "===================================================="
-	conda create -y -p "$ENV_PATH" python=3.5 keras=2.1.5 -c conda-forge
-
-	echo "Activating environment $ENV_NAME..."
-    echo "==================================="
-	conda activate "$ENV_PATH"
-
-	if ($status != 0) then
-	    echo "Error: Failed to activate Conda environment."
-	    exit 1
-	endif
-	
-	echo "Installing required packages..."
-    echo "==============================="
-	pip install --upgrade pip
-    pip install pillow matplotlib h5py
-    #pip install tensorflow-gpu==1.8
-	pip install opencv-python==4.1.2.30
-	pip install opencv-contrib-python==4.1.2.30
-endif
-
-echo "Conda environemnt summary..."
-echo "============================"
-conda info --envs
-conda list
+echo "Installing required packages..."
+echo "==============================="
+pip install --upgrade pip
+pip install pillow matplotlib h5py
+#pip install tensorflow-gpu==1.8
+pip install opencv-python==4.1.2.30
+pip install opencv-contrib-python==4.1.2.30
 
 # Download YOLOv3 weights
 if (! -e yolov3.weights || -z yolov3.weights) then
@@ -91,7 +63,11 @@ else
     echo "=================================================="
 endif
 
+date
+
 # Run YOLO video processing - image example
+#echo "Running non-interactive YOLO image processing..."
+#echo "================================================"
 #srun python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image
 
 # Run YOLO video processing - video example (non-interactive)
@@ -99,5 +75,6 @@ echo "Running non-interactive YOLO video processing..."
 echo "================================================"
 srun python yolo_video.py --input video/v1.avi --output video/001.avi #--gpu_num 1
 
+date
+
 conda deactivate
-exit
