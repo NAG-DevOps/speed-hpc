@@ -38,13 +38,13 @@ This directory contains a range of job script examples. Some are basic, while ot
   - `tmpdir.sh` -- Demonstrates use of `TMPDIR` on a local node.
   - `manual.sh` -- Builds the Speed manual (PDF and HTML) using LaTeX.
   - `env.sh` -- Prints job environment variables for debugging.
-  - `poppler/` -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script `poppler.sh`, python code, and example pdf.
+  - [`poppler/`](poppler/) -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script `poppler.sh`, python code, and example pdf.
 
 - Common Software Packages:
   - `comsol.sh` -- Job script for COMSOL Multiphysics.
   - `fluent.sh` -- Example job for ANSYS Fluent.
-  - `matlab/` -- Incluses batch job for MATLAB.
-  - `vscode/` -- Incluses instructions on how to run VS Code both locally and as a web-based version.
+  - [`matlab/`](matlab/) -- Incluses batch job for MATLAB.
+  - [`vscode/`](vscode/) -- Incluses instructions on how to run VS Code both locally and as a web-based version.
 
 - Research & Advanced Examples:
   - `efficientdet.sh` -- Runs EfficientDet model using a Conda environment.
@@ -56,11 +56,11 @@ This directory contains a range of job script examples. Some are basic, while ot
   - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
   - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
 
-  - `gpaw/` -- Example job scrits for GPAW simulaptions.
-  - `jupyter/` -- Hands-on examples for launching JupyterLab using Conda.
-  - `llm-examples/` -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
-  - `pytorch-multicpu/` -- Using Pytorch with Python virtual environment to run on CPUs.
-  - `single-job-multi-mig/` -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
+  - [`gpaw/`](gpaw/) -- Example job scrits for GPAW simulaptions.
+  - [`jupyter/`](jupyter/) -- Hands-on examples for launching JupyterLab using Conda.
+  - [`llm-examples/`](llm-examples/) -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
+  - [`pytorch-multicpu/`](pytorch-multicpu/) -- Using Pytorch with Python virtual environment to run on CPUs.
+  - [`single-job-multi-mig/`](single-job-multi-mig/) -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
   
 <!-- TOC --><a id="creating-environments"></a>
 # Creating Virtual Environments
@@ -91,20 +91,20 @@ The following documentation is specific to **Speed**.
 <!-- TOC --><a id="anaconda"></a>
 ### Anaconda
 - **List available modules for Anaconda and load the required version**.
-   ```  
+   ```bash
    module avail anaconda
    module load anaconda3/2023.03/default
    ```
 
 - **Initialize Conda for your shell** (only done once) **and source it** (or log out and log back in)
-   ```
+   ```bash
    conda init tcsh
    source ~/.tcshrc
    ```
    The default shell for ENCS accounts is tcsh.
 
 - **Start an interactive session**
-   ```
+   ```bash
    # For CPU-based environments
    salloc --mem=20G
 
@@ -115,26 +115,26 @@ The following documentation is specific to **Speed**.
 - **Create anaconda environment** (Once per project)
 
    It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues (default conda creates the environment in your home directory), thus we use the `-p` or `--prefix`.
-   ```
+   ```bash
    conda create -p /speed-scratch/$USER/<env_name> -y
    ```
    `$USER` is a parameter, either replace it by your ENCS username or the system will automatically do the work.
 
    **NOTE** If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
-   ```
+   ```bash
    setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
    setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
    ```
    If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using).
 
 - **Activate the environment**
-   ```
+   ```bash
    conda activate /speed-scratch/$USER/<env_name>
    ```
    After activating the environment, install the required packages for your environment with `conda install` or `pip install`.
 
 - Verify and list your conda environments
-   ```
+   ```bash
    conda info --envs
    # conda environments:
    #
@@ -143,12 +143,12 @@ The following documentation is specific to **Speed**.
    ```
 
 - **Deactivate the environment**
-   ```
+   ```bash
    conda deactivate
    ```
 
 - To delete/remove the environment (if no longer needed)
-   ```
+   ```bash
    conda env remove -p /speed-scratch/$USER/<env_name>
    conda clean --all --yes
    ```
@@ -158,23 +158,23 @@ The following documentation is specific to **Speed**.
 <!-- TOC --><a id="python"></a>
 ### Python
 - **List available modules for Anaconda and load the required version**.
-   ```  
+   ```bash
    module avail python
    module load python/3.11.0/default
    ```
 - **Create Python environment and activate it**
   
   It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues
-  ```
+  ```bash
   python -m venv /speed-scratch/$USER/<env_name>
   source /speed-scratch/$USER/<env_name>/bin/activate.csh
   ```
 - **Install required packages**
-  ```
+  ```bash
   pip install
   ```
 - **Deactivate the environment**
-  ```
+  ```bash
   deactivate
   ```
 
@@ -185,29 +185,25 @@ These variables control where temporary files are stored. This helps prevent exc
 Set these variables in your shell before installing packages or running jobs, especially if using Conda or Python virtual environments.
 
 - **For general temporary storage**
-  ```
+  ```bash
   setenv TMP /speed-scratch/$USER/tmp
   setenv TMPDIR /speed-scratch/$USER/tmp
   ```
-
 - **For Python pip cache**
-  ```
+  ```bash
   setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
   ```
-
 - **For Conda packages**
-  ```
+  ```bash
   setenv CONDA_PKGS_DIRS /speed-scratch/$USER/pkgs
   ```
-
 - **For Hugging Face** (if using Transformers or Datasets)
-  ```
+  ```bash
   setenv HF_HOME /speed-scratch/$USER/huggingface
   setenv HF_HUB_CACHE /speed-scratch/$USER/huggingface/cache
   ```
-
 - **For Singularity containers**
-  ```
+  ```bash
   setenv SINGULARITY_TMPDIR /speed-scratch/$USER/tmp
   setenv SINGULARITY_CACHEDIR /speed-scratch/$USER/tmp/cache
   ```
@@ -222,14 +218,14 @@ To compile and run CUDA programs on Speed, ensure that the correct CUDA librarie
 - **Specify CUDA library paths in your Makefile**
    
    Replace `/usr/local/cuda` with the appropriate version. For example, to use CUDA 11.5:
-   ```
+   ```bash
    -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
    ```
 
 - **Load the appropriate GCC version in your job script before compiling with CUDA**
    
    For example: 
-   ```
+   ```bash
    module load gcc/8.4 
    # or
    module load gcc/9.3
@@ -248,7 +244,7 @@ The following steps describing how to create an efficientdet environment on spee
 * create virtual environment `python3 -m venv my_env_name`
 * activate virtual environment `source my_env_name/bin/activate.csh`
 * install DL packages for Efficientdet
-```python
+```bash
 pip install tensorflow==2.7.0
 pip install lxml>=4.6.1
 pip install absl-py>=0.10.0
@@ -273,9 +269,9 @@ pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAP
 - [Speed-related scripts](https://github.com/d-chante/diviner-tools/tree/development/jobs/speed)
 
 <!-- TOC --><a id="openfoam-multinode"></a>
-## OpenFoam - Multinode
+## OpenFOAM - Multinode
 
-This example is taken from OpenFoam tutorials section: $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity
+This example is taken from OpenFOAM tutorials section: `$FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity`
 1. Go to your speed-scratch directory: `cd /speed-scratch/$USER`
 2. open a salloc session
 3. Load OpenFoam module: `module load OpenFOAM/v2306/default`
