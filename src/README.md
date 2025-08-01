@@ -1,222 +1,241 @@
-<!-- TOC --><a name="examples"></a>
-# Examples
 
-This directory has example job scripts and some tips and tricks how to
+This directory has example job scripts and some tips and tricks on how to
 run certcain things.
 
 <!-- TOC start -->
-## TOC 
+**Table of Contents**
 - [Sample Jobs](#sample-jobs)
-- [Creating Environments and Compiling Code on Speed](#creating-environments-and-compiling-code-on-speed)
-   * [Correct Procedure](#correct-procedure)
-      + [Overview of preparing environments, compiling code and testing](#overview-of-preparing-environments-compiling-code-and-testing)
-      + [Once your environment and code have been tested](#once-your-environment-and-code-have-been-tested)
-      + [Do not use the submit node to create environments or compile code](#do-not-use-the-submit-node-to-create-environments-or-compile-code)
-      + [`pip`](#pip)
-   * [Environments](#environments)
-      + [Anaconda](#anaconda)
-         - [Load the Anaconda module](#load-the-anaconda-module)
-         - [Initialize Shell](#initialize-shell)
-         - [Create an Environment](#create-an-environment)
-         - [List Environments](#list-environments)
-         - [Activate an Environment](#activate-an-environment)
-- Detailed Examples
-   + [efficientdet](#efficientdet)
-   * [Diviner Tools](#diviner-tools)
-   * [OpenFoam](#openfoam-multinode)
-   * [OpenISS-yolov3](#openiss-yolov3)
-      + [Prerequisites](#prerequisites-openiss-yolov3)
-      + [Configuration and Execution](#configuration-and-execution-openiss-yolov3)
-         - [Run Non-interactive Script](#run-non-interactive-openiss-yolov3)
-         - [Run Interactive Script ](#run-interactive-openiss-yolov3)
-      + [Performance Comparison](#performance-comparison-openiss-yolov3)
-   * [OpenISS-reid-tfk](#openiss-reid-tfk)
-      + [Prerequisities](#prerequisites-openiss-reid)
-      + [Configuration and execution](#configuration-and-execution)
-   * [CUDA](#cuda)
-      + [Special Notes for sending CUDA jobs to the GPU Partition (`pg`)](#special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg)
-      + [Jupyter notebook example: Jupyter-Pytorch-CUDA](#jupyter-example-gpu-pytorch)
-   * [Python Modules](#python-modules)
+- [Creating Virtual Environments](#creating-virtual-environments)
+  - [Procedure](#procedure)
+  - [Environments](#environments)
+    - [Anaconda](#anaconda)
+    - [Python](#python)
+  - [Environment Variables](#environment-variables)
+  - [CUDA](#cuda)
+- [Detailed Examples](#detailed-examples)
+  - [efficientdet](#efficientdet)
+  - [Diviner Tools](#diviner-tools)
+  - [OpenFOAM - Multinode](#openfoam---multinode)
+  - [OpenISS-yolov3](#openiss-yolov3)
+    - [Prerequisites](#prerequisites)
+    - [Configuration and execution](#configuration-and-execution)
+      - [Run Non-interactive Script](#run-non-interactive-script)
+      - [Run Interactive Script](#run-interactive-script)
+    - [Performance comparison](#performance-comparison)
+  - [OpenISS Person Re-Identification Baseline](#openiss-person-re-identification-baseline)
+    - [Prerequisites](#prerequisites-1)
+    - [Configuration and execution](#configuration-and-execution-1)
 <!-- TOC end -->
 
-<!-- TOC --><a name="sample-jobs"></a>
-## Sample Jobs
+<!-- TOC --><a id="sample-jobs"></a>
+# Sample Jobs
 
-These are examples either trivial or some are more elaborate. Some are described in the [manual](../doc/) more in detail or vice versa. The examples were written by the Speed team as well as contributed by the users or a result of solving a problem of some kind.
+This directory contains a range of job script examples. Some are basic, while others showcase advanced or research-specific workflows. Many are discussed in more detail in the [Speed Manual](https://nag-devops.github.io/speed-hpc/), and others are included here to complement it. They were created by the Speed team, contributed by users, or developed as solutions to specific problems.
+ 
+- Basic Examples:
+  - `bash.sh` -- Batch job script using the `bash` shell.
+  - `tcsh.sh` -- Batch job script using the default `tcsh` shell.
+  - `tmpdir.sh` -- Demonstrates use of `TMPDIR` on a local node.
+  - `manual.sh` -- Builds the Speed manual (PDF and HTML) using LaTeX.
+  - `env.sh` -- Prints job environment variables for debugging.
+  - [`poppler/`](poppler/) -- Interactive job example for PDF rendering using poppler and pdf2image. Includes instructions, setup script `poppler.sh`, python code, and example pdf.
 
-- Basic examples:
-  - `tcsh.sh` -- default `tcsh` job script example
-  - `tmpdir.sh` -- example use of TMPDIR on a local node
-  - `bash.sh` -- example use with `bash` shell as opposed to `tcsh`
-  - `manual.sh` -- example job to compile our very manual here to PDF and HTML using LaTeX
-  - `poppler.txt` -- Interactive job example: PDF rendering using poppler and pdf2image; instructions and code ready to paste.
-- Common packages:
-  - `fluent.sh` -- Fluent job
-  - `comsol.sh` -- Comsol job
-  - `matlab/matlab-slurm.sh` -- MATLAB job
-- Advanced or research examples:
-  - `msfp-speed-job.sh` -- MAC Spoofer Investigation starter job script (for detailes see [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
-  - `efficientdet.sh` -- `efficientdet` with Conda environment described below
-  - `gurobi-with-python.sh` -- using Gurobi with Python and Python virtual environment
-  - `pytorch-multicpu.txt` -- using Pytorch with Python virtual environment to run on CPUs; with instructions and code ready to paste.
-  - `pytorch-multinode-multigpu.sh` -- using Pytorch with Python virtual environment to run on Multinodes and MultiGpus
-  - `lambdal-singularity.sh` -- an example use of the Singularity container to run LambdaLabs software stack on the GPU node. The container was built from the docker image as a [source](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
-  - `openfoam-multinode.sh` -- an example using OpenFoam, icoFoam solver to run on Multinodes-multicpus
-  - `openiss-reid-speed.sh` -- OpenISS computer vision exame for re-edentification, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk) in its section
-  - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS examples with YOLO, related to `reid`, see [more](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3) in the corresponding section
-  - `gpaw/*` -- a sample to run GPAW
+- Common Software Packages:
+  - `comsol.sh` -- Job script for COMSOL Multiphysics.
+  - `fluent.sh` -- Example job for ANSYS Fluent.
+  - [`matlab/`](matlab/) -- Incluses batch job for MATLAB.
+  - [`vscode/`](vscode/) -- Incluses instructions on how to run VS Code both locally and as a web-based version.
+
+- Research & Advanced Examples:
+  - `efficientdet.sh` -- Runs EfficientDet model using a Conda environment.
+  - `gurobi-with-python.sh` -- Uses Gurobi with a Python virtual environment.
+  - `lambdal-singularity.sh` -- Uses Singularity container to run LambdaLabs software stack on GPU node. Based on this github repo [Lambda Stack Dockerfiles](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
+  - `msfp-speed-job.sh` -- MAC Spoofer analysis script (see more detailes [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
+  - `openfoam-multinode.sh` -- Runs OpenFOAM’s icoFoam solver across multiple CPU nodes.
+  - `openiss-reid-speed.sh` -- OpenISS for person re-identification. See more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk).
+  - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
+  - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
+  - [`gpaw/`](gpaw/) -- Example job scrits for GPAW simulaptions.
+  - [`jupyter/`](jupyter/) -- Hands-on examples for launching JupyterLab using Conda.
+  - [`llm-examples/`](llm-examples/) -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
+  - [`pytorch-multicpu/`](pytorch-multicpu/) -- Using Pytorch with Python virtual environment to run on CPUs.
+  - [`single-job-multi-mig/`](single-job-multi-mig/) -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
   - `cl/*` -- samples to run [OpenCL](cl/) jobs from examples, tutorials, and an AMDGPU benchmark
+  
+<!-- TOC --><a id="creating-environments"></a>
+# Creating Virtual Environments
 
-<!-- TOC --><a name="creating-environments-and-compiling-code-on-speed"></a>
-# Creating Environments and Compiling Code on Speed
+<!-- TOC --><a id="procedure"></a>
+## Procedure
+- Do not compile or create environments on `speed-submit{1|2}`
 
-<!-- TOC --><a name="correct-procedure"></a>
-## Correct Procedure
+   These are tiny virtual machines intended for job submission only and lack GPU drivers. All work/processes running outside the scheduler will be terminated.
 
-<!-- TOC --><a name="overview-of-preparing-environments-compiling-code-and-testing"></a>
-### Overview of preparing environments, compiling code and testing
+- Start an Interactive session with `salloc` (e.g., `salloc -p pg --gpus=1`)
+- Create and activate your environment
 
-- Create an `salloc` session to the queue you wish to run your jobs 
-(e.g., `salloc -p pg --gpus=1` for GPU jobs)
-- Within the `salloc` session, create and activate an Anaconda environment in 
-your `/speed-scratch/` directory using the instructions found in Section 2.11.1 of the manual: 
-https://nag-devops.github.io/speed-hpc/#creating-virtual-environments
-- Compile your code within the environment.
-- Test your code with a limited data set.
-- Once you are satisfied with your test results, exit your `salloc` session.
+   Use `/speed-scratch/$USER` for all environments.
 
-<!-- TOC --><a name="once-your-environment-and-code-have-been-tested"></a>
-### Once your environment and code have been tested
+- Compile and test your code within the environment. Once done, exit your `salloc` session.
 
-- Create a job script. (see https://nag-devops.github.io/speed-hpc/#job-submission-basics)
-- Remember to Activate your Anaconda environment in the user scripting section
-- Use the `sbatch` command to submit your job script to the correct partition and account
+- Prepare a job script (refer [Job Submission Basics](https://nag-devops.github.io/speed-hpc/#job-submission-basics))
 
-<!-- TOC --><a name="do-not-use-the-submit-node-to-create-environments-or-compile-code"></a>
-### Do not use the submit node to create environments or compile code
+   Use [Job Script Generator](nag-devops.github.io/speed-hpc/generator.html), and make sure you activate your environment and specify the correct resources.
 
-- `speed-submit` is a virtual machine intended to submit user jobs to 
-the job scheduler. It is not intended to compile or run code. 
-- **Importantly**, `speed-submit` does not have GPU drivers. This means that code compiled on `speed-submit` will not be compiled against proper GPU drivers. 
-- Processes run outside of the scheduler on `speed-submit` will be killed and you will lose your work.
+- Submit your job with `sbatch`
 
-<!-- TOC --><a name="pip"></a>
-### `pip`
-
-By default, `pip` installs packages to a system-wide default location.
-
-Creating environments via `pip` shound NOT be done outside of an Anaconda environment.
-
-Why you should create an Anaconda environment and not use pip directly from the 
-command line:
-- Using pip directly from the command line affects the system wide environment. If all users
-use pip in this way, the packages and versions installed via pip may change while your jobs run.
-- Creating Anaconda environments allows you to fully control what python packages, and their versions, are within that environment.
-- It is possible to create multiple conda environments for your different projects.
-
-<!-- TOC --><a name="environments"></a>
+<!-- TOC --><a id="environments"></a>
 ## Environments
+The following documentation is specific to **Speed**.
 
-Virtual Environment Creation documentation. The following documentation is specific to **Speed**.
-
-<!-- TOC --><a name="anaconda"></a>
+<!-- TOC --><a id="anaconda"></a>
 ### Anaconda
+- **List available modules for Anaconda and load the required version**.
+   ```bash
+   module avail anaconda
+   module load anaconda3/2023.03/default
+   ```
 
-<!-- TOC --><a name="load-the-anaconda-module"></a>
-#### Load the Anaconda module
+- **Initialize Conda for your shell** (only done once) **and source it** (or log out and log back in)
+   ```bash
+   conda init tcsh
+   source ~/.tcshrc
+   ```
+   The default shell for ENCS accounts is tcsh.
 
-To view the Anaconda modules available, run
-`module avail anaconda`
+- **Start an interactive session**
+   ```bash
+   # For CPU-based environments
+   salloc --mem=20G
 
-Load the desired version of anaconda using the module load command.
+   # For GPU-based environments
+   salloc --mem=20G --gpus=1
+   ```
 
-For example:
-`module load anaconda3/2023.03/default`
+- **Create anaconda environment** (Once per project)
 
-<!-- TOC --><a name="initialize-shell"></a>
-#### Initialize Shell
-To initialize your shell, run
-`conda init <SHELL_NAME>`
+   It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues (default conda creates the environment in your home directory), thus we use the `-p` or `--prefix`.
+   ```bash
+   conda create -p /speed-scratch/$USER/<env_name> -y
+   ```
+   `$USER` is a parameter, either replace it by your ENCS username or the system will automatically do the work.
 
-The default shell for ENCS accounts is tcsh. Therefore, to initialize your default shell run
-`conda init tcsh`
+   **NOTE** If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
+   ```bash
+   setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
+   setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
+   ```
+   If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using).
 
-<!-- TOC --><a name="create-an-environment"></a>
-#### Create an Environment
-To create an anaconda environment in your speed-scratch directory, use the `--prefix` option when executing `conda create`. 
+- **Activate the environment**
+   ```bash
+   conda activate /speed-scratch/$USER/<env_name>
+   ```
+   After activating the environment, install the required packages for your environment with `conda install` or `pip install`.
 
-For example:
-`conda create --prefix /speed-scratch/$USER/myconda`
+- Verify and list your conda environments
+   ```bash
+   conda info --envs
+   # conda environments:
+   #
+   base                 *  /encs/pkg/anaconda3-2023.03/root
+                           /speed-scratch/$USER/<env_name>
+   ```
 
-Where `$USER` is an environment variable containing your encs_username
+- **Deactivate the environment**
+   ```bash
+   conda deactivate
+   ```
 
-Without the `--prefix` option, `conda create` creates the environment in your home directory by default.
+- To delete/remove the environment (if no longer needed)
+   ```bash
+   conda env remove -p /speed-scratch/$USER/<env_name>
+   conda clean --all --yes
+   ```
 
-<!-- TOC --><a name="list-environments"></a>
-#### List Environments
-To view your conda environments, type 
-`conda info --envs`
+   To resolve "Disk Quota Error", check https://nag-devops.github.io/speed-hpc/#how-to-resolve-disk-quota-exceeded-errors
 
-```
-# conda environments:
-#
-base                  *  /encs/pkg/anaconda3-2023.03/root
-                         /speed-scratch/<encs_username>/myconda
-```                 
+<!-- TOC --><a id="python"></a>
+### Python
+- **List available modules for Anaconda and load the required version**.
+   ```bash
+   module avail python
+   module load python/3.11.0/default
+   ```
+- **Create Python environment and activate it**
+  
+  It is recommended to install the environment in the `/speed-scratch/$USER` directory to avoid quota issues
+  ```bash
+  python -m venv /speed-scratch/$USER/<env_name>
+  source /speed-scratch/$USER/<env_name>/bin/activate.csh
+  ```
+- **Install required packages**
+  ```bash
+  pip install
+  ```
+- **Deactivate the environment**
+  ```bash
+  deactivate
+  ```
 
-<!-- TOC --><a name="activate-an-environment"></a>
-#### Activate an Environment
-Activate the environment `/speed-scratch/<encs_username>/myconda` as follows
+<!-- TOC --><a id="environment-variables"></a>
+## Environment Variables
+These variables control where temporary files are stored. This helps prevent exceeding disk quotas in your home directory.
 
-`conda activate /speed-scratch/$USER/myconda`
+Set these variables in your shell before installing packages or running jobs, especially if using Conda or Python virtual environments.
 
-After activating your environment, add pip to your environment by using 
+- **For general temporary storage**
+  ```bash
+  setenv TMP /speed-scratch/$USER/tmp
+  setenv TMPDIR /speed-scratch/$USER/tmp
+  ```
+- **For Python pip cache**
+  ```bash
+  setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
+  ```
+- **For Conda packages**
+  ```bash
+  setenv CONDA_PKGS_DIRS /speed-scratch/$USER/pkgs
+  ```
+- **For Hugging Face** (if using Transformers or Datasets)
+  ```bash
+  setenv HF_HOME /speed-scratch/$USER/huggingface
+  setenv HF_HUB_CACHE /speed-scratch/$USER/huggingface/cache
+  ```
+- **For Singularity containers**
+  ```bash
+  setenv SINGULARITY_TMPDIR /speed-scratch/$USER/tmp
+  setenv SINGULARITY_CACHEDIR /speed-scratch/$USER/tmp/cache
+  ```
 
-`conda install pip`
+<!-- TOC --><a id="cuda"></a>
+## CUDA
 
-This will install pip and pip's dependencies, including python.
+To compile and run CUDA programs on Speed, ensure that the correct CUDA libraries and compatible compiler version are used.
 
-**Important Note:** pip (and pip3) are used to install modules from the python distribution while `conda install` installs modules from anaconda's repository.
+**IMPORTANT** Interactive jobs should be submitted to the **GPU Queue** (`pg`) with `salloc` in order to compile and link CUDA code.
 
-<!-- TOC --><a name="no-space-left-conda"></a>
-#### No Space left error when creating Conda Environment
-You are using your `$HOME` directory as conda default directory, the tarballs and pkgs are using all the space
+- **Specify CUDA library paths in your Makefile**
+   
+   Replace `/usr/local/cuda` with the appropriate version. For example, to use CUDA 11.5:
+   ```bash
+   -L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
+   ```
 
-`conda clean --all --dry-run` will show you the size of tarballs, packages, caches
-`conda clean -all` will wipe-out all unused packages, caches and tarballs
+- **Load the appropriate GCC version in your job script before compiling with CUDA**
+   
+   For example: 
+   ```bash
+   module load gcc/8.4 
+   # or
+   module load gcc/9.3
+   ```
 
-If the `conda clean` hasn't freed enough space, try to set change the location of Conda pkgs to another directory, e.g:
-```
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/tmp/pkgs
-```
+<!-- TOC --><a id="sample-jobs"></a>
+# Detailed Examples
 
-<!-- TOC --><a name="create-conda-env-speed"></a>
-#### Example: Create Conda Environment in Speed
-On speed-submit:
-`salloc --mem=10Gb -n1 -pps`
-
-On the node where the interactive session is running:
-
-```
-setenv TMPDIR /speed-scratch/$USER/tmp
-setenv TMP /speed-scratch/$USER/tmp
-module load anaconda3/2023.03/default
-setenv CONDA_PKGS_DIRS $TMP/pkgs
-conda create -p $TMP/Venv-Name python==3.11
-conda activate $TMP/Venv-Name
-```
-#### Conda envs without prefix
-If you don't want to use the `--prefix` option everytime you create a new environment and you don't want to use the default `$HOME` directory, create a new directory and set CONDA_ENVS_PATH and CONDA_PKGS_DIRS variables to point to the new created directory, e.g:
-
-```
-setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
-```
-
-If you want to make these changes permanent, add the variables to your .tcshrc or .bashrc (depending on the default shell you are using)
-
-<!-- TOC --><a name="efficientdet"></a>
-### efficientdet
+<!-- TOC --><a id="efficientdet"></a>
+## efficientdet
 
 The following steps describing how to create an efficientdet environment on speed, were submitted by a member of Dr. Amer's Research Group.
 
@@ -225,7 +244,7 @@ The following steps describing how to create an efficientdet environment on spee
 * create virtual environment `python3 -m venv my_env_name`
 * activate virtual environment `source my_env_name/bin/activate.csh`
 * install DL packages for Efficientdet
-```python
+```bash
 pip install tensorflow==2.7.0
 pip install lxml>=4.6.1
 pip install absl-py>=0.10.0
@@ -242,17 +261,17 @@ pip install Cython>=0.29.13
 pip install git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI
 ```
 
-<!-- TOC --><a name="diviner-tools"></a>
+<!-- TOC --><a id="diviner-tools"></a>
 ## Diviner Tools
 
 [Diviner Tools](https://github.com/d-chante/diviner-tools) is a custom library for pre-processing Diviner RDR LVL1 Channel 7 data by [Chantelle Dubois](https://github.com/d-chante).
 
 - [Speed-related scripts](https://github.com/d-chante/diviner-tools/tree/development/jobs/speed)
 
-<!-- TOC --><a name="openfoam-multinode"></a>
-## OpenFoam-multinode
+<!-- TOC --><a id="openfoam-multinode"></a>
+## OpenFOAM - Multinode
 
-This example is taken from OpenFoam tutorials section: $FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity
+This example is taken from OpenFOAM tutorials section: `$FOAM_TUTORIALS/incompressible/icoFoam/cavity/cavity`
 1. Go to your speed-scratch directory: `cd /speed-scratch/$USER`
 2. open a salloc session
 3. Load OpenFoam module: `module load OpenFOAM/v2306/default`
@@ -270,22 +289,25 @@ This is a case study example on image classification, for more details please vi
 
 <!-- TOC --><a id="prerequisites-openiss-yolov3"></a>
 ### Prerequisites
-
-   #### Images and Videos
+- **Images and Videos**
+   
    Images and videos can be from any source, but a sample video and images are provided in `video` and `image` folders in the [OpenISS-YOLOv3 Github repository](https://github.com/NAG-DevOps/openiss-yolov3).
 
-   #### YOLOv3 Weights
+- **YOLOv3 Weights**
+  
    The YOLOv3 weights can be downloaded from [YOLO website](http://pjreddie.com/darknet/yolo/). However the script provided includes a command to `wget` the weights from the link above.
 
-   #### Environment Setup
+- **Environment Setup**
+  
    To set up the virtual development environment, refer to section 2.11 of the Speed manual [Creating Virtual Environments](https://nag-devops.github.io/speed-hpc/#anaconda) for detailed information.
 
 <!-- TOC --><a id="configuration-and-execution-openiss-yolov3"></a>
 ### Configuration and execution
 - Log into SPEED and navigate to your `speed-scratch` directory:
-
-      ssh $USER@speed.encs.concordia.ca
-      cd /speed-scratch/$USER/
+   ```
+   ssh $USER@speed.encs.concordia.ca
+   cd /speed-scratch/$USER/
+   ```
 
    **Note**: To see a live video in an interactive session, enable X11 forwarding. Linux can run X11, however, to run X server on:
 	- Windows: use MobaXterm or Putty
@@ -294,16 +316,17 @@ This is a case study example on image classification, for more details please vi
    For more information refer to [How to Launch X11 applications](https://www.concordia.ca/ginacody/aits/support/faq/xserver.html)
 
 - Clone the [OpenISS-YOLOv3 Github repository](https://github.com/NAG-DevOps/openiss-yolov3)
-
-      git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
-      cd /speed-scratch/$USER/openiss-yolov3
+   ```
+   git clone --depth=1 https://github.com/NAG-DevOps/openiss-yolov3.git
+   cd /speed-scratch/$USER/openiss-yolov3
+   ```
 
 <!-- TOC --><a id="run-non-interactive-openiss-yolov3"></a>
 #### Run Non-interactive Script 
    - Download and run `openiss-yolo-speed.sh` script from [Speed-HPC Github repository](https://github.com/NAG-DevOps/speed-hpc/tree/master/src).
-
-         sbatch ./openiss-yolo-speed.sh
-
+   ```
+   sbatch ./openiss-yolo-speed.sh
+   ```
 The script performs the following:
    - Configures job resources and paths for Conda environments.
    - Creates, or activates the Conda environment, and installs required packages if necessary.
@@ -316,13 +339,14 @@ The script performs the following:
 #### Run Interactive Script
    *Note* To run interactive job we need to use `ssh -X`
    - Request resources with `salloc` command
-
-         salloc --x11=first --mem=60G -n 32 --gpus=1 -p pt
-
+   ```
+   salloc --x11=first --mem=60G -n 32 --gpus=1 -p pt
+   ```
    - Download and run `openiss-yolo-interactive.sh` script from [Speed-HPC Github repository](https://github.com/NAG-DevOps/speed-hpc/tree/master/src). You need to add permission access to the project files.
-
-         chmod u+x *.sh 
-         ./openiss-yolo-interactive.sh
+   ```
+   chmod u+x *.sh
+   ./openiss-yolo-interactive.sh
+   ```
 
    - A pop up window will show a classifed live video. 
 
@@ -332,14 +356,9 @@ The script does the following:
    - Convert the Darknet YOLO model into a Keras model using `convert.py`
    - Run YOLO inference on a sample video in an intaractive mode
 
-**Note**: If you need to delete the created virtual environment
+For Tiny YOLOv3, it can be run in the same way, but you will need to specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
 
-      conda deactivate
-      conda env remove -p /speed-scratch/$USER/envs/yolo_env
-
-   For Tiny YOLOv3, it can be run in the same way, but you will need to specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
-
-<!-- TOC --><a name="performance-comparison-openiss-yolov3"></a>
+<!-- TOC --><a id="performance-comparison-openiss-yolov3"></a>
 ### Performance comparison
 
 Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of tesla P6. The project uses keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 is gpu32, and for P6 is gpu16, you can find that in scripts shell.
@@ -349,15 +368,15 @@ Time is in minutes, run Yolo with different hardware configurations GPU types V1
 |    22.15      |   17.54       |   23.08       |     60.18      |
 |    22.18      |   17.18       |   23.13       |     60.47      |
 
-<!-- TOC --><a name="openiss-reid-tfk"></a>
+<!-- TOC --><a id="openiss-reid-tfk"></a>
 ## OpenISS Person Re-Identification Baseline
 
 The following are the steps required to run the *OpenISS Person Re-Identification Baseline* Project (https://github.com/NAG-DevOps/openiss-reid-tfk) on the *Speed* cluster. This implementatoin is based on tensorflow and keras
 
-<!-- TOC --><a name="prerequisites-openiss-reid"></a>
+<!-- TOC --><a id="prerequisites-openiss-reid"></a>
 ### Prerequisites
-
-#### Dataset
+- **Dataset**
+   
    Using the Market1501 dataset which consist of 
    - Train images: 12,936
    - Query images: 3,368
@@ -367,10 +386,10 @@ The following are the steps required to run the *OpenISS Person Re-Identificatio
    - Using GPU: 29 minute
    - Using CPUs (32 cores): 6 hours and 49 minute
 
-#### Environment Setup
+- **Environment Setup**
    The environment setup instructions are located in `environment.yml` (https://github.com/NAG-DevOps/openiss-reid-tfk). Ensure all dependencies are correctly installed.
 
-<!-- TOC --><a name="configuration-and-execution"></a>
+<!-- TOC --><a id="configuration-and-execution"></a>
 ### Configuration and execution
 
 - Log into Speed and navigate to your speed-scratch directory:
@@ -397,59 +416,3 @@ The following are the steps required to run the *OpenISS Person Re-Identificatio
    For CPU nodes: `sbatch ./openiss-reid-speed.sh`
 
    For GPU nodes: `sbatch -p pg ./openiss-reid-speed.sh`
-
-<!-- TOC --><a name="cuda"></a>
-## CUDA
-
-When calling CUDA within job scripts, it is important to create a link to the desired CUDA libraries and set the runtime link path to the same libraries. For example, to use the `cuda-11.5` libraries, specify the following in your `Makefile`.
-```
--L/encs/pkg/cuda-11.5/root/lib64 -Wl,-rpath,/encs/pkg/cuda-11.5/root/lib64
-```
-In your job script, specify the version of `gcc` to use prior to calling cuda. For example: 
-   `module load gcc/8.4`
-or
-   `module load gcc/9.3`
-
-<!-- TOC --><a name="special-notes-for-sending-cuda-jobs-to-the-gpu-partition-pg"></a>
-### Special Notes for sending CUDA jobs to the GPU Partition (`pg`)
-
-Interactive jobs (easier to debug) should be submitted to the **GPU Queue** with `salloc` in order to compile and link CUDA code.
-
-We have several versions of CUDA installed in:
-```
-/encs/pkg/cuda-11.5/root/
-/encs/pkg/cuda-10.2/root/
-/encs/pkg/cuda-9.2/root
-```
-
-For CUDA to compile properly for the GPU queue, edit your `Makefile` replacing `/usr/local/cuda` with one of the above.
-
-<!-- TOC --><a name="jupyter-example-gpu-pytorch"></a>
-### Jupyter notebook example: Jupyter-Pytorch-CUDA
-
-Example prepared to run on speed, extracted from: https://developers.redhat.com/learning/learn:openshift-data-science:configure-jupyter-notebook-use-gpus-aiml-modeling/resource/resources:how-examine-gpu-resources-pytorch
-
-From speed-submit: 
-- Download `gpu-ml-model.ipynb` from this github to your `/speed-scratch/$USER space`
-- `salloc --mem=10Gb --gpus=1`
-
-From the node (interactive session):
-- `module load singularity/3.10.4/default`
-- `srun singularity exec -B $PWD\:/speed-pwd,/speed-scratch/$USER\:/my-speed-scratch,/nettemp --env SHELL=/bin/bash --nv /speed-scratch/nag-public/jupyter-pytorch-cuda.sif /bin/bash -c '/opt/conda/bin/jupyter notebook --no-browser --notebook-dir=/speed-pwd --ip="*" --port=8888 --allow-root'`
-- Follow the steps described in: https://nag-devops.github.io/speed-hpc/#jupyter-notebooks
-- When Jupyter is running on the browser, open `gpu-ml-model.ipynb` and run each cell
-
-<!-- TOC --><a name="python-modules"></a>
-## Python Modules
-
-By default when adding a python module `/tmp` is used for the temporary repository of files downloaded. `/tmp` on speed-submit is too small for pytorch.
-
-To add a python module:
-
-- First create you own tmp directory in /speed-scratch
-  - `mkdir /speed-scratch/$USER/tmp`
-- Use the tmp direcrtory you created
-  - `setenv TMPDIR /speed-scratch/$USER/tmp`
-- Attempt the installation of pytorch
-
-Where `$USER` is an environment variable containing your GCS ENCS username
