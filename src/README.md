@@ -15,7 +15,7 @@ run certcain things.
 - [Detailed Examples](#detailed-examples)
   - [efficientdet](#efficientdet)
   - [Diviner Tools](#diviner-tools)
-  - [OpenFoam - Multinode](#openfoam---multinode)
+  - [OpenFOAM - Multinode](#openfoam---multinode)
   - [OpenISS-yolov3](#openiss-yolov3)
     - [Prerequisites](#prerequisites)
     - [Configuration and execution](#configuration-and-execution)
