@@ -36,7 +36,7 @@ if ( -d "$ENV_PATH" ) then
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
-        endif
+    endif
 else
     echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
     echo "======================================================================"
@@ -45,6 +45,7 @@ else
     echo "Activating Conda environment $ENV_NAME..."
         echo "======================================================================"
     conda activate "$ENV_PATH"
+    
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
