@@ -2,7 +2,7 @@
 
 #SBATCH --job-name openiss-reid
 #SBATCH --mail-type=ALL                 ## Receive all email type notifications
-#SBATCH --chdir=./                      ## Use currect directory as working directory (default) 
+#SBATCH --chdir=./                      ## Use currect directory as working directory (default)
 #SBATCH -o openiss-reid-output-%A.log   ## Specify output file name
 
 ##
@@ -36,19 +36,19 @@ if ( -d "$ENV_PATH" ) then
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
-	endif
+        endif
 else
     echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
     echo "======================================================================"
     conda env create -f environment.yml -p $ENV_PATH |& tee conda-create.log
 
     echo "Activating Conda environment $ENV_NAME..."
-	echo "======================================================================"
+        echo "======================================================================"
     conda activate "$ENV_PATH"
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
-    endif            
+    endif
 endif
 
 date
@@ -60,6 +60,8 @@ srun python reid.py
 echo "======================================================================"
 date
 
-echo "================================ DONE ================================"
+# Deactivate Conda env
 echo "Deactivating Conda environment..."
 conda deactivate
+
+echo "================================ DONE ================================"
