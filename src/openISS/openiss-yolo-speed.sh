@@ -38,19 +38,21 @@ if ( -d "$ENV_PATH" ) then
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
-        endif
+    endif
 else
     echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
     echo "======================================================================"
     conda create -y -p "$ENV_PATH" python=3.5 keras=2.1.5 -c conda-forge |& tee conda-create.log
 
     echo "Activating Conda environment $ENV_NAME..."
-        echo "======================================================================"
+    echo "======================================================================"
     conda activate "$ENV_PATH"
+    
     if ($status != 0) then
         echo "Error: Failed to activate Conda environment."
         exit 1
     endif
+
     echo "Installing required packages..."
     echo "==============================="
     pip install --upgrade pip
