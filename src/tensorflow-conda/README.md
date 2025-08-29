@@ -19,4 +19,3 @@ Installation and configuration of a Conda environment for tensorflow with Cuda c
         sbatch -ppg tf-speed.sh\
     -p parameter could have any of our GPU partitions: pt,pg,pa,cl,em,pn
         
-<!-- TOC end -->
