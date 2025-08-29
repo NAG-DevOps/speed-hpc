@@ -1,4 +1,3 @@
-<!-- TOC --><a name="README"></a>
 # Tensorflow in Conda
 
 Installation and configuration of a Conda environment for tensorflow with Cuda compatibility
