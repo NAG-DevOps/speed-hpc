@@ -8,7 +8,7 @@ Installation and configuration of a Conda environment for tensorflow with Cuda c
 * Conda environment creation, tensorflow and cuda packages installation
 
     * Connect to a node (salloc):
-    
+```bash
             setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
             setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
             conda create -n <Environment_Name> python=3.10
