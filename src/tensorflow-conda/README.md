@@ -2,7 +2,6 @@
 
 Installation and configuration of a Conda environment for tensorflow with Cuda compatibility
 
-<!-- TOC --><a name="Instructions"></a>
 ## Instructions
 * Conda environment creation, tensorflow and cuda packages installation
 
