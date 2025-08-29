@@ -15,7 +15,6 @@ Installation and configuration of a Conda environment for tensorflow with Cuda c
             conda activate <Environment_Name>
             conda install -c nvidia cuda-toolkit=12.5
             conda install -c conda-forge tensorflow-gpu matplotlib numpy
-
 * Modify according your needs (path, Environment_Name) the script `tf-speed.sh`
 * In a submit node, run the script `tf-speed.sh`
 
