@@ -4,10 +4,12 @@
 #SBATCH --mem=10G
 #SBATCH --gpus=1
 
-setenv CONDA_ENVS_PATH /speed-scratch/$USER/condas
-setenv CONDA_PKGS_DIRS /speed-scratch/$USER/condas/pkg
-
+set ENV_NAME = conda-env
+set ENV_DIR = /speed-scratch/$USER/envs
+set ENV_PATH = $ENV_DIR/$ENV_NAME 
+setenv CONDA_PKGS_DIRS $ENV_DIR/pkgs 
 # activate the environment created before
-conda activate <Environment_Name>
-srun python /speed-scratch/$USER/<Directory_where_the_script_is_located>/tf-stress.py
+conda activate $ENV_PATH
+# Directory where the script is located
+srun python $PWD/tf-stress.py
 conda deactivate
