@@ -1,7 +1,12 @@
 import ollama
 import os
+from pathlib import Path
 
-ollama_host = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
+user = os.getenv("USER")
+host_file = Path(f"/speed-scratch/{user}/ollama/.ollama_host")
+
+ollama_host = host_file.read_text().strip()
+
 client = ollama.Client(host=ollama_host)
 response = client.chat(
     model='llama3.1',
@@ -13,4 +18,6 @@ response = client.chat(
         )
     }]
 )
-print(response['message']['content'])
+
+print(f"[Client connected to {ollama_host}]")
+print(response["message"]["content"])
