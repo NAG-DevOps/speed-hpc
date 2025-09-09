@@ -38,7 +38,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
 
 * Open a new terminal window and paste the ssh command to connect to the speed node the server is running on. The command will look like:
     ```shell
-    ssh -L XXXXX:localhost:XXXXX <ENCSusername>@speed.encs.concordia.ca -t ssh speed-XX
+    ssh -L XXXXX:speed-XX:XXXXX <ENCSusername>@speed.encs.concordia.ca -t ssh speed-XX
     ```
 
 * Navigate to ollama directory and do a sanity check
@@ -47,8 +47,25 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
     ollama -v
     ```
 
-* Pull a specific model and run it interactively (optional).
+* Run the `run_ollama.sh` script, replace speed-XX with the name of the node the server is running on 
+    ```shell
+    sbatch -w speed-XX run_ollama.sh
+    ```
+
+    The script will:
+    - Request required resources
+    - Set environment variables
+    - Pull a model to run (in this case it's llama3.2)
+    - Create a python environment to run `ollama_demo.py`
+    - Run `ollama_demo.py` which interact with the model 
+
+Optional:
+1. Check if the server is running, replace XXXXX with the port number
 ```shell
-ollama pull llama3.2
-echo "What is today" | ollama run llama3.2
+curl http://localhost:XXXXX/api/tags
+```
+
+2. Run a model with a prompt
+```shell
+curl -sS http://localhost:56781/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2","prompt": "why is the sky blue?","stream": false}' | jq -r '.response'
 ```

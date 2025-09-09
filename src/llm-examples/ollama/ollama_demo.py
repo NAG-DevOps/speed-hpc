@@ -9,7 +9,7 @@ ollama_host = host_file.read_text().strip()
 
 client = ollama.Client(host=ollama_host)
 response = client.chat(
-    model='llama3.1',
+    model='llama3.2',
     messages=[{
         'role': 'user',
         'content': (

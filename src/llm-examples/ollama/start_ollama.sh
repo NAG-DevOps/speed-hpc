@@ -24,10 +24,7 @@ setenv PATH $ODIR/bin:$PATH
 setenv OLLAMA_MODELS $ODIR/models
 mkdir -p $OLLAMA_MODELS
 
-# pull a specific model
-ollama pull llama3.2
-
-# Get an available port for the server
+# Ollama by default listens on 127.0.0.1:11434, the port however can be overwritten
 set PORT = `python -c 'import socket,sys; s=socket.socket(); s.bind(("",0)); print(s.getsockname()[1]); s.close()'`
 setenv OLLAMA_HOST 127.0.0.1:$PORT
 echo "http://localhost:$PORT" >! ${ODIR}/.ollama_host
@@ -42,7 +39,7 @@ echo "===================================================="
 echo "To connect from your laptop, open a new terminal and run:"
 
 echo ""
-echo " ssh -L ${PORT}:localhost:${PORT} ${USER}@speed.encs.concordia.ca -t ssh $NODE"
+echo " ssh -L ${PORT}:${NODE}:${PORT} ${USER}@speed.encs.concordia.ca -t ssh $NODE"
 echo ""
 echo "Once connected, set your environment variables:"
 echo "  setenv PATH ${ODIR}/bin:$PATH"
