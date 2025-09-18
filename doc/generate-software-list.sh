@@ -26,32 +26,11 @@ in either \api{\#SBATCH} or on the command line.
 
 \noindent
 \textbf{NOTE:} this list does not include packages installed directly on the OS (yet).
-
-% -----------------------------------------------------------------------------
-\subsection{EL7}
-\label{sect:software-el7}
-
-Not all packages are intended for HPC, but the common tree is available
-on Speed as well as teaching labs' desktops.
-
-\scriptsize
-\begin{multicols}{3}
-\begin{itemize}
 LATEX_HEADER
 
-ls -1 /encs/ArchDep/x86_64.EL7/pkg/ \
-  | egrep -v HIDE \
-  | sed 's/^/\\item \\verb|/g' \
-  | sed 's/$/|/g' \
-  >> "$OUTFILE.tex"
-
 cat >> "$OUTFILE.tex" << LATEX_EL9_HEADER
-\end{itemize}
-\end{multicols}
-\normalsize
-
 % -----------------------------------------------------------------------------
-\subsection{EL9}
+\subsection{EL9 (/encs/pkg)}
 \label{sect:software-el9}
 
 \scriptsize
@@ -71,7 +50,7 @@ cat >> "$OUTFILE.tex" << LATEX_EB_HEADER
 \normalsize
 
 % -----------------------------------------------------------------------------
-\subsection{EB}
+\subsection{EB (EL9)}
 \label{sect:software-eb}
 
 \scriptsize
@@ -90,24 +69,29 @@ cat >> "$OUTFILE.tex" << LATEX_FOOTER
 \normalsize
 
 % -----------------------------------------------------------------------------
-\subsection{EB}
-\label{sect:software-EB}
+\subsection{EL7 (legacy)}
+\label{sect:software-el7}
+
+Not all packages are intended for HPC, but the common tree is available
+on Speed as well as teaching labs' desktops.
 
 \scriptsize
 \begin{multicols}{3}
 \begin{itemize}
-LATEX_EB_HEADER
+% EOF
+LATEX_FOOTER
 
-/encs/pkg/EasyBuild/root/./list.sh
-cat /encs/pkg/EasyBuild/root/eb-list.txt | sed 's/^/\\item \\verb|/g' | sed 's/$/|/g' >> "$OUTFILE.tex"
+ls -1 /encs/ArchDep/x86_64.EL7/pkg/ \
+  | egrep -v HIDE \
+  | sed 's/^/\\item \\verb|/g' \
+  | sed 's/$/|/g' \
+  >> "$OUTFILE.tex"
 
-cat >> "$OUTFILE.tex" << LATEX_FOOTER
+cat >> "$OUTFILE.tex" << LATEX_EL7_FOOTER
 \end{itemize}
 \end{multicols}
 \normalsize
-
-% EOF
-LATEX_FOOTER
+LATEX_EL7_FOOTER
 
 # Get .md version of the same from LaTeX
 pandoc -s "$OUTFILE.tex" -o "$OUTFILE.md"
