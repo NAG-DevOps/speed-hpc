@@ -17,7 +17,7 @@ Speed: Gina Cody School HPC Facility: Scripts, Tools, and Refs
 
 ## Software List
 
-* [EL7 and EL9 Software List](software-list.md) on Speed
+* [Software List](software-list.md) on Speed
 
 ## Contributing and TODO
 

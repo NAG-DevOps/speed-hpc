@@ -192,7 +192,7 @@ compared to shared storage (provided over NFS).
 It then creates a new subdirectory called \texttt{input} and copies data from the
 \texttt{\$SLURM\_SUBMIT\_DIR/references/} which represents the job submission directory into this created folder.
 A second directory, \texttt{results}, is also created to store the output. The job then executes the program using \texttt{srun}, 
-reading from \texttt{$TMPDIR/input/} and writing results to \texttt{$TMPDIR/results/}. 
+reading from \texttt{\$TMPDIR/input/} and writing results to \texttt{\$TMPDIR/results/}. 
 Once the computation is complete, the output files are copied back to the \texttt{processed} directory in the original submission folder.
 
 \noindent \textbf{Note:} \api{TMPDIR} only exists for the duration of the job, so it is crucial to copy relevant results from it at the end of the job.
