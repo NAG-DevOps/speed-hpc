@@ -3250,26 +3250,30 @@ AITS, so contact their respective representatives.
 <!-- l. 3 --><p class='noindent'>
 </p>
 <h3 class='sectionHead' id='software-installed-on-speed'><span class='titlemark'>D   </span> <a id='x1-89000D'></a>Software Installed On Speed</h3>
-<!-- l. 6 --><p class='noindent'>This is a generated section by a script; last updated on <span class='cmti-10'>Thu Sep 18 12:20:09 PM EDT 2025</span>. We have
-two major software trees: Scientific Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After
-major synchronization of software packages is complete, we will stop maintaining the EL7 tree and
-will migrate the remaining nodes to EL9.
-</p><!-- l. 12 --><p class='noindent'>Use <span class='cmtt-10'>--constraint=el7 </span>to select EL7-only installed nodes for their software packages. Conversely, use
-<span class='cmtt-10'>--constraint=el9 </span>for the EL9-only software. These options would be used as a part of your job
-parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line.
-</p><!-- l. 17 --><p class='noindent'><span class='cmbx-10'>NOTE: </span>this list does not include packages installed directly on the OS (yet).
+<!-- l. 6 --><p class='noindent'>This is a generated section by a script; last updated on <span class='cmti-10'>Fri Sep 19 02:22:34 PM EDT 2025</span>. We have
+two major software trees: AlmaLinux 9 (EL9), and Scientific Linux 7 (EL7), which is outgoing, and
+only available for legacy reasons. We stopped maintaining the EL7 tree after having migrated all the
+nodes to EL9.
+</p><!-- l. 13 --><p class='noindent'>EL9 packages come in the following flavours: </p>
+     <ul class='itemize1'>
+     <li class='itemize'>EL9 <span class='cmtt-10'>/encs/pkg </span>– traditionally manually installed/compiled
+     </li>
+     <li class='itemize'>EasyBuild  EL9  –  using  the  same  EasyBuild  tool  Alliance  Canada  use  for  software
+     compilation</li></ul>
+<!-- l. 22 --><p class='noindent'>Both are are available through <span class='cmtt-10'>modules</span>.
+</p><!-- l. 24 --><p class='noindent'><span class='cmbx-10'>NOTE: </span>this list does not include packages installed directly on the OS (yet).
 </p>
 <h4 class='subsectionHead' id='el-encspkg'><span class='titlemark'>D.1   </span> <a id='x1-90000D.1'></a>EL9 (/encs/pkg)</h4>
 <div class='columns-3'>
+                                                                               
+
+                                                                               
      <ul class='itemize1'>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>a2ps-4.14</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2021</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2023</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>abaqus-2025</span></span></span>
      </li>
@@ -3296,15 +3300,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2023R2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2024R2</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2025R1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2025R2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant-1.10.11</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant-1.10.2</span></span></span>
      </li>
@@ -3331,15 +3335,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>boost-1.73.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>buddy-2.4</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>build-openocd</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>camlp5-6.14</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Check-0.15.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cmake-3.18.4</span></span></span>
      </li>
@@ -3366,19 +3370,21 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-10.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-11.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-11.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-12.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cups-2.3.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-7.86.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>DbVisualizer-24.1.5</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>digilent-2.19.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>EasyBuild</span></span></span>
      </li>
@@ -3399,6 +3405,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.12.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.13.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.14.0</span></span></span>
      </li>
@@ -3407,9 +3416,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.15.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-115.10.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-115.2.1</span></span></span>
      </li>
@@ -3434,6 +3440,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.14.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.15.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.15.1</span></span></span>
      </li>
@@ -3442,9 +3451,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-115.2.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-115.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-91.10.0</span></span></span>
      </li>
@@ -3469,6 +3475,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-arm-11.2.2022.02</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-8.50</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-9.50</span></span></span>
      </li>
@@ -3477,9 +3486,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gmp-4.3.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.12</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.15.6</span></span></span>
      </li>
@@ -3504,6 +3510,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>http-parser-2.9.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hwloc-2.8.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jansson-2.14</span></span></span>
      </li>
@@ -3512,9 +3521,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-17.0.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-19</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-19.0.2</span></span></span>
      </li>
@@ -3539,6 +3545,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-8_32b</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>json-c-0.16</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>kicad-4.0.1</span></span></span>
      </li>
@@ -3547,9 +3556,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libjwt-1.15.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.1.8</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.4.7</span></span></span>
      </li>
@@ -3574,6 +3580,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R2024a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R2024b</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mesa-19.0.3</span></span></span>
      </li>
@@ -3582,9 +3591,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-5.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-current</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpack-1.6</span></span></span>
      </li>
@@ -3609,6 +3615,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.4</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.5</span></span></span>
      </li>
@@ -3617,9 +3626,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.8</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.9</span></span></span>
      </li>
@@ -3644,6 +3650,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ocaml-4.01.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>oidentd-3.1.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>oniguruma-6.9.5</span></span></span>
      </li>
@@ -3652,9 +3661,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-12.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-2.4.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-8.0</span></span></span>
      </li>
@@ -3679,6 +3685,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1n</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.12</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.current</span></span></span>
      </li>
@@ -3687,9 +3696,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>os-overrides-1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ParaView-5.11.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.30.3</span></span></span>
      </li>
@@ -3714,6 +3720,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.10.13</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.10.6</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.11.0</span></span></span>
      </li>
@@ -3722,9 +3731,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.11.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.12.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.6.15</span></span></span>
      </li>
@@ -3749,6 +3755,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>redis-8.0.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>redis-8.2.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.7.1</span></span></span>
      </li>
@@ -3757,9 +3766,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>singularity_containers</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>sqlite-3.44.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-15.04.010</span></span></span>
      </li>
@@ -3784,6 +3790,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20220405</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20230324</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
      </li>
@@ -3792,9 +3801,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird-102.12.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird-115.1.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird-115.10.2</span></span></span>
      </li>
@@ -3819,6 +3825,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-10.1.35</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat10-current</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-9.0.79</span></span></span>
      </li>
@@ -3827,9 +3836,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat9-current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat_connectors-1.2.46</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>user-utils-1.0</span></span></span>
      </li>
@@ -3841,7 +3847,7 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xemacs-21.4.24</span></span></span></li></ul>
 </div>
-<!-- l. 295 --><p class='noindent'>
+<!-- l. 303 --><p class='noindent'>
 </p>
 <h4 class='subsectionHead' id='eb-el'><span class='titlemark'>D.2   </span> <a id='x1-91000D.2'></a>EB (EL9)</h4>
 <div class='columns-3'>
@@ -3851,6 +3857,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant/1.10.12-Java-17</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant/1.10.14-Java-11</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ASE/3.23.0-gfbf-2024a</span></span></span>
      </li>
@@ -3859,17 +3868,20 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ASE/3.24.0-gfbf-2024a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autoconf/2.71-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autoconf/2.71-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autoconf/2.72-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Automake/1.16.5-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Automake/1.16.5-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Automake/1.16.5-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autotools/20220317-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autotools/20220317-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Autotools/20231222-GCCcore-13.3.0</span></span></span>
      </li>
@@ -3880,6 +3892,11 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>binutils/2.40</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>binutils/2.40-GCCcore-12.3.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>binutils/2.40-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>binutils/2.42</span></span></span>
      </li>
@@ -3893,28 +3910,38 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Bison/3.8.2-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Bison/3.8.2-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Bison/3.8.2-GCCcore-13.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Bison/3.8.2-GCCcore-14.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>BLIS/0.9.0-GCC-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>BLIS/0.9.0-GCC-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>BLIS/1.0-GCC-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Boost/1.82.0-GCC-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Boost/1.83.0-GCC-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Boost/1.85.0-GCC-13.3.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Brotli/1.0.9-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Brotli/1.1.0-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Brotli/1.1.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bzip2/1.0.8-GCCcore-10.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bzip2/1.0.8-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bzip2/1.0.8-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bzip2/1.0.8-GCCcore-13.3.0</span></span></span>
      </li>
@@ -3929,13 +3956,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Catch2/2.13.9-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cffi/1.15.1-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cffi/1.16.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CMake/3.26.3-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CMake/3.27.6-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CMake/3.29.3-GCCcore-13.3.0</span></span></span>
      </li>
@@ -3955,6 +3984,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cURL/8.0.1-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cURL/8.3.0-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cURL/8.7.1-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Cython/3.0.10-GCCcore-13.3.0</span></span></span>
@@ -3964,13 +3995,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>DBus/1.15.4-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>double-conversion/3.3.0-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Doxygen/1.11.0-GCCcore-13.3.0</span></span></span>
                                                                                
 
                                                                                
      </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Doxygen/1.11.0-GCCcore-13.3.0</span></span></span>
-     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Doxygen/1.9.7-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Doxygen/1.9.8-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Eigen/3.4.0-GCCcore-12.3.0</span></span></span>
      </li>
@@ -3984,6 +4017,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expat/2.5.0-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expat/2.5.0-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expat/2.6.2-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFmpeg/6.0-GCCcore-12.3.0</span></span></span>
@@ -3992,16 +4027,18 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFTW/3.3.10-GCC-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFTW/3.3.10-GCC-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFTW/3.3.10-GCC-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFTW.MPI/3.3.10-gompi-2023a</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FFTW.MPI/3.3.10-gompi-2024a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Flask/2.3.3-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Flask/3.0.3-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4010,6 +4047,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex/2.6.4-GCCcore-10.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex/2.6.4-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex/2.6.4-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex/2.6.4-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4028,15 +4067,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fontconfig/2.15.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fonttools/4.53.1-GCCcore-13.3.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>foss/2023a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>foss/2024a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>freetype/2.13.0-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>freetype/2.13.2-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4047,6 +4086,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>FSL/6.0.7.17</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GCC/12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GCC/13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GCC/13.3.0</span></span></span>
      </li>
@@ -4061,17 +4102,21 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GCCcore/14.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.21.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.21.1-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.22</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.22.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.22.5-GCCcore-13.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gettext/0.22-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gfbf/2023a</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gfbf/2024a</span></span></span>
      </li>
@@ -4085,9 +4130,16 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GLib/2.77.1-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GLib/2.78.1-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GLib/2.80.4-GCCcore-13.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GMP/6.3.0-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GMP/6.3.0-GCCcore-13.3.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GObject-Introspection/1.76.1-GCCcore-12.3.0</span></span></span>
      </li>
@@ -4104,9 +4156,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GPAW/24.6.0-intel-2023a-ASE-3.23.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GPAW/25.1.0-foss-2024a-ASE-3.24.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GPAW-setups/24.1.0</span></span></span>
      </li>
@@ -4116,15 +4165,24 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gperf/3.1-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gperf/3.1-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gperf/3.1-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>graphite2/1.3.14-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>groff/1.22.4-GCCcore-12.3.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>groff/1.23.0-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>groff/1.23.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gzip/1.12-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gzip/1.13-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gzip/1.13-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4139,17 +4197,19 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>HDF5/1.14.0-gompi-2023a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>HDF5/1.14.5-gompi-2024a</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>help2man/1.48.3-GCCcore-10.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>help2man/1.49.3-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>help2man/1.49.3-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>help2man/1.49.3-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>help2man/1.49.3-GCCcore-14.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hwloc/2.10.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4160,6 +4220,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hypothesis/6.82.0-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ICU/73.2-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ICU/74.1-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ICU/75.1-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4174,13 +4236,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>impi/2021.9.0-intel-compilers-2023.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intel/2023a</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intel-compilers/2023.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intltool/0.51.0-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intltool/0.51.0-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intltool/0.51.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4202,6 +4266,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive/3.6.2-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive/3.7.2-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive/3.7.4-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libdeflate/1.18-GCCcore-12.3.0</span></span></span>
@@ -4209,13 +4275,15 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libdeflate/1.20-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libdrm/2.4.115-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libdrm/2.4.122-GCCcore-13.3.0</span></span></span>
                                                                                
 
                                                                                
      </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libdrm/2.4.122-GCCcore-13.3.0</span></span></span>
-     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libevent/2.1.12-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libevent/2.1.12-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libevent/2.1.12-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4224,6 +4292,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libfabric/1.21.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libffi/3.4.4-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libffi/3.4.4-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libffi/3.4.5-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4241,12 +4311,14 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libiconv/1.17-GCCcore-12.3.0</span></span></span>
      </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libiconv/1.17-GCCcore-13.3.0</span></span></span>
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libjpeg-turbo/2.1.5.1-GCCcore-12.3.0</span></span></span>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libiconv/1.17-GCCcore-13.2.0</span></span></span>
                                                                                
 
                                                                                
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libiconv/1.17-GCCcore-13.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libjpeg-turbo/2.1.5.1-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libjpeg-turbo/3.0.1-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4260,28 +4332,36 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libpng/1.6.39-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libpng/1.6.40-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libpng/1.6.43-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libreadline/8.1-GCCcore-10.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libreadline/8.2-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libreadline/8.2-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libreadline/8.2-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libreadline/8.2-GCCcore-14.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibTIFF/4.5.0-GCCcore-12.3.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibTIFF/4.6.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libtool/2.4.7-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libtool/2.4.7-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libtool/2.4.7-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libunwind/1.6.2-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libunwind/1.6.2-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libunwind/1.8.1-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4297,7 +4377,14 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libxml2/2.11.4-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libxml2/2.11.5-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libxml2/2.12.7-GCCcore-13.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libxslt/1.1.38-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libxslt/1.1.42-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4314,15 +4401,14 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LittleCMS/2.16-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LLVM/16.0.6-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LLVM/18.1.8-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LLVM/18.1.8-GCCcore-13.3.0-minimal</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lz4/1.9.4-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lz4/1.9.4-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lz4/1.9.4-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4331,6 +4417,11 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>M4/1.4.19</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>M4/1.4.19-GCCcore-12.3.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>M4/1.4.19-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>M4/1.4.19-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4342,6 +4433,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Mako/1.2.4-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Mako/1.2.4-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Mako/1.3.5-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Mamba/23.11.0-0</span></span></span>
@@ -4349,9 +4442,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matplotlib/3.7.2-iimkl-2023a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matplotlib/3.9.2-gfbf-2024a</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>maturin/1.6.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4360,6 +4450,11 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Mesa/24.1.3-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Meson/1.1.1-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Meson/1.2.3-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Meson/1.4.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4379,28 +4474,38 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses/6.4-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses/6.4-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses/6.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses/6.5-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses/6.5-GCCcore-14.2.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>netCDF/4.9.2-gompi-2023a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nettle/3.10-GCCcore-13.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nettle/3.9.1-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Ninja/1.11.1-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Ninja/1.11.1-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Ninja/1.12.1-GCCcore-13.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>NLopt/2.7.1-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>NLopt/2.7.1-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nodejs/18.17.1-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nodejs/20.13.1-GCCcore-13.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nodejs/20.9.0-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>NSPR/4.35-GCCcore-12.3.0</span></span></span>
      </li>
@@ -4417,11 +4522,11 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenJPEG/2.5.0-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenJPEG/2.5.2-GCCcore-13.3.0</span></span></span>
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenMPI/4.1.5-GCC-12.3.0</span></span></span>
                                                                                
 
                                                                                
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenMPI/4.1.5-GCC-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenMPI/5.0.3-GCC-13.3.0</span></span></span>
      </li>
@@ -4437,15 +4542,24 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>PCRE2/10.42-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>PCRE2/10.42-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>PCRE2/10.43-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl/5.36.1-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl/5.38.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl/5.38.0-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl/5.38.2-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl-bundle-CPAN/5.36.1-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl-bundle-CPAN/5.38.0-GCCcore-13.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Perl-bundle-CPAN/5.38.2-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4454,15 +4568,16 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Pillow-SIMD/10.4.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pixman/0.42.2-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pixman/0.42.2-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pixman/0.43.4-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pkgconf/1.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pkgconf/1.9.5-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pkgconf/2.0.3-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pkgconf/2.2.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4477,6 +4592,11 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>poetry/1.5.1-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>poetry/1.8.3-GCCcore-13.3.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>PostgreSQL/16.1-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>PostgreSQL/16.4-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4489,9 +4609,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pybind11/2.12.0-GCC-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Python/3.11.3-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Python/3.11.5-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Python/3.12.3-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4508,6 +4627,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Qhull/2020.2-GCCcore-12.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Qhull/2020.2-GCCcore-13.3.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Qt5/5.15.10-GCCcore-12.3.0</span></span></span>
      </li>
@@ -4524,9 +4646,6 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Rust/1.78.0-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ScaLAPACK/2.2.0-gompi-2023a-fb</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ScaLAPACK/2.2.0-gompi-2024a-fb</span></span></span>
      </li>
@@ -4543,6 +4662,9 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SciPy-bundle/2023.07-iimkl-2023a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SciPy-bundle/2024.05-gfbf-2024a</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SDL2/2.28.2-GCCcore-12.3.0</span></span></span>
      </li>
@@ -4552,6 +4674,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>snappy/1.1.10-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SOCI/4.0.3-GCC-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SOCI/4.0.3-GCC-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>spglib-python/2.1.0-iimkl-2023a</span></span></span>
@@ -4559,9 +4683,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>spglib-python/2.5.0-gfbf-2024a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SQLite/3.42.0-GCCcore-12.3.0</span></span></span>
-                                                                               
-
-                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SQLite/3.43.1-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SQLite/3.45.3-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4569,9 +4692,16 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Szip/2.1.1-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Szip/2.1.1-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Szip/2.1.1-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Tcl/8.6.13-GCCcore-12.3.0</span></span></span>
+                                                                               
+
+                                                                               
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Tcl/8.6.13-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Tcl/8.6.14-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4593,18 +4723,24 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UCX/1.16.0-GCCcore-13.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UDUNITS/2.2.28-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UDUNITS/2.2.28-GCCcore-13.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-13.2.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-13.3.0</span></span></span>
                                                                                
 
                                                                                
      </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-12.3.0</span></span></span>
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-13.3.0</span></span></span>
-     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>UnZip/6.0-GCCcore-14.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>util-linux/2.39-GCCcore-12.3.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>util-linux/2.39-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>util-linux/2.40-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4624,6 +4760,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xorg-macros/1.20.0-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xorg-macros/1.20.0-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xorg-macros/1.20.1-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Xvfb/21.1.14-GCCcore-13.3.0</span></span></span>
@@ -4633,9 +4771,13 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
 
                                                                                
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>XZ/5.4.4-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>XZ/5.4.5-GCCcore-13.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>XZ/5.6.3-GCCcore-14.2.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>yaml-cpp/0.8.0-GCCcore-13.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>yaml-cpp/0.8.0-GCCcore-13.3.0</span></span></span>
      </li>
@@ -4651,6 +4793,8 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zlib/1.2.13-GCCcore-12.3.0</span></span></span>
      </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zlib/1.2.13-GCCcore-13.2.0</span></span></span>
+     </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zlib/1.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zlib/1.3.1-GCCcore-13.3.0</span></span></span>
@@ -4658,16 +4802,18 @@ parameters in either <span class='cmtt-10'>#SBATCH </span>or on the command line
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zlib/1.3.1-GCCcore-14.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zstd/1.5.5-GCCcore-12.3.0</span></span></span>
-     </li>
-     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zstd/1.5.6-GCCcore-13.3.0</span></span></span></li></ul>
-</div>
                                                                                
 
                                                                                
-<!-- l. 679 --><p class='noindent'>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zstd/1.5.5-GCCcore-13.2.0</span></span></span>
+     </li>
+     <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>zstd/1.5.6-GCCcore-13.3.0</span></span></span></li></ul>
+</div>
+<!-- l. 751 --><p class='noindent'>
 </p>
 <h4 class='subsectionHead' id='el-legacy'><span class='titlemark'>D.3   </span> <a id='x1-92000D.3'></a>EL7 (legacy)</h4>
-<!-- l. 682 --><p class='noindent'>Not all packages are intended for HPC, but the common tree is available on Speed as well as teaching
+<!-- l. 754 --><p class='noindent'>Not all packages are intended for HPC, but the common tree is available on Speed as well as teaching
 labs’ desktops.
 </p>
 <div class='columns-3'>
@@ -4689,6 +4835,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>acl-10.1.express</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>acroread-9.5.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ADS-2016.01</span></span></span>
      </li>
@@ -4697,9 +4846,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ADS-2019</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ADS-2020u1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>adt_bundle-20140702</span></span></span>
      </li>
@@ -4724,6 +4870,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>anaconda3-5.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>android_sdk-24.4.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>android_studio-162.4069837</span></span></span>
      </li>
@@ -4732,9 +4881,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansoft_designer-6.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansoft_designer-8.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-16.2</span></span></span>
      </li>
@@ -4759,6 +4905,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2023R1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ansys-2023R2</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>AnsysEM-16.2</span></span></span>
      </li>
@@ -4767,9 +4916,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant-1.10.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant-1.6.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ant-1.9.7</span></span></span>
      </li>
@@ -4794,6 +4940,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>aspectj-1.8.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>aspell-0.60.6</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>aspell-0.60.8</span></span></span>
      </li>
@@ -4802,9 +4951,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>autoconf-2.68</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>autoconf-2.71</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>AutoDock-4.2.6</span></span></span>
      </li>
@@ -4829,6 +4975,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-0.24.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-0.26.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-2.0.0</span></span></span>
      </li>
@@ -4837,9 +4986,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bazel-4.2.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bison-2.7.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bison-3.7.2</span></span></span>
      </li>
@@ -4864,6 +5010,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>boost-1.69.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>boost-1.70.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>boost-1.73.0</span></span></span>
      </li>
@@ -4872,9 +5021,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>buddy-2.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>bzr-2.6.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>camlp5-6.02.3</span></span></span>
      </li>
@@ -4899,6 +5045,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>clojure-1.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cmake-2.8.12</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cmake-3.18.4</span></span></span>
      </li>
@@ -4907,9 +5056,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cmake-3.8.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>CMC_utils-1.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>codeblocks-13.12</span></span></span>
      </li>
@@ -4934,6 +5080,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.10.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.6.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.6.2</span></span></span>
      </li>
@@ -4942,9 +5091,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.7.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.7.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cplex-12.8.0</span></span></span>
      </li>
@@ -4969,6 +5115,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-10.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-11.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cuda-11.8</span></span></span>
      </li>
@@ -4977,9 +5126,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cups-1.3.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>cups-2.3.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>curl-7.15.0</span></span></span>
      </li>
@@ -5004,6 +5150,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>DbVisualizer-9.1.9</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ddd-3.3.12</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>dejagnu-1.5.3</span></span></span>
      </li>
@@ -5012,9 +5161,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>digilent-2.19.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>digilent-2.8.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>dmtcp-1.2.8</span></span></span>
      </li>
@@ -5039,6 +5185,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.202109</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.202209</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.202506</span></span></span>
      </li>
@@ -5047,9 +5196,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.juno</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.luna</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>eclipse-jee.mars</span></span></span>
      </li>
@@ -5074,6 +5220,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expat-2.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expect-5.45</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>expect-5.45.4</span></span></span>
      </li>
@@ -5082,9 +5231,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>feko-2017.2.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>feko-2018.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>feko-6.1</span></span></span>
      </li>
@@ -5109,6 +5255,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.13.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.14.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-102.15.0</span></span></span>
      </li>
@@ -5117,9 +5266,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-115.10.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-115.2.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-115.3.0</span></span></span>
      </li>
@@ -5144,6 +5290,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-78.15.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox-91.11.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.11.0</span></span></span>
      </li>
@@ -5152,9 +5301,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.13.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.14.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-102.15.0</span></span></span>
      </li>
@@ -5179,6 +5325,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-60.9.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-68.12.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>firefox_french-78.15.0</span></span></span>
      </li>
@@ -5187,9 +5336,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex-2.5.37</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>flex-2.6.4</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fltk-1.3.2</span></span></span>
      </li>
@@ -5214,6 +5360,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>fxscintilla-2.28.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gambit-c-4.7.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gate-7.1</span></span></span>
      </li>
@@ -5222,9 +5371,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-12.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-13.1.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-3.3.2</span></span></span>
      </li>
@@ -5249,6 +5395,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-8.4.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-9.2.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gcc-9.3.0</span></span></span>
      </li>
@@ -5257,9 +5406,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gdb-12.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gdb-7.7</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>geomview-1.9.4</span></span></span>
      </li>
@@ -5284,6 +5430,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-9.50</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ghostscript-9.52</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gifsicle-1.92</span></span></span>
      </li>
@@ -5292,9 +5441,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gimp-2.8.18</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>git-1.8.5.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>git-2.15.0</span></span></span>
      </li>
@@ -5319,6 +5465,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glew-2.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glfw-3.0.4</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glfw-3.3</span></span></span>
      </li>
@@ -5327,9 +5476,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glm-0.9.5.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glm-0.9.9.8</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>glpk-4.55</span></span></span>
      </li>
@@ -5354,6 +5500,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.15.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.19.3</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>go-1.3</span></span></span>
      </li>
@@ -5362,9 +5511,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>GoldenGate-2020u1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gperf-3.0.4</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>grace-5.1.25</span></span></span>
      </li>
@@ -5389,6 +5535,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-10.0.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-10.0.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-7.0.1</span></span></span>
      </li>
@@ -5397,9 +5546,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-8.0.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-8.1.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>gurobi-9.0.0</span></span></span>
      </li>
@@ -5424,6 +5570,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-2.7.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hadoop-2.9.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>haskell_platform-2013.2.0.0</span></span></span>
      </li>
@@ -5432,9 +5581,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hdf5-1.8.11</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hexpert-2.4.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hmmer-3.3.2</span></span></span>
      </li>
@@ -5459,6 +5605,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.55</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.57</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>httpd-2.4.63</span></span></span>
      </li>
@@ -5467,9 +5616,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>http-parser-2.9.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hunspell-1.7.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>hwloc-1.11.2</span></span></span>
      </li>
@@ -5494,6 +5640,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>IntelliJ-2019.2.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>intltool-0.50.2</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-2.0</span></span></span>
      </li>
@@ -5502,9 +5651,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-2.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-2.2.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>invtools-2.3.0</span></span></span>
      </li>
@@ -5529,6 +5675,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ipe-7.1.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>iq-8.4.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>j2sdk_32b-1.5.0_22</span></span></span>
      </li>
@@ -5537,9 +5686,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jansson-2.14</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-11</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-11.0.1</span></span></span>
      </li>
@@ -5564,6 +5710,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u121</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u131</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u141</span></span></span>
      </li>
@@ -5572,9 +5721,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u161</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u171</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_32b-8u181</span></span></span>
      </li>
@@ -5599,6 +5745,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-7u80</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u101</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u111</span></span></span>
      </li>
@@ -5607,9 +5756,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u131</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u141</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk_64b-8u151</span></span></span>
      </li>
@@ -5634,6 +5780,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-7_32b</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-8</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jdk-8_32b</span></span></span>
      </li>
@@ -5642,9 +5791,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>jmag-20.1.02zi</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>json-c-0.16</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>julia-1.7.2</span></span></span>
      </li>
@@ -5669,6 +5815,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive-3.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libarchive-3.3.2</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libassuan-2.5.5</span></span></span>
      </li>
@@ -5677,9 +5826,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libav-12.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libedit-20210910.3.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libevent-2.1.12</span></span></span>
      </li>
@@ -5704,6 +5850,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.3.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>LibreOffice-7.4.7</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libssh-0.7.3</span></span></span>
      </li>
@@ -5712,9 +5861,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libtool-2.4.6</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libunistring-0.9.6</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>libusb-1.0.8</span></span></span>
      </li>
@@ -5739,6 +5885,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Logiscope-7.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lshw-B.02.16</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ltct-20060701</span></span></span>
      </li>
@@ -5747,9 +5896,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lua-5.3.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lucene-4.4.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>lucene-6.6.0</span></span></span>
      </li>
@@ -5774,6 +5920,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>maple-2019.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>maple-2022.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R0223b</span></span></span>
      </li>
@@ -5782,9 +5931,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R2021b</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R2022a</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>matlab-R2022b</span></span></span>
      </li>
@@ -5809,6 +5955,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>metamail-2.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>metis-5.1.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mininet-2.3.0</span></span></span>
      </li>
@@ -5817,9 +5966,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mod_auth_kerb-5.4</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mod_auth_mellon-0.17.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mod_authnz_external-3.2.5</span></span></span>
      </li>
@@ -5844,6 +5990,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>modules-current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mongodb-2.6.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mongodb-3.2.10</span></span></span>
      </li>
@@ -5852,9 +6001,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mono-3.0.11</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mono-4.4.2.8</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mono-6.12.0.122</span></span></span>
      </li>
@@ -5879,6 +6025,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>MPlayer-1.1.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mplayerplugin-3.45</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mpm-itk-2.4.7</span></span></span>
      </li>
@@ -5887,9 +6036,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>MUMPS-5.5.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-5.1.66</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-5.6.17</span></span></span>
      </li>
@@ -5914,6 +6060,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.23</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql-8.0.31</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>mysql_workbench-6.3.3</span></span></span>
      </li>
@@ -5922,9 +6071,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.10</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nagtools-2.1.4</span></span></span>
      </li>
@@ -5949,6 +6095,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncl-6.6.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ncurses-6.4</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>netbeans-7.3.1</span></span></span>
      </li>
@@ -5957,9 +6106,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>netbeans-8.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>netcdf-4.1.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>netcdf-4.3.0</span></span></span>
      </li>
@@ -5984,6 +6130,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nmh-1.1rc3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nmh-1.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>nmh-1.6</span></span></span>
      </li>
@@ -5992,9 +6141,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>node-v0.10.33</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>node-v12.13.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>node-v12.16.1</span></span></span>
      </li>
@@ -6019,6 +6165,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ocaml-3.12.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ocaml-4.01.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>octave-3.8.2</span></span></span>
      </li>
@@ -6027,9 +6176,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>octave-7.3.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>octave-8.2.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>omnetpp-4.2.2</span></span></span>
      </li>
@@ -6054,6 +6200,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openesb-2.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openesb-3.0.5</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-10.0</span></span></span>
      </li>
@@ -6062,9 +6211,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-1.7.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-2.3.1</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-2.4.0</span></span></span>
      </li>
@@ -6089,6 +6235,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2212</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>OpenFOAM-v2306</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openjpeg-2.3.1</span></span></span>
      </li>
@@ -6097,9 +6246,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openmpi-1.6.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openmpi-1.8.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openmpi-3.1.3</span></span></span>
      </li>
@@ -6124,6 +6270,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1.current</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1g</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1j</span></span></span>
      </li>
@@ -6132,9 +6281,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1o</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1p</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-1.1.1q</span></span></span>
      </li>
@@ -6159,6 +6305,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.7</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.8</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.0.9</span></span></span>
      </li>
@@ -6167,9 +6316,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>openssl-3.1.current</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>opera-12.16</span></span></span>
      </li>
@@ -6194,6 +6340,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pc2-9.3.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pcre-8.21</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pdfedit-0.4.5</span></span></span>
      </li>
@@ -6202,9 +6351,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.28.1_mt</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.30.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>perl-5.30.3_mt</span></span></span>
      </li>
@@ -6229,6 +6375,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.6.33</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-5.6.40</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-7.2.11</span></span></span>
      </li>
@@ -6237,9 +6386,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-7.2.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-7.4.11</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>php-7.4.14</span></span></span>
      </li>
@@ -6264,6 +6410,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-12.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-16</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-16.9</span></span></span>
      </li>
@@ -6272,9 +6421,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-8.3.18</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>postgresql-9.6.8</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>praat-6.3.06</span></span></span>
      </li>
@@ -6299,6 +6445,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.7.10</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-2.7.11</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.10.13</span></span></span>
      </li>
@@ -6307,9 +6456,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.11.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.11.5</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.11.6</span></span></span>
      </li>
@@ -6334,6 +6480,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.8.9</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>python-3.9.1</span></span></span>
      </li>
@@ -6342,9 +6491,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pytorch-1.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pytorch-1.10.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>pytorch-1.6.0</span></span></span>
      </li>
@@ -6369,6 +6515,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>quota-1.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.4.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.4.2</span></span></span>
      </li>
@@ -6377,9 +6526,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-3.6.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-4.1.3</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>R-4.2.2</span></span></span>
      </li>
@@ -6404,6 +6550,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.1.1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.3.1</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.5.0</span></span></span>
      </li>
@@ -6412,9 +6561,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.6.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.6.5</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>ruby-2.7.1</span></span></span>
      </li>
@@ -6439,6 +6585,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scalapack-2.2.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SciTE-3.4.0</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scons-2.3.1</span></span></span>
      </li>
@@ -6447,9 +6596,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>scotch-6.1.3</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>SDL2-2.0.9</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>sep-offprint-1.11</span></span></span>
      </li>
@@ -6474,6 +6620,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>slicer-4.11.20210226</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>Smarty-2.6.26</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>smpeg-2.0.0</span></span></span>
      </li>
@@ -6482,9 +6631,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>spacetools-1.1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>spacetools-1.2.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>spack-0.16.0</span></span></span>
      </li>
@@ -6509,6 +6655,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-14.06.013</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>StarCCM-15.04.010</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>stealfile-1.0</span></span></span>
      </li>
@@ -6517,9 +6666,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>subversion-1.14.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>subversion-1.6.17</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>subversion-1.8.9</span></span></span>
      </li>
@@ -6544,6 +6690,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcmalloc-1.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tcsh-6.18.01</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>teams-1.5.00</span></span></span>
      </li>
@@ -6552,9 +6701,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tecplot360-2022R1</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tecplot360-2022R2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tecplot360-2023R1</span></span></span>
      </li>
@@ -6579,6 +6725,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-20230324</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texlive-current</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>texstudio-2.12.16</span></span></span>
      </li>
@@ -6587,9 +6736,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tgif-4.2.5</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tgrid-5.0.6</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thttpd-2.25b</span></span></span>
      </li>
@@ -6614,6 +6760,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>thunderbird_french-115.10.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tidy-5.7.28</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tix-8.1.4</span></span></span>
      </li>
@@ -6622,9 +6771,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tk-8.5.14</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tk-8.6.13</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tmux-3.2a</span></span></span>
      </li>
@@ -6649,6 +6795,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.104</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.107</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.2</span></span></span>
      </li>
@@ -6657,9 +6806,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.67</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.70</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>tomcat-7.0.78</span></span></span>
      </li>
@@ -6684,6 +6830,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unafold-3.8</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unrar-3.8.2</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>unzip-6.0</span></span></span>
      </li>
@@ -6692,9 +6841,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>uudeview-0.5.20</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>uuid-1.6.2</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>vacation-sendmail-8.12.11</span></span></span>
      </li>
@@ -6719,6 +6865,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>weka-3.8.0</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>wget-1.16</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>wget-1.19</span></span></span>
      </li>
@@ -6727,9 +6876,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>wine-1.1.20</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>wireshark-2.0.4</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>WRF-4.1.2</span></span></span>
      </li>
@@ -6754,6 +6900,9 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xmgr-4.1.2</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xmlsec1-1.2.31</span></span></span>
+                                                                               
+
+                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xpdf-3.04</span></span></span>
      </li>
@@ -6762,9 +6911,6 @@ labs’ desktops.
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xv-3.10a</span></span></span>
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xz-5.0.0</span></span></span>
-                                                                               
-
-                                                                               
      </li>
      <li class='itemize'><span class='obeylines-h'><span class='verb'><span class='cmtt-8x-x-87'>xz-5.2.2</span></span></span>
      </li>
