@@ -14,15 +14,22 @@ cat > "$OUTFILE.tex" << LATEX_HEADER
 \label{sect:software-list}
 
 This is a generated section by a script; last updated on \textit{$GENERATED_ON}.
-We have two major software trees: Scientific Linux 7 (EL7), which is
-outgoing, and AlmaLinux 9 (EL9). After major synchronization of software
-packages is complete, we will stop maintaining the EL7 tree and
-will migrate the remaining nodes to EL9.
+We have two major software trees:
+AlmaLinux 9 (EL9), and
+Scientific Linux 7 (EL7), which is outgoing, and only available for legacy reasons.
+We stopped maintaining the EL7 tree after
+having migrated all the nodes to EL9.
 
-Use \option{--constraint=el7} to select EL7-only installed nodes for their
-software packages. Conversely, use \option{--constraint=el9} for the EL9-only
-software. These options would be used as a part of your job parameters
-in either \api{\#SBATCH} or on the command line.
+EL9 packages come in the following flavours:
+%
+\begin{itemize}
+\item
+EL9 \texttt{/encs/pkg} -- traditionally manually installed/compiled
+\item
+EasyBuild EL9 -- using the same EasyBuild tool Alliance Canada use for software compilation
+\end{itemize}
+%
+Both are are available through \tool{modules}.
 
 \noindent
 \textbf{NOTE:} this list does not include packages installed directly on the OS (yet).
@@ -78,7 +85,6 @@ on Speed as well as teaching labs' desktops.
 \scriptsize
 \begin{multicols}{3}
 \begin{itemize}
-% EOF
 LATEX_FOOTER
 
 ls -1 /encs/ArchDep/x86_64.EL7/pkg/ \
@@ -91,6 +97,8 @@ cat >> "$OUTFILE.tex" << LATEX_EL7_FOOTER
 \end{itemize}
 \end{multicols}
 \normalsize
+
+% EOF
 LATEX_EL7_FOOTER
 
 # Get .md version of the same from LaTeX

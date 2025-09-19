@@ -1,14 +1,19 @@
 # Software Installed On Speed {#sect:software-list}
 
-This is a generated section by a script; last updated on *Thu Sep 18
-12:20:09 PM EDT 2025*. We have two major software trees: Scientific
-Linux 7 (EL7), which is outgoing, and AlmaLinux 9 (EL9). After major
-synchronization of software packages is complete, we will stop
-maintaining the EL7 tree and will migrate the remaining nodes to EL9.
+This is a generated section by a script; last updated on *Fri Sep 19
+02:22:34 PM EDT 2025*. We have two major software trees: AlmaLinux 9
+(EL9), and Scientific Linux 7 (EL7), which is outgoing, and only
+available for legacy reasons. We stopped maintaining the EL7 tree after
+having migrated all the nodes to EL9.
 
-Use to select EL7-only installed nodes for their software packages.
-Conversely, use for the EL9-only software. These options would be used
-as a part of your job parameters in either or on the command line.
+EL9 packages come in the following flavours:
+
+-   EL9 `/encs/pkg` -- traditionally manually installed/compiled
+
+-   EasyBuild EL9 -- using the same EasyBuild tool Alliance Canada use
+    for software compilation
+
+Both are are available through .
 
 **NOTE:** this list does not include packages installed directly on the
 OS (yet).
@@ -123,6 +128,8 @@ OS (yet).
 -   `curl-7.86.0`
 
 -   `DbVisualizer-24.1.5`
+
+-   `digilent-2.19.2`
 
 -   `EasyBuild`
 
@@ -566,13 +573,19 @@ OS (yet).
 
 -   `Autoconf/2.71-GCCcore-12.3.0`
 
+-   `Autoconf/2.71-GCCcore-13.2.0`
+
 -   `Autoconf/2.72-GCCcore-13.3.0`
 
 -   `Automake/1.16.5-GCCcore-12.3.0`
 
+-   `Automake/1.16.5-GCCcore-13.2.0`
+
 -   `Automake/1.16.5-GCCcore-13.3.0`
 
 -   `Autotools/20220317-GCCcore-12.3.0`
+
+-   `Autotools/20220317-GCCcore-13.2.0`
 
 -   `Autotools/20231222-GCCcore-13.3.0`
 
@@ -583,6 +596,8 @@ OS (yet).
 -   `binutils/2.40`
 
 -   `binutils/2.40-GCCcore-12.3.0`
+
+-   `binutils/2.40-GCCcore-13.2.0`
 
 -   `binutils/2.42`
 
@@ -596,25 +611,35 @@ OS (yet).
 
 -   `Bison/3.8.2-GCCcore-12.3.0`
 
+-   `Bison/3.8.2-GCCcore-13.2.0`
+
 -   `Bison/3.8.2-GCCcore-13.3.0`
 
 -   `Bison/3.8.2-GCCcore-14.2.0`
 
 -   `BLIS/0.9.0-GCC-12.3.0`
 
+-   `BLIS/0.9.0-GCC-13.2.0`
+
 -   `BLIS/1.0-GCC-13.3.0`
 
 -   `Boost/1.82.0-GCC-12.3.0`
 
+-   `Boost/1.83.0-GCC-13.2.0`
+
 -   `Boost/1.85.0-GCC-13.3.0`
 
 -   `Brotli/1.0.9-GCCcore-12.3.0`
+
+-   `Brotli/1.1.0-GCCcore-13.2.0`
 
 -   `Brotli/1.1.0-GCCcore-13.3.0`
 
 -   `bzip2/1.0.8-GCCcore-10.3.0`
 
 -   `bzip2/1.0.8-GCCcore-12.3.0`
+
+-   `bzip2/1.0.8-GCCcore-13.2.0`
 
 -   `bzip2/1.0.8-GCCcore-13.3.0`
 
@@ -634,6 +659,8 @@ OS (yet).
 
 -   `CMake/3.26.3-GCCcore-12.3.0`
 
+-   `CMake/3.27.6-GCCcore-13.2.0`
+
 -   `CMake/3.29.3-GCCcore-13.3.0`
 
 -   `cppy/1.2.1-GCCcore-12.3.0`
@@ -652,6 +679,8 @@ OS (yet).
 
 -   `cURL/8.0.1-GCCcore-12.3.0`
 
+-   `cURL/8.3.0-GCCcore-13.2.0`
+
 -   `cURL/8.7.1-GCCcore-13.3.0`
 
 -   `Cython/3.0.10-GCCcore-13.3.0`
@@ -666,6 +695,8 @@ OS (yet).
 
 -   `Doxygen/1.9.7-GCCcore-12.3.0`
 
+-   `Doxygen/1.9.8-GCCcore-13.2.0`
+
 -   `Eigen/3.4.0-GCCcore-12.3.0`
 
 -   `Eigen/3.4.0-GCCcore-13.3.0`
@@ -678,6 +709,8 @@ OS (yet).
 
 -   `expat/2.5.0-GCCcore-12.3.0`
 
+-   `expat/2.5.0-GCCcore-13.2.0`
+
 -   `expat/2.6.2-GCCcore-13.3.0`
 
 -   `FFmpeg/6.0-GCCcore-12.3.0`
@@ -685,6 +718,8 @@ OS (yet).
 -   `ffnvcodec/12.0.16.0`
 
 -   `FFTW/3.3.10-GCC-12.3.0`
+
+-   `FFTW/3.3.10-GCC-13.2.0`
 
 -   `FFTW/3.3.10-GCC-13.3.0`
 
@@ -701,6 +736,8 @@ OS (yet).
 -   `flex/2.6.4-GCCcore-10.3.0`
 
 -   `flex/2.6.4-GCCcore-12.3.0`
+
+-   `flex/2.6.4-GCCcore-13.2.0`
 
 -   `flex/2.6.4-GCCcore-13.3.0`
 
@@ -736,6 +773,8 @@ OS (yet).
 
 -   `GCC/12.3.0`
 
+-   `GCC/13.2.0`
+
 -   `GCC/13.3.0`
 
 -   `GCCcore/10.3.0`
@@ -752,9 +791,13 @@ OS (yet).
 
 -   `gettext/0.21.1-GCCcore-12.3.0`
 
+-   `gettext/0.22`
+
 -   `gettext/0.22.5`
 
 -   `gettext/0.22.5-GCCcore-13.3.0`
+
+-   `gettext/0.22-GCCcore-13.2.0`
 
 -   `gfbf/2023a`
 
@@ -770,7 +813,11 @@ OS (yet).
 
 -   `GLib/2.77.1-GCCcore-12.3.0`
 
+-   `GLib/2.78.1-GCCcore-13.2.0`
+
 -   `GLib/2.80.4-GCCcore-13.3.0`
+
+-   `GMP/6.3.0-GCCcore-13.2.0`
 
 -   `GMP/6.3.0-GCCcore-13.3.0`
 
@@ -798,15 +845,21 @@ OS (yet).
 
 -   `gperf/3.1-GCCcore-12.3.0`
 
+-   `gperf/3.1-GCCcore-13.2.0`
+
 -   `gperf/3.1-GCCcore-13.3.0`
 
 -   `graphite2/1.3.14-GCCcore-12.3.0`
 
 -   `groff/1.22.4-GCCcore-12.3.0`
 
+-   `groff/1.23.0-GCCcore-13.2.0`
+
 -   `groff/1.23.0-GCCcore-13.3.0`
 
 -   `gzip/1.12-GCCcore-12.3.0`
+
+-   `gzip/1.13-GCCcore-13.2.0`
 
 -   `gzip/1.13-GCCcore-13.3.0`
 
@@ -826,6 +879,8 @@ OS (yet).
 
 -   `help2man/1.49.3-GCCcore-12.3.0`
 
+-   `help2man/1.49.3-GCCcore-13.2.0`
+
 -   `help2man/1.49.3-GCCcore-13.3.0`
 
 -   `help2man/1.49.3-GCCcore-14.2.0`
@@ -839,6 +894,8 @@ OS (yet).
 -   `hypothesis/6.82.0-GCCcore-12.3.0`
 
 -   `ICU/73.2-GCCcore-12.3.0`
+
+-   `ICU/74.1-GCCcore-13.2.0`
 
 -   `ICU/75.1-GCCcore-13.3.0`
 
@@ -857,6 +914,8 @@ OS (yet).
 -   `intel-compilers/2023.1.0`
 
 -   `intltool/0.51.0-GCCcore-12.3.0`
+
+-   `intltool/0.51.0-GCCcore-13.2.0`
 
 -   `intltool/0.51.0-GCCcore-13.3.0`
 
@@ -878,6 +937,8 @@ OS (yet).
 
 -   `libarchive/3.6.2-GCCcore-12.3.0`
 
+-   `libarchive/3.7.2-GCCcore-13.2.0`
+
 -   `libarchive/3.7.4-GCCcore-13.3.0`
 
 -   `libdeflate/1.18-GCCcore-12.3.0`
@@ -890,6 +951,8 @@ OS (yet).
 
 -   `libevent/2.1.12-GCCcore-12.3.0`
 
+-   `libevent/2.1.12-GCCcore-13.2.0`
+
 -   `libevent/2.1.12-GCCcore-13.3.0`
 
 -   `libfabric/1.18.0-GCCcore-12.3.0`
@@ -897,6 +960,8 @@ OS (yet).
 -   `libfabric/1.21.0-GCCcore-13.3.0`
 
 -   `libffi/3.4.4-GCCcore-12.3.0`
+
+-   `libffi/3.4.4-GCCcore-13.2.0`
 
 -   `libffi/3.4.5-GCCcore-13.3.0`
 
@@ -914,6 +979,8 @@ OS (yet).
 
 -   `libiconv/1.17-GCCcore-12.3.0`
 
+-   `libiconv/1.17-GCCcore-13.2.0`
+
 -   `libiconv/1.17-GCCcore-13.3.0`
 
 -   `libjpeg-turbo/2.1.5.1-GCCcore-12.3.0`
@@ -930,11 +997,15 @@ OS (yet).
 
 -   `libpng/1.6.39-GCCcore-12.3.0`
 
+-   `libpng/1.6.40-GCCcore-13.2.0`
+
 -   `libpng/1.6.43-GCCcore-13.3.0`
 
 -   `libreadline/8.1-GCCcore-10.3.0`
 
 -   `libreadline/8.2-GCCcore-12.3.0`
+
+-   `libreadline/8.2-GCCcore-13.2.0`
 
 -   `libreadline/8.2-GCCcore-13.3.0`
 
@@ -946,9 +1017,13 @@ OS (yet).
 
 -   `libtool/2.4.7-GCCcore-12.3.0`
 
+-   `libtool/2.4.7-GCCcore-13.2.0`
+
 -   `libtool/2.4.7-GCCcore-13.3.0`
 
 -   `libunwind/1.6.2-GCCcore-12.3.0`
+
+-   `libunwind/1.6.2-GCCcore-13.2.0`
 
 -   `libunwind/1.8.1-GCCcore-13.3.0`
 
@@ -964,7 +1039,11 @@ OS (yet).
 
 -   `libxml2/2.11.4-GCCcore-12.3.0`
 
+-   `libxml2/2.11.5-GCCcore-13.2.0`
+
 -   `libxml2/2.12.7-GCCcore-13.3.0`
+
+-   `libxslt/1.1.38-GCCcore-13.2.0`
 
 -   `libxslt/1.1.42-GCCcore-13.3.0`
 
@@ -988,6 +1067,8 @@ OS (yet).
 
 -   `lz4/1.9.4-GCCcore-12.3.0`
 
+-   `lz4/1.9.4-GCCcore-13.2.0`
+
 -   `lz4/1.9.4-GCCcore-13.3.0`
 
 -   `M4/1.4.18-GCCcore-10.3.0`
@@ -995,6 +1076,8 @@ OS (yet).
 -   `M4/1.4.19`
 
 -   `M4/1.4.19-GCCcore-12.3.0`
+
+-   `M4/1.4.19-GCCcore-13.2.0`
 
 -   `M4/1.4.19-GCCcore-13.3.0`
 
@@ -1005,6 +1088,8 @@ OS (yet).
 -   `make/4.4.1-GCCcore-13.3.0`
 
 -   `Mako/1.2.4-GCCcore-12.3.0`
+
+-   `Mako/1.2.4-GCCcore-13.2.0`
 
 -   `Mako/1.3.5-GCCcore-13.3.0`
 
@@ -1021,6 +1106,8 @@ OS (yet).
 -   `Mesa/24.1.3-GCCcore-13.3.0`
 
 -   `Meson/1.1.1-GCCcore-12.3.0`
+
+-   `Meson/1.2.3-GCCcore-13.2.0`
 
 -   `Meson/1.4.0-GCCcore-13.3.0`
 
@@ -1040,6 +1127,8 @@ OS (yet).
 
 -   `ncurses/6.4-GCCcore-12.3.0`
 
+-   `ncurses/6.4-GCCcore-13.2.0`
+
 -   `ncurses/6.5`
 
 -   `ncurses/6.5-GCCcore-13.3.0`
@@ -1050,15 +1139,23 @@ OS (yet).
 
 -   `nettle/3.10-GCCcore-13.3.0`
 
+-   `nettle/3.9.1-GCCcore-13.2.0`
+
 -   `Ninja/1.11.1-GCCcore-12.3.0`
 
+-   `Ninja/1.11.1-GCCcore-13.2.0`
+
 -   `Ninja/1.12.1-GCCcore-13.3.0`
+
+-   `NLopt/2.7.1-GCCcore-13.2.0`
 
 -   `NLopt/2.7.1-GCCcore-13.3.0`
 
 -   `nodejs/18.17.1-GCCcore-12.3.0`
 
 -   `nodejs/20.13.1-GCCcore-13.3.0`
+
+-   `nodejs/20.9.0-GCCcore-13.2.0`
 
 -   `NSPR/4.35-GCCcore-12.3.0`
 
@@ -1092,15 +1189,21 @@ OS (yet).
 
 -   `PCRE2/10.42-GCCcore-12.3.0`
 
+-   `PCRE2/10.42-GCCcore-13.2.0`
+
 -   `PCRE2/10.43-GCCcore-13.3.0`
 
 -   `Perl/5.36.1-GCCcore-12.3.0`
 
 -   `Perl/5.38.0`
 
+-   `Perl/5.38.0-GCCcore-13.2.0`
+
 -   `Perl/5.38.2-GCCcore-13.3.0`
 
 -   `Perl-bundle-CPAN/5.36.1-GCCcore-12.3.0`
+
+-   `Perl-bundle-CPAN/5.38.0-GCCcore-13.2.0`
 
 -   `Perl-bundle-CPAN/5.38.2-GCCcore-13.3.0`
 
@@ -1110,11 +1213,15 @@ OS (yet).
 
 -   `pixman/0.42.2-GCCcore-12.3.0`
 
+-   `pixman/0.42.2-GCCcore-13.2.0`
+
 -   `pixman/0.43.4-GCCcore-13.3.0`
 
 -   `pkgconf/1.8.0`
 
 -   `pkgconf/1.9.5-GCCcore-12.3.0`
+
+-   `pkgconf/2.0.3-GCCcore-13.2.0`
 
 -   `pkgconf/2.2.0-GCCcore-13.3.0`
 
@@ -1130,6 +1237,8 @@ OS (yet).
 
 -   `poetry/1.8.3-GCCcore-13.3.0`
 
+-   `PostgreSQL/16.1-GCCcore-13.2.0`
+
 -   `PostgreSQL/16.4-GCCcore-13.3.0`
 
 -   `PRRTE/3.0.5-GCCcore-13.3.0`
@@ -1141,6 +1250,8 @@ OS (yet).
 -   `pybind11/2.12.0-GCC-13.3.0`
 
 -   `Python/3.11.3-GCCcore-12.3.0`
+
+-   `Python/3.11.5-GCCcore-13.2.0`
 
 -   `Python/3.12.3-GCCcore-13.3.0`
 
@@ -1198,6 +1309,8 @@ OS (yet).
 
 -   `snappy/1.1.10-GCCcore-12.3.0`
 
+-   `SOCI/4.0.3-GCC-13.2.0`
+
 -   `SOCI/4.0.3-GCC-13.3.0`
 
 -   `spglib-python/2.1.0-iimkl-2023a`
@@ -1206,15 +1319,21 @@ OS (yet).
 
 -   `SQLite/3.42.0-GCCcore-12.3.0`
 
+-   `SQLite/3.43.1-GCCcore-13.2.0`
+
 -   `SQLite/3.45.3-GCCcore-13.3.0`
 
 -   `SQLite/3.47.2-GCCcore-14.2.0`
 
 -   `Szip/2.1.1-GCCcore-12.3.0`
 
+-   `Szip/2.1.1-GCCcore-13.2.0`
+
 -   `Szip/2.1.1-GCCcore-13.3.0`
 
 -   `Tcl/8.6.13-GCCcore-12.3.0`
+
+-   `Tcl/8.6.13-GCCcore-13.2.0`
 
 -   `Tcl/8.6.14-GCCcore-13.3.0`
 
@@ -1236,15 +1355,21 @@ OS (yet).
 
 -   `UCX/1.16.0-GCCcore-13.3.0`
 
+-   `UDUNITS/2.2.28-GCCcore-13.2.0`
+
 -   `UDUNITS/2.2.28-GCCcore-13.3.0`
 
 -   `UnZip/6.0-GCCcore-12.3.0`
+
+-   `UnZip/6.0-GCCcore-13.2.0`
 
 -   `UnZip/6.0-GCCcore-13.3.0`
 
 -   `UnZip/6.0-GCCcore-14.2.0`
 
 -   `util-linux/2.39-GCCcore-12.3.0`
+
+-   `util-linux/2.39-GCCcore-13.2.0`
 
 -   `util-linux/2.40-GCCcore-13.3.0`
 
@@ -1264,15 +1389,21 @@ OS (yet).
 
 -   `xorg-macros/1.20.0-GCCcore-12.3.0`
 
+-   `xorg-macros/1.20.0-GCCcore-13.2.0`
+
 -   `xorg-macros/1.20.1-GCCcore-13.3.0`
 
 -   `Xvfb/21.1.14-GCCcore-13.3.0`
 
 -   `XZ/5.4.2-GCCcore-12.3.0`
 
+-   `XZ/5.4.4-GCCcore-13.2.0`
+
 -   `XZ/5.4.5-GCCcore-13.3.0`
 
 -   `XZ/5.6.3-GCCcore-14.2.0`
+
+-   `yaml-cpp/0.8.0-GCCcore-13.2.0`
 
 -   `yaml-cpp/0.8.0-GCCcore-13.3.0`
 
@@ -1288,6 +1419,8 @@ OS (yet).
 
 -   `zlib/1.2.13-GCCcore-12.3.0`
 
+-   `zlib/1.2.13-GCCcore-13.2.0`
+
 -   `zlib/1.3.1`
 
 -   `zlib/1.3.1-GCCcore-13.3.0`
@@ -1295,6 +1428,8 @@ OS (yet).
 -   `zlib/1.3.1-GCCcore-14.2.0`
 
 -   `zstd/1.5.5-GCCcore-12.3.0`
+
+-   `zstd/1.5.5-GCCcore-13.2.0`
 
 -   `zstd/1.5.6-GCCcore-13.3.0`
 :::

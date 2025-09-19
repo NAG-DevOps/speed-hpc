@@ -3,16 +3,23 @@
 \section{Software Installed On Speed}
 \label{sect:software-list}
 
-This is a generated section by a script; last updated on \textit{Thu Sep 18 12:20:09 PM EDT 2025}.
-We have two major software trees: Scientific Linux 7 (EL7), which is
-outgoing, and AlmaLinux 9 (EL9). After major synchronization of software
-packages is complete, we will stop maintaining the EL7 tree and
-will migrate the remaining nodes to EL9.
+This is a generated section by a script; last updated on \textit{Fri Sep 19 02:22:34 PM EDT 2025}.
+We have two major software trees:
+AlmaLinux 9 (EL9), and
+Scientific Linux 7 (EL7), which is outgoing, and only available for legacy reasons.
+We stopped maintaining the EL7 tree after
+having migrated all the nodes to EL9.
 
-Use \option{--constraint=el7} to select EL7-only installed nodes for their
-software packages. Conversely, use \option{--constraint=el9} for the EL9-only
-software. These options would be used as a part of your job parameters
-in either \api{\#SBATCH} or on the command line.
+EL9 packages come in the following flavours:
+%
+\begin{itemize}
+\item
+EL9 \texttt{/encs/pkg} -- traditionally manually installed/compiled
+\item
+EasyBuild EL9 -- using the same EasyBuild tool Alliance Canada use for software compilation
+\end{itemize}
+%
+Both are are available through \tool{modules}.
 
 \noindent
 \textbf{NOTE:} this list does not include packages installed directly on the OS (yet).
@@ -76,6 +83,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|cups-2.3.3|
 \item \verb|curl-7.86.0|
 \item \verb|DbVisualizer-24.1.5|
+\item \verb|digilent-2.19.2|
 \item \verb|EasyBuild|
 \item \verb|EasyBuild.old|
 \item \verb|eclipse-jee.202506|
@@ -305,31 +313,40 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|ASE/3.23.0-iimkl-2023a|
 \item \verb|ASE/3.24.0-gfbf-2024a|
 \item \verb|Autoconf/2.71-GCCcore-12.3.0|
+\item \verb|Autoconf/2.71-GCCcore-13.2.0|
 \item \verb|Autoconf/2.72-GCCcore-13.3.0|
 \item \verb|Automake/1.16.5-GCCcore-12.3.0|
+\item \verb|Automake/1.16.5-GCCcore-13.2.0|
 \item \verb|Automake/1.16.5-GCCcore-13.3.0|
 \item \verb|Autotools/20220317-GCCcore-12.3.0|
+\item \verb|Autotools/20220317-GCCcore-13.2.0|
 \item \verb|Autotools/20231222-GCCcore-13.3.0|
 \item \verb|binutils/2.36.1|
 \item \verb|binutils/2.36.1-GCCcore-10.3.0|
 \item \verb|binutils/2.40|
 \item \verb|binutils/2.40-GCCcore-12.3.0|
+\item \verb|binutils/2.40-GCCcore-13.2.0|
 \item \verb|binutils/2.42|
 \item \verb|binutils/2.42-GCCcore-13.3.0|
 \item \verb|binutils/2.42-GCCcore-14.2.0|
 \item \verb|Bison/3.7.6-GCCcore-10.3.0|
 \item \verb|Bison/3.8.2|
 \item \verb|Bison/3.8.2-GCCcore-12.3.0|
+\item \verb|Bison/3.8.2-GCCcore-13.2.0|
 \item \verb|Bison/3.8.2-GCCcore-13.3.0|
 \item \verb|Bison/3.8.2-GCCcore-14.2.0|
 \item \verb|BLIS/0.9.0-GCC-12.3.0|
+\item \verb|BLIS/0.9.0-GCC-13.2.0|
 \item \verb|BLIS/1.0-GCC-13.3.0|
 \item \verb|Boost/1.82.0-GCC-12.3.0|
+\item \verb|Boost/1.83.0-GCC-13.2.0|
 \item \verb|Boost/1.85.0-GCC-13.3.0|
 \item \verb|Brotli/1.0.9-GCCcore-12.3.0|
+\item \verb|Brotli/1.1.0-GCCcore-13.2.0|
 \item \verb|Brotli/1.1.0-GCCcore-13.3.0|
 \item \verb|bzip2/1.0.8-GCCcore-10.3.0|
 \item \verb|bzip2/1.0.8-GCCcore-12.3.0|
+\item \verb|bzip2/1.0.8-GCCcore-13.2.0|
 \item \verb|bzip2/1.0.8-GCCcore-13.3.0|
 \item \verb|bzip2/1.0.8-GCCcore-14.2.0|
 \item \verb|cairo/1.17.8-GCCcore-12.3.0|
@@ -339,6 +356,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|cffi/1.15.1-GCCcore-12.3.0|
 \item \verb|cffi/1.16.0-GCCcore-13.3.0|
 \item \verb|CMake/3.26.3-GCCcore-12.3.0|
+\item \verb|CMake/3.27.6-GCCcore-13.2.0|
 \item \verb|CMake/3.29.3-GCCcore-13.3.0|
 \item \verb|cppy/1.2.1-GCCcore-12.3.0|
 \item \verb|cppy/1.2.1-GCCcore-13.3.0|
@@ -348,6 +366,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|cURL/7.76.1-GCCcore-10.3.0|
 \item \verb|cURL/7.77.0-GCCcore-10.3.0|
 \item \verb|cURL/8.0.1-GCCcore-12.3.0|
+\item \verb|cURL/8.3.0-GCCcore-13.2.0|
 \item \verb|cURL/8.7.1-GCCcore-13.3.0|
 \item \verb|Cython/3.0.10-GCCcore-13.3.0|
 \item \verb|Cython/3.0.8-GCCcore-12.3.0|
@@ -355,16 +374,19 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|double-conversion/3.3.0-GCCcore-12.3.0|
 \item \verb|Doxygen/1.11.0-GCCcore-13.3.0|
 \item \verb|Doxygen/1.9.7-GCCcore-12.3.0|
+\item \verb|Doxygen/1.9.8-GCCcore-13.2.0|
 \item \verb|Eigen/3.4.0-GCCcore-12.3.0|
 \item \verb|Eigen/3.4.0-GCCcore-13.3.0|
 \item \verb|ELPA/2023.05.001-intel-2023a|
 \item \verb|ELPA/2024.05.001-foss-2024a|
 \item \verb|expat/2.2.9-GCCcore-10.3.0|
 \item \verb|expat/2.5.0-GCCcore-12.3.0|
+\item \verb|expat/2.5.0-GCCcore-13.2.0|
 \item \verb|expat/2.6.2-GCCcore-13.3.0|
 \item \verb|FFmpeg/6.0-GCCcore-12.3.0|
 \item \verb|ffnvcodec/12.0.16.0|
 \item \verb|FFTW/3.3.10-GCC-12.3.0|
+\item \verb|FFTW/3.3.10-GCC-13.2.0|
 \item \verb|FFTW/3.3.10-GCC-13.3.0|
 \item \verb|FFTW.MPI/3.3.10-gompi-2023a|
 \item \verb|FFTW.MPI/3.3.10-gompi-2024a|
@@ -373,6 +395,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|flex/2.6.4|
 \item \verb|flex/2.6.4-GCCcore-10.3.0|
 \item \verb|flex/2.6.4-GCCcore-12.3.0|
+\item \verb|flex/2.6.4-GCCcore-13.2.0|
 \item \verb|flex/2.6.4-GCCcore-13.3.0|
 \item \verb|flex/2.6.4-GCCcore-14.2.0|
 \item \verb|FlexiBLAS/3.3.1-GCC-12.3.0|
@@ -390,6 +413,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|FriBidi/1.0.15-GCCcore-13.3.0|
 \item \verb|FSL/6.0.7.17|
 \item \verb|GCC/12.3.0|
+\item \verb|GCC/13.2.0|
 \item \verb|GCC/13.3.0|
 \item \verb|GCCcore/10.3.0|
 \item \verb|GCCcore/12.3.0|
@@ -398,8 +422,10 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|GCCcore/14.2.0|
 \item \verb|gettext/0.21.1|
 \item \verb|gettext/0.21.1-GCCcore-12.3.0|
+\item \verb|gettext/0.22|
 \item \verb|gettext/0.22.5|
 \item \verb|gettext/0.22.5-GCCcore-13.3.0|
+\item \verb|gettext/0.22-GCCcore-13.2.0|
 \item \verb|gfbf/2023a|
 \item \verb|gfbf/2024a|
 \item \verb|giflib/5.2.1-GCCcore-12.3.0|
@@ -407,7 +433,9 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|git/2.41.0-GCCcore-12.3.0-nodocs|
 \item \verb|git/2.45.1-GCCcore-13.3.0|
 \item \verb|GLib/2.77.1-GCCcore-12.3.0|
+\item \verb|GLib/2.78.1-GCCcore-13.2.0|
 \item \verb|GLib/2.80.4-GCCcore-13.3.0|
+\item \verb|GMP/6.3.0-GCCcore-13.2.0|
 \item \verb|GMP/6.3.0-GCCcore-13.3.0|
 \item \verb|GObject-Introspection/1.76.1-GCCcore-12.3.0|
 \item \verb|GObject-Introspection/1.80.1-GCCcore-13.3.0|
@@ -421,11 +449,14 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|GPAW-setups/24.11.0|
 \item \verb|gperf/3.1-GCCcore-10.3.0|
 \item \verb|gperf/3.1-GCCcore-12.3.0|
+\item \verb|gperf/3.1-GCCcore-13.2.0|
 \item \verb|gperf/3.1-GCCcore-13.3.0|
 \item \verb|graphite2/1.3.14-GCCcore-12.3.0|
 \item \verb|groff/1.22.4-GCCcore-12.3.0|
+\item \verb|groff/1.23.0-GCCcore-13.2.0|
 \item \verb|groff/1.23.0-GCCcore-13.3.0|
 \item \verb|gzip/1.12-GCCcore-12.3.0|
+\item \verb|gzip/1.13-GCCcore-13.2.0|
 \item \verb|gzip/1.13-GCCcore-13.3.0|
 \item \verb|HarfBuzz/5.3.1-GCCcore-12.3.0|
 \item \verb|HarfBuzz/9.0.0-GCCcore-13.3.0|
@@ -435,6 +466,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|HDF5/1.14.5-gompi-2024a|
 \item \verb|help2man/1.48.3-GCCcore-10.3.0|
 \item \verb|help2man/1.49.3-GCCcore-12.3.0|
+\item \verb|help2man/1.49.3-GCCcore-13.2.0|
 \item \verb|help2man/1.49.3-GCCcore-13.3.0|
 \item \verb|help2man/1.49.3-GCCcore-14.2.0|
 \item \verb|hwloc/2.10.0-GCCcore-13.3.0|
@@ -442,6 +474,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|hypothesis/6.103.1-GCCcore-13.3.0|
 \item \verb|hypothesis/6.82.0-GCCcore-12.3.0|
 \item \verb|ICU/73.2-GCCcore-12.3.0|
+\item \verb|ICU/74.1-GCCcore-13.2.0|
 \item \verb|ICU/75.1-GCCcore-13.3.0|
 \item \verb|iimkl/2023a|
 \item \verb|iimpi/2023a|
@@ -451,6 +484,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|intel/2023a|
 \item \verb|intel-compilers/2023.1.0|
 \item \verb|intltool/0.51.0-GCCcore-12.3.0|
+\item \verb|intltool/0.51.0-GCCcore-13.2.0|
 \item \verb|intltool/0.51.0-GCCcore-13.3.0|
 \item \verb|JasPer/4.0.0-GCCcore-12.3.0|
 \item \verb|Java/11|
@@ -461,16 +495,19 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|jbigkit/2.1-GCCcore-13.3.0|
 \item \verb|LAME/3.100-GCCcore-12.3.0|
 \item \verb|libarchive/3.6.2-GCCcore-12.3.0|
+\item \verb|libarchive/3.7.2-GCCcore-13.2.0|
 \item \verb|libarchive/3.7.4-GCCcore-13.3.0|
 \item \verb|libdeflate/1.18-GCCcore-12.3.0|
 \item \verb|libdeflate/1.20-GCCcore-13.3.0|
 \item \verb|libdrm/2.4.115-GCCcore-12.3.0|
 \item \verb|libdrm/2.4.122-GCCcore-13.3.0|
 \item \verb|libevent/2.1.12-GCCcore-12.3.0|
+\item \verb|libevent/2.1.12-GCCcore-13.2.0|
 \item \verb|libevent/2.1.12-GCCcore-13.3.0|
 \item \verb|libfabric/1.18.0-GCCcore-12.3.0|
 \item \verb|libfabric/1.21.0-GCCcore-13.3.0|
 \item \verb|libffi/3.4.4-GCCcore-12.3.0|
+\item \verb|libffi/3.4.4-GCCcore-13.2.0|
 \item \verb|libffi/3.4.5-GCCcore-13.3.0|
 \item \verb|libffi/3.4.5-GCCcore-14.2.0|
 \item \verb|libgit2/1.8.1-GCCcore-13.3.0|
@@ -479,6 +516,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|libglvnd/1.6.0-GCCcore-12.3.0|
 \item \verb|libglvnd/1.7.0-GCCcore-13.3.0|
 \item \verb|libiconv/1.17-GCCcore-12.3.0|
+\item \verb|libiconv/1.17-GCCcore-13.2.0|
 \item \verb|libiconv/1.17-GCCcore-13.3.0|
 \item \verb|libjpeg-turbo/2.1.5.1-GCCcore-12.3.0|
 \item \verb|libjpeg-turbo/3.0.1-GCCcore-13.3.0|
@@ -487,16 +525,20 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|libpciaccess/0.18.1-GCCcore-13.3.0|
 \item \verb|libpng/1.6.37-GCCcore-10.3.0|
 \item \verb|libpng/1.6.39-GCCcore-12.3.0|
+\item \verb|libpng/1.6.40-GCCcore-13.2.0|
 \item \verb|libpng/1.6.43-GCCcore-13.3.0|
 \item \verb|libreadline/8.1-GCCcore-10.3.0|
 \item \verb|libreadline/8.2-GCCcore-12.3.0|
+\item \verb|libreadline/8.2-GCCcore-13.2.0|
 \item \verb|libreadline/8.2-GCCcore-13.3.0|
 \item \verb|libreadline/8.2-GCCcore-14.2.0|
 \item \verb|LibTIFF/4.5.0-GCCcore-12.3.0|
 \item \verb|LibTIFF/4.6.0-GCCcore-13.3.0|
 \item \verb|libtool/2.4.7-GCCcore-12.3.0|
+\item \verb|libtool/2.4.7-GCCcore-13.2.0|
 \item \verb|libtool/2.4.7-GCCcore-13.3.0|
 \item \verb|libunwind/1.6.2-GCCcore-12.3.0|
+\item \verb|libunwind/1.6.2-GCCcore-13.2.0|
 \item \verb|libunwind/1.8.1-GCCcore-13.3.0|
 \item \verb|libvdwxc/0.4.0-foss-2024a|
 \item \verb|libwebp/1.3.1-GCCcore-12.3.0|
@@ -504,7 +546,9 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|libxc/6.2.2-GCC-13.3.0|
 \item \verb|libxc/6.2.2-intel-compilers-2023.1.0|
 \item \verb|libxml2/2.11.4-GCCcore-12.3.0|
+\item \verb|libxml2/2.11.5-GCCcore-13.2.0|
 \item \verb|libxml2/2.12.7-GCCcore-13.3.0|
+\item \verb|libxslt/1.1.38-GCCcore-13.2.0|
 \item \verb|libxslt/1.1.42-GCCcore-13.3.0|
 \item \verb|libyaml/0.2.5-GCCcore-12.3.0|
 \item \verb|libyaml/0.2.5-GCCcore-13.3.0|
@@ -516,15 +560,18 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|LLVM/18.1.8-GCCcore-13.3.0|
 \item \verb|LLVM/18.1.8-GCCcore-13.3.0-minimal|
 \item \verb|lz4/1.9.4-GCCcore-12.3.0|
+\item \verb|lz4/1.9.4-GCCcore-13.2.0|
 \item \verb|lz4/1.9.4-GCCcore-13.3.0|
 \item \verb|M4/1.4.18-GCCcore-10.3.0|
 \item \verb|M4/1.4.19|
 \item \verb|M4/1.4.19-GCCcore-12.3.0|
+\item \verb|M4/1.4.19-GCCcore-13.2.0|
 \item \verb|M4/1.4.19-GCCcore-13.3.0|
 \item \verb|M4/1.4.19-GCCcore-14.2.0|
 \item \verb|make/4.4.1-GCCcore-12.3.0|
 \item \verb|make/4.4.1-GCCcore-13.3.0|
 \item \verb|Mako/1.2.4-GCCcore-12.3.0|
+\item \verb|Mako/1.2.4-GCCcore-13.2.0|
 \item \verb|Mako/1.3.5-GCCcore-13.3.0|
 \item \verb|Mamba/23.11.0-0|
 \item \verb|matplotlib/3.7.2-iimkl-2023a|
@@ -533,6 +580,7 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|Mesa/23.1.4-GCCcore-12.3.0|
 \item \verb|Mesa/24.1.3-GCCcore-13.3.0|
 \item \verb|Meson/1.1.1-GCCcore-12.3.0|
+\item \verb|Meson/1.2.3-GCCcore-13.2.0|
 \item \verb|Meson/1.4.0-GCCcore-13.3.0|
 \item \verb|meson-python/0.13.2-GCCcore-12.3.0|
 \item \verb|meson-python/0.16.0-GCCcore-13.3.0|
@@ -542,16 +590,21 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|ncurses/6.3|
 \item \verb|ncurses/6.4|
 \item \verb|ncurses/6.4-GCCcore-12.3.0|
+\item \verb|ncurses/6.4-GCCcore-13.2.0|
 \item \verb|ncurses/6.5|
 \item \verb|ncurses/6.5-GCCcore-13.3.0|
 \item \verb|ncurses/6.5-GCCcore-14.2.0|
 \item \verb|netCDF/4.9.2-gompi-2023a|
 \item \verb|nettle/3.10-GCCcore-13.3.0|
+\item \verb|nettle/3.9.1-GCCcore-13.2.0|
 \item \verb|Ninja/1.11.1-GCCcore-12.3.0|
+\item \verb|Ninja/1.11.1-GCCcore-13.2.0|
 \item \verb|Ninja/1.12.1-GCCcore-13.3.0|
+\item \verb|NLopt/2.7.1-GCCcore-13.2.0|
 \item \verb|NLopt/2.7.1-GCCcore-13.3.0|
 \item \verb|nodejs/18.17.1-GCCcore-12.3.0|
 \item \verb|nodejs/20.13.1-GCCcore-13.3.0|
+\item \verb|nodejs/20.9.0-GCCcore-13.2.0|
 \item \verb|NSPR/4.35-GCCcore-12.3.0|
 \item \verb|NSS/3.89.1-GCCcore-12.3.0|
 \item \verb|numactl/2.0.16-GCCcore-12.3.0|
@@ -568,18 +621,23 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|patchelf/0.18.0-GCCcore-12.3.0|
 \item \verb|patchelf/0.18.0-GCCcore-13.3.0|
 \item \verb|PCRE2/10.42-GCCcore-12.3.0|
+\item \verb|PCRE2/10.42-GCCcore-13.2.0|
 \item \verb|PCRE2/10.43-GCCcore-13.3.0|
 \item \verb|Perl/5.36.1-GCCcore-12.3.0|
 \item \verb|Perl/5.38.0|
+\item \verb|Perl/5.38.0-GCCcore-13.2.0|
 \item \verb|Perl/5.38.2-GCCcore-13.3.0|
 \item \verb|Perl-bundle-CPAN/5.36.1-GCCcore-12.3.0|
+\item \verb|Perl-bundle-CPAN/5.38.0-GCCcore-13.2.0|
 \item \verb|Perl-bundle-CPAN/5.38.2-GCCcore-13.3.0|
 \item \verb|Pillow/10.0.0-GCCcore-12.3.0|
 \item \verb|Pillow-SIMD/10.4.0-GCCcore-13.3.0|
 \item \verb|pixman/0.42.2-GCCcore-12.3.0|
+\item \verb|pixman/0.42.2-GCCcore-13.2.0|
 \item \verb|pixman/0.43.4-GCCcore-13.3.0|
 \item \verb|pkgconf/1.8.0|
 \item \verb|pkgconf/1.9.5-GCCcore-12.3.0|
+\item \verb|pkgconf/2.0.3-GCCcore-13.2.0|
 \item \verb|pkgconf/2.2.0-GCCcore-13.3.0|
 \item \verb|pkgconf/2.3.0-GCCcore-14.2.0|
 \item \verb|pkg-config/0.29.2-GCCcore-10.3.0|
@@ -587,12 +645,14 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|PMIx/5.0.2-GCCcore-13.3.0|
 \item \verb|poetry/1.5.1-GCCcore-12.3.0|
 \item \verb|poetry/1.8.3-GCCcore-13.3.0|
+\item \verb|PostgreSQL/16.1-GCCcore-13.2.0|
 \item \verb|PostgreSQL/16.4-GCCcore-13.3.0|
 \item \verb|PRRTE/3.0.5-GCCcore-13.3.0|
 \item \verb|psutil/6.0.0-GCCcore-13.3.0|
 \item \verb|pybind11/2.11.1-GCCcore-12.3.0|
 \item \verb|pybind11/2.12.0-GCC-13.3.0|
 \item \verb|Python/3.11.3-GCCcore-12.3.0|
+\item \verb|Python/3.11.5-GCCcore-13.2.0|
 \item \verb|Python/3.12.3-GCCcore-13.3.0|
 \item \verb|Python/3.13.1-GCCcore-14.2.0|
 \item \verb|Python-bundle-PyPI/2023.06-GCCcore-12.3.0|
@@ -621,15 +681,19 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|setuptools-rust/1.6.0-GCCcore-12.3.0|
 \item \verb|setuptools-rust/1.9.0-GCCcore-13.3.0|
 \item \verb|snappy/1.1.10-GCCcore-12.3.0|
+\item \verb|SOCI/4.0.3-GCC-13.2.0|
 \item \verb|SOCI/4.0.3-GCC-13.3.0|
 \item \verb|spglib-python/2.1.0-iimkl-2023a|
 \item \verb|spglib-python/2.5.0-gfbf-2024a|
 \item \verb|SQLite/3.42.0-GCCcore-12.3.0|
+\item \verb|SQLite/3.43.1-GCCcore-13.2.0|
 \item \verb|SQLite/3.45.3-GCCcore-13.3.0|
 \item \verb|SQLite/3.47.2-GCCcore-14.2.0|
 \item \verb|Szip/2.1.1-GCCcore-12.3.0|
+\item \verb|Szip/2.1.1-GCCcore-13.2.0|
 \item \verb|Szip/2.1.1-GCCcore-13.3.0|
 \item \verb|Tcl/8.6.13-GCCcore-12.3.0|
+\item \verb|Tcl/8.6.13-GCCcore-13.2.0|
 \item \verb|Tcl/8.6.14-GCCcore-13.3.0|
 \item \verb|Tcl/8.6.16-GCCcore-14.2.0|
 \item \verb|Tk/8.6.13-GCCcore-12.3.0|
@@ -640,11 +704,14 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|UCC/1.3.0-GCCcore-13.3.0|
 \item \verb|UCX/1.14.1-GCCcore-12.3.0|
 \item \verb|UCX/1.16.0-GCCcore-13.3.0|
+\item \verb|UDUNITS/2.2.28-GCCcore-13.2.0|
 \item \verb|UDUNITS/2.2.28-GCCcore-13.3.0|
 \item \verb|UnZip/6.0-GCCcore-12.3.0|
+\item \verb|UnZip/6.0-GCCcore-13.2.0|
 \item \verb|UnZip/6.0-GCCcore-13.3.0|
 \item \verb|UnZip/6.0-GCCcore-14.2.0|
 \item \verb|util-linux/2.39-GCCcore-12.3.0|
+\item \verb|util-linux/2.39-GCCcore-13.2.0|
 \item \verb|util-linux/2.40-GCCcore-13.3.0|
 \item \verb|virtualenv/20.23.1-GCCcore-12.3.0|
 \item \verb|virtualenv/20.26.2-GCCcore-13.3.0|
@@ -654,11 +721,14 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|x264/20230226-GCCcore-12.3.0|
 \item \verb|x265/3.5-GCCcore-12.3.0|
 \item \verb|xorg-macros/1.20.0-GCCcore-12.3.0|
+\item \verb|xorg-macros/1.20.0-GCCcore-13.2.0|
 \item \verb|xorg-macros/1.20.1-GCCcore-13.3.0|
 \item \verb|Xvfb/21.1.14-GCCcore-13.3.0|
 \item \verb|XZ/5.4.2-GCCcore-12.3.0|
+\item \verb|XZ/5.4.4-GCCcore-13.2.0|
 \item \verb|XZ/5.4.5-GCCcore-13.3.0|
 \item \verb|XZ/5.6.3-GCCcore-14.2.0|
+\item \verb|yaml-cpp/0.8.0-GCCcore-13.2.0|
 \item \verb|yaml-cpp/0.8.0-GCCcore-13.3.0|
 \item \verb|Yasm/1.3.0-GCCcore-12.3.0|
 \item \verb|Z3/4.13.0-GCCcore-13.3.0|
@@ -666,10 +736,12 @@ in either \api{\#SBATCH} or on the command line.
 \item \verb|zlib/1.2.11-GCCcore-10.3.0|
 \item \verb|zlib/1.2.13|
 \item \verb|zlib/1.2.13-GCCcore-12.3.0|
+\item \verb|zlib/1.2.13-GCCcore-13.2.0|
 \item \verb|zlib/1.3.1|
 \item \verb|zlib/1.3.1-GCCcore-13.3.0|
 \item \verb|zlib/1.3.1-GCCcore-14.2.0|
 \item \verb|zstd/1.5.5-GCCcore-12.3.0|
+\item \verb|zstd/1.5.5-GCCcore-13.2.0|
 \item \verb|zstd/1.5.6-GCCcore-13.3.0|
 \end{itemize}
 \end{multicols}
@@ -685,7 +757,6 @@ on Speed as well as teaching labs' desktops.
 \scriptsize
 \begin{multicols}{3}
 \begin{itemize}
-% EOF
 \item \verb|a2ps-4.13b|
 \item \verb|a2ps-4.14|
 \item \verb|abaqus-2019|
@@ -1650,3 +1721,5 @@ on Speed as well as teaching labs' desktops.
 \end{itemize}
 \end{multicols}
 \normalsize
+
+% EOF
