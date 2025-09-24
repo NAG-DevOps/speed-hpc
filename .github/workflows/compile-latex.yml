@@ -1,0 +1,45 @@
+# RT549475
+name: Test-compile LaTeX
+on: [push, pull_request]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+      - name: GitHub Action for LaTeX
+        uses: xu-cheng/latex-action@v4
+        with:
+          # TeXLive version to use
+          # texlive_version: # optional
+          # Base operating system for the TeXLive Docker image ('alpine' or 'debian')
+          #os: debian
+          # Custom Docker image to use
+          #docker_image: # optional
+          # Root LaTeX file(s) to compile
+          root_file: speed-manual.tex
+          # Working directory for the compilation process
+          working_directory: doc/
+          # Change to each root file's directory before compilation
+          work_in_root_file_dir: true
+          # Continue building remaining documents even if some fail
+          continue_on_error: true
+          # LaTeX compiler to use, # optional, default is latexmk
+          compiler: pdflatex
+          # Additional arguments passed to the LaTeX compiler
+          # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+          args: -file-line-error -interaction=nonstopmode
+          # Additional system packages to install
+          #extra_system_packages: # optional
+          # Extra font files to install
+          #extra_fonts: # optional
+          # Bash commands to execute before compilation
+          #pre_compile: # optional
+          # Bash commands to execute after compilation
+          #post_compile: # optional
+          # Enable shell-escape for latexmk
+          #latexmk_shell_escape: # optional, default is false
+          # Use LuaLaTeX engine with latexmk
+          latexmk_use_lualatex: false
+          # Use XeLaTeX engine with latexmk
+          latexmk_use_xelatex: false
