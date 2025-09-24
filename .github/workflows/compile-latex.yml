@@ -3,6 +3,9 @@ name: Test-compile LaTeX
 on: [push, pull_request]
 jobs:
   build_latex:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
