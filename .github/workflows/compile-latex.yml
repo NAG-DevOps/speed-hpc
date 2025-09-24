@@ -29,7 +29,7 @@ jobs:
           compiler: latexmk
           # Additional arguments passed to the LaTeX compiler
           # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
-          args: -file-line-error -interaction=nonstopmode
+          args: -pdf -file-line-error -interaction=nonstopmode
           # Additional system packages to install
           #extra_system_packages: # optional
           # Extra font files to install
