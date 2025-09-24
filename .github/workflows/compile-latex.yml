@@ -25,7 +25,8 @@ jobs:
           # Continue building remaining documents even if some fail
           continue_on_error: true
           # LaTeX compiler to use, # optional, default is latexmk
-          compiler: pdflatex
+          # latexmk compiles pdflatex, bibtex, pdflatex x2 
+          compiler: latexmk
           # Additional arguments passed to the LaTeX compiler
           # optional, default is -pdf -file-line-error -halt-on-error -interaction=nonstopmode
           args: -file-line-error -interaction=nonstopmode
