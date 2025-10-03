@@ -1,18 +1,29 @@
-# Paraview 
+# Introduction
 
 ParaView is an open source post-processing visualization engine.
 
-[Source](https://www.paraview.org/)
+[Paraview Website](https://www.paraview.org/)
 
+# Paraview - Server (pvserver)
+
+## Pre-requisites
+* Install in your workstation Paraview-Desktop, recommended the same version as the Server
+```bash
+https://www.paraview.org/paraview-downloads/download.php?submit=Download&version=v5.13&type=binary&os=Windows&downloadFile=ParaView-5.13.2-Windows-Python3.10-msvc2017-AMD64.msi
+```
 ## Instructions
 
-* Open an interactive session
-* Execute the following commands:
-```bash
-module load GCC/12.3.0
-module load OpenMPI/4.1.5
-module load ParaView/5.13.2
+* From the **submit** node, run the `start_paraview.sh` script each time you need to launch paraview-server
 
-setenv PSM3_DEVICES 'self,shm'
-srun --mpi=pmix paraview
+```bash
+    ./start_paraview.sh
 ```
+* Read carefully the information displayed from the script, it contains important information to create the connection between the desktop application and pvserver
+
+# Paraview - GUI
+## Instructions
+* From the **submit** node, start an interactive session, with X11 activated (Important)
+```bash
+    salloc --x11 --mem=10Gb
+```
+* Run the script `paraview_GUI.sh`
