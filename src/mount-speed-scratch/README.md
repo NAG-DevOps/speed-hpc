@@ -31,5 +31,22 @@ These scripts allow you to conveniently mount  `/speed-scratch` folder from pers
 $DriveLetter = 'Y:'  # <- Change this if needed
 ```
 
-## Linux and macOS Instructions
+## MacOS Instructions
+
+### Files:
+- Speed_Scratch_MacOS_Map.sh
+
+### Instructions
+- Download the file into the `Downloads` folder
+- Open Terminal and navigate to the `~/Downloads` folder
+- Run the script
+```
+./Speed_Scratch_MacOS_Map.sh
+```
+- The script will:
+    - Unmount the Share if already mounted
+    - Map `filer-speed.encs.concordia.ca/speed_scratch` to `/Users/<YourUser>/Speed_Scratch`
+    - Open Finder showing the network drive
+
+## Linux Instructions
 coming soon...
