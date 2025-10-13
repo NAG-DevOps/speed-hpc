@@ -1,6 +1,6 @@
 # Start either a part of interactive or batch sesions
 # Hardcoded assumptions to adjust as necessary:
-#  path:          /speed-scratch/$USER/speed-hpc/src/jupyter/jupyterlabs-conda
+#  path:          /speed-scratch/$USER/speed-hpc/src/jupyter/jupyterlabs-pyenv
 #  memory:        16GB
 #  GPUs:          1
 #  partition:     pt
@@ -9,4 +9,4 @@
 # If calling from sbatch, make sure these don't exceed those from sbatch
 srun \
   --mem=16G --gpus=1 -p pt -c 8 --mail-type=ALL \
-  /speed-scratch/$USER/speed-hpc/src/jupyter/jupyterlabs-conda/run_jupyterlab.sh
+  /speed-scratch/$USER/speed-hpc/src/jupyter/jupyterlabs-pyenv/run_jupyterlab.sh
