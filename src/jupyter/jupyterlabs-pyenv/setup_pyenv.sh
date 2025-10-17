@@ -4,7 +4,7 @@
 if ( `hostname -s` =~ *submit* ) then
     echo "String 'submit' found in hostname. This script should be run in srun or salloc. Exiting."
     exit 1
-fi
+endif
 
 echo "Setting some initial variables..."
 date
@@ -33,7 +33,6 @@ echo "Installing jupyterlab..."
 date
 
 pip install jupyterlab
-
 
 echo "Installing initial Python packages..."
 date

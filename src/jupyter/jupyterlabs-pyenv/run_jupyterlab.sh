@@ -16,7 +16,7 @@ setenv TMP /speed-scratch/$USER/tmp
 setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
 
 # Activate the python virtual environment
-source /speed-scratch/$USER/Jupyter/.jupyter-venv/bin/activate.csh
+source /speed-scratch/$USER/.jupyter-venv/bin/activate.csh
 
 if ($status != 0) then
     echo "Failed to activate the python virtual environment"
