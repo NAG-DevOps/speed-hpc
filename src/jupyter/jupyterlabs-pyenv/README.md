@@ -20,7 +20,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
         # The default file is ~/.cshrc, use that if you don't have ~/.tcshrc configured
         source ~/.tcshrc
 
-* run `setup-pyenv.sh` (on the compute node `salloc` brought you to, **not** on `speed-submit`)
+* run `setup_pyenv.sh` (on the compute node `salloc` brought you to, **not** on `speed-submit`)
 
         ./setup_pyenv.sh
 

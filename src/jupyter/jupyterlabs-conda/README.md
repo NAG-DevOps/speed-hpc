@@ -23,7 +23,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
         conda init tcsh
         source ~/.tcshrc
 
-* run `setup-conda.sh` (on the compute node `salloc` brought you to, **not** on `speed-submit`)
+* run `setup_conda.sh` (on the compute node `salloc` brought you to, **not** on `speed-submit`)
 
         ./setup_conda.sh
 
