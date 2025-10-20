@@ -1,6 +1,6 @@
 # Jupyter Lab on HPC Cluster
 
-This folder contains scripts and instructions for setting up and running Jupyter Lab on the HPC cluster Speed using Conda without a container. These scripts are designed to simplify the process of allocating resources, setting up environments, and starting a Jupyter Lab process.
+This folder contains scripts and instructions for setting up and running Jupyter Lab on the HPC cluster Speed using Python environment. These scripts are designed to simplify the process of allocating resources, setting up environments, and starting a Jupyter Lab process.
 
 ## Prerequisites
 
@@ -45,9 +45,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
     - print the token/link to the jupyter server to paste in a web browser (starting with `http://127.0.0.1/...`)
 
 ## References
-
-* [More ways of running Jupyter notebooks are documented in our manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks)
-  * Using Python venv (like here)
-  * Using Conda venv 
+* [Speed Manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks>
+* More ways of running Jupyter notebook
+  * Using Conda venv [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src/jupyter/jupyterlabs-conda)
   * From containers
-  

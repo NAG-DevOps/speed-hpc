@@ -47,10 +47,9 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
     - print the token/link to the jupyter server to paste in a web browser (starting with `http://127.0.0.1/...`)
 
 ## References
-
-* [More ways of running Jupyter notebooks are documented in our manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks)
+* [Speed Manual](https://nag-devops.github.io/speed-hpc/#jupyter-notebooks>
+* More ways of running Jupyter notebook
+  * Using Python venv [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src/jupyter/jupyterlabs-pyenv)
   * From containers
-  * Using Conda venv (like here)
-  * Using Python venv
 
 <!-- TOC end -->
