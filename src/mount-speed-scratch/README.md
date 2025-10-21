@@ -26,7 +26,7 @@ These scripts allow you to conveniently mount  `/speed-scratch` folder from pers
     - Map `\\filer-speed.encs.concordia.ca\speed_scratch`
     - Open File Explorer showing the new drive
 
-**NOTE:** If you need to change the mapping to a different letter, you can do so by edditing the `Speed_Scratch_Windows_Map.ps1` file and change the following variable:
+**NOTE:** To change the mapped drive letter, edit the following line in `Speed_Scratch_Windows_Map.ps1` file:
 ```
 $DriveLetter = 'Y:'  # <- Change this if needed
 ```
@@ -37,16 +37,28 @@ $DriveLetter = 'Y:'  # <- Change this if needed
 - Speed_Scratch_MacOS_Map.sh
 
 ### Instructions
-- Download the file into the `Downloads` folder
-- Open Terminal and navigate to the `~/Downloads` folder
+- Download the file to your `Downloads` folder
+- Open Terminal and navigate to that folder
 - Run the script
 ```
 ./Speed_Scratch_MacOS_Map.sh
 ```
 - The script will:
     - Unmount the Share if already mounted
-    - Map `filer-speed.encs.concordia.ca/speed_scratch` to `/Users/<YourUser>/Speed_Scratch`
+    - Mount `filer-speed.encs.concordia.ca/speed_scratch` to `/Users/<YourUser>/Speed_Scratch`
     - Open Finder showing the network drive
 
 ## Linux Instructions
-coming soon...
+
+### Instructions for Manual Mount via File Manager
+- Open your **Files** (File Manager) application.
+- In the sidebar, select **Other Locations** (or Connect to Server on some desktops).
+- At the bottom, under “Connect to Server”, enter: `smb://filer-speed.encs.concordia.ca/speed_scratch`
+- When prompted:
+  - **Connect As**: Registered User
+  - **Username**: your ENCS username
+  - **Domain**: ENCS
+  - **Password**: your ENCS password
+- Click **Connect**.
+- Once connected, the share will open in the file manager.
+- Navigate to your personal folder inside `speed_scratch`. If it does not exist, create it.
