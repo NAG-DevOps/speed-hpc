@@ -207,12 +207,12 @@ see \xs{sect:openiss-examples} for details.
 % ----------------------------------
 \paragraph{Jupyter Notebook in Conda}
 \label{sect:jupyter-conda}
-
-For setting up Jupyter Labs with Conda and Pytorch, follow these steps:
+for setting up Jupyter Labs with Conda and Pytorch, follow these steps:
 
 \textbf{Environment preparation:} (only once, takes some time to run to install all required dependencies)
 \begin{enumerate}
-\item Start an interactive session, and navigate to your \tool{speed-scratch} directory:
+
+\item Start an interactive session, and navigate to your \texttt{speed-scratch} directory:
 \begin{verbatim}
 salloc --mem=20G --gpus=1
 cd /speed-scratch/$USER
@@ -225,98 +225,102 @@ conda init tcsh
 source ~/.tcshrc
 \end{verbatim}
 
-\item Set up Conda environment by runnung \tool{setup-conda.sh}
-(on the compute node salloc brought you to, not on speed-submit)
-as shown in \xf{fig:setup_conda.sh}
-\begin{verbatim} ./setup_conda.sh \end{verbatim}
+\item Set up Conda environment by running \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-conda/setup_conda.sh}{\texttt{setup\_conda.sh}}
+(on the compute node salloc brought you to, not on \texttt{speed-submit}).
 
-\small
-\begin{figure}[htpb]
-    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily\scriptsize]{../../src/jupyter/jupyterlabs-conda/setup_conda.sh}
-    \caption{Source code for \file{setup_conda.sh}}
-    \label{fig:setup_conda.sh}
-\end{figure}
-\normalsize
-\end{enumerate}
+%\small
+%\begin{figure}[htpb]
+%    \lstinputlisting[language=csh,frame=single,basicstyle=\ttfamily\scriptsize]{../../src/jupyter/jupyterlabs-conda/setup_conda.sh}
+%    \caption{Source code for \href{setup_conda.sh}{}}
+%    \label{fig:setup_conda.sh}
+%\end{figure}
+%\normalsize
 
 The script will:
 \begin{itemize}
-    \item create a Jupyter directory change Jupyter to any name of your choice in the script
-    \item set environment variables
-    \item create a conda environment named jupyter-env
-    \item install JupyterLabs and pytorch
-    \item exit the interactive session
+    \item Create Jupyter directory (change Jupyter to any name of your choice in the script)
+    \item Set environment variables
+    \item Create a conda environment named \texttt{jupyter-env}
+    \item Install JupyterLabs and Pytorch
+    \item Copy some example notebooks
 \end{itemize}
 
-\textbf{Launching Jupyter Labs instance from \textbf{speed-submit}:}
+\item Exit the interactive session once the script is finished.
+
+\end{enumerate}
+
+\textbf{Launching Jupyter Labs instance from \texttt{speed-submit}:}
 \begin{enumerate}
-    \item Run the \tool{start\_jupyterlab.sh} script each time you need to launch JupyterLab from the submit node
+    \item Run \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-conda/start_jupyterlab.sh}{\texttt{start\_jupyterlab.sh}} script each time you need to launch JupyterLab from the submit node
     The script will:
     \begin{itemize}
-        \item allocate resources for your job on a compute node
-        \item start jupyter server by running \tool{run\_jupyterlab.sh}
-        \item print the ssh command that you can use to connect to the compute node runnung the jupyter notebook (this is done in a new terminal)
-        \item print the token/link to the jupyter server to paste in a web browser (starting with http://127.0.0.1/...)
+        \item Allocate resources for your job on a compute node
+        \item Start jupyter server by running \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-conda/run_jupyterlab.sh}{\texttt{run\_jupyterlab.sh}}
+        \item Print the ssh command that you can use to connect to the compute node runnung the jupyter notebook (this is done in a new terminal)
+        \item Print the token/link to the jupyter server to paste in a web browser (starting with http://127.0.0.1/...)
     \end{itemize}
 
     \item Open a browser, and copy your Jupyter's token and paste it in the browser's URL field.
 \end{enumerate}
 
-
-% Jupyter Notebook in Python Virtual Env
+% Jupyter Notebook in Python Virtual Environment
 % ----------------------------------------------
 \paragraph{Jupyter Notebook in Python venv}
 \label{sect:jupyter-python}
+for setting up Jupyter labs with Python, follow these steps:
 
-This is an example of Jupyter Labs running in a Python Virtual environment on Speed.
-
-\textbf{Note:} Use of Python virtual environments is preferred over Conda at Alliance Canada clusters.
-If you prefer to make jobs that are more compatible between Speed and Alliance clusters, use Python
-\texttt{venv}s. See \url{https://docs.alliancecan.ca/wiki/Anaconda/en}
+\textbf{Note:} Use of Python virtual environment is preferred over Conda at Alliance Canada clusters, so use python when possible to make jobs more compatible between Speed and Alliance clusters.
+See \url{https://docs.alliancecan.ca/wiki/Anaconda/en}
 and \url{https://docs.alliancecan.ca/wiki/JupyterNotebook}.
 
+\textbf{Environment preparation:} (like the conda version, this is done only once)
+
+\begin{enumerate}
+\item Start an interactive session and navigate to your \texttt{/speed-scratch} directory:
+\begin{verbatim}
+salloc --mem=50G --gpus=1
+cd /speed-scrach/$USER
+\end{verbatim}
+
+\item Load and initialize Python environment
+\begin{verbatim}
+module load python/3.12.0/default
+source ~/.tcshrc
+\end{verbatim}
+
+\item Run \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-pyenv/setup_pyenv.sh}{\texttt{setup\_pyenv.sh}} on the compute node (not on \texttt{speed-submit})
+
+The script will:
 \begin{itemize}
-\item Environment preparation: for the FIRST time only:
-\begin{enumerate}
-\item Go to your speed-scratch directory: \texttt{cd /speed-scratch/\$USER}
-\item Open an interactive session: \texttt{salloc --mem=50G --gpus=1 --constraint=el9}
-\item Create a Python \texttt{venv} and install \tool{jupyterlab}+\tool{pytorch}
-\small
-\begin{verbatim}
-module load python/3.11.5/default
-setenv TMPDIR /speed-scratch/$USER/tmp
-setenv TMP /speed-scratch/$USER/tmp
-setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
-python -m venv /speed-scratch/$USER/tmp/jupyter-venv
-source /speed-scratch/$USER/tmp/jupyter-venv/bin/activate.csh
-pip install jupyterlab
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-exit
-\end{verbatim}
-\normalsize
-\end{enumerate}
-
-\item Running Jupyter, from \textbf{speed-submit}:
-\begin{enumerate}
-\item Open an interactive session: \texttt{salloc --mem=50G --gpus=1 --constraint=el9}
-\small
-\begin{verbatim}
-cd /speed-scratch/$USER
-module load python/3.11.5/default
-setenv PIP_CACHE_DIR /speed-scratch/$USER/tmp/cache
-source /speed-scratch/$USER/tmp/jupyter-venv/bin/activate.csh
-jupyter lab --no-browser --notebook-dir=$PWD --ip="0.0.0.0" --port=8888 --port-retries=50
-\end{verbatim}
-\normalsize
-
-\item Verify which port the system has assigned to Jupyter: \texttt{http://localhost:XXXX/lab?token=}
-
-\item SSH Tunnel creation: similar to Jupyter in Singularity, see \xs{sect:jupyter-singularity}
-
-\item Open a browser and type: \texttt {localhost:XXXX} (using the port assigned)
-\end{enumerate}
+    \item Create a Jupyter directory
+    \item Set environment variables such as \api{TMP}, \api{TMPDIR}, and \api{PIP\_CACHE\_DIR}
+    \item Load Python 3.12 and CUDA 12.8 modules
+    \item Create a Python virtual environment named \texttt{.jupyter-venv}
+    \item Install JupyterLabs and Pytorch
+    \item Copy some example notebooks
 \end{itemize}
 
+\item Exit the interactive session once the script is finished.
+
+\end{enumerate}
+
+\textbf{Launching Jupyter Labs instance:}
+
+\begin{enumerate}
+
+\item Run \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-pyenv/start_jupyterlab.sh}{\texttt{start\_jupyterlab.sh}} script from the submit node each time you need to launch juypterlab
+
+The script will:
+\begin{itemize}
+    \item Allocate resources for your job on a compute node
+    \item Start Jupyter server by running \href{https://github.com/NAG-DevOps/speed-hpc/blob/master/src/jupyter/jupyterlabs-pyenv/run_jupyterlab.sh}{\texttt{run\_jupyterlab.sh}}
+    \item Print the ssh command that you can use to connect to the compute node running the jupyter notebook (this is done in a new terminal)
+    \item Print the token/link to the jupyter server to paste in a web browser starting with http://127.0.0.1/...)
+\end{itemize}
+
+\item Copy your Juypyter's token, open a browser and paste it.
+ 
+\end{enumerate}
 
 % Visual Studio Code
 % ------------------------
