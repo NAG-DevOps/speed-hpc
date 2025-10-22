@@ -41,7 +41,7 @@ $DriveLetter = 'Y:'  # <- Change this if needed
 - Open Terminal and navigate to that folder
 - Run the script
 ```
-./Speed_Scratch_MacOS_Map.sh
+./speed-scratch-macOS-map.sh
 ```
 - The script will:
     - Unmount the Share if already mounted
