@@ -19,7 +19,7 @@ These scripts allow you to conveniently mount  `/speed-scratch` folder from pers
 
 ### Instructions
 - Download both files and place them in the same folder (for example: `Downloads\SpeedMap`).
-- Double-click `Speed_Scratch_Windows_Map.bat`.
+- Double-click `speed-scratch-Windows-map.bat`.
 - When prompted, enter your ENCS username and password.
 - The script will:
     - Disconnect any existing Y: mapping
