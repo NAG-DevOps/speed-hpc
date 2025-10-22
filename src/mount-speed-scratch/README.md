@@ -26,7 +26,7 @@ These scripts allow you to conveniently mount  `/speed-scratch` folder from pers
     - Map `\\filer-speed.encs.concordia.ca\speed_scratch`
     - Open File Explorer showing the new drive
 
-**NOTE:** To change the mapped drive letter, edit the following line in `Speed_Scratch_Windows_Map.ps1` file:
+**NOTE:** To change the mapped drive letter, edit the following line in `speed-scratch-Windows-map.ps1` file:
 ```
 $DriveLetter = 'Y:'  # <- Change this if needed
 ```
