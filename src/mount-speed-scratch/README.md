@@ -14,7 +14,7 @@ These scripts allow you to conveniently mount  `/speed-scratch` folder from pers
 ## Windows Instructions
 
 ### Files:
-- Speed_Scratch_Windows_Map.bat
+- `speed-scratch-Windows-map.bat`
 - Speed_Scratch_Windows_Map.ps1
 
 ### Instructions
