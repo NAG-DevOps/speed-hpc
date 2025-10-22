@@ -34,7 +34,7 @@ $DriveLetter = 'Y:'  # <- Change this if needed
 ## MacOS Instructions
 
 ### Files:
-- Speed_Scratch_MacOS_Map.sh
+- `speed-scratch-macOS-map.sh`
 
 ### Instructions
 - Download the file to your `Downloads` folder
