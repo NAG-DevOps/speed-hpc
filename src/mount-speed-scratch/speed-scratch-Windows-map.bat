@@ -12,6 +12,6 @@
 
 "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" ^
   -NoLogo -NoProfile -Sta -ExecutionPolicy Bypass ^
-  -File "%~d0%~p0Speed_Scratch_Windows_Map.ps1"
+  -File "%~d0%~p0speed_scratch_Windows_map.ps1"
 
 pause
