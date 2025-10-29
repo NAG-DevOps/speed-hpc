@@ -55,12 +55,12 @@ This directory contains a range of job script examples. Some are basic, while ot
   - `openiss-reid-speed.sh` -- OpenISS for person re-identification. See more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-reid-tfk).
   - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
   - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
-
   - [`gpaw/`](gpaw/) -- Example job scrits for GPAW simulaptions.
   - [`jupyter/`](jupyter/) -- Hands-on examples for launching JupyterLab using Conda.
   - [`llm-examples/`](llm-examples/) -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
   - [`pytorch-multicpu/`](pytorch-multicpu/) -- Using Pytorch with Python virtual environment to run on CPUs.
   - [`single-job-multi-mig/`](single-job-multi-mig/) -- Demonstrates how to run a single job using multiple MIGs (Multi-Instance GPU).
+  - `cl/*` -- samples to run [OpenCL](cl/) jobs from examples, tutorials, and an AMDGPU benchmark
   
 <!-- TOC --><a id="creating-environments"></a>
 # Creating Virtual Environments
