@@ -6,14 +6,12 @@
 #SBATCH -o openiss-yolo-output-%A.log   ## Specify output file name
 
 ## Request Resources
-#SBATCH --mem=60G
-#SBATCH -n 32
-#SBATCH --gpus=1
-#SBATCH -p pt
+#SBATCH --mem=8G
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
 
 # Load required modules
 module load anaconda3/2023.03/default
-module load cuda/9.2/default
 
 # Define environment variables
 set ENV_NAME = yolo-env
@@ -39,7 +37,7 @@ if ( -d "$ENV_PATH" ) then
 else
     echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
     echo "======================================================================"
-    conda create -y -p "$ENV_PATH" python=3.5.2 keras=2.1.5 -c conda-forge |& tee conda-create.log
+    conda create -y -p "$ENV_PATH"
 
     echo "Activating Conda environment $ENV_NAME..."
     echo "======================================================================"
@@ -52,10 +50,12 @@ else
 	
     echo "Installing required packages..."
     echo "==============================="
+    conda install -y python=3.5
+    conda install -y Keras=2.1.5
+    conda install -y Pillow
+    conda install -y matplotlib
+    conda install -c menpo opencv
     pip install --upgrade pip
-    pip install pillow matplotlib h5py
-    pip install tensorflow-gpu==1.10.0
-    pip install opencv-python==4.1.2.30
     pip install opencv-contrib-python==4.1.2.30
 endif
 
@@ -75,7 +75,7 @@ sleep 30
 if (! -e model_data/yolo.h5 || -z model_data/yolo.h5) then
     echo "Keras model NOT found. Converting Darknet YOLO model to Keras format..."
     echo "======================================================================="
-    srun python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
+    srun -n 1 python convert.py yolov3.cfg yolov3.weights model_data/yolo.h5
 else
     echo "Keras model already exists. Skipping conversion..."
     echo "=================================================="
@@ -86,18 +86,12 @@ echo "======================================================================"
 # Run YOLO video processing - image example
 #echo "Running non-interactive YOLO image processing..."
 #echo "================================================"
-#srun python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image
+#srun -n 1 python yolo_video.py --model model_data/yolo.h5 --classes model_data/coco_classes.txt --image
 
 # Run YOLO video processing - video example (non-interactive)
 echo "Running non-interactive YOLO video processing..."
 echo "================================================"
-srun python yolo_video.py --input video/v1.avi --output video/001.avi #--gpu_num 1
-
-
-# Run YOLO video processing - video example (interactive)
-#echo "Running interactive YOLO video processing..."
-#echo "============================================"
-#srun python yolo_video.py --input video/v1.avi --output video/002.avi --interactive
+srun -n 1 python yolo_video.py --input video/v1.avi --output video/001.avi
 
 echo "======================================================================"
 date
