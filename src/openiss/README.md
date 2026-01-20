@@ -128,3 +128,14 @@ salloc --mem=8G -n 1 --cpus-per-task=8 --gpus=1 --x11=first
 - A pop up window will show a classifed live video. 
 
 For Tiny YOLOv3, it can be run in the same way, but you will need to specify model path and anchor path with `--model model_file` and `--anchors anchor_file`.
+
+<!-- TOC --><a id="performance-openiss-yolov3"></a>
+### Performance
+
+Time is in minutes, run Yolo with different hardware configurations GPU types V100 and Tesla P6. Please note that there is an issue to run Yolo project on more than one GPU in case of tesla P6. The project uses keras.utils library calling `multi_gpu_model()` function, which cause hardware faluts and force to restart the server. GPU name for V100 is gpu32, and for P6 is gpu16, you can find that in scripts shell.
+
+|   1GPU-P6     |    1GPU-V100  |    2GPU-V100  |    32CPU       |
+| --------------|-------------- |-------------- |----------------|
+|    22.45      |   17.15       |   23.33       |     60.42      |
+|    22.15      |   17.54       |   23.08       |     60.18      |
+|    22.18      |   17.18       |   23.13       |     60.47      |
