@@ -15,12 +15,12 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
      - C: Modify your script: `fflush(stdout);`
    - Parameters: --time and --signal have to be carefully set-up:
      ```shell
-    # --signal and --time have to be set up in accordance with the simulation's size and load
-    # Examples: (Referencial values: Change the values to fit the needs of your simulation)
-    # Large simulations: These are simulations that require at least 4 days to run and use medium-sized or large datasets
-    #                    --time=24:00:00 --signal=B:SIGUSR1@600
-    # Very Large simulations: These are simulations that require at least 5 days to run and use big datasets
-    #                    --time=24:00:00 --signal=B:SIGUSR1@900
+     --signal and --time have to be set up in accordance with the simulation's size and load
+     Examples: (Referencial values: Change the values to fit the needs of your simulation)
+     Large simulations: These are simulations that require at least 4 days to run and use medium-sized or large datasets
+                        --time=24:00:00 --signal=B:SIGUSR1@600
+     Very Large simulations: These are simulations that require at least 5 days to run and use big datasets
+                        --time=24:00:00 --signal=B:SIGUSR1@900
     ```
     - Modify the parameters: Command= and Args=
     ```shell
