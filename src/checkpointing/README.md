@@ -33,7 +33,7 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
      
 * Run the simulation:
     ```shell
-      sbatch checpoint.sh
+      sbatch checkpoint.sh
     ```
 
 
