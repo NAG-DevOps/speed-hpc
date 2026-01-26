@@ -32,9 +32,10 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
      ```
      
 * Run the simulation:
-      ```shell
-          sbatch checkpoint.sh
-      ```
+    ```shell
+      sbatch checpoint.sh
+    ```
+
 
 * The script will create `job_xxx.out and job_xxx.err` files for each checkpoint.
 
