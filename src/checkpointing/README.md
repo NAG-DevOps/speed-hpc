@@ -10,9 +10,9 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
 * Copy the file `checkpoint.sh` to your working directory
 
 * Modify the file according to your simulation needs:
-   - Disable the output buffering in accordance of the language/script of your simulation (Environment variable or script modification)
-     - Python: export PYTHONUNBUFFERED=1
-     - C: Modify your script: `fflush(stdout);`
+   - Disable the output buffering in accordance of the language/script of your simulation (script modification)
+     - Python: `flush()`
+     - C: `fflush(stdout);` `setbuf(stdout, NULL)`
    - Parameters: --time and --signal have to be carefully set-up:
      ```shell
      --signal and --time have to be set up in accordance with the simulation's size and load
@@ -48,3 +48,9 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
       ```shell
       checkpoint(rank, data, size);
       ```
+* DMTCP must run on nodes with the same architecture, whereas SPEED has nodes with different architectures. 
+  Use the command '--constraint=' to specify where you want to run your job.
+    - avx: magic, magic-node-[01-10]
+    - avx2: gomory, nemhauser, salus, edmonds, wolsey
+    - avx512: speed-[01-36], matrix, xailab, nebulae, cisr-[1-2], antenna3
+    - AMD: speed-[37-43], stellar

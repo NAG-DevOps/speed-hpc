@@ -9,6 +9,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
+#SBATCH --constraint=avx512
 
 #########################################################################################
 # --signal and --time have to be set up in accordance with the simulation's size and load
@@ -17,6 +18,8 @@
 #                    --time=24:00:00 --signal=B:SIGUSR1@600
 # Very Large simulations: These are simulations that require at least 5 days to run and use big datasets
 #                    --time=24:00:00 --signal=B:SIGUSR1@900
+# --constraint: DMTCP needs to run on nodes that have same architecture, SPEED has nodes with different architecture
+#               so far, avx, avx2, avx512 and AMD (see README for more information)
 #########################################################################################
 
 . /encs/pkg/modules-5.3.1/root/init/bash
@@ -24,13 +27,6 @@
 module load GCCcore/14.2.0
 module load DMTCP/4.0.0
 module load python/3.12.0/default
-
-# For Python scripts
-# if needed, disable buffering: export PYTHONUNBUFFERED=1
-export PYTHONUNBUFFERED=1
-
-# For any other language/app disable the buffering accordingly; if available, use the correspondent environment variable
-# or modify the script (flush output)
 
 # CONFIGURATION - MODIFY THESE
 COMMAND="python3"
