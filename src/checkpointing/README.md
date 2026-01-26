@@ -49,7 +49,7 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
       checkpoint(rank, data, size);
       ```
 * DMTCP must run on nodes with the same architecture, whereas SPEED has nodes with different architectures. 
-  Use the command '--constraint=' to specify where you want to run your job.
+  Use the command `--constraint=` to specify where you want to run your job.
     - avx: magic, magic-node-[01-10]
     - avx2: gomory, nemhauser, salus, edmonds, wolsey
     - avx512: speed-[01-36], matrix, xailab, nebulae, cisr-[1-2], antenna3
