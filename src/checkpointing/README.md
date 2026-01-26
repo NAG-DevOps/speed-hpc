@@ -30,9 +30,10 @@ DMTCP: Distributed MultiThreaded Checkpointing, a transparent checkpoint-restart
         COMMAND="./heavy_simulation"  ; Example for C, compiled executable
         ARGS=                         ; Empty - this C script doesn't need arguments
      ```
+     
 * Run the simulation:
       ```shell
-        sbatch checkpoint.sh
+          sbatch checkpoint.sh
       ```
 
 * The script will create `job_xxx.out and job_xxx.err` files for each checkpoint.
