@@ -27,7 +27,7 @@ if ( -d "$ENV_PATH" ) then
 else
 	echo "Creating Conda environment $ENV_NAME at $ENV_PATH..."
     echo "======================================================================"
-    conda create -y -p "$ENV_PATH"
+    conda env create -f environment.yml -p $ENV_PATH |& tee conda-create.log
 
     echo "Activating Conda environment $ENV_NAME..."
     echo "======================================================================"
@@ -37,17 +37,6 @@ else
         echo "Error: Failed to activate Conda environment."
         exit 1
     endif
-
-    echo "Installing required packages..."
-    echo "==============================="
-    conda install -y python=3.5
-    conda install -y Keras=2.1.5
-    conda install -y tensorflow=1.10.0
-    conda install -y Pillow
-    conda install -y matplotlib
-    conda install -c menpo opencv
-    pip install --upgrade pip
-    pip install opencv-contrib-python==4.1.2.30
 endif
 
 # Download YOLOv3 weights
@@ -86,5 +75,4 @@ date
 # Deactivate Conda env
 echo "Deactivating Conda environment..."
 conda deactivate
-
 echo "================================ DONE ================================"
