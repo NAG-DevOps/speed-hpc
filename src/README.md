@@ -49,6 +49,7 @@ This directory contains a range of job script examples. Some are basic, while ot
 - Research & Advanced Examples:
   - `efficientdet.sh` -- Runs EfficientDet model using a Conda environment.
   - `gurobi-with-python.sh` -- Uses Gurobi with a Python virtual environment.
+  - `hec-ras.sh` -- Job script example for Hydrologic Engineering Center's River Analysis System.
   - `lambdal-singularity.sh` -- Uses Singularity container to run LambdaLabs software stack on GPU node. Based on this github repo [Lambda Stack Dockerfiles](https://github.com/NAG-DevOps/lambda-stack-dockerfiles).
   - `msfp-speed-job.sh` -- MAC Spoofer analysis script (see more detailes [here](https://dx.doi.org/10.1145/2641483.2641540) and [here](https://dx.doi.org/10.1007/978-3-319-17040-4_11))
   - `openfoam-multinode.sh` -- Runs OpenFOAM’s icoFoam solver across multiple CPU nodes.
@@ -56,7 +57,7 @@ This directory contains a range of job script examples. Some are basic, while ot
   - `openiss-yolo-speed.sh`, and `openiss-yolo-interactive.sh` -- OpenISS + YOLO demos; more [here](https://github.com/NAG-DevOps/speed-hpc/tree/master/src#openiss-yolov3).
   - `pytorch-multinode-multigpu.sh` -- Using Pytorch with Python virtual environment to run on multiple GPUs and nodes.
 
-  - [`gpaw/`](gpaw/) -- Example job scrits for GPAW simulaptions.
+  - [`gpaw/`](gpaw/) -- Example job scripts for GPAW simulations.
   - [`jupyter/`](jupyter/) -- Hands-on examples for launching JupyterLab using Conda.
   - [`llm-examples/`](llm-examples/) -- Examples for running Large Language Models (LLMs) such as LLaMA or BERT.
   - [`pytorch-multicpu/`](pytorch-multicpu/) -- Using Pytorch with Python virtual environment to run on CPUs.
