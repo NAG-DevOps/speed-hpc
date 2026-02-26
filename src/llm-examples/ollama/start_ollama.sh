@@ -13,10 +13,10 @@ set ODIR = /speed-scratch/$USER/ollama
 mkdir -p $ODIR && cd $ODIR
 
 # Download Ollama tarball and extract it once
-if ( ! -x $ODIR/bin/ollama ) then
+if (! -x $ODIR/bin/ollama) then
     echo "Downloading Ollama..."
-    curl -LO https://ollama.com/download/ollama-linux-amd64.tgz
-    tar -xzf ollama-linux-amd64.tgz
+    curl -LOS https://ollama.com/download/ollama-linux-amd64.tar.zst
+    tar -xvf ollama-linux-amd64.tar.zst -C /speed-scratch/$USER/ollama
 endif
 
 # Add ollama to your PATH and set models directory
