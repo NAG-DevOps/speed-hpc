@@ -15,7 +15,7 @@ Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc
     git clone --depth=1 https://github.com/NAG-DevOps/speed-hpc.git
     ```
 
-* Navigate to ollama directory in `src/llm-examples`
+* Navigate to ollama directory in `src/llm-examples/ollama`
 
 * Run `start_ollama.sh`
     ```shell
@@ -67,5 +67,5 @@ curl http://localhost:XXXXX/api/tags
 
 2. Run a model with a prompt
 ```shell
-curl -sS http://localhost:56781/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2","prompt": "why is the sky blue?","stream": false}' | jq -r '.response'
+curl -sS http://localhost:XXXXX/api/generate -H "Content-Type: application/json" -d '{"model": "llama3.2","prompt": "why is the sky blue?","stream": false}' | jq -r '.response'
 ```
