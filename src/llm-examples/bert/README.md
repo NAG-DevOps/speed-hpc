@@ -3,7 +3,7 @@
 BERT is an open-source Google machine learning framework for natural language processing (NLP). This example demonstrates how to run a BERT model using PyTorch and Hugging Face Transformers on Speed.
 
 #### References:
-- [Ollama](https://huggingface.co/docs/transformers/en/model_doc/bert)
+- [BERT](https://huggingface.co/docs/transformers/en/model_doc/bert)
 
 ## Prerequisites
 Before starting, ensure you have [access](https://nag-devops.github.io/speed-hpc/#requesting-access) to the HPC (Speed) cluster.
