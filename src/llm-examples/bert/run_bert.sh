@@ -1,4 +1,3 @@
-[speed-submit2] [/speed-scratch/f_salha/projects/bert] > cat run_bert.sh 
 #!/encs/bin/tcsh
 
 #SBATCH --job-name=bert
