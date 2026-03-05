@@ -9,7 +9,8 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=1G
-#SBATCH --constraint=avx512  # See README for more information (https://github.com/NAG-DevOps/speed-hpc/tree/master/src/checkpointing)
+# See README for more information (https://github.com/NAG-DevOps/speed-hpc/tree/master/src/checkpointing)
+#SBATCH --constraint=avx512```
 
 #########################################################################################
 # --signal and --time have to be set up in accordance with the simulation's size and load
