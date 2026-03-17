@@ -178,7 +178,47 @@ The following documentation is specific to **Speed**.
   ```bash
   deactivate
   ```
-
+<!-- TOC --><a id="UV"></a>
+### UV
+- **Preparation before installation**
+   Open an interactive session (salloc)
+   ```bash
+   setenv UV_INSTALL_DIR /speed-scratch/$USER/software/uv/bin
+   setenv UV_PYTHON_INSTALL_DIR /speed-scratch/$USER/software/uv/python
+   setenv UV_CACHE_DIR /speed-scratch/$USER/.uv-cache
+   setenv PATH ${UV_INSTALL_DIR}:$PATH
+   ```
+- **Installation**
+   ```bash
+   wget https://astral.sh/uv/install.sh
+   chmod +x install.sh
+   ./install.sh
+   ```
+- **Create UV environment and activate it**
+   ```bash
+   uv venv /speed-scratch/$USER/<env_name> --python 3.12
+   # if no name is specified it, it will create a .venv directory in the current directory
+   source /speed-scratch/$USER/<env_name>/bin/activate.csh
+   ```
+- **Install required packages**
+   ```bash
+   uv pip install
+   # example: uv pip install "tensorflow[and-cuda]"
+   # excample: uv pip install urllib3==1.26.6
+   ```
+- **Deactivate the environment**
+  ```bash
+  deactivate
+  ```
+- **Notes**
+   - When creating the environment --python X.XX will install that Python version into the environment
+   - If you want to use an existent python version in the modules list instead of installing the version with -- python X.XX use the following command
+      ```bash
+      module load python/3.12.0/default
+      uv venv /speed-scratch/$USER/<env_name> --python `which python`
+      ```
+   - `uv python list` will show the python versions installed and those available to install
+   
 <!-- TOC --><a id="environment-variables"></a>
 ## Environment Variables
 These variables control where temporary files are stored. This helps prevent exceeding disk quotas in your home directory.
@@ -198,6 +238,13 @@ Set these variables in your shell before installing packages or running jobs, es
   ```bash
   setenv CONDA_PKGS_DIRS /speed-scratch/$USER/pkgs
   ```
+- **For UV packages**
+   ```bash
+   setenv UV_INSTALL_DIR /speed-scratch/$USER/software/uv/bin
+   setenv UV_PYTHON_INSTALL_DIR /speed-scratch/$USER/software/uv/python
+   setenv UV_CACHE_DIR /speed-scratch/$USER/.uv-cache
+   setenv PATH ${UV_INSTALL_DIR}:$PATH
+   ```
 - **For Hugging Face** (if using Transformers or Datasets)
   ```bash
   setenv HF_HOME /speed-scratch/$USER/huggingface
