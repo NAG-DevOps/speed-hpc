@@ -232,4 +232,27 @@ cluster by emailing: \texttt{rt-ex-hpc AT encs.concordia.ca}.
 \end{itemize}
 
 For detailed instructions, refer to the Concordia
-\href{https://www.concordia.ca/ginacody/aits/speed.html}{Computing (HPC) Facility: Speed} webpage.
+\href{https://www.concordia.ca/ginacody/aits/speed.html}{High-Performance Computing (HPC) Facility: Speed} webpage.
+
+% Data Retention Policy
+% ------------------------------------------------------------------------------
+\subsection{Data Retention Policy}
+\label{sect:data-retention-policy}
+
+Speed storage is intended for active research and teaching. Users are responsible for maintaining local copies of important data. The following rules apply:
+
+\begin{itemize}
+	\item \textbf{Scratch directories} (\texttt{/speed-scratch}) 
+	\begin{itemize}
+		\item Files are subject to automatic cleanup if they have not been accessed (``touched'') in the past 90 days (see exceptions).
+		\item Scratch data are also purged upon account expiry and deletion (see exceptions).
+		\item Exceptions: content placed under approved group subfolders (e.g., \texttt{/a2}, \texttt{/gipsy}, \texttt{/nag}) is retained. In such cases, files are reassigned to the group owner and associated group.
+	\end{itemize}
+
+	\item \textbf{Temporary local storage} (\texttt{/nobackup} on all nodes and \texttt{/nobackup2} on SPEED2 nodes) is cleaned on node reboots or after 90 days of inactivity.
+	
+	\item \textbf{Research subcluster storage} (\texttt{/nobackups2} on Salus, OpsRes, CISR, Nebular) is not affected by the 90-day cleanup, but it is not backed up. Users must maintain local copies of their important data.
+    
+	\item \textbf{Home directories, \texttt{/private}, and \texttt{/group} directories} are not subject to scratch cleanup. These areas are protected by snapshots (see ENCS Data Storage documentation \url{https://www.concordia.ca/ginacody/aits/support/faq/snapshot.html}).
+
+\end{itemize}
