@@ -181,7 +181,7 @@ The following documentation is specific to **Speed**.
 <!-- TOC --><a id="UV"></a>
 ### UV
 - **Preparation before installation**
-   Open an interactive session (salloc)
+   Open an interactive session (salloc) and set the environment variables
    ```bash
    setenv UV_INSTALL_DIR /speed-scratch/$USER/software/uv/bin
    setenv UV_PYTHON_INSTALL_DIR /speed-scratch/$USER/software/uv/python
