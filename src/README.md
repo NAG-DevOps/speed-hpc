@@ -202,7 +202,7 @@ The following documentation is specific to **Speed**.
    ```
 - **Install required packages**
    ```bash
-   uv pip install
+   uv pip install <package_name>
    # example: uv pip install "tensorflow[and-cuda]"
    # example: uv pip install urllib3==1.26.6
    ```
