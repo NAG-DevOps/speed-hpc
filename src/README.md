@@ -197,7 +197,7 @@ The following documentation is specific to **Speed**.
 - **Create UV environment and activate it**
    ```bash
    uv venv /speed-scratch/$USER/<env_name> --python 3.12
-   # if no name is specified it, it will create a .venv directory in the current directory
+   # if no name is specified, it will create a .venv directory in the current directory
    source /speed-scratch/$USER/<env_name>/bin/activate.csh
    ```
 - **Install required packages**
