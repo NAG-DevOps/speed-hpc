@@ -204,7 +204,7 @@ The following documentation is specific to **Speed**.
    ```bash
    uv pip install
    # example: uv pip install "tensorflow[and-cuda]"
-   # excample: uv pip install urllib3==1.26.6
+   # example: uv pip install urllib3==1.26.6
    ```
 - **Deactivate the environment**
   ```bash
