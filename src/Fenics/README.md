@@ -16,7 +16,7 @@ FEniCS is a popular open-source computing platform for solving partial different
 
 * Based on the official FEniCS demo and adapted to Slurm: https://github.com/FEniCS/dolfinx/blob/main/python/demo/demo_poisson.py
 
-* From the **submit** node, go to the directory where `fenics-python.sh` and `poisson_dolfinx.py` and were saved.
+* From the **submit** node, go to the directory where `fenics-python.sh` and `poisson_dolfinx.py` were saved.
 * Modify the parameters to run on single or multi-node
 * Send the job to the scheduler
 
