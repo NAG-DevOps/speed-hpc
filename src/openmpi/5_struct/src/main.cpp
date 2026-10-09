@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
     MPI_Get_address(&p, &base);
 
     // Remove the base address so that the offsets start from 0
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 3; i++) {
       offsets[i] -= base;
     }
 
