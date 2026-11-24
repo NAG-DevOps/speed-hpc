@@ -2,38 +2,25 @@
 
 ## Description
 
-This is a pair of MPI programs. The `server` runs a basic server that receives
-commands from the `client` program. The `client` sends `Particle` data to the
-`server` which prints it out.
+This is a pair of MPI programs. The `server` waits for a `client` to connect, and the `client` sends it `Particle` data (a single particle, then a vector of particles), which the server prints. The two programs run as separate jobs and find each other through `ompi-server`.
 
 ## Building
 
-This is built using CMake.
-
-```
-cmake -B build -S .
-cmake --build build
-```
+This is built using CMake. The server job builds both programs and the client job uses that build.
 
 ## Running
 
-### OpenMPI 5 or later
-
+From this folder, submit the server:
 ```
-# Server
-prterun --report-uri server.txt -n 1 build/server
-
-# On a different terminal
-prun --dvm file:server.txt -n 1 build/client
+sbatch mpi_client_server.sh server
 ```
 
-### OpenMPI 4 or earlier
-
+Then run the client as an interactive job:
 ```
-# Server
-ompi-server --report-uri server.txt &
-mpiexec --ompi-server file:server.txt -n 1 build/server
-
-# On a different terminal
-mpiexec --ompi-server file:server.txt -n 1 build/client
+salloc -p pt --ntasks=1 --cpus-per-task=2 --mem=2G
+./mpi_client_server.sh client
 ```
+
+The client shows a menu. Type `P` to send one particle, `V` to send a vector of particles, and `D` to disconnect.
+
+The server's output is in `slurm-<jobid>.out` in this folder.

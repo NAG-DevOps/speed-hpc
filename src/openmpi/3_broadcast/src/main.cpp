@@ -4,6 +4,7 @@
 #include <string>
 #include <stdexcept>
 #include <vector>
+#include <cstdio>
 
 #include <cmath>
 
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  // MPI_Init must be called before calling and MPI functions.
+  // MPI_Init must be called before calling any MPI functions.
   MPI_Init(&argc, &argv);
 
   // Basic information retrieval commands
@@ -79,7 +80,7 @@ int main(int argc, char **argv) {
 
   if(world_size < 2) {
     std::cerr << "There must be at least 2 processes" << std::endl;
-    return 1;
+    MPI_Abort(MPI_COMM_WORLD, 1);
   }
 
   // Get rank of the process. This is the id of the process in the MPI context.
@@ -106,7 +107,7 @@ int main(int argc, char **argv) {
       }
     } else {
       // Else display current vector
-      std::cout << "Rank " << rank << " starting with starting with..." << std::endl;
+      std::cout << "Rank " << rank << " starting with..." << std::endl;
       display(v);
       std::cout << std::endl;
     }

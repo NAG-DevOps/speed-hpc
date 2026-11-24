@@ -13,7 +13,7 @@ std::ostream& operator<< (std::ostream& out, const Coord& c) {
 }
 
 int main(int argc, char **argv) {
-  // MPI_Init must be called before calling and MPI functions.
+  // MPI_Init must be called before calling any MPI functions.
   MPI_Init(&argc, &argv);
 
   // Basic information retrieval commands
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 
   if(world_size < 2) {
     std::cerr << "There must be at least 2 processes" << std::endl;
-    return 1;
+    MPI_Abort(MPI_COMM_WORLD, 1);
   }
 
   // Get rank of the process. This is the id of the process in the MPI context.
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
     std::cout << "Rank " << rank << ": Waiting..." << std::endl;
   }
 
-  // Broadcast the vector data from the rank 0 process to all other processes.
+  // Broadcast the struct from the rank 0 process to all other processes.
   MPI_Bcast(&c, 1, MPI_Coord, 0, MPI_COMM_WORLD);
 
   if (rank != 0) {
@@ -98,6 +98,7 @@ int main(int argc, char **argv) {
 
   std::cout << "Process " << rank << " done!" << std::endl;
 
+  MPI_Type_free(&MPI_Coord);
   MPI_Finalize();
 
   return 0;
