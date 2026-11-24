@@ -7,9 +7,10 @@
 ##    sbatch mpi_contiguous.sh
 ##
 ## The script does a clean build of the example with CMake in
-## /speed-scratch/$USER/mpi_build/<example>, then runs it across
-## the allocated nodes. The job output (slurm-<jobid>.out) is
-## written to the folder you submit from.
+## /speed-scratch/$USER/mpi_build/<example>, then runs it across 
+## the allocated nodes. 
+##
+## The job output (slurm-<jobid>.out) is written to the folder you submit from.
 ##
 
 ##
@@ -29,7 +30,7 @@
 EXAMPLE=4_contiguous                 ## Example folder name
 EXECUTABLE=contiguous                ## Program name defined in CMakeLists.txt
 SPEED_DIR=/speed-scratch/$USER
-MPI_SRC_DIR=$SPEED_DIR/speed-hpc/src/openmpi/$EXAMPLE
+MPI_SRC_DIR=$SLURM_SUBMIT_DIR
 MPI_BUILD_DIR=$SPEED_DIR/mpi_build/$EXAMPLE
 
 ##
@@ -54,7 +55,7 @@ fi
 mkdir -p "$MPI_BUILD_DIR"
 
 # Configure and build, once, on the first node
-echo "About to build..."
+echo "About to build $MPI_SRC_DIR..."
 cmake -B "$MPI_BUILD_DIR" -S "$MPI_SRC_DIR" || { echo "CMake configure failed" >&2; exit 1; }
 time cmake --build "$MPI_BUILD_DIR"         || { echo "Build failed" >&2; exit 1; }
 

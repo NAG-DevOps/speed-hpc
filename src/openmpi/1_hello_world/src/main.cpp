@@ -3,7 +3,7 @@
 #include <mpi.h>
 
 int main(int argc, char** argv) {
-  // MPI_Init must be called before calling and MPI functions.
+  // MPI_Init must be called before calling any MPI functions.
   MPI_Init(&argc, &argv);
 
   // Basic information retrieval commands
